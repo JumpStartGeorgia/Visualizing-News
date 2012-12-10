@@ -1,7 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+########## Story Type ##########################
+StoryType.delete_all
+type = StoryType.create(:id => 1)
+type.story_type_translations.create(:locale => 'ka', :name => 'Infographic')
+type.story_type_translations.create(:locale => 'en', :name => 'Infographic')
+type = StoryType.create(:id => 2)
+type.story_type_translations.create(:locale => 'ka', :name => 'Interactive')
+type.story_type_translations.create(:locale => 'en', :name => 'Interactive')

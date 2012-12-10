@@ -5,6 +5,9 @@ ka:
       not_found: "არ არის ნაპოვნი"
       already_confirmed: "უკვე დადასტურებულია"
       not_locked: "არ იყო დაბლოკილი"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
   devise:
     timeout: "GE::Timeout"
     failure:
@@ -15,6 +18,8 @@ ka:
     sessions:
       signed_in: 'თქვენ წარმატებით შეხვედით სისტემაში.'
       signed_out: 'თქვენ წარმატებით გამოხვედით სისტემიდან.'
+    registrations:
+      signed_up: 'Welcome! You have signed up successfully.'
     passwords:
       send_instructions: 'რამოდენიმე წუთში თქვენ ელ-ფოსტით მიიღებთ ინსტრუქციებს, თუ როგორ უნდა აღადგინოთ პაროლი.'
       updated: 'თქვენი პაროლი წარმატებით შეიცვალა. თქვენ ეხლა შესული ხართ სისტემაში.'

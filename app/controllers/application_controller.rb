@@ -3,8 +3,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
 	before_filter :set_locale
-	before_filter :is_browser_supported?
+#	before_filter :is_browser_supported?
 	before_filter :initialize_gon
+	before_filter :load_categories
+	after_filter :store_location
+
 
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
@@ -55,19 +58,33 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     { :locale => I18n.locale }
   end
 
+	def load_categories
+		@categories = Category.with_translations(I18n.locale)
+	end
+
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
 	end
 
-	# after user logs in, go to admin page
+	# after user logs in go back to the last page or go to root page
 	def after_sign_in_path_for(resource)
-		admin_path
+		request.env['omniauth.origin'] || session[:previous_urls].last || root_path
 	end
 
   def valid_role?(role)
     redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
+
+	# store the current path so after login, can go back
+	def store_location
+		session[:previous_urls] ||= []
+		# only record path if page is not for users (sign in, sign up, etc) and not for reporting problems
+		if session[:previous_urls].first != request.fullpath && request.fullpath.index("/users/").nil? && request.fullpath.index("/report/").nil?
+			session[:previous_urls].unshift request.fullpath
+		end
+		session[:previous_urls].pop if session[:previous_urls].count > 1
+	end
 
 
   #######################

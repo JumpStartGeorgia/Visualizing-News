@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
+				t('app.common.app_name') %></title>
+    <%= csrf_meta_tags %>
+	  <%= include_gon %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+		<!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+	  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon' %>
+  </head>
+  <body>
+		<!-- facebook comments -->
+		<div id="fb-root"></div>
+
+    <div class="container">
+		  <div class="content">
+		    <div class="row">
+		       <div class="span12">
+						<% flash.each do |key, msg| %>
+							<div class="alert <%= flash_translation(key) %> fade in">
+								<a href="#" data-dismiss="alert" class="close">×</a>
+								<%= msg %>
+							</div>
+						<% end %>
+
+						<% if content_for?(:title) %>
+							<div class="page-header">
+								<div class="block">
+			            <h1>
+										<%= image_tag(yield(:title_image), :style => 'vertical-align: middle;') if content_for?(:title_image) %>
+										<%= yield(:title) %>
+									</h1>
+								</div>
+							</div>
+						<% end %>
+
+		        <%= yield %>
+		      </div><!--/span12-->
+		    </div><!--/row-->
+		  </div><!--/content-->
+		 </div> <!-- /container -->
+
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+		<script type="text/javascript">
+			I18n.defaultLocale = "<%= I18n.default_locale %>";
+			I18n.locale = "<%= I18n.locale %>";
+		</script>
+
+		<% if Rails.env.production? %>
+			<!-- insert google analytics for production site here -->
+		<% elsif Rails.env.staging? %>
+			<!-- google analytics -->
+			<script type="text/javascript">
+
+				var _gaq = _gaq || [];
+				_gaq.push(['_setAccount', 'UA-12801815-11']);
+				_gaq.push(['_trackPageview']);
+
+				(function() {
+					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+
+			</script>
+		<% end %>
+
+  </body>
+</html>

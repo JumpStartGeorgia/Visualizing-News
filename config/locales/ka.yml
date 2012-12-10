@@ -3,6 +3,9 @@ ka:
   activerecord:
     models:
       user: მომხმარებელი
+      category: Category
+      story: Story
+      story_type: Story Type
     attributes:
       user:
         email: ელ.ფოსტა
@@ -10,6 +13,38 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
+      category:
+        icon: Icon
+      category_translation:
+        name: Name
+      story_type_translation:
+        name: Name
+      story:
+        published_date: Publication Date
+        published: Is Published?
+        story_type: Story Type
+        data_source_url: URL of Data Source
+        individual_votes: Individual Votes
+        overall_votes: Overall Votes
+        dataset: Dataset File
+        visual: Visual File
+      story_translation:
+        title: Title
+        explanation: Explanation
+        reporter: "Reporter (Name, Organization)"
+        designer: "Designer (Name, Organization)"
+        data_source_name: Name of Data Source
+  mailer:
+    closing: "Sincerely,"
+    signature: The Visualzing News Site
+    unsubscribe: Click here to unsubscribe
+    notification:
+      new_user:
+        subject: "Welcome to News Ideas!"
+        message: "Thank you for becoming a member of News Ideas and contributing to our repository of ideas."
+      new_story:
+        subject: "A new visualization has been added"
+        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
   helpers:
     actions: აირჩიეთ
     links:
@@ -18,9 +53,16 @@ ka:
       confirm: დარწმუნებული ხართ?
       destroy: წაშლა
       new: ახალი
-      list: იხილეთ სრულად
+      back: იხილეთ სრულად
       cancel: გაუქმება
       reset: საწყის კონფიგურაციაზე დაბრუნება
+      sign_in: Sign In
+      sign_up: Sign Up
+      sign_out: გასვლა
+      website: View Website
+      forgot_password: Forgot Password?
+      password_reset: Send Password Reset Instructions
+      sign_in_provider: "Sign in with %{provider}"
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -44,9 +86,19 @@ ka:
       confirm: დარწმუნებული ხართ?
       new: ახალი
     common:
-      app_name: Bootstrap Starter Project
+      app_name: Visualizing News in Georgia
+    msgs:
+      does_not_exist: You tried to access a page that does not exist.
+      not_authorized: You are not authorized to view that page.
+      permalink_exists: already exists in the database
+      success_created: "%{obj} was successfully created."
+      success_updated: "%{obj} was successfully updated."
   layouts:
     application:
+      menu_data: Got Data?
+      menu_idea: Got Ideas?
+      menu_about: About
+      menu_contact: Contact
       admin: ადმინისტრატო
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
@@ -68,9 +120,10 @@ ka:
   admin:
     index:
       title: ადმინისტრატორის განყოფილება
-      users_header: მომხმარებლები
-      new_users: მომხმარებლის დამატება
-      view_users: მომხმარებლების ნახვა
+      categories: Categories
+      stories: Stories
+      story_types: Story Types
+      users: Users
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე

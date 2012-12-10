@@ -6,11 +6,13 @@ gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
 
 gem "json"
 gem "jquery-rails", "1.0.19"
+gem "fancybox-rails", "~> 0.1.4" # use fancybox js
 gem "devise", "2.0.4" # user authentication
+gem 'omniauth' # to login via facebook
+gem 'omniauth-facebook' # to login via facebook
 gem "cancan", "~> 1.6.8" # user authorization
 gem "formtastic", "2.1.1" # create forms easier
 gem "formtastic-bootstrap", :git => "https://github.com/cgunther/formtastic-bootstrap.git", :branch => "bootstrap-2"
-gem "nested_form", "~> 0.1.1", :git => "https://github.com/davidray/nested_form.git" # easily build nested model forms with ajax links
 gem "globalize3", "0.2.0" # internationalization
 gem "psych", "1.2.2" # yaml parser - default psych in rails has issues
 gem "will_paginate", "3.0.3" # add paging to long lists
@@ -22,8 +24,9 @@ gem "has_permalink", "~> 0.1.4" # create permalink slugs for nice urls
 gem "capistrano", "~> 2.12.0" # to deploy to server
 gem "exception_notification", "2.5.2" # send an email when exception occurs
 gem "useragent", :git => "https://github.com/jilion/useragent.git" # browser detection
+gem "active_attr", "~> 0.5.1" # to create tabless models; using for contact form
+gem "use_tinymce", "~> 0.0.15" # wysiwyg
 #gem "pdfkit", "~> 0.5.2" # generate pdfs
-#gem "use_tinymce", "~> 0.0.15" # wysiwyg
 #gem "rails_autolink", "~> 1.0.9" # convert string to link if it is url
 #gem 'acts_as_commentable', '2.0.1' #comments
 #gem "paper_trail", "~> 2.6.3" # keep audit log of all transactions
@@ -38,7 +41,7 @@ group :assets do
 end
 
 group :development do
-#	gem "mailcatcher", "0.5.5" # small smtp server for dev, http://mailcatcher.me/
+	gem "mailcatcher", "0.5.10" # small smtp server for dev, http://mailcatcher.me/
 #	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # web kit that takes html and converts to pdf
 end
 

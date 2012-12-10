@@ -8,12 +8,6 @@ GIT
       rails (>= 3.1.0)
 
 GIT
-  remote: https://github.com/davidray/nested_form.git
-  revision: c97d280b75af661eb36279c04e420fb8098ad60d
-  specs:
-    nested_form (0.1.1)
-
-GIT
   remote: https://github.com/jilion/useragent.git
   revision: b65739e911aea99e444c608e65c7be9d483d4eaf
   specs:
@@ -36,6 +30,9 @@ GEM
       rack-mount (~> 0.8.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.0.3)
+    active_attr (0.5.1)
+      activemodel (>= 3.0.2, < 4.1)
+      activesupport (>= 3.0.2, < 4.1)
     activemodel (3.1.3)
       activesupport (= 3.1.3)
       builder (~> 3.0.0)
@@ -69,6 +66,7 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     commonjs (0.2.6)
+    daemons (1.1.9)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -76,10 +74,15 @@ GEM
       warden (~> 1.1.1)
     dynamic_form (1.1.4)
     erubis (2.7.0)
+    eventmachine (1.0.0)
     exception_notification (2.5.2)
       actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fancybox-rails (0.1.4)
+      railties (>= 3.1.0)
+    faraday (0.8.4)
+      multipart-post (~> 1.1)
     formtastic (2.1.1)
       actionpack (~> 3.0)
     globalize3 (0.2.0)
@@ -89,9 +92,12 @@ GEM
     gon (2.2.2)
       actionpack (>= 2.3.0)
       json
+    haml (3.1.7)
     has_permalink (0.1.4)
+    hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
+    httpauth (0.2.0)
     i18n (0.6.1)
     i18n-js (2.1.2)
       i18n
@@ -99,6 +105,8 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.7.5)
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     kgio (2.7.4)
     less (2.2.2)
       commonjs (~> 0.2.6)
@@ -110,8 +118,18 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailcatcher (0.5.10)
+      activesupport (~> 3.0)
+      eventmachine (~> 1.0.0)
+      haml (~> 3.1)
+      mail (~> 2.3)
+      sinatra (~> 1.2)
+      skinny (~> 0.2.3)
+      sqlite3 (~> 1.3)
+      thin (~> 1.5.0)
     mime-types (1.19)
     multi_json (1.3.6)
+    multipart-post (1.1.5)
     mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -120,6 +138,20 @@ GEM
     net-ssh (2.5.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
+    oauth2 (0.8.0)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.1)
+      hashie (~> 1.2)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     orm_adapter (0.0.7)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
@@ -137,6 +169,8 @@ GEM
       rack (>= 0.4)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
+    rack-protection (1.2.0)
+      rack
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
@@ -167,12 +201,24 @@ GEM
       sass (>= 3.1.4)
       sprockets (~> 2.0.0)
       tilt (~> 1.3.2)
+    sinatra (1.3.3)
+      rack (~> 1.3, >= 1.3.6)
+      rack-protection (~> 1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    skinny (0.2.3)
+      eventmachine (~> 1.0.0)
+      thin (~> 1.5.0)
     sprockets (2.0.4)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.6)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -191,6 +237,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    use_tinymce (0.0.15)
     warden (1.1.1)
       rack (>= 1.0)
     will_paginate (3.0.3)
@@ -199,6 +246,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr (~> 0.5.1)
   bundler (= 1.2.0)
   cancan (~> 1.6.8)
   capistrano (~> 2.12.0)
@@ -206,6 +254,7 @@ DEPENDENCIES
   devise (= 2.0.4)
   dynamic_form (= 1.1.4)
   exception_notification (= 2.5.2)
+  fancybox-rails (~> 0.1.4)
   formtastic (= 2.1.1)
   formtastic-bootstrap!
   globalize3 (= 0.2.0)
@@ -214,8 +263,10 @@ DEPENDENCIES
   i18n-js (~> 2.1.2)
   jquery-rails (= 1.0.19)
   json
+  mailcatcher (= 0.5.10)
   mysql2 (~> 0.3.11)
-  nested_form (~> 0.1.1)!
+  omniauth
+  omniauth-facebook
   paperclip (~> 3.0.4)
   psych (= 1.2.2)
   rails (= 3.1.3)
@@ -223,5 +274,6 @@ DEPENDENCIES
   twitter-bootstrap-rails (~> 2.1.0)
   uglifier (>= 1.0.3)
   unicorn (= 4.2.1)
+  use_tinymce (~> 0.0.15)
   useragent!
   will_paginate (= 3.0.3)

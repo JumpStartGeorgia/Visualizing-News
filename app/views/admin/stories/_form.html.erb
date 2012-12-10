@@ -25,7 +25,7 @@
 		<%= f.input :story_type %>
 		<%= f.input :data_source_url, :as => :url %>
 
-		<%= f.input :categories, :as => :check_boxes %>
+		<%= f.input :categories, :as => :check_boxes, :collection => @categories %>
 
 		<%= f.input :dataset, :as => :file %>
 		<%= image_tag @story.dataset.url if @story.dataset_file_name %>

@@ -2,6 +2,7 @@ class Category < ActiveRecord::Base
 	translates :name
 
 	has_many :story_categories, :dependent => :destroy
+	has_many :stories, :through => :story_categories
 	has_many :category_translations, :dependent => :destroy
 
 	has_attached_file :icon,
@@ -10,6 +11,5 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :category_translations
   attr_accessible :id, :icon, :category_translations_attributes
-
 
 end

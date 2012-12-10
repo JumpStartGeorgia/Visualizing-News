@@ -2,6 +2,7 @@ class Story < ActiveRecord::Base
 	translates :title, :explanation,	:reporter, :designer,	:data_source_name
 
 	has_many :story_categories, :dependent => :destroy
+	has_many :categories, :through => :story_categories
 	has_many :story_translations, :dependent => :destroy
 	belongs_to :story_type
 
@@ -14,7 +15,6 @@ class Story < ActiveRecord::Base
     :path => ":rails_root/public/system/story/:attachment/:id/:filename"
 
   accepts_nested_attributes_for :story_translations
-  accepts_nested_attributes_for :story_categories
 
 	attr_accessible :published_date,
       :published,
@@ -25,7 +25,8 @@ class Story < ActiveRecord::Base
 			:dataset,
 			:visual,
 			:story_translations_attributes,
-			:story_categories_attributes
+			:category_ids
+
 	attr_accessor :is_create
 
   validates :story_type_id, :presence => true

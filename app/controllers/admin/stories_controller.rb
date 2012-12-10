@@ -30,6 +30,7 @@ class Admin::StoriesController < ApplicationController
     I18n.available_locales.each do |locale|
 			@story.story_translations.build(:locale => locale)
 		end
+		@story.story_categories.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +41,8 @@ class Admin::StoriesController < ApplicationController
   # GET /stories/1/edit
   def edit
     @story = Story.find(params[:id])
+		@story.story_categories.build if @story.story_categories.nil? || @story.story_categories.empty?
+
   end
 
   # POST /stories

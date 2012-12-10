@@ -28,6 +28,7 @@ en:
         overall_votes: Overall Votes
         dataset: Dataset File
         visual: Visual File
+        story_categories: Categories
       story_translation:
         title: Title
         explanation: Explanation
@@ -54,6 +55,7 @@ en:
       destroy: Delete
       new: New
       back: View All
+      list: View All
       cancel: Cancel
       reset: Reset
       sign_in: Sign In

@@ -1,6 +1,9 @@
 class Story < ActiveRecord::Base
 	translates :title, :explanation,	:reporter, :designer,	:data_source_name
 
+  require 'split_votes'
+  include SplitVotes
+
 	has_many :story_categories, :dependent => :destroy
 	has_many :categories, :through => :story_categories
 	has_many :story_translations, :dependent => :destroy

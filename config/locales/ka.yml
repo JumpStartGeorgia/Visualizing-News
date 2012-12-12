@@ -65,6 +65,7 @@ ka:
       forgot_password: Forgot Password?
       password_reset: Send Password Reset Instructions
       sign_in_provider: "Sign in with %{provider}"
+      download: Download
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -135,3 +136,13 @@ ka:
         title: ახალი მომხმარებელი
       show:
         title: მომხმარებლის დეტალები
+  root:
+    index:
+    story:
+      reporter: Reporter
+      designer: Designer
+      data_source: Data Source
+      data_set: Data Set
+      category: Category
+      type: Type
+      comment_count: Comments            

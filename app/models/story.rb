@@ -31,4 +31,8 @@ class Story < ActiveRecord::Base
 
   validates :story_type_id, :presence => true
 
+  scope :recent, lambda {with_translations(I18n.locale).order("stories.published_date DESC, story_translations.title ASC")}
+  scope :published, where("published = '1'")
+  scope :unpublished, where("published = '0'")
+
 end

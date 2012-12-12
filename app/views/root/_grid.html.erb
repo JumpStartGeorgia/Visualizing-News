@@ -1,0 +1,22 @@
+<% @stories.each_with_index do |story, index| %>
+  <% if index%4 == 0 %>
+    <div class="grid_story_row">
+  <% end %>
+
+    <div class="grid_story_item">
+      <div class="visual">
+        <%= link_to(image_tag(story.visual.url), story_path(story.id)) if story.visual_file_name %>
+      </div>
+      <div class="title">
+        <h2><%= link_to story.title, story_path(story.id) %></h2>
+      </div>
+    </div>
+
+  <% if index%4 == 3 %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @stories.length%4 != 3 %>
+  </div>
+<% end %>

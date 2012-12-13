@@ -14,8 +14,15 @@ class Story < ActiveRecord::Base
     :path => ":rails_root/public/system/story/:attachment/:id/:filename"
 
 	has_attached_file :visual,
-    :url => "/system/story/:attachment/:id/:filename",
-    :path => ":rails_root/public/system/story/:attachment/:id/:filename"
+    :url => "/system/story/:attachment/:id/:style/:filename",
+    :path => ":rails_root/public/system/story/:attachment/:id/:style/:filename",
+		:styles => {
+      :thumb => "",
+      :medium => "600x>",
+			:large => "900x>" },
+		:convert_options => {
+        :thumb => "-gravity north -thumbnail 220x220^ -extent 220x220"
+    }
 
   accepts_nested_attributes_for :story_translations
 

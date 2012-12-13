@@ -23,7 +23,7 @@
   <p><strong><%= model_class.human_attribute_name(:dataset) %>:</strong>
   <%= link_to @story.dataset.url if @story.dataset_file_name %></p>
   <p><strong><%= model_class.human_attribute_name(:visual) %>:</strong>
-  <%= link_to @story.visual.url if @story.visual_file_name %></p>
+	<%= image_tag @story.visual.url(:thumb) if @story.visual_file_name %></p>
 
 
 <div class="form-actions">

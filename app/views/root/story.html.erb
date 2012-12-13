@@ -17,7 +17,7 @@
   <div class="span1">
     &nbsp;
   </div>
-</div>  
+</div>
 
 <div id="story_row2" class="row">
   <div class="span1">
@@ -25,7 +25,7 @@
   </div>
   <div id="main_block" class="span6">
     <div id="visual">
-      <%= image_tag @story.visual.url if @story.visual_file_name %>
+      <%= image_tag @story.visual.url(:medium) if @story.visual_file_name %>
     </div>
   </div>
   <div id="story_sidebar" class="span4">
@@ -34,7 +34,7 @@
       <%= simple_format @story.explanation %>
     </div>
     <% end %>
-    
+
     <div id="source">
       <ul>
         <li>
@@ -59,7 +59,7 @@
         </li>
       </ul>
     </div>
-    
+
     <div id="share">
       <div>
 			<%= link_to(image_tag("fb_share.jpg", :height => "20"),
@@ -77,7 +77,7 @@
   <div class="span1">
     &nbsp;
   </div>
-</div>  
+</div>
 
 <div id="story_row3" class="row">
   <div class="span1">

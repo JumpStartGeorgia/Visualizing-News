@@ -50,3 +50,17 @@ cat.category_translations.create(:locale => 'en', :name => 'Justice')
 cat = Category.create(:id => 12)
 cat.category_translations.create(:locale => 'ka', :name => 'საზოგადოება')
 cat.category_translations.create(:locale => 'en', :name => 'Society')
+
+######### Pages ##########################
+puts "pages"
+Page.delete_all
+PageTranslation.delete_all
+p = Page.create(:name => 'about')
+p.page_translations.create(:locale => 'ka', :title => 'About', :description => '...')
+p.page_translations.create(:locale => 'en', :title => 'About', :description => '...')
+p = Page.create(:name => 'get_involved')
+p.page_translations.create(:locale => 'ka', :title => 'Get Involved', :description => '...')
+p.page_translations.create(:locale => 'en', :title => 'Get Involved', :description => '...')
+p = Page.create(:name => 'data')
+p.page_translations.create(:locale => 'ka', :title => 'Got Data?', :description => '...')
+p.page_translations.create(:locale => 'en', :title => 'Got Data?', :description => '...')

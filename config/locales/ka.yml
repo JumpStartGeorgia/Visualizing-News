@@ -6,6 +6,7 @@ ka:
       category: Category
       story: Story
       story_type: Story Type
+      page: Page
     attributes:
       user:
         email: ელ.ფოსტა
@@ -17,6 +18,11 @@ ka:
         icon: Icon
       category_translation:
         name: Name
+      page:
+        name: Name
+      page_translation:
+        title: Title
+        description: Content
       story_type_translation:
         name: Name
       story:
@@ -131,6 +137,7 @@ ka:
       stories: Stories
       story_types: Story Types
       users: Users
+      pages: Pages
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -142,6 +149,13 @@ ka:
         title: მომხმარებლის დეტალები
   root:
     index:
+      title: hi!
+    about:
+      title: About
+    data:
+      title: Got Data?
+    get_involved:
+      title: Get Involved!
   visuals:
     index:
     show:

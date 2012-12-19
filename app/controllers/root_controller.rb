@@ -10,4 +10,16 @@ class RootController < ApplicationController
     end
   end
 
+	def about
+    @page = Page.where(:name => "about").first
+	end
+
+	def data
+    @page = Page.where(:name => "data").first
+	end
+
+	def get_involved
+    @page = Page.where(:name => "get_involved").first
+	end
+
 end

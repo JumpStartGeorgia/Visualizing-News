@@ -111,7 +111,7 @@ en:
     unsupported_browser:
       title: Unsupported Browser
       p1: We are sorry to report that your browser is out of date and will not properly render the content from this website.
-      p2: On the bright side, there are several free browsers that you can download that are compatible with this site.
+      p2: "On the bright side, there are several free browsers that you can download that are compatible with this site."
       chrome: Chrome
       firefox: Firefox
       ie: Internet Explorer (Windows only)
@@ -140,7 +140,9 @@ en:
         title: User Details
   root:
     index:
-    story:
+  visuals:
+    index:
+    show:
       reporter: Reporter
       designer: Designer
       data_source: Data Source

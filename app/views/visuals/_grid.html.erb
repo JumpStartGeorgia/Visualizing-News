@@ -5,10 +5,10 @@
 
     <div class="grid_story_item">
       <div class="visual">
-        <%= link_to(image_tag(story.visual.url(:thumb)), story_path(story.id)) if story.visual_file_name %>
+        <%= link_to(image_tag(story.visual.url(:thumb)), visual_path(story.id)) if story.visual_file_name %>
       </div>
       <div class="title">
-        <h2><%= link_to story.title, story_path(story.id) %></h2>
+        <h2><%= link_to story.title, visual_path(story.id) %></h2>
       </div>
     </div>
 

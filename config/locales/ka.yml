@@ -140,7 +140,9 @@ ka:
         title: მომხმარებლის დეტალები
   root:
     index:
-    story:
+  visuals:
+    index:
+    show:
       reporter: Reporter
       designer: Designer
       data_source: Data Source

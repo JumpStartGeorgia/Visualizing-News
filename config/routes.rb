@@ -15,6 +15,7 @@ BootstrapStarter::Application.routes.draw do
 		end
 
 
+    # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
 		match '/visualizations/:id', :to => 'visuals#show', :as => :visual, :via => :get
 		match '/visualizations/category/:id', :to => 'visuals#category', :as => :category, :via => :get
@@ -23,6 +24,9 @@ BootstrapStarter::Application.routes.draw do
 		match '/visualizations/vote/:type/:votable_id/:status', :to => 'visuals#vote', :as => :vote, :via => :get
 		match '/visualizations/comment_notification/:id', :to => 'visuals#comment_notification', :as => :comment_notification, :via => :get
 
+    # contact page
+		match '/contact' => 'messages#new', :as => 'contact', :via => :get
+		match '/contact' => 'messages#create', :as => 'contact', :via => :post
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

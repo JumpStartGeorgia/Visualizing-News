@@ -46,6 +46,8 @@ ka:
       new_story:
         subject: "A new visualization has been added"
         message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+    contact:
+      subject: "Visual.info Contact Form"
   helpers:
     actions: აირჩიეთ
     links:
@@ -150,3 +152,17 @@ ka:
       category: Category
       type: Type
       comment_count: Comments            
+  messages:
+    new:
+      title: დაგვიკავშირდით
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      reset: გადატვირთვა
+      cancel: გაუქმება
+      name: სახელი
+      email: ელ.ფოსტის მისამართი
+      message: შეტყობინება
+      address_map: Find our office on the map
+      email_us: Send us an email
+      email_subject: "Visual.info Email Link: Inquiry"
+      

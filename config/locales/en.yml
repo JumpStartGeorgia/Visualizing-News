@@ -98,8 +98,10 @@ en:
       success_updated: "%{obj} was successfully updated."
   layouts:
     application:
+      menu_visual: Visualizations
       menu_data: Got Data?
       menu_idea: Got Ideas?
+      menu_involved: Get Involved
       menu_about: About
       menu_contact: Contact
       admin: Admin

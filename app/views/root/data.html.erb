@@ -1,11 +1,11 @@
 <% if !@page.nil? %>
 
-  <% title @page.title %>
+	<%= page_title @page.title %>
 
 	<%= simple_format(@page.description) %>
 
 <% else %>
-  <% title t('.title') %>
+	<%= page_title t('.title') %>
 <% end %>
 
 <% if user_signed_in? %>

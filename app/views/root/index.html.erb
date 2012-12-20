@@ -2,7 +2,12 @@
 <div class="row-fluid">
 	<div class="span10">
 		<%= page_title t('.title') %>
-		<%= render @view_type %>
+
+		<div id="visual_list">
+			<%= render @view_type %>
+		</div>
+
+		<%= link_to_next_page @stories, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>
 	</div>
 	<div id="get_involved_container" class="span2">
 		<h2><%= t('.header_get_involved') %></h2>

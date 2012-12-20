@@ -1,12 +1,17 @@
 class RootController < ApplicationController
 
   def index
-    @stories = Story.published.recent
-    
+    @stories = Story.published.recent.page(params[:page])
+
     if params[:view] && params[:view] == 'list'
       @view_type = 'visuals/list'
     else
       @view_type = 'visuals/grid'
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

@@ -4,6 +4,9 @@ class Story < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
+
+	paginates_per 2
+
 	has_many :story_categories, :dependent => :destroy
 	has_many :categories, :through => :story_categories
 	has_many :story_translations, :dependent => :destroy

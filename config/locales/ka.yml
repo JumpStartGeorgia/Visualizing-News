@@ -74,6 +74,7 @@ ka:
       password_reset: Send Password Reset Instructions
       sign_in_provider: "Sign in with %{provider}"
       download: Download
+      more: Show More
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"

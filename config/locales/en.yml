@@ -74,6 +74,7 @@ en:
       password_reset: Send Password Reset Instructions
       sign_in_provider: "Sign in with %{provider}"
       download: Download
+      more: Show More
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"

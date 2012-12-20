@@ -1,13 +1,19 @@
 class VisualsController < ApplicationController
 
   def index
-    @stories = Story.published.recent
-    
+    @stories = Story.published.recent.page(params[:page])
+
     if params[:view] && params[:view] == 'list'
       @view_type = 'list'
     else
       @view_type = 'grid'
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
   end
 
   def show

@@ -140,11 +140,23 @@ div#form-ka {
     color: #B94A48;
 }
 
+/* template styles */
+body {
+	background-color: #fafafa;
+}
+
+/* navbar */
+.navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner {
+  background: #fff;
+  box-shadow: none;
+	filter: none; /* so ie will display the correct color background */
+}
+
 /* footer */
 footer {
 	margin-top: -54px; /* negative value of footer height */
 	min-height: 41px !important;
-	background: #D4D4D4 !important;
+	background: #dadada !important;
 	padding: 0 20px;
 	padding-top: 13px;
 	font-size: 10pt;

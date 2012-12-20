@@ -149,7 +149,17 @@ ka:
         title: მომხმარებლის დეტალები
   root:
     index:
-      title: hi!
+      title: Visaulizations
+      header_get_involved: Get Involved!
+      header_ideas: Ideas
+      header_visuals: Visuals
+      header_data: Data
+      text_ideas: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+      text_visuals: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+      text_data: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+      button_ideas: Post Idea
+      button_visuals: Submit Visual
+      button_data: Send Data
     about:
       title: About
     data:
@@ -158,6 +168,7 @@ ka:
       title: Get Involved!
   visuals:
     index:
+      title: Visaulizations
     show:
       reporter: Reporter
       designer: Designer
@@ -165,7 +176,7 @@ ka:
       data_set: Data Set
       category: Category
       type: Type
-      comment_count: Comments            
+      comment_count: Comments
   messages:
     new:
       title: დაგვიკავშირდით
@@ -179,4 +190,3 @@ ka:
       address_map: Find our office on the map
       email_us: Send us an email
       email_subject: "Visual.info Email Link: Inquiry"
-      

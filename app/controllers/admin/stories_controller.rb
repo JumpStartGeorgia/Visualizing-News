@@ -31,6 +31,7 @@ class Admin::StoriesController < ApplicationController
 			@story.story_translations.build(:locale => locale)
 		end
 		@story.story_categories.build
+		gon.edit_story = true
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,6 +43,9 @@ class Admin::StoriesController < ApplicationController
   def edit
     @story = Story.find(params[:id])
 		@story.story_categories.build if @story.story_categories.nil? || @story.story_categories.empty?
+
+		gon.edit_story = true
+		gon.published_date = @story.published_date.strftime('%m/%d/%Y') if !@story.published_date.nil?
 
   end
 
@@ -55,6 +59,8 @@ class Admin::StoriesController < ApplicationController
         format.html { redirect_to admin_story_path(@story), notice: t('app.msgs.success_created', :obj => t('activerecord.models.story')) }
         format.json { render json: @story, status: :created, location: @story }
       else
+				gon.edit_story = true
+				gon.published_date = @story.published_date.strftime('%m/%d/%Y') if !@story.published_date.nil?
         format.html { render action: "new" }
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end
@@ -71,6 +77,8 @@ class Admin::StoriesController < ApplicationController
         format.html { redirect_to admin_story_path(@story), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.story')) }
         format.json { head :ok }
       else
+				gon.edit_story = true
+				gon.published_date = @story.published_date.strftime('%m/%d/%Y') if !@story.published_date.nil?
         format.html { render action: "edit" }
         format.json { render json: @story.errors, status: :unprocessable_entity }
       end

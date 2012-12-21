@@ -1,8 +1,6 @@
 <div class="grid_items">
+  <div class="grid_story_row clear">
 	<% @stories.each_with_index do |story, index| %>
-		<% if index%4 == 0 %>
-		  <div class="grid_story_row clear">
-		<% end %>
 
 		  <div class="grid_story_item">
 		    <div class="visual">
@@ -23,12 +21,11 @@
 		    </div>
 		  </div>
 
-		<% if index%4 == 3 %>
+		<% if (index + 1) % 4 == 0 %>
 		  </div>
+      <div class="grid_story_row clear">
 		<% end %>
 	<% end %>
+	</div>
 
-	<% if @stories.length%4 != 3 %>
-		</div>
-	<% end %>
 </div>

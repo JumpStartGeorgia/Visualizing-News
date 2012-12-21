@@ -145,6 +145,46 @@ body {
 	background-color: #fafafa;
 }
 
+#frozen-menu {
+  width: 200px;
+  position: fixed;
+  background: #fff;
+  top: 0px;
+  bottom: 0px;
+}
+
+#everything-else {
+  padding-left: 200px;
+  height: 100%;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#frozen-menu .brand {
+  margin-top: 30px;
+  margin-bottom: 45px;
+  text-align: center;
+}
+
+#frozen-menu .brand > a {
+  display: inline-block;
+}
+
+.nav-menu {
+  padding-left: 35px;
+  text-transform: uppercase;
+}
+
+.nav-menu li a {
+  display: block;
+  padding: 7px 0px;
+}
+
+.user-menu {
+}
+
 /* navbar */
 .navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner {
   background: #fff;

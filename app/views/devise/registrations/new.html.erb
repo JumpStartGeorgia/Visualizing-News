@@ -1,6 +1,6 @@
 <% title t('helpers.links.sign_up') %>
 
-<div class="row">
+<div class="row-fluid">
 	<div class="span4">
 		<%= semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 			<%= devise_error_messages! %>

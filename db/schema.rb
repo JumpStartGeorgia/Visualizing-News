@@ -70,6 +70,11 @@ ActiveRecord::Schema.define(:version => 20121219185213) do
     t.datetime "visual_updated_at"
   end
 
+  add_index "stories", ["overall_votes"], :name => "index_stories_on_overall_votes"
+  add_index "stories", ["published"], :name => "index_stories_on_published"
+  add_index "stories", ["published_date"], :name => "index_stories_on_published_date"
+  add_index "stories", ["story_type_id"], :name => "index_stories_on_story_type_id"
+
   create_table "story_categories", :force => true do |t|
     t.integer  "story_id"
     t.integer  "category_id"

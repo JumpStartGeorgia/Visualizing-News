@@ -1,7 +1,7 @@
 <%- model_class = User -%>
 <% title t('helpers.links.sign_in') %>
 
-<div class="row">
+<div class="row-fluid">
 	<div class="span4">
 		<%= semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 			<%= f.input :email, :input_html => { :size => 35 } %>

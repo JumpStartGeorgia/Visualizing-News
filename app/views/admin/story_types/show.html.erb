@@ -1,6 +1,6 @@
 <%- model_class = StoryType -%>
 <%- model_class_trans = StoryTypeTranslation -%>
-<% title t '.title', :default => model_class.model_name.human %>
+<%= page_title t '.title', :default => model_class.model_name.human %>
 
 <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
 <%= @story_type.name %></p>

@@ -1,5 +1,5 @@
 <%- model_class = StoryType -%>
-<% title t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
+<%= page_title t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
                                  :default => "Edit #{model_class.model_name.human}") %>
 
 <%= render :partial => 'form' %>

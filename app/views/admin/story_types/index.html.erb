@@ -1,6 +1,6 @@
 <%- model_class = StoryType -%>
 <%- model_class_trans = StoryTypeTranslation -%>
-<% title t '.title', :default => model_class.model_name.human.pluralize %>
+<%= page_title t '.title', :default => model_class.model_name.human.pluralize %>
 
 <table class="table table-striped">
   <thead>

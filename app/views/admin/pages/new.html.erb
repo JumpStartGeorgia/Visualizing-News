@@ -1,5 +1,5 @@
 <%- model_class = Page -%>
-<% title t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+<%= page_title t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
                                  :default => "New #{model_class.model_name.human}") %>
 
 <%= render :partial => 'form' %>

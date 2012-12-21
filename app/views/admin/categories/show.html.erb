@@ -1,6 +1,6 @@
 <%- model_class = Category -%>
 <%- model_class_trans = CategoryTranslation -%>
-<% title t '.title', :default => model_class.model_name.human %>
+<%= page_title t '.title', :default => model_class.model_name.human %>
 
 
 <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>

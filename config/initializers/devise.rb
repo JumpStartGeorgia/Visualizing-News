@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = ENV['APPLICATION_FEEDBACK_FROM_EMAIL']
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -85,7 +85,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "2d0010eba8490cf62bc6a520a4e5cdb41eff4dbfa9ce92e1d5a5663d39016ad6655b97391bfe98a5364df713482b2ef86065906524bff5f5fe872897bc715f8f"
+  # config.pepper = "8e2d3ff05a9298e3d409138f05908d79efb26a8ab4eb7be3501aec382d926ddd26c475df8008c9deec428e6f0e6d0f51b69aa43c48fd9e979f6e81ce2e7dc201"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -211,6 +211,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+	require "omniauth-facebook"
+	config.omniauth :facebook, ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID'], ENV['VISUALIZING_NEWS_FACEBOOK_APP_SECRET']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

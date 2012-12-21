@@ -84,9 +84,6 @@
     &nbsp;
   </div>
   <div id="main_block" class="span6 clear">
-    <div id="comment_count">
-      <%= "#{t('.comment_count')}: #{0}" %>
-    </div>
     <div class="vote">
 		  <%= votes_cont(@story) %>
     </div>
@@ -97,4 +94,22 @@
   <div class="span1">
     &nbsp;
   </div>
-</div>  
+</div>
+
+<div id="story_row4" class="row-fluid">
+  <div class="span1">
+    &nbsp;
+  </div>
+  <div id="main_block" class="span6 clear">
+		<h3>
+			<%= "#{t('app.common.comments')}:" %>
+			<fb:comments-count href="<%= full_url(visual_path(@story)) %>"></fb:comments-count>
+		</h3>
+		<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
+  <div class="span4">
+    &nbsp;
+  </div>
+  <div class="span1">
+    &nbsp;
+  </div>
+</div>

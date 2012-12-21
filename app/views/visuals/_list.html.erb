@@ -9,6 +9,16 @@
 			<h3><%= l story.published_date, :format => :long if story.published_date %></h3>
 		  <%= simple_format truncate(story.explanation, :length => 300, :separator => ' ') %>
 		</div>
+		<div class="item_footer clear">
+			<div class="comment_count">
+				<%= "#{t('app.common.comments')}:" %>
+				<fb:comments-count href="<%= full_url(visual_path(story)) %>"></fb:comments-count>
+			</div>
+			<div class="like_count">
+				<%= "#{t('app.common.likes')}:" %>
+				<%= story.overall_votes %>
+			</div>
+		</div>
 	</div>
 	<% end %>
 </div>

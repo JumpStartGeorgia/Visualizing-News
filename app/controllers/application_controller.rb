@@ -64,6 +64,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
+		gon.placeholder = t('app.common.placeholder')
+		gon.comment_notification_url = nil#comment_notification_path(gon.placeholder)
+		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 	end
 
 	# after user logs in go back to the last page or go to root page

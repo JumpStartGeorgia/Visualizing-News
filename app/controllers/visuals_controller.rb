@@ -18,6 +18,7 @@ class VisualsController < ApplicationController
 
   def show
     @story = Story.published.find(params[:id])
+		gon.show_fb_comments = true
   end
 
   def vote

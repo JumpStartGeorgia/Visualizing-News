@@ -11,8 +11,14 @@
 		    <div class="title">
 		      <h2><%= link_to story.title, visual_path(story.id) %></h2>
 					<div class="item_footer clear">
-						<div class="comment_count">Comments: 123</div>
-						<div class="like_count">Likes: -234</div>
+						<div class="comment_count">
+							<%= "#{t('app.common.comments')}:" %>
+							<fb:comments-count href="<%= full_url(visual_path(story)) %>"></fb:comments-count>
+						</div>
+						<div class="like_count">
+							<%= "#{t('app.common.likes')}:" %>
+							<%= story.overall_votes %>
+						</div>
 					</div>
 		    </div>
 		  </div>

@@ -64,3 +64,13 @@ p.page_translations.create(:locale => 'en', :title => 'Get Involved', :descripti
 p = Page.create(:name => 'data')
 p.page_translations.create(:locale => 'ka', :title => 'Got Data?', :description => '...')
 p.page_translations.create(:locale => 'en', :title => 'Got Data?', :description => '...')
+
+########### Organization ####################
+puts "organizations"
+Organization.delete_all
+OrganizationTranslation.delete_all
+org = Organization.create(:id => 1, :url => "http://jumpstart.ge",
+	:logo_file_name => "jumpstart-logo.png", :logo_content_type => "image/png",
+	:logo_file_size => 3538, :logo_updated_at => Time.now)
+org.organization_translations.create(:locale => 'ka', :name => 'JumpStart Georgia')
+org.organization_translations.create(:locale => 'en', :name => 'JumpStart Georgia')

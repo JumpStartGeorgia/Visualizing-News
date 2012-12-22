@@ -1,0 +1,24 @@
+<%- model_class = Organization -%>
+<%- model_class_trans = OrganizationTranslation -%>
+<%= page_title t '.title', :default => model_class.model_name.human %>
+
+  <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
+  <%= @organization.name %></p>
+  <p><strong><%= model_class.human_attribute_name(:url) %>:</strong>
+  <%= link_to t('helpers.links.website'), @organization.url, :target => "blank", :class => 'btn btn-mini' if @organization.url %></p>
+  <p><strong><%= model_class.human_attribute_name(:logo) %>:</strong>
+  <%= image_tag @organization.logo.url if @organization.logo_file_name %></p>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_organizations_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_organization_path(@organization), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_organization_path(@organization),
+              :method => :delete,
+							:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+              :class => 'btn btn-mini btn-danger' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>

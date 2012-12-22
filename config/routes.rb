@@ -14,13 +14,14 @@ BootstrapStarter::Application.routes.draw do
 			resources :stories
 			resources :categories
       resources :pages
+			resources :organizations
 		end
 
     # root pages
 		match '/about', :to => 'root#about', :as => :about, :via => :get
 		match '/data', :to => 'root#data', :as => :data, :via => :get
 		match '/get_involved', :to => 'root#get_involved', :as => :get_involved, :via => :get
-    
+
 
     # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get

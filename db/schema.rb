@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219185213) do
+ActiveRecord::Schema.define(:version => 20121219185219) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -32,6 +32,50 @@ ActiveRecord::Schema.define(:version => 20121219185213) do
 
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_type"
+    t.integer  "identifier"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["notification_type", "identifier"], :name => "idx_notif_type"
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
+
+  create_table "organization_translations", :force => true do |t|
+    t.integer  "organization_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "organization_translations", ["locale"], :name => "index_organization_translations_on_locale"
+  add_index "organization_translations", ["organization_id"], :name => "index_b182f63d9a9aa74a99d1d5dca589cbf53f3a688c"
+
+  create_table "organization_users", :force => true do |t|
+    t.integer  "organization_id"
+    t.integer  "user_id"
+    t.boolean  "is_active",       :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "organization_users", ["is_active"], :name => "index_organization_users_on_is_active"
+  add_index "organization_users", ["organization_id"], :name => "index_organization_users_on_organization_id"
+  add_index "organization_users", ["user_id"], :name => "index_organization_users_on_user_id"
+
+  create_table "organizations", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "url"
+  end
 
   create_table "page_translations", :force => true do |t|
     t.integer  "page_id"
@@ -69,11 +113,6 @@ ActiveRecord::Schema.define(:version => 20121219185213) do
     t.integer  "visual_file_size"
     t.datetime "visual_updated_at"
   end
-
-  add_index "stories", ["overall_votes"], :name => "index_stories_on_overall_votes"
-  add_index "stories", ["published"], :name => "index_stories_on_published"
-  add_index "stories", ["published_date"], :name => "index_stories_on_published_date"
-  add_index "stories", ["story_type_id"], :name => "index_stories_on_story_type_id"
 
   create_table "story_categories", :force => true do |t|
     t.integer  "story_id"
@@ -117,9 +156,9 @@ ActiveRecord::Schema.define(:version => 20121219185213) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "role",                   :default => "", :null => false
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
+    t.integer  "role",                   :default => 0,    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -134,10 +173,12 @@ ActiveRecord::Schema.define(:version => 20121219185213) do
     t.string   "uid"
     t.string   "nickname"
     t.string   "avatar"
+    t.boolean  "wants_notifications",    :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["wants_notifications"], :name => "index_users_on_wants_notifications"
 
   create_table "voter_ips", :force => true do |t|
     t.string   "ip",           :limit => 50, :default => ""

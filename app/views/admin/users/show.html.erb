@@ -1,14 +1,31 @@
 <%- model_class = User -%>
+<%- model_class_org = OrganizationUser -%>
 <%= page_title t '.title', :default => model_class.model_name.human %>
 
+<p>
+  <strong><%= model_class.human_attribute_name(:nickname) %>:</strong>
+  <%= @user.nickname %>
+</p>
 <p>
   <strong><%= model_class.human_attribute_name(:email) %>:</strong>
   <%= @user.email %>
 </p>
 <p>
   <strong><%= model_class.human_attribute_name(:role) %>:</strong>
-  <%= @user.role.humanize %>
+  <%= @user.role_name.humanize %>
 </p>
+<p>
+  <strong><%= model_class.human_attribute_name(:provider) %>:</strong>
+  <%= @user.provider.humanize if @user.provider %>
+</p>
+<p>
+  <strong><%= model_class_org.human_attribute_name(:organization) %>:</strong>
+	<% @user.organization_users.each do |org| %>
+		<%= org.organization.name %>
+	<% end %>
+</p>
+
+
 
 <div class="form-actions">
   <%= link_to t('helpers.links.list'),

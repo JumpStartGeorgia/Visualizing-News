@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+	has_many :notifications, :dependent => :destroy
+	has_many :organization_users, :dependent => :destroy
+	has_many :organizations, :through => :organization_users
+  accepts_nested_attributes_for :organization_users
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
 	# :registerable, :recoverable,
@@ -13,23 +18,39 @@ class User < ActiveRecord::Base
   validates :email, :nickname, :presence => true
 	before_save :check_for_role
 
+	default_scope includes(:organizations)
+
   def self.no_admins
-    where("role != ?", ROLES[1])
+    where("role != ?", ROLES[:admin])
   end
 
-	# if no role is supplied, default to the basic author role
-	def check_for_role
-		self.role = User::ROLES[0] if self.role.nil? || self.role.empty?
-	end
-
   # use role inheritence
-  ROLES = %w[author admin]
+  # - a role with a larger number can do everything that smaller numbers can do
+  ROLES = {:user => 0, :org_admin => 50, :admin => 99}
   def role?(base_role)
-    if base_role && ROLES.index(base_role.to_s)
-      return ROLES.index(base_role.to_s) <= ROLES.index(role)
+    if base_role && ROLES.values.index(base_role)
+      return base_role <= self.role
     end
     return false
   end
+
+  def role_name
+    ROLES.keys[ROLES.values.index(self.role)].to_s
+  end
+
+	# if no role is supplied, default to the basic user role
+	def check_for_role
+		self.role = User::ROLES[:user] if self.role.nil?
+	end
+
+	def organization_ids
+		ids = []
+		if !self.organization_users.empty?
+			ids = self.organization_users.map{|x| x.organization_id}
+		end
+		return ids
+	end
+
 
 	##############################
 	## omniauth methods

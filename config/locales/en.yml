@@ -4,6 +4,7 @@ en:
     models:
       user: User
       category: Category
+      organization: Organization
       story: Visualization
       story_type: Visualization Type
       page: Page
@@ -18,6 +19,15 @@ en:
         icon: Icon
       category_translation:
         name: Name
+      organization:
+        logo: Logo
+        url: Website
+      organization_translation:
+        name: Name
+      organization_user:
+        is_active: Active?
+        user_id: User
+        organization_id: Organization
       page:
         name: Name
       page_translation:
@@ -108,6 +118,11 @@ en:
       permalink_exists: already exists in the database
       success_created: "%{obj} was successfully created."
       success_updated: "%{obj} was successfully updated."
+      notification_yes: You will be sent notifications.
+      notification_no: You will not be sent notifications.
+      notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
+      notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
+      notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
   layouts:
     application:
       menu_visual: Visualizations
@@ -117,6 +132,9 @@ en:
       menu_about: About
       menu_contact: Contact
       admin: Admin
+      user_profile: Your Profile
+      org_profile: "%{org} Profile"
+      notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -138,6 +156,7 @@ en:
     index:
       title: Administration Section
       categories: Categories
+      organizations: Organizations
       stories: Visualizations
       story_types: Visualization Types
       users: Users

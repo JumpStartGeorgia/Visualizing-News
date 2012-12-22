@@ -15,7 +15,8 @@
 /tmp
 
 # ignore file uploads
-/public/system/*
+/public/system/story/*
+/public/system/category/*
 
 #ignore db config
 /config/database.yml

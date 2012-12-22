@@ -4,8 +4,8 @@ en:
     models:
       user: User
       category: Category
-      story: Story
-      story_type: Story Type
+      story: Visualization
+      story_type: Visualization Type
       page: Page
     attributes:
       user:
@@ -28,7 +28,7 @@ en:
       story:
         published_date: Publication Date
         published: Is Published?
-        story_type: Story Type
+        story_type: Visualization Type
         data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
@@ -138,8 +138,8 @@ en:
     index:
       title: Administration Section
       categories: Categories
-      stories: Stories
-      story_types: Story Types
+      stories: Visualizations
+      story_types: Visualization Types
       users: Users
       pages: Pages
     users:

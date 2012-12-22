@@ -16,7 +16,7 @@
     <% @stories.each do |story| %>
       <tr>
         <td><%= link_to story.title, admin_story_path(story) %></td>
-        <td><%= l story.published_date if story.published_date %></td>
+        <td><%= l story.published_date, :format => :long if story.published_date %></td>
         <td><%= story.published %></td>
         <td><%= story.story_type.name %></td>
         <td>

@@ -11,6 +11,7 @@ class Story < ActiveRecord::Base
 	has_many :categories, :through => :story_categories
 	has_many :story_translations, :dependent => :destroy
 	belongs_to :story_type
+	belongs_to :organization
 
 	has_attached_file :dataset,
     :url => "/system/story/:attachment/:id/:filename",
@@ -38,7 +39,8 @@ class Story < ActiveRecord::Base
 			:dataset,
 			:visual,
 			:story_translations_attributes,
-			:category_ids
+			:category_ids,
+			:organization_id
 
 	attr_accessor :is_create
 

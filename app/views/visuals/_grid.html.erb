@@ -8,6 +8,9 @@
 		    </div>
 		    <div class="title">
 		      <h2><%= link_to story.title, visual_path(story.id) %></h2>
+					<% if !story.published %>
+					<div class="not_published"><%= t('app.common.not_published') %></div>
+					<% end %>
 					<div class="item_footer clear">
 						<div class="comment_count">
 							<%= "#{t('app.common.comments')}:" %>

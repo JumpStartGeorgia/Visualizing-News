@@ -7,6 +7,9 @@
 		<div class="content">
 		  <h2><%= link_to story.title, visual_path(story.id) %></h2>
 			<h3><%= l story.published_date, :format => :long if story.published_date %></h3>
+			<% if !story.published %>
+			<div class="not_published"><%= t('app.common.not_published') %></div>
+			<% end %>
 		  <%= simple_format truncate(story.explanation, :length => 300, :separator => ' ') %>
 		</div>
 		<div class="item_footer clear">

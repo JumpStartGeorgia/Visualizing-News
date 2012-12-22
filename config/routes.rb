@@ -22,6 +22,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/data', :to => 'root#data', :as => :data, :via => :get
 		match '/get_involved', :to => 'root#get_involved', :as => :get_involved, :via => :get
 
+		# organization
+		match '/organization/:id', :to => 'organization#index', :as => :organization, :via => :get
 
     # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get

@@ -112,6 +112,7 @@ en:
       placeholder: placeholder
       comments: Comments
       likes: Likes
+      not_published: Not Published
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.

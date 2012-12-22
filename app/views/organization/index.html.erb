@@ -1,0 +1,7 @@
+<%= page_title @organization.name %>
+
+<div id="visual_list">
+	<%= render @view_type %>
+</div>
+
+<%= link_to_next_page @stories, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>

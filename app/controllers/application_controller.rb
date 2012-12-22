@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 	before_filter :initialize_gon
 	before_filter :load_categories
 	after_filter :store_location
+	before_filter :load_view_type
 
 	layout :layout_by_resource
 
@@ -60,6 +61,14 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 	def load_categories
 		@categories = Category.with_translations(I18n.locale).order("category_translations.name asc")
+	end
+
+	def load_view_type
+	  if params[:view] && params[:view] == 'list'
+	    @view_type = 'visuals/list'
+	  else
+	    @view_type = 'visuals/grid'
+	  end
 	end
 
 	def initialize_gon

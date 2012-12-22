@@ -2,10 +2,10 @@
 	<% @stories.each do |story| %>
 	<div class="list_story_item clear">
 		<div class="visual">
-		  <%= link_to(image_tag(story.visual.url(:thumb)), visual_path(story.id)) if story.visual_file_name %>
+		  <%= link_to(image_tag(story.visual.url(:thumb)), create_visual_path(story.id, @user_in_org, organization_id=params[:id])) if story.visual_file_name %>
 		</div>
 		<div class="content">
-		  <h2><%= link_to story.title, visual_path(story.id) %></h2>
+		  <h2><%= link_to story.title, create_visual_path(story.id, @user_in_org, organization_id=params[:id]) %></h2>
 			<h3><%= l story.published_date, :format => :long if story.published_date %></h3>
 			<% if !story.published %>
 			<div class="not_published"><%= t('app.common.not_published') %></div>
@@ -21,6 +21,18 @@
 				<%= "#{t('app.common.likes')}:" %>
 				<%= story.overall_votes %>
 			</div>
+			<% if @user_in_org && params[:controller] == 'organizations' %>
+				<div>
+			    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+			                edit_organization_visualization_path(params[:id], story),
+											:class => 'btn btn-mini' %>
+			    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+			                organization_visualization_path(params[:id], story.id),
+			                :method => :delete,
+											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+			                :class => 'btn btn-mini btn-danger' %>
+				</div>
+			<% end %>
 		</div>
 	</div>
 	<% end %>

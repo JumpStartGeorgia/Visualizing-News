@@ -1,5 +1,13 @@
 module StoriesHelper
-  
+
+	def create_visual_path(story_id, user_in_org=false, organization_id=nil)
+		if user_in_org && organization_id
+			organization_visualization_path(organization_id,story_id)
+		else
+			visual_path(story_id)
+		end
+	end
+
   def votes_cont (obj)
     ip = request.remote_ip
     type = obj.class.name.downcase
@@ -20,5 +28,5 @@ module StoriesHelper
     end
     html
   end
-  
+
 end

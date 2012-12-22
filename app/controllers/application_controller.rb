@@ -88,6 +88,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
 
+  def assigned_to_org?(organization_id)
+    redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.organization_ids.index(organization_id.to_i)
+  end
+
 	# store the current path so after login, can go back
 	def store_location
 		session[:previous_urls] ||= []

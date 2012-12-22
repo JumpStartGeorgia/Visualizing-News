@@ -1,4 +1,9 @@
 class Admin::StoryTypesController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:admin])
+  end
+
   # GET /story_types
   # GET /story_types.json
   def index

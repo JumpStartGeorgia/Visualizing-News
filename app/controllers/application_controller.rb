@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 	before_filter :load_categories
 	after_filter :store_location
 
+	layout :layout_by_resource
 
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
@@ -88,6 +89,15 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		session[:previous_urls].pop if session[:previous_urls].count > 1
 	end
 
+
+	DEVISE_CONTROLLERS = ['devise/sessions', 'devise/registrations', 'devise/passwords']
+	def layout_by_resource
+    if DEVISE_CONTROLLERS.index(params[:controller]).nil?
+      "application"
+    else
+      "fancybox"
+    end
+  end
 
   #######################
 	def render_not_found(exception)

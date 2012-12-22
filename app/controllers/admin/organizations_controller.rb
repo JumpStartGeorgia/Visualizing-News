@@ -1,7 +1,7 @@
 class Admin::OrganizationsController < ApplicationController
   before_filter :authenticate_user!
   before_filter do |controller_instance|
-    controller_instance.send(:valid_role?, User::ROLES[:org_admin])
+    controller_instance.send(:valid_role?, User::ROLES[:admin])
   end
 
   # GET /organizations

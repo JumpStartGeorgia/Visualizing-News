@@ -37,17 +37,6 @@
 							</div>
 						<% end %>
 
-						<% if content_for?(:title) %>
-							<div class="page-header">
-								<div class="block">
-			            <h1>
-										<%= image_tag(yield(:title_image), :style => 'vertical-align: middle;') if content_for?(:title_image) %>
-										<%= yield(:title) %>
-									</h1>
-								</div>
-							</div>
-						<% end %>
-
 		        <%= yield %>
 		      </div><!--/span12-->
 		    </div><!--/row-->
@@ -57,29 +46,15 @@
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "fancybox_layout" %>
 		<script type="text/javascript">
 			I18n.defaultLocale = "<%= I18n.default_locale %>";
 			I18n.locale = "<%= I18n.locale %>";
 		</script>
-
 		<% if Rails.env.production? %>
 			<!-- insert google analytics for production site here -->
 		<% elsif Rails.env.staging? %>
 			<!-- google analytics -->
-			<script type="text/javascript">
-
-				var _gaq = _gaq || [];
-				_gaq.push(['_setAccount', 'UA-12801815-11']);
-				_gaq.push(['_trackPageview']);
-
-				(function() {
-					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-
-			</script>
 		<% end %>
 
   </body>

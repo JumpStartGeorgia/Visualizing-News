@@ -36,6 +36,10 @@ BootstrapStarter::Application.routes.draw do
 		match '/contact' => 'messages#new', :as => 'contact', :via => :get
 		match '/contact' => 'messages#create', :as => 'contact', :via => :post
 
+		# notifications
+		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get
+		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :post
+
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever
 	end

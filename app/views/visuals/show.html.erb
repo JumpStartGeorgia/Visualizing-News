@@ -25,7 +25,7 @@
   </div>
   <div id="main_block" class="span6">
     <div id="visual">
-      <%= image_tag @story.visual.url(:medium) if @story.visual_file_name %>
+      <%= link_to(image_tag(@story.visual.url(:medium)), @story.visual.url(:large), :class => 'fancybox_visual') if @story.visual_file_name %>
     </div>
   </div>
   <div id="story_sidebar" class="span4">

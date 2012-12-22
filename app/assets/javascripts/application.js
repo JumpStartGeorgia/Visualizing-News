@@ -10,6 +10,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
+//= require fancybox
 //= require vendor
 //= require_tree .
 
@@ -23,5 +24,12 @@ $(document).ready(function(){
 	$('body')
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
+
+
+	// register fancybox
+	$("a.fancybox").fancybox();
+	$("a.fancybox_visual").fancybox({
+		autoScale: false // use size of image to determine width/height
+	});
 
 });

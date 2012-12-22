@@ -11,5 +11,7 @@ class Organization < ActiveRecord::Base
   attr_accessible :logo, :organization_translations_attributes, :url, :id,
 		:logo_file_name, :logo_content_type, :logo_file_size, :logo_updated_at
 
-#	default_scope with_translations(I18n.locale)
+	def self.with_name
+		with_translations(I18n.locale).order("organization_translations.name asc")
+	end
 end

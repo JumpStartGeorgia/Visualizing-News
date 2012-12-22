@@ -12,9 +12,7 @@
 			<%= f.hidden_field :role , :value => User::ROLES[:user] %>
 		<% end %>
 
-		<%= f.fields_for :organization_users do |org| %>
-				<%= org.input :organization %>
-		<% end %>
+		<%= f.input :organizations, :as => :select, :collection => Organization.with_name, :multiple => true %>
 
 	<% end %>
 

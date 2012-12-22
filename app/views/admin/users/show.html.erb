@@ -20,9 +20,7 @@
 </p>
 <p>
   <strong><%= model_class_org.human_attribute_name(:organization) %>:</strong>
-	<% @user.organization_users.each do |org| %>
-		<%= org.organization.name %>
-	<% end %>
+	<%= @user.organizations.map{|x| x.name}.join("; ") %>
 </p>
 
 

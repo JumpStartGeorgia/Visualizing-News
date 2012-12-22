@@ -5,7 +5,9 @@
   <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
   <%= @organization.name %></p>
   <p><strong><%= model_class.human_attribute_name(:url) %>:</strong>
-  <%= link_to t('helpers.links.website'), @organization.url, :target => "blank", :class => 'btn btn-mini' if @organization.url %></p>
+	<% if @organization.url && !@organization.url.empty? %>
+	  <%= link_to t('helpers.links.website'), @organization.url, :target => "blank", :class => 'btn btn-mini' %></p>
+	<% end %>
   <p><strong><%= model_class.human_attribute_name(:logo) %>:</strong>
   <%= image_tag @organization.logo.url if @organization.logo_file_name %></p>
 

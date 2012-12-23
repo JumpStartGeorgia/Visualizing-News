@@ -5,10 +5,10 @@ class OrganizationsController < ApplicationController
 
 		if @organization
 			# see if user is in this org
-		  @stories = Story.recent.page(params[:page])
+		  @visualizations = Visualization.recent.page(params[:page])
 			@user_in_org = false
 			if !user_signed_in? || current_user.organization_ids.index(@organization.id).nil?
-			  @stories = @stories.published
+			  @visualizations = @visualizations.published
 			else
 				@user_in_org = true
 			end

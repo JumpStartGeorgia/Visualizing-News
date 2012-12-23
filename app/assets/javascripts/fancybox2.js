@@ -16,6 +16,12 @@ $(document).ready(function(){
 
 	// register click function for 'fancybox-nested' class that should only be used on pages that are opened in fancybox
 	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
+
+	// register fancybox
 	$("a.fancybox").fancybox();
+	$("a.fancybox_visual").fancybox({
+		autoScale: false // use size of image to determine width/height
+	});
+
 
 });

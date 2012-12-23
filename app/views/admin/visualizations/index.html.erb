@@ -1,0 +1,43 @@
+<%- model_class = Visualization -%>
+<%- model_class_trans = VisualizationTranslation -%>
+<%= page_title t '.title', :default => model_class.model_name.human.pluralize %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class_trans.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:published_date) %></th>
+      <th><%= model_class.human_attribute_name(:published) %></th>
+      <th><%= model_class.human_attribute_name(:visualization_type) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @visualizations.each do |visualization| %>
+      <tr>
+        <td><%= link_to visualization.title, admin_visualization_path(visualization) %></td>
+        <td><%= l visualization.published_date, :format => :long if visualization.published_date %></td>
+        <td><%= visualization.published %></td>
+        <td><%= visualization.visualization_type.name %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_visualization_path(visualization), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_visualization_path(visualization),
+                      :method => :delete,
+											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<div class="form-actions">
+	<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_admin_visualization_path,
+            :class => 'btn btn-primary' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>

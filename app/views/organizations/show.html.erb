@@ -1,7 +1,15 @@
 <%= page_title @organization.name %>
 
+<% if @user_in_org && params[:controller] == 'organizations' %>
+<div class="form-actions">
+	<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_organization_visualization_path(@organization.id),
+            :class => 'btn btn-primary' %>
+</div>
+<% end %>
+
 <div id="visual_list">
 	<%= render @view_type %>
 </div>
 
-<%= link_to_next_page @stories, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>
+<%= link_to_next_page @visualizations, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>

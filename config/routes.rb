@@ -10,8 +10,8 @@ BootstrapStarter::Application.routes.draw do
 		devise_for :users
 		namespace :admin do
 			resources :users
-			resources :story_types
-			resources :stories
+			resources :visualization_types
+			resources :visualizations
 			resources :categories
       resources :pages
 			resources :organizations
@@ -25,9 +25,8 @@ BootstrapStarter::Application.routes.draw do
 
 		# organization
 		resources :organizations, :as => :organization, :path => :organization, :only => [:show] do
-			resources :stories, :as => :visualizations, :path => :visualizations, :except => [:index]
+			resources :visualizations, :except => [:index]
 		end
-#		match '/organization/:org_id', :to => 'organization#index', :as => :organization, :via => :get
 
     # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get

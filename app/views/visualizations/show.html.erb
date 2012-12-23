@@ -1,0 +1,13 @@
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              organization_path(params[:organization_id]), :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_organization_visualization_path(params[:organization_id], @visualization), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              organization_visualization_path(params[:organization_id], @visualization),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+              :class => 'btn btn-danger' %>
+</div>
+
+<%= render "visuals/show" %>

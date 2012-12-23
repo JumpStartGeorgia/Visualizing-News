@@ -1,7 +1,7 @@
 class Organization < ActiveRecord::Base
 	translates :name
 
-	has_many :stories, :as => :visualizations
+	has_many :visualizations, :as => :visualizations
 	has_many :organization_users, :dependent => :destroy
 	has_many :organization_translations, :dependent => :destroy
 	has_attached_file :logo,

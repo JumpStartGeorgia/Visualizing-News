@@ -1,7 +1,11 @@
+####################
+# /visualizations/....
+# this controller is the public view to the visuals
+####################
 class VisualsController < ApplicationController
 
   def index
-    @stories = Story.published.recent.page(params[:page])
+    @visualizations = Visualization.published.recent.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -11,7 +15,7 @@ class VisualsController < ApplicationController
   end
 
   def show
-    @story = Story.published.find(params[:id])
+    @visualization = Visualization.published.find(params[:id])
 		gon.show_fb_comments = true
   end
 
@@ -30,8 +34,8 @@ class VisualsController < ApplicationController
     case params[:type]
     when 'comment'
       m = Comment
-    when 'story'
-      m = Story
+    when 'visualization'
+      m = Visualization
     else
       redirect_to root_path, :alert => 'wrong votable'
       return

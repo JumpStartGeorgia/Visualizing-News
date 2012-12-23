@@ -5,8 +5,8 @@ ka:
       user: მომხმარებელი
       category: Category
       organization: ორგანიზაცია
-      story: Visualization
-      story_type: Visualization Type
+      visualization: Visualization
+      visualization_type: Visualization Type
       page: Page
     attributes:
       user:
@@ -33,19 +33,19 @@ ka:
       page_translation:
         title: Title
         description: Content
-      story_type_translation:
+      visualization_type_translation:
         name: Name
-      story:
+      visualization:
         published_date: Publication Date
         published: Is Published?
-        story_type: Visualization Type
+        visualization_type: Visualization Type
         data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
         dataset: Dataset File
         visual: Visual File
-        story_categories: Categories
-      story_translation:
+        visualization_categories: Categories
+      visualization_translation:
         title: Title
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
@@ -59,7 +59,7 @@ ka:
       new_user:
         subject: "Welcome to News Ideas!"
         message: "Thank you for becoming a member of News Ideas and contributing to our repository of ideas."
-      new_story:
+      new_visualization:
         subject: "A new visualization has been added"
         message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
     contact:
@@ -158,8 +158,8 @@ ka:
       title: ადმინისტრატორის განყოფილება
       categories: Categories
       organizations: ორგანიზაციები
-      stories: Visualizations
-      story_types: Visualization Types
+      visualizations: Visualizations
+      visualization_types: Visualization Types
       users: Users
       pages: Pages
     users:

@@ -27,10 +27,4 @@ $(document).ready(function(){
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
 
 
-	// register fancybox
-	$("a.fancybox").fancybox();
-	$("a.fancybox_visual").fancybox({
-		autoScale: false // use size of image to determine width/height
-	});
-
 });

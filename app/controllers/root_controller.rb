@@ -1,7 +1,7 @@
 class RootController < ApplicationController
 
   def index
-    @stories = Story.published.recent.page(params[:page])
+    @visualizations = Visualization.published.recent.page(params[:page])
 
     respond_to do |format|
       format.html

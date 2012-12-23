@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222111243) do
+ActiveRecord::Schema.define(:version => 20121223073521) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -95,68 +95,7 @@ ActiveRecord::Schema.define(:version => 20121222111243) do
     t.datetime "updated_at"
   end
 
-  create_table "stories", :force => true do |t|
-    t.datetime "published_date"
-    t.boolean  "published",            :default => false
-    t.integer  "story_type_id"
-    t.string   "data_source_url"
-    t.string   "individual_votes"
-    t.integer  "overall_votes",        :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "dataset_file_name"
-    t.string   "dataset_content_type"
-    t.integer  "dataset_file_size"
-    t.datetime "dataset_updated_at"
-    t.string   "visual_file_name"
-    t.string   "visual_content_type"
-    t.integer  "visual_file_size"
-    t.datetime "visual_updated_at"
-    t.integer  "organization_id"
-  end
-
-  add_index "stories", ["organization_id"], :name => "index_stories_on_organization_id"
-
-  create_table "story_categories", :force => true do |t|
-    t.integer  "story_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "story_categories", ["category_id"], :name => "index_story_categories_on_category_id"
-  add_index "story_categories", ["story_id"], :name => "index_story_categories_on_story_id"
-
-  create_table "story_translations", :force => true do |t|
-    t.integer  "story_id"
-    t.string   "locale"
-    t.string   "title"
-    t.text     "explanation"
-    t.string   "reporter"
-    t.string   "designer"
-    t.string   "data_source_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "story_translations", ["locale"], :name => "index_story_translations_on_locale"
-  add_index "story_translations", ["story_id"], :name => "index_story_translations_on_story_id"
-
-  create_table "story_type_translations", :force => true do |t|
-    t.integer  "story_type_id"
-    t.string   "locale"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "story_type_translations", ["locale"], :name => "index_story_type_translations_on_locale"
-  add_index "story_type_translations", ["story_type_id"], :name => "index_story_type_translations_on_story_type_id"
-
-  create_table "story_types", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "pages", ["name"], :name => "index_pages_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false
@@ -182,6 +121,72 @@ ActiveRecord::Schema.define(:version => 20121222111243) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["wants_notifications"], :name => "index_users_on_wants_notifications"
+
+  create_table "visualization_categories", :force => true do |t|
+    t.integer  "visualization_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visualization_categories", ["category_id"], :name => "index_visualization_categories_on_category_id"
+  add_index "visualization_categories", ["visualization_id"], :name => "index_visualization_categories_on_visualization_id"
+
+  create_table "visualization_translations", :force => true do |t|
+    t.integer  "visualization_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "explanation"
+    t.string   "reporter"
+    t.string   "designer"
+    t.string   "data_source_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"
+  add_index "visualization_translations", ["visualization_id"], :name => "index_visualization_translations_on_visualization_id"
+
+  create_table "visualization_type_translations", :force => true do |t|
+    t.integer  "visualization_type_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visualization_type_translations", ["locale"], :name => "index_visualization_type_translations_on_locale"
+  add_index "visualization_type_translations", ["visualization_type_id"], :name => "index_visualization_type_translations_on_visualization_type_id"
+
+  create_table "visualization_types", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "visualizations", :force => true do |t|
+    t.datetime "published_date"
+    t.boolean  "published",             :default => false
+    t.integer  "visualization_type_id"
+    t.string   "data_source_url"
+    t.string   "individual_votes"
+    t.integer  "overall_votes",         :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "dataset_file_name"
+    t.string   "dataset_content_type"
+    t.integer  "dataset_file_size"
+    t.datetime "dataset_updated_at"
+    t.string   "visual_file_name"
+    t.string   "visual_content_type"
+    t.integer  "visual_file_size"
+    t.datetime "visual_updated_at"
+    t.integer  "organization_id"
+  end
+
+  add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"
+  add_index "visualizations", ["published"], :name => "index_visualizations_on_published"
+  add_index "visualizations", ["published_date"], :name => "index_visualizations_on_published_date"
+  add_index "visualizations", ["visualization_type_id"], :name => "index_visualizations_on_visualization_type_id"
 
   create_table "voter_ips", :force => true do |t|
     t.string   "ip",           :limit => 50, :default => ""

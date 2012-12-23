@@ -7,7 +7,7 @@ class NotificationMailer < ActionMailer::Base
     mail(:to => message.email, :subject => message.subject)
   end
 
-  def new_story(message)
+  def new_visualization(message)
     @message = message
     mail(:to => message.email, :subject => message.subject)
   end

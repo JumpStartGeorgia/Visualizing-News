@@ -51,6 +51,9 @@ en:
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
         data_source_name: Name of Data Source
+    errors:
+      messages:
+        published_visual_missing_fields: "is required when the visual is published."
   mailer:
     closing: "Sincerely,"
     signature: The Visualzing News Site

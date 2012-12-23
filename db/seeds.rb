@@ -1,14 +1,14 @@
 # encoding: UTF-8
-########## Story Type ##########################
-puts "story types"
-StoryType.delete_all
-StoryTypeTranslation.delete_all
-type = StoryType.create(:id => 1)
-type.story_type_translations.create(:locale => 'ka', :name => 'Infographic')
-type.story_type_translations.create(:locale => 'en', :name => 'Infographic')
-type = StoryType.create(:id => 2)
-type.story_type_translations.create(:locale => 'ka', :name => 'Interactive')
-type.story_type_translations.create(:locale => 'en', :name => 'Interactive')
+########## Visualization Type ##########################
+puts "visualization types"
+VisualizationType.delete_all
+VisualizationTypeTranslation.delete_all
+type = VisualizationType.create(:id => 1)
+type.visualization_type_translations.create(:locale => 'ka', :name => 'Infographic')
+type.visualization_type_translations.create(:locale => 'en', :name => 'Infographic')
+type = VisualizationType.create(:id => 2)
+type.visualization_type_translations.create(:locale => 'ka', :name => 'Interactive')
+type.visualization_type_translations.create(:locale => 'en', :name => 'Interactive')
 
 ######### Categories ##########################
 puts "categories"

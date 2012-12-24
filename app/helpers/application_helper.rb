@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def page_title(page_title)
-		title = page_title
+		title(page_title)
 		x = nil
 		if page_title
       x = content_tag(:div, content_tag(:div, content_tag(:h1, page_title), :class => 'block'), :class => 'page-header')

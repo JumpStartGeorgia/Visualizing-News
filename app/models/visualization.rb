@@ -25,7 +25,7 @@ class Visualization < ActiveRecord::Base
       :medium => "600x>",
 			:large => "900x>" },
 		:convert_options => {
-        :thumb => "-gravity north -thumbnail 220x220^ -extent 220x220"
+        :thumb => "-gravity north -thumbnail 180x180^ -extent 180x180"
     }
 
   accepts_nested_attributes_for :visualization_translations

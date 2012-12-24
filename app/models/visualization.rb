@@ -5,7 +5,7 @@ class Visualization < ActiveRecord::Base
   include SplitVotes
 
 
-	paginates_per 2
+	paginates_per 4
 
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories
@@ -53,7 +53,7 @@ class Visualization < ActiveRecord::Base
   validate :validate_if_published
 
   # when a record is published, the following fields must be provided
-  # - published date, visual file, at least one category, 
+  # - published date, visual file, at least one category,
   #   reporter, designer, data source name
   def validate_if_published
     if self.published
@@ -65,7 +65,7 @@ class Visualization < ActiveRecord::Base
       self.visualization_translations.each do |trans|
         trans_errors << trans.validate_if_published
       end
-      
+
       if !missing_fields.empty?
         missing_fields.each do |field|
           errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
@@ -78,7 +78,7 @@ class Visualization < ActiveRecord::Base
           errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
         end
       end
-      
+
     end
   end
 

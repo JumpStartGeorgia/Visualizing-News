@@ -45,7 +45,7 @@
         </li>
         <li>
           <%= "#{t('.data_source')}: #{@visualization.data_source_name}" %>
-          <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank", :class => 'btn btn-mini' if @visualization.data_source_url%>
+          <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank", :class => 'btn btn-mini' if @visualization.data_source_url && !@visualization.data_source_url.empty? %>
         </li>
         <li>
           <%= "#{t('.data_set')}: " %>

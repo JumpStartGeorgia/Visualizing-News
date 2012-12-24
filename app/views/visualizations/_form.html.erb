@@ -46,6 +46,6 @@
     <%= f.submit nil, :class => 'btn btn-primary' %>
 	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('helpers.links.reset'), :name => :reset %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                admin_visualizations_path, :class => 'btn' %>
+                organization_path(params[:organization_id]), :class => 'btn' %>
   </div>
 <% end %>

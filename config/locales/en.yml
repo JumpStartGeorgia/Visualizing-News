@@ -137,7 +137,8 @@ en:
       menu_contact: Contact
       admin: Admin
       user_profile: Your Profile
-      org_profile: "%{org} Profile"
+      org_profile: "%{org} - გვერდი"
+      new_visual: "%{org} - Add Visualization"
       notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"

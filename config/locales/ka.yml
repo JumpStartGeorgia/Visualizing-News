@@ -137,7 +137,8 @@ ka:
       menu_contact: Contact
       admin: ადმინისტრატო
       user_profile: შენი გვერდი
-      org_profile: "%{org} გვერდი"
+      org_profile: "%{org} - გვერდი"
+      new_visual: "%{org} - Add Visualization"
       notifications: ახალი იდეების შეტყობინება
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"

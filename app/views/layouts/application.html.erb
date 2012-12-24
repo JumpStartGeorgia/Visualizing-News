@@ -101,13 +101,14 @@
 	                <b class="caret"></b>
 	          </a>
 	          <ul class="dropdown-menu">
-			        <!--li>
-	 		         <%#= link_to t('.user_profile'), user_path(current_user.id) %>
-							</li-->
 							<% current_user.organizations.each do |org| %>
 					      <li>
 		 		         <%= link_to t('.org_profile', :org => org.name),
 											organization_path(org.id) %>
+								</li>
+					      <li>
+		 		         <%= link_to t('.new_visual', :org => org.name),
+											new_organization_visualization_path(org.id) %>
 								</li>
 							<% end %>
 			        <li>

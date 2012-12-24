@@ -88,6 +88,9 @@ ka:
       sign_in_provider: "Sign in with %{provider}"
       download: Download
       more: Show More
+      org_profile: "%{org} - გვერდი"
+      edit_org: "%{org} - Edit"
+      new_visual: "%{org} - Add Visualization"
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -137,8 +140,6 @@ ka:
       menu_contact: Contact
       admin: ადმინისტრატო
       user_profile: შენი გვერდი
-      org_profile: "%{org} - გვერდი"
-      new_visual: "%{org} - Add Visualization"
       notifications: ახალი იდეების შეტყობინება
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"

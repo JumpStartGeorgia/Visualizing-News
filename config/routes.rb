@@ -24,7 +24,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/get_involved', :to => 'root#get_involved', :as => :get_involved, :via => :get
 
 		# organization
-		resources :organizations, :as => :organization, :path => :organization, :only => [:show] do
+		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
 			resources :visualizations, :except => [:index]
 		end
 

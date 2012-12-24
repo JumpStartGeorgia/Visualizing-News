@@ -88,6 +88,9 @@ en:
       sign_in_provider: "Sign in with %{provider}"
       download: Download
       more: Show More
+      org_profile: "%{org} - Profile"
+      edit_org: "%{org} - Edit"
+      new_visual: "%{org} - Add Visualization"
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -137,8 +140,6 @@ en:
       menu_contact: Contact
       admin: Admin
       user_profile: Your Profile
-      org_profile: "%{org} - გვერდი"
-      new_visual: "%{org} - Add Visualization"
       notifications: Notification Settings
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"

@@ -56,17 +56,17 @@ ka:
         published_visual_missing_fields: "is required when the visual is published."
   mailer:
     closing: "Sincerely,"
-    signature: The Visualzing News Site
+    signature: feradi.info
     unsubscribe: Click here to unsubscribe
     notification:
       new_user:
-        subject: "Welcome to News Ideas!"
-        message: "Thank you for becoming a member of News Ideas and contributing to our repository of ideas."
+        subject: "Welcome to feradi.info!"
+        message: "Thank you for becoming a member of feradi.info and contributing to our repository of colorful news."
       new_visualization:
         subject: "A new visualization has been added"
         message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
     contact:
-      subject: "Visual.info Contact Form"
+      subject: "feradi.info Contact Form"
   helpers:
     actions: აირჩიეთ
     links:
@@ -111,7 +111,7 @@ ka:
       confirm: დარწმუნებული ხართ?
       new: ახალი
     common:
-      app_name: Visualizing News in Georgia
+      app_name: feradi.info
       placeholder: placeholder # do not translate
       comments: კომენტარები
       likes: Likes
@@ -216,4 +216,4 @@ ka:
       message: შეტყობინება
       address_map: Find our office on the map
       email_us: Send us an email
-      email_subject: "Visual.info Email Link: Inquiry"
+      email_subject: "feradi.info Email Link: Inquiry"

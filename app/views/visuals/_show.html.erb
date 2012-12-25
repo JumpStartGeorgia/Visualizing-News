@@ -5,7 +5,11 @@
   <div id="main_block" class="span6 clear">
 		<%= page_title @visualization.title %>
     <div id="visualization_date">
-      <%= l @visualization.published_date, :format => :long if @visualization.published_date %>
+			<% if @visualization.published %>
+	      <%= l @visualization.published_date, :format => :long if @visualization.published_date %>
+			<% else %>
+				<div class="not_published"><%= t('app.common.not_published') %></div>
+			<% end %>
     </div>
     <div class="vote">
 		  <%= votes_cont(@visualization) %>
@@ -26,7 +30,7 @@
   <div id="main_block" class="span6">
     <div id="visual">
 			<% if @visualization.visualization_type_id == 2 %>
-		    <%= link_to('test', url_for(params.merge(:view => 'interactive'))) %>
+		    <%= link_to(image_tag(@visualization.visual.url(:medium)), url_for(params.merge(:view => 'interactive'))) %>
 			<% else %>
 		    <%= link_to(image_tag(@visualization.visual.url(:medium)), @visualization.visual.url(:large), :class => 'fancybox_visual') if @visualization.visual_file_name %>
 			<% end %>

@@ -61,8 +61,14 @@ class Visualization < ActiveRecord::Base
       missing_fields = []
       trans_errors = []
       missing_fields << :published_date if !self.published_date
-#      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
       missing_fields << :categories if !self.categories || self.categories.empty?
+
+			if self.visualization_type_id == 1
+	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
+			elsif self.visualization_type_id == 2
+	      missing_fields << :interactive_url if !self.interactive_url || self.interactive_url.empty?
+	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
+			end
       self.visualization_translations.each do |trans|
         trans_errors << trans.validate_if_published
       end

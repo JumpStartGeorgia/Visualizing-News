@@ -16,10 +16,17 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @visualization }
-    end
+		if @visualization.visualization_type_id == 2 && params[:view] == 'interactive'
+	    @view_type = 'visuals/show_interactive'
+			gon.show_interactive = true
+		else
+	    @view_type = 'visuals/show'
+		end
+
+	  respond_to do |format|
+	    format.html
+	    format.json { render json: @visualization }
+	  end
   end
 
   def new
@@ -54,6 +61,19 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
+		if @visualization.visualization_type_id == 2 &&
+			@visualization.interactive_url && !@visualization.interactive_url.empty? &&
+			@visualization.visual_file_name.nil?
+			# get screenshot of interactive site
+			kit   = IMGKit.new(@visualization.interactive_url)
+			img   = kit.to_img(:png)
+			file  = Tempfile.new(["template_#{@visualization.id}", '.png'], 'tmp',
+						               :encoding => 'ascii-8bit')
+			file.write(img)
+			file.flush
+			@visualization.visual = file
+		end
+
     respond_to do |format|
       if @visualization.save
         format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
@@ -66,6 +86,7 @@ class VisualizationsController < ApplicationController
         format.json { render json: @visualization.errors, status: :unprocessable_entity }
       end
     end
+		file.unlink if file
   end
 
   def update

@@ -17,6 +17,17 @@ class VisualsController < ApplicationController
   def show
     @visualization = Visualization.published.find(params[:id])
 		gon.show_fb_comments = true
+		if @visualization.visualization_type_id == 2 && params[:view] == 'interactive'
+	    @view_type = 'visuals/show_interactive'
+			gon.show_interactive = true
+		else
+	    @view_type = 'visuals/show'
+		end
+
+	  respond_to do |format|
+	    format.html
+	    format.json { render json: @visualization }
+	  end
   end
 
   def vote

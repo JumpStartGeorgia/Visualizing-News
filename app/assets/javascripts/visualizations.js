@@ -1,5 +1,15 @@
+function reset_interactive_iframe_height(){
+	// adjust iframe height to fill entire window minus the header bar
+	$('iframe#interactive').css('height', $(window).height()-46);
+}
 $(document).ready(function(){
+	// visualization show interactive
+	// - adjust iframe height when window changes
+	if (gon.show_interactive){
+		$(window).bind('load resize', reset_interactive_iframe_height);
+	}
 
+	// visualization form
 	if (gon.edit_visualization){
 		// load the date time pickers
 		$('#visualization_published_date').datepicker({

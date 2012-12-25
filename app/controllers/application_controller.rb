@@ -4,9 +4,8 @@ class ApplicationController < ActionController::Base
 	before_filter :set_locale
 #	before_filter :is_browser_supported?
 	before_filter :initialize_gon
-	before_filter :load_categories
+	before_filter :preload_global_variables
 	after_filter :store_location
-	before_filter :load_view_type
 
 	layout :layout_by_resource
 
@@ -59,16 +58,15 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     { :locale => I18n.locale }
   end
 
-	def load_categories
+	def preload_global_variables
 		@categories = Category.with_translations(I18n.locale).order("category_translations.name asc")
-	end
 
-	def load_view_type
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'visuals/list'
 	  else
 	    @view_type = 'visuals/grid'
 	  end
+
 	end
 
 	def initialize_gon
@@ -107,10 +105,12 @@ logger.debug "------- testing if in org"
 
 	DEVISE_CONTROLLERS = ['devise/sessions', 'devise/registrations', 'devise/passwords']
 	def layout_by_resource
-    if DEVISE_CONTROLLERS.index(params[:controller]).nil?
-      "application"
-    else
+    if !DEVISE_CONTROLLERS.index(params[:controller]).nil?
       "fancybox"
+		elsif params[:view] == 'interactive'
+			"interactive"
+    else
+      "application"
     end
   end
 

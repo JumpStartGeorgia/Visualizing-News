@@ -25,7 +25,11 @@
   </div>
   <div id="main_block" class="span6">
     <div id="visual">
-      <%= link_to(image_tag(@visualization.visual.url(:medium)), @visualization.visual.url(:large), :class => 'fancybox_visual') if @visualization.visual_file_name %>
+			<% if @visualization.visualization_type_id == 2 %>
+		    <%= link_to('test', url_for(params.merge(:view => 'interactive'))) %>
+			<% else %>
+		    <%= link_to(image_tag(@visualization.visual.url(:medium)), @visualization.visual.url(:large), :class => 'fancybox_visual') if @visualization.visual_file_name %>
+			<% end %>
     </div>
   </div>
   <div id="visualization_sidebar" class="span4">

@@ -46,12 +46,14 @@ class Visualization < ActiveRecord::Base
 	attr_accessor :is_create
 
   validates :organization_id, :visualization_type_id, :presence => true
+	validates :visual_file_name, :presence => true, :if => "visualization_type_id == 1"
+	validates :interactive_url, :presence => true, :if => "visualization_type_id == 2"
+  validate :validate_if_published
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
   scope :unpublished, where("published = '0'")
 
-  validate :validate_if_published
 
   # when a record is published, the following fields must be provided
   # - published date, visual file, at least one category,

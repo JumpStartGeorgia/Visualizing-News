@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223073521) do
+ActiveRecord::Schema.define(:version => 20121225072712) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20121223073521) do
     t.integer  "visual_file_size"
     t.datetime "visual_updated_at"
     t.integer  "organization_id"
+    t.string   "interactive_url"
   end
 
   add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"

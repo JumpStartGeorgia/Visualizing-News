@@ -3,7 +3,6 @@
 	<%= f.inputs do %>
 		<%= f.hidden_field :organization_id ,
 					:value => @visualization.organization_id ? @visualization.organization_id : current_user.organization_ids.first %>
-		<%= f.input :visualization_type %>
 	<% end %>
 
   <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
@@ -32,9 +31,12 @@
 		<%= f.input :dataset, :as => :file %>
 		<%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
 
-		<%= f.input :visual, :as => :file %>
-		<%= image_tag @visualization.visual.url(:thumb) if @visualization.visual_file_name %>
+		<%= f.input :visualization_type %>
 
+		<%= f.input :visual, :as => :file %>
+		<%= image_tag @visualization.visual.url(:thumb), :id => 'visualization_thumbnail' if @visualization.visual_file_name %>
+
+		<%= f.input :interactive_url, :as => :url %>
 
 		<%= f.input :published, :as => :radio %>
 		<%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>

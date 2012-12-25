@@ -33,7 +33,9 @@
 		<%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
 
 		<%= f.input :visual, :as => :file %>
-		<%= image_tag @visualization.visual.url(:thumb) if @visualization.visual_file_name %>
+		<%= image_tag @visualization.visual.url(:thumb), :id => 'visualization_thumbnail' if @visualization.visual_file_name %>
+
+		<%= f.input :interactive_url, :as => :url %>
 
 
 		<%= f.input :published, :as => :radio %>

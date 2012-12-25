@@ -45,6 +45,7 @@ ka:
         dataset: Dataset File
         visual: Visual File
         visualization_categories: Categories
+        interactive_url: URL to Interactive Visualization
       visualization_translation:
         title: Title
         explanation: Explanation

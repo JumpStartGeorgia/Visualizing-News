@@ -45,6 +45,7 @@ class VisualizationsController < ApplicationController
 		@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
 
 		gon.edit_visualization = true
+		gon.visualization_type = @visualization.visualization_type_id
 		gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
 
   end
@@ -59,6 +60,7 @@ class VisualizationsController < ApplicationController
         format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
+				gon.visualization_type = @visualization.visualization_type_id
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
         format.html { render action: "new" }
         format.json { render json: @visualization.errors, status: :unprocessable_entity }
@@ -76,6 +78,7 @@ class VisualizationsController < ApplicationController
         format.json { head :ok }
       else
 				gon.edit_visualization = true
+				gon.visualization_type = @visualization.visualization_type_id
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
         format.html { render action: "edit" }
         format.json { render json: @visualization.errors, status: :unprocessable_entity }

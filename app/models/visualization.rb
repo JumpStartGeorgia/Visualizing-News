@@ -40,7 +40,8 @@ class Visualization < ActiveRecord::Base
 			:visual,
 			:visualization_translations_attributes,
 			:category_ids,
-			:organization_id
+			:organization_id,
+			:interactive_url
 
 	attr_accessor :is_create
 

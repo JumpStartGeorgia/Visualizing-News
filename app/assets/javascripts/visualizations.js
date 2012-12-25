@@ -10,6 +10,33 @@ $(document).ready(function(){
 			$("#visualization_published_date").datepicker("setDate", new Date(gon.published_date));
 		}
 
+		// show correct fields for visualization type
+		if (gon.visualization_type){
+			if (gon.visualization_type == 1){
+				$('#visualization_visual_input').show();
+				$('#visualization_interactive_url_input').hide();
+			} else if (gon.visualization_type == 2){
+				$('#visualization_interactive_url_input').show();
+				$('#visualization_visual_input').hide();
+				$('#visualization_thumbnail').hide();
+			}
+		}
+
+		// if type changes, show appropriate fields
+		$('select#visualization_visualization_type_id').click(function() {
+			if ($(this).val() == '1'){
+				$('#visualization_visual_input').show(300);
+				$('#visualization_thumbnail').show(300);
+				$('#visualization_interactive_url_input').hide(300);
+				$('input#visualization_interactive_url').attr('value', '');
+			} else if ($(this).val() == '2'){
+				$('#visualization_interactive_url_input').show(300);
+				$('#visualization_visual_input').hide(300);
+				$('#visualization_thumbnail').hide(300);
+				$('input#visualization_visual').attr('value', '');
+			}
+		});
+
 		// if record is published, show pub date field by default
 		if ($('input:radio[name=visualization[published]]:checked').val() === 'true') {
 			$('#visualization_published_date_input').show();

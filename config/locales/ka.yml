@@ -6,7 +6,6 @@ ka:
       category: Category
       organization: ორგანიზაცია
       visualization: Visualization
-      visualization_type: Visualization Type
       page: Page
     attributes:
       user:
@@ -33,12 +32,10 @@ ka:
       page_translation:
         title: Title
         description: Content
-      visualization_type_translation:
-        name: Name
       visualization:
         published_date: Publication Date
         published: Is Published?
-        visualization_type: Visualization Type
+        visualization_type_id: Visualization Type
         data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
@@ -95,6 +92,9 @@ ka:
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
+  visualization_types:
+    infographic: Infographic
+    interactive: Interactive
   app:
     language:
       en: English
@@ -165,7 +165,6 @@ ka:
       categories: Categories
       organizations: ორგანიზაციები
       visualizations: Visualizations
-      visualization_types: Visualization Types
       users: Users
       pages: Pages
     users:

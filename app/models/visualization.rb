@@ -4,13 +4,14 @@ class Visualization < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
+  TYPES = {:infographic => 1, :interactive => 2}
 
 	paginates_per 4
 
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories
 	has_many :visualization_translations, :dependent => :destroy
-	belongs_to :visualization_type
+#	belongs_to :visualization_type
 	belongs_to :organization
 
 	has_attached_file :dataset,
@@ -46,6 +47,7 @@ class Visualization < ActiveRecord::Base
 	attr_accessor :is_create
 
   validates :organization_id, :visualization_type_id, :presence => true
+  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
 	validates :visual_file_name, :presence => true, :if => "visualization_type_id == 1"
 	validates :interactive_url, :presence => true, :if => "visualization_type_id == 2"
   validate :validate_if_published
@@ -65,9 +67,9 @@ class Visualization < ActiveRecord::Base
       missing_fields << :published_date if !self.published_date
       missing_fields << :categories if !self.categories || self.categories.empty?
 
-			if self.visualization_type_id == 1
+			if self.visualization_type_id == Visualization::TYPES[:infographic]
 	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
-			elsif self.visualization_type_id == 2
+			elsif self.visualization_type_id == Visualization::TYPES[:interactive]
 	      missing_fields << :interactive_url if !self.interactive_url || self.interactive_url.empty?
 	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
 			end

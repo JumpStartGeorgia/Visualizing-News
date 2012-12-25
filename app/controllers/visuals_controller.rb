@@ -18,7 +18,7 @@ class VisualsController < ApplicationController
     @visualization = Visualization.published.find(params[:id])
 		gon.show_fb_comments = true
 
-		if @visualization.visualization_type_id == 2 && params[:view] == 'interactive'
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
 	    @view_type = 'visuals/show_interactive'
 			gon.show_interactive = true
 		else

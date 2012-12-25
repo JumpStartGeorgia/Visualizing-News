@@ -2,6 +2,7 @@ function reset_interactive_iframe_height(){
 	// adjust iframe height to fill entire window minus the header bar
 	$('iframe#interactive').css('height', $(window).height()-46);
 }
+
 $(document).ready(function(){
 	// visualization show interactive
 	// - adjust iframe height when window changes
@@ -33,7 +34,7 @@ $(document).ready(function(){
 		}
 
 		// if type changes, show appropriate fields
-		$('select#visualization_visualization_type_id').click(function() {
+		$('select#visualization_visualization_type_id').change(function() {
 			if ($(this).val() == '1'){
 				$('#visualization_visual_input').show(300);
 				$('#visualization_thumbnail').show(300);
@@ -44,6 +45,10 @@ $(document).ready(function(){
 				$('#visualization_visual_input').hide(300);
 				$('#visualization_thumbnail').hide(300);
 				$('input#visualization_visual').attr('value', '');
+			} else {
+				$('#visualization_interactive_url_input').hide(300);
+				$('#visualization_visual_input').hide(300);
+				$('#visualization_thumbnail').hide(300);
 			}
 		});
 

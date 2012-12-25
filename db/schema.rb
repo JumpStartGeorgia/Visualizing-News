@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225072712) do
+ActiveRecord::Schema.define(:version => 20121225185734) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -146,22 +146,6 @@ ActiveRecord::Schema.define(:version => 20121225072712) do
 
   add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"
   add_index "visualization_translations", ["visualization_id"], :name => "index_visualization_translations_on_visualization_id"
-
-  create_table "visualization_type_translations", :force => true do |t|
-    t.integer  "visualization_type_id"
-    t.string   "locale"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "visualization_type_translations", ["locale"], :name => "index_visualization_type_translations_on_locale"
-  add_index "visualization_type_translations", ["visualization_type_id"], :name => "index_visualization_type_translations_on_visualization_type_id"
-
-  create_table "visualization_types", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "visualizations", :force => true do |t|
     t.datetime "published_date"

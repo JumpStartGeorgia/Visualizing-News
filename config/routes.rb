@@ -10,7 +10,6 @@ BootstrapStarter::Application.routes.draw do
 		devise_for :users
 		namespace :admin do
 			resources :users
-			resources :visualization_types
 			resources :visualizations
 			resources :categories
       resources :pages

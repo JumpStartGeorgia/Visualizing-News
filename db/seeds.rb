@@ -1,5 +1,6 @@
 # encoding: UTF-8
 ########## Visualization Type ##########################
+=begin
 puts "visualization types"
 VisualizationType.delete_all
 VisualizationTypeTranslation.delete_all
@@ -9,7 +10,7 @@ type.visualization_type_translations.create(:locale => 'en', :name => 'Infograph
 type = VisualizationType.create(:id => 2)
 type.visualization_type_translations.create(:locale => 'ka', :name => 'Interactive')
 type.visualization_type_translations.create(:locale => 'en', :name => 'Interactive')
-
+=end
 ######### Categories ##########################
 puts "categories"
 Category.delete_all

@@ -6,7 +6,6 @@ en:
       category: Category
       organization: Organization
       visualization: Visualization
-      visualization_type: Visualization Type
       page: Page
     attributes:
       user:
@@ -33,12 +32,10 @@ en:
       page_translation:
         title: Title
         description: Content
-      visualization_type_translation:
-        name: Name
       visualization:
         published_date: Publication Date
         published: Is Published?
-        visualization_type: Visualization Type
+        visualization_type_id: Visualization Type
         data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
@@ -95,6 +92,9 @@ en:
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
+  visualization_types:
+    infographic: Infographic
+    interactive: Interactive
   app:
     language:
       en: English
@@ -165,7 +165,6 @@ en:
       categories: Categories
       organizations: Organizations
       visualizations: Visualizations
-      visualization_types: Visualization Types
       users: Users
       pages: Pages
     users:

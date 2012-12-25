@@ -16,7 +16,7 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 
-		if @visualization.visualization_type_id == 2 && params[:view] == 'interactive'
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
 	    @view_type = 'visuals/show_interactive'
 			gon.show_interactive = true
 		else
@@ -61,7 +61,7 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
-		if @visualization.visualization_type_id == 2 &&
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
 			@visualization.interactive_url && !@visualization.interactive_url.empty? &&
 			@visualization.visual_file_name.nil?
 			# get screenshot of interactive site

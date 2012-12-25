@@ -4,7 +4,7 @@
 		<%= f.hidden_field :organization_id ,
 					:value => @visualization.organization_id ? @visualization.organization_id : current_user.organization_ids.first %>
 
-		<%= f.input :visualization_type %>
+		<%= f.input :visualization_type_id, :as => :select, :collection => visualization_type_collection %>
 
 		<%= f.input :visual, :as => :file %>
 		<%= image_tag @visualization.visual.url(:thumb), :id => 'visualization_thumbnail' if @visualization.visual_file_name %>

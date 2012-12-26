@@ -95,6 +95,16 @@ en:
   visualization_types:
     infographic: Infographic
     interactive: Interactive
+  filters:
+    type:
+      header: Type
+      all: All
+      infographic: Infographic
+      interactive: Interactive
+    view:
+      header: Layout
+      grid: Grid
+      list: List
   app:
     language:
       en: English

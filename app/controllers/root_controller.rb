@@ -3,9 +3,15 @@ class RootController < ApplicationController
   def index
     @visualizations = Visualization.published.recent.page(params[:page])
 
+		if params[:type]
+			type_id = Visualization.type_id(params[:type])
+			@visualizations = @visualizations.by_type(type_id) if type_id
+		end
+
+
     respond_to do |format|
       format.html
-      format.js {render 'visuals/index'}
+      format.js {render 'shared/index'}
     end
   end
 

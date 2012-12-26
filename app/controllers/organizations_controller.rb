@@ -23,7 +23,7 @@ class OrganizationsController < ApplicationController
 
 		  respond_to do |format|
 		    format.html
-	      format.js {render 'visuals/index'}
+	      format.js {render 'shared/index'}
 		  end
 
 		else

@@ -62,9 +62,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@categories = Category.with_translations(I18n.locale).order("category_translations.name asc")
 
 	  if params[:view] && params[:view] == 'list'
-	    @view_type = 'visuals/list'
+	    @view_type = 'shared/list'
 	  else
-	    @view_type = 'visuals/grid'
+	    @view_type = 'shared/grid'
 	  end
 
 	end

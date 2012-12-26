@@ -93,4 +93,17 @@ class Visualization < ActiveRecord::Base
     end
   end
 
+	def self.type_id(name)
+		id = nil
+		if name
+			index = TYPES.keys.index{|x| x.to_s.downcase == name.downcase}
+			id = TYPES[TYPES.keys[index]] if index
+		end
+		return id
+	end
+
+	def self.by_type(type_id)
+		where(:visualization_type_id => type_id) if type_id
+	end
+
 end

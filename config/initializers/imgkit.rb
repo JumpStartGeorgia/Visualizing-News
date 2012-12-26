@@ -7,8 +7,10 @@
 # Rails.backtrace_cleaner.remove_silencers!
 
 IMGKit.configure do |config|
-	config.wkhtmltoimage = Rails.root.join('vendor', 'bin', 'wkhtmltoimage-i386').to_s
-	config.wkhtmltoimage = Rails.root.join('vendor', 'bin', 'wkhtmltoimage-amd64').to_s  if Rails.env.production? || Rails.env.staging?
+	y = YAML.load_file(File.open(Rails.root.join("config", "database.yml")))
+
+	config.wkhtmltoimage = Rails.root.join('vendor', 'bin', 'wkhtmltoimage-amd64').to_s
+	config.wkhtmltoimage = Rails.root.join('vendor', 'bin', 'wkhtmltoimage-i386').to_s if y["development"]["imgkit32"]
   config.default_options = {
     :quality => 100
   }

@@ -27,18 +27,14 @@ module ApplicationHelper
 			u = URI::parse(request.fullpath)
 			p = CGI::parse(u.query)
 			p.delete("view")
-logger.debug "*********** parse query string = #{p}"
 			if p.empty?
-logger.debug "*********** no query string left"
 				x = "#{request.protocol}#{request.host_with_port}#{u.path}"
 			else
-logger.debug "*********** rebuilding query string"
 				# rebuild querystring
 				q = []
 				p.keys.each do |key|
 					q << "#{key}=#{p[key].first}"
 				end
-logger.debug "*********** query string now #{q.join("&")}"
 				x = "#{request.protocol}#{request.host_with_port}#{u.path}?#{q.join("&")}"
 			end
 		end

@@ -12,4 +12,8 @@ class Category < ActiveRecord::Base
   accepts_nested_attributes_for :category_translations
   attr_accessible :id, :icon, :category_translations_attributes
 
+  def permalink
+    self.name.downcase.gsub(" ","_").gsub("/","_")
+  end
+
 end

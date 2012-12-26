@@ -106,4 +106,8 @@ class Visualization < ActiveRecord::Base
 		where(:visualization_type_id => type_id) if type_id
 	end
 
+  def self.by_category(category_id)
+    joins(:visualization_categories).where(:visualization_categories => {:category_id => category_id})
+  end
+
 end

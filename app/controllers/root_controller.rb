@@ -3,11 +3,7 @@ class RootController < ApplicationController
   def index
     @visualizations = Visualization.published.recent.page(params[:page])
 
-		if params[:type]
-			type_id = Visualization.type_id(params[:type])
-			@visualizations = @visualizations.by_type(type_id) if type_id
-		end
-
+    process_visualization_querystring # in app controller
 
     respond_to do |format|
       format.html

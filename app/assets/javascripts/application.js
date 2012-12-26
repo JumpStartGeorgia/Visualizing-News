@@ -26,5 +26,13 @@ $(document).ready(function(){
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
 
-
+  // build category slider
+  $('#category_slider_content').elastislide();
+/*  $('#carouselh').jsCarousel({ 
+      onthumbnailclick: function(src) { alert(src); }, 
+      autoscroll: false, 
+      masked: false, 
+      itemstodisplay: 8, 
+      orientation: 'h' });
+*/           
 });

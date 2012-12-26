@@ -141,6 +141,7 @@ ka:
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
       notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
       notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
+      no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
       menu_visual: Visualizations

@@ -7,6 +7,8 @@ class VisualsController < ApplicationController
   def index
     @visualizations = Visualization.published.recent.page(params[:page])
 
+    process_visualization_querystring # in app controller
+
     respond_to do |format|
       format.html
       format.js

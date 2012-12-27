@@ -23,10 +23,13 @@
       <% @categories.each do |cat| %>
         <% if cat.icon_file_name %>
           <li>
-            <%= link_to(url_for(params.merge(:category => cat.permalink)), :title => cat.name) do %>
+            <%= link_to(url_for(params.merge(:category => cat.permalink)), 
+              :'data-path' => cat.icon.url,
+              :title => cat.name) do %>
               <%= image_tag(cat.icon.url) %>
-              <br />
-              <%= cat.name %>
+              <div class="slider_text">
+                <%= cat.name %>
+              </div>
             <% end %>
           </li>
         <% end %>

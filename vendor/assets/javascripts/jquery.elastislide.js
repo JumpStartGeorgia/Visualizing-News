@@ -337,10 +337,12 @@
 
 			// save original image sizes
 			var $img = this.$items.find( 'img:first' );
-			this.imgSize = { width : $img.outerWidth( true ), height : $img.outerHeight( true ) };
-
+// dividing image height by 2 since rollover is stacked below
+			this.imgSize = { width : $img.outerWidth( true ), height : $img.outerHeight( true ) / 2};
+// hard code max height to 70px
 			this._setItemsSize();
-			this.options.orientation === 'horizontal' ? this.$el.css( 'max-height', this.imgSize.height ) : this.$el.css( 'height', this.options.minItems * this.imgSize.height );
+//			this.options.orientation === 'horizontal' ? this.$el.css( 'max-height', this.imgSize.height ) : this.$el.css( 'height', this.options.minItems * this.imgSize.height );
+			this.options.orientation === 'horizontal' ? this.$el.css( 'max-height', 70 ) : this.$el.css( 'height', this.options.minItems * this.imgSize.height );
 
 			// add the controls
 			this._addControls();
@@ -395,10 +397,12 @@
 			// width for the items (%)
 			var w = this.options.orientation === 'horizontal' ? ( Math.floor( this.$carousel.width() / this.options.minItems ) * 100 ) / this.$carousel.width() : 100;
 			
+// hard code max height to 70px
 			this.$items.css( {
 				'width' : w + '%',
 				'max-width' : this.imgSize.width,
-				'max-height' : this.imgSize.height
+//				'max-height' : this.imgSize.height
+				'max-height' : 70
 			} );
 
 			if( this.options.orientation === 'vertical' ) {

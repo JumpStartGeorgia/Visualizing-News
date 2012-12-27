@@ -21,8 +21,24 @@ module ApplicationHelper
     end
   end
 
-	def current_url
-		"#{request.protocol}#{request.host_with_port}#{request.fullpath}"
+	def current_url(no_view_param=false)
+		x = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
+		if no_view_param && request.fullpath.index("?") && request.fullpath.index("view=")
+			u = URI::parse(request.fullpath)
+			p = CGI::parse(u.query)
+			p.delete("view")
+			if p.empty?
+				x = "#{request.protocol}#{request.host_with_port}#{u.path}"
+			else
+				# rebuild querystring
+				q = []
+				p.keys.each do |key|
+					q << "#{key}=#{p[key].first}"
+				end
+				x = "#{request.protocol}#{request.host_with_port}#{u.path}?#{q.join("&")}"
+			end
+		end
+		return x
 	end
 
 	def full_url(path)

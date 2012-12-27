@@ -7,6 +7,8 @@ class VisualsController < ApplicationController
   def index
     @visualizations = Visualization.published.recent.page(params[:page])
 
+    process_visualization_querystring # in app controller
+
     respond_to do |format|
       format.html
       format.js
@@ -17,6 +19,18 @@ class VisualsController < ApplicationController
   def show
     @visualization = Visualization.published.find(params[:id])
 		gon.show_fb_comments = true
+
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
+	    @view_type = 'shared/show_interactive'
+			gon.show_interactive = true
+		else
+	    @view_type = 'shared/show'
+		end
+
+	  respond_to do |format|
+	    format.html
+	    format.json { render json: @visualization }
+	  end
   end
 
   def vote

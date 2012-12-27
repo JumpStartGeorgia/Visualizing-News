@@ -9,7 +9,7 @@
   <p><strong><%= model_class.human_attribute_name(:published) %>:</strong>
   <%= @visualization.published %></p>
   <p><strong><%= model_class.human_attribute_name(:visualization_type) %>:</strong>
-  <%= @visualization.visualization_type.name %></p>
+  <%= visualization_type_name(@visualization.visualization_type_id) %></p>
   <p><strong><%= model_class_trans.human_attribute_name(:explanation) %>:</strong></p>
   <%= simple_format @visualization.explanation %>
   <p><strong><%= model_class_trans.human_attribute_name(:reporter) %>:</strong>

@@ -1,0 +1,73 @@
+<div id="filter_bar" class="navbar">
+  <div id="category_slider">
+
+    <!--div id="hWrapper">
+      <div id="carouselh">
+        <% @categories.each do |cat| %>
+          <% if cat.icon_file_name %>
+            <div>
+              <%= link_to(url_for(params.merge(:category => cat.permalink))) do %>
+                <%= image_tag(cat.icon.url) %>
+                <br />
+                <span class="thumbnail-text"><%= cat.name %></span>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div-->
+                                 
+
+
+    <ul id="category_slider_content" class="elastislide-list">
+      <% @categories.each do |cat| %>
+        <% if cat.icon_file_name %>
+          <li>
+            <%= link_to(url_for(params.merge(:category => cat.permalink))) do %>
+              <%= image_tag(cat.icon.url) %>
+              <br />
+              <%= cat.name %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+    
+    
+  </div>
+  <div class="container">
+		<ul class="nav pull-right">
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<%= t('filters.type.header')%>
+	        <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>
+						<%= link_to t('filters.type.all'), url_for(params.merge(:type => 'all')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.type.infographic'), url_for(params.merge(:type => 'infographic')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.type.interactive'), url_for(params.merge(:type => 'interactive')) %>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<%= t('filters.view.header')%>
+	        <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>
+						<%= link_to t('filters.view.grid'), url_for(params.merge(:view => 'grid')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.view.list'), url_for(params.merge(:view => 'list')) %>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

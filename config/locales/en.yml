@@ -6,7 +6,6 @@ en:
       category: Category
       organization: Organization
       visualization: Visualization
-      visualization_type: Visualization Type
       page: Page
     attributes:
       user:
@@ -33,18 +32,17 @@ en:
       page_translation:
         title: Title
         description: Content
-      visualization_type_translation:
-        name: Name
       visualization:
         published_date: Publication Date
         published: Is Published?
-        visualization_type: Visualization Type
+        visualization_type_id: Visualization Type
         data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
         dataset: Dataset File
         visual: Visual File
         visualization_categories: Categories
+        interactive_url: URL to Interactive Visualization
       visualization_translation:
         title: Title
         explanation: Explanation
@@ -94,6 +92,19 @@ en:
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
+  visualization_types:
+    infographic: Infographic
+    interactive: Interactive
+  filters:
+    type:
+      header: Type
+      all: All
+      infographic: Infographic
+      interactive: Interactive
+    view:
+      header: Layout
+      grid: Grid
+      list: List
   app:
     language:
       en: English
@@ -130,6 +141,7 @@ en:
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
       notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
       notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
+      no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
       menu_visual: Visualizations
@@ -164,7 +176,6 @@ en:
       categories: Categories
       organizations: Organizations
       visualizations: Visualizations
-      visualization_types: Visualization Types
       users: Users
       pages: Pages
     users:

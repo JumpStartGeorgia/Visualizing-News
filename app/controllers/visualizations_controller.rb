@@ -16,10 +16,17 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @visualization }
-    end
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
+	    @view_type = 'shared/show_interactive'
+			gon.show_interactive = true
+		else
+	    @view_type = 'shared/show'
+		end
+
+	  respond_to do |format|
+	    format.html
+	    format.json { render json: @visualization }
+	  end
   end
 
   def new
@@ -45,6 +52,7 @@ class VisualizationsController < ApplicationController
 		@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
 
 		gon.edit_visualization = true
+		gon.visualization_type = @visualization.visualization_type_id
 		gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
 
   end
@@ -53,6 +61,19 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
     logger.debug('-------------------------------------------' + @visualization.crop_x.inspect)
+
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
+			@visualization.interactive_url && !@visualization.interactive_url.empty? &&
+			@visualization.visual_file_name.nil?
+			# get screenshot of interactive site
+			kit   = IMGKit.new(@visualization.interactive_url)
+			img   = kit.to_img(:png)
+			file  = Tempfile.new(["template_#{@visualization.id}", '.png'], 'tmp',
+						               :encoding => 'ascii-8bit')
+			file.write(img)
+			file.flush
+			@visualization.visual = file
+		end
 
     respond_to do |format|
       if @visualization.save
@@ -64,11 +85,13 @@ class VisualizationsController < ApplicationController
        #end
       else
 				gon.edit_visualization = true
+				gon.visualization_type = @visualization.visualization_type_id
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
         format.html { render action: "new" }
         format.json { render json: @visualization.errors, status: :unprocessable_entity }
       end
     end
+		file.unlink if file
   end
 
   def update
@@ -100,6 +123,7 @@ class VisualizationsController < ApplicationController
        #end
       else
 				gon.edit_visualization = true
+				gon.visualization_type = @visualization.visualization_type_id
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
         format.html { render action: "edit" }
         format.json { render json: @visualization.errors, status: :unprocessable_entity }

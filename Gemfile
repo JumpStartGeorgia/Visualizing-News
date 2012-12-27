@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '1.2.0'
+gem 'bundler', '~> 1.2.0'
 gem "rails", "3.1.3"
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
 
 gem "json"
-gem "jquery-rails", "1.0.19"
+gem "jquery-rails", "2.1.4"
 gem "fancybox-rails", "~> 0.1.4" # use fancybox js
 gem "devise", "2.0.4" # user authentication
 gem 'omniauth' # to login via facebook
@@ -21,6 +21,7 @@ gem "gon", "2.2.2" # push data into js
 gem "dynamic_form", "1.1.4" # to see form error messages
 gem "i18n-js", "~> 2.1.2" # to show translations in javascript
 gem "paperclip", "~> 3.0.4" # to upload files
+gem "imgkit", "~> 1.3.7" # create image of web page
 gem "has_permalink", "~> 0.1.4" # create permalink slugs for nice urls
 gem "capistrano", "~> 2.12.0" # to deploy to server
 gem "exception_notification", "2.5.2" # send an email when exception occurs

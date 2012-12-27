@@ -69,7 +69,6 @@
 	text-transform:uppercase;
 }
 
-
 #crop-panel {
   display: none;
   .preview {
@@ -80,4 +79,15 @@
       max-width: none;
     }
   }
+}
+
+/* hide these by default when the form opens and use js to show correct field */
+#visualization_interactive_url_input, #visualization_visual_input {
+	display: none;
+}
+
+/* share links */
+div#share a:hover, ul#share-links a:hover {
+	opacity: 0.7;
+  filter: alpha(opacity=70);
 }

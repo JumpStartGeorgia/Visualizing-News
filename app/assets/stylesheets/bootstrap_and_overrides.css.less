@@ -52,6 +52,20 @@ html, body {
 	overflow: auto;
 }
 
+/* style for looking at interactive visual with iframe */
+body#interactive_layout {
+	.navbar {
+		border-bottom: solid 3px #9a9a9a;
+		.navbar-inner {
+			background-color: #fafafa;
+		}
+	}
+
+	iframe#interactive {
+		padding-top: 67px;
+	}
+}
+
 .push { height: 155px; } /* Just some arbitrary space to add between footer and rest of the content, when they are close */
 
 @media (max-width: 979px) {
@@ -63,6 +77,13 @@ html, body {
   }
 	.navbar-fixed-top  {
 		margin: 0;
+	}
+
+	/* style for looking at interactive visual with iframe */
+	body#interactive_layout {
+		iframe#interactive {
+			padding-top: 0;
+		}
 	}
 }
 

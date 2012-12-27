@@ -7,6 +7,19 @@ module VisualizationsHelper
 			visual_path(visualization_id)
 		end
 	end
+	
+  def visualization_type_name(id)
+    index = Visualization::TYPES.values.index(id)
+    I18n.t("visualization_types.#{Visualization::TYPES.keys[index]}") if index
+  end
+
+	def visualization_type_collection
+	  col = []
+    Visualization::TYPES.keys.each do |key|
+	    col << [I18n.t("visualization_types.#{key}"), Visualization::TYPES[key]]
+	  end
+	  return col
+  end
 
   def votes_cont (obj)
     ip = request.remote_ip

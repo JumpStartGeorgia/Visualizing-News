@@ -1,4 +1,5 @@
 module ApplicationHelper
+	require 'utf8_converter'
 	def page_title(page_title)
 		title(page_title)
 		x = nil
@@ -43,6 +44,10 @@ module ApplicationHelper
 
 	def full_url(path)
 		"#{request.protocol}#{request.host_with_port}#{path}"
+	end
+
+	def permalink(text)
+    Utf8Converter.convert_ka_to_en(text.downcase.gsub(" ","_").gsub("/","_").gsub("__","_").gsub("__","_"))
 	end
 
 	# from http://www.kensodev.com/2012/03/06/better-simple_format-for-rails-3-x-projects/

@@ -3,3 +3,4 @@
 //= require jquerypp.custom
 //= require jquery.elastislide
 //= require jsCarousel-2.0.0
+//= require jquery.Jcrop.min

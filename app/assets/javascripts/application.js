@@ -13,7 +13,6 @@
 //= require fancybox
 //= require fancybox2
 //= require vendor
-//= require jquery.Jcrop.min
 //= require_tree .
 
 $(document).ready(function(){
@@ -29,11 +28,11 @@ $(document).ready(function(){
 
   // build category slider
   $('#category_slider_content').elastislide();
-/*  $('#carouselh').jsCarousel({ 
-      onthumbnailclick: function(src) { alert(src); }, 
-      autoscroll: false, 
-      masked: false, 
-      itemstodisplay: 8, 
+/*  $('#carouselh').jsCarousel({
+      onthumbnailclick: function(src) { alert(src); },
+      autoscroll: false,
+      masked: false,
+      itemstodisplay: 8,
       orientation: 'h' });
-*/           
+*/
 });

@@ -1,5 +1,6 @@
 class Category < ActiveRecord::Base
 	translates :name
+	require 'utf8_converter'
 
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :visualizations, :through => :visualization_categories
@@ -13,7 +14,11 @@ class Category < ActiveRecord::Base
   attr_accessible :id, :icon, :category_translations_attributes
 
   def permalink
-    self.name.downcase.gsub(" ","_").gsub("/","_")
+    Utf8Converter.convert_ka_to_en(self.name.downcase.gsub(" ","_").gsub("/","_").gsub("__","_").gsub("__","_"))
   end
+
+	def self.sorted
+		with_translations(I18n.locale).order("category_translations.name asc")
+	end
 
 end

@@ -1,16 +1,4 @@
 class Visualization < ActiveRecord::Base
-
-  after_update :reprocess_visual, :if => :cropping?
-
-  def cropping?
-    !cropping_started.blank? && cropping_started == 'true' && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
-  end
-
-  def visual_geometry(style = :original)
-    @geometry ||= {}
-    @geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
-  end
-
 	translates :title, :explanation,	:reporter, :designer,	:data_source_name
 
   require 'split_votes'
@@ -18,29 +6,10 @@ class Visualization < ActiveRecord::Base
 
   TYPES = {:infographic => 1, :interactive => 2}
 
-	paginates_per 4
-
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories
 	has_many :visualization_translations, :dependent => :destroy
-#	belongs_to :visualization_type
 	belongs_to :organization
-
-	has_attached_file :dataset,
-    :url => "/system/visualization/:attachment/:id/:filename",
-    :path => ":rails_root/public/system/visualization/:attachment/:id/:filename"
-
-	has_attached_file :visual,
-    :url => "/system/visualization/:attachment/:id/:style/:filename",
-    :path => ":rails_root/public/system/visualization/:attachment/:id/:style/:filename",
-		:styles => {
-      :thumb => {:geometry => "180x180#", :processors => [:cropper]},
-      :medium => {:geometry => "600x>"},
-      :large => {:geometry => "900x>"}
-    }
-	#:convert_options => {
-  #     :thumb => "-gravity north -thumbnail 180x180^ -extent 180x180"
-  # },
 
   accepts_nested_attributes_for :visualization_translations
 
@@ -56,19 +25,64 @@ class Visualization < ActiveRecord::Base
 			:category_ids,
 			:organization_id,
 			:interactive_url,
+			:visual_is_cropped,
 			:crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
 
 	attr_accessor :is_create, :crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
 
+	paginates_per 4
+
+
   validates :organization_id, :visualization_type_id, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validates :visual_file_name, :presence => true, :if => "visualization_type_id == 1"
+	validates :visual, :presence => true, :if => "visualization_type_id == 1"
 	validates :interactive_url, :presence => true, :if => "visualization_type_id == 2"
   validate :validate_if_published
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
   scope :unpublished, where("published = '0'")
+
+
+	has_attached_file :dataset,
+    :url => "/system/visualization/:attachment/:id/:filename",
+    :path => ":rails_root/public/system/visualization/:attachment/:id/:filename"
+
+	has_attached_file :visual,
+    :url => "/system/visualization/:attachment/:id/:style/:filename",
+    :path => ":rails_root/public/system/visualization/:attachment/:id/:style/:filename",
+		:styles => Proc.new { |attachment| attachment.instance.attachment_styles}
+	#:convert_options => {
+  #     :thumb => "-gravity north -thumbnail 180x180^ -extent 180x180"
+  # },
+
+	# if this is a new record, do not apply the cropping processor
+	# - the user must be able to set the crop size first
+	def attachment_styles
+	  if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
+			{
+		    :thumb => {:geometry => "180x180#"},
+		    :medium => {:geometry => "600x>"},
+		    :large => {:geometry => "900x>"}
+		  }
+		else
+			{
+		    :thumb => {:geometry => "180x180#", :processors => [:cropper]}
+		  }
+		end
+	end
+
+  after_update :reprocess_visual, :if => :cropping?
+
+  def cropping?
+    visual_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def visual_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
+  end
+
 
 
   # when a record is published, the following fields must be provided
@@ -106,6 +120,11 @@ class Visualization < ActiveRecord::Base
 
     end
   end
+
+	def visualization_type_name
+    name = TYPES.keys[TYPES.values.index(self.visualization_type_id)].to_s
+		I18n.t("visualization_types.#{name}") if name
+	end
 
 	def self.type_id(name)
 		id = nil

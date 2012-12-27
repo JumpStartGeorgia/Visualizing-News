@@ -209,6 +209,7 @@ en:
   visuals:
     index:
       title: Visaulizations
+  shared:
     show:
       reporter: Reporter
       designer: Designer

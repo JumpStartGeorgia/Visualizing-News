@@ -7,7 +7,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.sorted
 
     respond_to do |format|
       format.html # index.html.erb

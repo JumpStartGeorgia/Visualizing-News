@@ -59,7 +59,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   end
 
 	def preload_global_variables
-		@categories = Category.with_translations(I18n.locale).order("category_translations.name asc")
+		@categories = Category.sorted
 	end
 
 	def initialize_gon

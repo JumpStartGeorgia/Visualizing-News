@@ -1,67 +1,94 @@
 <%= semantic_form_for([@organization, @visualization], :html => { :class => 'form-horizontal precrop' }) do |f| %>
+		<%= f.error_messages %>
 
-  <input name="visualization[cropping_started]" type="hidden" value="false" />
+	<% if @visualization.id.nil? %>
+		<div id="fields-panel">
+			<%= f.inputs do %>
+				<%= f.hidden_field :organization_id ,
+							:value => @visualization.organization_id ? @visualization.organization_id : params[:organization_id] %>
 
-  <input id="visualization_crop_x" name="visualization[crop_x]" type="hidden">
-  <input id="visualization_crop_y" name="visualization[crop_y]" type="hidden">
-  <input id="visualization_crop_w" name="visualization[crop_w]" type="hidden">
-  <input id="visualization_crop_h" name="visualization[crop_h]" type="hidden">
+				<%= f.input :visualization_type_id, :as => :select, :collection => visualization_type_collection %>
 
-  <div id="fields-panel">
-	  <%= f.error_messages %>
-	  <%= f.inputs do %>
-		  <%= f.hidden_field :organization_id ,
-					  :value => @visualization.organization_id ? @visualization.organization_id : current_user.organization_ids.first %>
+				<%= f.input :visual, :as => :file %>
+				<%= image_tag @visualization.visual.url(:thumb), :id => 'visualization_thumbnail' if @visualization.visual_file_name %>
 
-		  <%= f.input :visualization_type_id, :as => :select, :collection => visualization_type_collection %>
+				<%= f.input :interactive_url, :as => :url %>
 
-		  <%= f.input :visual, :as => :file %>
-		  <%= image_tag @visualization.visual.url(:thumb), :id => 'visualization_thumbnail' if @visualization.visual_file_name %>
+			<% end %>
+		</div>
+	<% elsif !@visualization.visual_is_cropped %>
+		<%= f.hidden_field :visual_is_cropped, :value => true %>
+		<%= f.hidden_field :crop_x %>
+		<%= f.hidden_field :crop_y %>
+		<%= f.hidden_field :crop_w %>
+		<%= f.hidden_field :crop_h %>
 
-		  <%= f.input :interactive_url, :as => :url %>
+	  <input name="visualization[cropping_started]" type="hidden" value="false" />
 
-	  <% end %>
+		<div id="crop-panel">
+			<h4>Preview:</h4>
+			<div class="preview">
+				<%= image_tag @visualization.visual.url(:large), :id => "cropbox_preview" %>
+			</div>
 
-    <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
-		  <%= f.fields_for :visualization_translations, trans do |translation| %>
+			<hr />
 
-			  <div id="form-<%= trans.locale %>" class="multilanguage">
-				  <h3><%= t("app.language.#{trans.locale}") %></h3>
+			<%= image_tag @visualization.visual.url(:large), :id => "cropbox" %>
 
-				  <%= translation.input :title %>
-				  <%= translation.input :explanation %>
-				  <%= translation.input :reporter %>
-				  <%= translation.input :designer %>
-				  <%= translation.input :data_source_name %>
-				  <%= translation.hidden_field :locale , :value => trans.locale %>
-			  </div>
+		</div>
+	<% else %>
+		<div id="fields-panel">
+			<div>
+				<p>
+					<strong><%= Visualization.human_attribute_name(:visualization_type_id)%>:</strong>
+					<%= @visualization.visualization_type_name %>
+				</p>
+				<% if !@visualization.interactive_url.blank? %>
+				<p>
+					<strong><%= Visualization.human_attribute_name(:interactive_url)%>:</strong>
+					<%= link_to @visualization.interactive_url, @visualization.interactive_url, :target => :blank %>
+				</p>
+				<% end %>
+				<p>
+					<strong><%= Visualization.human_attribute_name(:visual)%>:</strong>
+					<br />
+					<%= image_tag @visualization.visual.url(:thumb) if @visualization.visual_file_name %>
+				</p>
+			</div>
 
-		  <% end %>
-	  <% end %>
+		  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
+				<%= f.fields_for :visualization_translations, trans do |translation| %>
+
+					<div id="form-<%= trans.locale %>" class="multilanguage">
+						<h3><%= t("app.language.#{trans.locale}") %></h3>
+
+						<%= translation.input :title %>
+						<%= translation.input :explanation %>
+						<%= translation.input :reporter %>
+						<%= translation.input :designer %>
+						<%= translation.input :data_source_name %>
+						<%= translation.hidden_field :locale , :value => trans.locale %>
+					</div>
+
+				<% end %>
+			<% end %>
 
 
-	  <%= f.inputs do %>
-		  <%= f.input :data_source_url, :as => :url %>
+			<%= f.inputs do %>
+				<%= f.input :data_source_url, :as => :url %>
 
-		  <%= f.input :categories, :as => :check_boxes, :collection => @categories %>
+				<%= f.input :categories, :as => :check_boxes, :collection => @categories %>
 
-		  <%= f.input :dataset, :as => :file %>
-		  <%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
+				<%= f.input :dataset, :as => :file %>
+				<%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
 
-		  <%= f.input :published, :as => :radio %>
-		  <%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>
-	  <% end %>
+				<%= f.input :published, :as => :radio %>
+				<%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>
+			<% end %>
 
-  </div>
+		</div>
 
-  <div id="crop-panel">
-
-    <h4>Preview:</h4>
-    <div class="preview">
-    </div>
-
-  </div>
-
+	<% end %>
 
 
   <div class="form-actions">

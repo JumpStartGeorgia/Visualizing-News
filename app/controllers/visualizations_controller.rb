@@ -32,12 +32,6 @@ class VisualizationsController < ApplicationController
   def new
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.new
-    # create the translation object for however many locales there are
-    # so the form will properly create all of the nested form fields
-    I18n.available_locales.each do |locale|
-			@visualization.visualization_translations.build(:locale => locale)
-		end
-		@visualization.visualization_categories.build
 		gon.edit_visualization = true
 
     respond_to do |format|
@@ -49,7 +43,27 @@ class VisualizationsController < ApplicationController
   def edit
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
-		@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
+
+		if @visualization.visual_is_cropped
+logger.debug "----------- visual is cropped"
+		  # create the translation object for however many locales there are
+		  # so the form will properly create all of the nested form fields
+logger.debug "---------- has trans records: #{@visualization.visualization_translations.map {|x| x.locale}.inspect}"
+			if @visualization.visualization_translations.length != I18n.available_locales.length
+logger.debug "---------- record does not have all locales"
+				I18n.available_locales.each do |locale|
+logger.debug "---------- locale: #{locale}, already exists = #{@visualization.visualization_translations.index{|x| x.locale == locale.to_s}}"
+					@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+				end
+			end
+logger.debug "-------------- vis trans = #{@visualization.visualization_translations.map {|x| x.locale}.inspect}"
+			@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
+		else
+logger.debug "----------- visual is NOT cropped"
+			gon.largeW = @visualization.visual_geometry(:large).width
+			gon.largeH = @visualization.visual_geometry(:large).height
+			gon.originalW = @visualization.visual_geometry(:original).width
+		end
 
 		gon.edit_visualization = true
 		gon.visualization_type = @visualization.visualization_type_id
@@ -60,7 +74,6 @@ class VisualizationsController < ApplicationController
   def create
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
-    logger.debug('-------------------------------------------' + @visualization.crop_x.inspect)
 
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
 			@visualization.interactive_url && !@visualization.interactive_url.empty? &&
@@ -68,7 +81,7 @@ class VisualizationsController < ApplicationController
 			# get screenshot of interactive site
 			kit   = IMGKit.new(@visualization.interactive_url)
 			img   = kit.to_img(:png)
-			file  = Tempfile.new(["template_#{@visualization.id}", '.png'], 'tmp',
+			file  = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
 						               :encoding => 'ascii-8bit')
 			file.write(img)
 			file.flush
@@ -77,12 +90,8 @@ class VisualizationsController < ApplicationController
 
     respond_to do |format|
       if @visualization.save
-       #if params[:visualization][:visual].blank?
-          format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
-          format.json { render json: @visualization, status: :created, location: @visualization }
-       #else
-         #render action: "crop"
-       #end
+        format.html { redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+        format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
 				gon.visualization_type = @visualization.visualization_type_id
@@ -97,30 +106,24 @@ class VisualizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
-   #abort params.inspect
+		was_cropped = @visualization.visual_is_cropped
 
     respond_to do |format|
-      
+
       if @visualization.update_attributes(params[:visualization])
-       #if params[:visualization][:visual].blank?
-          format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization')) }
-          format.json {
-            if @visualization.visual_file_name
-              render :json => {
-                :url => @visualization.visual.url(:large),
-                :visdata => {
-                  :largeW => @visualization.visual_geometry(:large).width,
-                  :largeH => @visualization.visual_geometry(:large).height,
-                  :originalW => @visualization.visual_geometry(:original).width
-                }
-              }
-            else
-              render :json => {:url => false}
-            end
-          }
-       #else
-         #format.html { render action: "crop" }
-       #end
+        format.html {
+					if !was_cropped && @visualization.visual_is_cropped
+						# image was just cropped, show complete form
+						gon.edit_visualization = true
+						gon.visualization_type = @visualization.visualization_type_id
+						gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
+						redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+					else
+						# redirect to show page
+						redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+					end
+				}
+        format.json { head :ok }
       else
 				gon.edit_visualization = true
 				gon.visualization_type = @visualization.visualization_type_id

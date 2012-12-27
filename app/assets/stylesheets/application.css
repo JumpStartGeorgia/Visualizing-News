@@ -7,7 +7,6 @@
  *= require formtastic-bootstrap
  *= require fancybox
  *= require vendor
- *= require jquery.Jcrop.min
  *= require_tree .
  *= require_self
 */

@@ -17,6 +17,7 @@
 # ignore file uploads
 /public/system/visualization/*
 /public/system/category/*
+/public/system/story/*
 
 #ignore db config
 /config/database.yml

@@ -1,7 +1,7 @@
 class VisualizationObserver < ActiveRecord::Observer
 
-	def after_create(visualization)
-		visualization.is_create = true
+	def after_save(visualization)
+		visualization.is_create = true if visualization.published
 	end
 
 	# after visualization has been created, send notification

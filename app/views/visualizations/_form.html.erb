@@ -1,46 +1,65 @@
-<%= semantic_form_for([@organization, @visualization], :html => { :class => 'form-horizontal' }) do |f| %>
-	<%= f.error_messages %>
-	<%= f.inputs do %>
-		<%= f.hidden_field :organization_id ,
-					:value => @visualization.organization_id ? @visualization.organization_id : current_user.organization_ids.first %>
-		<%= f.input :visualization_type %>
-	<% end %>
-
-  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
-		<%= f.fields_for :visualization_translations, trans do |translation| %>
-
-			<div id="form-<%= trans.locale %>" class="multilanguage">
-				<h3><%= t("app.language.#{trans.locale}") %></h3>
-
-				<%= translation.input :title %>
-				<%= translation.input :explanation %>
-				<%= translation.input :reporter %>
-				<%= translation.input :designer %>
-				<%= translation.input :data_source_name %>
-				<%= translation.hidden_field :locale , :value => trans.locale %>
-			</div>
-
-		<% end %>
-	<% end %>
+<%= semantic_form_for([@organization, @visualization], :html => { :class => 'form-horizontal precrop' }) do |f| %>
 
 
-	<%= f.inputs do %>
-		<%= f.input :data_source_url, :as => :url %>
+  <input name="visualization[cropping_started]" type="hidden" value="false" />
 
-		<%= f.input :categories, :as => :check_boxes, :collection => @categories %>
+  <input id="visualization_crop_x" name="visualization[crop_x]" type="hidden">
+  <input id="visualization_crop_y" name="visualization[crop_y]" type="hidden">
+  <input id="visualization_crop_w" name="visualization[crop_w]" type="hidden">
+  <input id="visualization_crop_h" name="visualization[crop_h]" type="hidden">
 
-		<%= f.input :dataset, :as => :file %>
-		<%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
+  <div id="fields-panel">
 
-		<%= f.input :visual, :as => :file %>
-		<%= image_tag @visualization.visual.url(:thumb) if @visualization.visual_file_name %>
+	  <%= f.error_messages %>
+	  <%= f.inputs do %>
+		  <%= f.hidden_field :organization_id ,
+					  :value => @visualization.organization_id ? @visualization.organization_id : current_user.organization_ids.first %>
+		  <%= f.input :visualization_type %>
+	  <% end %>
+
+    <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
+		  <%= f.fields_for :visualization_translations, trans do |translation| %>
+
+			  <div id="form-<%= trans.locale %>" class="multilanguage">
+				  <h3><%= t("app.language.#{trans.locale}") %></h3>
+
+				  <%= translation.input :title %>
+				  <%= translation.input :explanation %>
+				  <%= translation.input :reporter %>
+				  <%= translation.input :designer %>
+				  <%= translation.input :data_source_name %>
+				  <%= translation.hidden_field :locale , :value => trans.locale %>
+			  </div>
+
+		  <% end %>
+	  <% end %>
 
 
-		<%= f.input :published, :as => :radio %>
-		<%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>
-	<% end %>
+	  <%= f.inputs do %>
+		  <%= f.input :data_source_url, :as => :url %>
+
+		  <%= f.input :categories, :as => :check_boxes, :collection => @categories %>
+
+		  <%= f.input :dataset, :as => :file %>
+		  <%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
+
+		  <%= f.input :visual, :as => :file %>
+		  <%= image_tag @visualization.visual.url(:thumb) if @visualization.visual_file_name %>
 
 
+		  <%= f.input :published, :as => :radio %>
+		  <%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>
+	  <% end %>
+
+  </div>
+
+  <div id="crop-panel">
+
+    <h4>Preview:</h4>
+    <div class="preview">
+    </div>
+
+  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

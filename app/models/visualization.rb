@@ -1,4 +1,16 @@
 class Visualization < ActiveRecord::Base
+
+  after_update :reprocess_visual, :if => :cropping?
+
+  def cropping?
+    !cropping_started.blank? && cropping_started == 'true' && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def visual_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
+  end
+
 	translates :title, :explanation,	:reporter, :designer,	:data_source_name
 
   require 'split_votes'
@@ -21,12 +33,13 @@ class Visualization < ActiveRecord::Base
     :url => "/system/visualization/:attachment/:id/:style/:filename",
     :path => ":rails_root/public/system/visualization/:attachment/:id/:style/:filename",
 		:styles => {
-      :thumb => "",
-      :medium => "600x>",
-			:large => "900x>" },
-		:convert_options => {
-        :thumb => "-gravity north -thumbnail 180x180^ -extent 180x180"
+      :thumb => {:geometry => "180x180#", :processors => [:cropper]},
+      :medium => {:geometry => "600x>"},
+      :large => {:geometry => "900x>"}
     }
+	#:convert_options => {
+  #     :thumb => "-gravity north -thumbnail 180x180^ -extent 180x180"
+  # },
 
   accepts_nested_attributes_for :visualization_translations
 
@@ -40,9 +53,10 @@ class Visualization < ActiveRecord::Base
 			:visual,
 			:visualization_translations_attributes,
 			:category_ids,
-			:organization_id
+			:organization_id,
+			:crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
 
-	attr_accessor :is_create
+	attr_accessor :is_create, :crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
 
   validates :organization_id, :visualization_type_id, :presence => true
 
@@ -81,5 +95,11 @@ class Visualization < ActiveRecord::Base
 
     end
   end
+
+
+  private
+   def reprocess_visual
+     visual.reprocess!
+   end
 
 end

@@ -52,11 +52,16 @@ class VisualizationsController < ApplicationController
   def create
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
+    logger.debug('-------------------------------------------' + @visualization.crop_x.inspect)
 
     respond_to do |format|
       if @visualization.save
-        format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
-        format.json { render json: @visualization, status: :created, location: @visualization }
+       #if params[:visualization][:visual].blank?
+          format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+          format.json { render json: @visualization, status: :created, location: @visualization }
+       #else
+         #render action: "crop"
+       #end
       else
 				gon.edit_visualization = true
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
@@ -69,11 +74,30 @@ class VisualizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
+   #abort params.inspect
 
     respond_to do |format|
+      
       if @visualization.update_attributes(params[:visualization])
-        format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization')) }
-        format.json { head :ok }
+       #if params[:visualization][:visual].blank?
+          format.html { redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization')) }
+          format.json {
+            if @visualization.visual_file_name
+              render :json => {
+                :url => @visualization.visual.url(:large),
+                :visdata => {
+                  :largeW => @visualization.visual_geometry(:large).width,
+                  :largeH => @visualization.visual_geometry(:large).height,
+                  :originalW => @visualization.visual_geometry(:original).width
+                }
+              }
+            else
+              render :json => {:url => false}
+            end
+          }
+       #else
+         #format.html { render action: "crop" }
+       #end
       else
 				gon.edit_visualization = true
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?

@@ -13,6 +13,7 @@
 //= require fancybox
 //= require fancybox2
 //= require vendor
+//= require jquery.Jcrop.min
 //= require_tree .
 
 $(document).ready(function(){

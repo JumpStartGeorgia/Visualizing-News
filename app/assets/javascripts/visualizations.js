@@ -31,4 +31,104 @@ $(document).ready(function(){
 
 	}
 
+
+
+
+
+
+  $('form[class*="form"].visualization.precrop').submit(function ()
+  {
+    var el = $(this);
+    if (!el.hasClass('precrop'))
+    {
+      return true;
+    }
+
+    $.post(el.attr('action').replace('.json', '') + '.json', el.serialize())
+    .success(function (response)
+    {
+      if (response.url !== false)
+      {
+        window.visdata = response.visdata;
+        $('#fields-panel').hide();
+
+        var img = new Image;
+        img.src = response.url;
+
+        $('#crop-panel').prepend(img);
+
+        $(img).Jcrop({
+          onChange: update_crop,
+          onSelect: update_crop,
+          setSelect: [0, 0, 500, 500],
+          aspectRatio: 1
+        });
+
+        $('#crop-panel').show().children('div.preview').html($(img).clone());
+
+        window.visdata.preview = $('.preview img');
+        window.visdata.crop_x = $("#visualization_crop_x");
+        window.visdata.crop_y = $("#visualization_crop_y");
+        window.visdata.crop_w = $("#visualization_crop_w");
+        window.visdata.crop_h = $("#visualization_crop_h");
+
+        el.removeClass('precrop');
+        $('[name="visualization\[cropping_started\]"]').val('true');
+      }
+      else
+      {
+      }
+    })
+    .error(function (response)
+    {
+      console.log('error', "\n", response);
+    });
+    
+    return false;
+  });
+
+
+
+
+
+
+
+
+
+
 });
+
+
+
+
+function update_crop (coords)
+{
+  var rx = 180/coords.w;
+  var ry = 180/coords.h;
+  visdata.preview.css({
+    width: Math.round(rx * visdata.largeW) + 'px',
+    height: Math.round(ry * visdata.largeH) + 'px',
+    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+  });
+  var ratio = visdata.originalW / visdata.largeW;
+  window.visdata.crop_x.val(Math.round(coords.x * ratio));
+  window.visdata.crop_y.val(Math.round(coords.y * ratio));
+  window.visdata.crop_w.val(Math.round(coords.w * ratio));
+  window.visdata.crop_h.val(Math.round(coords.h * ratio));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@
 IMGKit.configure do |config|
 	y = YAML.load_file(File.open(Rails.root.join("config", "database.yml")))
 
-	if y["development"]["imgkit32"]
+	if y && y["development"]["imgkit32"]
 		config.wkhtmltoimage = Rails.root.join('vendor', 'bin', 'wkhtmltoimage-i386').to_s
 	else
 		config.wkhtmltoimage = Rails.root.join('vendor', 'bin', 'wkhtmltoimage-amd64').to_s

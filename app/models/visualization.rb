@@ -53,7 +53,7 @@ class Visualization < ActiveRecord::Base
     :path => ":rails_root/public/system/visualization/:attachment/:id/:style/:filename",
 		:styles => Proc.new { |attachment| attachment.instance.attachment_styles}
 	#:convert_options => {
-  #     :thumb => "-gravity north -thumbnail 180x180^ -extent 180x180"
+  #     :thumb => "-gravity north -thumbnail 230x230^ -extent 230x230"
   # },
 
 	# if this is a new record, do not apply the cropping processor
@@ -61,13 +61,13 @@ class Visualization < ActiveRecord::Base
 	def attachment_styles
 	  if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 			{
-		    :thumb => {:geometry => "180x180#"},
+		    :thumb => {:geometry => "230x230#"},
 		    :medium => {:geometry => "600x>"},
 		    :large => {:geometry => "900x>"}
 		  }
 		else
 			{
-		    :thumb => {:geometry => "180x180#", :processors => [:cropper]}
+		    :thumb => {:geometry => "230x230#", :processors => [:cropper]}
 		  }
 		end
 	end

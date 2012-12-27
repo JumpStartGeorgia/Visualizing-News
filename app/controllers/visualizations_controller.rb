@@ -45,21 +45,15 @@ class VisualizationsController < ApplicationController
     @visualization = Visualization.find(params[:id])
 
 		if @visualization.visual_is_cropped
-logger.debug "----------- visual is cropped"
 		  # create the translation object for however many locales there are
 		  # so the form will properly create all of the nested form fields
-logger.debug "---------- has trans records: #{@visualization.visualization_translations.map {|x| x.locale}.inspect}"
 			if @visualization.visualization_translations.length != I18n.available_locales.length
-logger.debug "---------- record does not have all locales"
 				I18n.available_locales.each do |locale|
-logger.debug "---------- locale: #{locale}, already exists = #{@visualization.visualization_translations.index{|x| x.locale == locale.to_s}}"
 					@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
 				end
 			end
-logger.debug "-------------- vis trans = #{@visualization.visualization_translations.map {|x| x.locale}.inspect}"
 			@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
 		else
-logger.debug "----------- visual is NOT cropped"
 			gon.largeW = @visualization.visual_geometry(:large).width
 			gon.largeH = @visualization.visual_geometry(:large).height
 			gon.originalW = @visualization.visual_geometry(:original).width

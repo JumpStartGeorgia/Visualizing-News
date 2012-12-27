@@ -3,9 +3,17 @@ function reset_interactive_iframe_height(){
 	$('iframe#interactive').css('height', $(window).height()-46);
 }
 
+// we need 230px from original file.
+// the large file that is show on screen for cropping can be a different size
+// so adjust the values so the scale is the same
+var adjusted_size = gon.thumbnail_size;
+if (gon.originalW && gon.largeW){
+	adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+}
+
 function update_crop(coords) {
-	var rx = 180/coords.w;
-	var ry = 180/coords.h;
+	var rx = adjusted_size/coords.w;
+	var ry = adjusted_size/coords.h;
 	$('#cropbox_preview').css({
 		width: Math.round(rx * gon.largeW) + 'px',
 		height: Math.round(ry * gon.largeH) + 'px',
@@ -91,7 +99,9 @@ $(document).ready(function(){
 	  $('img#cropbox').Jcrop({
 	    onChange: update_crop,
 	    onSelect: update_crop,
-	    setSelect: [0, 0, 180, 180],
+	    setSelect: [0, 0, adjusted_size, adjusted_size],
+			minSize: [adjusted_size,adjusted_size],
+			maxSize: [adjusted_size, adjusted_size],
 	    aspectRatio: 1
 	  });
 

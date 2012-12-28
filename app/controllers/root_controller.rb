@@ -7,7 +7,10 @@ class RootController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js {render 'shared/index'}
+      format.js {
+        @ajax_call = true
+        render 'shared/index'
+      }
     end
   end
 

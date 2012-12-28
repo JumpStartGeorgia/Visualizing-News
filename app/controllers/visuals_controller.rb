@@ -12,7 +12,7 @@ class VisualsController < ApplicationController
     respond_to do |format|
       format.atom
       format.html
-      format.js
+      format.js {render 'shared/index'}
     end
 
   end

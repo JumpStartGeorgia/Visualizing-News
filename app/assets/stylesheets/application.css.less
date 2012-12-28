@@ -189,6 +189,44 @@ body {
   padding-left: 35px;
 }
 
+#follow-us {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  li {
+    display: inline-block;
+    a {
+      display: block;
+      height: 19px;
+      margin-right: 10px;
+      &.fb {
+        width: 9px;
+        background: url('/assets/follow_us_FB.png') 0px 0px no-repeat;
+        &:hover {
+          background-position: -10px;
+        }
+      }
+      &.twitter {
+        width: 30px;
+        background: url('/assets/follow_us_twitter.png') 0px 0px no-repeat;
+        &:hover {
+          background-position: -31px;
+        }
+      }
+      &.rss {
+        margin-right: 0px;
+        width: 19px;
+        background: url('/assets/RSS.png') 0px 0px no-repeat;
+        &:hover {
+          background-position: -20px;
+        }
+      }
+    }
+  }
+}
+
+
+
 /* navbar */
 .navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner {
   background: #fff;

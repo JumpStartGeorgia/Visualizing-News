@@ -76,15 +76,36 @@
 						<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox' %>
 					</li>
         <% end %>
-				<% I18n.available_locales.each do |locale| %>
-					<% if locale != I18n.locale %>
-						<li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
-					<% end %>
-				<% end %>
       </ul>
+
+      <ul id="follow-us">
+        <li><a class="fb" title="Facebook" href="javascript:;"></a></li>
+        <li><a class="twitter" title="Twitter" href="javascript:;"></a></li>
+        <li><a class="rss" title="RSS" href="javascript:;"></a></li>
+      </ul>
+
     </div>
 
     <div id="everything-else">
+
+      <div class="navbar def">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span9"></div>
+              <div class="span3" id="locale-c">
+                <ul>
+				          <% I18n.available_locales.each do |locale| %>
+					          <% if locale != I18n.locale %>
+						          <li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
+					          <% end %>
+				          <% end %>
+				        </ul>
+              </div>
+            </div>
+          </div><!--.container-fluid-->
+        </div>
+      </div>
 
 		  <div id="wrapper">
 		    <div class="container-fluid">

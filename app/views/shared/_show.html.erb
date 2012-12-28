@@ -46,30 +46,30 @@
     <div id="source">
       <ul>
         <li>
-          <%= "#{t('.reporter')}: #{@visualization.reporter}" %>
+          <%= "#{t('.reporter')}: <span class=\"val\">#{@visualization.reporter}".html_safe %>
         </li>
         <li>
-          <%= "#{t('.designer')}: #{@visualization.designer}" %>
+          <%= "#{t('.designer')}: <span class=\"val\">#{@visualization.designer}".html_safe %>
         </li>
         <li>
-          <%= "#{t('.data_source')}: #{@visualization.data_source_name}" %>
+          <%= "#{t('.data_source')}: <span class=\"val-source\">#{@visualization.data_source_name}".html_safe %>
           <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank", :class => 'btn btn-mini' if @visualization.data_source_url && !@visualization.data_source_url.empty? %>
         </li>
         <li>
           <%= "#{t('.data_set')}: " %>
-          <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'btn btn-mini' if @visualization.dataset_file_name%>
+          <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>
         </li>
         <li>
-          <%= "#{t('.category')}: #{@visualization.visualization_categories.map{|x| x.category.name}.join(', ')}" %>
+          <%= "#{t('.category')}: <span class=\"val\">#{@visualization.visualization_categories.map{|x| x.category.name}.join(', ')}</span>".html_safe %>
         </li>
         <li>
-          <%= "#{t('.type')}: #{visualization_type_name(@visualization.visualization_type_id)}" %>
+          <%= "#{t('.type')}: <span class=\"val\">#{visualization_type_name(@visualization.visualization_type_id)}".html_safe %>
         </li>
       </ul>
     </div>
 
     <div id="share">
-      <div>
+      <div class="social-links clear">
 				<%= link_to(image_tag("share_fb.png"),
 							"http://www.facebook.com/share.php?u=#{current_url(true)}",
 							:title => "facebook",	:target => "_blank") %>
@@ -83,8 +83,9 @@
 							"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{image_path(@visualization.visual.url(:thumbnail))}&description=#{@visualization.title}", :title => "pinterest",
 							:onclick => "window.open(this.href); return false;") %>
 			</div>
-			<div>
-			  Embed ...
+			<div class="embed">
+			  <span>Embed:</span>
+			  <textarea readonly onfocus="this.select();" onmouseup="return false;">lorem ipsum dolor sit amet</textarea>
 			</div>
     </div>
   </div>

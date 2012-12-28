@@ -18,10 +18,10 @@
 		</div>
 	<% elsif !@visualization.visual_is_cropped %>
 		<%= f.hidden_field :visual_is_cropped, :value => true %>
-		<%= f.text_field :crop_x %>
-		<%= f.text_field :crop_y %>
-		<%= f.text_field :crop_w %>
-		<%= f.text_field :crop_h %>
+		<%= f.hidden_field :crop_x %>
+		<%= f.hidden_field :crop_y %>
+		<%= f.hidden_field :crop_w %>
+		<%= f.hidden_field :crop_h %>
 
 		<div id="crop-panel">
 			<h4>Preview:</h4>

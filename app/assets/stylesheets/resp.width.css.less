@@ -1,0 +1,77 @@
+
+/*
+
+   200px  00px     270px  270px  270px  270px  270px         00px    = 1550px
+   menu   padding  grid   grid   grid   grid   get_involved  padding
+
+   200px  00px     270px  270px  270px  270px         00px           = 1280px
+   menu   padding  grid   grid   grid   get_involved  padding
+
+   200px  00px     270px  270px  270px         00px                  = 1010px
+   menu   padding  grid   grid   get_involved  padding
+
+   200px  00px     270px  270px  00px                                = 740px
+   menu   padding  grid   grid   padding
+
+*/
+
+.resp {
+  width: 1350px;
+  padding: 0px 0px;
+/*
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+*/
+}
+
+#visual_list {
+  &.index {
+    width: 1080px;
+  }
+  &.viz, &.org {
+    width: 1350px;
+  }
+}
+
+
+@media (max-width: 1549px)
+{
+  .resp {
+    width: 1080px;
+  }
+
+  #visual_list {
+    &.index {
+      width: 810px;
+    }
+    &.viz, &.org {
+      width: 1080px;
+    }
+  }
+}
+
+@media (max-width: 1279px)
+{
+  .resp {
+    width: 810px;
+  }
+
+  #visual_list {
+    &.index {
+      width: 540px;
+    }
+    &.viz, &.org {
+      width: 810px;
+    }
+  }
+}
+
+@media (max-width: 1019px)
+{
+  .resp {
+    width: 540px;
+  }
+
+}
+

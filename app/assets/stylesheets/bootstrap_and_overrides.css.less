@@ -101,8 +101,20 @@ body#interactive_layout {
 /* navbar for locale */
 
 .navbar.def {
+  .navbar-inner {
+    &, & * {
+      min-height: 1px;
+    }
+    background: transparent;
+    border: none;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+  }
   #locale-c {
     text-align: right;
+    padding-right: 3px;
+    padding-top: 1px;
     a {
       color: #c17250;
       &:hover {

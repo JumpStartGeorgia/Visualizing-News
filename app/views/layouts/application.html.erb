@@ -89,26 +89,21 @@
     <div id="everything-else">
 
       <div class="navbar def">
-        <div class="navbar-inner">
-          <div class="container-fluid">
-            <div class="row-fluid">
-              <div class="span9"></div>
-              <div class="span3" id="locale-c">
-                <ul>
-				          <% I18n.available_locales.each do |locale| %>
-					          <% if locale != I18n.locale %>
-						          <li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
-					          <% end %>
-				          <% end %>
-				        </ul>
-              </div>
-            </div>
-          </div><!--.container-fluid-->
+        <div class="navbar-inner resp">
+          <div id="locale-c">
+            <ul>
+		          <% I18n.available_locales.each do |locale| %>
+			          <% if locale != I18n.locale %>
+				          <li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
+			          <% end %>
+		          <% end %>
+		        </ul>
+          </div>
         </div>
       </div>
 
 		  <div id="wrapper">
-		    <div class="container-fluid">
+		    <div class="container-fluid resp">
 		      <div class="content">
 		        <div class="row-fluid">
 		          <div class="span12">
@@ -128,7 +123,7 @@
 
       <div class="push"><!--//--></div>
 
-      <footer class="clear">
+      <footer class="clear resp">
 			  <div id="left">&copy; 2012</div>
 		    <div id="middle">
 				  &nbsp;

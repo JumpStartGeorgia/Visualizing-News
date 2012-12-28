@@ -1,15 +1,15 @@
 
-<div class="row-fluid">
-	<div class="span10">
+<div class="row-resp">
+	<div id="visual_list_container">
 		<%= page_title t('.title') %>
 
-		<div id="visual_list">
+		<div id="visual_list" class="index">
 			<%= render @view_type %>
 		</div>
 
 		<%= link_to_next_page @visualizations, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>
 	</div>
-	<div id="get_involved_container" class="span2">
+	<div id="get_involved_container">
 		<h2><%= t('.header_get_involved') %></h2>
 
 		<div id="ideas">

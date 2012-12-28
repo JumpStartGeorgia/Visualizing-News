@@ -1,6 +1,6 @@
 <% if @visualizations && !@visualizations.empty?%>
   <div class="grid_items">
-    <div class="grid_visualization_row clear">
+    <!--<div class="grid_visualization_row clear">-->
   	<% @visualizations.each_with_index do |visualization, index| %>
 
   		  <div class="grid_visualization_item">
@@ -38,12 +38,12 @@
   		    </div>
   		  </div>
 
-  		<% if (index + 1) % 4 == 0 %>
+  		<% if false && (index + 1) % 4 == 0 %>
   		  </div>
         <div class="grid_visualization_row clear">
   		<% end %>
   	<% end %>
-  	</div>
+  	<!--</div>-->
 
   </div>
 <% else %>

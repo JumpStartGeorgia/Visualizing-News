@@ -23,6 +23,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/about', :to => 'root#about', :as => :about, :via => :get
 		match '/data', :to => 'root#data', :as => :data, :via => :get
 		match '/get_involved', :to => 'root#get_involved', :as => :get_involved, :via => :get
+		match '/rss', :to => 'root#rss', :as => :rss, :via => :get
 
 		# organization
 		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
@@ -33,7 +34,7 @@ BootstrapStarter::Application.routes.draw do
 
     # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
-		match '/visualizations/:id', :to => 'visuals#show', :as => :visual, :via => :get
+		match '/visualizations/:id', :to => 'visuals#show', :as => :visualization, :via => :get
 		match '/visualizations/category/:id', :to => 'visuals#category', :as => :category, :via => :get
 		match '/visualizations/search', :to => 'visuals#search', :as => :search, :via => :get
 		match '/visualizations/search', :to => 'visuals#search', :as => :search, :via => :post

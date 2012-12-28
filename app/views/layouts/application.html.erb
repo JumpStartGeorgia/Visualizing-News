@@ -31,6 +31,8 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon' %>
+
+		<%= yield(:head) %>
   </head>
   <body>
 		<!-- facebook comments -->
@@ -91,7 +93,7 @@
       <ul id="follow-us">
         <li><a class="fb" title="Facebook" href="javascript:;"></a></li>
         <li><a class="twitter" title="Twitter" href="javascript:;"></a></li>
-        <li><a class="rss" title="RSS" href="javascript:;"></a></li>
+				<li><%= link_to "", visuals_path(:format => :atom), :class => 'rss', :title => 'RSS' %></li>
       </ul>
 
     </div>

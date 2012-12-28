@@ -12,12 +12,12 @@ module Paperclip
         Rails.logger.debug('______________________________________________2' + super.inspect + '_________________')
       end
     end
-    
+
     def crop_command
       Rails.logger.debug('______________________________________________3' + @attachment.inspect + '_________________')
       target = @attachment.instance
       if target.cropping?
-        " -crop '#{target.crop_w.to_i}x#{target.crop_h.to_i}+#{target.crop_x.to_i}+#{target.crop_y.to_i}'"
+        " -crop '#{target.crop_w.to_i}x#{target.crop_h.to_i}+#{target.crop_x.to_i}+#{target.crop_y.to_i}' -thumbnail '230x230^'"
       end
     end
   end

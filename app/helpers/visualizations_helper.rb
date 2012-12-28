@@ -4,10 +4,10 @@ module VisualizationsHelper
 		if user_in_org && organization_id
 			organization_visualization_path(organization_id,visualization_id)
 		else
-			visual_path(visualization_id)
+			visualization_path(visualization_id)
 		end
 	end
-	
+
   def visualization_type_name(id)
     index = Visualization::TYPES.values.index(id)
     I18n.t("visualization_types.#{Visualization::TYPES.keys[index]}") if index

@@ -10,6 +10,7 @@ class VisualsController < ApplicationController
     process_visualization_querystring # in app controller
 
     respond_to do |format|
+      format.atom
       format.html
       format.js
     end

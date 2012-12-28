@@ -206,9 +206,12 @@ ka:
       title: Got Data?
     get_involved:
       title: Get Involved!
+    rss:
+      title: RSS
   visuals:
     index:
       title: Visaulizations
+      title_feed: "%{app_name} Visualizations"
   shared:
     show:
       reporter: Reporter

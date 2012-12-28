@@ -101,7 +101,7 @@ $(document).ready(function(){
 	    onSelect: update_crop,
 	    setSelect: [0, 0, adjusted_size, adjusted_size],
 			minSize: [adjusted_size,adjusted_size],
-			maxSize: [adjusted_size, adjusted_size],
+//			maxSize: [adjusted_size, adjusted_size],
 	    aspectRatio: 1
 	  });
 

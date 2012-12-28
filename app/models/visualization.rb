@@ -35,7 +35,7 @@ class Visualization < ActiveRecord::Base
 
   validates :organization_id, :visualization_type_id, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validates :visual, :presence => true, :if => "visualization_type_id == 1"
+	validates :visual_file_name, :presence => true, :if => "visualization_type_id == 1"
 	validates :interactive_url, :presence => true, :if => "visualization_type_id == 2"
   validate :validate_if_published
 

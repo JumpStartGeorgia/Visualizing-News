@@ -33,5 +33,8 @@ class RootController < ApplicationController
     end
 	end
 
+	def rss
+	end
+
 
 end

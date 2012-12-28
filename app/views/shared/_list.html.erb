@@ -1,5 +1,9 @@
 <% if @visualizations && !@visualizations.empty?%>
-  <div class="grid_items">
+
+  <% if !@ajax_call %>
+    <div class="grid_items clear">
+  <% end %>
+
   	<% @visualizations.each do |visualization| %>
   	<div class="list_visualization_item clear">
   		<div class="visual">
@@ -37,7 +41,9 @@
   		</div>
   	</div>
   	<% end %>
-  </div>
+  <% if !@ajax_call %>
+    </div>
+  <% end %>
 <% else %>
   <div id="no_records">
     <%= t('app.msgs.no_visual_records')%>

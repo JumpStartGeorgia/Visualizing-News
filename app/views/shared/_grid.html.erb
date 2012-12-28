@@ -1,8 +1,6 @@
 <% if @visualizations && !@visualizations.empty?%>
 
-  <% ajax_call = @ajax_call %>
-
-  <% if !ajax_call %>
+  <% if !@ajax_call %>
     <div class="grid_items clear">
   <% end %>
     <!--<div class="grid_visualization_row clear">-->
@@ -50,7 +48,7 @@
   	<% end %>
   	<!--</div>-->
 
-  <% if !ajax_call %>
+  <% if !@ajax_call %>
     </div>
   <% end %>
 <% else %>

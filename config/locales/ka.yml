@@ -23,6 +23,8 @@ ka:
         url: ვებ-გვერდი
       organization_translation:
         name: სახელი
+        permalink: Name in URL
+        permalink_hint: "If you want to generate a new permalink, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
       organization_user:
         is_active: აქტიური
         user_id: მომხმარებელი

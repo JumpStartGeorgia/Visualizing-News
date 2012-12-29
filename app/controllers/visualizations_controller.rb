@@ -13,7 +13,7 @@ class VisualizationsController < ApplicationController
   end
 
   def show
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
@@ -30,7 +30,7 @@ class VisualizationsController < ApplicationController
   end
 
   def new
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new
 		gon.edit_visualization = true
 
@@ -41,7 +41,7 @@ class VisualizationsController < ApplicationController
   end
 
   def edit
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 
 		if @visualization.visual_is_cropped
@@ -66,7 +66,7 @@ class VisualizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
@@ -84,7 +84,7 @@ class VisualizationsController < ApplicationController
 
     respond_to do |format|
       if @visualization.save
-        format.html { redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+        format.html { redirect_to edit_organization_visualization_path(params[:organization_id], @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
         format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
@@ -98,7 +98,7 @@ class VisualizationsController < ApplicationController
   end
 
   def update
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 		was_cropped = @visualization.visual_is_cropped
     # if the user wants to redo the image crop, reset the variable
@@ -109,10 +109,10 @@ class VisualizationsController < ApplicationController
         format.html {
 					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
 						# show form again
-						redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to edit_organization_visualization_path(params[:organization_id], @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else
 						# redirect to show page
-						redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to organization_visualization_path(params[:organization_id], @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					end
 				}
         format.json { head :ok }
@@ -127,7 +127,7 @@ class VisualizationsController < ApplicationController
   end
 
   def destroy
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find(params[:id])
     @visualization.destroy
 

@@ -1,4 +1,5 @@
-<%= semantic_form_for(@organization, :html => { :class => 'form-horizontal' }) do |f| %>
+<%= semantic_form_for(@organization, :url => organization_path(@organization.permalink), 
+      :html => { :class => 'form-horizontal' }) do |f| %>
 	<%= f.error_messages %>
 
   <% @organization.organization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
@@ -8,6 +9,9 @@
 				<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 				<%= translation.input :name %>
+			<% if request.post? || request.put? || controller.action_name.downcase == 'edit' %>
+				<%= translation.input :permalink, :hint => t('activerecord.attributes.organization_translation.permalink_hint') %>
+			<% end %>
 				<%= translation.hidden_field :locale , :value => trans.locale %>
 			</div>
 

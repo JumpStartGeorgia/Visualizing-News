@@ -1,4 +1,13 @@
-<%= semantic_form_for([@organization, @visualization], :html => { :class => 'form-horizontal precrop' }) do |f| %>
+<%
+  if params[:action] == 'new'
+    path = organization_visualizations_path(params[:organization_id])
+  else
+    path = organization_visualization_path(params[:organization_id], params[:id])
+  end
+%>
+<%= semantic_form_for([@organization, @visualization], 
+      :url => path,
+      :html => { :class => 'form-horizontal precrop' }) do |f| %>
 		<%= f.error_messages %>
 
 	<% if @visualization.id.nil? %>

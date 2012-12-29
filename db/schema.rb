@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227102203) do
+ActiveRecord::Schema.define(:version => 20121229090933) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -50,10 +50,12 @@ ActiveRecord::Schema.define(:version => 20121227102203) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink"
   end
 
   add_index "organization_translations", ["locale"], :name => "index_organization_translations_on_locale"
   add_index "organization_translations", ["organization_id"], :name => "index_b182f63d9a9aa74a99d1d5dca589cbf53f3a688c"
+  add_index "organization_translations", ["permalink"], :name => "index_organization_translations_on_permalink"
 
   create_table "organization_users", :force => true do |t|
     t.integer  "organization_id"
@@ -96,73 +98,6 @@ ActiveRecord::Schema.define(:version => 20121227102203) do
   end
 
   add_index "pages", ["name"], :name => "index_pages_on_name"
-
-  create_table "stories", :force => true do |t|
-    t.datetime "published_date"
-    t.boolean  "published",            :default => false
-    t.integer  "story_type_id"
-    t.string   "data_source_url"
-    t.string   "individual_votes"
-    t.integer  "overall_votes",        :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "dataset_file_name"
-    t.string   "dataset_content_type"
-    t.integer  "dataset_file_size"
-    t.datetime "dataset_updated_at"
-    t.string   "visual_file_name"
-    t.string   "visual_content_type"
-    t.integer  "visual_file_size"
-    t.datetime "visual_updated_at"
-    t.integer  "organization_id"
-  end
-
-  add_index "stories", ["organization_id"], :name => "index_stories_on_organization_id"
-  add_index "stories", ["overall_votes"], :name => "index_stories_on_overall_votes"
-  add_index "stories", ["published"], :name => "index_stories_on_published"
-  add_index "stories", ["published_date"], :name => "index_stories_on_published_date"
-  add_index "stories", ["story_type_id"], :name => "index_stories_on_story_type_id"
-
-  create_table "story_categories", :force => true do |t|
-    t.integer  "story_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "story_categories", ["category_id"], :name => "index_story_categories_on_category_id"
-  add_index "story_categories", ["story_id"], :name => "index_story_categories_on_story_id"
-
-  create_table "story_translations", :force => true do |t|
-    t.integer  "story_id"
-    t.string   "locale"
-    t.string   "title"
-    t.text     "explanation"
-    t.string   "reporter"
-    t.string   "designer"
-    t.string   "data_source_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "story_translations", ["locale"], :name => "index_story_translations_on_locale"
-  add_index "story_translations", ["story_id"], :name => "index_story_translations_on_story_id"
-
-  create_table "story_type_translations", :force => true do |t|
-    t.integer  "story_type_id"
-    t.string   "locale"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "story_type_translations", ["locale"], :name => "index_story_type_translations_on_locale"
-  add_index "story_type_translations", ["story_type_id"], :name => "index_story_type_translations_on_story_type_id"
-
-  create_table "story_types", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false

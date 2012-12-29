@@ -8,7 +8,20 @@ function reset_interactive_iframe_height(){
 // so adjust the values so the scale is the same
 var adjusted_size = gon.thumbnail_size;
 if (gon.originalW && gon.largeW){
-	adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+  if (gon.largeW != $('#cropbox').width()){
+console.log ("image size is different than it should be");    
+    gon.largeW = $('#cropbox').width();
+    gon.largeH = $('#cropbox').height();
+
+    adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+
+    // adjust preview box height/width
+    $('.preview').css('width', adjusted_size).css('height', adjusted_size);
+
+  } else {
+    adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+  }
+
 }
 
 function update_crop(coords) {
@@ -96,6 +109,7 @@ $(document).ready(function(){
 		});
 
 		// assign the jcrop to the visual image
+
 	  $('img#cropbox').Jcrop({
 	    onChange: update_crop,
 	    onSelect: update_crop,

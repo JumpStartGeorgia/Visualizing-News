@@ -4,12 +4,14 @@ function reset_interactive_iframe_height(){
 }
 
 // we need 230px from original file.
-// the large file that is show on screen for cropping can be a different size
+// the large file that is shown on screen for cropping can be a different size
 // so adjust the values so the scale is the same
 var adjusted_size = gon.thumbnail_size;
 if (gon.originalW && gon.largeW){
   if (gon.largeW != $('#cropbox').width()){
-console.log ("image size is different than it should be");    
+    // the layout may cause the large image to not display at its full size
+    // - when this happens, the sizes used for calculations must be reset
+    //   to the image size on screen
     gon.largeW = $('#cropbox').width();
     gon.largeH = $('#cropbox').height();
 

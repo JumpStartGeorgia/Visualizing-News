@@ -101,16 +101,14 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find(params[:organization_id])
     @visualization = Visualization.find(params[:id])
 		was_cropped = @visualization.visual_is_cropped
-
+    # if the user wants to redo the image crop, reset the variable
+    params[:visualization][:visual_is_cropped] = false if params[:visualization][:reset_crop] == "true"
+    
     respond_to do |format|
-
       if @visualization.update_attributes(params[:visualization])
         format.html {
-					if !was_cropped && @visualization.visual_is_cropped
-						# image was just cropped, show complete form
-						gon.edit_visualization = true
-						gon.visualization_type = @visualization.visualization_type_id
-						gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
+					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
+						# show form again
 						redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else
 						# redirect to show page

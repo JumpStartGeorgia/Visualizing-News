@@ -26,9 +26,9 @@ class Visualization < ActiveRecord::Base
 			:organization_id,
 			:interactive_url,
 			:visual_is_cropped,
-			:crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
+			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
 
-	attr_accessor :is_create, :crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
+	attr_accessor :is_create, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
 
 	paginates_per 4
 

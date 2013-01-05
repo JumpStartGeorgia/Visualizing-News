@@ -18,7 +18,7 @@
 				<div class="like_btn_voted"></div>
 			<% else %>
 				<%= link_to("",
-						vote_path(:type => Visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+						vote_path(:type => Visualization.name.downcase, :votable_id => @visualization.id, :status => 'up'),
 						:class => 'like_btn', :title => t('app.common.like')) %>
 			<% end %>
     </div>
@@ -114,7 +114,7 @@
 				<div class="like_btn_voted"></div>
 			<% else %>
 				<%= link_to("",
-						vote_path(:type => Visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+						vote_path(:type => Visualization.name.downcase, :votable_id => @visualization.id, :status => 'up'),
 						:class => 'like_btn', :title => t('app.common.like')) %>
 			<% end %>
     </div>

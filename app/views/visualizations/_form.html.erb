@@ -83,6 +83,9 @@
 						<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 						<%= translation.input :title %>
+						<% if request.post? || request.put? || controller.action_name.downcase == 'edit' %>
+							<%= translation.input :permalink, :hint => t('activerecord.attributes.visualization_translation.permalink_hint') %>
+						<% end %>
 						<%= translation.input :explanation %>
 						<%= translation.input :reporter %>
 						<%= translation.input :designer %>

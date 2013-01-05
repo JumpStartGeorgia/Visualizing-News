@@ -24,7 +24,7 @@ en:
       organization_translation:
         name: Name
         permalink: Name in URL
-        permalink_hint: "If you want to generate a new permalink, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
+        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
       organization_user:
         is_active: Active?
         user_id: User
@@ -48,6 +48,8 @@ en:
         reset_crop: Redo the Thumbnail Image
       visualization_translation:
         title: Title
+        permalink: Name in URL
+        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"

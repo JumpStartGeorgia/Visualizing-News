@@ -51,7 +51,7 @@ class OrganizationsController < ApplicationController
       if @organization.update_attributes(params[:organization])
         # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
         # - have to get it by hand
-        format.html { redirect_to organization_path(@organization.organization_translations.select{|x| x.locale = I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.user')) }
+        format.html { redirect_to organization_path(@organization.organization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.user')) }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

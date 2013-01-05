@@ -98,7 +98,7 @@ class VisualizationsController < ApplicationController
       if @visualization.save
         # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
         # - have to get it by hand
-        format.html { redirect_to edit_organization_visualization_path(params[:organization_id],  @visualization.visualization_translations.select{|x| x.locale = I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+        format.html { redirect_to edit_organization_visualization_path(params[:organization_id],  @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
         format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
@@ -125,10 +125,10 @@ class VisualizationsController < ApplicationController
         format.html {
 					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
 						# show form again
-						redirect_to edit_organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale = I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to edit_organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else
 						# redirect to show page
-						redirect_to organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale = I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					end
 				}
         format.json { head :ok }

@@ -14,9 +14,13 @@
     <div class="vote">
 			<%= "#{t('app.common.likes')}:" %>
 			<%= @visualization.overall_votes %>
-			<%= link_to("",
-					vote_path(:type => @visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
-					:class => 'like_btn', :title => t('app.common.like')) %>
+			<% if @visualization.voted(request.remote_ip, 'up') %>
+				<div class="like_btn_voted"></div>
+			<% else %>
+				<%= link_to("",
+						vote_path(:type => Visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% end %>
     </div>
   </div>
   <div class="span4">
@@ -106,9 +110,13 @@
     <div class="vote">
 			<%= "#{t('app.common.likes')}:" %>
 			<%= @visualization.overall_votes %>
-			<%= link_to("",
-					vote_path(:type => @visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
-					:class => 'like_btn', :title => t('app.common.like')) %>
+			<% if @visualization.voted(request.remote_ip, 'up') %>
+				<div class="like_btn_voted"></div>
+			<% else %>
+				<%= link_to("",
+						vote_path(:type => Visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% end %>
     </div>
   </div>
   <div class="span4">

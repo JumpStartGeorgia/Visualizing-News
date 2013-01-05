@@ -140,6 +140,29 @@
 	}
 }
 
+/* vote button */
+.vote {
+	a.like_btn {
+    display: inline-block;
+		height: 34px;
+		width: 108px;
+    background: url('/assets/like_button.png') 0px 0px no-repeat;
+    &:hover {
+      background-position: bottom;
+    }
+	}
+	div.like_btn_voted {
+    display: inline-block;
+		height: 34px;
+		width: 108px;
+    background: url('/assets/like_button.png') 0px 0px no-repeat;
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+}
+
+
+
 /* hide these by default when the form opens and use js to show correct field */
 #visualization_interactive_url_input, #visualization_visual_input {
 	display: none;

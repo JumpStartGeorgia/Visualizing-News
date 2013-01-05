@@ -6,13 +6,17 @@
 		<%= page_title @visualization.title %>
     <div id="visualization_date">
 			<% if @visualization.published %>
-	      <%= l @visualization.published_date, :format => :long if @visualization.published_date %>
+	      <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
 			<% else %>
 				<div class="not_published"><%= t('app.common.not_published') %></div>
 			<% end %>
     </div>
     <div class="vote">
-		  <%= votes_cont(@visualization) %>
+			<%= "#{t('app.common.likes')}:" %>
+			<%= @visualization.overall_votes %>
+			<%= link_to("",
+					vote_path(:type => @visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+					:class => 'like_btn', :title => t('app.common.like')) %>
     </div>
   </div>
   <div class="span4">
@@ -100,7 +104,11 @@
   </div>
   <div id="main_block" class="span6 clear">
     <div class="vote">
-		  <%= votes_cont(@visualization) %>
+			<%= "#{t('app.common.likes')}:" %>
+			<%= @visualization.overall_votes %>
+			<%= link_to("",
+					vote_path(:type => @visualization.class.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+					:class => 'like_btn', :title => t('app.common.like')) %>
     </div>
   </div>
   <div class="span4">

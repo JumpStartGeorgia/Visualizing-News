@@ -132,6 +132,7 @@ ka:
       placeholder: placeholder # do not translate
       comments: კომენტარები
       likes: Likes
+      like: Like
       not_published: Not Published
     msgs:
       does_not_exist: You tried to access a page that does not exist.

@@ -227,7 +227,18 @@ body {
   }
 }
 
-
+/* vote button */
+.vote {
+	a.like_btn {
+    display: inline-block;
+		height: 34px;
+		width: 108px;
+    background: url('/assets/like_button.png') 0px 0px no-repeat;
+    &:hover {
+      background-position: bottom;
+    }
+	}
+}
 
 /* navbar */
 .navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner {
@@ -321,8 +332,3 @@ footer, footer ul li, footer div#right ul li {
     padding: 0.5em 1em;
   }
 }
-
-
-
-
-

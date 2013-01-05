@@ -77,12 +77,12 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	end
 
   def valid_role?(role)
-    redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
+    redirect_to root_path(:locale => I18n.locale), :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
 
   def assigned_to_org?(organization_permalink)
     org_id = OrganizationTranslation.get_org_id(organization_permalink)
-    redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.organization_ids.index(org_id)
+    redirect_to root_path(:locale => I18n.locale), :notice => t('app.msgs.not_authorized') if !current_user || !current_user.organization_ids.index(org_id)
   end
 
 	# store the current path so after login, can go back

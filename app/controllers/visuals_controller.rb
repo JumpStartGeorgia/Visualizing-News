@@ -21,20 +21,26 @@ class VisualsController < ApplicationController
   end
 
   def show
-    @visualization = Visualization.published.find(params[:id])
-		gon.show_fb_comments = true
+    @visualization = Visualization.published.find_by_permalink(params[:id])
 
-		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
-	    @view_type = 'shared/show_interactive'
-			gon.show_interactive = true
+		if @visualization
+			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
+			  @view_type = 'shared/show_interactive'
+				gon.show_interactive = true
+			else
+			  @view_type = 'shared/show'
+			end
+
+			gon.show_fb_comments = true
+
+			respond_to do |format|
+			  format.html
+			  format.json { render json: @visualization }
+			end
 		else
-	    @view_type = 'shared/show'
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
 		end
-
-	  respond_to do |format|
-	    format.html
-	    format.json { render json: @visualization }
-	  end
   end
 
   def vote
@@ -55,7 +61,7 @@ class VisualsController < ApplicationController
     when 'visualization'
       m = Visualization
     else
-      redirect_to root_path, :alert => 'wrong votable'
+      redirect_to root_path(:locale => I18n.locale), :alert => t('app.msgs.does_not_exist')
       return
     end
 

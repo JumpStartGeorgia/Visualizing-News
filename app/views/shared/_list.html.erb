@@ -7,10 +7,10 @@
   	<% @visualizations.each do |visualization| %>
   	<div class="list_visualization_item clear">
   		<div class="visual">
-  		  <%= link_to(image_tag(visualization.visual.url(:thumb)), create_visual_path(visualization.id, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
+  		  <%= link_to(image_tag(visualization.visual.url(:thumb)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
   		</div>
   		<div class="content">
-  		  <h2><%= link_to visualization.title, create_visual_path(visualization.id, @user_in_org, organization_id=params[:id]) %></h2>
+  		  <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>
   			<h3><%= l visualization.published_date, :format => :long if visualization.published_date %></h3>
   			<% if !visualization.published %>
   			<div class="not_published"><%= t('app.common.not_published') %></div>
@@ -20,7 +20,7 @@
   		<div class="item_footer clear">
   			<div class="comment_count">
   				<%= "#{t('app.common.comments')}:" %>
-  				<fb:comments-count href="<%= full_url(visualization_path(visualization)) %>"></fb:comments-count>
+  				<fb:comments-count href="<%= full_url(visualization_path(visualization.permalink)) %>"></fb:comments-count>
   			</div>
   			<div class="like_count">
   				<%= "#{t('app.common.likes')}:" %>
@@ -29,10 +29,10 @@
   			<% if @user_in_org && params[:controller] == 'organizations' %>
   				<div>
   			    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-  			                edit_organization_visualization_path(params[:id], visualization),
+  			                edit_organization_visualization_path(params[:id], visualization.permalink),
   											:class => 'btn btn-mini' %>
   			    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-  			                organization_visualization_path(params[:id], visualization.id),
+  			                organization_visualization_path(params[:id], visualization.permalink),
   			                :method => :delete,
   											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
   			                :class => 'btn btn-mini btn-danger' %>

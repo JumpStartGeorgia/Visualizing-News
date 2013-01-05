@@ -237,3 +237,6 @@ en:
       address_map: Find our office on the map
       email_us: Send us an email
       email_subject: "feradi.info Email Link: Inquiry"
+  visualizations:
+    form:
+      preview: Preview

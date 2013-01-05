@@ -8,6 +8,7 @@ function reset_interactive_iframe_height(){
 // so adjust the values so the scale is the same
 var adjusted_size = gon.thumbnail_size;
 if (gon.originalW && gon.largeW){
+
   if (gon.largeW != $('#cropbox').width()){
     // the layout may cause the large image to not display at its full size
     // - when this happens, the sizes used for calculations must be reset
@@ -17,13 +18,12 @@ if (gon.originalW && gon.largeW){
 
     adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
 
-    // adjust preview box height/width
-    $('.preview').css('width', adjusted_size).css('height', adjusted_size);
-
   } else {
     adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
   }
 
+  // adjust preview box height/width
+  $('.preview').css('width', adjusted_size).css('height', adjusted_size);
 }
 
 function update_crop(coords) {

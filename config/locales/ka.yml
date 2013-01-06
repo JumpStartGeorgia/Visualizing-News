@@ -253,6 +253,7 @@ ka:
   notifications:
     index:
       title: ახალი იდეის შეტყობინება
+      explain: "You can recieve email notifications whenever a visualization is added feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
       all_sub_title: ყველა შეტყობინება
       all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?
       all_no: "არ გამომიგზავნო შეტყობინება."

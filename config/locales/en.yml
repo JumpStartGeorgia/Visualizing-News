@@ -252,7 +252,8 @@ en:
       preview: Preview
   notifications:
     index:
-      title: Notification Settings
+      title: Email Subscriptions
+      explain: "You can recieve email notifications whenever a visualization is added feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
       all_sub_title: All Notifications
       all_label: Do you want to recieve any notifications from this site?
       all_no: "No, do not send me any notifications."

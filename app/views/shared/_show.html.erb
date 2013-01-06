@@ -6,13 +6,21 @@
 		<%= page_title @visualization.title %>
     <div id="visualization_date">
 			<% if @visualization.published %>
-	      <%= l @visualization.published_date, :format => :long if @visualization.published_date %>
+	      <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
 			<% else %>
 				<div class="not_published"><%= t('app.common.not_published') %></div>
 			<% end %>
     </div>
     <div class="vote">
-		  <%= votes_cont(@visualization) %>
+			<%= "#{t('app.common.likes')}:" %>
+			<%= @visualization.overall_votes %>
+			<% if @visualization.voted(request.remote_ip, 'up') %>
+				<div class="like_btn_voted"></div>
+			<% else %>
+				<%= link_to("",
+						vote_path(:type => Visualization.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% end %>
     </div>
   </div>
   <div class="span4">
@@ -32,7 +40,7 @@
 			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
 		    <%= link_to(image_tag(@visualization.visual.url(:medium, false)), url_for(params.merge(:view => 'interactive'))) %>
 			<% else %>
-		    <%= link_to(image_tag(@visualization.visual.url(:medium, false)), @visualization.visual.url(:large, :false), :class => 'fancybox_visual') if @visualization.visual_file_name %>
+		    <%= link_to(image_tag(@visualization.visual.url(:medium, false)), @visualization.visual.url(:large, false), :class => 'fancybox_visual') if @visualization.visual_file_name %>
 			<% end %>
     </div>
   </div>
@@ -100,7 +108,15 @@
   </div>
   <div id="main_block" class="span6 clear">
     <div class="vote">
-		  <%= votes_cont(@visualization) %>
+			<%= "#{t('app.common.likes')}:" %>
+			<%= @visualization.overall_votes %>
+			<% if @visualization.voted(request.remote_ip, 'up') %>
+				<div class="like_btn_voted"></div>
+			<% else %>
+				<%= link_to("",
+						vote_path(:type => Visualization.name.downcase, :votable_id => @visualization.id, :status => 'up'),
+						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% end %>
     </div>
   </div>
   <div class="span4">
@@ -118,7 +134,7 @@
   <div id="main_block" class="span6 clear">
 		<h3>
 			<%= "#{t('app.common.comments')}:" %>
-			<fb:comments-count href="<%= full_url(visualization_path(@visualization)) %>"></fb:comments-count>
+			<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
 		</h3>
 		<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
   <div class="span4">

@@ -1,5 +1,5 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink
 
   require 'split_votes'
   include SplitVotes

@@ -21,7 +21,8 @@ module VisualizationsHelper
 	  return col
   end
 
-  def votes_cont (obj)
+
+  def votes_cont_old (obj)
     ip = request.remote_ip
     type = obj.class.name.downcase
 

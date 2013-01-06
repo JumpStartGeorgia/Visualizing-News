@@ -60,6 +60,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 	def preload_global_variables
 		@categories = Category.sorted
+		@filter_type_selection = I18n.t('filters.type.all')
+		@filter_view_selection = I18n.t('filters.view.grid')
 	end
 
 	def initialize_gon
@@ -111,13 +113,16 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   def process_visualization_querystring
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/list'
+			@filter_view_selection = I18n.t('filters.view.list')
 	  else
 	    @view_type = 'shared/grid'
+			@filter_view_selection = I18n.t('filters.view.grid')
 	  end
 
 		if params[:type]
 			type_id = Visualization.type_id(params[:type])
 			@visualizations = @visualizations.by_type(type_id) if type_id
+			@filter_type_selection = I18n.t("filters.type.#{params[:type]}")
 		end
 
 		if params[:category]

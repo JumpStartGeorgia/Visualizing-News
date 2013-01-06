@@ -8,7 +8,7 @@
 
   		  <div class="grid_visualization_item">
   		    <div class="visual">
-  		      <%= link_to(image_tag(visualization.visual.url(:thumb)),
+  		      <%= link_to(image_tag(visualization.visual.url(:thumb, false)),
   							create_visual_path(visualization.id, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
   		    </div>
   		    <div class="title">

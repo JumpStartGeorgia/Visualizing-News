@@ -34,12 +34,12 @@
 		<div id="crop-panel">
 			<h4>Preview:</h4>
 			<div class="preview">
-				<%= image_tag @visualization.visual.url(:large), :id => "cropbox_preview" %>
+				<%= image_tag @visualization.visual.url(:large, false), :id => "cropbox_preview" %>
 			</div>
 
 			<hr />
 
-			<%= image_tag @visualization.visual.url(:large), :id => "cropbox" %>
+			<%= image_tag @visualization.visual.url(:large, false), :id => "cropbox" %>
 
 		</div>
 	<% else %>
@@ -59,7 +59,7 @@
 					<strong><%= Visualization.human_attribute_name(:visual)%>:</strong>
 			    <%= f.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
 					<br />
-					<%= image_tag @visualization.visual.url(:thumb) if @visualization.visual_file_name %>
+					<%= image_tag @visualization.visual.url(:thumb, false) if @visualization.visual_file_name %>
 				</p>
 			</div>
 

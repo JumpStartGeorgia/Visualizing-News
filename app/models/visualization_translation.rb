@@ -11,6 +11,8 @@ class VisualizationTranslation < ActiveRecord::Base
   # -> this method is called from the visualization model
   def validate_if_published
     missing_fields = []
+    missing_fields << :title if !self.title || self.title.empty?
+    missing_fields << :explanation if !self.explanation || self.explanation.empty?
     missing_fields << :reporter if !self.reporter || self.reporter.empty?
     missing_fields << :designer if !self.designer || self.designer.empty?
     missing_fields << :data_source_name if !self.data_source_name || self.data_source_name.empty?

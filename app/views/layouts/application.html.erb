@@ -10,7 +10,7 @@
 		<meta property="og:type" content="non_profit" />
 		<meta property="og:url" content="<%= current_url %>" />
 		<% if @visualization && @visualization.visual_file_name %>
-			<meta property="og:image" content="<%= full_url(@visualization.visual.url(:thumb)) %>" />
+			<meta property="og:image" content="<%= full_url(@visualization.visual.url(:thumb, false)) %>" />
 		<% end %>
 		<meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
 

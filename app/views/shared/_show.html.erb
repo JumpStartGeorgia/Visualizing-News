@@ -68,7 +68,17 @@
           <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>
         </li>
         <li>
-          <%= "#{t('.category')}: <span class=\"val\">#{@visualization.visualization_categories.map{|x| x.category.name}.join(', ')}</span>".html_safe %>
+          <%= "#{t('.category')}: "%>
+          <span class="val">
+          <% @visualization.visualization_categories.each_with_index do |cat, index| %>
+            <% x = link_to cat.category.name, visuals_path(:category => cat.category.permalink) %>
+            <% if index != @visualization.visualization_categories.length-1 %>
+              <%= "#{x}, "%>
+            <% else %>
+              <%= x %>
+            <% end %>
+          <% end %>
+          </span>
         </li>
         <li>
           <%= "#{t('.type')}: <span class=\"val\">#{visualization_type_name(@visualization.visualization_type_id)}".html_safe %>

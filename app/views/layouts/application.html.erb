@@ -91,9 +91,10 @@
       </ul>
 
       <ul id="follow-us">
-        <li><a class="fb" title="Facebook" href="javascript:;"></a></li>
-        <li><a class="twitter" title="Twitter" href="javascript:;"></a></li>
-				<li><%= link_to "", visuals_path(:format => :atom), :class => 'rss', :title => 'RSS' %></li>
+        <li><a class="fb" title="<%= t('.facebook') %>" href="#"></a></li>
+        <li><a class="twitter" title="<%= t('.twitter') %>" href="#"></a></li>
+				<li><%= link_to "", notifications_path, :class => 'twitter', :title => t('.subscription') %></li>
+				<li><%= link_to "", visuals_path(:format => :atom), :class => 'rss', :title => t('.rss') %></li>
       </ul>
 
     </div>

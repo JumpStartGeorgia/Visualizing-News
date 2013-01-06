@@ -137,16 +137,19 @@ ka:
       like: Like
       not_published: Not Published
     msgs:
-      does_not_exist: You tried to access a page that does not exist.
-      not_authorized: You are not authorized to view that page.
-      permalink_exists: already exists in the database
-      success_created: "%{obj} was successfully created."
-      success_updated: "%{obj} was successfully updated."
-      notification_yes: You will be sent notifications.
-      notification_no: You will not be sent notifications.
+      does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
+      not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
+      permalink_exists: უკვე არსებობს მონაცემთა ბაზაში
+      success_created: "%{obj} შექმნილია."
+      success_updated: "%{obj} განახლებულია."
+      notification_yes: თქვენ მიიღებთ შეტყობინებებს.
+      notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
       notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
       notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
+      notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
+      notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
+      notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -159,6 +162,10 @@ ka:
       admin: ადმინისტრატორი
       user_profile: შენი გვერდი
       notifications: ახალი იდეების შეტყობინება
+      facebook: Facebook
+      twitter: Twitter
+      rss: RSS
+      subscription: Email Subscription
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
@@ -243,3 +250,18 @@ ka:
   visualizations:
     form:
       preview: Preview
+  notifications:
+    index:
+      title: ახალი იდეის შეტყობინება
+      all_sub_title: ყველა შეტყობინება
+      all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?
+      all_no: "არ გამომიგზავნო შეტყობინება."
+      all_yes: "დიახ, მინდა მივიღო შეტყობინებები."
+      new_visuals_sub_title: New Visualization Notifications
+      new_visuals_all: Notify me when any visualization is added.
+      new_visuals_none: I do not want to receive notifications when a new visualization is added.
+      new_visuals_by_category: "Notify me when a visualization is added to:"
+      new_ideas_sub_title: ახალი იდეის შეტყობინება
+      new_ideas_all: შემატყობინე ახალი იდეის დამატება
+      new_ideas_none: არ შემატყობინო ახალი იდეის დამატება.
+      new_ideas_by_category: "შემატყობინე როდესაც იდეა დაემატება:"

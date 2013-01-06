@@ -147,6 +147,9 @@ en:
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
       notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
       notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
+      notification_new_idea_all_success: You will recieve a notification whenever an idea is added.
+      notification_new_idea_none_success: You will not receive any notifications when ideas are added.
+      notification_new_idea_by_category_success: "You will receive a notification when an idea is added to these categories: %{categories}."
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -159,6 +162,10 @@ en:
       admin: Admin
       user_profile: Your Profile
       notifications: Notification Settings
+      facebook: Facebook
+      twitter: Twitter
+      rss: RSS
+      subscription: Email Subscription
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -243,3 +250,18 @@ en:
   visualizations:
     form:
       preview: Preview
+  notifications:
+    index:
+      title: Notification Settings
+      all_sub_title: All Notifications
+      all_label: Do you want to recieve any notifications from this site?
+      all_no: "No, do not send me any notifications."
+      all_yes: "Yes, I want notifications sent to me."
+      new_visuals_sub_title: New Visualization Notifications
+      new_visuals_all: Notify me when any visualization is added.
+      new_visuals_none: I do not want to receive notifications when a new visualization is added.
+      new_visuals_by_category: "Notify me when a visualization is added to:"
+      new_ideas_sub_title: New Idea Notifications
+      new_ideas_all: Notify me when any idea is added.
+      new_ideas_none: I do not want to receive notifications when a new idea is added.
+      new_ideas_by_category: "Notify me when an idea is added to:"

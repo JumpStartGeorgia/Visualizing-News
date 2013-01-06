@@ -14,12 +14,44 @@ class NotificationsController < ApplicationController
 					msg << I18n.t('app.msgs.notification_yes')
 				end
 
-				if params[:none]
+        # process visualization notifications
+				if params[:visuals_none]
+					# delete all notifications
+					Notification.where(:notification_type => Notification::TYPES[:new_visual],
+																					:user_id => current_user.id).delete_all
+					msg << I18n.t('app.msgs.notification_new_visual_none_success')
+				elsif params[:visuals_all]
+					# all notifications
+					# delete anything on file first
+					Notification.where(:notification_type => Notification::TYPES[:new_visual],
+																					:user_id => current_user.id).delete_all
+					# add all option
+					Notification.create(:notification_type => Notification::TYPES[:new_visual],
+																					:user_id => current_user.id)
+
+					msg << I18n.t('app.msgs.notification_new_visual_all_success')
+				elsif params[:visuals_categories] && !params[:visuals_categories].empty?
+					# by category
+					# delete anything on file first
+					Notification.where(:notification_type => Notification::TYPES[:new_visual],
+																					:user_id => current_user.id).delete_all
+					# add each category
+					params[:visuals_categories].each do |cat_id|
+						Notification.create(:notification_type => Notification::TYPES[:new_visual],
+																						:user_id => current_user.id,
+																						:identifier => cat_id)
+					end
+					msg << I18n.t('app.msgs.notification_new_visual_by_category_success',
+						:categories => @categories.select{|x| params[:visuals_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
+        end
+        
+        # process idea notificatons
+				if params[:ideas_none]
 					# delete all notifications
 					Notification.where(:notification_type => Notification::TYPES[:new_idea],
 																					:user_id => current_user.id).delete_all
 					msg << I18n.t('app.msgs.notification_new_idea_none_success')
-				elsif params[:all]
+				elsif params[:ideas_all]
 					# all notifications
 					# delete anything on file first
 					Notification.where(:notification_type => Notification::TYPES[:new_idea],
@@ -29,21 +61,22 @@ class NotificationsController < ApplicationController
 																					:user_id => current_user.id)
 
 					msg << I18n.t('app.msgs.notification_new_idea_all_success')
-				elsif params[:categories] && !params[:categories].empty?
+				elsif params[:ideas_categories] && !params[:ideas_categories].empty?
 					# by category
 					# delete anything on file first
 					Notification.where(:notification_type => Notification::TYPES[:new_idea],
 																					:user_id => current_user.id).delete_all
 					# add each category
-					params[:categories].each do |cat_id|
+					params[:ideas_categories].each do |cat_id|
 						Notification.create(:notification_type => Notification::TYPES[:new_idea],
 																						:user_id => current_user.id,
 																						:identifier => cat_id)
 					end
 					msg << I18n.t('app.msgs.notification_new_idea_by_category_success',
-						:categories => @categories.select{|x| params[:categories].index(x.id.to_s)}.map{|x| x.name}.join(","))
+						:categories => @categories.select{|x| params[:ideas_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
 
 				end
+				
 			else
 				# indicate user does not want notifications
 				if current_user.wants_notifications
@@ -52,6 +85,8 @@ class NotificationsController < ApplicationController
 				end
 
 				# delete any on record
+				Notification.where(:notification_type => Notification::TYPES[:new_visual],
+																				:user_id => current_user.id).delete_all
 				Notification.where(:notification_type => Notification::TYPES[:new_idea],
 																				:user_id => current_user.id).delete_all
 
@@ -63,22 +98,37 @@ class NotificationsController < ApplicationController
 		@enable_notifications = current_user.wants_notifications
 		gon.enable_notifications = @enable_notifications
 
-		# get data to load the form
-		@notifications = Notification.where(:notification_type => Notification::TYPES[:new_idea],
+		# get new visual data to load the form
+		@visual_notifications = Notification.where(:notification_type => Notification::TYPES[:new_visual],
 																			:user_id => current_user.id)
 
-		@all = false
-		@none = false
+		@visual_all = false
+		@visual_none = false
 
-		if @notifications && !@notifications.empty?
-			if @notifications.length == 1 && @notifications.first.identifier.nil?
-				@all = true
+		if @visual_notifications && !@visual_notifications.empty?
+			if @visual_notifications.length == 1 && @visual_notifications.first.identifier.nil?
+				@visual_all = true
 			end
 		else
-			@none = true
+			@visual_none = true
 		end
 
-		flash[:notice] = msg.join("<br />") if !msg.empty?
+		# get new idea data to load the form
+		@idea_notifications = Notification.where(:notification_type => Notification::TYPES[:new_idea],
+																			:user_id => current_user.id)
+
+		@idea_all = false
+		@idea_none = false
+
+		if @idea_notifications && !@idea_notifications.empty?
+			if @idea_notifications.length == 1 && @idea_notifications.first.identifier.nil?
+				@idea_all = true
+			end
+		else
+			@idea_none = true
+		end
+
+		flash[:notice] = msg.join("<br />").html_safe if !msg.empty?
 	end
 
 end

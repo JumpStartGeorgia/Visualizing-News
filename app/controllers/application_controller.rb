@@ -68,7 +68,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		gon.set = true
 		gon.highlight_first_form_field = true
 		gon.placeholder = t('app.common.placeholder')
-		gon.comment_notification_url = nil#comment_notification_path(gon.placeholder)
+		gon.visual_comment_notification_url = visual_comment_notification_path(gon.placeholder)
 		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 		gon.thumbnail_size = 230
 	end

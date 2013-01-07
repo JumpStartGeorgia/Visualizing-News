@@ -240,6 +240,7 @@ en:
       category: Category
       type: Type
       embed: Embed
+      embed_link_title: Click to view larger image
       comment_count: Comments
   messages:
     new:

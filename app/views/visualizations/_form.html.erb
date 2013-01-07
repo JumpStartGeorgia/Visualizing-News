@@ -13,8 +13,7 @@
 	<% if @visualization.id.nil? %>
 		<div id="fields-panel">
 			<%= f.inputs do %>
-				<%= f.hidden_field :organization_id ,
-							:value => @visualization.organization_id ? @visualization.organization_id : params[:organization_id] %>
+				<%= f.hidden_field :organization_id ,	:value => @organization.id %>
 
 				<% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 					<%= f.fields_for :visualization_translations, trans do |translation| %>

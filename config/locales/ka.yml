@@ -153,6 +153,8 @@ ka:
       notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
       notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
       notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
+      notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
+      notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
       notification_language: You will be sent notifications in %{language}.
       no_visual_records: No visualization records exist for your selection.
   layouts:

@@ -239,6 +239,7 @@ ka:
       data_set: Data Set
       category: Category
       type: Type
+      embed: Embed
       comment_count: Comments
   messages:
     new:

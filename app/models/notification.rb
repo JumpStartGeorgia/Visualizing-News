@@ -8,27 +8,14 @@ class Notification < ActiveRecord::Base
 
   TYPES = {:new_idea => 1, :follow_idea => 2, :new_visual => 3}
 
+	def self.new_visual(category_ids)
+		return new_item(TYPES[:new_visual], category_ids)
+	end
+
+
 =begin
 	def self.new_idea_users(category_ids)
-		x = nil
-		if category_ids
-			if category_ids.class == Array
-				if !category_ids.empty?
-					# idea belongs to multiple categories
-					x = select("users.email").joins(:user)
-					.where("users.wants_notifications = 1 and notification_type = ? and (identifier is null or identifier in (?))", TYPES[:new_idea], category_ids)
-				end
-			else
-				# idea belongs to one category
-				x = select("users.email").joins(:user)
-				.where("users.wants_notifications = 1 and notification_type = ? and (identifier is null or identifier = ?)", TYPES[:new_idea], category_ids)
-			end
-
-			if x && !x.empty?
-				x = x.map{|x| x.email}
-			end
-		end
-		return x
+		return new_item(TYPES[:new_idea], category_ids)
 	end
 
 	def self.follow_idea_users(idea_id)
@@ -44,4 +31,29 @@ class Notification < ActiveRecord::Base
 		return x
 	end
 =end
+
+protected
+
+	def self.new_item(type, category_ids)
+		x = nil
+		if category_ids && type
+			if category_ids.class == Array
+				if !category_ids.empty?
+					# visual belongs to multiple categories
+					x = select("users.email").joins(:user)
+					.where("users.wants_notifications = 1 and notification_type = ? and (identifier is null or identifier in (?))", type, category_ids)
+				end
+			else
+				# visual belongs to one category
+				x = select("users.email").joins(:user)
+				.where("users.wants_notifications = 1 and notification_type = ? and (identifier is null or identifier = ?)", type, category_ids)
+			end
+
+			if x && !x.empty?
+				x = x.map{|x| x.email}
+			end
+		end
+		return x
+	end
+
 end

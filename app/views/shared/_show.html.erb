@@ -73,7 +73,7 @@
           <% @visualization.visualization_categories.each_with_index do |cat, index| %>
             <% x = link_to cat.category.name, visuals_path(:category => cat.category.permalink) %>
             <% if index != @visualization.visualization_categories.length-1 %>
-              <%= "#{x}, "%>
+              <%= x + ", "%>
             <% else %>
               <%= x %>
             <% end %>

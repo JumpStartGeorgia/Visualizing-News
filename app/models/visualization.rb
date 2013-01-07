@@ -34,8 +34,9 @@ class Visualization < ActiveRecord::Base
 
 	after_find :check_if_published
 
+	# have to check if published exists because some find methods do not get the published attribute
 	def check_if_published
-		self.was_published = self.published ? true : false
+		self.was_published = self.has_attribute?(:published) && self.published ? true : false
 	end
 
   validates :organization_id, :visualization_type_id, :presence => true

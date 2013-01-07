@@ -153,6 +153,7 @@ ka:
       notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
       notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
       notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
+      notification_language: You will be sent notifications in %{language}.
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -273,3 +274,5 @@ ka:
       new_ideas_all: შემატყობინე ახალი იდეის დამატება
       new_ideas_none: არ შემატყობინო ახალი იდეის დამატება.
       new_ideas_by_category: "შემატყობინე როდესაც იდეა დაემატება:"
+      language_sub_title: Notification Language
+      language_label: In what language do you want to receive the notifications?

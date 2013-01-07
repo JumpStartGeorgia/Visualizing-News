@@ -14,6 +14,13 @@ class NotificationsController < ApplicationController
   					msg << I18n.t('app.msgs.notification_yes')
   				end
 
+					# language
+					if params[:language]
+  					current_user.notification_language = params[:language]
+  					current_user.save
+  					msg << I18n.t('app.msgs.notification_language', :language => t("app.language.#{params[:language]}"))
+					end
+
           # process visualization notifications
   				if params[:visuals_none]
   					# delete all notifications
@@ -119,6 +126,10 @@ class NotificationsController < ApplicationController
   		# see if user wants notifications
   		@enable_notifications = current_user.wants_notifications
   		gon.enable_notifications = @enable_notifications
+
+			# get the notfification language
+			@language = current_user.notification_language.nil? ? I18n.default_locale.to_s : current_user.notification_language
+logger.debug "----------- language = #{@language}"
 
   		# get new visual data to load the form
   		@visual_notifications = Notification.where(:notification_type => Notification::TYPES[:new_visual],

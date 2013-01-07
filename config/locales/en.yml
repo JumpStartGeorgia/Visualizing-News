@@ -155,6 +155,7 @@ en:
       notification_new_idea_by_category_success: "You will receive a notification when an idea is added to these categories: %{categories}."
       notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
       notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
+      notification_language: You will be sent notifications in %{language}.
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -275,3 +276,5 @@ en:
       new_ideas_all: Notify me when any idea is added.
       new_ideas_none: I do not want to receive notifications when a new idea is added.
       new_ideas_by_category: "Notify me when an idea is added to:"
+      language_sub_title: Notification Language
+      language_label: In what language do you want to receive the notifications?

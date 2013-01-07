@@ -19,6 +19,20 @@
   	</div>
 
 
+  	<h3><%= t('.language_sub_title') %></h3>
+  	<div class="fluid-row clear" id="language_notifications">
+  		<div class="span12">
+  			<%= t('.language_label') %>
+				<% I18n.available_locales.each do |locale| %>
+					<label for="<%= "language_#{locale}"%>" class="radio">
+						<%= radio_button_tag 'language', locale, locale.to_s == @language ? true : false %>
+						<%= t("app.language.#{locale}") %>
+					</label>
+				<% end %>
+  		</div>
+  	</div>
+
+
 
   	<h3><%= t('.new_visuals_sub_title') %></h3>
   	<div class="fluid-row clear <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_visual_notifications">
@@ -49,7 +63,7 @@
 			<% current_user.organizations.each do |org| %>
 				<h3><%= t('.visual_comment_sub_title', :org => org.name) %></h3>
 				<%= hidden_field_tag "visual_comment[#{org.id}][name]", org.name %>
-				<div class="fluid-row clear" id="new_visual_comment_notifications">
+				<div class="fluid-row clear" id="visual_comment_notifications">
 					<div class="span12">
 						<%= t('.visual_comment_label') %>
 						<label for="<%= "visual_comment_#{org.id}_wants_true"%>" class="radio">

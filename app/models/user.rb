@@ -11,11 +11,12 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-		:role, :provider, :uid, :nickname, :avatar, :organization_ids, :wants_notifications
+		:role, :provider, :uid, :nickname, :avatar, :organization_ids, :wants_notifications, :notification_language
 	attr_accessor :is_create
 
   validates :email, :nickname, :presence => true
 	before_save :check_for_role
+	before_save :set_notification_language
 
 	default_scope includes(:organizations)
 
@@ -40,6 +41,11 @@ class User < ActiveRecord::Base
 	# if no role is supplied, default to the basic user role
 	def check_for_role
 		self.role = User::ROLES[:user] if self.role.nil?
+	end
+
+	# if not set, default to default locale
+	def set_notification_language
+		self.notification_language = I18n.default_locale if self.notification_language.nil?
 	end
 
 	def organization_ids

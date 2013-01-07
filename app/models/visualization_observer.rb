@@ -12,12 +12,16 @@ class VisualizationObserver < ActiveRecord::Observer
 			category_ids = visualization.visualization_categories.map{|x| x.category_id}
 			if category_ids && !category_ids.empty?
 				message = Message.new
-				message.bcc = Notification.new_visual(category_ids)
-				if message.bcc && !message.bcc.empty?
-					message.subject = I18n.t("mailer.notification.new_visualization.subject")
-					message.message = I18n.t("mailer.notification.new_visualization.message", :title => visualization.title)
-					message.url_id = visualization.permalink
-					NotificationMailer.new_visualization(message).deliver
+				I18n.available_locales.each do |locale|
+					message.bcc = Notification.new_visual(category_ids, locale)
+					if message.bcc && !message.bcc.empty?
+						message.locale = locale
+						message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)
+						message.message = I18n.t("mailer.notification.new_visualization.message",
+							:title => visualization.title, :locale => locale)
+						message.url_id = visualization.permalink
+						NotificationMailer.new_visualization(message).deliver
+					end
 				end
 			end
 		end

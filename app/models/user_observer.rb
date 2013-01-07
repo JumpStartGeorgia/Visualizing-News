@@ -9,8 +9,9 @@ class UserObserver < ActiveRecord::Observer
 		# only process if a create just occurred
 		if user.is_create
 			message = Message.new
-			message.subject = I18n.t("mailer.notification.new_user.subject")
-			message.message = I18n.t("mailer.notification.new_user.message")
+			message.locale = user.notification_language
+			message.subject = I18n.t("mailer.notification.new_user.subject", :locale => user.notification_language)
+			message.message = I18n.t("mailer.notification.new_user.message", :locale => user.notification_language)
 			NotificationMailer.new_user(message).deliver
 			user.is_create = false # make sure duplicate messages are not sent
 		end

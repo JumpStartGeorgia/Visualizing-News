@@ -1,1 +1,4 @@
 <%= simple_format @message.message %>
+
+<%= link_to notification_url(:locale => @message.locale),
+						notification_url(:locale => @message.locale) %>

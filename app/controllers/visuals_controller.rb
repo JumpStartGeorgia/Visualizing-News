@@ -126,12 +126,16 @@ class VisualsController < ApplicationController
 		if visualization
       # notify org users if want notification
 			message = Message.new
-			message.bcc = Notification.visual_comment(visualization.organization_id)
-			if message.bcc && !message.bcc.empty?
-				message.subject = I18n.t("mailer.notification.visualization_comment.subject", :title => visualization.title)
-				message.message = I18n.t("mailer.notification.visualization_comment.message")
-				message.url_id = visualization.permalink
-				NotificationMailer.visualization_comment(message).deliver
+			I18n.available_locales.each do |locale|
+				message.bcc = Notification.visual_comment(visualization.organization_id, locale)
+				if message.bcc && !message.bcc.empty?
+					message.locale = locale
+					message.subject = I18n.t("mailer.notification.visualization_comment.subject",
+						:title => visualization.title, :locale => locale)
+					message.message = I18n.t("mailer.notification.visualization_comment.message", :locale => locale)
+					message.url_id = visualization.permalink
+					NotificationMailer.visualization_comment(message).deliver
+				end
 			end
 
 			render :text => "true"

@@ -129,7 +129,6 @@ class NotificationsController < ApplicationController
 
 			# get the notfification language
 			@language = current_user.notification_language.nil? ? I18n.default_locale.to_s : current_user.notification_language
-logger.debug "----------- language = #{@language}"
 
   		# get new visual data to load the form
   		@visual_notifications = Notification.where(:notification_type => Notification::TYPES[:new_visual],

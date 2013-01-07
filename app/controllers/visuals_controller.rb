@@ -51,31 +51,27 @@ class VisualsController < ApplicationController
 			end
 
     if !(['down', 'up'].include? params[:status])
-      redirect_to redirect_path, :alert => 'wrong status'
+      redirect_to redirect_path
       return
     end
 
-    case params[:type]
-    when 'comment'
-      m = Comment
-    when 'visualization'
-      m = Visualization
-    else
-      redirect_to root_path(:locale => I18n.locale), :alert => t('app.msgs.does_not_exist')
-      return
-    end
+    visualization = Visualization.published.find_by_permalink(params[:id])
 
+    if !visualization
+      redirect_to redirect_path
+      return
+    end 
+    
     ip = request.remote_ip
-    record = VoterIp.where(:ip => ip, :votable_type => params[:type], :votable_id => params[:votable_id])
+    record = VoterIp.where(:ip => ip, :votable_type => visualization.class.name.downcase, :votable_id => visualization.id)
 
     if record.nil? || record.empty?
 
-      obj = m.find(params[:votable_id])
-      if obj.individual_votes.nil? || obj.individual_votes.length < 4
-        obj.individual_votes = '+0-0'
+      if visualization.individual_votes.nil? || visualization.individual_votes.length < 4
+        visualization.individual_votes = '+0-0'
       end
 
-      split = obj.individual_votes.split('+')[1].split('-')
+      split = visualization.individual_votes.split('+')[1].split('-')
       ups = split[0].to_i
       downs = split[1].to_i
 
@@ -85,17 +81,16 @@ class VisualsController < ApplicationController
         downs = downs + 1
       end
 
-      obj.individual_votes = '+' + ups.to_s + '-' + downs.to_s
-			obj.overall_votes = ups - downs
-      obj.save
+      visualization.individual_votes = "+#{ups}-#{downs}"
+			visualization.overall_votes = ups - downs
+      visualization.save
 
-      VoterIp.create(:ip => ip, :votable_type => params[:type], :votable_id => params[:votable_id], :status => params[:status])
+      VoterIp.create(:ip => ip, :votable_type => visualization.class.name.downcase, 
+                      :votable_id => visualization.id, :status => params[:status])
 
     elsif record[0].status != params[:status]
 
-      obj = m.find(params[:votable_id])
-
-      split = obj.individual_votes.split('+')[1].split('-')
+      split = visualization.individual_votes.split('+')[1].split('-')
       ups = split[0].to_i
       downs = split[1].to_i
 
@@ -107,9 +102,9 @@ class VisualsController < ApplicationController
         downs = downs + 1
       end
 
-      obj.individual_votes = '+' + ups.to_s + '-' + downs.to_s
-			obj.overall_votes = ups - downs
-      obj.save
+      visualization.individual_votes = "+#{ups}-#{downs}"
+			visualization.overall_votes = ups - downs
+      visualization.save
 
       record[0].status = params[:status]
       record[0].save

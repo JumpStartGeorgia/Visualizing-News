@@ -44,6 +44,29 @@
   			</label>
   		</div>
   	</div>
+
+		<% if !current_user.organization_users.empty? %>
+			<% current_user.organizations.each do |org| %>
+				<h3><%= t('.visual_comment_sub_title', :org => org.name) %></h3>
+				<%= hidden_field_tag "visual_comment[#{org.id}][name]", org.name %>
+				<div class="fluid-row clear" class="new_visual_comment_notifications">
+					<div class="span12">
+						<%= t('.visual_comment_label') %>
+						<label for="<%= "visual_comment_#{org.id}_wants_true"%>" class="radio">
+							<%= radio_button_tag "visual_comment[#{org.id}][wants]", 'true', @visual_comment[org.id] %>
+							<%= t('.visual_comment_yes') %>
+						</label>
+						<label for="<%= "visual_comment_#{org.id}_wants_false"%>" class="radio">
+							<%= radio_button_tag "visual_comment[#{org.id}][wants]", 'false', !@visual_comment[org.id] %>
+							<%= t('.visual_comment_no') %>
+						</label>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+
+
+
   <!--
   	<h3><%= t('.new_ideas_sub_title') %></h3>
   	<div class="fluid-row clear <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_idea_notifications">
@@ -69,7 +92,7 @@
   			</label>
   		</div>
   	</div>
-  -->	
+  -->
   	<div>
   		<%= submit_tag nil, :class => 'btn btn-mini' %>
   	</div>

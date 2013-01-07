@@ -150,6 +150,8 @@ en:
       notification_new_idea_all_success: You will recieve a notification whenever an idea is added.
       notification_new_idea_none_success: You will not receive any notifications when ideas are added.
       notification_new_idea_by_category_success: "You will receive a notification when an idea is added to these categories: %{categories}."
+      notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
+      notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -258,6 +260,10 @@ en:
       all_label: Do you want to recieve any notifications from this site?
       all_no: "No, do not send me any notifications."
       all_yes: "Yes, I want notifications sent to me."
+      visual_comment_sub_title: New Visualization Comment Notifications for %{org}
+      visual_comment_label: "Do you want to recieve notifications when a comment is made to your organization's visualizations?"
+      visual_comment_no: "No, do not send me any notifications."
+      visual_comment_yes: "Yes, I want notifications sent to me."
       new_visuals_sub_title: New Visualization Notifications
       new_visuals_all: Notify me when any visualization is added.
       new_visuals_none: I do not want to receive notifications when a new visualization is added.

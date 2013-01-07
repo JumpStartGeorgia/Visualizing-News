@@ -44,7 +44,29 @@ class NotificationsController < ApplicationController
   					msg << I18n.t('app.msgs.notification_new_visual_by_category_success',
   						:categories => @categories.select{|x| params[:visuals_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
           end
-        
+
+					# process visual comment notifications for each org
+					if params[:visual_comment]
+						params[:visual_comment].keys.each do |org_id|
+							existing = Notification.where(:notification_type => Notification::TYPES[:visual_comment],
+																							:user_id => current_user.id)
+
+							if params[:visual_comment][org_id][:wants] == "true" && existing.empty?
+								Notification.create(:notification_type => Notification::TYPES[:visual_comment],
+																								:user_id => current_user.id,
+																								:identifier => org_id)
+
+								msg << I18n.t('app.msgs.notification_visual_comments_yes',
+									:org => params[:visual_comment][org_id][:name])
+							elsif params[:visual_comment][org_id][:wants] != "true" && !existing.empty?
+								# delete anything on file first
+								existing.delete_all
+								msg << I18n.t('app.msgs.notification_visual_comments_no',
+									:org => params[:visual_comment][org_id][:name])
+							end
+						end
+					end
+
           # process idea notificatons
   				if params[:ideas_none]
   					# delete all notifications
@@ -76,7 +98,7 @@ class NotificationsController < ApplicationController
   						:categories => @categories.select{|x| params[:ideas_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
 
   				end
-				
+
   			else
   				# indicate user does not want notifications
   				if current_user.wants_notifications
@@ -112,6 +134,18 @@ class NotificationsController < ApplicationController
   		else
   			@visual_none = true
   		end
+
+			# get visual comments for each org
+			if !current_user.organization_users.empty?
+				@visual_comment = Hash.new
+				current_user.organizations.each do |org|
+					comment_notify = Notification.where(:notification_type => Notification::TYPES[:visual_comment],
+  																			:user_id => current_user.id,
+  																			:identifier => org.id)
+					@visual_comment[org.id] = comment_notify && !comment_notify.empty? ? true : false
+				end
+			end
+
 
   		# get new idea data to load the form
   		@idea_notifications = Notification.where(:notification_type => Notification::TYPES[:new_idea],

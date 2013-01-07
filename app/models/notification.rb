@@ -6,7 +6,7 @@ class Notification < ActiveRecord::Base
 
   validates :user_id, :notification_type, :presence => true
 
-  TYPES = {:new_idea => 1, :follow_idea => 2, :new_visual => 3}
+  TYPES = {:new_idea => 1, :follow_idea => 2, :new_visual => 3, :visual_comment => 4}
 
 	def self.new_visual(category_ids)
 		return new_item(TYPES[:new_visual], category_ids)

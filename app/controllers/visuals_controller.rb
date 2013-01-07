@@ -45,10 +45,10 @@ class VisualsController < ApplicationController
 
   def vote
 		redirect_path = if request.env["HTTP_REFERER"]
-		    :back
-			else
-		    root_path
-			end
+	    :back
+		else
+	    root_path
+		end
 
     if !(['down', 'up'].include? params[:status])
       redirect_to redirect_path
@@ -116,6 +116,14 @@ class VisualsController < ApplicationController
     redirect_to redirect_path
   end
 
+  def next
+    next_previous('next')
+  end
+
+  def previous
+    next_previous('previous')
+  end
+
 	def comment_notification
     visualization = Visualization.published.find_by_permalink(params[:id])
 		if visualization
@@ -140,4 +148,53 @@ class VisualsController < ApplicationController
 		return false
 	end
 
+protected
+
+  def next_previous(type)
+		# get a list of visual ids in correct order
+    visualizations = Visualization.select("visualizations.id").published.recent
+    # get the visual that was showing
+    visualization = Visualization.published.find_by_permalink(params[:id])
+		record_id = nil
+
+		if visualizations && !visualizations.empty? && visualization
+			index = visualizations.index{|x| x.id == visualization.id}
+      if type == 'next'
+  			if index
+  				if index == visualizations.length-1
+  					record_id = visualizations[0].id
+  				else
+  					record_id = visualizations[index+1].id
+  				end
+  			else
+  				record_id = visualizations[0].id
+  			end
+  		elsif type == 'previous'
+				if index
+					if index == 0
+						record_id = visualizations[visualizations.length-1].id
+					else
+						record_id = visualizations[index-1].id
+					end
+				else
+					record_id = visualizations[0].id
+				end
+			end
+			
+			if record_id
+  			# get the next record
+  			visual = Visualization.published.find_by_id(record_id)
+			
+  			if visual
+  			  # found next record, go to it
+          redirect_to visualization_path(visual.permalink)
+          return
+  	    end
+      end
+    end
+
+		# if get here, then next record was not found
+    redirect_to(visuals_path, :alert => t("app.common.page_not_found"))
+    return
+  end
 end

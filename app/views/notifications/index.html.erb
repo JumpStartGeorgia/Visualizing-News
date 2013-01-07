@@ -49,7 +49,7 @@
 			<% current_user.organizations.each do |org| %>
 				<h3><%= t('.visual_comment_sub_title', :org => org.name) %></h3>
 				<%= hidden_field_tag "visual_comment[#{org.id}][name]", org.name %>
-				<div class="fluid-row clear" class="new_visual_comment_notifications">
+				<div class="fluid-row clear" id="new_visual_comment_notifications">
 					<div class="span12">
 						<%= t('.visual_comment_label') %>
 						<label for="<%= "visual_comment_#{org.id}_wants_true"%>" class="radio">

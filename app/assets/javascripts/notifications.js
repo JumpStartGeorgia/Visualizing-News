@@ -3,7 +3,7 @@ function enable_notifications(type){
 	$('#new_' + type + '_notifications input').removeAttr('disabled');
 	$('#new_' + type + '_notifications select').removeAttr('disabled');
 	$('#new_' + type + '_notifications').css('opacity', 1.0);
-	$('#new_' + type + '_notifications').css('filter', 'alpha(opacity=100)');  
+	$('#new_' + type + '_notifications').css('filter', 'alpha(opacity=100)');
 }
 
 function disable_all_fields(type){
@@ -20,7 +20,7 @@ function enable_all_fields(type){
 
 function all_clicked(type){
 	$('input#' + type + '_none').removeAttr('checked');
-	$('select#' + type + '_categories').val([]);  
+	$('select#' + type + '_categories').val([]);
 }
 
 function none_clicked(type){
@@ -38,17 +38,20 @@ $(document).ready(function(){
 		if (gon.enable_notifications) {
 			// enable new visual and idea form fields
 			enable_notifications('visual');
+			enable_notifications('visual_comment');
 			enable_notifications('idea');
 		}
 
-		// if want all notifications turn on new idea fields
+		// if want all notifications turn on fields
 		// else, turn them off
 		$("input[name='enable_notifications']").click(function(){
 			if ($(this).val() === 'true') {
 			  enable_all_fields('visual');
+			  enable_all_fields('visual_comment');
 			  enable_all_fields('idea');
 			} else {
 			  disable_all_fields('visual');
+			  disable_all_fields('visual_comment');
 			  disable_all_fields('idea');
 			}
 		});

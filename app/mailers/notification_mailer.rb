@@ -12,4 +12,9 @@ class NotificationMailer < ActionMailer::Base
     mail(:to => message.email, :subject => message.subject)
   end
 
+  def visualization_comment(message)
+    @message = message
+    mail(:to => message.email, :subject => message.subject)
+  end
+
 end

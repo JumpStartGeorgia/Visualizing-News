@@ -68,6 +68,9 @@ ka:
       new_visualization:
         subject: "A new visualization has been added"
         message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+      visualization_comment:
+        subject: "Someone has commented on your visualization '%{title}' on feradi.info"
+        message: "Please click on the link below to view the comment."
     contact:
       subject: "feradi.info Contact Form"
   helpers:

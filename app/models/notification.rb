@@ -12,6 +12,18 @@ class Notification < ActiveRecord::Base
 		return new_item(TYPES[:new_visual], category_ids)
 	end
 
+	def self.visual_comment(organization_id)
+		x = nil
+		if organization_id
+			x = select("users.email").joins(:user)
+			.where("users.wants_notifications = 1 and notification_type = ? and identifier = ?", TYPES[:visual_comment], organization_id)
+
+			if x && !x.empty?
+				x = x.map{|x| x.email}
+			end
+		end
+		return x
+	end
 
 =begin
 	def self.new_idea_users(category_ids)

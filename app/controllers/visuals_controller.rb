@@ -120,29 +120,25 @@ class VisualsController < ApplicationController
 
     redirect_to redirect_path
   end
-  
+
 	def comment_notification
     visualization = Visualization.published.find_by_permalink(params[:id])
 		if visualization
-      # notify org users if wants noticication
-
-=begin
-			# notify owner if wants notification
-			if idea.user.wants_notifications
-				message = Message.new
-				message.email = idea.user.email
-				message.subject = I18n.t('mailer.owner.new_comment.subject')
-				message.message = I18n.t('mailer.owner.new_comment.message')
-				message.url_id = params[:idea_id]
-				NotificationOwnerMailer.new_comment(message).deliver
+      # notify org users if want notification
+			message = Message.new
+			message.bcc = Notification.visual_comment(visualization.organization_id)
+			if message.bcc && !message.bcc.empty?
+				message.subject = I18n.t("mailer.notification.visualization_comment.subject", :title => visualization.title)
+				message.message = I18n.t("mailer.notification.visualization_comment.message")
+				message.url_id = visualization.permalink
+				NotificationMailer.visualization_comment(message).deliver
 			end
 
-=end
 			render :text => "true"
 			return false
 		end
 		render :text => "false"
 		return false
 	end
-  
+
 end

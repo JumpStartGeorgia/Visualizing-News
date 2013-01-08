@@ -81,7 +81,11 @@
           </span>
         </li>
         <li>
-          <%= "#{t('.type')}: <span class=\"val\">#{visualization_type_name(@visualization.visualization_type_id)}".html_safe %>
+          <%= "#{t('.type')}:"%>
+						<span class="val">
+							<% type_name = visualization_type_name(@visualization.visualization_type_id) %>
+							<%= link_to type_name, visuals_path(:type => type_name.downcase) %>
+						</span>
         </li>
       </ul>
     </div>

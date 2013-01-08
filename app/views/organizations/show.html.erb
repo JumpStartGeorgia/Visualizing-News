@@ -3,11 +3,22 @@
 <% if @user_in_org && params[:controller] == 'organizations' %>
 <div class="form-actions">
   <%= link_to t("helpers.links.edit_org", :org => @organization.name),
-      edit_organization_path(@organization.id), :class => 'btn' %>
+      edit_organization_path(@organization.permalink), :class => 'btn' %>
 	<%= link_to t('helpers.links.new_visual', :org => @organization.name),
-			new_organization_visualization_path(@organization.id), :class => 'btn btn-primary' %>
+			new_organization_visualization_path(@organization.permalink), :class => 'btn btn-primary' %>
 </div>
 <% end %>
+
+<div class="row-fluid">
+	<div class="span8">
+		<%= simple_format @organization.bio %>
+	</div>
+	<div class="span3">
+		<%= link_to t('helpers.links.website'), @organization.url, :class => 'btn btn-mini' if @organization.url %>
+	</div>
+</div>
+
+<hr />
 
 <%= render "shared/filter_bar" %>
 

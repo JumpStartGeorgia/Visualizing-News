@@ -12,11 +12,11 @@ $(document).ready(function(){
 		// when a comment is submitted, notify the user of the idea
 		if (gon.show_fb_comments){
 			FB.Event.subscribe('comment.create', function(response){
-				// get idea id
+				// get id of record
 				var url_ary = response.href.split("/");
 				// check for query string values
-				var idea_id = url_ary[url_ary.length-1].split("?")[0];
-				$.get(gon.comment_notification_url.replace(gon.placeholder, idea_id));
+				var id = url_ary[url_ary.length-1].split("?")[0];
+				$.get(gon.visual_comment_notification_url.replace(gon.placeholder, id));
 			});
 		}
   };

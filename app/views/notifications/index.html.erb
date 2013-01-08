@@ -1,48 +1,121 @@
 <%= page_title t('.title') %>
 
+<% if user_signed_in? %>
 
-<%= form_tag(notifications_path) do %>
-	<h3><%= t('.all_sub_title') %></h3>
-	<div class="row" style="margin-bottom: 15px;">
-		<div class="span12">
-			<%= t('.all_label') %>
-			<label for="enable_notifications_true" class="radio">
-				<%= radio_button_tag 'enable_notifications', 'true', @enable_notifications %>
-				<%= t('.all_yes') %>
-			</label>
-			<label for="enable_notifications_false" class="radio">
-				<%= radio_button_tag 'enable_notifications', 'false', !@enable_notifications %>
-				<%= t('.all_no') %>
-			</label>
-		</div>
-	</div>
+  <%= form_tag notifications_path, :id => "notifications" do %>
+  	<h3><%= t('.all_sub_title') %></h3>
+  	<div class="fluid-row clear">
+  		<div class="span12">
+  			<%= t('.all_label') %>
+  			<label for="enable_notifications_true" class="radio">
+  				<%= radio_button_tag 'enable_notifications', 'true', @enable_notifications %>
+  				<%= t('.all_yes') %>
+  			</label>
+  			<label for="enable_notifications_false" class="radio">
+  				<%= radio_button_tag 'enable_notifications', 'false', !@enable_notifications %>
+  				<%= t('.all_no') %>
+  			</label>
+  		</div>
+  	</div>
 
 
-	<h3><%= t('.new_ideas_sub_title') %></h3>
-	<div class="row <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_idea_notifications">
-		<div class="span3">
-			<label for="all" class="checkbox">
-				<%= check_box_tag 'all', 'true', @all %>
-				<%= t('.new_ideas_all') %>
-			</label>
-		</div>
-		<div class="span3">
-			<label for="categories">
-				<%= t('.new_ideas_by_category') %>
-				<br />
-				<%= select_tag "categories",
-						options_from_collection_for_select(@categories, "id", "name", @notifications.map{|x| x.identifier}),
-						:multiple => true %>
-			</label>
-		</div>
-		<div class="span2">
-			<label for="none" class="checkbox">
-				<%= check_box_tag 'none', 'true', @none %>
-				<%= t('.new_ideas_none') %>
-			</label>
-		</div>
-	</div>
-	<div>
-		<%= submit_tag nil, :class => 'btn btn-mini' %>
-	</div>
+  	<h3><%= t('.language_sub_title') %></h3>
+  	<div class="fluid-row clear" id="language_notifications">
+  		<div class="span12">
+  			<%= t('.language_label') %>
+				<% I18n.available_locales.each do |locale| %>
+					<label for="<%= "language_#{locale}"%>" class="radio">
+						<%= radio_button_tag 'language', locale, locale.to_s == @language ? true : false %>
+						<%= t("app.language.#{locale}") %>
+					</label>
+				<% end %>
+  		</div>
+  	</div>
+
+
+
+  	<h3><%= t('.new_visuals_sub_title') %></h3>
+  	<div class="fluid-row clear <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_visual_notifications">
+  		<div class="span3">
+  			<label for="visuals_all" class="checkbox">
+  				<%= check_box_tag 'visuals_all', 'true', @visual_all %>
+  				<%= t('.new_visuals_all') %>
+  			</label>
+  		</div>
+  		<div class="span3">
+  			<label for="visuals_categories">
+  				<%= t('.new_visuals_by_category') %>
+  				<br />
+  				<%= select_tag "visuals_categories",
+  						options_from_collection_for_select(@categories, "id", "name", @visual_notifications.map{|x| x.identifier}),
+  						:multiple => true %>
+  			</label>
+  		</div>
+  		<div class="span2">
+  			<label for="visuals_none" class="checkbox">
+  				<%= check_box_tag 'visuals_none', 'true', @visual_none %>
+  				<%= t('.new_visuals_none') %>
+  			</label>
+  		</div>
+  	</div>
+
+		<% if !current_user.organization_users.empty? %>
+			<% current_user.organizations.each do |org| %>
+				<h3><%= t('.visual_comment_sub_title', :org => org.name) %></h3>
+				<%= hidden_field_tag "visual_comment[#{org.id}][name]", org.name %>
+				<div class="fluid-row clear" id="visual_comment_notifications">
+					<div class="span12">
+						<%= t('.visual_comment_label') %>
+						<label for="<%= "visual_comment_#{org.id}_wants_true"%>" class="radio">
+							<%= radio_button_tag "visual_comment[#{org.id}][wants]", 'true', @visual_comment[org.id] %>
+							<%= t('.visual_comment_yes') %>
+						</label>
+						<label for="<%= "visual_comment_#{org.id}_wants_false"%>" class="radio">
+							<%= radio_button_tag "visual_comment[#{org.id}][wants]", 'false', !@visual_comment[org.id] %>
+							<%= t('.visual_comment_no') %>
+						</label>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+
+
+
+  <!--
+  	<h3><%= t('.new_ideas_sub_title') %></h3>
+  	<div class="fluid-row clear <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_idea_notifications">
+  		<div class="span3">
+  			<label for="ideas_all" class="checkbox">
+  				<%= check_box_tag 'ideas_all', 'true', @idea_all %>
+  				<%= t('.new_ideas_all') %>
+  			</label>
+  		</div>
+  		<div class="span3">
+  			<label for="ideas_categories">
+  				<%= t('.new_ideas_by_category') %>
+  				<br />
+  				<%= select_tag "ideas_categories",
+  						options_from_collection_for_select(@categories, "id", "name", @idea_notifications.map{|x| x.identifier}),
+  						:multiple => true %>
+  			</label>
+  		</div>
+  		<div class="span2">
+  			<label for="ideas_none" class="checkbox">
+  				<%= check_box_tag 'ideas_none', 'true', @idea_none %>
+  				<%= t('.new_ideas_none') %>
+  			</label>
+  		</div>
+  	</div>
+  -->
+  	<div>
+  		<%= submit_tag nil, :class => 'btn btn-mini' %>
+  	</div>
+  <% end %>
+<% else %>
+  <p>
+    <%= t('.explain')%>
+  </p>
+  <p>
+    <%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'btn btn-mini fancybox' %>
+  </p>
 <% end %>

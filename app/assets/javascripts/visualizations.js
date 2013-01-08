@@ -4,11 +4,26 @@ function reset_interactive_iframe_height(){
 }
 
 // we need 230px from original file.
-// the large file that is show on screen for cropping can be a different size
+// the large file that is shown on screen for cropping can be a different size
 // so adjust the values so the scale is the same
 var adjusted_size = gon.thumbnail_size;
 if (gon.originalW && gon.largeW){
-	adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+
+  if (gon.largeW != $('#cropbox').width()){
+    // the layout may cause the large image to not display at its full size
+    // - when this happens, the sizes used for calculations must be reset
+    //   to the image size on screen
+    gon.largeW = $('#cropbox').width();
+    gon.largeH = $('#cropbox').height();
+
+    adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+
+  } else {
+    adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+  }
+
+  // adjust preview box height/width
+  $('.preview').css('width', adjusted_size).css('height', adjusted_size);
 }
 
 function update_crop(coords) {
@@ -38,7 +53,7 @@ $(document).ready(function(){
 	if (gon.edit_visualization){
 		// load the date time pickers
 		$('#visualization_published_date').datepicker({
-				dateFormat: 'dd.mm.yy',
+				dateFormat: 'dd/mm/yy',
 		});
 		if (gon.published_date !== undefined && gon.published_date.length > 0)
 		{
@@ -96,6 +111,7 @@ $(document).ready(function(){
 		});
 
 		// assign the jcrop to the visual image
+
 	  $('img#cropbox').Jcrop({
 	    onChange: update_crop,
 	    onSelect: update_crop,

@@ -50,6 +50,37 @@ module ApplicationHelper
     Utf8Converter.convert_ka_to_en(text.downcase.gsub(" ","_").gsub("/","_").gsub("__","_").gsub("__","_"))
 	end
 
+	# since the url contains english or georgian text, the text must be updated to the correct language
+	# for the language switcher link to work
+	# - only applies to organizations and visualizations
+	def generate_language_switcher_link(locale)
+		vis = nil
+		org = nil
+
+		if @organization
+			org = OrganizationTranslation.where(:locale => locale, :organization_id => @organization.id)
+		end
+
+		if @visualization
+			vis = VisualizationTranslation.where(:locale => locale, :visualization_id => @visualization.id)
+		end
+
+		if vis && !vis.empty? && org && !org.empty?
+			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+				:organization_id => org.first.permalink,
+				:id => vis.first.permalink
+			)
+		elsif vis && !vis.empty?
+			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+				:id => vis.first.permalink)
+		elsif org && !org.empty?
+			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+				:id => org.first.permalink)
+		else
+			link_to t("app.language.#{locale}"), params.merge(:locale => locale)
+		end
+	end
+
 	# from http://www.kensodev.com/2012/03/06/better-simple_format-for-rails-3-x-projects/
 	# same as simple_format except it does not wrap all text in p tags
 	def simple_format_no_tags(text, html_options = {}, options = {})

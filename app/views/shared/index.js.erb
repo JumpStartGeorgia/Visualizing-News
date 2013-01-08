@@ -1,2 +1,2 @@
-$('#visual_list').append($("<%= escape_javascript(render @view_type)%>").hide()).find('div.grid_items:last').slideDown('slow');
+$('div.grid_items').append($("<%= escape_javascript(render @view_type)%>").hide()).find('[class*="visualization_item"]').slideDown('slow');
 $('#load_more_link').replaceWith("<%= escape_javascript(link_to_next_page(@visualizations, t('helpers.links.more'), :remote => true, :id=>'load_more_link', :params => {:view => params[:view]}))%>");

@@ -2,9 +2,9 @@
 <%= page_title t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
                                  :default => "Edit #{model_class.model_name.human}") %>
 
-<%= render :partial => 'form' %>
-
 <div class="form-actions">
 	<%= link_to t('helpers.links.list'), organization_path(params[:organization_id]),
   :class => 'btn' %>
 </div>
+
+<%= render :partial => 'form' %>

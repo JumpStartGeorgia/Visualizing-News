@@ -84,7 +84,38 @@
 }
 
 /* Navigation Arrows */
+.elastislide-wrapper nav span {
+	position: absolute;
+	width: 28px;
+	height: 76px;
+	text-indent: -9000px;
+	cursor: pointer;
+}
 
+.elastislide-wrapper nav span.elastislide-prev {
+	top: 0;
+	left: 0;
+  background-position: top;
+	background: url(./slider_images/navigation_left.png) no-repeat;
+}
+
+.elastislide-wrapper nav span.elastislide-prev:hover {
+	background-position: bottom;
+}
+
+.elastislide-wrapper nav span.elastislide-next {
+	top: 0;
+	right: 0;
+  background-position: top;
+	background: url(./slider_images/navigation_right.png) no-repeat;
+}
+
+.elastislide-wrapper nav span.elastislide-next:hover {
+	background-position: bottom;
+}
+
+
+/* orig styles - not using due to change in icons 
 .elastislide-wrapper nav span {
 	position: absolute;
 	background: #ddd url(./slider_images/nav.png) no-repeat 4px 3px;
@@ -124,3 +155,4 @@
 	top: auto;
 	background-position: -17px -18px;
 }
+*/

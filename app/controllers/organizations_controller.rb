@@ -9,7 +9,7 @@ class OrganizationsController < ApplicationController
 
 
   def show
-		@organization = Organization.where(:id => params[:id]).with_name.first
+		@organization = Organization.where(:organization_translations => {:permalink => params[:id]}).with_name.first
 
 		if @organization
 			# see if user is in this org
@@ -33,23 +33,25 @@ class OrganizationsController < ApplicationController
 
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
-			redirect_to root_path
+			redirect_to root_path(:locale => I18n.locale)
 		end
   end
 
   # GET /organizations/1/edit
   def edit
-    @organization = Organization.find(params[:id])
+    @organization = Organization.find_by_permalink(params[:id])
   end
 
   # PUT /organizations/1
   # PUT /organizations/1.json
   def update
-    @organization = Organization.find(params[:id])
+    @organization = Organization.find_by_permalink(params[:id])
 
     respond_to do |format|
       if @organization.update_attributes(params[:organization])
-        format.html { redirect_to organization_path(@organization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.user')) }
+        # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
+        # - have to get it by hand
+        format.html { redirect_to organization_path(@organization.organization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.user')) }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

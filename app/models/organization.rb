@@ -1,5 +1,5 @@
 class Organization < ActiveRecord::Base
-	translates :name
+	translates :name, :permalink, :bio
 
 	has_many :visualizations, :as => :visualizations
 	has_many :organization_users, :dependent => :destroy

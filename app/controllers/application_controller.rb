@@ -60,13 +60,15 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 	def preload_global_variables
 		@categories = Category.sorted
+		@filter_type_selection = I18n.t('filters.type.all')
+		@filter_view_selection = I18n.t('filters.view.grid')
 	end
 
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
 		gon.placeholder = t('app.common.placeholder')
-		gon.comment_notification_url = nil#comment_notification_path(gon.placeholder)
+		gon.visual_comment_notification_url = visual_comment_notification_path(gon.placeholder)
 		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 		gon.thumbnail_size = 230
 	end
@@ -77,11 +79,12 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	end
 
   def valid_role?(role)
-    redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
+    redirect_to root_path(:locale => I18n.locale), :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
 
-  def assigned_to_org?(organization_id)
-    redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.organization_ids.index(organization_id.to_i)
+  def assigned_to_org?(organization_permalink)
+    org_id = OrganizationTranslation.get_org_id(organization_permalink)
+    redirect_to root_path(:locale => I18n.locale), :notice => t('app.msgs.not_authorized') if !current_user || !current_user.organization_ids.index(org_id)
   end
 
 	# store the current path so after login, can go back
@@ -110,13 +113,16 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   def process_visualization_querystring
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/list'
+			@filter_view_selection = I18n.t('filters.view.list')
 	  else
 	    @view_type = 'shared/grid'
+			@filter_view_selection = I18n.t('filters.view.grid')
 	  end
 
 		if params[:type]
 			type_id = Visualization.type_id(params[:type])
 			@visualizations = @visualizations.by_type(type_id) if type_id
+			@filter_type_selection = I18n.t("filters.type.#{params[:type]}")
 		end
 
 		if params[:category]

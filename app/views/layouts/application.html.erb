@@ -10,7 +10,7 @@
 		<meta property="og:type" content="non_profit" />
 		<meta property="og:url" content="<%= current_url %>" />
 		<% if @visualization && @visualization.visual_file_name %>
-			<meta property="og:image" content="<%= full_url(@visualization.visual.url(:thumb)) %>" />
+			<meta property="og:image" content="<%= full_url(@visualization.visual.url(:thumb, false)) %>" />
 		<% end %>
 		<meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
 
@@ -63,11 +63,11 @@
 							<% current_user.organizations.each do |org| %>
 					      <li>
 		 		         <%= link_to t('helpers.links.org_profile', :org => org.name),
-											organization_path(org.id) %>
+											organization_path(org.permalink) %>
 								</li>
 					      <li>
 		 		         <%= link_to t('helpers.links.new_visual', :org => org.name),
-											new_organization_visualization_path(org.id) %>
+											new_organization_visualization_path(org.permalink) %>
 								</li>
 							<% end %>
 			        <li>
@@ -91,9 +91,10 @@
       </ul>
 
       <ul id="follow-us">
-        <li><a class="fb" title="Facebook" href="javascript:;"></a></li>
-        <li><a class="twitter" title="Twitter" href="javascript:;"></a></li>
-				<li><%= link_to "", visuals_path(:format => :atom), :class => 'rss', :title => 'RSS' %></li>
+        <li><a class="fb" title="<%= t('.facebook') %>" href="#"></a></li>
+        <li><a class="twitter" title="<%= t('.twitter') %>" href="#"></a></li>
+				<li><%= link_to "", notifications_path, :class => 'twitter', :title => t('.subscription') %></li>
+				<li><%= link_to "", visuals_path(:format => :atom), :class => 'rss', :title => t('.rss') %></li>
       </ul>
 
     </div>
@@ -106,7 +107,7 @@
             <ul>
 		          <% I18n.available_locales.each do |locale| %>
 			          <% if locale != I18n.locale %>
-				          <li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
+								  <li><%= generate_language_switcher_link(locale) %></li>
 			          <% end %>
 		          <% end %>
 		        </ul>

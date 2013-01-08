@@ -1,5 +1,5 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink
 
   require 'split_votes'
   include SplitVotes
@@ -26,12 +26,18 @@ class Visualization < ActiveRecord::Base
 			:organization_id,
 			:interactive_url,
 			:visual_is_cropped,
-			:crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
+			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
 
-	attr_accessor :is_create, :crop_x, :crop_y, :crop_w, :crop_h, :cropping_started
+	attr_accessor :send_notification, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :was_published
 
 	paginates_per 4
 
+	after_find :check_if_published
+
+	# have to check if published exists because some find methods do not get the published attribute
+	def check_if_published
+		self.was_published = self.has_attribute?(:published) && self.published ? true : false
+	end
 
   validates :organization_id, :visualization_type_id, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}

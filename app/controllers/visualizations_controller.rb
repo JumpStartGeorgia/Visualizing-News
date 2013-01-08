@@ -13,25 +13,37 @@ class VisualizationsController < ApplicationController
   end
 
   def show
-    @organization = Organization.find(params[:organization_id])
-    @visualization = Visualization.find(params[:id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
+    @visualization = Visualization.find_by_permalink(params[:id])
 
-		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
-	    @view_type = 'shared/show_interactive'
-			gon.show_interactive = true
+		if @visualization
+			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
+			  @view_type = 'shared/show_interactive'
+				gon.show_interactive = true
+			else
+			  @view_type = 'shared/show'
+			end
+
+			respond_to do |format|
+			  format.html
+			  format.json { render json: @visualization }
+			end
 		else
-	    @view_type = 'shared/show'
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
 		end
-
-	  respond_to do |format|
-	    format.html
-	    format.json { render json: @visualization }
-	  end
   end
 
   def new
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new
+	  # create the translation object for however many locales there are
+	  # so the form will properly create all of the nested form fields
+		if @visualization.visualization_translations.length != I18n.available_locales.length
+			I18n.available_locales.each do |locale|
+				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+			end
+		end
 		gon.edit_visualization = true
 
     respond_to do |format|
@@ -41,8 +53,8 @@ class VisualizationsController < ApplicationController
   end
 
   def edit
-    @organization = Organization.find(params[:organization_id])
-    @visualization = Visualization.find(params[:id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
+    @visualization = Visualization.find_by_permalink(params[:id])
 
 		if @visualization.visual_is_cropped
 		  # create the translation object for however many locales there are
@@ -66,7 +78,7 @@ class VisualizationsController < ApplicationController
   end
 
   def create
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
@@ -84,7 +96,9 @@ class VisualizationsController < ApplicationController
 
     respond_to do |format|
       if @visualization.save
-        format.html { redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+        # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
+        # - have to get it by hand
+        format.html { redirect_to edit_organization_visualization_path(params[:organization_id],  @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
         format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
@@ -98,23 +112,23 @@ class VisualizationsController < ApplicationController
   end
 
   def update
-    @organization = Organization.find(params[:organization_id])
-    @visualization = Visualization.find(params[:id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
+    @visualization = Visualization.find_by_permalink(params[:id])
 		was_cropped = @visualization.visual_is_cropped
+    # if the user wants to redo the image crop, reset the variable
+    params[:visualization][:visual_is_cropped] = false if params[:visualization][:reset_crop] == "true"
 
     respond_to do |format|
-
       if @visualization.update_attributes(params[:visualization])
+        # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
+        # - have to get it by hand
         format.html {
-					if !was_cropped && @visualization.visual_is_cropped
-						# image was just cropped, show complete form
-						gon.edit_visualization = true
-						gon.visualization_type = @visualization.visualization_type_id
-						gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
-						redirect_to edit_organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
+						# show form again
+						redirect_to edit_organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else
 						# redirect to show page
-						redirect_to organization_visualization_path(@organization, @visualization), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					end
 				}
         format.json { head :ok }
@@ -129,8 +143,8 @@ class VisualizationsController < ApplicationController
   end
 
   def destroy
-    @organization = Organization.find(params[:organization_id])
-    @visualization = Visualization.find(params[:id])
+    @organization = Organization.find_by_permalink(params[:organization_id])
+    @visualization = Visualization.find_by_permalink(params[:id])
     @visualization.destroy
 
     respond_to do |format|

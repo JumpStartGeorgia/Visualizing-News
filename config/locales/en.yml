@@ -23,6 +23,9 @@ en:
         url: Website
       organization_translation:
         name: Name
+        bio: About
+        permalink: Name in URL
+        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
       organization_user:
         is_active: Active?
         user_id: User
@@ -43,8 +46,11 @@ en:
         visual: Visual File
         visualization_categories: Categories
         interactive_url: URL to Interactive Visualization
+        reset_crop: Redo the Thumbnail Image
       visualization_translation:
         title: Title
+        permalink: Name in URL
+        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
@@ -59,10 +65,13 @@ en:
     notification:
       new_user:
         subject: "Welcome to feradi.info!"
-        message: "Thank you for becoming a member of feradi.info and contributing to our repository of colorful news."
+        message: "Thank you for becoming a member of feradi.info and contributing to colorful news.  You can manage when you would like to receive emails from feradi.info by clicking on the following link."
       new_visualization:
-        subject: "A new visualization has been added!"
+        subject: "A new visualization has been added to feradi.info!"
         message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+      visualization_comment:
+        subject: "Someone has commented on your visualization '%{title}' on feradi.info"
+        message: "Please click on the link below to view the comment."
     contact:
       subject: "feradi.info Contact Form"
   helpers:
@@ -129,6 +138,7 @@ en:
       placeholder: placeholder
       comments: Comments
       likes: Likes
+      like: Like
       not_published: Not Published
     msgs:
       does_not_exist: You tried to access a page that does not exist.
@@ -141,6 +151,12 @@ en:
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
       notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
       notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
+      notification_new_idea_all_success: You will recieve a notification whenever an idea is added.
+      notification_new_idea_none_success: You will not receive any notifications when ideas are added.
+      notification_new_idea_by_category_success: "You will receive a notification when an idea is added to these categories: %{categories}."
+      notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
+      notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
+      notification_language: You will be sent notifications in %{language}.
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -153,6 +169,10 @@ en:
       admin: Admin
       user_profile: Your Profile
       notifications: Notification Settings
+      facebook: Facebook
+      twitter: Twitter
+      rss: RSS
+      subscription: Email Subscription
       sign_out: Sign Out
       js_link_title: "Visit JumpStart Georgia's website"
       js_link_text: Built by
@@ -214,12 +234,15 @@ en:
       title_feed: "%{app_name} Visualizations"
   shared:
     show:
+      organization: Organization
       reporter: Reporter
       designer: Designer
       data_source: Data Source
       data_set: Data Set
       category: Category
       type: Type
+      embed: Embed
+      embed_link_title: Click to view larger image
       comment_count: Comments
   messages:
     new:
@@ -234,3 +257,28 @@ en:
       address_map: Find our office on the map
       email_us: Send us an email
       email_subject: "feradi.info Email Link: Inquiry"
+  visualizations:
+    form:
+      preview: Preview
+  notifications:
+    index:
+      title: Email Subscriptions
+      explain: "You can recieve email notifications whenever a visualization is added feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
+      all_sub_title: All Notifications
+      all_label: Do you want to recieve any notifications from this site?
+      all_no: "No, do not send me any notifications."
+      all_yes: "Yes, I want notifications sent to me."
+      visual_comment_sub_title: New Visualization Comment Notifications for %{org}
+      visual_comment_label: "Do you want to recieve notifications when a comment is made to your organization's visualizations?"
+      visual_comment_no: "No, do not send me any notifications."
+      visual_comment_yes: "Yes, I want notifications sent to me."
+      new_visuals_sub_title: New Visualization Notifications
+      new_visuals_all: Notify me when any visualization is added.
+      new_visuals_none: I do not want to receive notifications when a new visualization is added.
+      new_visuals_by_category: "Notify me when a visualization is added to:"
+      new_ideas_sub_title: New Idea Notifications
+      new_ideas_all: Notify me when any idea is added.
+      new_ideas_none: I do not want to receive notifications when a new idea is added.
+      new_ideas_by_category: "Notify me when an idea is added to:"
+      language_sub_title: Notification Language
+      language_label: In what language do you want to receive the notifications?

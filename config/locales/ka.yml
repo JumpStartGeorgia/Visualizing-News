@@ -23,6 +23,9 @@ ka:
         url: ვებ-გვერდი
       organization_translation:
         name: სახელი
+        bio: About
+        permalink: Name in URL
+        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
       organization_user:
         is_active: აქტიური
         user_id: მომხმარებელი
@@ -43,8 +46,11 @@ ka:
         visual: Visual File
         visualization_categories: Categories
         interactive_url: URL to Interactive Visualization
+        reset_crop: Redo the Thumbnail Image
       visualization_translation:
         title: Title
+        permalink: Name in URL
+        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
@@ -58,11 +64,14 @@ ka:
     unsubscribe: Click here to unsubscribe
     notification:
       new_user:
-        subject: "Welcome to feradi.info!"
-        message: "Thank you for becoming a member of feradi.info and contributing to our repository of colorful news."
+        subject: "კეთილი იყოს თქვენი მობრძანება feradi.info-ზე!"
+        message: "მადლობა იმისათვის, რომ გახდით feradi.info-ს წევრი და თქვენი წვლილი შეგაქვთ ფერადი ახალი ამბების შექმნაში. თქვენ შეგიძლიათ მართოთ feradi.info-სგან მიღებული ელექტრონული წერილები შემდეგი ბმულის საშუალებით."
       new_visualization:
-        subject: "A new visualization has been added"
-        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+        subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
+        message: "feradi.info-ს ახალი ვიზუალიზაცია, სახელწოდებით '%{title}', დაემატა. მიჰყევით შემდეგ ბმულს ახალი ვიზუალიზაციის სანახავად."
+      visualization_comment:
+        subject: "ვიღაცამ feradi.info-ზე განთავსებულ თქვენს ვიზუალიზაციაზე '%{title}' დააკომენტარა."
+        message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
     contact:
       subject: "feradi.info Contact Form"
   helpers:
@@ -129,18 +138,25 @@ ka:
       placeholder: placeholder # do not translate
       comments: კომენტარები
       likes: Likes
+      like: Like
       not_published: Not Published
     msgs:
-      does_not_exist: You tried to access a page that does not exist.
-      not_authorized: You are not authorized to view that page.
-      permalink_exists: already exists in the database
-      success_created: "%{obj} was successfully created."
-      success_updated: "%{obj} was successfully updated."
-      notification_yes: You will be sent notifications.
-      notification_no: You will not be sent notifications.
+      does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
+      not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
+      permalink_exists: უკვე არსებობს მონაცემთა ბაზაში
+      success_created: "%{obj} შექმნილია."
+      success_updated: "%{obj} განახლებულია."
+      notification_yes: თქვენ მიიღებთ შეტყობინებებს.
+      notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
       notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
       notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
+      notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
+      notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
+      notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
+      notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
+      notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
+      notification_language: You will be sent notifications in %{language}.
       no_visual_records: No visualization records exist for your selection.
   layouts:
     application:
@@ -153,6 +169,10 @@ ka:
       admin: ადმინისტრატორი
       user_profile: შენი გვერდი
       notifications: ახალი იდეების შეტყობინება
+      facebook: Facebook
+      twitter: Twitter
+      rss: RSS
+      subscription: Email Subscription
       sign_out: გასვლა
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
@@ -214,12 +234,15 @@ ka:
       title_feed: "%{app_name} Visualizations"
   shared:
     show:
+      organization: Organization
       reporter: Reporter
       designer: Designer
       data_source: Data Source
       data_set: Data Set
       category: Category
       type: Type
+      embed: Embed
+      embed_link_title: Click to view larger image
       comment_count: Comments
   messages:
     new:
@@ -234,3 +257,28 @@ ka:
       address_map: Find our office on the map
       email_us: Send us an email
       email_subject: "feradi.info Email Link: Inquiry"
+  visualizations:
+    form:
+      preview: Preview
+  notifications:
+    index:
+      title: Email Subscriptions
+      explain: "You can recieve email notifications whenever a visualization is added feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
+      all_sub_title: ყველა შეტყობინება
+      all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?
+      all_no: "არ გამომიგზავნო შეტყობინება."
+      all_yes: "დიახ, მინდა მივიღო შეტყობინებები."
+      visual_comment_sub_title: New Visualization Comment Notifications for %{org}
+      visual_comment_label: "Do you want to recieve notifications when a comment is made to your organization's visualizations?"
+      visual_comment_no: "არ გამომიგზავნო შეტყობინება."
+      visual_comment_yes: "დიახ, მინდა მივიღო შეტყობინებები."
+      new_visuals_sub_title: New Visualization Notifications
+      new_visuals_all: Notify me when any visualization is added.
+      new_visuals_none: I do not want to receive notifications when a new visualization is added.
+      new_visuals_by_category: "Notify me when a visualization is added to:"
+      new_ideas_sub_title: ახალი იდეის შეტყობინება
+      new_ideas_all: შემატყობინე ახალი იდეის დამატება
+      new_ideas_none: არ შემატყობინო ახალი იდეის დამატება.
+      new_ideas_by_category: "შემატყობინე როდესაც იდეა დაემატება:"
+      language_sub_title: Notification Language
+      language_label: In what language do you want to receive the notifications?

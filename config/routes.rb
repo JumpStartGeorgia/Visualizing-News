@@ -35,11 +35,12 @@ BootstrapStarter::Application.routes.draw do
     # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
 		match '/visualizations/:id', :to => 'visuals#show', :as => :visualization, :via => :get
-		match '/visualizations/category/:id', :to => 'visuals#category', :as => :category, :via => :get
 		match '/visualizations/search', :to => 'visuals#search', :as => :search, :via => :get
 		match '/visualizations/search', :to => 'visuals#search', :as => :search, :via => :post
-		match '/visualizations/vote/:type/:votable_id/:status', :to => 'visuals#vote', :as => :vote, :via => :get
-		match '/visualizations/comment_notification/:id', :to => 'visuals#comment_notification', :as => :comment_notification, :via => :get
+		match '/visualizations/:id/vote/:status', :to => 'visuals#vote', :as => :visual_vote, :via => :get
+		match '/visualizations/comment_notification/:id', :to => 'visuals#comment_notification', :as => :visual_comment_notification, :via => :get
+	  match '/visualizations/:id/next', :to => 'visuals#next', :as => :visual_next, :via => :get
+	  match '/visualizations/:id/previous', :to => 'visuals#previous', :as => :visual_previous, :via => :get
 
 
     # contact page

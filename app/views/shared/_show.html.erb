@@ -54,14 +54,29 @@
     <div id="source">
       <ul>
         <li>
-          <%= "#{t('.reporter')}: <span class=\"val\">#{@visualization.reporter}".html_safe %>
+          <%= "#{t('.organization')}: "%>
+					<span class="val">
+						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
+					</span>
         </li>
         <li>
-          <%= "#{t('.designer')}: <span class=\"val\">#{@visualization.designer}".html_safe %>
+          <%= "#{t('.reporter')}: "%>
+					<span class="val">
+						<%= @visualization.reporter %>
+					</span>
         </li>
         <li>
-          <%= "#{t('.data_source')}: <span class=\"val-source\">#{@visualization.data_source_name}".html_safe %>
-          <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank", :class => 'btn btn-mini' if @visualization.data_source_url && !@visualization.data_source_url.empty? %>
+          <%= "#{t('.designer')}: "%>
+					<span class="val">
+						<%= @visualization.designer %>
+					</span>
+        </li>
+        <li>
+          <%= "#{t('.data_source')}: "%>
+					<span class="val-source">
+						<%= @visualization.data_source_name %>
+					</span>
+          <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank" if @visualization.data_source_url && !@visualization.data_source_url.empty? %>
         </li>
         <li>
           <%= "#{t('.data_set')}: " %>

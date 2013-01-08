@@ -233,6 +233,7 @@ en:
       title_feed: "%{app_name} Visualizations"
   shared:
     show:
+      organization: Organization
       reporter: Reporter
       designer: Designer
       data_source: Data Source

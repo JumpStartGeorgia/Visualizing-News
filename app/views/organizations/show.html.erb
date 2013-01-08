@@ -9,6 +9,17 @@
 </div>
 <% end %>
 
+<div class="row-fluid">
+	<div class="span8">
+		<%= simple_format @organization.bio %>
+	</div>
+	<div class="span3">
+		<%= link_to t('helpers.links.website'), @organization.url, :class => 'btn btn-mini' if @organization.url %>
+	</div>
+</div>
+
+<hr />
+
 <%= render "shared/filter_bar" %>
 
 

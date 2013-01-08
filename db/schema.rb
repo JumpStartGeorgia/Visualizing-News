@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107104514) do
+ActiveRecord::Schema.define(:version => 20130108101134) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20130107104514) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
+    t.text     "bio"
   end
 
   add_index "organization_translations", ["locale"], :name => "index_organization_translations_on_locale"

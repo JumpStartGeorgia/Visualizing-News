@@ -22,8 +22,12 @@ class RootController < ApplicationController
     @page = Page.where(:name => "data").first
 	end
 
-	def get_involved
-    @page = Page.where(:name => "get_involved").first
+	def submit_visual
+    @page = Page.where(:name => "submit_visual").first
+	end
+
+	def terms
+    @page = Page.where(:name => "terms").first
 	end
 
 	def snapshot

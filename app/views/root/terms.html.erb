@@ -1,0 +1,16 @@
+<% if !@page.nil? %>
+
+	<%= page_title @page.title %>
+
+	<%= simple_format(@page.description) %>
+
+<% else %>
+	<%= page_title t('.title') %>
+<% end %>
+
+<% if user_signed_in? %>
+<div class="form-actions">
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_page_path(@page), :class => 'btn' %>
+</div>
+<% end %>

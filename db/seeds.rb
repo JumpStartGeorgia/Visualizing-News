@@ -66,6 +66,12 @@ p.page_translations.create(:locale => 'en', :title => 'Get Involved', :descripti
 p = Page.create(:name => 'data')
 p.page_translations.create(:locale => 'ka', :title => 'Got Data?', :description => '...')
 p.page_translations.create(:locale => 'en', :title => 'Got Data?', :description => '...')
+p = Page.create(:name => 'submit_visual')
+p.page_translations.create(:locale => 'ka', :title => 'Submit a Visual', :description => '...')
+p.page_translations.create(:locale => 'en', :title => 'Submit a Visual', :description => '...')
+p = Page.create(:name => 'terms')
+p.page_translations.create(:locale => 'ka', :title => 'Terms of Service', :description => '...')
+p.page_translations.create(:locale => 'en', :title => 'Terms of Service', :description => '...')
 
 ########### Organization ####################
 puts "organizations"

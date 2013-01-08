@@ -161,9 +161,9 @@ ka:
   layouts:
     application:
       menu_visual: Visualizations
-      menu_data: Got Data?
-      menu_idea: Got Ideas?
-      menu_involved: Get Involved
+      menu_data: Send Data
+      menu_idea: Post Ideas
+      menu_submit_visual: Submit Visual
       menu_about: About
       menu_contact: Contact
       admin: ადმინისტრატორი
@@ -174,6 +174,7 @@ ka:
       rss: RSS
       subscription: Email Subscription
       sign_out: გასვლა
+      terms: Terms of Service
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
     unsupported_browser:
@@ -187,9 +188,9 @@ ka:
       Safari: Safari
       admin: ადმინისტრატორი
       sign_out: გასვლა
+      terms: Terms of Service
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
-
   admin:
     index:
       title: ადმინისტრატორის განყოფილება
@@ -223,9 +224,11 @@ ka:
     about:
       title: About
     data:
-      title: Got Data?
-    get_involved:
-      title: Get Involved!
+      title: Send Data
+    submit_visual:
+      title: Submit a Visual
+    terms:
+      title: Terms of Service
     rss:
       title: RSS
   visuals:

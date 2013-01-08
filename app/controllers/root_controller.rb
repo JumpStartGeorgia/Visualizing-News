@@ -20,10 +20,28 @@ class RootController < ApplicationController
 
 	def data
     @page = Page.where(:name => "data").first
+    @message = Message.new
+    if request.post?
+      @message = Message.new(params[:message])
+      if @message.valid?
+        # send message
+  			ContactMailer.send_data(@message).deliver
+  			@email_sent = true
+      end
+    end
 	end
 
 	def submit_visual
     @page = Page.where(:name => "submit_visual").first
+    @message = Message.new
+    if request.post?
+      @message = Message.new(params[:message])
+      if @message.valid?
+        # send message
+  			ContactMailer.submit_visual(@message).deliver
+  			@email_sent = true
+      end
+    end
 	end
 
 	def terms

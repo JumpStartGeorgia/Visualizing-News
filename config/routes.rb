@@ -22,7 +22,9 @@ BootstrapStarter::Application.routes.draw do
     # root pages
 		match '/about', :to => 'root#about', :as => :about, :via => :get
 		match '/data', :to => 'root#data', :as => :data, :via => :get
+		match '/data', :to => 'root#data', :as => :data, :via => :post
 		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => :get
+		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => :post
 		match '/terms', :to => 'root#terms', :as => :terms, :via => :get
 		match '/rss', :to => 'root#rss', :as => :rss, :via => :get
 

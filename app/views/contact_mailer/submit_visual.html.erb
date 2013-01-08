@@ -1,0 +1,27 @@
+<%- model_class = Message -%>
+
+<p>
+<strong><%= model_class.human_attribute_name(:name) %>:</strong>
+<%= @message.name %>
+</p>
+
+<p>
+<strong><%= model_class.human_attribute_name(:organization) %>:</strong>
+<%= @message.organization %>
+</p>
+
+<p>
+<strong><%= model_class.human_attribute_name(:email) %>:</strong>
+<%= @message.email %>
+</p>
+
+<p>
+<strong><%= model_class.human_attribute_name(:phone) %>:</strong>
+<%= @message.phone %>
+</p>
+
+<p>
+<strong><%= model_class.human_attribute_name(:how_use) %>:</strong>
+<%= simple_format @message.how_use %>
+</p>
+

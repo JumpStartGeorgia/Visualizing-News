@@ -7,6 +7,7 @@ ka:
       organization: ორგანიზაცია
       visualization: Visualization
       page: Page
+      message: Message
     attributes:
       user:
         email: ელ.ფოსტა
@@ -14,6 +15,16 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
+      message:
+        name: Name
+        phone: Phone Number
+        email: Email Address
+        message: Message
+        what_is_data: Briefly describe the data that you want to visualize
+        why_visualize: Why do you want to visualize this data?
+        datasource: What is the datasource?
+        file: Attach the data file        
+        how_use: Why would you like to use feradi.info to show your visualiations?
       category:
         icon: Icon
       category_translation:
@@ -58,6 +69,9 @@ ka:
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
+        contact_missing_fields: "can't be blank."
+        send_data_missing_fields: "can't be blank."
+        submit_visual_missing_fields: "can't be blank."
   mailer:
     closing: "Sincerely,"
     signature: feradi.info
@@ -74,6 +88,10 @@ ka:
         message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
     contact:
       subject: "feradi.info Contact Form"
+      submit_visual: 
+        subject: "feradi.info Submit Visual Form"
+      send_data: 
+        subject: "feradi.info Send Data Form"      
   helpers:
     actions: აირჩიეთ
     links:
@@ -225,8 +243,27 @@ ka:
       title: About
     data:
       title: Send Data
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      name: სახელი
+      phone: Phone Number
+      email: ელ.ფოსტის მისამართი
+      what_is_data: Briefly describe the data that you want to visualize
+      why_visualize: Why do you want to visualize this data?
+      datasource: What is the datasource?
+      file: Attach the data file
+      email_us: Send us an email
+      email_subject: "feradi.info Send Data Request"
     submit_visual:
       title: Submit a Visual
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      name: სახელი
+      phone: Phone Number
+      email: ელ.ფოსტის მისამართი
+      how_use: Why would you like to use feradi.info to post your visualiations?
+      email_us: Send us an email
+      email_subject: "feradi.info Submit Visual Request"
     terms:
       title: Terms of Service
     rss:
@@ -252,14 +289,12 @@ ka:
       title: დაგვიკავშირდით
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
-      reset: გადატვირთვა
-      cancel: გაუქმება
       name: სახელი
       email: ელ.ფოსტის მისამართი
       message: შეტყობინება
       address_map: Find our office on the map
       email_us: Send us an email
-      email_subject: "feradi.info Email Link: Inquiry"
+      email_subject: "feradi.info Contact Form"
   visualizations:
     form:
       preview: Preview

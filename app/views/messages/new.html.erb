@@ -9,12 +9,8 @@
 <% else %>
 
   <div>
-    <%= mail_to "feedback@jumpstart.ge", nil, :encode => "hex", :subject => t('.email_subject'),
+    <%= mail_to "info@feradi.ge", nil, :encode => "hex", :subject => t('.email_subject'),
       :title => t('.email_us')%>
-    <br />
-    +995 032 214 29 26
-    <br />
-    <a href="http://mapspot.ge/?lt=41.697952843518&lg=44.796804273637&z=18&m=1&mlg=44.796804273637&mlt=41.697952843518" target="_blank" title="<%= t('.address_map')%>">#5 Shevchenko St, Apt 2 </a>
     <hr />
   </div>
 
@@ -22,9 +18,9 @@
 		<%= f.error_messages %>
 
 		<%= f.inputs do %>
-			<%= f.input :name, :label => t(".name") %>
-			<%= f.input :email, :label => t(".email") %>
-			<%= f.input :message, :label => t(".message"), :as => :text, :input_html => {:rows => 5} %>
+			<%= f.input :name, :label => t("activerecord.attributes.message.name") %>
+			<%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
+			<%= f.input :message, :label => t("activerecord.attributes.message.message"), :required => true, :as => :text, :input_html => {:rows => 5} %>
 		<% end %>
 
   	<div>

@@ -64,7 +64,7 @@ en:
     notification:
       new_user:
         subject: "Welcome to feradi.info!"
-        message: "Thank you for becoming a member of feradi.info and contributing to our repository of colorful news. You can manage when you would like to receive emails from feradi.info by clicking on the following link."
+        message: "Thank you for becoming a member of feradi.info and contributing to colorful news.  You can manage when you would like to receive emails from feradi.info by clicking on the following link."
       new_visualization:
         subject: "A new visualization has been added to feradi.info!"
         message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."

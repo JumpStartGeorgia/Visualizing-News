@@ -63,14 +63,14 @@ ka:
     unsubscribe: Click here to unsubscribe
     notification:
       new_user:
-        subject: "Welcome to feradi.info!"
-        message: "Thank you for becoming a member of feradi.info and contributing to our repository of colorful news. You can manage when you would like to receive emails from feradi.info by clicking on the following link."
+        subject: "კეთილი იყოს თქვენი მობრძანება feradi.info-ზე!"
+        message: "მადლობა იმისათვის, რომ გახდით feradi.info-ს წევრი და თქვენი წვლილი შეგაქვთ ფერადი ახალი ამბების შექმნაში. თქვენ შეგიძლიათ მართოთ feradi.info-სგან მიღებული ელექტრონული წერილები შემდეგი ბმულის საშუალებით."
       new_visualization:
-        subject: "A new visualization has been added"
-        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+        subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
+        message: "feradi.info-ს ახალი ვიზუალიზაცია, სახელწოდებით '%{title}', დაემატა. მიჰყევით შემდეგ ბმულს ახალი ვიზუალიზაციის სანახავად."
       visualization_comment:
-        subject: "Someone has commented on your visualization '%{title}' on feradi.info"
-        message: "Please click on the link below to view the comment."
+        subject: "ვიღაცამ feradi.info-ზე განთავსებულ თქვენს ვიზუალიზაციაზე '%{title}' დააკომენტარა."
+        message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
     contact:
       subject: "feradi.info Contact Form"
   helpers:

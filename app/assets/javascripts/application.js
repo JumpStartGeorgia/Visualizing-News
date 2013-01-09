@@ -35,4 +35,21 @@ $(document).ready(function(){
       itemstodisplay: 8,
       orientation: 'h' });
 */
+
+
+
+
+
+  //ajax call for visualizations
+  if ($('#load_more_link').length)
+  {
+    //$.get(gon.vis_ajax_path + '?screen_w=' + $(window).width(), function (response)
+   // {
+      
+   // });
+  }
+
+
+
+
 });

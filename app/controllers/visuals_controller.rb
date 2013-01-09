@@ -5,7 +5,7 @@
 class VisualsController < ApplicationController
 
   def index
-    @visualizations = Visualization.published.recent.page(params[:page])
+    gon.vis_ajax_path = visuals_path(:format => :js)
 
     process_visualization_querystring # in app controller
 
@@ -13,6 +13,20 @@ class VisualsController < ApplicationController
       format.atom
       format.html
       format.js {
+        screen_w = params[:screen_w].nil? ? 4 : params[:screen_w].to_i
+        vis_w = 270
+        gi_w = vis_w
+        menu_w = 200
+        max = 5
+        min = 3
+        number = (screen_w - menu_w - gi_w) / vis_w
+        if number > max
+          number = max
+        elsif number < min
+          number = min
+        end
+        number *= 2
+        @visualizations = Visualization.published.recent.page(params[:page]).per(number)
         @ajax_call = true
         render 'shared/index'
       }

@@ -30,7 +30,7 @@ class Visualization < ActiveRecord::Base
 
 	attr_accessor :send_notification, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :was_published
 
-	paginates_per 4
+ #paginates_per 4
 
 	after_find :check_if_published
 

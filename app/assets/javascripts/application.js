@@ -35,10 +35,10 @@ $(document).ready(function(){
   //ajax call for visualizations
   if ($('#load_more_link').length)
   {
-    //$.get(gon.vis_ajax_path + '?screen_w=' + $(window).width(), function (response)
-   // {
-
-   // });
+    $.get(gon.vis_ajax_path + '?screen_w=' + $(window).width(), function (response)
+    {
+      //$('#load_more_link').show();
+    });
   }
 
 

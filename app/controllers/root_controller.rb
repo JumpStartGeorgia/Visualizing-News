@@ -1,7 +1,12 @@
 class RootController < ApplicationController
 
   def index
-    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]).per(6))
+
+#    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]).per(6))
+    gon.vis_ajax_path = root_path(:format => :js)
+   #@visualizations = Visualization.published.recent.page(1)
+
+    process_visualization_querystring # in app controller
 
     respond_to do |format|
       format.html

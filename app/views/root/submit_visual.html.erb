@@ -12,12 +12,6 @@
 
 	  <%= simple_format(@page.description) %>
 
-    <div>
-      <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
-        :title => t('.email_us')%>
-      <hr />
-    </div>
-
   	<%= semantic_form_for @message, :url => submit_visual_path do |f| %>
   		<%= f.error_messages %>
 

@@ -87,7 +87,8 @@ ka:
         subject: "ვიღაცამ feradi.info-ზე განთავსებულ თქვენს ვიზუალიზაციაზე '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
     contact:
-      subject: "feradi.info Contact Form"
+      contact_form:
+        subject: "feradi.info Contact Form"
       submit_visual:
         subject: "feradi.info Submit Visual Form"
       send_data:

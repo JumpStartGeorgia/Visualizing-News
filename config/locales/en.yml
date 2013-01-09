@@ -87,7 +87,7 @@ en:
         subject: "Someone has commented on your visualization '%{title}' on feradi.info"
         message: "Please click on the link below to view the comment."
     contact:
-      message:
+      contact_form:
         subject: "feradi.info Contact Form"
       submit_visual:
         subject: "feradi.info Submit Visual Form"

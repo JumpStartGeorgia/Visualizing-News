@@ -23,7 +23,7 @@ ka:
         what_is_data: Briefly describe the data that you want to visualize
         why_visualize: Why do you want to visualize this data?
         datasource: What is the datasource?
-        file: Attach the data file        
+        file: Attach the data file
         how_use: Why would you like to use feradi.info to show your visualiations?
       category:
         icon: Icon
@@ -88,10 +88,10 @@ ka:
         message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
     contact:
       subject: "feradi.info Contact Form"
-      submit_visual: 
+      submit_visual:
         subject: "feradi.info Submit Visual Form"
-      send_data: 
-        subject: "feradi.info Send Data Form"      
+      send_data:
+        subject: "feradi.info Send Data Form"
   helpers:
     actions: აირჩიეთ
     links:
@@ -268,6 +268,16 @@ ka:
       title: Terms of Service
     rss:
       title: RSS
+    contact:
+      title: დაგვიკავშირდით
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      name: სახელი
+      email: ელ.ფოსტის მისამართი
+      message: შეტყობინება
+      address_map: Find our office on the map
+      email_us: Send us an email
+      email_subject: "feradi.info Contact Form"
   visuals:
     index:
       title: Visaulizations
@@ -284,17 +294,6 @@ ka:
       embed: Embed
       embed_link_title: Click to view larger image
       comment_count: Comments
-  messages:
-    new:
-      title: დაგვიკავშირდით
-      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
-      send: გაგზავნა
-      name: სახელი
-      email: ელ.ფოსტის მისამართი
-      message: შეტყობინება
-      address_map: Find our office on the map
-      email_us: Send us an email
-      email_subject: "feradi.info Contact Form"
   visualizations:
     form:
       preview: Preview

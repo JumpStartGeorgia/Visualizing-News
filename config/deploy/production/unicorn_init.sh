@@ -7,7 +7,7 @@ set -e
 AS_USER=feradi # name of user on server
 APP_ROOT=/home/feradi/Feradi/current # path to application current folder
 # update the name of the enviroment at '-E _____' to production, staging, etc
-CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/deploy/staging/unicorn.rb -E staging"
+CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/deploy/production/unicorn.rb -E production"
 ##################################
 
 PID=$APP_ROOT/tmp/pids/unicorn.pid

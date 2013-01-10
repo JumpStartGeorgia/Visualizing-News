@@ -10,8 +10,8 @@ class AddNewPages < ActiveRecord::Migration
   end
 
   def down
-		Page.where(:name => 'submit_visual').destroy
-		Page.where(:name => 'terms').destroy
+		Page.where(:name => 'submit_visual').destroy_all
+		Page.where(:name => 'terms').destroy_all
 		p = Page.create(:name => 'get_involved')
 		p.page_translations.create(:locale => 'ka', :title => 'Get Involved', :description => '...')
 		p.page_translations.create(:locale => 'en', :title => 'Get Involved', :description => '...')

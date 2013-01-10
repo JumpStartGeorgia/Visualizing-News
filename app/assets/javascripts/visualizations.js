@@ -72,7 +72,7 @@ $(document).ready(function(){
 		}
 
 		// if type changes, show appropriate fields
-		$('select#visualization_visualization_type_id').change(function() {
+		$('input[id^="visualization_visualization_type_id"]').change(function() {
 			if ($(this).val() == '1'){
 				$('.trans_visual_file').show(300);
 				$('.trans_interactive_url').hide(300);

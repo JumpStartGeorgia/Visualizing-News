@@ -15,7 +15,7 @@
 			<%= f.inputs do %>
 				<%= f.hidden_field :organization_id ,	:value => @organization.id %>
 
-				<%= f.input :visualization_type_id, :as => :select, :collection => visualization_type_collection %>
+				<%= f.input :visualization_type_id, :as => :radio, :collection => visualization_type_collection %>
 
         
 

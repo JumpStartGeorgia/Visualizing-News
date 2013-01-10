@@ -63,31 +63,27 @@ $(document).ready(function(){
 		// show correct fields for visualization type
 		if (gon.visualization_type){
 			if (gon.visualization_type == 1){
-				$('#visualization_visual_input').show();
-				$('#visualization_interactive_url_input').hide();
+				$('.trans_visual_file').show();
+				$('.trans_interactive_url').hide();
 			} else if (gon.visualization_type == 2){
-				$('#visualization_interactive_url_input').show();
-				$('#visualization_visual_input').hide();
-				$('#visualization_thumbnail').hide();
+				$('.trans_interactive_url').show();
+				$('.trans_visual_file').hide();
 			}
 		}
 
 		// if type changes, show appropriate fields
 		$('select#visualization_visualization_type_id').change(function() {
 			if ($(this).val() == '1'){
-				$('#visualization_visual_input').show(300);
-				$('#visualization_thumbnail').show(300);
-				$('#visualization_interactive_url_input').hide(300);
-				$('input#visualization_interactive_url').attr('value', '');
+				$('.trans_visual_file').show(300);
+				$('.trans_interactive_url').hide(300);
+				$('input[id$="_interactive_url"]').attr('value', '');
 			} else if ($(this).val() == '2'){
-				$('#visualization_interactive_url_input').show(300);
-				$('#visualization_visual_input').hide(300);
-				$('#visualization_thumbnail').hide(300);
-				$('input#visualization_visual').attr('value', '');
+				$('.trans_interactive_url').show(300);
+				$('.trans_visual_file').hide(300);
+				$('input[id$="_visualization_visual"]').attr('value', '');
 			} else {
-				$('#visualization_interactive_url_input').hide(300);
-				$('#visualization_visual_input').hide(300);
-				$('#visualization_thumbnail').hide(300);
+				$('.trans_interactive_url').hide(300);
+				$('.trans_visual_file').hide(300);
 			}
 		});
 

@@ -14,11 +14,11 @@ class VisualizationTranslation < ActiveRecord::Base
 	validates :interactive_url, :presence => true, :if => :is_interactive?
 
   def is_infographic?
-    self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
+    self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
   end
 
   def is_interactive?
-    self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
+    self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
   end
 
 	has_attached_file :visual,

@@ -1,5 +1,5 @@
 <%
-  if params[:action] == 'new'
+  if params[:action] == 'new' || params[:action] == 'create'
     path = organization_visualizations_path(params[:organization_id])
   else
     path = organization_visualization_path(params[:organization_id], params[:id])
@@ -17,7 +17,9 @@
 
 				<%= f.input :visualization_type_id, :as => :radio, :collection => visualization_type_collection %>
 
-        
+				<%= f.input :languages_internal, :as => :check_boxes, 
+				  :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
+				  :input_html => {:checked => 'checked'} %>
 
 				<% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 					<%= f.fields_for :visualization_translations, trans do |translation| %>

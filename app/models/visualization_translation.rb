@@ -4,29 +4,20 @@ class VisualizationTranslation < ActiveRecord::Base
 
 	belongs_to :visualization
 
-  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, 
-			:interactive_url, :visual,
-			:visual_is_cropped, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
-
-  validates :title, :permalink, :presence => true
-	validates :visual_file_name, :presence => true, :if => :is_infographic?
-	validates :interactive_url, :presence => true, :if => :is_interactive?
-
-  def is_infographic?
-    self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
-  end
-
-  def is_interactive?
-    self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
-  end
-
 	has_attached_file :visual,
     :url => "/system/visualizations/:visual_id/:permalink_:locale_:style.:extension",
 		:styles => Proc.new { |attachment| attachment.instance.attachment_styles}
 	#:convert_options => {
   #     :thumb => "-gravity north -thumbnail 230x230^ -extent 230x230"
   # },
+
+  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, 
+			:interactive_url, :visual, :visual_file_name, :visual_content_type,
+			:visual_is_cropped, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
+
+  validates :title, :presence => true
+
 
 	# if this is a new record, do not apply the cropping processor
 	# - the user must be able to set the crop size first
@@ -65,13 +56,14 @@ class VisualizationTranslation < ActiveRecord::Base
     missing_fields << :reporter if !self.reporter || self.reporter.empty?
     missing_fields << :designer if !self.designer || self.designer.empty?
     missing_fields << :data_source_name if !self.data_source_name || self.data_source_name.empty?
-		if self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
+=begin - doing this test in visualization model
+		if is_infographic?
       missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
-		elsif self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
+		elsif is_interactive?
       missing_fields << :interactive_url if !self.interactive_url || self.interactive_url.empty?
       missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
 		end
-
+=end
     if !missing_fields.empty?
       missing_fields.each do |field|
         errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))

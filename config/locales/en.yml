@@ -55,6 +55,8 @@ en:
         overall_votes: Overall Votes
         dataset: Dataset File
         visualization_categories: Categories
+        languages: Languages
+        languages_internal: Languages
       visualization_translation:
         title: Title
         permalink: Name in URL
@@ -72,6 +74,7 @@ en:
         contact_missing_fields: "can't be blank."
         send_data_missing_fields: "can't be blank."
         submit_visual_missing_fields: "can't be blank."
+        required_field: "is a required field."
   mailer:
     closing: "Sincerely,"
     signature: feradi.info

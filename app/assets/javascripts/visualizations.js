@@ -71,6 +71,17 @@ $(document).ready(function(){
 			}
 		}
 
+		// if language changes, show appropriate fields
+		$('input[id^="visualization_languages"]').change(function() {
+      var id = $(this).attr('id').split('_');
+      var locale = id[id.length-1];
+      if ($(this).is(':checked')) {
+        $('#form-' + locale).show(300);
+      } else {
+        $('#form-' + locale).hide(300);
+      }
+		});
+
 		// if type changes, show appropriate fields
 		$('input[id^="visualization_visualization_type_id"]').change(function() {
 			if ($(this).val() == '1'){

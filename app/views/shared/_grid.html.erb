@@ -8,11 +8,11 @@
 
   		  <div class="grid_visualization_item">
   		    <div class="visual">
-  		      <%= link_to(image_tag(visualization.visual.url(:thumb, false)),
-  							create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
+  		      <%= link_to(image_tag(visualization.visual_url(:thumb, false)),
+  							create_visual_path(visualization.permalink, @user_in_org, params[:id])) if visualization.visual_file_name %>
   		    </div>
   		    <div class="title">
-  		      <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>
+  		      <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, params[:id]) %></h2>
   					<% if !visualization.published %>
   					<div class="not_published"><%= t('app.common.not_published') %></div>
   					<% end %>

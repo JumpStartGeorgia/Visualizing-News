@@ -1,5 +1,5 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :interactive_url#, :visual
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :interactive_url, :visual, :visual_file_name, :visual_content_type, :fallbacks_for_empty_translations => true
 
   require 'split_votes'
   include SplitVotes
@@ -11,7 +11,7 @@ class Visualization < ActiveRecord::Base
 	has_many :visualization_translations, :dependent => :destroy
 	belongs_to :organization
 
-  accepts_nested_attributes_for :visualization_translations
+  accepts_nested_attributes_for :visualization_translations#, :reject_if => lambda { |a| a[:title].nil? || a[:title].blank?}, :allow_destroy => true
 
 	attr_accessible :published_date,
       :published,
@@ -22,9 +22,10 @@ class Visualization < ActiveRecord::Base
 			:dataset,
 			:visualization_translations_attributes,
 			:category_ids,
-			:organization_id
+			:organization_id,
+			:languages, :languages_internal
 
-	attr_accessor :send_notification, :was_published
+	attr_accessor :send_notification, :was_published, :languages_internal
 
 	paginates_per 4
 
@@ -35,8 +36,10 @@ class Visualization < ActiveRecord::Base
 		self.was_published = self.has_attribute?(:published) && self.published ? true : false
 	end
 
-  validates :organization_id, :visualization_type_id, :presence => true
+  before_validation :set_languages
+  validates :organization_id, :visualization_type_id, :languages, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
+  validate :required_fields_for_type
   validate :validate_if_published
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
@@ -48,6 +51,42 @@ class Visualization < ActiveRecord::Base
     :url => "/system/visualization/:attachment/:id/:filename",
     :path => ":rails_root/public/system/visualization/:attachment/:id/:filename"
 
+  def set_languages
+    if self.languages_internal
+      self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",") 
+    end
+  end
+
+  def required_fields_for_type
+    missing_fields = []
+    self.visualization_translations.each do |trans|
+      if self.visualization_type_id == Visualization::TYPES[:infographic]
+        missing_fields << :visual if !trans.visual_file_name || trans.visual_file_name.empty?
+      elsif self.visualization_type_id == Visualization::TYPES[:interactive]
+        missing_fields << :interactive_url if !trans.interactive_url || trans.interactive_url.empty?
+        missing_fields << :visual if !trans.visual_file_name || trans.visual_file_name.empty?
+      end
+    end
+    if !missing_fields.empty?
+      missing_fields.each do |field|
+        errors.add(field, I18n.t('activerecord.errors.messages.required_field'))
+      end
+    end
+  end
+
+  def is_infographic?
+Rails.logger.debug "******************* is infographic called"    
+    x = self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
+Rails.logger.debug "******************* - result = #{x}"
+    return x
+  end
+
+  def is_interactive?
+Rails.logger.debug "******************* is interactive called"    
+    x = self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
+Rails.logger.debug "******************* - result = #{x}"
+    return x
+  end
 
   # when a record is published, the following fields must be provided
   # - published date, visual file, at least one category,
@@ -100,13 +139,29 @@ class Visualization < ActiveRecord::Base
   def self.by_category(category_id)
     joins(:visualization_categories).where(:visualization_categories => {:category_id => category_id})
   end
+=begin
 
   def visual
     self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.visual
   end
-  
   def visual_file_name
     self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.visual_file_name
   end
+=end
 
+  # have to do test for fallbacks in case file does not exist in current locale
+  def visual_url(style=:thumb, nothing=false)
+    path = nil
+    if self.id && self.permalink && self.visual_content_type
+      ext = self.visual_content_type.split("/").last.gsub('jpeg', 'jpg')
+      I18n.fallbacks[I18n.locale].each do |locale|
+        x = "/system/visualizations/#{self.id}/#{self.permalink}_#{locale}_#{style}.#{ext}"
+        if File.exist?("#{Rails.root}/public#{x}")
+          path = x
+          break
+        end
+      end
+    end
+    return path
+  end
 end

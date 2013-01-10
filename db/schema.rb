@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110120356) do
+ActiveRecord::Schema.define(:version => 20130110165340) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20130110120356) do
     t.integer  "organization_id"
     t.string   "interactive_url"
     t.boolean  "visual_is_cropped",     :default => false
+    t.string   "languages"
   end
 
   add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"

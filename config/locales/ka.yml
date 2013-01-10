@@ -54,10 +54,7 @@ ka:
         individual_votes: Individual Votes
         overall_votes: Overall Votes
         dataset: Dataset File
-        visual: Visual File
         visualization_categories: Categories
-        interactive_url: URL to Interactive Visualization
-        reset_crop: Redo the Thumbnail Image
       visualization_translation:
         title: Title
         permalink: Name in URL
@@ -66,6 +63,9 @@ ka:
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
         data_source_name: Name of Data Source
+        visual: Visual File
+        interactive_url: URL to Interactive Visualization
+        reset_crop: Redo the Thumbnail Image
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."

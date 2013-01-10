@@ -1,5 +1,5 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :interactive_url, :visual
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :interactive_url#, :visual
 
   require 'split_votes'
   include SplitVotes
@@ -101,6 +101,12 @@ class Visualization < ActiveRecord::Base
     joins(:visualization_categories).where(:visualization_categories => {:category_id => category_id})
   end
 
-
+  def visual
+    self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.visual
+  end
+  
+  def visual_file_name
+    self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.visual_file_name
+  end
 
 end

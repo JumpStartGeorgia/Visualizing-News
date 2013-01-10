@@ -66,18 +66,6 @@
 					<strong><%= Visualization.human_attribute_name(:visualization_type_id)%>:</strong>
 					<%= @visualization.visualization_type_name %>
 				</p>
-				<% if !@visualization.interactive_url.blank? %>
-				<p>
-					<strong><%= Visualization.human_attribute_name(:interactive_url)%>:</strong>
-					<%= link_to @visualization.interactive_url, @visualization.interactive_url, :target => :blank %>
-				</p>
-				<% end %>
-				<p>
-					<strong><%= Visualization.human_attribute_name(:visual)%>:</strong>
-			    <%= f.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
-					<br />
-					<%= image_tag @visualization.visual.url(:thumb, false) if @visualization.visual_file_name %>
-				</p>
 			</div>
 
 		  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
@@ -87,6 +75,20 @@
 						<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 						<%= translation.input :title %>
+
+    				<% if !trans.interactive_url.blank? %>
+    				<p>
+    					<strong><%= Visualization.human_attribute_name(:interactive_url)%>:</strong>
+    					<%= link_to trans.interactive_url, trans.interactive_url, :target => :blank %>
+    				</p>
+    				<% end %>
+    				<p>
+    					<strong><%= Visualization.human_attribute_name(:visual)%>:</strong>
+    			    <%= f.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
+    					<br />
+    					<%= image_tag trans.visual.url(:thumb, false) if trans.visual_file_name %>
+    				</p>
+
 						<% if request.post? || request.put? || controller.action_name.downcase == 'edit' %>
 							<%= translation.input :permalink, :hint => t('activerecord.attributes.visualization_translation.permalink_hint') %>
 						<% end %>

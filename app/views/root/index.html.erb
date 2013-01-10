@@ -12,6 +12,9 @@
 	</div>
 	<div id="get_involved_container">
 		<h2><%= t('.header_get_involved') %></h2>
+		<div id="get_involved">
+			<p><%= t('.text_get_involved') %></p>
+		</div>
 
 		<div id="ideas">
 			<h3><%= t('.header_ideas') %></h3>
@@ -22,13 +25,13 @@
 		<div id="visuals">
 			<h3><%= t('.header_visuals') %></h3>
 			<p><%= t('.text_visuals') %></p>
-			<%= link_to t('.button_visuals'), '#' %>
+			<%= link_to t('.button_visuals'), submit_visual_path %>
 		</div>
 
 		<div id="data">
 			<h3><%= t('.header_data') %></h3>
 			<p><%= t('.text_data') %></p>
-			<%= link_to t('.button_data'), '#' %>
+			<%= link_to t('.button_data'), data_path %>
 		</div>
 
 	</div>

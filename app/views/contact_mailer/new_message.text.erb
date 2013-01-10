@@ -1,7 +1,10 @@
+<%- model_class = Message -%>
 
-Name: <%= @message.name %>
+<%= model_class.human_attribute_name(:name) %>:
+<%= @message.name %>
 
-Email: <%= @message.email %>
+<%= model_class.human_attribute_name(:email) %>:
+<%= @message.email %>
 
-Message: 
+<%= model_class.human_attribute_name(:message) %>:
 <%= @message.message %>

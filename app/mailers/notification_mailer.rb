@@ -1,5 +1,5 @@
 class NotificationMailer < ActionMailer::Base
-  default :from => ENV['APPLICATION_FEEDBACK_FROM_EMAIL']
+  default :from => ENV['FERADI_NOREPLY_FEEDBACK_FROM_EMAIL']
 	layout 'mailer'
 
   def new_user(message)

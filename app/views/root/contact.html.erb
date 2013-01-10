@@ -1,0 +1,31 @@
+<%= page_title t('.title') %>
+
+<% if @email_sent %>
+
+<p>
+<%= t(".message_sent") %>
+</p>
+
+<% else %>
+
+  <!--div>
+    <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
+      :title => t('.email_us')%>
+    <hr />
+  </div-->
+
+	<%= semantic_form_for @message, :url => contact_path do |f| %>
+		<%= f.error_messages %>
+
+		<%= f.inputs do %>
+			<%= f.input :name, :label => t("activerecord.attributes.message.name") %>
+			<%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
+			<%= f.input :message, :label => t("activerecord.attributes.message.message"), :required => true, :as => :text, :input_html => {:rows => 5} %>
+		<% end %>
+
+  	<div>
+  	  <%= f.submit t(".send"), :class => 'btn' %>
+  	</div>
+
+	<% end %>
+<% end %>

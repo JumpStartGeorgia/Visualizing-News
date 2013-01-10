@@ -7,6 +7,7 @@ ka:
       organization: ორგანიზაცია
       visualization: Visualization
       page: Page
+      message: Message
     attributes:
       user:
         email: ელ.ფოსტა
@@ -14,6 +15,16 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
+      message:
+        name: Name
+        phone: Phone Number
+        email: Email Address
+        message: Message
+        what_is_data: Briefly describe the data that you want to visualize
+        why_visualize: Why do you want to visualize this data?
+        datasource: What is the datasource?
+        file: Attach the data file
+        how_use: Why would you like to use feradi.info to show your visualiations?
       category:
         icon: Icon
       category_translation:
@@ -58,6 +69,9 @@ ka:
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
+        contact_missing_fields: "can't be blank."
+        send_data_missing_fields: "can't be blank."
+        submit_visual_missing_fields: "can't be blank."
   mailer:
     closing: "Sincerely,"
     signature: feradi.info
@@ -73,7 +87,12 @@ ka:
         subject: "ვიღაცამ feradi.info-ზე განთავსებულ თქვენს ვიზუალიზაციაზე '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
     contact:
-      subject: "feradi.info Contact Form"
+      contact_form:
+        subject: "feradi.info Contact Form"
+      submit_visual:
+        subject: "feradi.info Submit Visual Form"
+      send_data:
+        subject: "feradi.info Send Data Form"
   helpers:
     actions: აირჩიეთ
     links:
@@ -161,9 +180,9 @@ ka:
   layouts:
     application:
       menu_visual: Visualizations
-      menu_data: Got Data?
-      menu_idea: Got Ideas?
-      menu_involved: Get Involved
+      menu_data: Send Data
+      menu_idea: Post Ideas
+      menu_submit_visual: Submit Visual
       menu_about: About
       menu_contact: Contact
       admin: ადმინისტრატორი
@@ -174,6 +193,7 @@ ka:
       rss: RSS
       subscription: Email Subscription
       sign_out: გასვლა
+      terms: Terms of Service
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
     unsupported_browser:
@@ -187,9 +207,9 @@ ka:
       Safari: Safari
       admin: ადმინისტრატორი
       sign_out: გასვლა
+      terms: Terms of Service
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
-
   admin:
     index:
       title: ადმინისტრატორის განყოფილება
@@ -214,20 +234,52 @@ ka:
       header_ideas: Ideas
       header_visuals: Visuals
       header_data: Data
-      text_ideas: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-      text_visuals: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-      text_data: lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+      text_get_involved: "If you are passionate about exploring and visualizing data, or just have interesting questions that we could answer visually, then get involved!"
+      text_ideas: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it."
+      text_visuals: "You too can contribute your visual ideas or any idea posted on the ideas webpage. Go ahead and register with us and begin posting your visuals under your or your organization’s name!"
+      text_data: "If you or your organization possess data that you think is of social interest and you would like someone to visualize it, please send us your data. "
       button_ideas: Post Idea
-      button_visuals: Submit Visual
+      button_visuals: Register
       button_data: Send Data
     about:
       title: About
     data:
-      title: Got Data?
-    get_involved:
-      title: Get Involved!
+      title: Send Data
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      name: სახელი
+      phone: Phone Number
+      email: ელ.ფოსტის მისამართი
+      what_is_data: Briefly describe the data that you want to visualize
+      why_visualize: Why do you want to visualize this data?
+      datasource: What is the datasource?
+      file: Attach the data file
+      email_us: Send us an email
+      email_subject: "feradi.info Send Data Request"
+    submit_visual:
+      title: Submit a Visual
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      name: სახელი
+      phone: Phone Number
+      email: ელ.ფოსტის მისამართი
+      how_use: Why would you like to use feradi.info to post your visualiations?
+      email_us: Send us an email
+      email_subject: "feradi.info Submit Visual Request"
+    terms:
+      title: Terms of Service
     rss:
       title: RSS
+    contact:
+      title: დაგვიკავშირდით
+      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
+      send: გაგზავნა
+      name: სახელი
+      email: ელ.ფოსტის მისამართი
+      message: შეტყობინება
+      address_map: Find our office on the map
+      email_us: Send us an email
+      email_subject: "feradi.info Contact Form"
   visuals:
     index:
       title: Visaulizations
@@ -244,19 +296,6 @@ ka:
       embed: Embed
       embed_link_title: Click to view larger image
       comment_count: Comments
-  messages:
-    new:
-      title: დაგვიკავშირდით
-      message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
-      send: გაგზავნა
-      reset: გადატვირთვა
-      cancel: გაუქმება
-      name: სახელი
-      email: ელ.ფოსტის მისამართი
-      message: შეტყობინება
-      address_map: Find our office on the map
-      email_us: Send us an email
-      email_subject: "feradi.info Email Link: Inquiry"
   visualizations:
     form:
       preview: Preview

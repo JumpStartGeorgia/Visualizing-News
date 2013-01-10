@@ -12,19 +12,16 @@
 
 	  <%= simple_format(@page.description) %>
 
-  	<%= semantic_form_for @message, :url => data_path, :html => { :multipart => true } do |f| %>
+  	<%= semantic_form_for @message, :url => submit_visual_path do |f| %>
   		<%= f.error_messages %>
 
   		<%= f.inputs do %>
-  			<%= f.input :type, :as => :hidden, :value => Message::TYPES[:send_data] %>
+  			<%= f.input :type, :as => :hidden, :value => Message::TYPES[:submit_visual] %>
   			<%= f.input :name, :label => t("activerecord.attributes.message.name"), :required => true %>
   			<%= f.input :organization, :label => t("activerecord.attributes.message.organization") %>
   			<%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
   			<%= f.input :phone, :label => t("activerecord.attributes.message.phone") %>
-  			<%= f.input :what_is_data, :label => t("activerecord.attributes.message.what_is_data"), :required => true, :as => :text, :input_html => {:rows => 5} %>
-  			<%= f.input :why_visualize, :label => t("activerecord.attributes.message.why_visualize"), :required => true, :as => :text, :input_html => {:rows => 5} %>
-  			<%= f.input :datasource, :label => t("activerecord.attributes.message.datasource"), :required => true %>
-  			<%= f.input :file, :as => :file, :label => t("activerecord.attributes.message.file") %>
+  			<%= f.input :how_use, :label => t("activerecord.attributes.message.how_use"), :required => true, :as => :text, :input_html => {:rows => 5} %>
   		<% end %>
 
     	<div>
@@ -33,6 +30,7 @@
 
   	<% end %>
   <% end %>
+
 
 <% else %>
 	<%= page_title t('.title') %>

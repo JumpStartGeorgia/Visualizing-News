@@ -22,8 +22,13 @@ BootstrapStarter::Application.routes.draw do
     # root pages
 		match '/about', :to => 'root#about', :as => :about, :via => :get
 		match '/data', :to => 'root#data', :as => :data, :via => :get
-		match '/get_involved', :to => 'root#get_involved', :as => :get_involved, :via => :get
+		match '/data', :to => 'root#data', :as => :data, :via => :post
+		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => :get
+		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => :post
+		match '/terms', :to => 'root#terms', :as => :terms, :via => :get
 		match '/rss', :to => 'root#rss', :as => :rss, :via => :get
+		match '/contact' => 'root#contact', :as => 'contact', :via => :get
+		match '/contact' => 'root#contact', :as => 'contact', :via => :post
 
 		# organization
 		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
@@ -42,10 +47,6 @@ BootstrapStarter::Application.routes.draw do
 	  match '/visualizations/:id/next', :to => 'visuals#next', :as => :visual_next, :via => :get
 	  match '/visualizations/:id/previous', :to => 'visuals#previous', :as => :visual_previous, :via => :get
 
-
-    # contact page
-		match '/contact' => 'messages#new', :as => 'contact', :via => :get
-		match '/contact' => 'messages#create', :as => 'contact', :via => :post
 
 		# notifications
 		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get

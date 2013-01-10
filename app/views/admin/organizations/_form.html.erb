@@ -8,6 +8,10 @@
 				<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 				<%= translation.input :name %>
+				<%= translation.input :bio, :as => :text, :input_html => {:rows => 3} %>
+				<% if request.post? || request.put? || controller.action_name.downcase == 'edit' %>
+					<%= translation.input :permalink, :hint => t('activerecord.attributes.organization_translation.permalink_hint') %>
+				<% end %>
 				<%= translation.hidden_field :locale , :value => trans.locale %>
 			</div>
 

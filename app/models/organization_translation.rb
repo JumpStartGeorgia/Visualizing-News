@@ -6,7 +6,7 @@ class OrganizationTranslation < ActiveRecord::Base
 
   attr_accessible :organization_id, :name, :locale, :permalink, :bio
 
-  validates :name, :permalink, :bio, :presence => true
+  validates :name, :permalink, :presence => true
 
   def create_permalink
     Utf8Converter.convert_ka_to_en(self.name)

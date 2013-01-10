@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109092829) do
+ActiveRecord::Schema.define(:version => 20130110120356) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -148,6 +148,12 @@ ActiveRecord::Schema.define(:version => 20130109092829) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
+    t.string   "visual_file_name"
+    t.string   "visual_content_type"
+    t.integer  "visual_file_size"
+    t.datetime "visual_updated_at"
+    t.string   "interactive_url"
+    t.boolean  "visual_is_cropped",   :default => false
   end
 
   add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"

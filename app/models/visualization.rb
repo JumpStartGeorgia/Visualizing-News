@@ -1,5 +1,5 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :interactive_url, :visual
 
   require 'split_votes'
   include SplitVotes
@@ -20,15 +20,11 @@ class Visualization < ActiveRecord::Base
       :individual_votes,
       :overall_votes,
 			:dataset,
-			:visual,
 			:visualization_translations_attributes,
 			:category_ids,
-			:organization_id,
-			:interactive_url,
-			:visual_is_cropped,
-			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
+			:organization_id
 
-	attr_accessor :send_notification, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :was_published
+	attr_accessor :send_notification, :was_published
 
 	paginates_per 4
 
@@ -41,8 +37,6 @@ class Visualization < ActiveRecord::Base
 
   validates :organization_id, :visualization_type_id, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validates :visual_file_name, :presence => true, :if => "visualization_type_id == 1"
-	validates :interactive_url, :presence => true, :if => "visualization_type_id == 2"
   validate :validate_if_published
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
@@ -53,42 +47,6 @@ class Visualization < ActiveRecord::Base
 	has_attached_file :dataset,
     :url => "/system/visualization/:attachment/:id/:filename",
     :path => ":rails_root/public/system/visualization/:attachment/:id/:filename"
-
-	has_attached_file :visual,
-    :url => "/system/visualization/:attachment/:id/:style/:filename",
-    :path => ":rails_root/public/system/visualization/:attachment/:id/:style/:filename",
-		:styles => Proc.new { |attachment| attachment.instance.attachment_styles}
-	#:convert_options => {
-  #     :thumb => "-gravity north -thumbnail 230x230^ -extent 230x230"
-  # },
-
-	# if this is a new record, do not apply the cropping processor
-	# - the user must be able to set the crop size first
-	def attachment_styles
-	  if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
-			{
-		    :thumb => {:geometry => "230x230#"},
-		    :medium => {:geometry => "600x>"},
-		    :large => {:geometry => "900x>"}
-		  }
-		else
-			{
-		    :thumb => {:geometry => "230x230#", :processors => [:cropper]}
-		  }
-		end
-	end
-
-  after_update :reprocess_visual, :if => :cropping?
-
-  def cropping?
-    visual_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
-  end
-
-  def visual_geometry(style = :original)
-    @geometry ||= {}
-    @geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
-  end
-
 
 
   # when a record is published, the following fields must be provided
@@ -101,12 +59,6 @@ class Visualization < ActiveRecord::Base
       missing_fields << :published_date if !self.published_date
       missing_fields << :categories if !self.categories || self.categories.empty?
 
-			if self.visualization_type_id == Visualization::TYPES[:infographic]
-	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
-			elsif self.visualization_type_id == Visualization::TYPES[:interactive]
-	      missing_fields << :interactive_url if !self.interactive_url || self.interactive_url.empty?
-	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
-			end
       self.visualization_translations.each do |trans|
         trans_errors << trans.validate_if_published
       end
@@ -150,9 +102,5 @@ class Visualization < ActiveRecord::Base
   end
 
 
-  private
-   def reprocess_visual
-     visual.reprocess!
-   end
 
 end

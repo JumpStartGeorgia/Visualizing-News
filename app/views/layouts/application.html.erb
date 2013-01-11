@@ -44,12 +44,12 @@
       </div>
 
       <ul class="nav-menu">
-        <li class="<%= assign_active_class(visuals_path)%>"><%= link_to t('.menu_visual'), visuals_path  %></li>
-        <li class="<%#= assign_active_class(about_path)%>"><%= link_to t('.menu_idea'), "#"  %></li>
-        <li class="<%= assign_active_class(submit_visual_path)%>"><%= link_to t('.menu_submit_visual'), submit_visual_path  %></li>
-        <li class="<%= assign_active_class(data_path)%>"><%= link_to t('.menu_data'), data_path  %></li>
-        <li class="<%= assign_active_class(about_path)%>"><%= link_to t('.menu_about'), about_path  %></li>
-        <li class="<%= assign_active_class(contact_path)%>"><%= link_to t('.menu_contact'), contact_path  %></li>
+        <li><%= link_to t('.menu_visual'), visuals_path, :class => assign_active_class(visuals_path) %></li>
+        <!--li><%= link_to t('.menu_idea'), "#", :class => assign_active_class(about_path) %></li-->
+        <li><%= link_to t('.menu_submit_visual'), submit_visual_path, :class => assign_active_class(submit_visual_path)  %></li>
+        <li><%= link_to t('.menu_data'), data_path, :class => assign_active_class(data_path)  %></li>
+        <li><%= link_to t('.menu_about'), about_path, :class => assign_active_class(about_path)  %></li>
+        <li><%= link_to t('.menu_contact'), contact_path, :class => assign_active_class(contact_path)  %></li>
       </ul>
 
       <ul class="user-menu">
@@ -91,7 +91,7 @@
       </ul>
 
       <ul id="follow-us">
-        <input type="text" class="search" placeholder="Search" />
+        <!--input type="text" class="search" placeholder="<%= t('.search')%>" /-->
         <div class="clear">
           <li><a class="fb" title="<%= t('.facebook') %>" href="#"></a></li>
           <li><a class="twitter" title="<%= t('.twitter') %>" href="#"></a></li>
@@ -147,7 +147,7 @@
       <footer class="clear resp">
 			  <div id="left">&copy; 2012</div>
 		    <div id="middle">
-				  <%= link_to t('.terms'), terms_path %>
+				  <%# link_to t('.terms'), terms_path %>
 			  </div>
 			  <div id="right" class="clear">
 				  <ul>

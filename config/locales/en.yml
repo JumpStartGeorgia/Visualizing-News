@@ -231,7 +231,7 @@ en:
         title: User Details
   root:
     index:
-      title: Visaulizations
+      title: Visualizations
       header_get_involved: Get Involved!
       header_ideas: Ideas
       header_visuals: Visuals
@@ -284,7 +284,7 @@ en:
       email_subject: "feradi.info Contact Form"
   visuals:
     index:
-      title: Visaulizations
+      title: Visualizations
       title_feed: "%{app_name} Visualizations"
   shared:
     show:

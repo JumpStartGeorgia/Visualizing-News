@@ -158,6 +158,7 @@ en:
       comments: Comments
       likes: Likes
       like: Like
+      share: Share
       not_published: Not Published
     msgs:
       does_not_exist: You tried to access a page that does not exist.

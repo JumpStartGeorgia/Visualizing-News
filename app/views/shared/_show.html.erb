@@ -12,12 +12,14 @@
 			<% end %>
     </div>
     <div class="vote">
-			<%= "#{t('app.common.likes')}:" %>
-			<%= @visualization.overall_votes %>
+      <div class="text">
+			  <%= "#{t('app.common.likes')}:" %>
+			  <%= @visualization.overall_votes %>
+      </div>
 			<% if @visualization.voted(request.remote_ip, 'up') %>
-				<div class="like_btn_voted"></div>
+				<div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
 			<% else %>
-				<%= link_to("",
+				<%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
 						visual_vote_path(:id => @visualization.permalink, :status => 'up'),
 						:class => 'like_btn', :title => t('app.common.like')) %>
 			<% end %>
@@ -107,22 +109,25 @@
 
     <div id="share">
       <div class="social-links clear">
-				<%= link_to(image_tag("share_fb.png"),
-							"http://www.facebook.com/share.php?u=#{current_url(true)}",
-							:title => "facebook",	:target => "_blank") %>
-				<%= link_to(image_tag("share_twitter.png"),
-							"https://twitter.com/share?url=#{current_url(true)}", :title => "twitter",
-							:target => "_blank") %>
-				<%= link_to(image_tag("share_gplus.png"),
-							"https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
-							:target => "_blank") %>
-				<%= link_to(image_tag("share_pinterest.png"),
+        <span><%= t('app.common.share'); %>: </span>
+        <div>
+				  <%= link_to(image_tag("share_fb.png"),
+							  "http://www.facebook.com/share.php?u=#{current_url(true)}",
+							  :title => "facebook",	:target => "_blank") %>
+				  <%= link_to(image_tag("share_twitter.png"),
+							  "https://twitter.com/share?url=#{current_url(true)}", :title => "twitter",
+							  :target => "_blank") %>
+				  <%= link_to(image_tag("share_gplus.png"),
+							  "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
+							  :target => "_blank") %>
+				  <%= link_to(image_tag("share_pinterest.png"),
 							"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{image_path(@visualization.visual.url(:thumb, false))}&description=#{@visualization.title}", :title => "pinterest",
 							:onclick => "window.open(this.href); return false;") %>
+				</div>
 			</div>
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
-			  <textarea readonly onfocus="this.select();"
+			  <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
 					onmouseup="return false;"><%= link_to(
 						image_tag(full_url(@visualization.visual.url(:medium, false)),
 							:title => @visualization.title,
@@ -147,12 +152,14 @@
   </div>
   <div id="main_block" class="span6 clear">
     <div class="vote">
-			<%= "#{t('app.common.likes')}:" %>
-			<%= @visualization.overall_votes %>
+      <div class="text">
+			  <%= "#{t('app.common.likes')}:" %>
+			  <%= @visualization.overall_votes %>
+      </div>
 			<% if @visualization.voted(request.remote_ip, 'up') %>
-				<div class="like_btn_voted"></div>
+				<div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
 			<% else %>
-				<%= link_to("",
+				<%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
 						visual_vote_path(:id => @visualization.permalink, :status => 'up'),
 						:class => 'like_btn', :title => t('app.common.like')) %>
 			<% end %>

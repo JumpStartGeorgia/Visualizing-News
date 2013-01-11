@@ -10,6 +10,7 @@ class OrganizationsController < ApplicationController
 
   def show
     gon.vis_ajax_path = organization_show_path(:id => params[:id], :format => :js)
+    @visualizations = Visualization.recent.page(params[:page])
 		@organization = Organization.where(:organization_translations => {:permalink => params[:id]}).with_name.first
 
 		if @organization

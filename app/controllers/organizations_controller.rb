@@ -15,13 +15,13 @@ class OrganizationsController < ApplicationController
 
 		if @organization
 			# see if user is in this org
-		 #@visualizations = Visualization.recent.page(params[:page])
+		 	#@visualizations = Visualization.recent.page(params[:page])
 			@user_in_org = false
-			if !user_signed_in? || current_user.organization_ids.index(@organization.id).nil?
-			 #@visualizations = @visualizations.published
-			else
+Rails.logger.debug "------------------- init user_in_org = #{@user_in_org}"
+			if user_signed_in? && current_user.organization_ids.index(@organization.id)
 				@user_in_org = true
 			end
+Rails.logger.debug "------------------- after check user_in_org = #{@user_in_org}"
 
       process_visualization_querystring # in app controller
 
@@ -42,7 +42,9 @@ class OrganizationsController < ApplicationController
           end
           number *= 2
 		      @visualizations = Visualization.recent.page(params[:page]).per(number)
+Rails.logger.debug "------------------- testing if user not in org to add published field"
 			    if !@user_in_org
+Rails.logger.debug "---------------------> user not in org, adding published field"
 			      @visualizations = @visualizations.published
 			    end
           @ajax_call = true

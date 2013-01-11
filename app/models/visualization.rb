@@ -45,7 +45,7 @@ class Visualization < ActiveRecord::Base
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
-  scope :unpublished, where("published = '0'")
+  scope :unpublished, where("published != '1'")
 
 
 	has_attached_file :dataset,

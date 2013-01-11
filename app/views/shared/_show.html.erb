@@ -12,14 +12,16 @@
 			<% end %>
     </div>
     <div class="vote">
-			<%= "#{t('app.common.likes')}:" %>
-			<%= @visualization.overall_votes %>
-			<% if @visualization.voted(request.remote_ip, 'up') %>
-				<div class="like_btn_voted"></div>
-			<% else %>
-				<%= link_to("",
-						visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% if params[:controller] == 'visuals' %>
+				<%= "#{t('app.common.likes')}:" %>
+				<%= @visualization.overall_votes %>
+				<% if @visualization.voted(request.remote_ip, 'up') %>
+					<div class="like_btn_voted"></div>
+				<% else %>
+					<%= link_to("",
+							visual_vote_path(:id => @visualization.permalink, :status => 'up'),
+							:class => 'like_btn', :title => t('app.common.like')) %>
+				<% end %>
 			<% end %>
     </div>
   </div>
@@ -150,14 +152,16 @@
   </div>
   <div id="main_block" class="span6 clear">
     <div class="vote">
-			<%= "#{t('app.common.likes')}:" %>
-			<%= @visualization.overall_votes %>
-			<% if @visualization.voted(request.remote_ip, 'up') %>
-				<div class="like_btn_voted"></div>
-			<% else %>
-				<%= link_to("",
-						visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% if params[:controller] == 'visuals' %>
+				<%= "#{t('app.common.likes')}:" %>
+				<%= @visualization.overall_votes %>
+				<% if @visualization.voted(request.remote_ip, 'up') %>
+					<div class="like_btn_voted"></div>
+				<% else %>
+					<%= link_to("",
+							visual_vote_path(:id => @visualization.permalink, :status => 'up'),
+							:class => 'like_btn', :title => t('app.common.like')) %>
+				<% end %>
 			<% end %>
     </div>
   </div>
@@ -169,20 +173,22 @@
   </div>
 </div>
 
-<div id="visualization_row4" class="row-fluid clear">
-  <div class="span1">
-    &nbsp;
-  </div>
-  <div id="main_block" class="span6 clear">
-		<h3>
-			<%= "#{t('app.common.comments')}:" %>
-			<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
-		</h3>
-		<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
-  <div class="span4">
-    &nbsp;
-  </div>
-  <div class="span1">
-    &nbsp;
-  </div>
-</div>
+<% if params[:controller] == 'visuals' %>
+	<div id="visualization_row4" class="row-fluid clear">
+		<div class="span1">
+		  &nbsp;
+		</div>
+		<div id="main_block" class="span6 clear">
+			<h3>
+				<%= "#{t('app.common.comments')}:" %>
+				<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
+			</h3>
+			<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
+		<div class="span4">
+		  &nbsp;
+		</div>
+		<div class="span1">
+		  &nbsp;
+		</div>
+	</div>
+<% end %>

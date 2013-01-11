@@ -50,7 +50,6 @@ ka:
         published_date: Publication Date
         published: Is Published?
         visualization_type_id: Visualization Type
-        data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
         dataset: Dataset File
@@ -66,6 +65,7 @@ ka:
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
         data_source_name: Name of Data Source
+        data_source_url: URL of Data Source
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."

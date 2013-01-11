@@ -89,6 +89,7 @@
 						<%= translation.input :reporter %>
 						<%= translation.input :designer %>
 						<%= translation.input :data_source_name %>
+						<%= translation.input :data_source_url, :as => :url %>
 						<%= translation.hidden_field :locale , :value => trans.locale %>
 					</div>
 
@@ -97,7 +98,6 @@
 
 
 			<%= f.inputs do %>
-				<%= f.input :data_source_url, :as => :url %>
 
 				<%= f.input :categories, :as => :check_boxes, :collection => @categories %>
 

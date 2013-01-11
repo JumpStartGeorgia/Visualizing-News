@@ -4,7 +4,8 @@ class VisualizationTranslation < ActiveRecord::Base
 
 	belongs_to :visualization
 
-  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink
+ attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
+									:designer,	:data_source_name, :permalink, :data_source_url
 
   validates :title, :permalink, :presence => true
 

@@ -2,7 +2,7 @@ class RootController < ApplicationController
 
   def index
     gon.vis_ajax_path = root_path(:format => :js)
-    @visualizations = Visualization.published.recent.page(params[:page])
+    @visualizations = Visualization.published.recent.page(params[:page]).per(6)
 
     process_visualization_querystring # in app controller
 

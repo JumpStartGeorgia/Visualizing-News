@@ -74,9 +74,12 @@
         <li>
           <%= "#{t('.data_source')}: "%>
 					<span class="val-source">
-						<%= @visualization.data_source_name %>
+						<% if !@visualization.data_source_name.blank? && !@visualization.data_source_url.blank? %>
+		          <%= link_to @visualization.data_source_name, @visualization.data_source_url, :target => "blank" %>
+						<% else %>
+							<%= @visualization.data_source_name %>
+						<% end %>
 					</span>
-          <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank" if @visualization.data_source_url && !@visualization.data_source_url.empty? %>
         </li>
         <li>
           <%= "#{t('.data_set')}: " %>

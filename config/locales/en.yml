@@ -50,7 +50,6 @@ en:
         published_date: Publication Date
         published: Is Published?
         visualization_type_id: Visualization Type
-        data_source_url: URL of Data Source
         individual_votes: Individual Votes
         overall_votes: Overall Votes
         dataset: Dataset File
@@ -66,6 +65,7 @@ en:
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
         data_source_name: Name of Data Source
+        data_source_url: URL of Data Source
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
@@ -188,12 +188,11 @@ en:
       menu_contact: Contact
       admin: Admin
       user_profile: Your Profile
-      notifications: Notification Settings
+      notifications: Notifications
       search: Search
       facebook: Facebook
       twitter: Twitter
       rss: RSS
-      mail: Mail
       pinterest: Pinterest
       subscription: Email Subscription
       sign_out: Sign Out
@@ -233,7 +232,7 @@ en:
         title: User Details
   root:
     index:
-      title: Visaulizations
+      title: Visualizations
       header_get_involved: Get Involved!
       header_ideas: Ideas
       header_visuals: Visuals
@@ -286,7 +285,7 @@ en:
       email_subject: "feradi.info Contact Form"
   visuals:
     index:
-      title: Visaulizations
+      title: Visualizations
       title_feed: "%{app_name} Visualizations"
   shared:
     show:
@@ -305,7 +304,7 @@ en:
       preview: Preview
   notifications:
     index:
-      title: Email Subscriptions
+      title: Notifications
       explain: "You can recieve email notifications whenever a visualization is added to feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
       all_sub_title: All Notifications
       all_label: Do you want to recieve any notifications from this site?

@@ -12,16 +12,18 @@
 			<% end %>
     </div>
     <div class="vote">
-      <div class="text">
-			  <%= "#{t('app.common.likes')}:" %>
-			  <%= @visualization.overall_votes %>
-      </div>
-			<% if @visualization.voted(request.remote_ip, 'up') %>
-				<div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
-			<% else %>
-				<%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
-						visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% if params[:controller] == 'visuals' %>
+        <div class="text">
+			    <%= "#{t('app.common.likes')}:" %>
+			    <%= @visualization.overall_votes %>
+        </div>
+			  <% if @visualization.voted(request.remote_ip, 'up') %>
+				  <div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
+			  <% else %>
+				  <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
+						  visual_vote_path(:id => @visualization.permalink, :status => 'up'),
+						  :class => 'like_btn', :title => t('app.common.like')) %>
+				<% end %>
 			<% end %>
     </div>
   </div>
@@ -76,9 +78,12 @@
         <li>
           <%= "#{t('.data_source')}: "%>
 					<span class="val-source">
-						<%= @visualization.data_source_name %>
+						<% if !@visualization.data_source_name.blank? && !@visualization.data_source_url.blank? %>
+		          <%= link_to @visualization.data_source_name, @visualization.data_source_url, :target => "blank" %>
+						<% else %>
+							<%= @visualization.data_source_name %>
+						<% end %>
 					</span>
-          <%= link_to t('helpers.links.website'), @visualization.data_source_url, :target => "blank" if @visualization.data_source_url && !@visualization.data_source_url.empty? %>
         </li>
         <li>
           <%= "#{t('.data_set')}: " %>
@@ -152,16 +157,18 @@
   </div>
   <div id="main_block" class="span6 clear">
     <div class="vote">
-      <div class="text">
-			  <%= "#{t('app.common.likes')}:" %>
-			  <%= @visualization.overall_votes %>
-      </div>
-			<% if @visualization.voted(request.remote_ip, 'up') %>
-				<div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
-			<% else %>
-				<%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
-						visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-						:class => 'like_btn', :title => t('app.common.like')) %>
+			<% if params[:controller] == 'visuals' %>
+        <div class="text">
+			    <%= "#{t('app.common.likes')}:" %>
+			    <%= @visualization.overall_votes %>
+        </div>
+			  <% if @visualization.voted(request.remote_ip, 'up') %>
+				  <div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
+			  <% else %>
+				  <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
+						  visual_vote_path(:id => @visualization.permalink, :status => 'up'),
+						  :class => 'like_btn', :title => t('app.common.like')) %>
+				<% end %>
 			<% end %>
     </div>
   </div>
@@ -173,20 +180,22 @@
   </div>
 </div>
 
-<div id="visualization_row4" class="row-fluid clear">
-  <div class="span1">
-    &nbsp;
-  </div>
-  <div id="main_block" class="span6 clear">
-		<h3>
-			<%= "#{t('app.common.comments')}:" %>
-			<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
-		</h3>
-		<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
-  <div class="span4">
-    &nbsp;
-  </div>
-  <div class="span1">
-    &nbsp;
-  </div>
-</div>
+<% if params[:controller] == 'visuals' %>
+	<div id="visualization_row4" class="row-fluid clear">
+		<div class="span1">
+		  &nbsp;
+		</div>
+		<div id="main_block" class="span6 clear">
+			<h3>
+				<%= "#{t('app.common.comments')}:" %>
+				<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
+			</h3>
+			<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
+		<div class="span4">
+		  &nbsp;
+		</div>
+		<div class="span1">
+		  &nbsp;
+		</div>
+	</div>
+<% end %>

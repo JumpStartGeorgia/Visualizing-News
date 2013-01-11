@@ -1,5 +1,5 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :data_source_url
 
   require 'split_votes'
   include SplitVotes
@@ -16,7 +16,6 @@ class Visualization < ActiveRecord::Base
 	attr_accessible :published_date,
       :published,
       :visualization_type_id,
-      :data_source_url,
       :individual_votes,
       :overall_votes,
 			:dataset,
@@ -26,8 +25,7 @@ class Visualization < ActiveRecord::Base
 			:organization_id,
 			:interactive_url,
 			:visual_is_cropped,
-			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
-
+			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :data_source_url_old
 	attr_accessor :send_notification, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :was_published
 
  paginates_per 8
@@ -47,7 +45,7 @@ class Visualization < ActiveRecord::Base
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
-  scope :unpublished, where("published = '0'")
+  scope :unpublished, where("published != '1'")
 
 
 	has_attached_file :dataset,

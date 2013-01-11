@@ -9,16 +9,14 @@ class OrganizationsController < ApplicationController
 
 
   def show
-    gon.vis_ajax_path = organization_path(:id => params[:id], :format => :js)
-    @visualizations = Visualization.recent.page(params[:page])
 		@organization = Organization.where(:organization_translations => {:permalink => params[:id]}).with_name.first
 
 		if @organization
 			# see if user is in this org
-		 #@visualizations = Visualization.recent.page(params[:page])
+		  @visualizations = Visualization.recent.page(params[:page])
 			@user_in_org = false
 			if !user_signed_in? || current_user.organization_ids.index(@organization.id).nil?
-			 #@visualizations = @visualizations.published
+			  @visualizations = @visualizations.published
 			else
 				@user_in_org = true
 			end
@@ -28,23 +26,6 @@ class OrganizationsController < ApplicationController
 		  respond_to do |format|
 		    format.html
         format.js {
-          screen_w = params[:screen_w].nil? ? 4 : params[:screen_w].to_i
-          vis_w = 270
-          gi_w = vis_w
-          menu_w = 200
-          max = 5
-          min = 3
-          number = (screen_w - menu_w - gi_w) / vis_w
-          if number > max
-            number = max
-          elsif number < min
-            number = min
-          end
-          number *= 2
-		      @visualizations = Visualization.recent.page(params[:page]).per(number)
-			    if !@user_in_org
-			      @visualizations = @visualizations.published
-			    end
           @ajax_call = true
           render 'shared/index'
         }

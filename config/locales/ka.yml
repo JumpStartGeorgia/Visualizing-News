@@ -187,12 +187,11 @@ ka:
       menu_contact: Contact
       admin: ადმინისტრატორი
       user_profile: შენი გვერდი
-      notifications: ახალი იდეების შეტყობინება
+      notifications: Notifications
       search: Search
       facebook: Facebook
       twitter: Twitter
       rss: RSS
-      mail: Mail
       pinterest: Pinterest
       subscription: Email Subscription
       sign_out: გასვლა
@@ -304,7 +303,7 @@ ka:
       preview: Preview
   notifications:
     index:
-      title: Email Subscriptions
+      title: Notifications
       explain: "You can recieve email notifications whenever a visualization is added to feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
       all_sub_title: ყველა შეტყობინება
       all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?

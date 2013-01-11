@@ -5,7 +5,6 @@
 class VisualsController < ApplicationController
 
   def index
-    gon.vis_ajax_path = visuals_path(:format => :js)
     @visualizations = Visualization.published.recent.page(params[:page])
 
     process_visualization_querystring # in app controller
@@ -14,26 +13,11 @@ class VisualsController < ApplicationController
       format.atom
       format.html
       format.js {
-        screen_w = params[:screen_w].nil? ? 4 : params[:screen_w].to_i
-        vis_w = 270
-        gi_w = vis_w
-        menu_w = 200
-        max = 5
-        min = 3
-        number = (screen_w - menu_w - gi_w) / vis_w
-        if number > max
-          number = max
-        elsif number < min
-          number = min
-        end
-        number *= 2
-        @visualizations = Visualization.published.recent.page(params[:page]).per(number)
         @ajax_call = true
         render 'shared/index'
       }
     end
-
-  end
+	end
 
   def show
     @visualization = Visualization.published.find_by_permalink(params[:id])
@@ -75,8 +59,8 @@ class VisualsController < ApplicationController
     if !visualization
       redirect_to redirect_path
       return
-    end 
-    
+    end
+
     ip = request.remote_ip
     record = VoterIp.where(:ip => ip, :votable_type => visualization.class.name.downcase, :votable_id => visualization.id)
 
@@ -100,7 +84,7 @@ class VisualsController < ApplicationController
 			visualization.overall_votes = ups - downs
       visualization.save
 
-      VoterIp.create(:ip => ip, :votable_type => visualization.class.name.downcase, 
+      VoterIp.create(:ip => ip, :votable_type => visualization.class.name.downcase,
                       :votable_id => visualization.id, :status => params[:status])
 
     elsif record[0].status != params[:status]
@@ -195,11 +179,11 @@ protected
 					record_id = visualizations[0].id
 				end
 			end
-			
+
 			if record_id
   			# get the next record
   			visual = Visualization.published.find_by_id(record_id)
-			
+
   			if visual
   			  # found next record, go to it
           redirect_to visualization_path(visual.permalink)

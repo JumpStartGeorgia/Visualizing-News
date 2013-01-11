@@ -38,6 +38,8 @@ $(document).ready(function(){
     $.get(gon.vis_ajax_path + '?screen_w=' + $(window).width(), function (response)
     {
       //$('#load_more_link').show();
+      $('#throbber').hide();
+    //console.log(response);
     });
   }
 

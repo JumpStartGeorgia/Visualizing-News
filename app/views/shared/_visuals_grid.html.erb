@@ -1,9 +1,10 @@
-<% @visualizations = [] if !@visualizations || !@visualizations.empty?%>
+<% @visualizations = [] if !@visualizations || @visualizations.empty?%>
 
   <% if !@ajax_call %>
     <div class="grid_items clear">
   <% end %>
     <!--<div class="grid_visualization_row clear">-->
+    <img src="/assets/throbber.svg" id="throbber" />
   	<% @visualizations.each_with_index do |visualization, index| %>
 
   		  <div class="grid_visualization_item">

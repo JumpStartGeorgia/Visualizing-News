@@ -26,6 +26,23 @@ class OrganizationsController < ApplicationController
 		  respond_to do |format|
 		    format.html
         format.js {
+          vis_w = 270
+          gi_w = vis_w
+          menu_w = 200
+          max = 5
+          min = 3
+          screen_w = params[:screen_w].nil? ? 4 * vis_w : params[:screen_w].to_i
+          number = (screen_w - menu_w) / vis_w
+          if number > max
+            number = max
+          elsif number < min
+            number = min
+          end
+          number *= 2
+		      @visualizations = Visualization.recent.page(params[:page]).per(number)
+			    if !@user_in_org
+			      @visualizations = @visualizations.published
+			    end
           @ajax_call = true
           render 'shared/visuals_index'
         }

@@ -93,4 +93,14 @@ module ApplicationHelper
 		text.html_safe
 	end
 
+  def assign_active_class(path)
+    is_current_section(path) ? " active" : ""
+  end
+
+  # determine if the path is contained in the current url
+  # - if menu item path is /news we want /news/3 to be a match
+  def is_current_section(path)
+    request.fullpath.start_with?(path)
+  end
+
 end

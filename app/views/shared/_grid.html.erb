@@ -8,8 +8,11 @@
 
   		  <div class="grid_visualization_item">
   		    <div class="visual">
-  		      <%= link_to(image_tag(visualization.visual.url(:thumb, false)),
-  							create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
+  		       <%  if visualization.visual_file_name %>
+    		      <%= link_to(image_tag(visualization.visual.url(:thumb, false)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+  		      <% else %>
+    		      <%= link_to(image_tag('image_placeholder.png'), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+  		      <% end %>
   		    </div>
   		    <div class="title">
   		      <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>

@@ -102,7 +102,7 @@
 				<%= f.input :categories, :as => :check_boxes, :collection => @categories %>
 
 				<%= f.input :dataset, :as => :file %>
-				<%= image_tag @visualization.dataset.url if @visualization.dataset_file_name %>
+				<%= link_to t('helpers.links.download'), @visualization.dataset.url if @visualization.dataset_file_name %>
 
 				<%= f.input :published, :as => :radio %>
 				<%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>

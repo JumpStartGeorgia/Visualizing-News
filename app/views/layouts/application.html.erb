@@ -40,7 +40,9 @@
 
     <div id="frozen-menu">
       <div class="brand">
-        <%= link_to(image_tag('logo.png'), root_path(:locale => I18n.locale))%>
+        <%= link_to(image_tag('logo.png', :alt => t('app.common.app_name')),
+					root_path(:locale => I18n.locale),
+					:title => t('app.common.app_name'))%>
       </div>
 
       <ul class="nav-menu">

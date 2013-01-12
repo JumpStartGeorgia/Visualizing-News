@@ -7,7 +7,7 @@
 		<%= f.input :visualization_type_id, :as => :select, :collection => visualization_type_collection %>
 
 		<%= f.input :visual, :as => :file %>
-		<%= image_tag @visualization.visual.url(:thumb), :id => 'visualization_thumbnail' if @visualization.visual_file_name %>
+		<%= image_tag @visualization.image.url(:thumb), :id => 'visualization_thumbnail' if !@visualization.image_file_name.blank? %>
 
 		<%= f.input :interactive_url, :as => :url %>
 	<% end %>

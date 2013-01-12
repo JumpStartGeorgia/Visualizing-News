@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111111859) do
+ActiveRecord::Schema.define(:version => 20130112120231) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -100,6 +100,19 @@ ActiveRecord::Schema.define(:version => 20130111111859) do
 
   add_index "pages", ["name"], :name => "index_pages_on_name"
 
+  create_table "upload_files", :force => true do |t|
+    t.integer  "visualization_translation_id"
+    t.integer  "type_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "upload_files", ["visualization_translation_id", "type_id"], :name => "idx_upload_type"
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false
     t.string   "encrypted_password",     :default => "",   :null => false
@@ -149,6 +162,8 @@ ActiveRecord::Schema.define(:version => 20130111111859) do
     t.datetime "updated_at"
     t.string   "permalink"
     t.string   "data_source_url"
+    t.string   "interactive_url"
+    t.boolean  "visual_is_cropped", :default => false
   end
 
   add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"
@@ -157,24 +172,24 @@ ActiveRecord::Schema.define(:version => 20130111111859) do
 
   create_table "visualizations", :force => true do |t|
     t.datetime "published_date"
-    t.boolean  "published",             :default => false
+    t.boolean  "published",               :default => false
     t.integer  "visualization_type_id"
     t.string   "data_source_url_old"
     t.string   "individual_votes"
-    t.integer  "overall_votes",         :default => 0
+    t.integer  "overall_votes",           :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "dataset_file_name"
     t.string   "dataset_content_type"
     t.integer  "dataset_file_size"
     t.datetime "dataset_updated_at"
-    t.string   "visual_file_name"
-    t.string   "visual_content_type"
-    t.integer  "visual_file_size"
-    t.datetime "visual_updated_at"
+    t.string   "visual_file_name_old"
+    t.string   "visual_content_type_old"
+    t.integer  "visual_file_size_old"
+    t.datetime "visual_updated_at_old"
     t.integer  "organization_id"
-    t.string   "interactive_url"
-    t.boolean  "visual_is_cropped",     :default => false
+    t.string   "interactive_url_old"
+    t.boolean  "visual_is_cropped_old",   :default => false
   end
 
   add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"

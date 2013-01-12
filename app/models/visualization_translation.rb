@@ -3,9 +3,13 @@ class VisualizationTranslation < ActiveRecord::Base
   has_permalink :create_permalink
 
 	belongs_to :visualization
+	has_many :upload_files, :dependent => :destroy
+  accepts_nested_attributes_for :upload_files
 
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
-									:designer,	:data_source_name, :permalink, :data_source_url
+									:designer,	:data_source_name, :permalink, :data_source_url,
+									:upload_files_attributes,	:interactive_url,	:visual_is_cropped
+
 
   validates :title, :permalink, :presence => true
 

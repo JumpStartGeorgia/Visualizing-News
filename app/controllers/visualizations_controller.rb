@@ -83,7 +83,7 @@ class VisualizationsController < ApplicationController
 
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
 			@visualization.interactive_url && !@visualization.interactive_url.empty? &&
-			@visualization.visual_file_name.nil?
+			@visualization.image_file_name.blank?
 			# get screenshot of interactive site
 			kit   = IMGKit.new(@visualization.interactive_url)
 			img   = kit.to_img(:png)

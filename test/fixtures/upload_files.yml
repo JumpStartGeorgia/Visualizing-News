@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  visualization_translation_id: 1
+  type_id: 1
+
+two:
+  visualization_translation_id: 1
+  type_id: 1

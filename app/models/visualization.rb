@@ -1,5 +1,8 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :data_source_url
+	translates :title, :explanation,	:reporter, :designer,
+						:data_source_name, :permalink, :data_source_url,
+						:interactive_url,	:visual_is_cropped
+
 
   require 'split_votes'
   include SplitVotes
@@ -19,14 +22,14 @@ class Visualization < ActiveRecord::Base
       :individual_votes,
       :overall_votes,
 			:dataset,
-			:visual,
+			:visual_old,
 			:visualization_translations_attributes,
 			:category_ids,
 			:organization_id,
-			:interactive_url,
-			:visual_is_cropped,
-			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :data_source_url_old
-	attr_accessor :send_notification, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :was_published
+			:interactive_url_old,
+			:visual_is_cropped_old,
+			:data_source_url_old
+	attr_accessor :send_notification, :was_published
 
  paginates_per 8
 
@@ -47,45 +50,6 @@ class Visualization < ActiveRecord::Base
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
 
-
-	has_attached_file :dataset,
-    :url => "/system/visualization/:attachment/:id/:filename",
-    :path => ":rails_root/public/system/visualization/:attachment/:id/:filename"
-
-	has_attached_file :visual,
-    :url => "/system/visualization/:attachment/:id/:style/:filename",
-    :path => ":rails_root/public/system/visualization/:attachment/:id/:style/:filename",
-		:styles => Proc.new { |attachment| attachment.instance.attachment_styles}
-	#:convert_options => {
-  #     :thumb => "-gravity north -thumbnail 230x230^ -extent 230x230"
-  # },
-
-	# if this is a new record, do not apply the cropping processor
-	# - the user must be able to set the crop size first
-	def attachment_styles
-	  if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
-			{
-		    :thumb => {:geometry => "230x230#"},
-		    :medium => {:geometry => "600x>"},
-		    :large => {:geometry => "900x>"}
-		  }
-		else
-			{
-		    :thumb => {:geometry => "230x230#", :processors => [:cropper]}
-		  }
-		end
-	end
-
-  after_update :reprocess_visual, :if => :cropping?
-
-  def cropping?
-    visual_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
-  end
-
-  def visual_geometry(style = :original)
-    @geometry ||= {}
-    @geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
-  end
 
 
 
@@ -147,10 +111,19 @@ class Visualization < ActiveRecord::Base
     joins(:visualization_categories).where(:visualization_categories => {:category_id => category_id})
   end
 
+	def image_record
+		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first
+			.upload_files.select{|x| x.type_id == UploadFile::TYPES[:image]}.first
+	end
 
-  private
-   def reprocess_visual
-     visual.reprocess!
-   end
+	def image_file_name
+		image_record.upload_file_name
+	end
+
+	def image
+		image_record.upload
+	end
+
+
 
 end

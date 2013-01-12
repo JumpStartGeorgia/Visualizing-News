@@ -157,7 +157,7 @@ en:
       placeholder: placeholder
       comments: Comments
       likes: Likes
-      like: Like
+      like: like
       share: Share
       not_published: Not Published
     msgs:

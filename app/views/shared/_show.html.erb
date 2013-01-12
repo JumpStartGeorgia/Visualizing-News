@@ -13,17 +13,7 @@
     </div>
     <div class="vote">
 			<% if params[:controller] == 'visuals' %>
-        <div class="text">
-			    <%= "#{t('app.common.likes')}:" %>
-			    <%= @visualization.overall_votes %>
-        </div>
-			  <% if @visualization.voted(request.remote_ip, 'up') %>
-				  <div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
-			  <% else %>
-				  <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
-						  visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-						  :class => 'like_btn', :title => t('app.common.like')) %>
-				<% end %>
+				<%= render 'shared/vote' %>
 			<% end %>
     </div>
   </div>
@@ -158,17 +148,7 @@
   <div id="main_block" class="span6 clear">
     <div class="vote">
 			<% if params[:controller] == 'visuals' %>
-        <div class="text">
-			    <%= "#{t('app.common.likes')}:" %>
-			    <%= @visualization.overall_votes %>
-        </div>
-			  <% if @visualization.voted(request.remote_ip, 'up') %>
-				  <div class="like_btn_voted"><span class="heart">❤</span><span class="text">like</span></div>
-			  <% else %>
-				  <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">like</span>".html_safe,
-						  visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-						  :class => 'like_btn', :title => t('app.common.like')) %>
-				<% end %>
+				<%= render 'shared/vote' %>
 			<% end %>
     </div>
   </div>

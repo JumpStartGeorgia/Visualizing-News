@@ -157,7 +157,7 @@ ka:
       placeholder: placeholder # do not translate
       comments: კომენტარები
       likes: Likes
-      like: Like
+      like: like
       share: Share
       not_published: Not Published
     msgs:

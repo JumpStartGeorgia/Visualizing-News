@@ -42,9 +42,15 @@ class VisualizationsController < ApplicationController
 		if @visualization.visualization_translations.length != I18n.available_locales.length
 			I18n.available_locales.each do |locale|
 				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+				# add upload file record
+				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.upload_files.build
 			end
 		end
 		gon.edit_visualization = true
+
+		# initialize to be infographic
+		@visualization.visualization_type_id = Visualization::TYPES[:infographic]
+		gon.visualization_type = @visualization.visualization_type_id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -56,19 +62,16 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
 
-		if @visualization.visual_is_cropped
-		  # create the translation object for however many locales there are
-		  # so the form will properly create all of the nested form fields
-			if @visualization.visualization_translations.length != I18n.available_locales.length
-				I18n.available_locales.each do |locale|
-					@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
-				end
-			end
-			@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
+
+		locales_to_crop = @visualization.locales_to_crop
+		if !locales_to_crop.empty?
+			@locale_to_crop = locales_to_crop.first
+			to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
+			gon.largeW = to_crop.visual_geometry(:large).width
+			gon.largeH = to_crop.visual_geometry(:large).height
+			gon.originalW = to_crop.visual_geometry(:original).width
 		else
-			gon.largeW = @visualization.visual_geometry(:large).width
-			gon.largeH = @visualization.visual_geometry(:large).height
-			gon.originalW = @visualization.visual_geometry(:original).width
+			@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
 		end
 
 		gon.edit_visualization = true
@@ -81,24 +84,44 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
-		if @visualization.visualization_type_id == Visualization::TYPES[:interactive] &&
-			@visualization.interactive_url && !@visualization.interactive_url.empty? &&
-			@visualization.image_file_name.blank?
-			# get screenshot of interactive site
-			kit   = IMGKit.new(@visualization.interactive_url)
-			img   = kit.to_img(:png)
-			file  = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
-						               :encoding => 'ascii-8bit')
-			file.write(img)
-			file.flush
-			@visualization.visual = file
+logger.debug "********************"
+@visualization.visualization_translations.each do |trans|
+	logger.debug trans.inspect
+	logger.debug trans.upload_files.inspect
+end
+
+		# if interactive, take screen shots of urls
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
+			files = Hash.new
+			@visualization.visualization_translations.each do |trans|
+				# only proceed if the url is valid
+				if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
+						!trans.interactive_url.blank? && trans.image_file_name.blank?
+					# get screenshot of interactive site
+					kit   = IMGKit.new(trans.interactive_url)
+					img   = kit.to_img(:png)
+					files[trans.locale] = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
+										           :encoding => 'ascii-8bit')
+					files[trans.locale].write(img)
+					files[trans.locale].flush
+					trans.upload_files.first.upload = files[trans.locale]
+				end
+			end
 		end
+
+logger.debug "********************"
+@visualization.visualization_translations.each do |trans|
+	logger.debug trans.inspect
+	logger.debug trans.upload_files.inspect
+end
 
     respond_to do |format|
       if @visualization.save
         # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
         # - have to get it by hand
-        format.html { redirect_to edit_organization_visualization_path(params[:organization_id],  @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+
+        format.html { redirect_to edit_organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
         format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
@@ -108,7 +131,13 @@ class VisualizationsController < ApplicationController
         format.json { render json: @visualization.errors, status: :unprocessable_entity }
       end
     end
-		file.unlink if file
+
+		# if a temp file was created, go ahead and delete it
+		if !files.blank?
+			files.keys.each do |key|
+				files[key].unlink
+			end
+		end
   end
 
   def update
@@ -122,13 +151,15 @@ class VisualizationsController < ApplicationController
       if @visualization.update_attributes(params[:visualization])
         # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
         # - have to get it by hand
+				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+
         format.html {
 					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
 						# show form again
-						redirect_to edit_organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to edit_organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else
 						# redirect to show page
-						redirect_to organization_visualization_path(params[:organization_id], @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					end
 				}
         format.json { head :ok }

@@ -1,7 +1,7 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,
-						:data_source_name, :permalink, :data_source_url,
-						:interactive_url,	:visual_is_cropped
+	translates :title, :explanation, :reporter, :designer,
+		:interactive_url,	:visual_is_cropped,
+		:data_source_name, :permalink, :data_source_url
 
 
   require 'split_votes'
@@ -28,8 +28,9 @@ class Visualization < ActiveRecord::Base
 			:organization_id,
 			:interactive_url_old,
 			:visual_is_cropped_old,
-			:data_source_url_old
-	attr_accessor :send_notification, :was_published
+			:data_source_url_old,
+			:languages, :languages_internal
+	attr_accessor :send_notification, :was_published, :languages_internal
 
  paginates_per 8
 
@@ -40,18 +41,41 @@ class Visualization < ActiveRecord::Base
 		self.was_published = self.has_attribute?(:published) && self.published ? true : false
 	end
 
-  validates :organization_id, :visualization_type_id, :presence => true
+	before_validation :set_languages
+  validates :organization_id, :visualization_type_id, :languages, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validates :visual_file_name, :presence => true, :if => "visualization_type_id == 1"
-	validates :interactive_url, :presence => true, :if => "visualization_type_id == 2"
+	validate :required_fields_for_type
   validate :validate_if_published
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
 
+	def set_languages
+    if self.languages_internal
+      self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",")
+    end
+  end
 
-
+	# this validation is done here and not in trans obj because
+	# when creating objs, the relationship between vis and trans do not exist
+	# and so cannot get type id
+  def required_fields_for_type
+    missing_fields = []
+    self.visualization_translations.each do |trans|
+      if self.visualization_type_id == Visualization::TYPES[:infographic]
+        missing_fields << :visual if trans.image_file_name.blank?
+      elsif self.visualization_type_id == Visualization::TYPES[:interactive]
+        missing_fields << :interactive_url if trans.interactive_url.blank?
+        missing_fields << :visual if trans.image_file_name.blank?
+      end
+    end
+    if !missing_fields.empty?
+      missing_fields.each do |field|
+        errors.add(field, I18n.t('activerecord.errors.messages.required_field'))
+      end
+    end
+  end
 
   # when a record is published, the following fields must be provided
   # - published date, visual file, at least one category,
@@ -62,16 +86,6 @@ class Visualization < ActiveRecord::Base
       trans_errors = []
       missing_fields << :published_date if !self.published_date
       missing_fields << :categories if !self.categories || self.categories.empty?
-
-			if self.visualization_type_id == Visualization::TYPES[:infographic]
-	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
-			elsif self.visualization_type_id == Visualization::TYPES[:interactive]
-	      missing_fields << :interactive_url if !self.interactive_url || self.interactive_url.empty?
-	      missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?
-			end
-      self.visualization_translations.each do |trans|
-        trans_errors << trans.validate_if_published
-      end
 
       if !missing_fields.empty?
         missing_fields.each do |field|
@@ -112,18 +126,25 @@ class Visualization < ActiveRecord::Base
   end
 
 	def image_record
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first
-			.upload_files.select{|x| x.type_id == UploadFile::TYPES[:image]}.first
+		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.image_record
 	end
 
 	def image_file_name
-		image_record.upload_file_name
+		image_record.upload_file_name if !image_record.blank?
 	end
 
 	def image
-		image_record.upload
+		image_record.upload if !image_record.blank?
 	end
 
+	# check which visuals in trans objects need to be cropped
+	def locales_to_crop
+		to_crop = []
+		self.visualization_translations.each do |trans|
+			to_crop << trans.locale if !trans.visual_is_cropped
+		end
+		return to_crop
+	end
 
 
 end

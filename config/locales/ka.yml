@@ -53,10 +53,8 @@ ka:
         individual_votes: Individual Votes
         overall_votes: Overall Votes
         dataset: Dataset File
-        visual: Visual File
+#        visual: Visual File
         visualization_categories: Categories
-        interactive_url: URL to Interactive Visualization
-        reset_crop: Redo the Thumbnail Image
       visualization_translation:
         title: Title
         permalink: Name in URL
@@ -66,12 +64,17 @@ ka:
         designer: "Designer (Name, Organization)"
         data_source_name: Name of Data Source
         data_source_url: URL of Data Source
+        interactive_url: URL to Interactive Visualization
+        reset_crop: Redo the Thumbnail Image
+      upload_files:
+        upload: File
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
         contact_missing_fields: "can't be blank."
         send_data_missing_fields: "can't be blank."
         submit_visual_missing_fields: "can't be blank."
+        required_field: "is a required field."
   mailer:
     closing: "Sincerely,"
     signature: feradi.info
@@ -302,6 +305,7 @@ ka:
   visualizations:
     form:
       preview: Preview
+      crop_image: Create %{language} Thumbnail Image
   notifications:
     index:
       title: Notifications

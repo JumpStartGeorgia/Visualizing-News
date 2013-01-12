@@ -130,6 +130,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visualizations = @visualizations.by_category(@categories[index].id) if index
 		end
   end
+
   #######################
 	def render_not_found(exception)
 		ExceptionNotifier::Notifier

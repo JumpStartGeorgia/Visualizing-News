@@ -12,7 +12,7 @@ class VisualizationTranslation < ActiveRecord::Base
 
 
   validates :title, :permalink, :presence => true
-
+	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!interactive_url.blank?"
 
   # when a record is published, the following fields must be provided
   # - reporter, designer, data source name
@@ -47,5 +47,13 @@ class VisualizationTranslation < ActiveRecord::Base
 			nil
 		end
   end
+
+	def image_record
+		self.upload_files.select{|x| x.type_id == UploadFile::TYPES[:image]}.first
+	end
+
+	def image_file_name
+		image.upload_file_name if image
+	end
 
 end

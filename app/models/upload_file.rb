@@ -8,6 +8,8 @@ class UploadFile < ActiveRecord::Base
 
 	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
 
+  validates :type_id, :upload_file_name, :presence => true
+
 	def type_name
     TYPES.keys[TYPES.values.index(self.type_id)].to_s
 	end
@@ -53,7 +55,7 @@ class UploadFile < ActiveRecord::Base
 
   def visual_geometry(style = :original)
     geometry ||= {}
-    geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
+    geometry[style] ||= Paperclip::Geometry.from_file(upload.path(style))
   end
 
 private

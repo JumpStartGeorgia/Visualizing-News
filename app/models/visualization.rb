@@ -1,5 +1,7 @@
 class Visualization < ActiveRecord::Base
-	translates :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, :interactive_url, :visual, :visual_file_name, :visual_content_type, :fallbacks_for_empty_translations => true
+	translates :title, :explanation,	:reporter, :designer,	:data_source_name,
+						:permalink, :interactive_url, :visual, :visual_file_name, :visual_content_type,
+						:fallbacks_for_empty_translations => true
 
   require 'split_votes'
   include SplitVotes
@@ -53,7 +55,7 @@ class Visualization < ActiveRecord::Base
 
   def set_languages
     if self.languages_internal
-      self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",") 
+      self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",")
     end
   end
 
@@ -75,14 +77,14 @@ class Visualization < ActiveRecord::Base
   end
 
   def is_infographic?
-Rails.logger.debug "******************* is infographic called"    
+Rails.logger.debug "******************* is infographic called"
     x = self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
 Rails.logger.debug "******************* - result = #{x}"
     return x
   end
 
   def is_interactive?
-Rails.logger.debug "******************* is interactive called"    
+Rails.logger.debug "******************* is interactive called"
     x = self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
 Rails.logger.debug "******************* - result = #{x}"
     return x

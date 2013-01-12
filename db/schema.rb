@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20130110165340) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
+    t.string   "data_source_url"
     t.string   "visual_file_name"
     t.string   "visual_content_type"
     t.integer  "visual_file_size"
@@ -162,24 +163,24 @@ ActiveRecord::Schema.define(:version => 20130110165340) do
 
   create_table "visualizations", :force => true do |t|
     t.datetime "published_date"
-    t.boolean  "published",             :default => false
+    t.boolean  "published",               :default => false
     t.integer  "visualization_type_id"
     t.string   "data_source_url"
     t.string   "individual_votes"
-    t.integer  "overall_votes",         :default => 0
+    t.integer  "overall_votes",           :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "dataset_file_name"
     t.string   "dataset_content_type"
     t.integer  "dataset_file_size"
     t.datetime "dataset_updated_at"
-    t.string   "visual_file_name"
-    t.string   "visual_content_type"
-    t.integer  "visual_file_size"
-    t.datetime "visual_updated_at"
+    t.string   "visual_file_name_old"
+    t.string   "visual_content_type_old"
+    t.integer  "visual_file_size_old"
+    t.datetime "visual_updated_at_old"
     t.integer  "organization_id"
-    t.string   "interactive_url"
-    t.boolean  "visual_is_cropped",     :default => false
+    t.string   "interactive_url_old"
+    t.boolean  "visual_is_cropped_old",   :default => false
     t.string   "languages"
   end
 

@@ -38,9 +38,9 @@
   <div id="main_block" class="span6">
     <div id="visual">
 			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-		    <%= link_to(image_tag(@visualization.visual.url(:medium, false)), url_for(params.merge(:view => 'interactive'))) %>
+		    <%= link_to(image_tag(@visualization.visual_url(:medium, false)), url_for(params.merge(:view => 'interactive'))) %>
 			<% else %>
-		    <%= link_to(image_tag(@visualization.visual.url(:medium, false)), @visualization.visual.url(:large, false), :class => 'fancybox_visual') if @visualization.visual_file_name %>
+		    <%= link_to(image_tag(@visualization.visual_url(:medium, false)), @visualization.visual_url(:large, false), :class => 'fancybox_visual') if @visualization.visual_file_name %>
 			<% end %>
     </div>
   </div>
@@ -117,14 +117,14 @@
 							"https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
 							:target => "_blank") %>
 				<%= link_to(image_tag("share_pinterest.png"),
-							"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{image_path(@visualization.visual.url(:thumb, false))}&description=#{@visualization.title}", :title => "pinterest",
+							"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{image_path(@visualization.visual_url(:thumb, false))}&description=#{@visualization.title}", :title => "pinterest",
 							:onclick => "window.open(this.href); return false;") %>
 			</div>
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
 			  <textarea readonly onfocus="this.select();"
 					onmouseup="return false;"><%= link_to(
-						image_tag(full_url(@visualization.visual.url(:medium, false)),
+						image_tag(full_url(@visualization.visual_url(:medium, false)),
 							:title => @visualization.title,
 							:alt => @visualization.title),
 						full_url(url_for(params.merge(:from_embed => true))),

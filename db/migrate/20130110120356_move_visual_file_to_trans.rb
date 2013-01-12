@@ -4,12 +4,12 @@ class MoveVisualFileToTrans < ActiveRecord::Migration
     puts "move table records"
     Visualization.all.each do |visual|
       visual.visualization_translations.each do |trans|
-        trans.interactive_url = visual.interactive_url
-        trans.visual_file_name = visual.visual_file_name
-        trans.visual_content_type = visual.visual_content_type
-        trans.visual_file_size = visual.visual_file_size
-        trans.visual_updated_at = visual.visual_updated_at
-        trans.visual_is_cropped  = visual.visual_is_cropped
+        trans.interactive_url = visual.interactive_url_old
+        trans.visual_file_name = visual.visual_file_name_old
+        trans.visual_content_type = visual.visual_content_type_old
+        trans.visual_file_size = visual.visual_file_size_old
+        trans.visual_updated_at = visual.visual_updated_at_old
+        trans.visual_is_cropped  = visual.visual_is_cropped_old
         trans.save
       end
     end
@@ -49,7 +49,7 @@ class MoveVisualFileToTrans < ActiveRecord::Migration
       :visual_updated_at => nil,
       :visual_is_cropped  => nil
     )
-    
+
     FileUtils.rm_rf("#{Rails.root}/public/system/visualizations")
   end
 end

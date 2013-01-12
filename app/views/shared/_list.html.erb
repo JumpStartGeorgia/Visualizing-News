@@ -7,7 +7,7 @@
   	<% @visualizations.each do |visualization| %>
   	<div class="list_visualization_item clear">
   		<div class="visual">
-  		  <%= link_to(image_tag(visualization.visual.url(:thumb, false)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
+  		  <%= link_to(image_tag(visualization.visual_url(:thumb, false)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) if visualization.visual_file_name %>
   		</div>
   		<div class="content">
   		  <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>

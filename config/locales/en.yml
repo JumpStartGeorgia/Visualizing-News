@@ -301,6 +301,7 @@ en:
   visualizations:
     form:
       preview: Preview
+      crop_image: Create %{language} Thumbnail Image
   notifications:
     index:
       title: Email Subscriptions

@@ -11,13 +11,13 @@ class VisualizationTranslation < ActiveRecord::Base
   #     :thumb => "-gravity north -thumbnail 230x230^ -extent 230x230"
   # },
 
-  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink, 
+  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter, :designer,	:data_source_name, :permalink,
 			:interactive_url, :visual, :visual_file_name, :visual_content_type,
 			:visual_is_cropped, :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
 
   validates :title, :presence => true
-
+	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}
 
 	# if this is a new record, do not apply the cropping processor
 	# - the user must be able to set the crop size first
@@ -42,8 +42,8 @@ class VisualizationTranslation < ActiveRecord::Base
   end
 
   def visual_geometry(style = :original)
-    @geometry ||= {}
-    @geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
+    geometry ||= {}
+    geometry[style] ||= Paperclip::Geometry.from_file(visual.path(style))
   end
 
   # when a record is published, the following fields must be provided
@@ -51,11 +51,11 @@ class VisualizationTranslation < ActiveRecord::Base
   # -> this method is called from the visualization model
   def validate_if_published
     missing_fields = []
-    missing_fields << :title if !self.title || self.title.empty?
-    missing_fields << :explanation if !self.explanation || self.explanation.empty?
-    missing_fields << :reporter if !self.reporter || self.reporter.empty?
-    missing_fields << :designer if !self.designer || self.designer.empty?
-    missing_fields << :data_source_name if !self.data_source_name || self.data_source_name.empty?
+    missing_fields << :title if self.title.blank?
+    missing_fields << :explanation if self.explanation.blank?
+    missing_fields << :reporter if self.reporter.blank?
+    missing_fields << :designer if self.designer.blank?
+    missing_fields << :data_source_name if self.data_source_name.blank?
 =begin - doing this test in visualization model
 		if is_infographic?
       missing_fields << :visual if !self.visual_file_name || self.visual_file_name.empty?

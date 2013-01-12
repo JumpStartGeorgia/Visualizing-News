@@ -59,14 +59,17 @@ class Visualization < ActiveRecord::Base
     end
   end
 
+	# this validation is done here and not in trans obj because
+	# when creating objs, the relationship between vis and trans do not exist
+	# and so cannot get type id
   def required_fields_for_type
     missing_fields = []
     self.visualization_translations.each do |trans|
       if self.visualization_type_id == Visualization::TYPES[:infographic]
-        missing_fields << :visual if !trans.visual_file_name || trans.visual_file_name.empty?
+        missing_fields << :visual if trans.visual_file_name.blank?
       elsif self.visualization_type_id == Visualization::TYPES[:interactive]
-        missing_fields << :interactive_url if !trans.interactive_url || trans.interactive_url.empty?
-        missing_fields << :visual if !trans.visual_file_name || trans.visual_file_name.empty?
+        missing_fields << :interactive_url if trans.interactive_url.blank?
+        missing_fields << :visual if trans.visual_file_name.blank?
       end
     end
     if !missing_fields.empty?
@@ -76,20 +79,6 @@ class Visualization < ActiveRecord::Base
     end
   end
 
-  def is_infographic?
-Rails.logger.debug "******************* is infographic called"
-    x = self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:infographic]
-Rails.logger.debug "******************* - result = #{x}"
-    return x
-  end
-
-  def is_interactive?
-Rails.logger.debug "******************* is interactive called"
-    x = self.visualization && self.visualization.visualization_type_id == Visualization::TYPES[:interactive]
-Rails.logger.debug "******************* - result = #{x}"
-    return x
-  end
-
   # when a record is published, the following fields must be provided
   # - published date, visual file, at least one category,
   #   reporter, designer, data source name
@@ -97,8 +86,8 @@ Rails.logger.debug "******************* - result = #{x}"
     if self.published
       missing_fields = []
       trans_errors = []
-      missing_fields << :published_date if !self.published_date
-      missing_fields << :categories if !self.categories || self.categories.empty?
+      missing_fields << :published_date if self.published_date.blank?
+      missing_fields << :categories if self.categories.blank?
 
       self.visualization_translations.each do |trans|
         trans_errors << trans.validate_if_published
@@ -166,4 +155,14 @@ Rails.logger.debug "******************* - result = #{x}"
     end
     return path
   end
+
+	# check which visuals in trans objects need to be cropped
+	def locales_to_crop
+		to_crop = []
+		self.visualization_translations.each do |trans|
+			to_crop << trans.locale if !trans.visual_is_cropped
+		end
+		return to_crop
+	end
+
 end

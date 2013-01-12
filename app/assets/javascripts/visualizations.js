@@ -84,14 +84,14 @@ $(document).ready(function(){
 
 		// if type changes, show appropriate fields
 		$('input[id^="visualization_visualization_type_id"]').change(function() {
-			if ($(this).val() == '1'){
+			if ($(this).val() == '1'){ // infographic
 				$('.trans_visual_file').show(300);
 				$('.trans_interactive_url').hide(300);
 				$('input[id$="_interactive_url"]').attr('value', '');
-			} else if ($(this).val() == '2'){
+			} else if ($(this).val() == '2'){ // interactive
 				$('.trans_interactive_url').show(300);
 				$('.trans_visual_file').hide(300);
-				$('input[id$="_visualization_visual"]').attr('value', '');
+				$('input[id$="_visual"]').attr('value', '');
 			} else {
 				$('.trans_interactive_url').hide(300);
 				$('.trans_visual_file').hide(300);

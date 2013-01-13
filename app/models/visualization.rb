@@ -126,21 +126,21 @@ class Visualization < ActiveRecord::Base
 
 	##############################
 	## shortcut methods to get to
-	## image file in upload_file object
+	## image file in image_file object
 	##############################
 	def image_record
 		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.image_record
 	end
 	def image_file_name
-		image_record.upload_file_name if !image_record.blank?
+		image_record.file_file_name if !image_record.blank?
 	end
 	def image
-		image_record.upload if !image_record.blank?
+		image_record.file if !image_record.blank?
 	end
 
 	##############################
 	## shortcut methods to get to
-	## dataset file in upload_file object
+	## dataset file in dataset_file object
 	##############################
 	def dataset_record
 		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.dataset_record

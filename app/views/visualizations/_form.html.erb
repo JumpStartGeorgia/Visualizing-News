@@ -29,9 +29,8 @@
 
 							<%= translation.input :title %>
 							<div class="trans_visual_file" style="display: none">
-								<%= translation.fields_for :upload_files do |upload| %>
-	      				  <%= upload.hidden_field :type_id, :value => UploadFile::TYPES[:image] %>
-	      				  <%= upload.input :upload, :as => :file, :label => UploadFile.human_attribute_name(:image) %>
+								<%= translation.fields_for :image_file do |upload| %>
+	      				  <%= upload.input :file, :as => :file %>
 								<% end %>
       				</div>
       				<div class="trans_interactive_url" style="display: none">
@@ -50,7 +49,7 @@
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
 
 			<h3><%= t('.crop_image', :language => t("app.language.#{@locale_to_crop}")) %></h3>
-			<%= translation.fields_for :upload_files do |upload| %>
+			<%= translation.fields_for :image_file do |upload| %>
 				<%= upload.hidden_field :image_is_cropped, :value => true %>
 				<%= upload.hidden_field :crop_x %>
 				<%= upload.hidden_field :crop_y %>
@@ -100,11 +99,10 @@
 							</div>
 						<% end %>
 
-						<% image_file = trans.image_record %>
-						<%= translation.fields_for :upload_files, image_file do |upload| %>
+						<%= translation.fields_for :image_file do |upload| %>
 							<div class="control-group">
 								<div class="control-label">
-									<strong><%= UploadFile.human_attribute_name(:image)%></strong>
+									<strong><%= ImageFile.human_attribute_name(:file)%></strong>
 								</div>
 								<div class="controls">
 									<%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>

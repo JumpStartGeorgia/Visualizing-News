@@ -3,14 +3,14 @@ class VisualizationTranslation < ActiveRecord::Base
   has_permalink :create_permalink
 
 	belongs_to :visualization
-	has_many :upload_files, :dependent => :destroy
+	has_one :image_file, :dependent => :destroy
 	has_one :dataset_file, :dependent => :destroy
-  accepts_nested_attributes_for :upload_files
+  accepts_nested_attributes_for :image_file
   accepts_nested_attributes_for :dataset_file
 
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
 									:designer,	:data_source_name, :permalink, :data_source_url,
-									:interactive_url, :upload_files_attributes,	:dataset_file_attributes
+									:interactive_url, :image_file_attributes,	:dataset_file_attributes
 
 
   validates :title, :permalink, :presence => true
@@ -58,16 +58,16 @@ class VisualizationTranslation < ActiveRecord::Base
 
 	##############################
 	## shortcut methods to get to
-	## image file in upload_file object
+	## image file in image_file object
 	##############################
 	def image_record
-		self.upload_files.select{|x| x.type_id == UploadFile::TYPES[:image]}.first
+		self.image_file
 	end
 	def image
-		image_record.upload if !image_record.blank?
+		image_record.file if image_record
 	end
 	def image_file_name
-		image_record.upload_file_name if image_record
+		image_record.file_file_name if image_record
 	end
 	def image_is_cropped
 		image_record.image_is_cropped if image_record
@@ -81,7 +81,7 @@ class VisualizationTranslation < ActiveRecord::Base
 		self.dataset_file
 	end
 	def dataset
-		dataset_record.file if !dataset_record.blank?
+		dataset_record.file if dataset_record
 	end
 	def dataset_file_name
 		dataset_record.file_file_name if dataset_record

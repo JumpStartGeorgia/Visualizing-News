@@ -42,8 +42,8 @@ class VisualizationsController < ApplicationController
 		if @visualization.visualization_translations.length != I18n.available_locales.length
 			I18n.available_locales.each do |locale|
 				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
-				# add upload file record
-				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.upload_files.build
+				# add image file record
+				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
 			end
 		end
 		gon.edit_visualization = true
@@ -102,7 +102,7 @@ class VisualizationsController < ApplicationController
 										           :encoding => 'ascii-8bit')
 					files[trans.locale].write(img)
 					files[trans.locale].flush
-					trans.upload_files.first.upload = files[trans.locale]
+					trans.image_record.file = files[trans.locale]
 				end
 			end
 		end
@@ -139,7 +139,7 @@ class VisualizationsController < ApplicationController
 		# if reset crop flag set, reset image is cropped falg
 		reset_crop = false
 		params[:visualization][:visualization_translations_attributes].keys.each do |key|
-			x = params[:visualization][:visualization_translations_attributes][key][:upload_files_attributes]["0"]
+			x = params[:visualization][:visualization_translations_attributes][key][:image_file_attributes]
 			if x[:reset_crop] == "true"
 				x[:image_is_cropped] = false
 				reset_crop = true
@@ -152,7 +152,7 @@ class VisualizationsController < ApplicationController
 				processed_crop = false
 				@visualization.visualization_translations.each do |trans|
 					if trans.image_record && !trans.image_record.was_cropped && trans.image_record.image_is_cropped
-						trans.image_record.reprocess_upload
+						trans.image_record.reprocess_file
 						processed_crop = true
 					end
 				end

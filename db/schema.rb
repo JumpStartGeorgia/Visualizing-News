@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113113047) do
+ActiveRecord::Schema.define(:version => 20130113143052) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -44,6 +44,23 @@ ActiveRecord::Schema.define(:version => 20130113113047) do
   end
 
   add_index "dataset_files", ["visualization_translation_id"], :name => "index_dataset_files_on_visualization_translation_id"
+
+  create_table "image_files", :force => true do |t|
+    t.integer  "visualization_translation_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "image_is_cropped",             :default => false
+    t.integer  "crop_x"
+    t.integer  "crop_y"
+    t.integer  "crop_w"
+    t.integer  "crop_h"
+  end
+
+  add_index "image_files", ["visualization_translation_id"], :name => "index_image_files_on_visualization_translation_id"
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
@@ -111,24 +128,6 @@ ActiveRecord::Schema.define(:version => 20130113113047) do
   end
 
   add_index "pages", ["name"], :name => "index_pages_on_name"
-
-  create_table "upload_files", :force => true do |t|
-    t.integer  "visualization_translation_id"
-    t.integer  "type_id"
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
-    t.integer  "upload_file_size"
-    t.datetime "upload_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "image_is_cropped",             :default => false
-    t.integer  "crop_x"
-    t.integer  "crop_y"
-    t.integer  "crop_w"
-    t.integer  "crop_h"
-  end
-
-  add_index "upload_files", ["visualization_translation_id", "type_id"], :name => "idx_upload_type"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false

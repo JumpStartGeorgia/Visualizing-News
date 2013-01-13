@@ -20,7 +20,7 @@ class Visualization < ActiveRecord::Base
       :visualization_type_id,
       :individual_votes,
       :overall_votes,
-			:dataset,
+			:dataset_old,
 			:visual_old,
 			:visualization_translations_attributes,
 			:category_ids,
@@ -124,17 +124,34 @@ class Visualization < ActiveRecord::Base
     joins(:visualization_categories).where(:visualization_categories => {:category_id => category_id})
   end
 
+	##############################
+	## shortcut methods to get to
+	## image file in upload_file object
+	##############################
 	def image_record
 		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.image_record
 	end
-
 	def image_file_name
 		image_record.upload_file_name if !image_record.blank?
 	end
-
 	def image
 		image_record.upload if !image_record.blank?
 	end
+
+	##############################
+	## shortcut methods to get to
+	## dataset file in upload_file object
+	##############################
+	def dataset_record
+		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.dataset_record
+	end
+	def dataset_file_name
+		dataset_record.upload_file_name if !dataset_record.blank?
+	end
+	def dataset
+		dataset_record.upload if !dataset_record.blank?
+	end
+
 
 	# check which visuals in trans objects need to be cropped
 	def locales_to_crop

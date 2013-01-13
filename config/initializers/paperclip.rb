@@ -10,3 +10,6 @@ end
 Paperclip.interpolates('locale') do |attachment, style|
   attachment.instance.visualization_translation.locale
 end
+Paperclip.interpolates('upload_file_name') do |attachment, style|
+  attachment.instance.upload_file_name
+end

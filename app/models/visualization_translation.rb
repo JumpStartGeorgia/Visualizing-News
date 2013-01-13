@@ -67,4 +67,18 @@ class VisualizationTranslation < ActiveRecord::Base
 		image_record.image_is_cropped if image_record
 	end
 
+	##############################
+	## shortcut methods to get to
+	## dataset file in upload_file object
+	##############################
+	def dataset_record
+		self.upload_files.select{|x| x.type_id == UploadFile::TYPES[:dataset]}.first
+	end
+	def dataset
+		dataset_record.upload if !dataset_record.blank?
+	end
+	def dataset_file_name
+		dataset_record.upload_file_name if dataset_record
+	end
+
 end

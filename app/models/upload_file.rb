@@ -3,12 +3,14 @@ class UploadFile < ActiveRecord::Base
 
   TYPES = {:image => 1, :dataset => 2}
 
-	attr_accessible :visualization_translation_id, :type_id, :upload, :upload_file_name,
+	attr_accessible :visualization_translation_id, :type_id,
+			:upload, :upload_file_name, :upload_content_type, :upload_file_size, :upload_updated_at,
 			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :image_is_cropped
 
 	attr_accessor :reset_crop, :was_cropped
 
   validates :type_id, :upload_file_name, :presence => true
+  validates :type_id, :inclusion => {:in => TYPES.values}
 
 	def type_name
     TYPES.keys[TYPES.values.index(self.type_id)].to_s
@@ -25,7 +27,7 @@ class UploadFile < ActiveRecord::Base
 		if self.type_id == TYPES[:image]
 			"/system/visualizations/:visual_id/:type/:permalink_:locale_:style.:extension"
 		elsif self.type_id == TYPES[:dataset]
-			"/system/visualizations/:visual_id/:type/:filename"
+			"/system/visualizations/:visual_id/:type/:locale/:upload_file_name"
 		end
 	end
 

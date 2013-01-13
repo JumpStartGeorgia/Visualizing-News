@@ -19,17 +19,32 @@ class ImageFile < ActiveRecord::Base
 	# if this is a new record, do not apply the cropping processor
 	# - the user must be able to set the crop size first
 	def attachment_styles
-		if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
-			{
-			  :thumb => {:geometry => "230x230#"},
-			  :medium => {:geometry => "600x>"},
-			  :large => {:geometry => "900x>"}
-			}
-		else
-			{
-			  :thumb => {:geometry => "230x230#", :processors => [:cropper]}
-			}
+#		if self.visualization_translation.visualization.visualization_type_id == Visalization::TYPES[:infographic]
+			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
+				{
+					:thumb => {:geometry => "230x230#"},
+					:medium => {:geometry => "600x>"},
+					:large => {:geometry => "900x>"}
+				}
+			else
+				{
+					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
+				}
+			end
+=begin
+		elsif self.visualization_translation.visualization.visualization_type_id == Visalization::TYPES[:infographic]
+			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
+				{
+					:thumb => {:geometry => "230x230#"},
+					:medium => {:geometry => "600x500>"},
+				}
+			else
+				{
+					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
+				}
+			end
 		end
+=end
 	end
 
 	# with new version of paperclip, can no longer run this as after update because

@@ -102,7 +102,7 @@ class VisualizationsController < ApplicationController
 										           :encoding => 'ascii-8bit')
 					files[trans.locale].write(img)
 					files[trans.locale].flush
-					trans.image_record.file = files[trans.locale]
+					trans.build_image_file(:file => files[trans.locale])
 				end
 			end
 		end

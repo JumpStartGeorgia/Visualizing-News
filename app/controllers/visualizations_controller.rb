@@ -132,7 +132,17 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
 
-		show_form = true
+		# if reset crop flag set, reset is cropped flag
+		reset_crop = false
+		params[:visualization][:visualization_translations_attributes].keys.each do |key|
+logger.debug "/////////////////// vis trans key = #{key}"
+			if params[:visualization][:visualization_translations_attributes][key][:upload_files_attributes]["0"][:reset_crop] == "true"
+logger.debug "/////////////////// reset == true"
+				params[:visualization][:visualization_translations_attributes][key][:upload_files_attributes]["0"][:image_is_cropped] = false
+				reset_crop = true
+			end
+		end
+
 #		was_cropped = @visualization.visual_is_cropped
     # if the user wants to redo the image crop, reset the variable
 #    params[:visualization][:visual_is_cropped] = false if params[:visualization][:reset_crop] == "true"
@@ -140,11 +150,11 @@ class VisualizationsController < ApplicationController
     respond_to do |format|
       if @visualization.update_attributes(params[:visualization])
 				# if the visuals need to be re-cropped, do it now
+				processed_crop = false
 				@visualization.visualization_translations.each do |trans|
-					logger.debug "+++++++++++++++++ locale = #{trans.locale}, image rec = #{trans.image_record}, was cropped = #{trans.image_record.was_cropped}, is cropped = #{trans.image_record.image_is_cropped}"
 					if trans.image_record && !trans.image_record.was_cropped && trans.image_record.image_is_cropped
-						logger.debug "+++++++++++++++++ reprocessing upload image"
 						trans.image_record.reprocess_upload
+						processed_crop = true
 					end
 				end
 
@@ -153,13 +163,14 @@ class VisualizationsController < ApplicationController
 				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
 
         format.html {
-					if show_form
-#					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
+					if processed_crop || reset_crop
 						# show form again
-						redirect_to edit_organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to edit_organization_visualization_path(params[:organization_id], permalink),
+									notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else
 						# redirect to show page
-						redirect_to organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+						redirect_to organization_visualization_path(params[:organization_id], permalink),
+									notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					end
 				}
         format.json { head :ok }

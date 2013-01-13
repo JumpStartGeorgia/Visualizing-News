@@ -52,10 +52,10 @@
 			<h3><%= t('.crop_image', :language => t("app.language.#{@locale_to_crop}")) %></h3>
 			<%= translation.fields_for :upload_files do |upload| %>
 				<%= upload.hidden_field :image_is_cropped, :value => true %>
-				<%= upload.text_field :crop_x %>
-				<%= upload.text_field :crop_y %>
-				<%= upload.text_field :crop_w %>
-				<%= upload.text_field :crop_h %>
+				<%= upload.hidden_field :crop_x %>
+				<%= upload.hidden_field :crop_y %>
+				<%= upload.hidden_field :crop_w %>
+				<%= upload.hidden_field :crop_h %>
 			<% end %>
 
 			<div id="crop-panel">

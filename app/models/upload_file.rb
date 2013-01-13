@@ -4,9 +4,9 @@ class UploadFile < ActiveRecord::Base
   TYPES = {:image => 1, :dataset => 2}
 
 	attr_accessible :visualization_translation_id, :type_id, :upload, :upload_file_name,
-			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
+			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :image_is_cropped
 
-	attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop
+	attr_accessor :reset_crop, :was_cropped
 
   validates :type_id, :upload_file_name, :presence => true
 
@@ -32,7 +32,7 @@ class UploadFile < ActiveRecord::Base
 	# if this is a new record, do not apply the cropping processor
 	# - the user must be able to set the crop size first
 	def attachment_styles
-		if self.type_id == TYPES[:image]
+		if is_image?
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 				{
 				  :thumb => {:geometry => "230x230#"},
@@ -47,10 +47,19 @@ class UploadFile < ActiveRecord::Base
 		end
 	end
 
-  after_update :reprocess_visual, :if => :cropping?
+	# with new version of paperclip, can no longer run this as after update because
+	# paperclip updates the file updated date after reprocessing, thus causing infinite loop
+	# - reprocess_upload now called in edit controller
+#  after_update :reprocess_upload, :if => :cropping?
+
+	after_find :set_flags
+
+	def set_flags
+		self.was_cropped = self.image_is_cropped
+	end
 
   def cropping?
-    visual_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+    is_image? && image_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end
 
   def visual_geometry(style = :original)
@@ -58,9 +67,13 @@ class UploadFile < ActiveRecord::Base
     geometry[style] ||= Paperclip::Geometry.from_file(upload.path(style))
   end
 
-private
-   def reprocess_visual
-     visual.reprocess!
-   end
+	def is_image?
+		self.type_id == TYPES[:image]
+	end
+
+#private
+	def reprocess_upload
+		self.upload.reprocess!
+	end
 
 end

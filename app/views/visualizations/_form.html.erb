@@ -50,13 +50,12 @@
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
 
 			<h3><%= t('.crop_image', :language => t("app.language.#{@locale_to_crop}")) %></h3>
-			<%= translation.hidden_field :locale , :value => @locale_to_crop %>
-			<%= translation.hidden_field :visual_is_cropped, :value => true %>
 			<%= translation.fields_for :upload_files do |upload| %>
-				<%= upload.hidden_field :crop_x %>
-				<%= upload.hidden_field :crop_y %>
-				<%= upload.hidden_field :crop_w %>
-				<%= upload.hidden_field :crop_h %>
+				<%= upload.hidden_field :image_is_cropped, :value => true %>
+				<%= upload.text_field :crop_x %>
+				<%= upload.text_field :crop_y %>
+				<%= upload.text_field :crop_w %>
+				<%= upload.text_field :crop_h %>
 			<% end %>
 
 			<div id="crop-panel">
@@ -78,18 +77,6 @@
 					<strong><%= Visualization.human_attribute_name(:visualization_type_id)%>:</strong>
 					<%= @visualization.visualization_type_name %>
 				</p>
-				<% if !@visualization.interactive_url.blank? %>
-				<p>
-					<strong><%= Visualization.human_attribute_name(:interactive_url)%>:</strong>
-					<%= link_to @visualization.interactive_url, @visualization.interactive_url, :target => :blank %>
-				</p>
-				<% end %>
-				<p>
-					<strong><%= Visualization.human_attribute_name(:visual)%>:</strong>
-			    <%= f.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
-					<br />
-					<%= image_tag @visualization.image.url(:thumb, false) if !@visualization.image_file_name.blank? %>
-				</p>
 			</div>
 
 		  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
@@ -99,6 +86,26 @@
 						<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 						<%= translation.input :title %>
+
+						<% if !trans.interactive_url.blank? %>
+						<p>
+							<strong><%= VisualizationTranslation.human_attribute_name(:interactive_url)%>:</strong>
+							<%= link_to trans.interactive_url, trans.interactive_url, :target => :blank %>
+						</p>
+						<% end %>
+						<%= translation.fields_for :upload_files do |upload| %>
+							<div class="control-group">
+								<div class="control-label">
+									<strong><%= UploadFile.human_attribute_name(:image)%></strong>
+								</div>
+								<div class="controls">
+									<%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
+									<%= upload.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
+								</div>
+							</div>
+
+						<% end %>
+
 						<% if request.post? || request.put? || controller.action_name.downcase == 'edit' %>
 							<%= translation.input :permalink, :hint => t('activerecord.attributes.visualization_translation.permalink_hint') %>
 						<% end %>

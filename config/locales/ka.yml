@@ -65,9 +65,11 @@ ka:
         data_source_name: Name of Data Source
         data_source_url: URL of Data Source
         interactive_url: URL to Interactive Visualization
-        reset_crop: Redo the Thumbnail Image
-      upload_files:
+      upload_file:
         upload: File
+        image: Visual File
+        dataset: Dataset File
+        reset_crop: Redo the Thumbnail Image
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."

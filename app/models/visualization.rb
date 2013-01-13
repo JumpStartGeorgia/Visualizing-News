@@ -1,7 +1,6 @@
 class Visualization < ActiveRecord::Base
 	translates :title, :explanation, :reporter, :designer,
-		:interactive_url,	:visual_is_cropped,
-		:data_source_name, :permalink, :data_source_url
+		:interactive_url,	:data_source_name, :permalink, :data_source_url
 
 
   require 'split_votes'
@@ -141,7 +140,7 @@ class Visualization < ActiveRecord::Base
 	def locales_to_crop
 		to_crop = []
 		self.visualization_translations.each do |trans|
-			to_crop << trans.locale if !trans.visual_is_cropped
+			to_crop << trans.locale if !trans.image_is_cropped
 		end
 		return to_crop
 	end

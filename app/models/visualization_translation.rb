@@ -8,11 +8,12 @@ class VisualizationTranslation < ActiveRecord::Base
 
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
 									:designer,	:data_source_name, :permalink, :data_source_url,
-									:upload_files_attributes,	:interactive_url,	:visual_is_cropped
+									:upload_files_attributes,	:interactive_url
 
 
   validates :title, :permalink, :presence => true
 	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!interactive_url.blank?"
+	validates :data_source_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!data_source_url.blank?"
 
   # when a record is published, the following fields must be provided
   # - reporter, designer, data source name
@@ -48,12 +49,22 @@ class VisualizationTranslation < ActiveRecord::Base
 		end
   end
 
+
+	##############################
+	## shortcut methods to get to
+	## image file in upload_file object
+	##############################
 	def image_record
 		self.upload_files.select{|x| x.type_id == UploadFile::TYPES[:image]}.first
 	end
-
+	def image
+		image_record.upload if !image_record.blank?
+	end
 	def image_file_name
-		image.upload_file_name if image
+		image_record.upload_file_name if image_record
+	end
+	def image_is_cropped
+		image_record.image_is_cropped if image_record
 	end
 
 end

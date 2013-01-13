@@ -84,12 +84,6 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
-logger.debug "********************"
-@visualization.visualization_translations.each do |trans|
-	logger.debug trans.inspect
-	logger.debug trans.upload_files.inspect
-end
-
 		# if interactive, take screen shots of urls
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
 			files = Hash.new
@@ -108,12 +102,6 @@ end
 				end
 			end
 		end
-
-logger.debug "********************"
-@visualization.visualization_translations.each do |trans|
-	logger.debug trans.inspect
-	logger.debug trans.upload_files.inspect
-end
 
     respond_to do |format|
       if @visualization.save
@@ -143,18 +131,30 @@ end
   def update
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
-		was_cropped = @visualization.visual_is_cropped
+
+		show_form = true
+#		was_cropped = @visualization.visual_is_cropped
     # if the user wants to redo the image crop, reset the variable
-    params[:visualization][:visual_is_cropped] = false if params[:visualization][:reset_crop] == "true"
+#    params[:visualization][:visual_is_cropped] = false if params[:visualization][:reset_crop] == "true"
 
     respond_to do |format|
       if @visualization.update_attributes(params[:visualization])
+				# if the visuals need to be re-cropped, do it now
+				@visualization.visualization_translations.each do |trans|
+					logger.debug "+++++++++++++++++ locale = #{trans.locale}, image rec = #{trans.image_record}, was cropped = #{trans.image_record.was_cropped}, is cropped = #{trans.image_record.image_is_cropped}"
+					if trans.image_record && !trans.image_record.was_cropped && trans.image_record.image_is_cropped
+						logger.debug "+++++++++++++++++ reprocessing upload image"
+						trans.image_record.reprocess_upload
+					end
+				end
+
         # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
         # - have to get it by hand
 				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
 
         format.html {
-					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
+					if show_form
+#					if (!was_cropped && @visualization.visual_is_cropped) || params[:visualization][:reset_crop] == "true"
 						# show form again
 						redirect_to edit_organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					else

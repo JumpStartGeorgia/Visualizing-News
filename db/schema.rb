@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112135346) do
+ActiveRecord::Schema.define(:version => 20130113070222) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -109,6 +109,11 @@ ActiveRecord::Schema.define(:version => 20130112135346) do
     t.datetime "upload_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "image_is_cropped",             :default => false
+    t.integer  "crop_x"
+    t.integer  "crop_y"
+    t.integer  "crop_w"
+    t.integer  "crop_h"
   end
 
   add_index "upload_files", ["visualization_translation_id", "type_id"], :name => "idx_upload_type"
@@ -163,7 +168,7 @@ ActiveRecord::Schema.define(:version => 20130112135346) do
     t.string   "permalink"
     t.string   "data_source_url"
     t.string   "interactive_url"
-    t.boolean  "visual_is_cropped", :default => false
+    t.boolean  "visual_is_cropped_old", :default => false
   end
 
   add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"

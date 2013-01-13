@@ -36,10 +36,10 @@ function update_crop(coords) {
 		marginTop: '-' + Math.round(ry * coords.y) + 'px'
 	});
   var ratio = gon.originalW / gon.largeW;
-  $("#visualization_crop_x").val(Math.round(coords.x * ratio));
-  $("#visualization_crop_y").val(Math.round(coords.y * ratio));
-  $("#visualization_crop_w").val(Math.round(coords.w * ratio));
-  $("#visualization_crop_h").val(Math.round(coords.h * ratio));
+  $('input[id$="_crop_x"]').val(Math.round(coords.x * ratio));
+  $('input[id$="_crop_y"]').val(Math.round(coords.y * ratio));
+  $('input[id$="_crop_w"]').val(Math.round(coords.w * ratio));
+  $('input[id$="_crop_h"]').val(Math.round(coords.h * ratio));
 }
 
 $(document).ready(function(){
@@ -117,16 +117,25 @@ $(document).ready(function(){
 			}
 		});
 
-		// assign the jcrop to the visual image
+		// if crop values already exist, use them when creating jcrop preview box
+		var setInit = [0, 0, adjusted_size, adjusted_size];
+		if ($('input[id$="_crop_x"]').val() != '' && $('input[id$="_crop_y"]').val() != '' &&
+				$('input[id$="_crop_w"]').val() != ''  && $('input[id$="_crop_h"]').val() != '' ) {
 
+			setInit = [$('input[id$="_crop_x"]').val(), $('input[id$="_crop_y"]').val(),
+								$('input[id$="_crop_w"]').val(), $('input[id$="_crop_h"]').val()];
+		}
+
+		// assign the jcrop to the visual image
 	  $('img#cropbox').Jcrop({
 	    onChange: update_crop,
 	    onSelect: update_crop,
-	    setSelect: [0, 0, adjusted_size, adjusted_size],
+	    setSelect: setInit,
 			minSize: [adjusted_size,adjusted_size],
 //			maxSize: [adjusted_size, adjusted_size],
 	    aspectRatio: 1
 	  });
+
 
 	}
 

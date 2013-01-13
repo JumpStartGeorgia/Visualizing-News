@@ -48,7 +48,7 @@ en:
         description: Content
       visualization:
         published_date: Publication Date
-        published: Is Published?
+        published: Release to Public?
         visualization_type_id: Visualization Type
         individual_votes: Individual Votes
         overall_votes: Overall Votes
@@ -68,8 +68,9 @@ en:
       upload_file:
         upload: File
         image: Visual File
-        dataset: Dataset File
         reset_crop: Redo the Thumbnail Image
+      dataset_file:
+        file: Dataset File
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
@@ -77,6 +78,7 @@ en:
         send_data_missing_fields: "can't be blank."
         submit_visual_missing_fields: "can't be blank."
         required_field: "is a required field."
+        already_exists: 'already exists in the database.'
   mailer:
     closing: "Sincerely,"
     signature: feradi.info

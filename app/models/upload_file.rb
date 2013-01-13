@@ -9,7 +9,8 @@ class UploadFile < ActiveRecord::Base
 
 	attr_accessor :reset_crop, :was_cropped
 
-  validates :type_id, :upload_file_name, :presence => true
+  validates :type_id, :presence => true
+#  validates :type_id, :upload_file_name, :presence => true
   validates :type_id, :inclusion => {:in => TYPES.values}
 
 	def type_name

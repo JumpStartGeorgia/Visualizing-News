@@ -62,6 +62,10 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
 
+		# if dataset file obj not exist, build
+		@visualization.visualization_translations.each do |trans|
+			trans.build_dataset_file if !trans.dataset_file
+		end
 
 		locales_to_crop = @visualization.locales_to_crop
 		if !locales_to_crop.empty?
@@ -132,20 +136,15 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
 
-		# if reset crop flag set, reset is cropped flag
+		# if reset crop flag set, reset image is cropped falg
 		reset_crop = false
 		params[:visualization][:visualization_translations_attributes].keys.each do |key|
-logger.debug "/////////////////// vis trans key = #{key}"
-			if params[:visualization][:visualization_translations_attributes][key][:upload_files_attributes]["0"][:reset_crop] == "true"
-logger.debug "/////////////////// reset == true"
-				params[:visualization][:visualization_translations_attributes][key][:upload_files_attributes]["0"][:image_is_cropped] = false
+			x = params[:visualization][:visualization_translations_attributes][key][:upload_files_attributes]["0"]
+			if x[:reset_crop] == "true"
+				x[:image_is_cropped] = false
 				reset_crop = true
 			end
 		end
-
-#		was_cropped = @visualization.visual_is_cropped
-    # if the user wants to redo the image crop, reset the variable
-#    params[:visualization][:visual_is_cropped] = false if params[:visualization][:reset_crop] == "true"
 
     respond_to do |format|
       if @visualization.update_attributes(params[:visualization])

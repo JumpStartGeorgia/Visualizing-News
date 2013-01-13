@@ -7,6 +7,10 @@ class OrganizationTranslation < ActiveRecord::Base
   attr_accessible :organization_id, :name, :locale, :permalink, :bio
 
   validates :name, :permalink, :presence => true
+	validates :name, :uniqueness => {:scope => :locale, :case_sensitive => false,
+			:message => I18n.t('activerecord.errors.messages.already_exists')}
+	validates :permalink, :uniqueness => {:scope => :locale, :case_sensitive => false,
+			:message => I18n.t('activerecord.errors.messages.already_exists')}
 
   def create_permalink
     Utf8Converter.convert_ka_to_en(self.name)

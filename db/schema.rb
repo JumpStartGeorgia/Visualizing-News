@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(:version => 20130113113047) do
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
 
+  create_table "dataset_files", :force => true do |t|
+    t.integer  "visualization_translation_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dataset_files", ["visualization_translation_id"], :name => "index_dataset_files_on_visualization_translation_id"
+
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "notification_type"

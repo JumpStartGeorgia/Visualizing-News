@@ -146,10 +146,10 @@ class Visualization < ActiveRecord::Base
 		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.dataset_record
 	end
 	def dataset_file_name
-		dataset_record.upload_file_name if !dataset_record.blank?
+		dataset_record.file_file_name if !dataset_record.blank?
 	end
 	def dataset
-		dataset_record.upload if !dataset_record.blank?
+		dataset_record.file if !dataset_record.blank?
 	end
 
 

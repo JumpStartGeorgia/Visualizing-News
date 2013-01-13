@@ -1,16 +1,15 @@
 class MoveDatasetData < ActiveRecord::Migration
   def up
-    # copy the dataset records to upload files
+    # copy the dataset records to dataset files table
     puts "move table records"
     Visualization.all.each do |visual|
 			if !visual.dataset_file_name_old.blank?
 		    visual.visualization_translations.each do |trans|
-					trans.upload_files.create(
-						:type_id => UploadFile::TYPES[:dataset],
-				    :upload_file_name => visual.dataset_file_name_old,
-				    :upload_content_type => visual.dataset_content_type_old,
-				    :upload_file_size => visual.dataset_file_size_old,
-				    :upload_updated_at => visual.dataset_updated_at_old
+					trans.create_dataset_file(
+				    :file_file_name => visual.dataset_file_name_old,
+				    :file_content_type => visual.dataset_content_type_old,
+				    :file_file_size => visual.dataset_file_size_old,
+				    :file_updated_at => visual.dataset_updated_at_old
 					)
 		    end
 	    end
@@ -37,7 +36,7 @@ class MoveDatasetData < ActiveRecord::Migration
   end
 
   def down
-		UploadFile.where(:type_id => UploadFile::TYPES[:dataset]).delete_all
+		Dataset.delete_all
 
     Dir.glob("#{Rails.root}/public/system/visualizations/*").select {|f| File.directory? f}.each do |dir|
       puts "- directory = #{dir.split("/").last}"

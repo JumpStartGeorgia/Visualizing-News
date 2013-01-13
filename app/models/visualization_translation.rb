@@ -4,14 +4,20 @@ class VisualizationTranslation < ActiveRecord::Base
 
 	belongs_to :visualization
 	has_many :upload_files, :dependent => :destroy
+	has_one :dataset_file, :dependent => :destroy
   accepts_nested_attributes_for :upload_files
+  accepts_nested_attributes_for :dataset_file
 
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
 									:designer,	:data_source_name, :permalink, :data_source_url,
-									:upload_files_attributes,	:interactive_url
+									:interactive_url, :upload_files_attributes,	:dataset_file_attributes
 
 
   validates :title, :permalink, :presence => true
+	validates :title, :uniqueness => {:scope => :locale, :case_sensitive => false,
+			:message => I18n.t('activerecord.errors.messages.already_exists')}
+	validates :permalink, :uniqueness => {:scope => :locale, :case_sensitive => false,
+			:message => I18n.t('activerecord.errors.messages.already_exists')}
 	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!interactive_url.blank?"
 	validates :data_source_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!data_source_url.blank?"
 
@@ -69,16 +75,16 @@ class VisualizationTranslation < ActiveRecord::Base
 
 	##############################
 	## shortcut methods to get to
-	## dataset file in upload_file object
+	## dataset file in dataset object
 	##############################
 	def dataset_record
-		self.upload_files.select{|x| x.type_id == UploadFile::TYPES[:dataset]}.first
+		self.dataset_file
 	end
 	def dataset
-		dataset_record.upload if !dataset_record.blank?
+		dataset_record.file if !dataset_record.blank?
 	end
 	def dataset_file_name
-		dataset_record.upload_file_name if dataset_record
+		dataset_record.file_file_name if dataset_record
 	end
 
 end

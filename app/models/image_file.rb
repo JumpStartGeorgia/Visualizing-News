@@ -7,6 +7,11 @@ class ImageFile < ActiveRecord::Base
 
 	attr_accessor :reset_crop, :was_cropped
 
+=begin
+	def visualization_type_id
+		2
+	end
+=end
   validates :file_file_name, :presence => true
 
 	has_attached_file :file,
@@ -19,33 +24,44 @@ class ImageFile < ActiveRecord::Base
 	# if this is a new record, do not apply the cropping processor
 	# - the user must be able to set the crop size first
 	def attachment_styles
-#		if self.visualization_translation.visualization.visualization_type_id == Visualization::TYPES[:infographic]
+		styles = {}
+Rails.logger.debug "///////////// attachment styles start"
+Rails.logger.debug "///////////// - vis type = #{self.visualization_type_id}"
+#		if self.visualization_type_id == Visualization::TYPES[:infographic]
+Rails.logger.debug "///////////// -> in infographic"
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
-				{
+Rails.logger.debug "///////////// -> generating all styles"
+				styles = {
 					:thumb => {:geometry => "230x230#"},
 					:medium => {:geometry => "600x>"},
 					:large => {:geometry => "900x>"}
 				}
 			else
-				{
+Rails.logger.debug "///////////// -> generating new thumb style"
+				styles = {
 					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
 				}
 			end
 =begin
-		elsif self.visualization_translation.visualization.visualization_type_id == Visualization::TYPES[:interactive]
+		elsif visualization_type_id == Visualization::TYPES[:interactive]
+Rails.logger.debug "///////////// -> in interactive"
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
-				{
+Rails.logger.debug "///////////// -> generating all styles"
+				styles = {
 					:thumb => {:geometry => "230x230#"},
 					:medium => {:geometry => "600x500>", :convert_options => "-gravity north -thumbnail 600x500^ -extent 600x500"},
 					:large => {:geometry => "900x>", :convert_options => "-gravity north -thumbnail 900x500^ -extent 900x500"}
 				}
 			else
-				{
+Rails.logger.debug "///////////// -> generating new thumb style"
+				styles = {
 					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
 				}
 			end
 		end
 =end
+Rails.logger.debug "///////////// attachment styles end"
+		return styles
 	end
 
 	# with new version of paperclip, can no longer run this as after update because

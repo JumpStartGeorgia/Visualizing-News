@@ -19,7 +19,7 @@ class ImageFile < ActiveRecord::Base
 	# if this is a new record, do not apply the cropping processor
 	# - the user must be able to set the crop size first
 	def attachment_styles
-#		if self.visualization_translation.visualization.visualization_type_id == Visalization::TYPES[:infographic]
+#		if self.visualization_translation.visualization.visualization_type_id == Visualization::TYPES[:infographic]
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 				{
 					:thumb => {:geometry => "230x230#"},
@@ -32,11 +32,12 @@ class ImageFile < ActiveRecord::Base
 				}
 			end
 =begin
-		elsif self.visualization_translation.visualization.visualization_type_id == Visalization::TYPES[:infographic]
+		elsif self.visualization_translation.visualization.visualization_type_id == Visualization::TYPES[:infographic]
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 				{
 					:thumb => {:geometry => "230x230#"},
-					:medium => {:geometry => "600x500>"},
+					:medium => {:geometry => "600x500>", :convert_options => "-gravity north -thumbnail 600x500^ -extent 600x500"},
+					:large => {:geometry => "900x>", :convert_options => "-gravity north -thumbnail 900x500^ -extent 900x500"}
 				}
 			else
 				{

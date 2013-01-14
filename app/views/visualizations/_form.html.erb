@@ -17,9 +17,11 @@
 
 				<%= f.input :visualization_type_id, :as => :radio, :collection => visualization_type_collection %>
 
+				<div style="display: none;">
 				<%= f.input :languages_internal, :as => :check_boxes,
 				  :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
 				  :input_html => {:checked => 'checked'} %>
+				</div>
 
 				<% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 					<%= f.fields_for :visualization_translations, trans do |translation| %>

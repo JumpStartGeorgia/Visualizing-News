@@ -8,6 +8,9 @@ class VisualizationTranslation < ActiveRecord::Base
   accepts_nested_attributes_for :image_file
   accepts_nested_attributes_for :dataset_file
 
+	# this is only here so old migrations will work - no longer used
+	has_many :upload_files, :dependent => :destroy
+
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
 									:designer,	:data_source_name, :permalink, :data_source_url,
 									:interactive_url, :image_file_attributes,	:dataset_file_attributes

@@ -7,11 +7,12 @@
   	<% @visualizations.each do |visualization| %>
   	<div class="list_visualization_item clear">
   		<div class="visual">
-  		  <%= link_to(image_tag(visualization.image.url(:thumb, false)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
 	      <%  if !visualization.image_file_name.blank? %>
-    		  <%= link_to(image_tag(visualization.image.url(:thumb, false)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+    		  <%= link_to(image_tag(visualization.image.url(:thumb, false)),
+								create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
 	      <% else %>
-    		  <%= link_to(image_tag('image_placeholder.png'), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+    		  <%= link_to(image_tag('image_placeholder.png'),
+								create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
 	      <% end %>
   		</div>
   		<div class="content">

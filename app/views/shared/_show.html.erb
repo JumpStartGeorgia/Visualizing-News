@@ -116,7 +116,7 @@
 							  "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
 							  :target => "_blank") %>
 				  <%= link_to(image_tag("share_pinterest.png"),
-							"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{image_path(@visualization.image.url(:thumb, false))}&description=#{@visualization.title}", :title => "pinterest",
+							"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{full_url(image_path(@visualization.image.url(:thumb, false)))}&description=#{@visualization.title}", :title => "pinterest",
 							:onclick => "window.open(this.href); return false;") %>
 				</div>
 			</div>

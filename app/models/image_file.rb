@@ -32,7 +32,7 @@ class ImageFile < ActiveRecord::Base
 				}
 			end
 =begin
-		elsif self.visualization_translation.visualization.visualization_type_id == Visualization::TYPES[:infographic]
+		elsif self.visualization_translation.visualization.visualization_type_id == Visualization::TYPES[:interactive]
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 				{
 					:thumb => {:geometry => "230x230#"},

@@ -127,7 +127,11 @@
 
 						<%= translation.fields_for :dataset_file do |upload| %>
 							<%= upload.input :file, :as => :file %>
-							<%= link_to t('helpers.links.download'), @visualization.dataset.url if @visualization.dataset_file_name %>
+							<div class="control-group">
+								<div class="controls">
+									<%= link_to t('helpers.links.existing_file'), @visualization.dataset.url, :class => 'btn' if @visualization.dataset_file_name %>
+								</div>
+							</div>
 
 						<% end %>
 

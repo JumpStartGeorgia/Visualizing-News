@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115061757) do
+ActiveRecord::Schema.define(:version => 20130115082318) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(:version => 20130115061757) do
   end
 
   add_index "dataset_files", ["visualization_translation_id"], :name => "index_dataset_files_on_visualization_translation_id"
+
+  create_table "datasources", :force => true do |t|
+    t.integer  "visualization_translation_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "datasources", ["visualization_translation_id"], :name => "index_datasources_on_visualization_translation_id"
 
   create_table "image_files", :force => true do |t|
     t.integer  "visualization_translation_id"
@@ -173,11 +183,11 @@ ActiveRecord::Schema.define(:version => 20130115061757) do
     t.text     "explanation"
     t.string   "reporter"
     t.string   "designer"
-    t.string   "data_source_name"
+    t.string   "data_source_name_old"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "permalink"
-    t.string   "data_source_url"
+    t.string   "data_source_url_old"
     t.string   "interactive_url"
     t.boolean  "visual_is_cropped_old", :default => false
   end

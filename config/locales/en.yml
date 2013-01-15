@@ -8,6 +8,7 @@ en:
       visualization: Visualization
       page: Page
       message: Message
+      datasource: Datasource
     attributes:
       user:
         email: Email Address
@@ -62,14 +63,15 @@ en:
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
-        data_source_name: Name of Data Source
-        data_source_url: URL of Data Source
         interactive_url: URL to Interactive Visualization
       image_file:
         file: Visual File
         reset_crop: Redo the Thumbnail Image
       dataset_file:
         file: Dataset File
+      datasource:
+        name: Name of Data Source
+        url: URL of Data Source
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
@@ -310,6 +312,10 @@ en:
     form:
       preview: Preview
       crop_image: Create %{language} Thumbnail Image
+      datasources_header: Datasources
+      add_datasource: Add Datasource
+    datasource_fields:
+      remove_link: Remove Datasource
   notifications:
     index:
       title: Notifications

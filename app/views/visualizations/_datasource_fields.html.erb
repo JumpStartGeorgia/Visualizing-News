@@ -1,0 +1,7 @@
+<div class="nested_form_item">
+	<%= f.input :name %>
+	<%= f.input :url, :as => :url %>
+
+	<%= f.hidden_field :_destroy %>
+	<%= f.link_to_remove t(".remove_link"), :class => "btn btn-mini btn-danger", :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => t("app.common.are_you_sure"))) %>
+</div>

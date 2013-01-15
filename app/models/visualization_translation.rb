@@ -5,15 +5,18 @@ class VisualizationTranslation < ActiveRecord::Base
 	belongs_to :visualization
 	has_one :image_file, :dependent => :destroy
 	has_one :dataset_file, :dependent => :destroy
+  has_many :datasources, :dependent => :destroy
   accepts_nested_attributes_for :image_file
   accepts_nested_attributes_for :dataset_file
+  accepts_nested_attributes_for :datasources, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
 
 	# this is only here so old migrations will work - no longer used
 	has_many :upload_files, :dependent => :destroy
 
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
-									:designer,	:data_source_name, :permalink, :data_source_url,
-									:interactive_url, :image_file_attributes,	:dataset_file_attributes
+									:designer, :permalink,
+                  :data_source_url_old,:data_source_name_old,
+									:interactive_url, :image_file_attributes,	:dataset_file_attributes, :datasources_attributes
 
 
   validates :title, :permalink, :presence => true
@@ -22,24 +25,38 @@ class VisualizationTranslation < ActiveRecord::Base
 	validates :permalink, :uniqueness => {:scope => :locale, :case_sensitive => false,
 			:message => I18n.t('activerecord.errors.messages.already_exists')}
 	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!interactive_url.blank?"
-	validates :data_source_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!data_source_url.blank?"
 
   # when a record is published, the following fields must be provided
   # - reporter, designer, data source name
   # -> this method is called from the visualization model
   def validate_if_published
     missing_fields = []
+    datasource_errors = []
     missing_fields << :title if !self.title || self.title.empty?
     missing_fields << :explanation if !self.explanation || self.explanation.empty?
     missing_fields << :reporter if !self.reporter || self.reporter.empty?
     missing_fields << :designer if !self.designer || self.designer.empty?
-    missing_fields << :data_source_name if !self.data_source_name || self.data_source_name.empty?
+#    missing_fields << :data_source_name if !self.data_source_name || self.data_source_name.empty?
+
+    # validate each datasource object
+    self.datasources.each do |source|
+      datasource_errors << source.validate_if_published
+    end
 
     if !missing_fields.empty?
       missing_fields.each do |field|
         errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
       end
     end
+
+=begin
+    # if there were missing fields from the datasource object, add the errors
+    if !datasource_errors.empty?
+      datasource_errors.flatten.each do |field|
+        errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
+      end
+    end
+=end
 
     return missing_fields
   end

@@ -10,6 +10,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
+//= require jquery_nested_form
 //= require fancybox
 //= require fancybox2
 //= require vendor
@@ -45,7 +46,7 @@ $(document).ready(function(){
   {
     //$.get(gon.vis_ajax_path + '?screen_w=' + $(window).width(), function (response)
    // {
-      
+
    // });
   }
 

@@ -68,11 +68,20 @@
         <li>
           <%= "#{t('.data_source')}: "%>
 					<span class="val-source">
-						<% if !@visualization.data_source_name.blank? && !@visualization.data_source_url.blank? %>
-		          <%= link_to @visualization.data_source_name, @visualization.data_source_url, :target => "blank" %>
-						<% else %>
-							<%= @visualization.data_source_name %>
-						<% end %>
+            <% if !@visualization.datasources.blank? %>
+              <ul style="margin-left: 10px;">
+              <% @visualization.datasources.each_with_index do |source, index| %>
+						    <% if !source.name.blank? %>
+                  <li>
+						      <% if !source.url.blank? %>
+		                <%= link_to source.name, source.url, :target => "blank" %>
+						      <% else %>
+							      <%= source.name %>
+						      <% end %></li>
+					      <% end %>
+              <% end %>
+              </ul>
+            <% end %>
 					</span>
         </li>
         <li>

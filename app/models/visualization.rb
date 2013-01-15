@@ -1,6 +1,6 @@
 class Visualization < ActiveRecord::Base
 	translates :title, :explanation, :reporter, :designer,
-		:interactive_url,	:data_source_name, :permalink, :data_source_url
+		:interactive_url,	:permalink
 
 
   require 'split_votes'
@@ -86,19 +86,24 @@ class Visualization < ActiveRecord::Base
       missing_fields << :published_date if !self.published_date
       missing_fields << :categories if !self.categories || self.categories.empty?
 
+      # validate each translation object
+      self.visualization_translations.each do |trans|
+        trans_errors << trans.validate_if_published
+      end
+
       if !missing_fields.empty?
         missing_fields.each do |field|
           errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
         end
       end
-
+=begin
       # if there were missing fields from the translation object, add the errors
       if !trans_errors.empty?
         trans_errors.flatten.each do |field|
           errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
         end
       end
-
+=end
     end
   end
 
@@ -150,6 +155,14 @@ class Visualization < ActiveRecord::Base
 	end
 	def dataset
 		dataset_record.file if !dataset_record.blank?
+	end
+
+	##############################
+	## shortcut methods to get to
+	## datasource records
+	##############################
+	def datasources
+		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.datasources
 	end
 
 

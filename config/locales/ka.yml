@@ -8,7 +8,7 @@ ka:
       visualization: Visualization
       page: Page
       message: Message
-      datasource: Datasource
+      datasource: Data Source
     attributes:
       user:
         email: ელ.ფოსტა
@@ -23,7 +23,7 @@ ka:
         message: Message
         what_is_data: Briefly describe the data that you want to visualize
         why_visualize: Why do you want to visualize this data?
-        datasource: What is the datasource?
+        datasource: What is the data source?
         file: Attach the data file
         how_use: Why would you like to use feradi.info to show your visualiations?
       category:
@@ -264,7 +264,7 @@ ka:
       email: ელ.ფოსტის მისამართი
       what_is_data: Briefly describe the data that you want to visualize
       why_visualize: Why do you want to visualize this data?
-      datasource: What is the datasource?
+      datasource: What is the data source?
       file: Attach the data file
       email_us: Send us an email
       email_subject: "feradi.info Send Data Request"
@@ -312,10 +312,10 @@ ka:
     form:
       preview: Preview
       crop_image: Create %{language} Thumbnail Image
-      datasources_header: Datasources
-      add_datasource: Add Datasource
+      datasources_header: Data Sources
+      add_datasource: Add Data Source
     datasource_fields:
-      remove_link: Remove Datasource
+      remove_link: Remove Data Source
   notifications:
     index:
       title: Notifications

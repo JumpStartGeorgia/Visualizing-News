@@ -1,3 +1,9 @@
+####################################
+####################################
+## THIS FILE IS NO LONGER USED
+## ONLY HERE SO MIGRATIONS WORK
+####################################
+####################################
 class UploadFile < ActiveRecord::Base
 	belongs_to :visualization_translation
 

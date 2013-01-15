@@ -8,6 +8,7 @@ en:
       visualization: Visualization
       page: Page
       message: Message
+      datasource: Data Source
     attributes:
       user:
         email: Email Address
@@ -22,9 +23,10 @@ en:
         message: Message
         what_is_data: Briefly describe the data that you want to visualize
         why_visualize: Why do you want to visualize this data?
-        datasource: What is the datasource?
+        datasource: What is the data source?
         file: Attach the data file
         how_use: Why would you like to use feradi.info to show your visualiations?
+        organization: Organization
       category:
         icon: Icon
       category_translation:
@@ -62,14 +64,15 @@ en:
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
-        data_source_name: Name of Data Source
-        data_source_url: URL of Data Source
         interactive_url: URL to Interactive Visualization
       image_file:
         file: Visual File
         reset_crop: Redo the Thumbnail Image
       dataset_file:
         file: Dataset File
+      datasource:
+        name: Name of Data Source
+        url: URL of Data Source
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
@@ -262,7 +265,7 @@ en:
       email: Email Address
       what_is_data: Briefly describe the data that you want to visualize
       why_visualize: Why do you want to visualize this data?
-      datasource: What is the datasource?
+      datasource: What is the data source?
       file: Attach the data file
       email_us: Send us an email
       email_subject: "feradi.info Send Data Request"
@@ -310,6 +313,10 @@ en:
     form:
       preview: Preview
       crop_image: Create %{language} Thumbnail Image
+      datasources_header: Data Sources
+      add_datasource: Add Data Source
+    datasource_fields:
+      remove_link: Remove Data Source
   notifications:
     index:
       title: Notifications

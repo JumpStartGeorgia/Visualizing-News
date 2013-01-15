@@ -5,7 +5,7 @@
     path = organization_visualization_path(params[:organization_id], params[:id])
   end
 %>
-<%= semantic_form_for([@organization, @visualization],
+<%= semantic_nested_form_for([@organization, @visualization],
       :url => path,
       :html => { :class => 'form-horizontal precrop' }) do |f| %>
 		<%= f.error_messages %>
@@ -104,7 +104,7 @@
 						<%= translation.fields_for :image_file do |upload| %>
 							<div class="control-group">
 								<div class="control-label">
-									<strong><%= ImageFile.human_attribute_name(:file)%></strong>
+									<%= ImageFile.human_attribute_name(:file)%>
 								</div>
 								<div class="controls">
 									<%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
@@ -122,8 +122,18 @@
 						<%= translation.input :explanation %>
 						<%= translation.input :reporter %>
 						<%= translation.input :designer %>
-						<%= translation.input :data_source_name %>
-						<%= translation.input :data_source_url, :as => :url %>
+
+	          <div class="nested_form_container">
+							<div class="control-group">
+								<div class="control-label">
+									<%= t(".datasources_header") %>
+								</div>
+								<div class="controls">
+		              <%= translation.fields_for :datasources %>
+		              <p><%= translation.link_to_add t(".add_datasource"), :datasources, :class => "btn btn-mini btn-primary" %></p>
+								</div>
+							</div>
+	          </div>
 
 						<%= translation.fields_for :dataset_file do |upload| %>
 							<%= upload.input :file, :as => :file %>

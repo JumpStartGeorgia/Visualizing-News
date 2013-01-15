@@ -8,6 +8,12 @@ GIT
       rails (>= 3.1.0)
 
 GIT
+  remote: https://github.com/davidray/nested_form.git
+  revision: c97d280b75af661eb36279c04e420fb8098ad60d
+  specs:
+    nested_form (0.1.1)
+
+GIT
   remote: https://github.com/jilion/useragent.git
   revision: 9fd0f887527850994c543caa7cf5327bd635dc02
   specs:
@@ -272,6 +278,7 @@ DEPENDENCIES
   kaminari (~> 0.14.1)
   mailcatcher (= 0.5.10)
   mysql2 (~> 0.3.11)
+  nested_form (~> 0.1.1)!
   omniauth
   omniauth-facebook
   paperclip (~> 3.4.0)

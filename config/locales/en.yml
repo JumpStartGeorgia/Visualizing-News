@@ -26,6 +26,7 @@ en:
         datasource: What is the data source?
         file: Attach the data file
         how_use: Why would you like to use feradi.info to show your visualiations?
+        organization: Organization
       category:
         icon: Icon
       category_translation:

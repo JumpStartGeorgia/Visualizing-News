@@ -8,11 +8,15 @@
 
 <% else %>
 
-  <!--div>
-    <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
-      :title => t('.email_us')%>
-    <hr />
-  </div-->
+			<div>
+        <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
+          :title => t('.email_us')%>
+				<br />
+				+995 032 214 29 26
+				<br />
+				#5 Shevchenko St, Apt 2, Tbilisi, Georgia
+				<hr />
+			</div>
 
 	<%= semantic_form_for @message, :url => contact_path do |f| %>
 		<%= f.error_messages %>

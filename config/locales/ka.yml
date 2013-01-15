@@ -3,12 +3,12 @@ ka:
   activerecord:
     models:
       user: მომხმარებელი
-      category: Category
+      category: კატეგორია
       organization: ორგანიზაცია
-      visualization: Visualization
-      page: Page
-      message: Message
-      datasource: Data Source
+      visualization: ვიზუალური გამოსახულება
+      page: გვერდი
+      message: შეტყობინება
+      datasource: მონაცემთა წყარო
     attributes:
       user:
         email: ელ.ფოსტა
@@ -17,90 +17,91 @@ ka:
         role: როლი
         remember_me: დამიმახსოვრე
       message:
-        name: Name
-        phone: Phone Number
-        email: Email Address
-        message: Message
-        what_is_data: Briefly describe the data that you want to visualize
-        why_visualize: Why do you want to visualize this data?
-        datasource: What is the data source?
-        file: Attach the data file
-        how_use: Why would you like to use feradi.info to show your visualiations?
+        name: სახელი
+        phone: ტელეფონი ნომერი
+        email: ელ.ფოსტის მისამართი
+        message: შეტყობინება
+        what_is_data: მოკლედ აღწერეთ თქვენთვის სასურველი ვიზუალურად გამოსასახი მონაცემები
+        why_visualize: რატომ გსურთ ამ მონაცემების ვიზუალურად გამოსახვა?
+        datasource: რა არის მონაცემთა წყარო?
+        file: დაურთეთ მონაცემთა ფაილი
+        how_use: რატომ გსურთ feradi.info-ს მეშვეობით თქვენი მონაცემების ვიზუალურად გამოსახვა?
+        organization: ორგანიზაცია
       category:
-        icon: Icon
+        icon: ხატულა
       category_translation:
-        name: Name
+        name: სახელი
       organization:
         logo: ლოგო
         url: ვებ-გვერდი
       organization_translation:
         name: სახელი
-        bio: About
-        permalink: Name in URL
-        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
+        bio: შესახებ
+        permalink: ბმულის სახელი
+        permalink_hint: "თუ გსურთ ბმულის ახალი სახელის შექმნა წაშალეთ არსებული ტექსტი და შეინახეთ ახალი ჩანაწერი. ეს ოპერაცია განახორციელეთ ყველა ენაზე."
       organization_user:
         is_active: აქტიური
         user_id: მომხმარებელი
         organization_id: ორგანიზაცია
       page:
-        name: Name
+        name: სახელი
       page_translation:
-        title: Title
-        description: Content
+        title: სათაური
+        description: შინაარსი
       visualization:
-        published_date: Publication Date
-        published: Release to Public?
-        visualization_type_id: Visualization Type
-        individual_votes: Individual Votes
-        overall_votes: Overall Votes
-        dataset: Dataset File
-#        visual: Visual File
-        visualization_categories: Categories
+        published_date: გამოქვეყნების თარიღი
+        published: გსურთ გამოქვეყნება?
+        visualization_type_id: ვიზუალიზაციის ტიპი
+        individual_votes: ინდივიდუალური ხმები
+        overall_votes: ხმების საერთო რაოდენობა
+        dataset: მონაცემები
+#        visual: ვიზუალური ფაილი
+        visualization_categories: კატეგორიები
       visualization_translation:
-        title: Title
-        permalink: Name in URL
-        permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
-        explanation: Explanation
-        reporter: "Reporter (Name, Organization)"
-        designer: "Designer (Name, Organization)"
-        interactive_url: URL to Interactive Visualization
+        title: სათაური
+        permalink: ბმულის სახელი
+        permalink_hint: "თუ გსურთ ბმულის ახალი სახელის შექმნა წაშალეთ არსებული ტექსტი და შეინახეთ ახალი ჩანაწერი. ეს ოპერაცია განახორციელეთ ყველა ენაზე."
+        explanation: განმარტება
+        reporter: "მომხსენებელი (სახელი, ორგანიზაცია)"
+        designer: "დიზაინერი (სახელი, ორგანიზაცია)"
+        data_source_name: მონაცემთა წყაროს სახელი
       image_file:
-        file: Visual File
-        reset_crop: Redo the Thumbnail Image
+        file: ვისუალის ფაილი
+        reset_crop: ესკიზის განახლება
       dataset_file:
-        file: Dataset File
+        file: მონაცემების ფაილი
       datasource:
-        name: Name of Data Source
-        url: URL of Data Source
+        data_source_url: მონაცემთა წყაროს ბმული
+        interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
     errors:
       messages:
-        published_visual_missing_fields: "is required when the visual is published."
-        contact_missing_fields: "can't be blank."
-        send_data_missing_fields: "can't be blank."
-        submit_visual_missing_fields: "can't be blank."
-        required_field: "is a required field."
-        already_exists: 'already exists in the database.'
+        published_visual_missing_fields: "სავალდებულოა, როდესაც ვიზუალი გამოქვეყნდება."
+        contact_missing_fields: "არ დატოვოთ ცარიელი"
+        send_data_missing_fields: "არ დატოვოთ ცარიელი"
+        submit_visual_missing_fields: "არ დატოვოთ ცარიელი"
+        required_field: "სავალდებულოა"
+        already_exists: 'უკვე არსებობს მონაცემთა ბაზაში'
   mailer:
-    closing: "Sincerely,"
+    closing: "პატივისცემით,"
     signature: feradi.info
-    unsubscribe: Click here to unsubscribe
+    unsubscribe: გამოწერის გაუქმება
     notification:
       new_user:
         subject: "კეთილი იყოს თქვენი მობრძანება feradi.info-ზე!"
-        message: "მადლობა იმისათვის, რომ გახდით feradi.info-ს წევრი და თქვენი წვლილი შეგაქვთ ფერადი ახალი ამბების შექმნაში. თქვენ შეგიძლიათ მართოთ feradi.info-სგან მიღებული ელექტრონული წერილები შემდეგი ბმულის საშუალებით."
+        message: "მადლობას გიხდით feradi.info-ზე გაწევრიანებისთვის. ამით თქვენ ეხმარებით ახალი ფერადი ამბების შექმნას. თქვენ შეგიძლიათ მართოთ feradi.info-სგან მიღებული ელექტრონული წერილები შემდეგი ბმულის საშუალებით."
       new_visualization:
         subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
         message: "feradi.info-ს ახალი ვიზუალიზაცია, სახელწოდებით '%{title}', დაემატა. მიჰყევით შემდეგ ბმულს ახალი ვიზუალიზაციის სანახავად."
       visualization_comment:
-        subject: "ვიღაცამ feradi.info-ზე განთავსებულ თქვენს ვიზუალიზაციაზე '%{title}' დააკომენტარა."
-        message: "გთხოვთ, კომენტარის სანახავად მიჰყევით შემდეგ ბმულს."
+        subject: "feradi.info-ზე თქვენ მიერ განთავსებულ ვიზუალურ გამოსახულებაზე დატოვა '%{title}' დააკომენტარა."
+        message: "გთხოვთ, კომენტარის სანახავად მიჰყვეთ შემდეგ ბმულს."
     contact:
       contact_form:
-        subject: "feradi.info Contact Form"
+        subject: "feradi.info საკონტაქტო ფორმა"
       submit_visual:
-        subject: "feradi.info Submit Visual Form"
+        subject: "feradi.info ვიზუალური ფორმის წარდგენა"
       send_data:
-        subject: "feradi.info Send Data Form"
+        subject: "feradi.info მონაცემთა ფორმის გაგზავნა"
   helpers:
     actions: აირჩიეთ
     links:
@@ -113,35 +114,35 @@ ka:
       list: იხილეთ სრულად
       cancel: გაუქმება
       reset: საწყის კონფიგურაციაზე დაბრუნება
-      sign_in: Sign In
-      sign_up: Sign Up
+      sign_in: სისტემაში შესვლა
+      sign_up: რეგისტრაცია
       sign_out: გასვლა
-      website: View Website
-      forgot_password: Forgot Password?
-      password_reset: Send Password Reset Instructions
-      sign_in_provider: "Sign in with %{provider}"
-      download: Download
-      existing_file: View Existing File
-      more: Show More
+      website: ვებ-გვერდის ნახვა
+      forgot_password: დაგავიწყდათ პაროლი?
+      password_reset: პაროლის აღდგენის ინსტრუქციის გაგზავნა
+      sign_in_provider: "სისტემაში შესვლა %{provider}"
+      download: გადმოტვირთვა
+      existing_file: არსებულის ფაილის ნახვა
+      more: ვრცლად
       org_profile: "%{org} - გვერდი"
-      edit_org: "%{org} - Edit"
-      new_visual: "%{org} - Add Visualization"
+      edit_org: "%{org} - რედაქტირება"
+      new_visual: "%{org} - ვიზუალური გამოსახულების დამატება"
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
   visualization_types:
-    infographic: Infographic
-    interactive: Interactive
+    infographic: ინფოგრაფიკა
+    interactive: ინტერაქტივი
   filters:
     type:
-      header: Type
+      header: ტიპი
       all: All
-      infographic: Infographic
-      interactive: Interactive
+      infographic: ინფოგრაფიკა
+      interactive: ინტერაქტივი
     view:
-      header: Layout
-      grid: Grid
-      list: List
+      header: განლაგება
+      grid: ბადე
+      list: სია
   app:
     language:
       en: English
@@ -167,8 +168,8 @@ ka:
       comments: კომენტარები
       likes: Likes
       like: like
-      share: Share
-      not_published: Not Published
+      share: გაზიარება
+      not_published: გამოუქვეყნებელი
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -177,35 +178,35 @@ ka:
       success_updated: "%{obj} განახლებულია."
       notification_yes: თქვენ მიიღებთ შეტყობინებებს.
       notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
-      notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
-      notification_new_visual_none_success: You will not receive any notifications when visualizations are added.
-      notification_new_visual_by_category_success: "You will receive a notification when a visualization is added to these categories: %{categories}."
-      notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
-      notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის დამატებაზე.
-      notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას ამ კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
-      notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
-      notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
-      notification_language: You will be sent notifications in %{language}.
-      no_visual_records: No visualization records exist for your selection.
+      notification_new_visual_all_success: თქვენ მიიღებთ ვიზუალური გამოსახულების დამატების შეტყობინებას
+      notification_new_visual_none_success: თქვენ არ მიიღებთ ვიზუალური გამსახულების დამატების შეტყობინებას
+      notification_new_visual_by_category_success: "თქვენ მიიღებთ  ვიზუალური გამოსახულების შემდეგ კატეგორიებში დამატების შეტყობინებას:%{categories}."
+      notification_new_idea_all_success: თქვენ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის გამოქვეყნების შემდეგ.
+      notification_new_idea_none_success: თქვენ არ მიიღებთ შეტყობინებას ყოველი  ახალ იდეის გამოქვეყნების შემდეგ .
+      notification_new_idea_by_category_success: "თქვენ მიიღებთ შეტყობინებას შემდეგი კატეგორიები ამორჩევის შემთხვევაში: %{categories}."
+      notification_visual_comments_yes: თქვენ მიიღებთ შეტყობინებას თქვენ მიერ განთავსებული ვიზუალურ გამოსახულებაზე კომენტარის დამატების შესახებ %{org}
+      notification_visual_comments_no: თქვენ არ მიიღებთ შეტყობინებას თქვენ მიერ განთავსებული ვიზუალურ გამოსახულებაზე კომენტარის დამატების შესახებ %{org}.
+      notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
+      no_visual_records: თქვენ მიერ არჩეული ვიზუალური გამოსახულება არ მოიძებნა.
   layouts:
     application:
-      menu_visual: Visualizations
-      menu_data: Send Data
-      menu_idea: Post Ideas
-      menu_submit_visual: Submit Visual
-      menu_about: About
-      menu_contact: Contact
+      menu_visual: ვიზუალური გამოსახულებები
+      menu_data: მონაცემების გაგზავნა
+      menu_idea: იდეების გამოქვეყნება
+      menu_submit_visual: ვიზუალის წარდგენა
+      menu_about: შესახებ
+      menu_contact: კონტაქტი
       admin: ადმინისტრატორი
       user_profile: შენი გვერდი
-      notifications: Notifications
-      search: Search
+      notifications: შეტყობინებები
+      search: ძიება
       facebook: Facebook
       twitter: Twitter
       rss: RSS
       pinterest: Pinterest
-      subscription: Email Subscription
+      subscription: ელ.ფოსტის გამოწერა
       sign_out: გასვლა
-      terms: Terms of Service
+      terms: მომსახურების პირობები
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
     unsupported_browser:
@@ -219,17 +220,17 @@ ka:
       Safari: Safari
       admin: ადმინისტრატორი
       sign_out: გასვლა
-      terms: Terms of Service
+      terms: მომსახურების პირობები
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
   admin:
     index:
       title: ადმინისტრატორის განყოფილება
-      categories: Categories
+      categories: კატეგორიები
       organizations: ორგანიზაციები
-      visualizations: Visualizations
-      users: Users
-      pages: Pages
+      visualizations: ვიზუალური გამოსახულებები
+      users: მომხმარებლები
+      pages: გვერდები
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -242,44 +243,44 @@ ka:
   root:
     index:
       title: Visualizations
-      header_get_involved: Get Involved!
-      header_ideas: Ideas
-      header_visuals: Visuals
-      header_data: Data
-      text_get_involved: "If you are passionate about exploring and visualizing data, or just have interesting questions that we could answer visually, then get involved!"
-      text_ideas: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it."
-      text_visuals: "You too can contribute your visual ideas. Go ahead and register with us and begin posting your visuals under your or your organization’s name!"
-      text_data: "If you or your organization possess data that you think is of social interest and you would like someone to visualize it, please send us your data. "
-      button_ideas: Post Idea
-      button_visuals: Register
-      button_data: Send Data
+      header_get_involved: ჩაერთეთ!
+      header_ideas: იდეები
+      header_visuals: ვიზუალები
+      header_data: მონაცემები
+      text_get_involved: "თუ გსურთ შეისწავლოთ და ვიზუალურად გამოსახოთ მონაცემები, ან გაქვთ საინტერესო კითხვები, რომელზეც გაგცემთ ვიზუალურად გამოსახულ პასუხს, შემოგვიერთდით!"
+      text_ideas: "გაქვთ ახალი ამბის შექმნის იდეა? გსურთ მედიამ იმუშაოს თვენთვის საინტერესო საკითხებზე? გაგვიზიარეთ თქვენი იდეა აქ. კარგი იდეის მოწოდების შემთხვევაში ჯურნალისტი იმუშავებს ამ საკითხზე"
+      text_visuals: "თქვენც შეგიძლიათ შექმნათ თქვენი ვიზუალურად გამოსახული იდეა. დარეგისტრირდით და გაგვიზიარეთ თქვენი ან თქვენი ორგანიზაციის ვიზუალური გამოსახულებები"
+      text_data: "თუ თქვენ ან თქვენი ორგანიზაცია ფლობთ საზოგადოებისთვის საინტერესო მონაცემებს და გსურთ მათი ვიზუალურად გამოსახვა, გთხოვთ, გამოგვიგზავნეთ მონაცემები."
+      button_ideas: იდეის გაზიარება
+      button_visuals: რეგისტრაცია
+      button_data: მონაცემების გაგზავნა
     about:
-      title: About
+      title: შესახებ
     data:
-      title: Send Data
+      title: მონაცემების გაგზავნა
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი
-      phone: Phone Number
+      phone: ტელეფონის ნომერი
       email: ელ.ფოსტის მისამართი
-      what_is_data: Briefly describe the data that you want to visualize
-      why_visualize: Why do you want to visualize this data?
-      datasource: What is the data source?
-      file: Attach the data file
+      what_is_data: მოკლედ აღწერეთ თქვენთვის სასურველი ვიზუალურად გამოსასახი მონაცემები
+      why_visualize: რატომ გსურთ ამ მონაცემების ვიზუალურად გამოსახვა?
+      datasource: რა არის მონაცემთა წყარო?
+      file: დაურთეთ მონაცემთა ფაილი
       email_us: Send us an email
-      email_subject: "feradi.info Send Data Request"
+      email_subject: "feradi.info მონაცემთა მოთხოვნის გაგზავნა"
     submit_visual:
-      title: Submit a Visual
+      title: ვიზუალის წარდგენა
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი
-      phone: Phone Number
+      phone: ტელეფონის ნომერი
       email: ელ.ფოსტის მისამართი
-      how_use: Why would you like to use feradi.info to post your visualiations?
-      email_us: Send us an email
-      email_subject: "feradi.info Submit Visual Request"
+      how_use: რატომ გსურთ თქვენი მონაცემების feradi.info-ს საშუალებით ვიზუალურად გამოსახვა?
+      email_us: მოგვწერეთ ელ.წერილი
+      email_subject: "feradi.info წარადგინეთ ვიზუალური მოთხოვნა"
     terms:
-      title: Terms of Service
+      title: მომსახურების პირობები
     rss:
       title: RSS
     contact:
@@ -289,52 +290,52 @@ ka:
       name: სახელი
       email: ელ.ფოსტის მისამართი
       message: შეტყობინება
-      address_map: Find our office on the map
-      email_us: Send us an email
-      email_subject: "feradi.info Contact Form"
+      address_map: მოძებნეთ ჩვენი ოფისი რუკაზე
+      email_us: გამოგვიგზავნეთ ელექტრონული წერილი
+      email_subject: "feradi.info საკონტაქტო ფორმა"
   visuals:
     index:
-      title: Visualizations
-      title_feed: "%{app_name} Visualizations"
+      title: ვიზუალური გამოსახულებები
+      title_feed: "%{app_name} ვიზუალური გამოსახულებები"
   shared:
     show:
-      organization: Organization
-      reporter: Reporter
-      designer: Designer
-      data_source: Data Source
-      data_set: Data Set
-      category: Category
-      type: Type
-      embed: Embed
-      embed_link_title: Click to view larger image
-      comment_count: Comments
+      organization: ორგანიზაცია
+      reporter: მომხსენებელი
+      designer: დიზაინერი
+      data_source: მონაცემთა წყარო
+      data_set: მონაცემები
+      category: კატეგორია
+      type: ტიპი
+      embed: ჩასასმელი კოდი
+      embed_link_title: დიდი გამოსახულების სანახავად დააჭირეთ
+      comment_count: კომენტარები
   visualizations:
     form:
-      preview: Preview
-      crop_image: Create %{language} Thumbnail Image
-      datasources_header: Data Sources
-      add_datasource: Add Data Source
+      preview: ნახვა
+      crop_image: ესკიზის %{language} შექმნა
+      datasources_header: მონაცემთა წყაროები
+      add_datasource: მონაცემთა წყაროს დამატება
     datasource_fields:
-      remove_link: Remove Data Source
+      remove_link: მონაცემთა წყაროს წაშლა
   notifications:
     index:
-      title: Notifications
-      explain: "You can recieve email notifications whenever a visualization is added to feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
+      title: შეტყობინებები
+      explain: "თქვენ მიიღებთ ვიზუალური გამოსახულების  feradi.info-ზე დამატების შეტყობინებას ელ. წერილის სახით. სისტემაში შესვლა შეტყობინებების გამოსაწერად ხდება Facebook-ის ან feradi.info-ზე რეგისტრაციის გავლის მეშვეობით."
       all_sub_title: ყველა შეტყობინება
       all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?
       all_no: "არ გამომიგზავნო შეტყობინება."
       all_yes: "დიახ, მინდა მივიღო შეტყობინებები."
-      visual_comment_sub_title: New Visualization Comment Notifications for %{org}
-      visual_comment_label: "Do you want to recieve notifications when a comment is made to your organization's visualizations?"
+      visual_comment_sub_title: ახალ ვიზუალურ გამოსახულებაზე კომენტარის დატოვების შეტყობინება %{org}
+      visual_comment_label: "გსურთ მიიღოთ თქვენი ორგანიზაციის ვიზუალურ გამოსახულებაზე დატოვებული კომენტარის შეტყობინება?"
       visual_comment_no: "არ გამომიგზავნო შეტყობინება."
       visual_comment_yes: "დიახ, მინდა მივიღო შეტყობინებები."
-      new_visuals_sub_title: New Visualization Notifications
-      new_visuals_all: Notify me when any visualization is added.
-      new_visuals_none: I do not want to receive notifications when a new visualization is added.
-      new_visuals_by_category: "Notify me when a visualization is added to:"
+      new_visuals_sub_title: ახალი ვიზუალური გამოსახულეის შეტყობინება
+      new_visuals_all: შემატყობინე ახალი ვიზუალური გამოსახულების დამატება.
+      new_visuals_none: არ შემატყობინოთ ახალი ვიზუალური გამოსახულების დამატება.
+      new_visuals_by_category: "შემატყობინე ვიზუალური გამოსახულების დამატება:"
       new_ideas_sub_title: ახალი იდეის შეტყობინება
       new_ideas_all: შემატყობინე ახალი იდეის დამატება
       new_ideas_none: არ შემატყობინო ახალი იდეის დამატება.
       new_ideas_by_category: "შემატყობინე როდესაც იდეა დაემატება:"
-      language_sub_title: Notification Language
-      language_label: In what language do you want to receive the notifications?
+      language_sub_title: შეტყობინების ენა
+      language_label: რომელ ენაზე გსურთ შეტყობინების მიღება? 

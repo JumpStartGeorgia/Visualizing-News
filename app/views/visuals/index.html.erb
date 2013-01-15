@@ -1,7 +1,7 @@
 <%= render "shared/filter_bar" %>
 <%= content_for :head, auto_discovery_link_tag(:atom, visuals_path(:format => "atom")) %>
 
-<div id="visual_list" class="viz">
+<div id="visual_list" class="viz resp">
 	<%= render @view_type %>
 </div>
 

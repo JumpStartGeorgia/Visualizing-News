@@ -119,6 +119,7 @@ en:
       password_reset: Send Password Reset Instructions
       sign_in_provider: "Sign in with %{provider}"
       download: Download
+      existing_file: View Existing File
       more: Show More
       org_profile: "%{org} - Profile"
       edit_org: "%{org} - Edit"

@@ -200,6 +200,7 @@ body {
   background: #fff;
   top: 0px;
   bottom: 0px;
+  z-index: 1000;
   .brand {
     margin-top: 30px;
     margin-bottom: 45px;
@@ -224,6 +225,22 @@ body {
           box-sizing: border-box;
 }
 
+.fullscreen {
+  position: absolute;
+  top: auto;
+  left: 0px;
+  right: 0px;
+  z-index: auto;
+  margin: 0px;
+  padding: 0px 0px 0px 200px;
+/*
+  width: 100%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+*/
+}
+
 
 .nav-menu {
   font-family: exo_regular;
@@ -234,6 +251,7 @@ body {
     display: block;
     padding: 7px 0px;
     font-size: 12px;
+    letter-spacing: 1px;
     &:hover, &.active {
       text-decoration: none;
       font-size: 14px;
@@ -345,6 +363,7 @@ body {
 	border: none;
 	h1 {
 	  color: #555;
+    line-height: 24px;
   }
 }
 

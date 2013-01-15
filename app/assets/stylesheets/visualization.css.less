@@ -23,13 +23,6 @@
       width: 50%;
     }
     .vote{
-      & > * {
-        float: left;
-      }
-      .text {
-        padding-top: 4px;
-        margin-right: 10px;
-      }
       float: right;
     /*
       width: 50%;
@@ -135,9 +128,16 @@
     }
     .vote{
       float: right;
-      width: 50%;
       text-align: right;
     }
+  }
+}
+
+#visualization_row4{
+  .comments_count {
+    font-family: themix_regular;
+    color: gray;
+    font-weight: normal;
   }
 }
 
@@ -165,8 +165,17 @@
 
 /* vote button */
 .vote {
+  font-family: themix_regular;
+  color: gray;
 	a.like_btn {
 	}
+  & > * {
+    float: left;
+  }
+  & > .text {
+    padding-top: 4px;
+    margin-right: 10px;
+  }
 	a.like_btn, div.like_btn_voted {
     display: inline-block;
     text-transform: uppercase;
@@ -206,3 +215,14 @@ div#share a:hover, ul#share-links a:hover {
 	opacity: 0.7;
   filter: alpha(opacity=70);
 }
+
+
+#visual {
+ a {
+   img {
+     width: 100%;
+   }
+ }
+}
+
+

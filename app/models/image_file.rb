@@ -26,7 +26,7 @@ class ImageFile < ActiveRecord::Base
 	def attachment_styles
 		styles = {}
 Rails.logger.debug "///////////// attachment styles start"
-Rails.logger.debug "///////////// - vis type = #{self.visualization_type_id}"
+#Rails.logger.debug "///////////// - vis type = #{self.visualization_type_id}"
 #		if self.visualization_type_id == Visualization::TYPES[:infographic]
 Rails.logger.debug "///////////// -> in infographic"
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?

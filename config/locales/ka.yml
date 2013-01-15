@@ -5,7 +5,7 @@ ka:
       user: მომხმარებელი
       category: კატეგორია
       organization: ორგანიზაცია
-      visualization: ვიზუალური გამოსახულება
+      visualization: ვიზუალიზაცია
       page: გვერდი
       message: შეტყობინება
       datasource: მონაცემთა წყარო
@@ -121,7 +121,7 @@ ka:
       forgot_password: დაგავიწყდათ პაროლი?
       password_reset: პაროლის აღდგენის ინსტრუქციის გაგზავნა
       sign_in_provider: "სისტემაში შესვლა %{provider}"
-      download: გადმოტვირთვა
+      download: ჩამოტვირთვა
       existing_file: არსებულის ფაილის ნახვა
       more: ვრცლად
       org_profile: "%{org} - გვერდი"
@@ -168,7 +168,7 @@ ka:
       comments: კომენტარები
       likes: Likes
       like: like
-      share: გაზიარება
+      share: გააზიარეთ
       not_published: გამოუქვეყნებელი
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
@@ -190,12 +190,12 @@ ka:
       no_visual_records: თქვენ მიერ არჩეული ვიზუალური გამოსახულება არ მოიძებნა.
   layouts:
     application:
-      menu_visual: ვიზუალური გამოსახულებები
-      menu_data: მონაცემების გაგზავნა
+      menu_visual: ვიზუალიზაციები
+      menu_data: გამოგვიგზავნეთ მონაცემები
       menu_idea: იდეების გამოქვეყნება
-      menu_submit_visual: ვიზუალის წარდგენა
-      menu_about: შესახებ
-      menu_contact: კონტაქტი
+      menu_submit_visual: ატვირთეთ ვიზუალი
+      menu_about: ჩვენ შესახებ
+      menu_contact: დაგვიკავშირდი
       admin: ადმინისტრატორი
       user_profile: შენი გვერდი
       notifications: შეტყობინებები
@@ -228,7 +228,7 @@ ka:
       title: ადმინისტრატორის განყოფილება
       categories: კატეგორიები
       organizations: ორგანიზაციები
-      visualizations: ვიზუალური გამოსახულებები
+      visualizations: ვიზუალიზაციები
       users: მომხმარებლები
       pages: გვერდები
     users:
@@ -242,7 +242,7 @@ ka:
         title: მომხმარებლის დეტალები
   root:
     index:
-      title: Visualizations
+      title: ვიზუალიზაციები
       header_get_involved: ჩაერთეთ!
       header_ideas: იდეები
       header_visuals: ვიზუალები
@@ -255,9 +255,9 @@ ka:
       button_visuals: რეგისტრაცია
       button_data: მონაცემების გაგზავნა
     about:
-      title: შესახებ
+      title: ჩვენ შესახებ
     data:
-      title: მონაცემების გაგზავნა
+      title: გამოგვიგზავნეთ მონაცემები
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი
@@ -270,7 +270,7 @@ ka:
       email_us: Send us an email
       email_subject: "feradi.info მონაცემთა მოთხოვნის გაგზავნა"
     submit_visual:
-      title: ვიზუალის წარდგენა
+      title: ატვირთეთ ვიზუალი
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი
@@ -284,7 +284,7 @@ ka:
     rss:
       title: RSS
     contact:
-      title: დაგვიკავშირდით
+      title: დაგვიკავშირდი
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი
@@ -295,8 +295,8 @@ ka:
       email_subject: "feradi.info საკონტაქტო ფორმა"
   visuals:
     index:
-      title: ვიზუალური გამოსახულებები
-      title_feed: "%{app_name} ვიზუალური გამოსახულებები"
+      title: ვიზუალიზაციები
+      title_feed: "%{app_name} ვიზუალიზაციები"
   shared:
     show:
       organization: ორგანიზაცია

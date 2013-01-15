@@ -69,7 +69,7 @@
           <%= "#{t('.data_source')}: "%>
 					<span class="val-source">
             <% if !@visualization.datasources.blank? %>
-              <ul style="margin-left: 10px;">
+              <ul class="datasource_list">
               <% @visualization.datasources.each_with_index do |source, index| %>
 						    <% if !source.name.blank? %>
                   <li>

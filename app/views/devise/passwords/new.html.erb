@@ -1,33 +1,48 @@
-<%= page_title t('helpers.links.forgot_password') %>
+<div id="forgot_password_c">
 
-<div class="row-fluid">
-	<div class="span4">
-		<%= semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-			<%= devise_error_messages! %>
+  <%= page_title t('helpers.links.forgot_password') %>
 
-			<%= f.input :email, :input_html => { :size => 35 } %>
+  <div class="">
+	  <div class="">
 
-			<div class="control-group">
-				<%= f.submit t('helpers.links.password_reset'), :class => 'btn' %>
-			</div>
-		<% end %>
+	    <div class="providers">
+		    <%- if devise_mapping.omniauthable? %>
+			    <%- resource_class.omniauth_providers.each do |provider| %>
+			      <% if provider == :facebook %>
+    				  <%= link_to image_tag('connect_fb.png'), omniauth_authorize_path(resource_name, provider), :class => '' %>
+			      <% else %>
+    				  <%= link_to t('helpers.links.sign_in_provider', :provider => provider.to_s.titleize), omniauth_authorize_path(resource_name, provider), :class => 'btn btn-primary' %>
+			      <% end %>
+			    <% end -%>
+		    <% end -%>
+	    </div>
 
-		<div class="control-group">
-			<%- if controller_name != 'sessions' %>
-				<%= link_to t('helpers.links.sign_in'), new_session_path(resource_name), :class => 'btn btn-mini fancybox-nested' %>
-			<% end -%>
 
-			<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-				<%= link_to t('helpers.links.sign_up'), new_registration_path(resource_name), :class => 'btn btn-mini fancybox-nested' %>
-			<% end -%>
-		</div>
+		  <%= semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+			  <%= devise_error_messages! %>
 
-	</div>
-	<div class="span4">
-		<%- if devise_mapping.omniauthable? %>
-			<%- resource_class.omniauth_providers.each do |provider| %>
-				<%= link_to t('helpers.links.sign_in_provider', :provider => provider.to_s.titleize), omniauth_authorize_path(resource_name, provider), :class => 'btn btn-primary' %>
-			<% end -%>
-		<% end -%>
-	</div>
+			  <%= f.input :email, :input_html => { :size => 35, :placeholder => t('activerecord.attributes.user.email') }, :label => false %>
+
+			  <div class="control-group">
+				  <%= f.submit t('helpers.links.password_reset'), :class => 'btn' %>
+			  </div>
+		  <% end %>
+
+		  <div class="control-group">
+			  <%- if controller_name != 'sessions' %>
+				  <%= link_to t('helpers.links.sign_in'), new_session_path(resource_name), :class => 'fancybox-nested sign-in-link' %>
+			  <% end -%>
+
+			  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+				  <%= link_to t('helpers.links.sign_up'), new_registration_path(resource_name), :class => 'fancybox-nested sign-up-link' %>
+			  <% end -%>
+		  </div>
+
+	  </div>
+  </div>
+
+
+
+
+
 </div>

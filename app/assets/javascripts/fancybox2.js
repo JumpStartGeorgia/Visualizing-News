@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
 
 	// register fancybox
-	$("a.fancybox").fancybox({ width: 380, autoDimensions: false });
+	$("a.fancybox").fancybox({ width: 400 });
 	$("a.fancybox_visual").fancybox({
 		autoScale: false // use size of image to determine width/height
 	});

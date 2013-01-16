@@ -33,6 +33,7 @@
     <div id="visual">
 			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
 		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), url_for(params.merge(:view => 'interactive'))) %>
+        <%= image_tag "interactive.png", :id => 'interactive_indicator' %>
 			<% else %>
 		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), @visualization.image.url(:large, false), :class => 'fancybox_visual') if !@visualization.image_file_name.blank? %>
 			<% end %>

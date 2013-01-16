@@ -33,6 +33,8 @@
 							<div class="trans_visual_file" style="display: none">
 								<%= translation.fields_for :image_file do |upload| %>
 	      				  <%= upload.input :file, :as => :file %>
+	      				  <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
+
 								<% end %>
       				</div>
       				<div class="trans_interactive_url" style="display: none">

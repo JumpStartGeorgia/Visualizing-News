@@ -1,18 +1,13 @@
 class ImageFile < ActiveRecord::Base
 	belongs_to :visualization_translation
 
-	attr_accessible :visualization_translation_id,
+	attr_accessible :visualization_translation_id, :visualization_type_id,
 			:file, :file_file_name, :file_content_type, :file_file_size, :file_updated_at,
 			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :image_is_cropped
 
 	attr_accessor :reset_crop, :was_cropped
 
-=begin
-	def visualization_type_id
-		2
-	end
-=end
-  validates :file_file_name, :presence => true
+  validates :file_file_name, :presence => true, :if => "visualization_type_id == Visualization::TYPES[:infographic]"
 
 	has_attached_file :file,
     :url => "/system/visualizations/:visual_id/image/:permalink_:locale_:style.:extension",
@@ -26,8 +21,8 @@ class ImageFile < ActiveRecord::Base
 	def attachment_styles
 		styles = {}
 Rails.logger.debug "///////////// attachment styles start"
-#Rails.logger.debug "///////////// - vis type = #{self.visualization_type_id}"
-#		if self.visualization_type_id == Visualization::TYPES[:infographic]
+Rails.logger.debug "///////////// - vis type = #{self.visualization_type_id}"
+		if self.visualization_type_id == Visualization::TYPES[:infographic]
 Rails.logger.debug "///////////// -> in infographic"
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 Rails.logger.debug "///////////// -> generating all styles"
@@ -42,14 +37,13 @@ Rails.logger.debug "///////////// -> generating new thumb style"
 					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
 				}
 			end
-=begin
-		elsif visualization_type_id == Visualization::TYPES[:interactive]
+		elsif self.visualization_type_id == Visualization::TYPES[:interactive]
 Rails.logger.debug "///////////// -> in interactive"
 			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 Rails.logger.debug "///////////// -> generating all styles"
 				styles = {
 					:thumb => {:geometry => "230x230#"},
-					:medium => {:geometry => "600x500>", :convert_options => "-gravity north -thumbnail 600x500^ -extent 600x500"},
+					:medium => {:geometry => "600x>", :convert_options => "-gravity north -thumbnail 600x500^ -extent 600x500"},
 					:large => {:geometry => "900x>", :convert_options => "-gravity north -thumbnail 900x500^ -extent 900x500"}
 				}
 			else
@@ -59,7 +53,6 @@ Rails.logger.debug "///////////// -> generating new thumb style"
 				}
 			end
 		end
-=end
 Rails.logger.debug "///////////// attachment styles end"
 		return styles
 	end

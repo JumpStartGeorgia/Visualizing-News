@@ -90,11 +90,14 @@ class VisualizationsController < ApplicationController
 
 		# if interactive, take screen shots of urls
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
+logger.debug "//////////// is interactive, taking snapshots"
 			files = Hash.new
 			@visualization.visualization_translations.each do |trans|
+logger.debug "//////////// - locale = #{trans.locale}"
 				# only proceed if the url is valid
 				if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
 						!trans.interactive_url.blank? && trans.image_file_name.blank?
+logger.debug "//////////// -- records are valid, taking screen shot"
 					# get screenshot of interactive site
 					kit   = IMGKit.new(trans.interactive_url)
 					img   = kit.to_img(:png)
@@ -102,7 +105,8 @@ class VisualizationsController < ApplicationController
 										           :encoding => 'ascii-8bit')
 					files[trans.locale].write(img)
 					files[trans.locale].flush
-					trans.build_image_file(:file => files[trans.locale])
+logger.debug "//////////// -- adding image file"
+					trans.image_file.file = files[trans.locale]
 				end
 			end
 		end

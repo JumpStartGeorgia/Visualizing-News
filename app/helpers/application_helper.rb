@@ -65,15 +65,15 @@ module ApplicationHelper
 			vis = VisualizationTranslation.where(:locale => locale, :visualization_id => @visualization.id)
 		end
 
-		if vis && !vis.empty? && org && !org.empty?
+		if !vis.blank? && !org.blank?
 			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
 				:organization_id => org.first.permalink,
 				:id => vis.first.permalink
 			)
-		elsif vis && !vis.empty?
+		elsif !vis.blank?
 			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
 				:id => vis.first.permalink)
-		elsif org && !org.empty?
+		elsif !org.blank?
 			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
 				:id => org.first.permalink)
 		else

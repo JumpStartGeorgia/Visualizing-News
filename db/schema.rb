@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115082318) do
+ActiveRecord::Schema.define(:version => 20130116101649) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20130115082318) do
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
+    t.integer  "visualization_type_id"
   end
 
   add_index "image_files", ["visualization_translation_id"], :name => "index_image_files_on_visualization_translation_id"

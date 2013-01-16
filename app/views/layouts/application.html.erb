@@ -11,6 +11,8 @@
 		<meta property="og:url" content="<%= current_url %>" />
 		<% if @visualization && @visualization.id && !@visualization.image_file_name.blank? %>
 			<meta property="og:image" content="<%= full_url(@visualization.image.url(:thumb, false)) %>" />
+    <% else %>
+			<meta property="og:image" content="<%= full_url(image_path('logo.png')) %>" />
 		<% end %>
 		<meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
 

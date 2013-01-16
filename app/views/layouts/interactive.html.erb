@@ -28,40 +28,48 @@
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale),:class=>"brand font")%>
-          <div class="container nav-collapse">
-            <ul class="nav pull-right">
-              <li><%= link_to 'close', url_for(params.merge(:view => nil)) %></li>
-            </ul>
-
-	          <ul id="share-links" class="nav pull-right">
-							<li>
-								<%= link_to(image_tag("share_fb.png"),
-											"http://www.facebook.com/share.php?u=#{current_url(true)}",
-											:title => "facebook",	:target => "_blank") %>
-							</li>
-							<li>
-								<%= link_to(image_tag("share_twitter.png"),
-											"https://twitter.com/share?url=#{current_url(true)}", :title => "twitter",
-											:target => "_blank") %>
-							</li>
-							<li>
-								<%= link_to(image_tag("share_gplus.png"),
-											"https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
-											:target => "_blank") %>
-							</li>
-							<li>
-								<%= link_to(image_tag("share_pinterest.png"),
-											"http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{full_url(image_path(@visualization.image.url(:medium, false)))}&description=#{@visualization.title}", :title => "pinterest",
-											:onclick => "window.open(this.href); return false;") %>
-							</li>
-	          </ul>
+          <%= link_to(image_tag('logo_interactive.png'), root_path(:locale => I18n.locale),:class=>"brand font")%>
+          <div class="container-fluid nav-collapse">
+            <div id="social" class="pull-right">
+              <div class="">
+              </div>
+              <div class="">
+                <div class="clear" id="close-link"><%= link_to 'close', url_for(params.merge(:view => nil)) %></div>
+	              <div class="clear" id="share-links">
+	                <ul class="nav">
+							      <li>
+								      <%= link_to(image_tag("share_fb.png"),
+											      "http://www.facebook.com/share.php?u=#{current_url(true)}",
+											      :title => "facebook",	:target => "_blank") %>
+							      </li>
+							      <li>
+								      <%= link_to(image_tag("share_twitter.png"),
+											      "https://twitter.com/share?url=#{current_url(true)}", :title => "twitter",
+											      :target => "_blank") %>
+							      </li>
+							      <li>
+								      <%= link_to(image_tag("share_gplus.png"),
+											      "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
+											      :target => "_blank") %>
+							      </li>
+							      <li>
+								      <%= link_to(image_tag("share_pinterest.png"),
+											      "http://pinterest.com/pin/create/button/?url=#{current_url(true)}&media=#{full_url(image_path(@visualization.image.url(:medium, false)))}&description=#{@visualization.title}", :title => "pinterest",
+											      :onclick => "window.open(this.href); return false;") %>
+							      </li>
+	                </ul>
+                </div>
+              </div>
+              <div class="">
+                <a href="<%= url_for(params.merge(:view => nil)) %>" id="close-button"></a>
+              </div>
+            </div>
           </div><!--/.nav-collapse -->
         </div>
       </div>

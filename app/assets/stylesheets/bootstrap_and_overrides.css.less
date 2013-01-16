@@ -62,14 +62,67 @@ html, body {
 /* style for looking at interactive visual with iframe */
 body#interactive_layout {
 	.navbar {
+/*
 		border-bottom: solid 3px #9a9a9a;
+*/
+    border: none;
 		.navbar-inner {
-			background-color: #fafafa;
+      background: #fbfde3;
+      a.brand {
+      }
+		}
+		.container-fluid {
+		  padding-right: 0px;
 		}
 	}
 
+  #social {
+    background: #fff;
+    padding: 0px 40px 14px 45px;
+    & > div {
+      float: left;
+      
+    }
+    #close-link, #share-links {
+      float: none;
+      display: block;
+    }
+    #close-link {
+      margin-top: 5px;
+      margin-bottom: 9px;
+      a {
+        display: block;
+        float: right;
+        color: #aaa;
+        padding-right: 3px;
+      }
+    }
+    #share-links {
+      ul.nav {
+        float: right;
+        margin-right: 0px;
+        li {
+          a {
+            padding: 0px 2px;
+          }
+        }
+      }
+    }
+    #close-button {
+      width: 12px;
+      height: 12px;
+      display: block;
+      background: url('/assets/close_button.png') 0px 0px no-repeat;
+      margin-top: 7px;
+      margin-left: 20px;
+      &:hover {
+        background-position: 0px 100%;
+      }
+    }
+  }
+
 	iframe#interactive {
-		padding-top: 67px;
+		padding-top: 87px;
 	}
 }
 

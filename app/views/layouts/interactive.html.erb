@@ -34,13 +34,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to(image_tag('logo_interactive.png'), root_path(:locale => I18n.locale),:class=>"brand font")%>
+          <%= link_to(image_tag('logo_interactive.png'),
+              root_path(:locale => I18n.locale),
+					    :title => t('app.common.app_name'),
+              :class=>"brand font")%>
           <div class="container-fluid nav-collapse">
             <div id="social" class="pull-right">
               <div class="">
               </div>
               <div class="">
-                <div class="clear" id="close-link"><%= link_to 'close', url_for(params.merge(:view => nil)) %></div>
+                <div class="clear" id="close-link"><%= link_to "<- #{t('.go_back')}", url_for(params.merge(:view => nil)) %></div>
 	              <div class="clear" id="share-links">
 	                <ul class="nav">
 							      <li>
@@ -67,7 +70,7 @@
                 </div>
               </div>
               <div class="">
-                <a href="<%= url_for(params.merge(:view => nil)) %>" id="close-button"></a>
+                <a href="<%= @visualization.interactive_url %>" id="close-button"></a>
               </div>
             </div>
           </div><!--/.nav-collapse -->

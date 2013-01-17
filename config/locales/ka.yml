@@ -211,7 +211,7 @@ ka:
       js_link_title: "ეწვიეთ ჯამპსტარტ ჯორჯიას ვებ-გვერდს"
       js_link_text: აგებულია
     interactive:
-      go_back: go back
+      go_back: უკან დაბრუნება
     unsupported_browser:
       title: არასათანადო ბრაუზერი
       p1: სამწუხაროდ თქვენი ინტერნეტ ბრაუზერის მოხმარების ვადა გასულია და ვერ მოხდება ვებ-გვერდთან სრულად დაკავშირება.
@@ -312,7 +312,7 @@ ka:
       type: ტიპი
       embed: ჩასასმელი კოდი
       embed_link_title: დიდი გამოსახულების სანახავად დააჭირეთ
-      embed_link_interactive_title: Click to view interactive visualization
+      embed_link_interactive_title: ინტერაქტიული ვიზუალიზაციის სანახავად დააჭირეთ
       comment_count: კომენტარები
   visualizations:
     form:

@@ -114,8 +114,9 @@ en:
       list: View All
       cancel: Cancel
       reset: Reset
-      sign_in: Sign In
-      sign_up: Sign Up
+      sign_in2: Sign In
+      sign_in: "Already have an account?"
+      sign_up: "Don't have an account yet?"
       sign_out: Sign Out
       website: View Website
       forgot_password: Forgot Password?

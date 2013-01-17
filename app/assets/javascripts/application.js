@@ -29,15 +29,6 @@ $(document).ready(function(){
 
   // build category slider
   $('#category_slider_content').elastislide();
-/*  $('#carouselh').jsCarousel({
-      onthumbnailclick: function(src) { alert(src); },
-      autoscroll: false,
-      masked: false,
-      itemstodisplay: 8,
-      orientation: 'h' });
-*/
-
-
 
 
 

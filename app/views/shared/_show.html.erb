@@ -132,17 +132,29 @@
 			</div>
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
-			  <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
-					onmouseup="return false;"><%= link_to(
-						image_tag(full_url(@visualization.image.url(:medium, false)),
-							:title => @visualization.title,
-							:alt => @visualization.title),
-						full_url(url_for(params.merge(:from_embed => true))),
-						:title => t('.embed_link_title'),
-						:target => :blank) %>
-					<br />
-					<%= link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank %>
-				</textarea>
+        <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+			    <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
+					  onmouseup="return false;"><%= link_to(
+						  image_tag(full_url(@visualization.image.url(:medium, false)),
+							  :alt => @visualization.title),
+						  full_url(url_for(params.merge(:from_embed => true))),
+						  :title => t('.embed_link_title'),
+						  :target => :blank) %>
+					  <br />
+					  <%= link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank %>
+				  </textarea>
+        <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+		      <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
+					  onmouseup="return false;"><%= link_to(
+              image_tag(full_url(@visualization.image.url(:medium, false)),
+							  :alt => @visualization.title),
+              full_url(url_for(params.merge(:view => 'interactive', :from_embed => true))),
+					    :title => t('.embed_link_interactive_title'),
+					    :target => :blank) %>
+					  <br />
+					  <%= link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank %>
+				  </textarea>
+        <% end %>
 			</div>
     </div>
   </div>

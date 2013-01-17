@@ -49,6 +49,11 @@ $(document).ready(function(){
 		$(window).bind('load resize', reset_interactive_iframe_height);
 	}
 
+  // if coming from embed link, automatically show large image
+  if (gon.trigger_fancybox_large_image){
+    $("a.fancybox_visual").trigger('click');
+  }
+
 	// visualization form
 	if (gon.edit_visualization){
 		// load the date time pickers

@@ -391,16 +391,34 @@ body {
 footer {
 	margin-top: -54px; /* negative value of footer height */
 	min-height: 41px !important;
-	background: #dadada !important;
+	background: transpanent;
 	padding: 0 20px;
 	padding-top: 13px;
 	font-size: 10pt;
+	.gradient {
+	  margin-bottom: 15px;
+	  width: 100%;
+	  height: 1px;
+    background: #e2e2e2; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEyJSIgc3RvcC1jb2xvcj0iI2UyZTJlMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijg4JSIgc3RvcC1jb2xvcj0iI2UyZTJlMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(left, #ffffff 0%, #e2e2e2 12%, #e2e2e2 88%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(12%,#e2e2e2), color-stop(88%,#e2e2e2), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #ffffff 0%,#e2e2e2 12%,#e2e2e2 88%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #ffffff 0%,#e2e2e2 12%,#e2e2e2 88%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #ffffff 0%,#e2e2e2 12%,#e2e2e2 88%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to right, #ffffff 0%,#e2e2e2 12%,#e2e2e2 88%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-8 */
+  }
 	div#left {
 	  margin: 0 !important;
 	  float: left;
 	  width: 30%;
 	  margin-top: 20px;
-    padding-top: 3px;
+    padding-top: 15px;
+    font-family: verdana, arial, sans-serif;
+    font-size: 10px;
+    color: rgba(0, 0, 0, .8);
   }
   a:hover {
 	  background-color: #D4D4D4;
@@ -430,16 +448,37 @@ footer {
 	  float: right;
 	  width: 30%;
 	  text-align: right;
-	  ul li {
-	    display:inline;
+	  ul {
+	    float: right;
+	    li {
+  	    display: block;
+	    }
     }
-    #js_link_text{
+    #js_link_text {
 	    text-align: right;
     }
     #js_logo{
 	    text-align: left;
+	    & > * {
+	      display: block;
+	      float: left;
+	    }
+	    a {
+	      margin-top: 7px;
+	      &:hover {
+	        background: none;
+	      }
+	    }
 	    img {
 	      vertical-align: middle;
+      }
+      div {
+        width: 38px;
+        height: 38px;
+        overflow: hidden;
+        img {
+          max-width: none;
+        }
       }
     }
   }

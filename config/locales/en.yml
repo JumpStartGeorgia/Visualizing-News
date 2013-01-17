@@ -311,6 +311,7 @@ en:
       type: Type
       embed: Embed
       embed_link_title: Click to view larger image
+      embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
   visualizations:
     form:

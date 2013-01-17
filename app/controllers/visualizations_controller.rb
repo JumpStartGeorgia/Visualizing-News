@@ -99,7 +99,7 @@ logger.debug "//////////// - locale = #{trans.locale}"
 						!trans.interactive_url.blank? && trans.image_file_name.blank?
 logger.debug "//////////// -- records are valid, taking screen shot"
 					# get screenshot of interactive site
-					kit   = IMGKit.new(trans.interactive_url)
+					kit   = IMGKit.new(trans.interactive_url, :'javascript-delay' => 10000)
 					img   = kit.to_img(:png)
 					files[trans.locale] = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
 										           :encoding => 'ascii-8bit')

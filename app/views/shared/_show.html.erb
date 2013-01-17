@@ -32,10 +32,10 @@
   <div id="main_block" class="span6">
     <div id="visual">
 			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), url_for(params.merge(:view => 'interactive'))) %>
+		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
         <%= image_tag "interactive.png", :id => 'interactive_indicator' %>
 			<% else %>
-		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), @visualization.image.url(:large, false), :class => 'fancybox_visual') if !@visualization.image_file_name.blank? %>
+		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), @visualization.image.url(:large, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
 			<% end %>
     </div>
   </div>

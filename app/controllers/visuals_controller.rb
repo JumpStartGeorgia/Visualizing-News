@@ -32,6 +32,11 @@ class VisualsController < ApplicationController
 
 			gon.show_fb_comments = true
 
+      # if from_embed in url, set gon so large image loads automatically
+      if params[:from_embed] && @visualization.visualization_type_id == Visualization::TYPES[:infographic]
+        gon.trigger_fancybox_large_image = true
+      end
+
 			respond_to do |format|
 			  format.html
 			  format.json { render json: @visualization }

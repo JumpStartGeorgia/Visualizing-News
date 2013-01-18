@@ -44,7 +44,8 @@ Rails.logger.debug "///////////// -> generating all styles"
 				styles = {
 					:thumb => {:geometry => "230x230#"},
 					:medium => {:geometry => "600x>", :convert_options => "-gravity northwest -thumbnail 600x500^ -extent 600x500"},
-					:large => {:geometry => "900x>", :convert_options => "-gravity northwest -thumbnail 900x500^ -extent 900x500"}
+					:large => {:geometry => "900x>"}
+#					:large => {:geometry => "900x>", :convert_options => "-gravity northwest -thumbnail 900x500^ -extent 900x500"}
 				}
 			else
 Rails.logger.debug "///////////// -> generating new thumb style"

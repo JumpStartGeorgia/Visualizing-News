@@ -12,6 +12,10 @@ class VisualizationsController < ApplicationController
     controller_instance.send(:assigned_to_org?, params[:organization_id])
   end
 
+  # for taking screen shots  
+  require "headless"
+  require "selenium-webdriver"
+
   def show
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
@@ -99,6 +103,20 @@ logger.debug "//////////// - locale = #{trans.locale}"
 						!trans.interactive_url.blank? && trans.image_file_name.blank?
 logger.debug "//////////// -- records are valid, taking screen shot"
 					# get screenshot of interactive site
+
+          headless = Headless.new
+          headless.start
+          driver = Selenium::WebDriver.for :chrome
+          driver.navigate.to trans.interactive_url
+          sleep 8
+          filename = "#{Rails.root}/tmp/visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}.png"
+          driver.save_screenshot(filename)
+          driver.quit
+          headless.destroy
+          files[trans.locale] = filename
+					trans.image_file.file = File.new(filename, 'r')
+
+=begin
 					kit   = IMGKit.new(trans.interactive_url, :'javascript-delay' => 10000)
 					img   = kit.to_img(:png)
 					files[trans.locale] = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
@@ -107,6 +125,7 @@ logger.debug "//////////// -- records are valid, taking screen shot"
 					files[trans.locale].flush
 logger.debug "//////////// -- adding image file"
 					trans.image_file.file = files[trans.locale]
+=end
 				end
 			end
 		end
@@ -131,9 +150,17 @@ logger.debug "//////////// -- adding image file"
 		# if a temp file was created, go ahead and delete it
 		if !files.blank?
 			files.keys.each do |key|
+				File.delete(files[key])
+			end
+		end
+
+=begin
+		if !files.blank?
+			files.keys.each do |key|
 				files[key].unlink
 			end
 		end
+=end
   end
 
   def update

@@ -35,7 +35,7 @@
 		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
         <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
 			<% else %>
-		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), @visualization.image.url(:large, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
+		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
 			<% end %>
     </div>
   </div>

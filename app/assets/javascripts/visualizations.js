@@ -1,6 +1,6 @@
 function reset_interactive_iframe_height(){
 	// adjust iframe height to fill entire window minus the header bar
-	$('iframe#interactive').css('height', $(window).height()-46);
+	$('iframe#interactive').css('height', $(window).height()-88);
 }
 
 var adjusted_size = gon.thumbnail_size;

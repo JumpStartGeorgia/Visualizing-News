@@ -7,6 +7,9 @@
 
 		<meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
 				t('app.common.app_name') %>" />
+		<% if @visualization && @visualization.id && !@visualization.explanation.blank? %>
+  		<meta property="og:description" content="<%= @visualization.explanation%>" />
+    <% end %>
 		<meta property="og:type" content="non_profit" />
 		<meta property="og:url" content="<%= current_url %>" />
 		<% if @visualization && @visualization.id && !@visualization.image_file_name.blank? %>

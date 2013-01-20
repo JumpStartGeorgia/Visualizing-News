@@ -21,7 +21,7 @@ class OrganizationsController < ApplicationController
 				@user_in_org = true
 			end
 
-      process_visualization_querystring # in app controller
+      process_visualization_querystring(@visualizations) # in app controller
 
 		  respond_to do |format|
 		    format.html

@@ -4,9 +4,8 @@
 ####################
 class VisualsController < ApplicationController
   def index
-    @visualizations = Visualization.published.recent.page(params[:page])
+    @visualizations = process_visualization_querystring(Visualization.published.recent.page(params[:page]))
 
-    process_visualization_querystring # in app controller
 
     respond_to do |format|
       format.atom
@@ -160,12 +159,13 @@ protected
 
   def next_previous(type)
 		# get a list of visual ids in correct order
-    visualizations = Visualization.select("visualizations.id").published.recent
+    visualizations = process_visualization_querystring(Visualization.select("visualizations.id").published.recent)
+    
     # get the visual that was showing
     visualization = Visualization.published.find_by_permalink(params[:id])
 		record_id = nil
 
-		if visualizations && !visualizations.empty? && visualization
+		if !visualizations.blank? && !visualization.blank?
 			index = visualizations.index{|x| x.id == visualization.id}
       if type == 'next'
   			if index
@@ -195,7 +195,7 @@ protected
 
   			if visual
   			  # found next record, go to it
-          redirect_to visualization_path(visual.permalink)
+          redirect_to visualization_path(visual.permalink, @param_options)
           return
   	    end
       end

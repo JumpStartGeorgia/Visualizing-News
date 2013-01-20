@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 #	before_filter :is_browser_supported?
 	before_filter :preload_global_variables
 	before_filter :initialize_gon
+	before_filter :create_querystring_hash
 	after_filter :store_location
 
 	layout :layout_by_resource
@@ -110,7 +111,13 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   end
 
   #######################
-  def process_visualization_querystring
+  def create_querystring_hash
+    @param_options = Hash.new
+    url = URI.parse(request.fullpath)
+    @param_options = CGI.parse(url.query).inject({}) { |h, (k, v)| h[k] = v.first; h } if url.query
+  end
+
+  def process_visualization_querystring(visual_objects)
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/list'
 			@filter_view_selection = I18n.t('filters.view.list')
@@ -121,14 +128,15 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 		if params[:type]
 			type_id = Visualization.type_id(params[:type])
-			@visualizations = @visualizations.by_type(type_id) if type_id
+			visual_objects = visual_objects.by_type(type_id) if type_id
 			@filter_type_selection = I18n.t("filters.type.#{params[:type]}")
 		end
 
 		if params[:category]
       index = @categories.index{|x| x.permalink == params[:category]}
-			@visualizations = @visualizations.by_category(@categories[index].id) if index
+			visual_objects = visual_objects.by_category(@categories[index].id) if index
 		end
+		return visual_objects
   end
 
   #######################

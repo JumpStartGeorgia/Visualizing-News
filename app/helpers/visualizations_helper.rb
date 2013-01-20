@@ -4,7 +4,7 @@ module VisualizationsHelper
 		if user_in_org && organization_id
 			organization_visualization_path(organization_id,visualization_id)
 		else
-			visualization_path(visualization_id)
+			visualization_path(visualization_id, @param_options)
 		end
 	end
 
@@ -21,6 +21,13 @@ module VisualizationsHelper
 	  return col
   end
 
+  def merge_visual_params(key, value)
+    p = @param_options.clone
+    if !key.blank? && !value.blank?
+      p[key.to_s] = value
+    end
+    return p 
+  end
 
   def votes_cont_old (obj)
     ip = request.remote_ip

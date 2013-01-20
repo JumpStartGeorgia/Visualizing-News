@@ -6,3 +6,4 @@
 //= require fancybox
 //= require fancybox2
 //= require vendor
+//= require visualizations

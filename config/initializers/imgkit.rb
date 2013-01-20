@@ -6,6 +6,7 @@
 # You can also remove all the silencers if you're trying to debug a problem that might stem from framework code.
 # Rails.backtrace_cleaner.remove_silencers!
 
+=begin
 IMGKit.configure do |config|
 	y = YAML.load_file(File.open(Rails.root.join("config", "database.yml")))
 
@@ -19,3 +20,4 @@ IMGKit.configure do |config|
   }
   config.default_format = :png
 end
+=end

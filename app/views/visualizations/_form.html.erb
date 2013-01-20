@@ -48,6 +48,28 @@
 
 			<% end %>
 		</div>
+	<% elsif !@locale_to_reset.blank? %>
+		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
+		<%= f.fields_for :visualization_translations, trans do |translation| %>
+				<%= translation.hidden_field :reload_file, :value => 'true' %>
+
+      <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+  			<h3><%= t('.reset_file', :language => t("app.language.#{@locale_to_reset}")) %></h3>
+			  <%= translation.fields_for :image_file do |upload| %>
+				  <%= upload.input :file, :as => :file %>
+			    <%= upload.hidden_field :reset_crop, :value => true %>
+			    <%= upload.hidden_field :image_is_cropped, :value => false %>
+			  <% end %>
+      <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+    			<h3><%= t('.reset_url', :language => t("app.language.#{@locale_to_reset}")) %></h3>
+  				<%= translation.input :interactive_url, :as => :url %>
+			    <%= translation.fields_for :image_file do |upload| %>
+  			    <%= upload.hidden_field :reset_crop, :value => true %>
+				    <%= upload.hidden_field :image_is_cropped, :value => false %>
+          <% end %>
+      <% end %>
+
+		<% end %>
 	<% elsif !@locale_to_crop.blank? %>
 		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first %>
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
@@ -55,6 +77,7 @@
 			<h3><%= t('.crop_image', :language => t("app.language.#{@locale_to_crop}")) %></h3>
 			<%= translation.fields_for :image_file do |upload| %>
 				<%= upload.hidden_field :image_is_cropped, :value => true %>
+				<%= upload.hidden_field :redid_crop, :value => true %>
 				<%= upload.hidden_field :crop_x %>
 				<%= upload.hidden_field :crop_y %>
 				<%= upload.hidden_field :crop_w %>
@@ -110,7 +133,13 @@
 								</div>
 								<div class="controls">
 									<%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
-									<%= upload.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
+									<%# upload.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
+                  <%= link_to t('activerecord.attributes.image_file.reset_crop'), url_for(params.merge(:reset_crop => trans.locale)), :class => 'btn btn-mini' %> 
+                  <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+                    <%= link_to t('activerecord.attributes.image_file.reset_file'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %> 
+                  <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+                    <%= link_to t('activerecord.attributes.image_file.reset_url'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %> 
+                  <% end %>
 								</div>
 							</div>
 

@@ -12,9 +12,7 @@ class VisualizationsController < ApplicationController
     controller_instance.send(:assigned_to_org?, params[:organization_id])
   end
 
-  # for taking screen shots  
-  require "headless"
-  require "selenium-webdriver"
+  require 'screenshot'
 
   def show
     @organization = Organization.find_by_permalink(params[:organization_id])
@@ -71,21 +69,44 @@ class VisualizationsController < ApplicationController
 			trans.build_dataset_file if !trans.dataset_file
 		end
 
-		locales_to_crop = @visualization.locales_to_crop
-		if !locales_to_crop.empty?
-			@locale_to_crop = locales_to_crop.first
+    new_layout = nil
+    if params[:reset_crop] && I18n.available_locales.index(params[:reset_crop].to_sym)
+logger.debug "************* reseting crop for #{params[:reset_crop]}"
+			@locale_to_crop = params[:reset_crop]
 			to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
 			gon.largeW = to_crop.visual_geometry(:large).width
 			gon.largeH = to_crop.visual_geometry(:large).height
 			gon.originalW = to_crop.visual_geometry(:original).width
-		else
-			@visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
-		end
+#      new_layout = 'fancybox' 
+    elsif params[:reset_file] && I18n.available_locales.index(params[:reset_file].to_sym)
+logger.debug "************* reseting file for #{params[:reset_file]}"
+			@locale_to_reset = params[:reset_file]
+#      new_layout = 'fancybox' 
+    else 
+		  locales_to_crop = @visualization.locales_to_crop
+		  if !locales_to_crop.empty?
+logger.debug "************* setting crop for #{locales_to_crop.first}"
+			  @locale_to_crop = locales_to_crop.first
+			  to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
+			  gon.largeW = to_crop.visual_geometry(:large).width
+			  gon.largeH = to_crop.visual_geometry(:large).height
+			  gon.originalW = to_crop.visual_geometry(:original).width
+		  else
+logger.debug "************* load complete form"
+			  @visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
+		  end
+    end
 
 		gon.edit_visualization = true
 		gon.visualization_type = @visualization.visualization_type_id
 		gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
-
+    
+    if new_layout
+      respond_to do |format|
+        format.html { render :layout => new_layout}
+        format.json { render json: @visualization }
+      end
+    end
   end
 
   def create
@@ -103,19 +124,11 @@ logger.debug "//////////// - locale = #{trans.locale}"
 						!trans.interactive_url.blank? && trans.image_file_name.blank?
 logger.debug "//////////// -- records are valid, taking screen shot"
 					# get screenshot of interactive site
-
-          headless = Headless.new
-          headless.start
-          driver = Selenium::WebDriver.for :chrome
-          driver.navigate.to trans.interactive_url
-          sleep 8
-          filename = "#{Rails.root}/tmp/visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}.png"
-          driver.save_screenshot(filename)
-          driver.quit
-          headless.destroy
-          files[trans.locale] = filename
-					trans.image_file.file = File.new(filename, 'r')
-
+          filename = Screenshot.take(trans.interactive_url)
+          if filename
+            files[trans.locale] = filename
+					  trans.image_file.file = File.new(filename, 'r')
+          end
 =begin
 					kit   = IMGKit.new(trans.interactive_url, :'javascript-delay' => 10000)
 					img   = kit.to_img(:png)
@@ -167,50 +180,89 @@ logger.debug "//////////// -- adding image file"
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
 
-		# if reset crop flag set, reset image is cropped falg
-		reset_crop = false
-		params[:visualization][:visualization_translations_attributes].keys.each do |key|
-			x = params[:visualization][:visualization_translations_attributes][key][:image_file_attributes]
-			if x[:reset_crop] == "true"
-				x[:image_is_cropped] = false
-				reset_crop = true
-			end
-		end
+		Visualization.transaction do
+			files = Hash.new
 
-    respond_to do |format|
-      if @visualization.update_attributes(params[:visualization])
-				# if the visuals need to be re-cropped, do it now
-				processed_crop = false
-				@visualization.visualization_translations.each do |trans|
-					if trans.image_record && !trans.image_record.was_cropped && trans.image_record.image_is_cropped
-						trans.image_record.reprocess_file
-						processed_crop = true
-					end
-				end
+		  # if reset crop flag set, reset image is cropped falg
+		  reset_crop = false
+		  params[:visualization][:visualization_translations_attributes].keys.each do |key|
+			  x = params[:visualization][:visualization_translations_attributes][key][:image_file_attributes]
+			  if x[:reset_crop] == "true"
+				  x[:image_is_cropped] = false
+				  reset_crop = true
+			  end
+		  end
 
-        # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
-        # - have to get it by hand
-				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+      # if reload file flag is set, erase file record so that the new file will be processed
+      # - and if this is interactive, retake screenshot
+		  params[:visualization][:visualization_translations_attributes].keys.each do |key|
+			  ptrans = params[:visualization][:visualization_translations_attributes][key]
+			  if ptrans[:reload_file] == "true"
+				  trans = @visualization.visualization_translations.select{|x| x.id.to_s == ptrans[:id]}.first
+          # remove the file on record
+          trans.image_file.file = nil
+          trans.image_file.reload_file = true
+#          trans.image_file.save
 
-        format.html {
-					if processed_crop || reset_crop
-						# show form again
-						redirect_to edit_organization_visualization_path(params[:organization_id], permalink),
-									notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
-					else
-						# redirect to show page
-						redirect_to organization_visualization_path(params[:organization_id], permalink),
-									notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
-					end
-				}
-        format.json { head :ok }
-      else
-				gon.edit_visualization = true
-				gon.visualization_type = @visualization.visualization_type_id
-				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
-        format.html { render action: "edit" }
-        format.json { render json: @visualization.errors, status: :unprocessable_entity }
+          # if this is interactive, redo screenshot
+  				if trans.image_file.visualization_type_id == Visualization::TYPES[:interactive] && !ptrans[:interactive_url].blank?
+  logger.debug "//////////// -- taking screen shot"
+					  # get screenshot of interactive site
+            filename = Screenshot.take(ptrans[:interactive_url])
+            if filename
+              files[trans.locale] = filename
+					    trans.image_file.file = File.new(filename, 'r')
+            end
+          end
+
+			  end
+		  end
+      
+
+      respond_to do |format|
+        if @visualization.update_attributes(params[:visualization])
+				  # if the visuals need to be re-cropped, do it now
+				  processed_crop = false
+				  @visualization.visualization_translations.each do |trans|
+					  if trans.image_record && (!trans.image_record.was_cropped && trans.image_record.image_is_cropped) || 
+                (trans.image_record.redid_crop && trans.image_record.image_is_cropped)
+						  trans.image_record.reprocess_file
+						  processed_crop = true
+					  end
+				  end
+
+          # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
+          # - have to get it by hand
+				  permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+
+          format.html {
+					  if processed_crop || reset_crop
+						  # show form again
+						  redirect_to edit_organization_visualization_path(params[:organization_id], permalink),
+									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+					  else
+						  # redirect to show page
+						  redirect_to organization_visualization_path(params[:organization_id], permalink),
+									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+					  end
+				  }
+          format.json { head :ok }
+        else
+				  gon.edit_visualization = true
+				  gon.visualization_type = @visualization.visualization_type_id
+				  gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
+          format.html { render action: "edit" }
+          format.json { render json: @visualization.errors, status: :unprocessable_entity }
+        end
       end
+
+		  # if a temp file was created, go ahead and delete it
+		  if !files.blank?
+			  files.keys.each do |key|
+				  File.delete(files[key])
+			  end
+		  end
+
     end
   end
 

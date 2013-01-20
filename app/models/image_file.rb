@@ -3,9 +3,9 @@ class ImageFile < ActiveRecord::Base
 
 	attr_accessible :visualization_translation_id, :visualization_type_id,
 			:file, :file_file_name, :file_content_type, :file_file_size, :file_updated_at,
-			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :image_is_cropped
+			:crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :image_is_cropped, :redid_crop, :reload_file
 
-	attr_accessor :reset_crop, :was_cropped
+	attr_accessor :reset_crop, :was_cropped, :redid_crop, :reload_file
 
   validates :file_file_name, :presence => true, :if => "visualization_type_id == Visualization::TYPES[:infographic]"
 
@@ -24,7 +24,7 @@ Rails.logger.debug "///////////// attachment styles start"
 Rails.logger.debug "///////////// - vis type = #{self.visualization_type_id}"
 		if self.visualization_type_id == Visualization::TYPES[:infographic]
 Rails.logger.debug "///////////// -> in infographic"
-			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
+			if self.id.nil? || self.reload_file || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 Rails.logger.debug "///////////// -> generating all styles"
 				styles = {
 					:thumb => {:geometry => "230x230#"},
@@ -39,7 +39,7 @@ Rails.logger.debug "///////////// -> generating new thumb style"
 			end
 		elsif self.visualization_type_id == Visualization::TYPES[:interactive]
 Rails.logger.debug "///////////// -> in interactive"
-			if self.id.nil? || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
+			if self.id.nil? || self.reload_file || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
 Rails.logger.debug "///////////// -> generating all styles"
 				styles = {
 					:thumb => {:geometry => "230x230#"},

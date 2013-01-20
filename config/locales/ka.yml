@@ -64,15 +64,17 @@ ka:
         explanation: განმარტება
         reporter: "ჟურნალისტი (სახელი, ორგანიზაცია)"
         designer: "დიზაინერი (სახელი, ორგანიზაცია)"
-        data_source_name: მონაცემთა წყაროს სახელი
+        interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
       image_file:
         file: ვიზუალის ფაილი
         reset_crop: ესკიზის განახლება
+        reset_file: Load a New File
+        reset_url: Retake URL Screenshot
       dataset_file:
         file: მონაცემების ფაილი
       datasource:
-        data_source_url: მონაცემთა წყაროს ბმული
-        interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
+        name: მონაცემთა წყაროს სახელი
+        url: მონაცემთა წყაროს ბმული
     errors:
       messages:
         published_visual_missing_fields: "სავალდებულოა, როდესაც ვიზუალი გამოქვეყნდება."
@@ -319,6 +321,8 @@ ka:
     form:
       preview: ნახვა
       crop_image: ესკიზის %{language} შექმნა
+      reset_file: Load New %{language} Infographic
+      reset_url: Load New %{language} URL
       datasources_header: მონაცემთა წყაროები
       add_datasource: მონაცემთა წყაროს დამატება
     datasource_fields:

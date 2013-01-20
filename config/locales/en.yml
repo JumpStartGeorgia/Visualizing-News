@@ -68,6 +68,8 @@ en:
       image_file:
         file: Visual File
         reset_crop: Redo the Thumbnail Image
+        reset_file: Load a New File
+        reset_url: Retake URL Screenshot
       dataset_file:
         file: Dataset File
       datasource:
@@ -319,6 +321,8 @@ en:
     form:
       preview: Preview
       crop_image: Create %{language} Thumbnail Image
+      reset_file: Load New %{language} Infographic
+      reset_url: Load New %{language} URL
       datasources_header: Data Sources
       add_datasource: Add Data Source
     datasource_fields:

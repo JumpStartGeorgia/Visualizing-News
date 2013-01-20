@@ -3,28 +3,8 @@ function reset_interactive_iframe_height(){
 	$('iframe#interactive').css('height', $(window).height()-46);
 }
 
-// we need 230px from original file.
-// the large file that is shown on screen for cropping can be a different size
-// so adjust the values so the scale is the same
 var adjusted_size = gon.thumbnail_size;
-if (gon.originalW && gon.largeW){
 
-  if (gon.largeW != $('#cropbox').width()){
-    // the layout may cause the large image to not display at its full size
-    // - when this happens, the sizes used for calculations must be reset
-    //   to the image size on screen
-    gon.largeW = $('#cropbox').width();
-    gon.largeH = $('#cropbox').height();
-
-    adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
-
-  } else {
-    adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
-  }
-
-  // adjust preview box height/width
-  $('.preview').css('width', adjusted_size).css('height', adjusted_size);
-}
 
 function update_crop(coords) {
 	var rx = adjusted_size/coords.w;
@@ -123,25 +103,50 @@ $(document).ready(function(){
 			}
 		});
 
-		// if crop values already exist, use them when creating jcrop preview box
-		var setInit = [0, 0, adjusted_size, adjusted_size];
-		if ($('input[id$="_crop_x"]').val() != '' && $('input[id$="_crop_y"]').val() != '' &&
-				$('input[id$="_crop_w"]').val() != ''  && $('input[id$="_crop_h"]').val() != '' ) {
+	  $('#cropbox').one('load', function() {
+      // we need 230px from original file.
+      // the large file that is shown on screen for cropping can be a different size
+      // so adjust the values so the scale is the same
+      if (gon.originalW && gon.largeW){
+        if (gon.largeW != $(this).width()){
+          // the layout may cause the large image to not display at its full size
+          // - when this happens, the sizes used for calculations must be reset
+          //   to the image size on screen
+          gon.largeW = $(this).width();
+          gon.largeH = $(this).height();
 
-			setInit = [$('input[id$="_crop_x"]').val(), $('input[id$="_crop_y"]').val(),
-								$('input[id$="_crop_w"]').val(), $('input[id$="_crop_h"]').val()];
-		}
+          adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
 
-		// assign the jcrop to the visual image
-	  $('img#cropbox').Jcrop({
-	    onChange: update_crop,
-	    onSelect: update_crop,
-	    setSelect: setInit,
-			minSize: [adjusted_size,adjusted_size],
-//			maxSize: [adjusted_size, adjusted_size],
-	    aspectRatio: 1
-	  });
+        } else {
+          adjusted_size = gon.thumbnail_size*gon.largeW/gon.originalW;
+        }
 
+        // adjust preview box height/width
+        $('.preview').css('width', adjusted_size).css('height', adjusted_size);
+      }
+
+		  // if crop values already exist, use them when creating jcrop preview box
+		  var setInit = [0, 0, adjusted_size, adjusted_size];
+		  if ($('input[id$="_crop_x"]').val() != '' && $('input[id$="_crop_y"]').val() != '' &&
+				  $('input[id$="_crop_w"]').val() != '' && $('input[id$="_crop_w"]').val() != '0' &&
+          $('input[id$="_crop_h"]').val() != '' && $('input[id$="_crop_h"]').val() != '0' ) {
+
+			  setInit = [$('input[id$="_crop_x"]').val(), $('input[id$="_crop_y"]').val(),
+								  (parseInt($('input[id$="_crop_w"]').val()) + parseInt($('input[id$="_crop_x"]').val())), 
+                  (parseInt($('input[id$="_crop_h"]').val()) + parseInt($('input[id$="_crop_y"]').val()))];
+		  }
+		  // assign the jcrop to the visual image
+	    $(this).Jcrop({
+	      onChange: update_crop,
+	      onSelect: update_crop,
+	      setSelect: setInit,
+			  minSize: [adjusted_size,adjusted_size],
+  //			maxSize: [adjusted_size, adjusted_size],
+	      aspectRatio: 1
+	    });
+    }).each(function(){
+      if (this.complete) { $(this).load(); }
+    });
 
 	}
 

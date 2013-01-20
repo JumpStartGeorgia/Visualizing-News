@@ -21,3 +21,9 @@
 
 #ignore db config
 /config/database.yml
+
+#ignore chromedriver.log
+chromedriver.log
+
+
+

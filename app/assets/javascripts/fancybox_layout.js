@@ -7,3 +7,9 @@
 //= require fancybox2
 //= require vendor
 //= require visualizations
+
+	// set focus to first text box on page
+	if (gon.highlight_first_form_field){
+	  $(":input:visible:enabled:first").focus();
+	}
+

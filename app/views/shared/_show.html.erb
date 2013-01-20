@@ -1,6 +1,6 @@
 <div id="visualization_row1" class="row-fluid">
-  <div class="span1">
-    &nbsp;
+  <div id="previous_visual" class="span1">
+	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visual_previous_path(@param_options))%>
   </div>
   <div id="main_block" class="span6 clear">
 		<%= page_title @visualization.title %>
@@ -20,8 +20,8 @@
   <div class="span4">
     &nbsp;
   </div>
-  <div class="span1">
-    &nbsp;
+  <div id="next_visual" class="span1">
+	  <%= link_to(image_tag('nav_next.png', :alt => '>'), visual_next_path(@param_options))%>
   </div>
 </div>
 
@@ -156,12 +156,6 @@
 				  </textarea>
         <% end %>
 			</div>
-			<% if !Rails.env.production? %>
-  			<div>
-  			  <%= link_to(image_tag('navigation_left.png', :alt => '<'), visual_previous_path(@param_options))%>
-  			  <%= link_to(image_tag('navigation_right.png', :alt => '>'), visual_next_path(@param_options))%>
-  			</div>
-      <% end %>
     </div>
   </div>
   <div class="span1">

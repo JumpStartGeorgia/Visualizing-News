@@ -1,4 +1,5 @@
 class Visualization < ActiveRecord::Base
+  is_impressionable :counter_cache => true
 	translates :title, :explanation, :reporter, :designer,
 		:interactive_url,	:permalink
 

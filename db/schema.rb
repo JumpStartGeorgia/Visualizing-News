@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116101649) do
+ActiveRecord::Schema.define(:version => 20130120123259) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -72,6 +72,30 @@ ActiveRecord::Schema.define(:version => 20130116101649) do
   end
 
   add_index "image_files", ["visualization_translation_id"], :name => "index_image_files_on_visualization_translation_id"
+
+  create_table "impressions", :force => true do |t|
+    t.string   "impressionable_type"
+    t.integer  "impressionable_id"
+    t.integer  "user_id"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.string   "view_name"
+    t.string   "request_hash"
+    t.string   "ip_address"
+    t.string   "session_hash"
+    t.text     "message"
+    t.text     "referrer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], :name => "controlleraction_ip_index"
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], :name => "controlleraction_request_index"
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], :name => "controlleraction_session_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], :name => "poly_ip_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], :name => "poly_request_index"
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], :name => "poly_session_index"
+  add_index "impressions", ["user_id"], :name => "index_impressions_on_user_id"
 
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
@@ -218,8 +242,10 @@ ActiveRecord::Schema.define(:version => 20130116101649) do
     t.string   "interactive_url_old"
     t.boolean  "visual_is_cropped_old",    :default => false
     t.string   "languages"
+    t.integer  "impressions_count",        :default => 0
   end
 
+  add_index "visualizations", ["impressions_count"], :name => "index_visualizations_on_impressions_count"
   add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"
   add_index "visualizations", ["published"], :name => "index_visualizations_on_published"
   add_index "visualizations", ["published_date"], :name => "index_visualizations_on_published_date"

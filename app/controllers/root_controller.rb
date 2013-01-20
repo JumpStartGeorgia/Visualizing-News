@@ -1,9 +1,7 @@
 class RootController < ApplicationController
 
   def index
-logger.debug "************* getting visualizations"
     @visualizations = Visualization.published.recent.page(params[:page]).per(6)
-logger.debug "************* got visualizations"
 
     process_visualization_querystring # in app controller
 

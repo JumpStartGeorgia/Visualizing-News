@@ -3,7 +3,6 @@
 # this controller is the public view to the visuals
 ####################
 class VisualsController < ApplicationController
-
   def index
     @visualizations = Visualization.published.recent.page(params[:page])
 
@@ -42,6 +41,10 @@ class VisualsController < ApplicationController
 			  format.html
 			  format.json { render json: @visualization }
 			end
+
+      # record the view count
+      impressionist(@visualization)
+
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
 			redirect_to root_path(:locale => I18n.locale)

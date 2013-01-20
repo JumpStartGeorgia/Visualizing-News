@@ -35,6 +35,7 @@ gem "use_tinymce", "~> 0.0.15" # wysiwyg
 #gem "imgkit", "~> 1.3.7" # create image of web page
 gem "headless" # use browser to load a web page via code
 gem "selenium-webdriver"  # create snapshot of web page
+gem "impressionist", "~> 1.1.1"
 
 # Gems used only for assets and not required
 # in production environments by default.

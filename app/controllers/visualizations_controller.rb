@@ -17,6 +17,7 @@ class VisualizationsController < ApplicationController
   def show
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
+    gon.highlight_first_form_field = false
 
 		if @visualization
 			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'

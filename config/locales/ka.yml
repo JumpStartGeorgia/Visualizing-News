@@ -68,8 +68,8 @@ ka:
       image_file:
         file: ვიზუალის ფაილი
         reset_crop: ესკიზის განახლება
-        reset_file: Load a New File
-        reset_url: Retake URL Screenshot
+        reset_file: ახალი ფაილის ჩატვირთვა
+        reset_url: ბმულისთვის სკრინშოტის ხელახლა გადაღება
       dataset_file:
         file: მონაცემების ფაილი
       datasource:
@@ -148,10 +148,10 @@ ka:
       grid: ბადე
       list: სია
     organize:
-      header: Sort
-      recent: Recent
+      header: დახარისხება
+      recent: ბოლო
       likes: Likes
-      views: Views
+      views: ნახვები
   app:
     language:
       en: English
@@ -278,7 +278,7 @@ ka:
       why_visualize: რატომ გსურთ ამ მონაცემების ვიზუალიზაცია?
       datasource: რა არის მონაცემთა წყარო?
       file: დაურთეთ მონაცემთა ფაილი
-      email_us: Send us an email
+      email_us: მოგვწერეთ ელ. წერილი
       email_subject: "feradi.info მონაცემთა მოთხოვნის გაგზავნა"
     submit_visual:
       title: ატვირთეთ ვიზუალი
@@ -326,8 +326,8 @@ ka:
     form:
       preview: ნახვა
       crop_image: ესკიზის %{language} შექმნა
-      reset_file: Load New %{language} Infographic
-      reset_url: Load New %{language} URL
+      reset_file:  ჩატვირთე ახალი %{language} ინფოგრაფიკა
+      reset_url: ჩატვირთე ახალი %{language} ბმული
       datasources_header: მონაცემთა წყაროები
       add_datasource: მონაცემთა წყაროს დამატება
     datasource_fields:

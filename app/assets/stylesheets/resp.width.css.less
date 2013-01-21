@@ -51,11 +51,16 @@
 }
 
 #about_page{
-	background: url('/assets/about_big.png');
 	background-position: top;
 	background-repeat: no-repeat;
 	height: 1246px;
 	width: 1240px;
+  &.locale_en{
+  	background: url('/assets/about_big.png');
+  }
+  &.locale_ka{
+  	background: url('/assets/about_big_ge.png');
+  }
 	#hide_text{
 		text-indent: 100%;
 		white-space: nowrap;
@@ -103,9 +108,14 @@
   }
 
 	#about_page{
-		background: url('/assets/about_small.png');
 		height: 1246px;
 		width: 814px;
+    &.locale_en{
+  		background: url('/assets/about_small.png');
+    }
+    &.locale_ka{
+  		background: url('/assets/about_small_ge.png');
+    }
 	}
 }
 

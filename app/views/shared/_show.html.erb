@@ -4,6 +4,20 @@
   </div>
   <div id="main_block" class="span6 clear">
 		<%= page_title @visualization.title %>
+  </div>
+  <div class="span4">
+    &nbsp;
+  </div>
+  <div class="span1">
+    &nbsp;
+  </div>
+</div>
+
+<div id="visualization_row1a" class="row-fluid">
+  <div class="span1">
+    &nbsp;
+  </div>
+  <div id="main_block" class="span6 clear">
     <div id="visualization_date">
 			<% if @visualization.published %>
 	      <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
@@ -17,8 +31,22 @@
 			<% end %>
     </div>
   </div>
-  <div class="span4">
-    &nbsp;
+  <div id="overall_counts" class="span4">
+    <ul>
+      <li>
+        <span class="heart">❤</span>
+        <%= "#{@visualization.overall_votes} #{t('filters.organize.likes')}" %>
+      </li>
+      <li>
+        <%= image_tag('view_icon.png') %>
+        <%= "#{@visualization.impressions_count} #{t('filters.organize.views')}" %>
+      </li>
+      <li>
+        <%= image_tag('comments_icon.png') %>
+        <fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
+        <%= t('app.common.comments') %>
+      </li>
+    </ul>
   </div>
   <div class="span1">
     &nbsp;

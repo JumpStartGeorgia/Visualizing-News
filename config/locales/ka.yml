@@ -202,7 +202,7 @@ ka:
       menu_visual: ვიზუალიზაციები
       menu_data: გამოგვიგზავნეთ მონაცემები
       menu_idea: იდეების გამოქვეყნება
-      menu_submit_visual: ატვირთეთ ვიზუალი
+      menu_submit_visual: ვიზუალის გაგზავნა
       menu_about: ჩვენ შესახებ
       menu_contact: დაგვიკავშირდი
       admin: ადმინისტრატორი
@@ -281,7 +281,7 @@ ka:
       email_us: მოგვწერეთ ელ. წერილი
       email_subject: "feradi.info მონაცემთა მოთხოვნის გაგზავნა"
     submit_visual:
-      title: ატვირთეთ ვიზუალი
+      title: ვიზუალის გაგზავნა
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი

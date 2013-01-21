@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
 
 		if @organization
 			# see if user is in this org
-		  @visualizations = Visualization.recent.page(params[:page])
+      @visualizations = process_visualization_querystring(Visualization.page(params[:page]))
 			@user_in_org = false
 			if !user_signed_in? || current_user.organization_ids.index(@organization.id).nil?
 			  @visualizations = @visualizations.published

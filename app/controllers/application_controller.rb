@@ -132,6 +132,22 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@filter_type_selection = I18n.t("filters.type.#{params[:type]}")
 		end
 
+		if params[:organize]
+      case params[:organize]
+        when 'recent'
+    			visual_objects = visual_objects.recent
+        when 'likes'
+    			visual_objects = visual_objects.likes
+        when 'views'
+    			visual_objects = visual_objects.views
+      end
+			@filter_organize_selection = I18n.t("filters.organize.#{params[:organize]}")
+    else
+      # if not set, default to recent
+			visual_objects = visual_objects.recent
+			@filter_organize_selection = I18n.t("filters.organize.recent")
+		end
+
 		if params[:category]
       index = @categories.index{|x| x.permalink == params[:category]}
 			visual_objects = visual_objects.by_category(@categories[index].id) if index

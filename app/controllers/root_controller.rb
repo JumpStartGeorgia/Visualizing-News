@@ -1,9 +1,7 @@
 class RootController < ApplicationController
 
   def index
-    @visualizations = Visualization.published.recent.page(params[:page]).per(6)
-
-    process_visualization_querystring(@visualizations) # in app controller
+    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]).per(6))
 
     respond_to do |format|
       format.html

@@ -48,6 +48,8 @@ class Visualization < ActiveRecord::Base
   validate :validate_if_published
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
+  scope :likes, lambda {with_translations(I18n.locale).order("visualizations.overall_votes DESC, visualization_translations.title ASC")}
+  scope :views, lambda {with_translations(I18n.locale).order("visualizations.impressions_count DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
 

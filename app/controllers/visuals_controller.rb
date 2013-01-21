@@ -4,7 +4,7 @@
 ####################
 class VisualsController < ApplicationController
   def index
-    @visualizations = process_visualization_querystring(Visualization.published.recent.page(params[:page]))
+    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]))
 
 
     respond_to do |format|

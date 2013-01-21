@@ -147,6 +147,11 @@ en:
       header: Layout
       grid: Grid
       list: List
+    organize:
+      header: Sort
+      recent: Recent
+      likes: Likes
+      views: Views
   app:
     language:
       en: English

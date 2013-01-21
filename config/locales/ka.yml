@@ -147,6 +147,11 @@ ka:
       header: განლაგება
       grid: ბადე
       list: სია
+    organize:
+      header: Sort
+      recent: Recent
+      likes: Likes
+      views: Views
   app:
     language:
       en: English

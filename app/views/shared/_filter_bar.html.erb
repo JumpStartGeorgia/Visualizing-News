@@ -58,6 +58,24 @@
 				</ul>
 			</li>
 			<li class="dropdown">
+				<a id="filter_organize" class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<%= t('filters.organize.header')%>:
+					<span id="filter_organize_selection" class="filter_selection"><%=@filter_organize_selection%></span>
+	        <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>
+						<%= link_to t('filters.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.organize.views'), url_for(params.merge(:organize => 'views')) %>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
 				<a id="filter_view" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.view.header')%>:
 					<span id="filter_view_selection" class="filter_selection"><%=@filter_view_selection%></span>

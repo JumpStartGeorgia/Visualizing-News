@@ -24,14 +24,31 @@
   		  <%= simple_format truncate(visualization.explanation, :length => 300, :separator => ' ') %>
   		</div>
   		<div class="item_footer clear">
-  			<div class="comment_count">
-  				<%= "#{t('app.common.comments')}:" %>
-  				<fb:comments-count href="<%= full_url(visualization_path(visualization.permalink)) %>"></fb:comments-count>
-  			</div>
-  			<div class="like_count">
-  				<%= "#{t('app.common.likes')}:" %>
-  				<%= visualization.overall_votes %>
-  			</div>
+        <div class="count_item">
+          <div class="count_icon">
+            <span class="heart">❤</span>
+          </div>
+          <div class="count_text">
+            <%= "#{visualization.overall_votes} #{t('filters.organize.likes')}" %>
+          </div>
+        </div>
+        <div class="count_item">
+          <div class="count_icon">
+            <%= image_tag('view_icon.png') %>
+          </div>
+          <div class="count_text">
+            <%= "#{visualization.impressions_count} #{t('filters.organize.views')}" %>
+          </div>
+        </div>
+        <div class="count_item">
+          <div class="count_icon">
+            <%= image_tag('comments_icon.png') %>
+          </div>
+          <div class="count_text">
+            <fb:comments-count href="<%= full_url(visualization_path(visualization.permalink)) %>"></fb:comments-count>
+            <%= t('app.common.comments') %>
+          </div>
+        </div>
   			<% if @user_in_org && params[:controller] == 'organizations' %>
   				<div>
   			    <%= link_to t('.edit', :default => t("helpers.links.edit")),

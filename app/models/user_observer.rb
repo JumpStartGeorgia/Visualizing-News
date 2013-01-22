@@ -9,6 +9,7 @@ class UserObserver < ActiveRecord::Observer
 		# only process if a create just occurred
 		if user.is_create
 			message = Message.new
+      message.email = user.email
 			message.locale = user.notification_language
 			message.subject = I18n.t("mailer.notification.new_user.subject", :locale => user.notification_language)
 			message.message = I18n.t("mailer.notification.new_user.message", :locale => user.notification_language)

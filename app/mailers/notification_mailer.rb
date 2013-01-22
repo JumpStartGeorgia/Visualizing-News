@@ -9,12 +9,12 @@ class NotificationMailer < ActionMailer::Base
 
   def new_visualization(message)
     @message = message
-    mail(:to => message.email, :subject => message.subject)
+    mail(:bcc => message.bcc, :subject => message.subject)
   end
 
   def visualization_comment(message)
     @message = message
-    mail(:to => message.email, :subject => message.subject)
+    mail(:bcc => message.bcc, :subject => message.subject)
   end
 
 end

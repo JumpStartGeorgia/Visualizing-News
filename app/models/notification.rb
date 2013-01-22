@@ -26,16 +26,15 @@ class Notification < ActiveRecord::Base
 		return x
 	end
 
-=begin
 	def self.new_idea_users(category_ids, locale)
 		return new_item(TYPES[:new_idea], category_ids)
 	end
 
-	def self.follow_idea_users(idea_id)
+	def self.follow_idea_users(idea_id, locale)
 		x = nil
-		if idea_id
+		if idea_id && locale
 			x = select("users.email").joins(:user)
-			.where("users.wants_notifications = 1 and notification_type = ? and identifier = ?", TYPES[:follow_idea], idea_id)
+			.where("users.wants_notifications = 1 and users.notification_language = ? and notification_type = ? and identifier = ?", locale, TYPES[:follow_idea], idea_id)
 
 			if x && !x.empty?
 				x = x.map{|x| x.email}
@@ -43,7 +42,6 @@ class Notification < ActiveRecord::Base
 		end
 		return x
 	end
-=end
 
 protected
 

@@ -134,6 +134,33 @@ ka:
       visualization_comment:
         subject: "feradi.info-ზე თქვენ მიერ განთავსებულ ვიზუალიზაციაზე დატოვა '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყვეთ შემდეგ ბმულს."
+      idea_claimed_owner:
+        subject: "%{organization} დაინტერესებულია თქვენი იდეით!"
+        message: "%{organization} გამოეხმაურა თქვენს იდეას.  მათ დაწერეს:"
+      idea_progress_update_owner:
+        subject: "%{organization} თქვენი იდეიის პროგრესი განახლებულია"
+        message: "%{organization} თქვენს იდეაზე მოსაზრება განაახლეს.  მათ დაწერეს:"
+      idea_realized_owner:
+        subject: "%{organization} თქვენს იდეაზე მუშაობა დაასრულეს!"
+        message: "%{organization} თქვენი იდეის შესახებ სიახლე გამოაქვეყნეს. მათ დაწერეს:"
+      idea_comment_owner:
+        subject: "კომენტარი თქვენს იდეაზე"
+        message: "კომენტარის სანახავად მიყევით ბმულს."
+      new_idea_subscriber:
+        subject: "დამატებულია ახალია იდეა"
+        message: "ახალი იდეა:"
+      idea_claimed_subscriber:
+        subject: "%{organization} ასევე დაინტერესებულია ამ იდეით"
+        message: "%{organization} გამოეხმაურა იდეას, რომლითაც თქვენ ხართ დაინტერესებული. მათ დაწერეს:"
+      idea_progress_update_subscriber:
+        subject: "%{organization} განაახლა პროგრესი იდეაზე, რომლითაც თქვენ ხართ დაინტერესებული. "
+        message: "%{organization} განაახლა გამოხმაურება  იდეაზე რომლითაც თქვენ ხართ დაინტერესებული. მათ დაწერეს:"
+      idea_realized_subscriber:
+        subject: "%{organization} დაასრულა მუშაობა იდეაზე რომლითაც თქვენ ხართ დაინტერესებული!"
+        message: "%{organization}გამოაქვეყნა სიახლე იდეაზე, რომლითაც თქვენ ხართ დაინტერესებული. მათ დაწერეს:"
+      idea_comment_subscriber:
+        subject: "კომენტარი იდეაზე რომლითაც თქვენ ხართ დაინტერესებული."
+        message: "ლინკის სანახავად მიყევით ბმულს."
     contact:
       contact_form:
         subject: "feradi.info დაგვიკავშირდი"

@@ -11,6 +11,7 @@ class CopyIdeaData < ActiveRecord::Migration
     IdeaInappropriateReport.delete_all
     IdeaProgress.delete_all
     Idea.delete_all
+    Notification.where(:notification_type => [1,2]).delete_all
 
     connection = ActiveRecord::Base.connection()
     news_db_name = '`news-ideas`'
@@ -118,6 +119,18 @@ class CopyIdeaData < ActiveRecord::Migration
       )
     end
 
+    # add idea notifications
+    puts "adding notifications"
+    sql = "select user_id, notification_type, identifier from #{news_db_name}.notifications"
+    old_nots = connection.execute(sql)
+    old_nots.each do |old_not|
+      Notification.create(
+        :user_id => user_id_match.select{|x| x[0] == old_not[0]}.first[1], 
+        :notification_type => old_not[1],
+        :identifier => old_not[2]
+      )
+    end
+
   end
 
   def down
@@ -125,5 +138,6 @@ class CopyIdeaData < ActiveRecord::Migration
     IdeaInappropriateReport.delete_all
     IdeaProgress.delete_all
     Idea.delete_all
+    Notification.where(:notification_type => [1,2]).delete_all
   end
 end

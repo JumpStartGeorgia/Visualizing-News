@@ -28,33 +28,37 @@ class IdeaProgressObserver < ActiveRecord::Observer
 				# notify owner if wants notification
 				if idea_progress.idea.user.wants_notifications
 					message = Message.new
+          message.locale = idea_progress.idea.user.notification_language 
 					message.email = idea_progress.idea.user.email
-					message.subject = I18n.t("mailer.owner.idea_realized.subject",
+					message.subject = I18n.t("mailer.notification.idea_realized_owner.subject",
 															:organization => idea_progress.organization.name)
-					message.message = I18n.t("mailer.owner.idea_realized.message",
+					message.message = I18n.t("mailer.notification.idea_realized_owner.message",
 															:organization => idea_progress.organization.name)
 					message.org_message = idea_progress.explaination
 					message.url = idea_progress.url
-					NotificationOwnerMailer.idea_realized(message).deliver
+					NotificationMailer.idea_realized_owner(message).deliver
 				end
 
 				# notify subscribers
-				message = Message.new
-				message.bcc = Notification.follow_idea_users(idea_progress.idea_id)
-				if message.bcc && !message.bcc.empty?
-					# if the owner is a subscriber, remove from list
-					index = message.bcc.index(idea_progress.idea.user.email)
-					message.bcc.delete_at(index) if index
-					# only continue if owner was not only subscriber
-					if message.bcc.length > 0
-						message.subject = I18n.t("mailer.subscriber.idea_realized.subject",
-																:organization => idea_progress.organization.name)
-						message.message = I18n.t("mailer.subscriber.idea_realized.message",
-																:organization => idea_progress.organization.name)
-						message.org_message = idea_progress.explaination
-						message.url = idea_progress.url
-						NotificationSubscriberMailer.idea_realized(message).deliver
-					end
+				I18n.available_locales.each do |locale|
+				  message = Message.new
+				  message.bcc = Notification.follow_idea_users(idea_progress.idea_id, locale)
+				  if !message.bcc.blank?
+					  # if the owner is a subscriber, remove from list
+					  index = message.bcc.index(idea_progress.idea.user.email)
+					  message.bcc.delete_at(index) if index
+					  # only continue if owner was not only subscriber
+					  if message.bcc.length > 0
+              message.locale = locale
+						  message.subject = I18n.t("mailer.notification.idea_realized_subscriber.subject",
+																  :organization => idea_progress.organization.name)
+						  message.message = I18n.t("mailer.notification.idea_realized_subscriber.message",
+																  :organization => idea_progress.organization.name)
+						  message.org_message = idea_progress.explaination
+						  message.url = idea_progress.url
+						  NotificationMailer.idea_realized_subscriber(message).deliver
+					  end
+  				end
 				end
 			else
 				# see if this idea is already claimed by this org
@@ -66,67 +70,75 @@ class IdeaProgressObserver < ActiveRecord::Observer
 					# notify owner if wants notification
 					if idea_progress.idea.user.wants_notifications
 						message = Message.new
+            message.locale = idea_progress.idea.user.notification_language 
 						message.email = idea_progress.idea.user.email
-						message.subject = I18n.t("mailer.owner.idea_progress_update.subject",
+						message.subject = I18n.t("mailer.notification.idea_progress_update_owner.subject",
 																:organization => idea_progress.organization.name)
-						message.message = I18n.t("mailer.owner.idea_progress_update.message",
+						message.message = I18n.t("mailer.notification.idea_progress_update_owner.message",
 																:organization => idea_progress.organization.name)
 						message.org_message = idea_progress.explaination
 						message.url_id = idea_progress.idea_id
-						NotificationOwnerMailer.idea_progress_update(message).deliver
+						NotificationMailer.idea_progress_update_owner(message).deliver
 					end
 
 					# notify subscribers
-					message = Message.new
-					message.bcc = Notification.follow_idea_users(idea_progress.idea_id)
-					if message.bcc && !message.bcc.empty?
-						# if the owner is a subscriber, remove from list
-						index = message.bcc.index(idea_progress.idea.user.email)
-						message.bcc.delete_at(index) if index
-						# only continue if owner was not only subscriber
-						if message.bcc.length > 0
-							message.subject = I18n.t("mailer.subscriber.idea_progress_update.subject",
-																	:organization => idea_progress.organization.name)
-							message.message = I18n.t("mailer.subscriber.idea_progress_update.message",
-																	:organization => idea_progress.organization.name)
-							message.org_message = idea_progress.explaination
-							message.url_id = idea_progress.idea_id
-							NotificationSubscriberMailer.idea_progress_update(message).deliver
-						end
+  				I18n.available_locales.each do |locale|
+					  message = Message.new
+					  message.bcc = Notification.follow_idea_users(idea_progress.idea_id, locale)
+					  if !message.bcc.blank?
+						  # if the owner is a subscriber, remove from list
+						  index = message.bcc.index(idea_progress.idea.user.email)
+						  message.bcc.delete_at(index) if index
+						  # only continue if owner was not only subscriber
+						  if message.bcc.length > 0
+                message.locale = locale
+							  message.subject = I18n.t("mailer.notification.idea_progress_update_subscriber.subject",
+																	  :organization => idea_progress.organization.name)
+							  message.message = I18n.t("mailer.notification.idea_progress_update_subscriber.message",
+																	  :organization => idea_progress.organization.name)
+							  message.org_message = idea_progress.explaination
+							  message.url_id = idea_progress.idea_id
+							  NotificationMailer.idea_progress_update_subscriber(message).deliver
+						  end
+  					end
 					end
 				else
 					# org is claiming idea
 					# notify owner if wants notification
 					if idea_progress.idea.user.wants_notifications
 						message = Message.new
+            message.locale = idea_progress.idea.user.notification_language 
 						message.email = idea_progress.idea.user.email
-						message.subject = I18n.t("mailer.owner.idea_claimed.subject",
+						message.subject = I18n.t("mailer.notification.idea_claimed_owner.subject",
 																:organization => idea_progress.organization.name)
-						message.message = I18n.t("mailer.owner.idea_claimed.message",
+						message.message = I18n.t("mailer.notification.idea_claimed_owner.message",
 																:organization => idea_progress.organization.name)
 						message.org_message = idea_progress.explaination
 						message.url_id = idea_progress.idea_id
-						NotificationOwnerMailer.idea_claimed(message).deliver
+						NotificationMailer.idea_claimed_owner(message).deliver
 					end
 
 					# notify subscribers
-					message = Message.new
-					message.bcc = Notification.follow_idea_users(idea_progress.idea_id)
-					if message.bcc && !message.bcc.empty?
-						# if the owner is a subscriber, remove from list
-						index = message.bcc.index(idea_progress.idea.user.email)
-						message.bcc.delete_at(index) if index
-						# only continue if owner was not only subscriber
-						if message.bcc.length > 0
-							message.subject = I18n.t("mailer.subscriber.idea_claimed.subject",
-																	:organization => idea_progress.organization.name)
-							message.message = I18n.t("mailer.subscriber.idea_claimed.message",
-																	:organization => idea_progress.organization.name)
-							message.org_message = idea_progress.explaination
-							message.url_id = idea_progress.idea_id
-							NotificationSubscriberMailer.idea_claimed(message).deliver
-						end
-					end
+  				I18n.available_locales.each do |locale|
+					  message = Message.new
+					  message.bcc = Notification.follow_idea_users(idea_progress.idea_id, locale)
+					  if !message.bcc.blank?
+						  # if the owner is a subscriber, remove from list
+						  index = message.bcc.index(idea_progress.idea.user.email)
+						  message.bcc.delete_at(index) if index
+						  # only continue if owner was not only subscriber
+						  if message.bcc.length > 0
+                message.locale = locale
+							  message.subject = I18n.t("mailer.notification.idea_claimed_subscriber.subject",
+																	  :organization => idea_progress.organization.name)
+							  message.message = I18n.t("mailer.notification.idea_claimed_subscriber.message",
+																	  :organization => idea_progress.organization.name)
+							  message.org_message = idea_progress.explaination
+							  message.url_id = idea_progress.idea_id
+							  NotificationMailer.idea_claimed_subscriber(message).deliver
+						  end
+					  end
+  				end
 				end
 			end
 		end

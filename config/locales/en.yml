@@ -134,6 +134,33 @@ en:
       visualization_comment:
         subject: "Someone has commented on your visualization '%{title}' on feradi.info"
         message: "Please click on the link below to view the comment."
+      idea_claimed_owner:
+        subject: "%{organization} is interested in your idea!"
+        message: "%{organization} has expressed interest in writing a story about your idea.  This is what they wrote:"
+      idea_progress_update_owner:
+        subject: "%{organization} has updated their progress on your idea"
+        message: "%{organization} has made a progress report on your idea.  This is what they wrote:"
+      idea_realized_owner:
+        subject: "%{organization} has completed their work on your idea!"
+        message: "%{organization} has published a story about your idea.  This is what they wrote:"
+      idea_comment_owner:
+        subject: "Someone has commented on your idea"
+        message: "Please click on the link below to view the comment."
+      new_idea_subscriber:
+        subject: "A new idea has been submitted"
+        message: "This is the new idea:"
+      idea_claimed_subscriber:
+        subject: "%{organization} is interested in an idea you care about"
+        message: "%{organization} has expressed interest in writing a story on an idea you care about.  This is what they wrote:"
+      idea_progress_update_subscriber:
+        subject: "%{organization} has updated their progress on an idea you care about"
+        message: "%{organization} has made a progress report on an idea you care about.  This is what they wrote:"
+      idea_realized_subscriber:
+        subject: "%{organization} has completed their work on an idea you care about!"
+        message: "%{organization} has published a story about an idea you care about.  This is what they wrote:"
+      idea_comment_subscriber:
+        subject: "Someone has commented on an idea you care about"
+        message: "Please click on the link below to view the comment."
     contact:
       contact_form:
         subject: "feradi.info Contact Form"

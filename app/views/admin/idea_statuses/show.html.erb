@@ -1,0 +1,24 @@
+<%- model_class = IdeaStatus -%>
+<%- model_class_trans = IdeaStatusTranslation -%>
+<% title t '.title', :default => model_class.model_name.human %>
+
+  <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
+  <%= @idea_status.name %></p>
+  <p><strong><%= model_class.human_attribute_name(:sort) %>:</strong>
+  <%= @idea_status.sort %></p>
+  <p><strong><%= model_class.human_attribute_name(:is_published) %>:</strong>
+  <%= @idea_status.is_published %></p>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_idea_statuses_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_idea_status_path(@idea_status), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_idea_status_path(@idea_status),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+              :class => 'btn btn-danger' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>

@@ -1,0 +1,29 @@
+<%= semantic_form_for([:admin, @idea_status], :html => { :class => 'form-horizontal' }) do |f| %>
+	<%= f.error_messages %>
+  <% @idea_status.idea_status_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
+		<%= f.fields_for :idea_status_translations, trans do |translation| %>
+
+			<div id="form-<%= trans.locale %>" class="multilanguage">
+				<h3><%= t("app.language.#{trans.locale}") %></h3>
+
+				<%= translation.input :name %>
+				<%= translation.hidden_field :locale , :value => trans.locale %>
+			</div>
+
+		<% end %>
+	<% end %>
+
+	<%= f.inputs do %>
+		<%= f.input :sort, :as => :string, :input_html => {:size => 10},
+			:hint => t('activerecord.attributes.idea_status.sort_hint') %>
+		<%= f.input :is_published, :as => :radio,
+			:hint => t('activerecord.attributes.idea_status.is_published_hint') %>
+	<% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('helpers.links.reset'), :name => :reset %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_idea_statuses_path, :class => 'btn btn-mini btn-warning' %>
+  </div>
+<% end %>

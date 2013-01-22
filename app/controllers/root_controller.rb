@@ -58,16 +58,6 @@ class RootController < ApplicationController
     @page = Page.where(:name => "terms").first
 	end
 
-	def snapshot
-		@kit = IMGKit.new(params[:url])
-
-    respond_to do |format|
-			format.png do
-				send_data(@kit.to_png, :type => "image/png", :disposition => 'inline')
-			end
-    end
-	end
-
 	def rss
 	end
 

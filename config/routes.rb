@@ -36,8 +36,6 @@ BootstrapStarter::Application.routes.draw do
 			resources :visualizations, :except => [:index]
 		end
 
-		match '/snapshot', :to => 'root#snapshot', :as => :snapshot, :via => :get, :defaults => {:format => 'png'}
-
     # visualizations
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
 		match '/visualizations/:id', :to => 'visuals#show', :as => :visualization, :via => :get
@@ -48,6 +46,28 @@ BootstrapStarter::Application.routes.draw do
 	  match '/visualizations/:id/next', :to => 'visuals#next', :as => :visual_next, :via => :get
 	  match '/visualizations/:id/previous', :to => 'visuals#previous', :as => :visual_previous, :via => :get
 
+    # ideas
+		match '/ideas/:id', :to => 'ideas#index', :as => :ideas, :via => :get
+		match '/ideas/user/:id', :to => 'ideas#user', :as => :user_ideas, :via => :get
+		match '/ideas/organization/:id', :to => 'ideas#organization', :as => :organization_ideas, :via => :get
+		match '/ideas/create', :to => 'ideas#create', :as => :create_idea, :via => :post
+		match '/ideas/search', :to => 'ideas#search', :as => :search_ideas, :via => :get
+		match '/ideas/search', :to => 'ideas#search', :as => :search_ideas, :via => :post
+		match '/ideas/vote/:type/:votable_id/:status', :to => 'ideas#vote', :as => :idea_vote, :via => :get
+		match '/ideas/comment_notification/:id', :to => 'ideas#comment_notification', :as => :idea_comment_notification, :via => :get
+		match '/ideas/follow_idea/:idea_id', :to => 'ideas#follow_idea', :as => :follow_idea, :via => :get
+		match '/ideas/unfollow_idea/:idea_id', :to => 'ideas#unfollow_idea', :as => :unfollow_idea, :via => :get
+
+		# idea progress
+		match '/ideas/progress/claim/:idea_id/:organization_id', :to => 'idea_progress#claim', :as => :claim_idea, :via => :get
+		match '/ideas/progress/new/:idea_id/:organization_id', :to => 'idea_progress#new', :as => :idea_progress_update, :via => :get
+		match '/ideas/progress/edit/:id', :to => 'idea_progress#edit', :as => :idea_edit_progress, :via => :get
+		match '/ideas/progress/create', :to => 'idea_progress#create', :as => :idea_create_progress, :via => :post
+		match '/ideas/progress/update/:id', :to => 'idea_progress#update', :as => :idea_update_progress, :via => :put
+
+		# report idea
+		match '/ideas/report/inappropriate/:idea_id', :to => 'idea_report#inappropriate', :as => :report_inappropriate_idea, :via => :get
+		match '/ideas/report/inappropriate/:idea_id', :to => 'idea_report#inappropriate', :as => :report_inappropriate_idea, :via => :post
 
 		# notifications
 		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get

@@ -4,22 +4,20 @@
 		<div class="span4">
 			<ul class="standard">
 				<li>
-				 <%= link_to t('.visualizations'), admin_visualizations_path %>
+				 <%= link_to t('.organizations'), admin_organizations_path %>
 				</li>
-				<% if current_user.role?(User::ROLES[:admin]) %>
-					<li>
-					 <%= link_to t('.organizations'), admin_organizations_path %>
-					</li>
-					<li>
-					 <%= link_to t('.categories'), admin_categories_path %>
-					</li>
-					<li>
-					 <%= link_to t('.pages'), admin_pages_path %>
-					</li>
-					<li>
-					 <%= link_to t('.users'), admin_users_path %>
-					</li>
-				<% end %>
+				<li>
+				 <%= link_to t('.categories'), admin_categories_path %>
+				</li>
+				<li>
+				 <%= link_to t('.idea_statuses'), admin_idea_statuses_path %>
+				</li>
+				<li>
+				 <%= link_to t('.pages'), admin_pages_path %>
+				</li>
+				<li>
+				 <%= link_to t('.users'), admin_users_path %>
+				</li>
 			</ul>
 		</div>
 	</div>

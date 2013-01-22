@@ -1,6 +1,6 @@
 <%- model_class = IdeaStatus -%>
 <%- model_class_trans = IdeaStatusTranslation -%>
-<% title t '.title', :default => model_class.model_name.human %>
+<%= page_title t '.title', :default => model_class.model_name.human %>
 
   <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
   <%= @idea_status.name %></p>

@@ -9,6 +9,9 @@ en:
       page: Page
       message: Message
       datasource: Data Source
+      idea: Idea
+      idea_inappropriate_report: Report
+      idea_status: Idea Status
     attributes:
       user:
         email: Email Address
@@ -75,6 +78,40 @@ en:
       datasource:
         name: Name of Data Source
         url: URL of Data Source
+      idea:
+        user_id: User
+        explaination: Explaination
+        created_at: Date
+        individual_votes: Individual Votes
+        overall_votes: Overall Votes
+        is_duplicate: Duplicate?
+        is_inappropriate: Inappropriate?
+        is_private: Is Private?
+        current_status_id: Current Status
+      idea_category:
+        idea_id: Idea
+        category_id: Category
+      idea_progress:
+        idea_id: Idea
+        organization_id: Organization
+        is_completed: News Story Completed?
+        url: News Story URL
+        progress_date: Date
+        explaination: Explaination
+        idea_status_id: Status
+        idea_status: Status
+        is_private: Is Private?
+      idea_inappropriate_report:
+        user_id: User
+        idea_id: Idea
+        reason: Why is Idea Inappropriate?
+      idea_status:
+        sort: Sort Order
+        sort_hint: "1, 2, 3, etc. (ascending order)"
+        is_published: Published?
+        is_published_hint: This status indicates that the idea is published
+      idea_status_translation:
+        name: Name
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
@@ -244,6 +281,7 @@ en:
       visualizations: Visualizations
       users: Users
       pages: Pages
+      idea_statuses: Idea Status
     users:
       edit:
         title: Editing User

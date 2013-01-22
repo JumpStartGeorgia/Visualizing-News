@@ -16,6 +16,7 @@ BootstrapStarter::Application.routes.draw do
 			resources :categories
       resources :pages
 			resources :organizations
+		  resources :idea_statuses
 		end
 
 

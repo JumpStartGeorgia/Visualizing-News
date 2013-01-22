@@ -1,0 +1,8 @@
+<% title t('.title', :q => params[:q]) %>
+
+<%= form_tag search_path, :method => :post, :class => 'navbar-search navbar-search-no-float' do %>
+	<%= text_field_tag 'q', nil, :placeholder => t('app.common.search'), :value => params[:q], :class => 'span8 search-query' %>
+	<i class="icon-search"></i>
+<% end %>
+
+<%= render :partial => "shared/ideas_block", :object => @ideas if @ideas %>

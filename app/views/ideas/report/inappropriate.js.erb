@@ -1,0 +1,3 @@
+$('form#new_idea_inappropriate_report').html('<%= escape_javascript render("form") %>');
+$(".alert-info").html("<%= escape_javascript(flash[:notice]) %>");
+$(".alert-info").show(300);	

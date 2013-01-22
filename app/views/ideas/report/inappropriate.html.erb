@@ -1,0 +1,10 @@
+<% title t('.title') %>
+
+<div id="test"></div>
+<% if @successful %>
+	<div>
+		<% t('.success') %>
+	</div>
+<% else %>
+	<%= render :partial => 'form' %>
+<% end %>

@@ -29,43 +29,6 @@ class IdeasController < ApplicationController
 
   end
 
-	def explore
-		@explore = params[:id].humanize
-		@initial_tab_id = case params[:id]
-			when 'top'
-				gon.id_top
-			when 'new'
-				gon.id_new
-			when 'in_progress'
-				gon.id_in_progress
-			when 'realized'
-				gon.id_realized
-		end
-		gon.initial_tab_id = @initial_tab_id
-
-		new_ideas = Idea.with_private(current_user).new_ideas.appropriate#.paginate(:page => params[:page])
-		top_ideas = Idea.with_private(current_user).top_ideas.appropriate#.paginate(:page => params[:page])
-		in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).appropriate#.paginate(:page => params[:page])
-		realized_ideas = Idea.with_private(current_user).realized_ideas(current_user).appropriate#.paginate(:page => params[:page])
-		@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
-	end
-
-	def category
-		@category = @categories.select{|x| x.id.to_s == params[:id]}
-		@category = @category.first if @category.kind_of?(Array)
-
-		if @category
-			new_ideas = Idea.with_private(current_user).new_ideas.categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			top_ideas = Idea.with_private(current_user).top_ideas.categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas(current_user).categorized_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
-		else
-			flash[:info] =  t('app.msgs.does_not_exist')
-			redirect_to root_path
-		end
-	end
-
 	def user
 		@user = User.find_by_id(params[:id])
 

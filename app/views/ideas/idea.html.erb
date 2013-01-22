@@ -1,0 +1,178 @@
+<%- model_class = Idea -%>
+<% title t '.title', :default => model_class.model_name.human %>
+
+<% if @idea.is_inappropriate %>
+	<div>
+		<%= t('.inappropriate_idea') %>
+	</div>
+<% else %>
+	<div id="idea_user_block" class="row" style="margin-bottom: 10px; border-bottom: solid 1px #ddd;">
+		<div class="span4">
+			<%= image_tag @idea.user.avatar, :style => 'float:left; padding-right: 5px;' if @idea.user.avatar %>
+			<h2><%= link_to t('.idea_by', :name => @idea.user.nickname), user_path(@idea.user_id)%></h2>
+      <% if user_signed_in? && @idea.is_private &&
+							(@idea.organization_submitted_idea?(current_user) || @idea.organization_claimed_idea?(current_user)) %>
+        <span class="private_item"><%= t('app.common.is_private')%></span>
+      <% end %>
+		</div>
+		<div class="span3">
+			<%= l @idea.created_at, :format => :long %>
+		</div>
+		<div class="span1" style="text-align: right;">
+			<%= "#{t('app.common.rate_it')}:" %>
+		  <%= votes_cont(@idea) %>
+		</div>
+	</div>
+
+	<div id="idea_translate_block" class="row" style="margin-bottom: 20px;">
+		<div class="span3">
+			<% if !@idea.in_locale?(I18n.locale) %>
+				<%= link_to t('.translate_idea'), google_translate_url(@idea.explaination),
+					:class => "btn btn-mini", :target => :blank %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+		<div class="span3">
+			<% if user_signed_in? %>
+				<% if current_user.is_following_idea?(@idea.id) %>
+					<%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'btn btn-mini'%>
+				<% else %>
+					<%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'btn btn-mini'%>
+				<% end %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+		<div class="span2" style="text-align: right;">
+			<% @idea.idea_categories.each do |idea| %>
+				<%= link_to idea.category.name, category_path(idea.category_id), :class => 'btn btn-mini' %>
+			<% end %>
+		</div>
+	</div>
+
+	<div id="idea_description_block" style="margin-bottom: 20px">
+		<%= simple_format auto_link(@idea.explaination, :urls, :target => "_blank") %>
+	</div>
+
+	<div id="idea_social_block" class="row" style="margin-bottom: 10px;">
+		<div class="span3">
+			<%= link_to(image_tag("fb_share.jpg", :height => "20"),
+						"http://www.facebook.com/share.php?u=#{current_url}",
+						:title => "facebook",	:target => "_blank") %>
+			<%= link_to(image_tag("twitter.jpg", :height => "20"),
+						"https://twitter.com/share", :title => "twitter",
+						:target => "_blank") %>
+		</div>
+		<div class="span3" style="text-align: right;">
+			<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
+						!@idea.organization_claimed_idea?(current_user) %>
+
+				<%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
+						claim_idea_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+						:class => 'btn btn-mini btn-primary fancybox' %>
+			<% else %>
+				&nbsp;
+			<% end %>
+		</div>
+		<div class="span2" style="text-align: right;">
+			<%= link_to t('helpers.links.report_inappropriate'),
+					report_inappropriate_idea_path(@idea.id), :class => 'btn btn-mini fancybox' %>
+		</div>
+	</div>
+
+	<div id="idea_progress_block" style="margin-bottom: 10px;">
+		<% orgs = @idea.claimed_by_organizations(current_user)
+		  if orgs && !orgs.empty? %>
+			<h3><%= t('.claimed_by') %></h3>
+			<% orgs.each_with_index do |org, index| %>
+				<div class="idea_progress_org" style="margin-left: 10px; margin-top: 10px; border: solid 1px #ddd; padding: 5px;">
+					<% progresses = @idea.organization_progress(org.id, current_user) %>
+					<div class="row" style="border-bottom: dashed 1px #ddd;">
+						<div class="span3">
+							<h4>
+								<% if org.logo_file_name %>
+									<%= link_to(image_tag(org.logo.url),
+											organization_path(org.id)) %>
+								<% else %>
+									<%= link_to org.name,
+												organization_path(org.id) %>
+								<% end %>
+							</h4>
+						</div>
+						<div class="span2">
+							<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
+							      current_user.organization_users && !current_user.organization_users.empty? &&
+										@idea.organization_claimed_idea?(current_user) &&
+										!@idea.organization_realized_idea?(current_user) %>
+
+								<%= link_to t('.progress_udpate'),
+										progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+										:class => 'btn btn-mini btn-primary fancybox' %>
+							<% else %>
+								&nbsp;
+							<% end %>
+
+							<% progress_in_locale = true
+									progresses.each do |progress|
+										if !progress.in_locale?(I18n.locale)
+											progress_in_locale = false
+											break
+										end
+									end
+							%>
+
+							<% if !progress_in_locale %>
+								<%= link_to t('.translate_org_progress'), google_translate_url(t('app.common.placeholder')),
+									:class => "btn btn-mini translate_org_progress", :target => :blank,
+									:"data-id" => index %>
+							<% end %>
+
+						</div>
+						<div class="span3" style="text-align: right;">
+							<% if !progresses.empty? && progresses.first.is_completed && !progresses.first.url.empty? %>
+								<strong><%= "#{t('.finished')}!" %></strong>
+								<%= link_to t('.news_url'), progresses.first.url, :target => :blank, :class => 'btn btn-mini' %>
+							<% end %>
+						</div>
+					</div>
+					<div id="<%= "org_progress_#{index}" %>">
+						<% progresses.each do |progress| %>
+							<div class="row">
+								<div class="span3">
+									<strong><%= l progress.progress_date, :format => :long if progress.progress_date %></strong>
+			            <% if user_signed_in? && progress.organization_wrote_progress?(current_user) && progress.is_private %>
+                    <span class="private_item"><%= t('app.common.is_private')%></span>
+                  <% end %>
+								</div>
+								<div class="span3">
+									<strong><%= "#{t('activerecord.attributes.idea_progress.idea_status')}:" %></strong>
+									<%= progress.idea_status.name if progress.idea_status_id %>
+								</div>
+								<div class="span2">
+								<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
+								      current_user.organization_users && !current_user.organization_users.empty? &&
+											@idea.organization_claimed_idea?(current_user) %>
+
+									<%= link_to t('.edit_progress'),
+											edit_progress_path(progress.id),
+											:class => 'btn btn-mini btn-primary fancybox' %>
+								<% else %>
+									&nbsp;
+								<% end %>
+								</div>
+							</div>
+
+							<%= simple_format progress.explaination %>
+
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+
+	<h3><%= t('app.common.comments') %></h3>
+	<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
+
+<% end %>

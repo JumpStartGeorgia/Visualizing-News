@@ -35,7 +35,10 @@
     <ul>
       <li id="like_count">
         <span class="heart">❤</span>
-        <%= "#{@visualization.overall_votes} #{t('filters.organize.likes')}" %>
+        <span id="like_count_text">
+          <span id="like_count_number"><%= @visualization.overall_votes %></span>
+          <%= t('filters.organize.likes') %>
+        </span>
       </li>
       <li id="view_count">
         <%= image_tag('view_icon.png') %>

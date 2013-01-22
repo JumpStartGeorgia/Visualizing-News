@@ -5,6 +5,19 @@ function reset_interactive_iframe_height(){
 
 var adjusted_size = gon.thumbnail_size;
 
+function indicate_like_success(){  
+  $('a.like_btn').addClass('disabled');
+  $('body').animate({scrollTop: 0}, 400, function(){
+    $('span#like_count_text').fadeOut('slow', function(){
+      $('span#like_count_number').html(parseInt($('span#like_count_number').html()) + 1);
+      $(this).css('color', '#fff');
+      $(this).css('background-color', '#469e72');
+      $(this).fadeIn('slow', function(){
+        $('span#like_count_text').animate({color: '#757575', backgroundColor: 'transparent'}, 1000);
+      })
+    });
+  });            
+}
 
 function update_crop(coords) {
 	var rx = adjusted_size/coords.w;
@@ -150,6 +163,29 @@ $(document).ready(function(){
 
 	}
 
+
+  // process like button click
+  $('a.like_btn').click(function(){
+
+    $.ajax({
+        type: "GET",
+        url: $(this).attr('href') + '.js',
+        dataType:"json",
+        timeout: 3000,
+        error: function(response) {
+          indicate_like_success();
+        },
+        success: function(response) {
+          if(response.status === "success") {
+            indicate_like_success();
+          } else{
+            indicate_like_success();
+          }
+        }
+       });
+
+    return false;
+  });
 
 });
 

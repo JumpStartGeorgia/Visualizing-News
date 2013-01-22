@@ -51,76 +51,79 @@ class VisualsController < ApplicationController
   end
 
   def vote
+    success = true
+    
 		redirect_path = if request.env["HTTP_REFERER"]
 	    :back
 		else
 	    root_path
 		end
 
-    if !(['down', 'up'].include? params[:status])
-      redirect_to redirect_path
-      return
-    end
+    if ['down', 'up'].include?(params[:status])
+      visualization = Visualization.published.find_by_permalink(params[:id])
 
-    visualization = Visualization.published.find_by_permalink(params[:id])
+      if !visualization.blank?
+        ip = request.remote_ip
+        record = VoterIp.where(:ip => ip, :votable_type => visualization.class.name.downcase, :votable_id => visualization.id)
 
-    if !visualization
-      redirect_to redirect_path
-      return
-    end
+        if record.nil? || record.empty?
 
-    ip = request.remote_ip
-    record = VoterIp.where(:ip => ip, :votable_type => visualization.class.name.downcase, :votable_id => visualization.id)
+          if visualization.individual_votes.nil? || visualization.individual_votes.length < 4
+            visualization.individual_votes = '+0-0'
+          end
 
-    if record.nil? || record.empty?
+          split = visualization.individual_votes.split('+')[1].split('-')
+          ups = split[0].to_i
+          downs = split[1].to_i
 
-      if visualization.individual_votes.nil? || visualization.individual_votes.length < 4
-        visualization.individual_votes = '+0-0'
+          if params[:status] == 'up'
+            ups = ups + 1
+          elsif params[:status] == 'down'
+            downs = downs + 1
+          end
+
+          visualization.individual_votes = "+#{ups}-#{downs}"
+    			visualization.overall_votes = ups - downs
+          visualization.save
+
+          VoterIp.create(:ip => ip, :votable_type => visualization.class.name.downcase,
+                          :votable_id => visualization.id, :status => params[:status])
+
+        elsif record[0].status != params[:status]
+
+          split = visualization.individual_votes.split('+')[1].split('-')
+          ups = split[0].to_i
+          downs = split[1].to_i
+
+          if params[:status] == 'up'
+            ups = ups + 1
+            downs = downs - 1
+          elsif params[:status] == 'down'
+            ups = ups - 1
+            downs = downs + 1
+          end
+
+          visualization.individual_votes = "+#{ups}-#{downs}"
+    			visualization.overall_votes = ups - downs
+          visualization.save
+
+          record[0].status = params[:status]
+          record[0].save
+        else
+          success = false
+        end
+      else
+        success = false
       end
-
-      split = visualization.individual_votes.split('+')[1].split('-')
-      ups = split[0].to_i
-      downs = split[1].to_i
-
-      if params[:status] == 'up'
-        ups = ups + 1
-      elsif params[:status] == 'down'
-        downs = downs + 1
-      end
-
-      visualization.individual_votes = "+#{ups}-#{downs}"
-			visualization.overall_votes = ups - downs
-      visualization.save
-
-      VoterIp.create(:ip => ip, :votable_type => visualization.class.name.downcase,
-                      :votable_id => visualization.id, :status => params[:status])
-
-    elsif record[0].status != params[:status]
-
-      split = visualization.individual_votes.split('+')[1].split('-')
-      ups = split[0].to_i
-      downs = split[1].to_i
-
-      if params[:status] == 'up'
-        ups = ups + 1
-        downs = downs - 1
-      elsif params[:status] == 'down'
-        ups = ups - 1
-        downs = downs + 1
-      end
-
-      visualization.individual_votes = "+#{ups}-#{downs}"
-			visualization.overall_votes = ups - downs
-      visualization.save
-
-      record[0].status = params[:status]
-      record[0].save
     else
-	    redirect_to redirect_path
-      return false
+      success = false
     end
-
-    redirect_to redirect_path
+    
+    respond_to do |format|
+      format.html{ redirect_to redirect_path}
+      format.js {render json: {'status' => success ? 'success' : 'fail'} }
+    end
+    
   end
 
   def next

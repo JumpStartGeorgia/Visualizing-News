@@ -43,9 +43,9 @@ class User < ActiveRecord::Base
 		self.role = User::ROLES[:user] if self.role.nil?
 	end
 
-	# if not set, default to default locale
+	# if not set, default to current locale
 	def set_notification_language
-		self.notification_language = I18n.default_locale if self.notification_language.nil?
+		self.notification_language = I18n.locale if self.notification_language.nil?
 	end
 
 	def organization_ids

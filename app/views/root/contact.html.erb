@@ -1,35 +1,39 @@
-<%= page_title t('.title') %>
+<div id="contact">
 
-<% if @email_sent %>
+  <%= page_title t('.title') %>
 
-<p>
-<%= t(".message_sent") %>
-</p>
+  <% if @email_sent %>
 
-<% else %>
+  <p>
+  <%= t(".message_sent") %>
+  </p>
 
-			<div>
-        <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
-          :title => t('.email_us')%>
-				<br />
-				+995 032 214 29 26
-				<br />
-				<%= t('.address') %>
-				<hr />
-			</div>
+  <% else %>
 
-	<%= semantic_form_for @message, :url => contact_path do |f| %>
-		<%= f.error_messages %>
+			  <div class="p">
+          <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
+            :title => t('.email_us')%>
+				  <br />
+				  +995 032 214 29 26
+				  <br />
+				  <%= t('.address') %>
+				  <hr />
+			  </div>
 
-		<%= f.inputs do %>
-			<%= f.input :name, :label => t("activerecord.attributes.message.name") %>
-			<%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
-			<%= f.input :message, :label => t("activerecord.attributes.message.message"), :required => true, :as => :text, :input_html => {:rows => 5} %>
-		<% end %>
+	  <%= semantic_form_for @message, :url => contact_path do |f| %>
+		  <%= f.error_messages %>
 
-  	<div>
-  	  <%= f.submit t(".send"), :class => 'btn' %>
-  	</div>
+		  <%= f.inputs do %>
+			  <%= f.input :name, :label => t("activerecord.attributes.message.name") %>
+			  <%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
+			  <%= f.input :message, :label => t("activerecord.attributes.message.message"), :required => true, :as => :text, :input_html => {:rows => 5} %>
+		  <% end %>
 
-	<% end %>
-<% end %>
+    	<div>
+    	  <%= f.submit t(".send"), :class => 'btn' %>
+    	</div>
+
+	  <% end %>
+  <% end %>
+
+</div>

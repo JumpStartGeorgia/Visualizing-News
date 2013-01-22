@@ -5,18 +5,23 @@ function reset_interactive_iframe_height(){
 
 var adjusted_size = gon.thumbnail_size;
 
-function indicate_like_success(){  
+function indicate_like_success(is_interactive){  
+console.log('indicate_like_success start');
   $('a.like_btn').addClass('disabled');
-  $('body').animate({scrollTop: 0}, 400, function(){
-    $('span#like_count_text').fadeOut('slow', function(){
-      $('span#like_count_number').html(parseInt($('span#like_count_number').html()) + 1);
-      $(this).css('color', '#fff');
-      $(this).css('background-color', '#469e72');
-      $(this).fadeIn('slow', function(){
-        $('span#like_count_text').animate({color: '#757575', backgroundColor: 'transparent'}, 1000);
-      })
-    });
-  });            
+  if (!is_interactive){
+console.log('is not interactive');
+    // update the like counter
+    $('body').animate({scrollTop: 0}, 400, function(){
+      $('span#like_count_text').fadeOut('slow', function(){
+        $('span#like_count_number').html(parseInt($('span#like_count_number').html()) + 1);
+        $(this).css('color', '#fff');
+        $(this).css('background-color', '#469e72');
+        $(this).fadeIn('slow', function(){
+          $('span#like_count_text').animate({color: '#757575', backgroundColor: 'transparent'}, 1000);
+        })
+      });
+    });            
+  }
 }
 
 function update_crop(coords) {
@@ -166,20 +171,23 @@ $(document).ready(function(){
 
   // process like button click
   $('a.like_btn').click(function(){
-
+    var is_interactive = false;
+    if ($(this).attr('data-interactive') !== undefined){
+      is_interactive = true;
+    }
     $.ajax({
         type: "GET",
         url: $(this).attr('href') + '.js',
         dataType:"json",
         timeout: 3000,
         error: function(response) {
-          indicate_like_success();
+          indicate_like_success(is_interactive);
         },
         success: function(response) {
           if(response.status === "success") {
-            indicate_like_success();
+            indicate_like_success(is_interactive);
           } else{
-            indicate_like_success();
+            indicate_like_success(is_interactive);
           }
         }
        });

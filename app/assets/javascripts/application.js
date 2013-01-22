@@ -43,5 +43,14 @@ $(document).ready(function(){
 
 
 
+  if ($('#file_replacement').length)
+  {
+    $('#file_replacement').click(function ()
+    {
+      $('#' + $(this).data('inputid')).click();
+    });
+  }
+
+
 
 });

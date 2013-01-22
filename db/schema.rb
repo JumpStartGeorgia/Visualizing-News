@@ -164,19 +164,6 @@ ActiveRecord::Schema.define(:version => 20130120123259) do
 
   add_index "pages", ["name"], :name => "index_pages_on_name"
 
-  create_table "upload_files", :force => true do |t|
-    t.integer  "visualization_translation_id"
-    t.integer  "type_id"
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
-    t.integer  "upload_file_size"
-    t.datetime "upload_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "upload_files", ["visualization_translation_id", "type_id"], :name => "idx_upload_type"
-
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false
     t.string   "encrypted_password",     :default => "",   :null => false

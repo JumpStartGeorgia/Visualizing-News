@@ -1,42 +1,48 @@
-<% if !@page.nil? %>
+<div id="send_data">
 
-	<%= page_title @page.title %>
+  <% if !@page.nil? %>
 
-  <% if @email_sent %>
+	  <%= page_title @page.title %>
 
-    <p>
-    <%= t(".message_sent") %>
-    </p>
+    <% if @email_sent %>
+
+      <p>
+      <%= t(".message_sent") %>
+      </p>
+
+    <% else %>
+
+	    <%= simple_format(@page.description) %>
+
+    	<%= semantic_form_for @message, :url => data_path, :html => { :multipart => true } do |f| %>
+    		<%= f.error_messages %>
+
+    		<%= f.inputs do %>
+    			<%= f.input :type, :as => :hidden, :value => Message::TYPES[:send_data] %>
+    			<%= f.input :name, :label => t("activerecord.attributes.message.name"), :required => true %>
+    			<%= f.input :organization, :label => t("activerecord.attributes.message.organization") %>
+    			<%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
+    			<%= f.input :phone, :label => t("activerecord.attributes.message.phone") %>
+    			<%= f.input :what_is_data, :label => t("activerecord.attributes.message.what_is_data"), :required => true, :as => :text, :input_html => {:rows => 5} %>
+    			<%= f.input :why_visualize, :label => t("activerecord.attributes.message.why_visualize"), :required => true, :as => :text, :input_html => {:rows => 5} %>
+    			<%= f.input :datasource, :label => t("activerecord.attributes.message.datasource"), :required => true %>
+    			<%= f.input :file, :as => :file, :label => t("activerecord.attributes.message.file") %>
+    		<% end %>
+
+        <div id="file_replacement" data-inputid="message_file"><%= t('root.data.file') %></div>
+
+      	<div>
+      	  <%= f.submit t(".send"), :class => 'btn' %>
+      	</div>
+
+    	<% end %>
+    <% end %>
 
   <% else %>
-
-	  <%= simple_format(@page.description) %>
-
-  	<%= semantic_form_for @message, :url => data_path, :html => { :multipart => true } do |f| %>
-  		<%= f.error_messages %>
-
-  		<%= f.inputs do %>
-  			<%= f.input :type, :as => :hidden, :value => Message::TYPES[:send_data] %>
-  			<%= f.input :name, :label => t("activerecord.attributes.message.name"), :required => true %>
-  			<%= f.input :organization, :label => t("activerecord.attributes.message.organization") %>
-  			<%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
-  			<%= f.input :phone, :label => t("activerecord.attributes.message.phone") %>
-  			<%= f.input :what_is_data, :label => t("activerecord.attributes.message.what_is_data"), :required => true, :as => :text, :input_html => {:rows => 5} %>
-  			<%= f.input :why_visualize, :label => t("activerecord.attributes.message.why_visualize"), :required => true, :as => :text, :input_html => {:rows => 5} %>
-  			<%= f.input :datasource, :label => t("activerecord.attributes.message.datasource"), :required => true %>
-  			<%= f.input :file, :as => :file, :label => t("activerecord.attributes.message.file") %>
-  		<% end %>
-
-    	<div>
-    	  <%= f.submit t(".send"), :class => 'btn' %>
-    	</div>
-
-  	<% end %>
+	  <%= page_title t('.title') %>
   <% end %>
 
-<% else %>
-	<%= page_title t('.title') %>
-<% end %>
+</div>
 
 <% if user_signed_in? %>
 <div class="form-actions">

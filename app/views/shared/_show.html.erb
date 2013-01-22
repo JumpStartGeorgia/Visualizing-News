@@ -161,7 +161,7 @@
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
         <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
-			    <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
+			    <textarea readonly style="cursor: default;" onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
 					  onmouseup="return false;"><%= link_to(
 						  image_tag(full_url(@visualization.image.url(:medium, false)),
 							  :alt => @visualization.title),
@@ -172,7 +172,7 @@
 					  <%= link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank %>
 				  </textarea>
         <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-		      <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
+		      <textarea readonly style="cursor: default;" onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
 					  onmouseup="return false;"><%= link_to(
               image_tag(full_url(@visualization.image.url(:medium, false)),
 							  :alt => @visualization.title),

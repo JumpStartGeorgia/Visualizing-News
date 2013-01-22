@@ -21,10 +21,13 @@ module VisualizationsHelper
 	  return col
   end
 
-  def merge_visual_params(key, value)
+  # options = [{key, value}]
+  def merge_visual_params(options)
     p = @param_options.clone
-    if !key.blank? && !value.blank?
-      p[key.to_s] = value
+    options.each do |option|
+      if !option[:key].blank? && !option[:value].blank?
+        p[option[:key].to_s] = option[:value]
+      end
     end
     return p 
   end

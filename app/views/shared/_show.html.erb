@@ -121,7 +121,7 @@
           <%= "#{t('.category')}: "%>
           <span class="val">
           <% @visualization.visualization_categories.each_with_index do |cat, index| %>
-            <% x = link_to cat.category.name, visuals_path(merge_visual_params(:category, cat.category.permalink)) %>
+            <% x = link_to cat.category.name, visuals_path(merge_visual_params([{:key => :category, :value => cat.category.permalink}])) %>
             <% if index != @visualization.visualization_categories.length-1 %>
               <%= x + ", "%>
             <% else %>
@@ -134,7 +134,7 @@
           <%= "#{t('.type')}:"%>
 						<span class="val">
 							<% type_name = visualization_type_name(@visualization.visualization_type_id) %>
-							<%= link_to type_name, visuals_path(merge_visual_params(:type, type_name.downcase)) %>
+							<%= link_to type_name, visuals_path(merge_visual_params([{:key => :type, :value => type_name.downcase}])) %>
 						</span>
         </li>
       </ul>

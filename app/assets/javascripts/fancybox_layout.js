@@ -10,6 +10,6 @@
 
 	// set focus to first text box on page
 	if (gon.highlight_first_form_field){
-	  $(":input:visible:enabled:first").focus();
+	  $("#fancybox-content :input:visible:enabled:first").focus();
 	}
 

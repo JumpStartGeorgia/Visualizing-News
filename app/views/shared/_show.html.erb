@@ -1,23 +1,14 @@
 <div id="visualization_row1" class="row-fluid">
-  <div class="span1">
-    &nbsp;
-  </div>
-  <div class="main_block span6 clear">
+
+  <div class="main_block clear">
 		<%= page_title @visualization.title %>
   </div>
-  <div class="span4">
-    &nbsp;
-  </div>
-  <div class="span1">
-    &nbsp;
-  </div>
+
 </div>
 
 <div id="visualization_row1a" class="row-fluid">
-  <div class="span1">
-    &nbsp;
-  </div>
-  <div class="main_block span6 clear">
+
+  <div class="main_block clear">
     <div id="visualization_date">
 			<% if @visualization.published %>
 	      <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
@@ -31,7 +22,7 @@
 			<% end %>
     </div>
   </div>
-  <div id="overall_counts" class="span4">
+  <div id="overall_counts" class="side_block">
     <ul>
       <li id="like_count">
         <span class="heart">❤</span>
@@ -51,16 +42,12 @@
       </li>
     </ul>
   </div>
-  <div class="span1">
-    &nbsp;
-  </div>
+
 </div>
 
 <div id="visualization_row2" class="row-fluid">
-  <div class="span1">
-    &nbsp;
-  </div>
-  <div class="main_block span6">
+
+  <div class="main_block">
     <div id="visual">
 			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
 		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
@@ -70,7 +57,7 @@
 			<% end %>
     </div>
   </div>
-  <div id="visualization_sidebar" class="span4">
+  <div id="visualization_sidebar" class="side_block">
     <% if @visualization.explanation %>
     <div id="explanation">
       <%= simple_format @visualization.explanation %>
@@ -164,7 +151,7 @@
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
         <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
-			    <textarea readonly style="cursor: default;" onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
+			    <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
 					  onmouseup="return false;"><%= link_to(
 						  image_tag(full_url(@visualization.image.url(:medium, false)),
 							  :alt => @visualization.title),
@@ -175,7 +162,7 @@
 					  <%= link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank %>
 				  </textarea>
         <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-		      <textarea readonly style="cursor: default;" onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
+		      <textarea readonly onfocus="var _self = this; setTimeout(function (){ _self.select(); }, 10);"
 					  onmouseup="return false;"><%= link_to(
               image_tag(full_url(@visualization.image.url(:medium, false)),
 							  :alt => @visualization.title),
@@ -189,47 +176,32 @@
 			</div>
     </div>
   </div>
-  <div class="span1">
-    &nbsp;
-  </div>
+
 </div>
 
 <div id="visualization_row3" class="row-fluid">
-  <div class="span1">
-    &nbsp;
-  </div>
-  <div class="main_block span6 clear">
+
+  <div class="main_block clear">
     <div class="vote">
 			<% if params[:controller] == 'visuals' %>
 				<%= render 'shared/vote' %>
 			<% end %>
     </div>
   </div>
-  <div class="span4">
-    &nbsp;
-  </div>
-  <div class="span1">
-    &nbsp;
-  </div>
+
 </div>
 
 <% if params[:controller] == 'visuals' %>
 	<div id="visualization_row4" class="row-fluid clear">
-		<div class="span1">
-		  &nbsp;
-		</div>
-		<div class="main_block span6 clear">
+
+		<div class="main_block clear">
 			<h3 class="comments_count">
 				<%= "#{t('app.common.comments')}:" %>
 				<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
 			</h3>
 			<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
-		<div class="span4">
-		  &nbsp;
 		</div>
-		<div class="span1">
-		  &nbsp;
-		</div>
+
 	</div>
 <% end %>
 
@@ -237,12 +209,11 @@
   <div id="previous_visual" class="span1">
 	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visual_previous_path(@param_options))%>
   </div>
-  <div class="main_block span6 clear">
+
+  <div class="main_block clear">
     &nbsp;
   </div>
-  <div class="span4">
-    &nbsp;
-  </div>
+
   <div id="next_visual" class="span1">
 	  <%= link_to(image_tag('nav_next.png', :alt => '>'), visual_next_path(@param_options))%>
   </div>

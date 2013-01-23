@@ -15,7 +15,7 @@
   <div class="row-fluid">
     <div class="span12">
 	    <%= image_tag @organization.logo.url if @organization.logo_file_name %>
-		  <%= link_to t('helpers.links.website'), @organization.url, :class => 'visit_website' if @organization.url %>
+		  <%= link_to t('helpers.links.website'), @organization.url, :class => 'visit_website', :target => :blank if @organization.url %>
     </div>
   </div>
 

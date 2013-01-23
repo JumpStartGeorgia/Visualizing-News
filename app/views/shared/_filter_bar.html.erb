@@ -1,23 +1,20 @@
+<% 
+  show_toggle ||= false 
+  hide_slider = show_toggle ? "display: none;" : ""
+hide_slider = ''  
+%>
 <div id="filter_bar" class="navbar">
-  <div id="category_slider" class="">
 
-    <!--div id="hWrapper">
-      <div id="carouselh">
-        <% @categories.each do |cat| %>
-          <% if cat.icon_file_name %>
-            <div>
-              <%= link_to(url_for(params.merge(:category => cat.permalink))) do %>
-                <%= image_tag(cat.icon.url) %>
-                <br />
-                <span class="thumbnail-text"><%= cat.name %></span>
-              <% end %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div-->
+  <% if show_toggle %>
+    <div id="toggle_categories" class="resp">
+      <%= t('.categories')%>
+      <br />
+      <%= image_tag('org_downarrow.png', :id => "category_arrow")%>
+    </div>
+  <% end %>
 
 
+  <div id="category_slider" style="<%=hide_slider%>">
 
     <ul id="category_slider_content" class="elastislide-list">
       <% @categories.each do |cat| %>
@@ -37,12 +34,6 @@
     </ul>
 
   </div>
-
-  <% if defined?(show_toggle) && show_toggle %>
-    <div id="toggle_categories" class="resp">
-      categories
-    </div>
-  <% end %>
 
   <div id="filter_bar_inner" class="container">
 		<ul class="nav">

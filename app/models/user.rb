@@ -56,6 +56,16 @@ class User < ActiveRecord::Base
 		return ids
 	end
 
+	def is_following_idea?(idea_id)
+		if idea_id
+			x = Notification.where(:user_id => self.id,
+														:notification_type => Notification::TYPES[:follow_idea],
+														:identifier => idea_id)
+			if x && !x.empty?
+				return true
+			end
+		end
+	end
 
 	##############################
 	## omniauth methods

@@ -1,0 +1,37 @@
+#idea_progress_url_input{
+  display: none;
+}
+
+.private_item {
+  background-color: #f00; 
+  color: #fff;  
+}
+#idea_list{
+  .idea_list_item{
+  	padding: 5px;
+    .count_block ul li{
+      display: inline-block;
+      color: #757575;
+      font-size: 12px;
+      font-family: themix_light;
+      width: 30%;
+      .heart {
+        color: #b1b1b1;
+        font-size: 18px;
+        vertical-align: middle;
+        margin-right: 3px;
+      }
+      img{
+        vertical-align: middle;
+        margin-right: 3px;
+      }
+    }
+  }
+  .idea_list_item:nth-child(even) {background-color: #eee;}
+  .idea_list_item:nth-child(odd) {background-color: #fff;}
+}
+
+/* set width of private ddl in idea form */
+select#idea_is_private{
+  width: 75px;
+}

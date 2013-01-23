@@ -112,6 +112,9 @@ en:
         is_published_hint: This status indicates that the idea is published
       idea_status_translation:
         name: Name
+    messages:
+      idea_progress:
+        success: "The record was successfully saved."
     errors:
       messages:
         published_visual_missing_fields: "is required when the visual is published."
@@ -195,6 +198,10 @@ en:
       org_profile: "%{org} - Profile"
       edit_org: "%{org} - Edit"
       new_visual: "%{org} - Add Visualization"
+      post_idea: Post Idea
+      report_inappropriate: Report Inappropriate Idea
+      follow_idea: Follow Idea
+      unfollow_idea: Unfollow Idea
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -245,6 +252,21 @@ en:
       unlike: unlike
       share: Share
       not_published: Not Published
+      author: Author
+      rating: Rating
+      rate_it: Rate It!
+      top_ideas: Top Ideas
+      new_ideas: New Ideas
+      in_progress: In Progress
+      realized: Realized Ideas
+      post_idea: Post Your Idea
+      search: Search
+      follow_idea: You will now be sent email notifications when updates occur to this idea.
+      follow_idea_bad: The idea could not be found to follow.
+      unfollow_idea: You will no longer be sent email notifications when updates occur to this idea.
+      unfollow_idea_bad: The idea could not be found to unfollow.
+      is_private: PRIVATE
+      last_update: Last Update
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -391,6 +413,8 @@ en:
       comment_count: Comments
     filter_bar:
       categories: Categories
+    ideas_list:
+      no_ideas: No Idea records were found.
   visualizations:
     form:
       preview: Preview
@@ -423,3 +447,38 @@ en:
       new_ideas_by_category: "Notify me when an idea is added to:"
       language_sub_title: Notification Language
       language_label: In what language do you want to receive the notifications?
+  ideas:
+    index: 
+      title: Ideas
+    user:
+      title: "User: %{name}"
+    category:
+      title: "Category: %{name}"
+    explore:
+      title: "Explore Ideas"
+    idea:
+      title: "Idea #%{number}"
+      idea_by: "Idea by %{name}"
+      claimed_by: "Idea Being Worked On"
+      finished: Finished
+      news_url: View News Article
+      take_ownership: "Work on Idea (%{org})"
+      progress_udpate: Add Progress Update
+      edit_progress: Edit Progress
+      translate_idea: Translate the Idea
+      translate_org_progress: Translate the Text
+      inappropriate_idea: "This idea has been reported as inappropriate and is no longer available."
+    search:
+      title: "Search: %{q}"
+  progress:
+    form:
+      title_claim: Claim Idea
+      title_progress_update: Progress Update
+      title_edit_progress: Edit Progress
+      title_error: Error
+      error: The requested Idea and/or Organization could not be found.
+  report:
+    inappropriate:
+      title: Report Inappropriate Idea
+      success: The Idea hs been reported.
+

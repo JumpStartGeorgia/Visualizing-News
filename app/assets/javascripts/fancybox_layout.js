@@ -7,6 +7,7 @@
 //= require fancybox2
 //= require vendor
 //= require visualizations
+//= require ideas
 
 	// set focus to first text box on page
 	if (gon.highlight_first_form_field){

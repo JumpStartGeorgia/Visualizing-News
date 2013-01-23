@@ -1,4 +1,5 @@
 class Idea < ActiveRecord::Base
+  is_impressionable :counter_cache => true
 	require 'utf8_converter'
 
 	has_many :idea_categories, :dependent => :destroy

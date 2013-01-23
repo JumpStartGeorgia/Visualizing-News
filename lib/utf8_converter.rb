@@ -11,6 +11,16 @@ module Utf8Converter
 		  'r','s','t','u','p','q','gh','qkh','sh','ch','ts','dz','ts','tch','kh','j','h']
 	end
 
+	# determine if the text contains georgian characters
+	# - assuming if first character is geo, than all is geo
+	def self.is_geo?(text)
+		is_geo = false
+		if text
+			is_geo = true if !geo.index(text[0]).nil?
+		end
+		return is_geo
+	end
+
   def self.convert_ka_to_en (text)
     s = text
     geo.each_with_index do |v, i|

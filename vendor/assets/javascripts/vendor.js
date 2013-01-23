@@ -3,3 +3,4 @@
 //= require jquerypp.custom
 //= require jquery.elastislide
 //= require jquery.Jcrop.min
+//= require jquery.multiselect.min

@@ -8,7 +8,6 @@ class IdeasController < ApplicationController
 				in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).appropriate#.paginate(:page => params[:page])
 				realized_ideas = Idea.with_private(current_user).realized_ideas(current_user).appropriate#.paginate(:page => params[:page])
 				@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
-				render :layout => 'application_home'
       }
       format.js {
 				# test which tab to get data for
@@ -27,6 +26,25 @@ class IdeasController < ApplicationController
     end
 
 
+  end
+
+  def show
+    @idea = Idea.with_private(current_user).find_by_id(params[:id])
+
+		if @idea
+			gon.show_fb_comments = true
+
+		  respond_to do |format|
+		    format.html # idea.html.erb
+		    format.json { render json: @idea }
+		  end
+
+      # record the view count
+      impressionist(@idea)
+		else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+		end
   end
 
 	def user
@@ -77,22 +95,6 @@ class IdeasController < ApplicationController
 			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
 		end
 	end
-
-  def idea
-    @idea = Idea.with_private(current_user).find_by_id(params[:id])
-
-		if @idea
-			gon.show_fb_comments = true
-
-		  respond_to do |format|
-		    format.html # idea.html.erb
-		    format.json { render json: @idea }
-		  end
-		else
-			flash[:info] =  t('app.msgs.does_not_exist')
-			redirect_to root_path
-		end
-  end
 
   def create
     @idea = Idea.new(params[:idea])

@@ -63,6 +63,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@categories = Category.sorted
 		@filter_type_selection = I18n.t('filters.type.all')
 		@filter_view_selection = I18n.t('filters.view.grid')
+		@idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
+    @idea = Idea.new
+		@idea.idea_categories.build
 	end
 
 	def initialize_gon
@@ -72,6 +75,16 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		gon.visual_comment_notification_url = visual_comment_notification_path(gon.placeholder)
 		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 		gon.thumbnail_size = 230
+		gon.id_top = t('app.common.top_ideas').gsub(" ", "_").downcase
+		gon.id_new = t('app.common.new_ideas').gsub(" ", "_").downcase
+		gon.id_in_progress = t('app.common.in_progress').gsub(" ", "_").downcase
+		gon.id_realized = t('app.common.realized').gsub(" ", "_").downcase
+		@id_top = gon.id_top
+		@id_new = gon.id_new
+		@id_in_progress = gon.id_in_progress
+		@id_realized = gon.id_realized
+
+		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
 	end
 
 	# after user logs in go back to the last page or go to root page

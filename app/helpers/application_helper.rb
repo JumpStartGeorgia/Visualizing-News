@@ -3,14 +3,27 @@ module ApplicationHelper
 	def page_title(page_title)
 		title(page_title)
 		x = nil
+
 		if page_title
-      x = content_tag(:div, content_tag(:div, content_tag(:h1, page_title), :class => 'block'), :class => 'page-header')
+      h1_content = content_tag(:h1, page_title)
+      if content_for?(:title_image)
+        h1_content = content_tag(:h1) do
+          tag('img', {:src => content_for(:title_image), :style => 'vertical-align: middle; margin-right: 5px;'}) + 
+          content_tag(:span, page_title)
+        end
+      end
+
+      x = content_tag(:div, content_tag(:div, h1_content, :class => 'block'), :class => 'page-header')
 		end
 		return x
 	end
 
   def title(page_title)
     content_for(:title) { page_title }
+  end
+
+  def title_image(image_url)
+    content_for(:title_image) { image_url }
   end
 
 	def flash_translation(level)

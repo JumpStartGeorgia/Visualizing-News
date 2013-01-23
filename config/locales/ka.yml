@@ -112,6 +112,9 @@ ka:
         is_published_hint: This status indicates that the idea is published
       idea_status_translation:
         name: Name
+    messages:
+      idea_progress:
+        success: "ჩანაწერები წარმატებით შეინახა."
     errors:
       messages:
         published_visual_missing_fields: "სავალდებულოა, როდესაც ვიზუალი გამოქვეყნდება."
@@ -195,6 +198,10 @@ ka:
       org_profile: "%{org} - გვერდი"
       edit_org: "%{org} - რედაქტირება"
       new_visual: "%{org} - ატვირთეთ ვიზუალი"
+      post_idea: იდეის გამოქვეყნება
+      report_inappropriate: დაარეპორტე შეუსაბამო იდეა
+      follow_idea: მიყევი იდეას
+      unfollow_idea: აღარ მიყვე
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -245,6 +252,21 @@ ka:
       unlike: unlike
       share: გააზიარეთ
       not_published: გამოუქვეყნებელი
+      author: ავტორები
+      rating: შეფასება
+      rate_it: შეაფასე!
+      top_ideas: ტოპ იდეები
+      new_ideas: ახალი იდეები
+      in_progress: მიმდინარეობს
+      realized: განხორციელებული იდეები
+      post_idea: გამოაქვეყნე შენი იდეა
+      search: ძებნა
+      follow_idea: თქვენ მიიღებთ ელექტრონულ შეტყობინებას  იდეისთან დაკავშირებით სიახლეებზე.
+      follow_idea_bad: იდეა ვერ მოიძებნა
+      unfollow_idea: თქვენ არ მიიღებთ ელექტრონულ შეტყობინებებს სიახლეებზე.
+      unfollow_idea_bad: იდეა ვერ მოიძებნა.
+      is_private: PRIVATE
+      last_update: Last Update
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -391,6 +413,8 @@ ka:
       comment_count: კომენტარები
     filter_bar:
       categories: კატეგორიები
+    ideas_list:
+      no_ideas: იდეა არ მოიძებნა.
   visualizations:
     form:
       preview: ნახვა
@@ -423,3 +447,38 @@ ka:
       new_ideas_by_category: "შემატყობინე როდესაც იდეა დაემატება:"
       language_sub_title: შეტყობინების ენა
       language_label: რომელ ენაზე გსურთ შეტყობინების მიღება? 
+  ideas:
+    index:
+      title: Ideas
+    user:
+      title: "მომხმარებელი: %{name}"
+    category:
+      title: "კატეგორია: %{name}"
+    explore:
+      title: "აღმოაცინე იდეა"
+    idea:
+      title: "Idea #%{number}"
+      idea_by: "%{name}-ის იდეა"
+      claimed_by: "იდეა შეიმუშავა"
+      finished: დასრულებული
+      news_url: იხილე სიახლეები
+      take_ownership: "დაიწყე მუშაობა იდეაზე (%{org})"
+      progress_udpate: დაამატე პროგრესი
+      edit_progress: შეცვალე პროგრესი
+      translate_idea: იდეის თარგმნა
+      translate_org_progress: ტექსტის თარგმნა
+      inappropriate_idea: "იდეა არ მოიძებნა."
+    search:
+      title: "ძებნა: %{q}"
+  progress:
+    form:
+      title_claim: იდეაზე პასუხისმგებლობა
+      title_progress_update: პროგრესი
+      title_edit_progress: პროგრესის ცვლილება
+      title_error: შეცდომა
+      error: იდეა/ორგანიზაცია არ მოიძებნა
+  report:
+    inappropriate:
+      title: დაარეპორტე შეუსაბამო იდეა
+      success: იდეა დარეპორტდა.
+

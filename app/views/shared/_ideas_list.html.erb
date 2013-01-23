@@ -1,0 +1,57 @@
+	<% if !ideas_list || ideas_list.empty? %>
+		<div class="idea_list_item">
+			<%= t('.no_ideas') %>
+		</div>
+	<% else %>
+		<% ideas_list.each_with_index do |idea,index| %>
+			<div class="idea_list_item">
+				<div class="row-fluid">
+					<div class="span5">
+						<%= link_to l(idea.created_at, :format => :long), idea_path(idea) %>
+            <% if user_signed_in? && idea.is_private &&
+								(idea.organization_submitted_idea?(current_user) || idea.organization_claimed_idea?(current_user)) %>
+			        <span class="private_item"><%= t('app.common.is_private')%></span>
+            <% end %>
+					</div>
+					<div class="span3">
+						<%= "#{t('app.common.author')}: "%>
+						<%= link_to idea.user.nickname, user_ideas_path(idea.user_id) %>
+					</div>
+				</div>
+				<div>
+					<%= auto_link(truncate(idea.explaination, :length => 150, :separator => ' '), :urls, :target => "_blank") %>
+				</div>
+				<% last_report = idea.last_progress_report(current_user)
+				  if last_report %>
+  				<div>
+  				  <%= "#{t('app.common.last_update')}: #{last_report.idea_status.name} (#{l last_report.progress_date, :format => :default})" %>
+            <% if user_signed_in? && last_report.organization_wrote_progress?(current_user) && last_report.is_private %>
+              <span class="private_item"><%= t('app.common.is_private')%></span>
+            <% end %>
+  				</div>
+				<% end %>
+				<div class="count_block clear" class="row-fluid">
+					<div class="span2">
+            <ul>
+              <li>
+                <span class="heart" title="<%= t('filters.organize.likes')%>">❤</span>
+                <%= idea.overall_votes %>
+              </li>
+              <li>
+                <%= image_tag('view_icon12.png', :alt => t('filters.organize.views'), :title => t('filters.organize.views')) %>
+                <%= idea.impressions_count %>
+              </li>
+              <li>
+                <%= image_tag('comments_icon12.png', :alt => t('app.common.comments'), :title => t('app.common.comments')) %>
+                <fb:comments-count href="<%= full_url(idea_path(idea)) %>"></fb:comments-count>
+              </li>
+            </ul>
+					</div>
+					<div class="span6">
+            &nbsp;
+					</div>
+				</div>
+			</div>
+		<% end %>
+		<%#= page_navigation_links ideas_list %>
+	<% end %>

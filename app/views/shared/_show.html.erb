@@ -2,7 +2,7 @@
   <div class="span1">
     &nbsp;
   </div>
-  <div id="main_block" class="span6 clear">
+  <div class="main_block span6 clear">
 		<%= page_title @visualization.title %>
   </div>
   <div class="span4">
@@ -17,7 +17,7 @@
   <div class="span1">
     &nbsp;
   </div>
-  <div id="main_block" class="span6 clear">
+  <div class="main_block span6 clear">
     <div id="visualization_date">
 			<% if @visualization.published %>
 	      <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
@@ -60,7 +60,7 @@
   <div class="span1">
     &nbsp;
   </div>
-  <div id="main_block" class="span6">
+  <div class="main_block span6">
     <div id="visual">
 			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
 		    <%= link_to(image_tag(@visualization.image.url(:medium, false)), url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
@@ -198,7 +198,7 @@
   <div class="span1">
     &nbsp;
   </div>
-  <div id="main_block" class="span6 clear">
+  <div class="main_block span6 clear">
     <div class="vote">
 			<% if params[:controller] == 'visuals' %>
 				<%= render 'shared/vote' %>
@@ -218,7 +218,7 @@
 		<div class="span1">
 		  &nbsp;
 		</div>
-		<div id="main_block" class="span6 clear">
+		<div class="main_block span6 clear">
 			<h3 class="comments_count">
 				<%= "#{t('app.common.comments')}:" %>
 				<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
@@ -237,7 +237,7 @@
   <div id="previous_visual" class="span1">
 	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visual_previous_path(@param_options))%>
   </div>
-  <div id="main_block" class="span6 clear">
+  <div class="main_block span6 clear">
     &nbsp;
   </div>
   <div class="span4">

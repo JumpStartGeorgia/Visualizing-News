@@ -1,26 +1,31 @@
-<%= page_title @organization.name %>
+<div id="org-top">
 
-<% if @user_in_org && params[:controller] == 'organizations' %>
-<div class="form-actions">
-  <%= link_to t("helpers.links.edit_org", :org => @organization.name),
-      edit_organization_path(@organization.permalink), :class => 'btn' %>
-	<%= link_to t('helpers.links.new_visual', :org => @organization.name),
-			new_organization_visualization_path(@organization.permalink), :class => 'btn btn-primary' %>
+  <%= page_title @organization.name %>
+
+  <% if @user_in_org && params[:controller] == 'organizations' %>
+  <div class="form-actions">
+    <%= link_to t("helpers.links.edit_org", :org => @organization.name),
+        edit_organization_path(@organization.permalink), :class => 'btn' %>
+	  <%= link_to t('helpers.links.new_visual', :org => @organization.name),
+			  new_organization_visualization_path(@organization.permalink), :class => 'btn btn-primary' %>
+  </div>
+  <% end %>
+
+
+  <div class="row-fluid">
+    <div class="span12">
+	    <%= image_tag @organization.logo.url if @organization.logo_file_name %>
+		  <%= link_to t('helpers.links.website'), @organization.url, :class => 'visit_website' if @organization.url %>
+    </div>
+  </div>
+
+  <div class="desc resp">
+    <%= simple_format @organization.bio %>
+  </div>
+
 </div>
-<% end %>
 
-<div class="row-fluid">
-	<div class="span8">
-		<%= simple_format @organization.bio %>
-	</div>
-	<div class="span3">
-		<%= link_to t('helpers.links.website'), @organization.url, :class => 'btn btn-mini' if @organization.url %>
-	</div>
-</div>
-
-<hr />
-
-<%= render "shared/filter_bar" %>
+<%= render "shared/filter_bar", :show_toggle => true %>
 
 
 <div id="visual_list" class="org">

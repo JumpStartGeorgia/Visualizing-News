@@ -5,22 +5,49 @@ function reset_interactive_iframe_height(){
 
 var adjusted_size = gon.thumbnail_size;
 
-function indicate_like_success(is_interactive){  
-  $('a.like_btn').attr('href', '');
-  $('a.like_btn').addClass('disabled');
-  if (!is_interactive){
-    // update the like counter
-    $('body').animate({scrollTop: 0}, 400, function(){
+function indicate_like_success(update_counter){  
+  var counter_action = 1;
+  $('body').animate({scrollTop: 0}, 300, function(){
+    // switch button status
+    var like_text, href_status_old, href_status_new;
+    if ($('.like_btn').first().attr('title') == $('.like_btn').first().attr('data-like')){
+      // was like, change to unlike
+      like_text = $('.like_btn').first().attr('data-unlike');
+      href_status_old = '/up';
+      href_status_new = '/down';
+    } else{
+      // was unlike, change to like
+      counter_action = -1;
+      like_text = $('.like_btn').first().attr('data-like');
+      href_status_old = '/down';
+      href_status_new = '/up';
+    }
+
+    $('.like_btn .text').fadeOut('slow', function(){
+      $('.like_btn').attr('title', like_text);
+      $('.like_btn').attr('href', $('.like_btn').attr('href').replace(href_status_old, href_status_new));
+      $('.like_btn .text').each(function(){
+        $(this).html(like_text);
+      });
+      $('.like_btn .text').fadeIn('slow');
+    });
+    if (update_counter){
+      // update the like counter
       $('span#like_count_text').fadeOut('slow', function(){
-        $('span#like_count_number').html(parseInt($('span#like_count_number').html()) + 1);
+        var old_count = parseInt($('span#like_count_number').html());            
+        var new_count = old_count + counter_action;
+        if (old_count < 0){
+          new_count = 0;
+        }
+        $('span#like_count_number').html(new_count);
         $(this).css('color', '#fff');
         $(this).css('background-color', '#469e72');
         $(this).fadeIn('slow', function(){
           $('span#like_count_text').animate({color: '#757575', backgroundColor: 'transparent'}, 1000);
         })
       });
-    });            
-  }
+    }
+  });            
 }
 
 function update_crop(coords) {
@@ -170,30 +197,26 @@ $(document).ready(function(){
 
   // process like button click
   $('a.like_btn').click(function(){
-    // href is removed after link is clicked on so it cannot be clicked on again
-    if ($(this).attr('href') !== ''){
-      var is_interactive = false;
-      if ($(this).attr('data-interactive') !== undefined){
-        is_interactive = true;
-      }
-      $.ajax({
-          type: "GET",
-          url: $(this).attr('href') + '.js',
-          dataType:"json",
-          timeout: 3000,
-          error: function(response) {
-            indicate_like_success(is_interactive);
-          },
-          success: function(response) {
-            if(response.status === "success") {
-              indicate_like_success(is_interactive);
-            } else{
-              indicate_like_success(is_interactive);
-            }
-          }
-         });
-
+    var update_counter = true;
+    if ($(this).attr('data-interactive') == 'true'){
+      update_counter = false;
     }
+    $.ajax({
+      type: "GET",
+      url: $(this).attr('href') + '.js',
+      dataType:"json",
+      timeout: 3000,
+      error: function(response) {
+        indicate_like_success(update_counter);
+      },
+      success: function(response) {
+        if(response.status === "success") {
+          indicate_like_success(update_counter);
+        } else{
+          indicate_like_success(update_counter);
+        }
+      }
+    });
     return false;
   });
 

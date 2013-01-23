@@ -1,7 +1,11 @@
-<% if @visualization.voted(request.remote_ip, 'up') %>
-  <div class="like_btn_voted"><span class="heart">❤</span><span class="text"><%= t('app.common.like') %></span></div>
-<% else %>
-  <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{t('app.common.like')}</span>".html_safe,
-		  visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-		  :class => 'like_btn', :title => t('app.common.like')) %>
-<% end %>
+  <% 
+    is_interactive ||= false
+    can_like = @visualization.voted(request.remote_ip, 'down')
+    span_text = can_like ? t('app.common.like') : t('app.common.unlike')
+    status = can_like ? 'up' : 'down'
+  %>
+  <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{span_text}</span>".html_safe,
+		  visual_vote_path(:id => @visualization.permalink, :status => status),
+		  :class => 'like_btn', :title => span_text, 
+		  :'data-like' => t('app.common.like'), :'data-unlike' => t('app.common.unlike'),
+		  :'data-interactive' => is_interactive) %>

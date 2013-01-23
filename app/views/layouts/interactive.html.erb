@@ -47,9 +47,7 @@
 	              <div class="clear" id="share-links">
 	                <ul class="nav">
 							      <li id="like_btn_item">
-                      <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{t('app.common.like')}</span>".html_safe,
-                    		  visual_vote_path(:id => @visualization.permalink, :status => 'up'),
-                    		  :class => 'like_btn', :title => t('app.common.like'), :'data-interactive' => 'true') %>
+				              <%= render :partial => 'shared/vote', :locals => {:is_interactive => true} %>
 							      </li>
 							      <li>
 								      <%= link_to(image_tag("share_fb.png"),

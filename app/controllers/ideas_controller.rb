@@ -28,11 +28,7 @@ class IdeasController < ApplicationController
 		@user = User.find_by_id(params[:id])
 
 		if @user
-			new_ideas = Idea.with_private(current_user).new_ideas.user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			top_ideas = Idea.with_private(current_user).top_ideas.user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas(current_user).user_ideas(params[:id]).appropriate#.paginate(:page => params[:page])
-			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+  		@ideas = Idea.with_private(current_user).new_ideas.user_ideas(params[:id]).appropriate
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
 			redirect_to root_path

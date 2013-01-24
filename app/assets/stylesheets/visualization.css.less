@@ -327,7 +327,7 @@ div#share a:hover, ul#share-links a:hover {
   width: 600px;
 }
 
-.side_block {
+.side_block, #overall_counts {
   float: left;
   width: 400px;
   margin-left: 20px;
@@ -345,15 +345,22 @@ div#share a:hover, ul#share-links a:hover {
       width: 100%;
     }
   }
+/*
   #visualization_row1a #overall_counts ul li {
     width: auto !important;
     display: block;
   }
+*/
 }
 
+
 @media (max-width: 1023px) {
+/*
   .side_block {
     margin-left: 0px;
   }
+*/
+  #overall_counts {
+    margin-left: 0px;
+  }
 }
-

@@ -12,7 +12,7 @@
   }
 
   label {
-    color: #df4758;
+    color: #f87364;
     margin-top: 1px;
   }
 
@@ -74,14 +74,32 @@
 
 }
 
+#send_data {
+
+  .page-header {
+    h1 {
+      color: #de4355;
+    }
+  }
+
+  input[type="submit"] {
+    background: #de4355;
+  }
+}
+
 
 
 #message_name, #message_organization, #message_email, #message_phone {
   background: #fff 9px center no-repeat;
 }
+#message_message {
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: 9px 9px;
+}
 
 #message_name {
-  background-image: url('/assets/message_icon.png');
+  background-image: url('/assets/user_icon.png');
 }
 
 #message_organization {
@@ -94,6 +112,10 @@
 
 #message_phone {
   background-image: url('/assets/phone_icon.png');
+}
+
+#message_message {
+  background-image: url('/assets/message_icon.png');
 }
 
 #message_file_input {

@@ -201,7 +201,7 @@ ka:
   layouts:
     application:
       menu_visual: ვიზუალიზაციები
-      menu_data: გამოგვიგზავნეთ მონაცემები
+      menu_data: მონაცემების გაგზავნა
       menu_idea: იდეების გამოქვეყნება
       menu_submit_visual: ვიზუალის გაგზავნა
       menu_about: ჩვენ შესახებ
@@ -269,7 +269,7 @@ ka:
     about:
       title: ჩვენ შესახებ
     data:
-      title: გამოგვიგზავნეთ მონაცემები
+      title: მონაცემების გაგზავნა
       message_sent: თქვენი შეტყობინება გაგზავნილია! მადლობა რომ დაგვიკავშირდით.
       send: გაგზავნა
       name: სახელი

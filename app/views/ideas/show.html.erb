@@ -20,13 +20,15 @@
 		</div>
 		<div class="span3" style="text-align: right;">
       <div class="vote">
-        <% if @idea.voted(request.remote_ip, 'up') %>
-          <div class="like_btn_voted"><span class="heart">❤</span><span class="text"><%= t('app.common.like') %></span></div>
-        <% else %>
-          <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{t('app.common.like')}</span>".html_safe,
-	            idea_vote_path(:id => @idea.id, :status => 'up'),
-	            :class => 'like_btn', :title => t('app.common.like')) %>
-        <% end %>			  
+        <% 
+          can_like = @idea.voted(request.remote_ip, 'down')
+          span_text = can_like ? t('app.common.like') : t('app.common.unlike')
+          status = can_like ? 'up' : 'down'
+        %>
+        <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{span_text}</span>".html_safe,
+		        idea_vote_path(:id => @idea.id, :status => status),
+		        :class => 'like_btn', :title => span_text, 
+		        :'data-like' => t('app.common.like'), :'data-unlike' => t('app.common.unlike')) %>
       </div>
 		</div>
 	</div>

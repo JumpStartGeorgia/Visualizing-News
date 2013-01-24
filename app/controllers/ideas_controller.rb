@@ -117,6 +117,8 @@ class IdeasController < ApplicationController
   end
 
   def vote
+    success = true
+
 		redirect_path = if request.env["HTTP_REFERER"]
 	    :back
 		else
@@ -126,12 +128,19 @@ class IdeasController < ApplicationController
     if ['down', 'up'].include?(params[:status])
       idea = Idea.find_by_id(params[:id])
 
-      if idea
+      if !idea.blank?
         idea.process_vote(request.remote_ip, params[:status])
+      else
+        success = false
       end
+    else
+      success = false
     end
-
-    redirect_to redirect_path
+    
+    respond_to do |format|
+      format.html{ redirect_to redirect_path}
+      format.js {render json: {'status' => success ? 'success' : 'fail'} }
+    end
 
   end
 

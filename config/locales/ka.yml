@@ -415,6 +415,7 @@ ka:
     filter_bar:
       categories: კატეგორიები
     ideas_list:
+      idea_title: "Idea #%{number}"
       no_ideas: იდეა არ მოიძებნა.
     ideas_grid:
       idea_title: "Idea #%{number}"

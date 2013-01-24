@@ -416,6 +416,7 @@ en:
       categories: Categories
     ideas_list:
       no_ideas: No Idea records were found.
+      idea_title: "Idea #%{number}"
     ideas_grid:
       idea_title: "Idea #%{number}"
   visualizations:

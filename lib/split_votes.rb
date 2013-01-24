@@ -30,8 +30,70 @@ module SplitVotes
   end
 
   def voted (ip, status)
-    record = VoterIp.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id, :status => status)
-    return !(record.nil? || record.empty?)
+    if !ip.blank? && !status.blank?
+      record = VoterIp.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id, :status => status)
+      return !(record.nil? || record.empty?)
+    end
+    return false
+  end
+
+  def process_vote(ip, status)
+    success = false
+    if !ip.blank? && !status.blank?
+      record = VoterIp.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id)
+
+      if record.blank?
+
+        if self.individual_votes.blank? || self.individual_votes.length < 4
+          # reset to 0
+          self.individual_votes = '+0-0'
+        end
+
+        split = self.individual_votes.split('+')[1].split('-')
+        ups = split[0].to_i
+        downs = split[1].to_i
+
+        if status == 'up'
+          ups = ups + 1
+        elsif status == 'down'
+          downs = downs + 1
+        end
+
+        self.individual_votes = "+#{ups}-#{downs}"
+			  self.overall_votes = ups - downs
+        self.save
+
+        VoterIp.create(:ip => ip, :votable_type => self.class.name.downcase,
+                        :votable_id => self.id, :status => status)
+
+        success = true
+
+      elsif record[0].status != status
+
+        split = self.individual_votes.split('+')[1].split('-')
+        ups = split[0].to_i
+        downs = split[1].to_i
+
+        if status == 'up'
+          ups = ups + 1
+          downs = downs - 1
+        elsif status == 'down'
+          ups = ups - 1
+          downs = downs + 1
+        end
+
+        self.individual_votes = "+#{ups}-#{downs}"
+			  self.overall_votes = ups - downs
+        self.save
+
+        # update the ip record
+        record[0].status = status
+        record[0].save
+
+        success = true
+      end
+    end
+    return success
   end
 
   module ClassMethods

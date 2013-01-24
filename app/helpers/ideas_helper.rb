@@ -17,7 +17,7 @@ module IdeasHelper
 		"http://translate.google.com/##{from_locale}/#{I18n.locale}/#{text.html_safe}"
 	end
 
-  def ideas_votes_cont (obj)
+  def ideas_votes_cont_old (obj)
     ip = request.remote_ip
     type = obj.class.name.downcase
 

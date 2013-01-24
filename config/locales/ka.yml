@@ -456,7 +456,7 @@ ka:
       title: "კატეგორია: %{name}"
     explore:
       title: "აღმოაცინე იდეა"
-    idea:
+    show:
       title: "Idea #%{number}"
       idea_by: "%{name}-ის იდეა"
       claimed_by: "იდეა შეიმუშავა"

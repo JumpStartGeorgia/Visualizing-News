@@ -63,55 +63,7 @@ class VisualsController < ApplicationController
       visualization = Visualization.published.find_by_permalink(params[:id])
 
       if !visualization.blank?
-        ip = request.remote_ip
-        record = VoterIp.where(:ip => ip, :votable_type => visualization.class.name.downcase, :votable_id => visualization.id)
-
-        if record.nil? || record.empty?
-
-          if visualization.individual_votes.nil? || visualization.individual_votes.length < 4
-            visualization.individual_votes = '+0-0'
-          end
-
-          split = visualization.individual_votes.split('+')[1].split('-')
-          ups = split[0].to_i
-          downs = split[1].to_i
-
-          if params[:status] == 'up'
-            ups = ups + 1
-          elsif params[:status] == 'down'
-            downs = downs + 1
-          end
-
-          visualization.individual_votes = "+#{ups}-#{downs}"
-    			visualization.overall_votes = ups - downs
-          visualization.save
-
-          VoterIp.create(:ip => ip, :votable_type => visualization.class.name.downcase,
-                          :votable_id => visualization.id, :status => params[:status])
-
-        elsif record[0].status != params[:status]
-
-          split = visualization.individual_votes.split('+')[1].split('-')
-          ups = split[0].to_i
-          downs = split[1].to_i
-
-          if params[:status] == 'up'
-            ups = ups + 1
-            downs = downs - 1
-          elsif params[:status] == 'down'
-            ups = ups - 1
-            downs = downs + 1
-          end
-
-          visualization.individual_votes = "+#{ups}-#{downs}"
-    			visualization.overall_votes = ups - downs
-          visualization.save
-
-          record[0].status = params[:status]
-          record[0].save
-        else
-          success = false
-        end
+        visualization.process_vote(request.remote_ip, params[:status])
       else
         success = false
       end

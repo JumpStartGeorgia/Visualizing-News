@@ -18,9 +18,16 @@
 		<div class="span3">
 			<%= l @idea.created_at, :format => :long %>
 		</div>
-		<div class="span1" style="text-align: right;">
-			<%= "#{t('app.common.rate_it')}:" %>
-		  <%= ideas_votes_cont(@idea) %>
+		<div class="span3" style="text-align: right;">
+      <div class="vote">
+        <% if @idea.voted(request.remote_ip, 'up') %>
+          <div class="like_btn_voted"><span class="heart">❤</span><span class="text"><%= t('app.common.like') %></span></div>
+        <% else %>
+          <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{t('app.common.like')}</span>".html_safe,
+	            idea_vote_path(:id => @idea.id, :status => 'up'),
+	            :class => 'like_btn', :title => t('app.common.like')) %>
+        <% end %>			  
+      </div>
 		</div>
 	</div>
 

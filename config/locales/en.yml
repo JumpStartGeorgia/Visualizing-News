@@ -456,7 +456,7 @@ en:
       title: "Category: %{name}"
     explore:
       title: "Explore Ideas"
-    idea:
+    show:
       title: "Idea #%{number}"
       idea_by: "Idea by %{name}"
       claimed_by: "Idea Being Worked On"

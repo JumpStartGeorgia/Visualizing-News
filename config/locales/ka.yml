@@ -175,6 +175,7 @@ ka:
       app_name: feradi.info
       placeholder: placeholder # do not translate
       comments: კომენტარები
+      comments_noun: კომენტარი
       likes: Likes
       like: like
       unlike: unlike

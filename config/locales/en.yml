@@ -175,6 +175,7 @@ en:
       app_name: feradi.info
       placeholder: placeholder
       comments: Comments
+      comments_noun: Comments
       likes: Likes
       like: like
       unlike: unlike

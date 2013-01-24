@@ -17,6 +17,19 @@ module IdeasHelper
 		"http://translate.google.com/##{from_locale}/#{I18n.locale}/#{text.html_safe}"
 	end
 
+  # options = [{key, value}]
+  def merge_idea_params(options)
+    p = @param_options.clone
+    options.each do |option|
+      if !option[:key].blank? && !option[:value].blank?
+        p[option[:key].to_s] = option[:value]
+      end
+    end
+    return p 
+  end
+
+
+
   def ideas_votes_cont_old (obj)
     ip = request.remote_ip
     type = obj.class.name.downcase

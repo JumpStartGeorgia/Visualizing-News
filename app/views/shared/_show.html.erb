@@ -110,7 +110,7 @@
           <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>
         </li>
         <li>
-          <%= "#{t('.category')}: "%>
+          <%= "#{t('app.common.category')}: "%>
           <span class="val">
           <% @visualization.visualization_categories.each_with_index do |cat, index| %>
             <% x = link_to cat.category.name, visuals_path(merge_visual_params([{:key => :category, :value => cat.category.permalink}])) %>

@@ -252,6 +252,7 @@ en:
       unlike: unlike
       share: Share
       not_published: Not Published
+      category: Category
       author: Author
       rating: Rating
       rate_it: Rate It!
@@ -405,7 +406,6 @@ en:
       designer: Designer
       data_source: Data Source
       data_set: Data Set
-      category: Category
       type: Type
       embed: Embed
       embed_link_title: Click to view larger image

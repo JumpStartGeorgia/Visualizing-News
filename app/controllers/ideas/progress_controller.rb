@@ -1,5 +1,6 @@
 class Ideas::ProgressController < ApplicationController
 	layout "fancybox"
+  before_filter :authenticate_user!
 
 	def claim
 		@idea = Idea.find_by_id(params[:idea_id])

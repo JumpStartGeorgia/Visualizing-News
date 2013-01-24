@@ -1,4 +1,5 @@
 class IdeasController < ApplicationController
+  before_filter :authenticate_user!, :only => [:create, :follow_idea, :unfollow_idea]
 
   def index
     respond_to do |format|

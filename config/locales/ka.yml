@@ -253,6 +253,7 @@ ka:
       share: გააზიარეთ
       not_published: გამოუქვეყნებელი
       author: ავტორები
+      category: კატეგორია
       rating: შეფასება
       rate_it: შეაფასე!
       top_ideas: ტოპ იდეები
@@ -405,7 +406,6 @@ ka:
       designer: დიზაინერი
       data_source: მონაცემთა წყარო
       data_set: მონაცემები
-      category: კატეგორია
       type: ტიპი
       embed: ჩასასმელი კოდი
       embed_link_title: დიდი გამოსახულების სანახავად დააჭირეთ

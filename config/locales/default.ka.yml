@@ -5,7 +5,7 @@ ka:
   date:
     #order: [ :year, :month, :day ]
     formats:
-      default: "%d-%m-%Y"
+      default: '%d/%m/%Y'
       short: "%d %b"
       long: "%B %d, %Y"
     day_names: [კვირა, ორშაბათი, სამშაბათი, ოთხშაბათი, ხუთშაბათი, პარასკევი, შაბათი]

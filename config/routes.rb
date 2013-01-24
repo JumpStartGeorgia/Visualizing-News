@@ -58,6 +58,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/ideas/comment_notification/:id', :to => 'ideas#comment_notification', :as => :idea_comment_notification, :via => :get
 		match '/ideas/follow_idea/:idea_id', :to => 'ideas#follow_idea', :as => :follow_idea, :via => :get
 		match '/ideas/unfollow_idea/:idea_id', :to => 'ideas#unfollow_idea', :as => :unfollow_idea, :via => :get
+	  match '/ideas/:id/next', :to => 'ideas#next', :as => :idea_next, :via => :get
+	  match '/ideas/:id/previous', :to => 'ideas#previous', :as => :idea_previous, :via => :get
 
     namespace :ideas do
   		# idea progress

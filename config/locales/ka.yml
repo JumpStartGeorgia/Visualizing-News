@@ -455,7 +455,7 @@ ka:
     index:
       title: Ideas
     user:
-      title: "მომხმარებელი: %{name}"
+      title: "Ideas by: %{name}"
     category:
       title: "კატეგორია: %{name}"
     explore:

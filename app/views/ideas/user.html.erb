@@ -1,5 +1,6 @@
 <% title_image @user.avatar if @user.avatar %>
-<%= page_title @user.nickname %>
+<%= page_title t('.title', :name => @user.nickname) %>
+
 <!--
 <% if !@user.organization_users.empty? %>
 	<h2><%= OrganizationUser.human_attribute_name(:organization) %></h2>

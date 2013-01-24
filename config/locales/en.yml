@@ -455,7 +455,7 @@ en:
     index: 
       title: Ideas
     user:
-      title: "User: %{name}"
+      title: "Ideas by: %{name}"
     category:
       title: "Category: %{name}"
     explore:

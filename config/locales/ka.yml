@@ -285,7 +285,8 @@ ka:
       notification_visual_comments_yes: თქვენ მიიღებთ შეტყობინებას თქვენ მიერ განთავსებული ვიზუალიზაციაზე კომენტარის დამატების შესახებ %{org}
       notification_visual_comments_no: თქვენ არ მიიღებთ შეტყობინებას თქვენ მიერ განთავსებული ვიზუალიზაციაზე კომენტარის დამატების შესახებ %{org}.
       notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
-      no_visual_records: თქვენ მიერ არჩეული ვიზუალიზაცია არ მოიძებნა.
+      no_visual_records: No visualization records match your selection.
+      no_idea_records: No ideas match your selection.
   layouts:
     application:
       menu_visual: ვიზუალიზაციები
@@ -415,6 +416,8 @@ ka:
       categories: კატეგორიები
     ideas_list:
       no_ideas: იდეა არ მოიძებნა.
+    ideas_grid:
+      idea_title: "Idea #%{number}"
   visualizations:
     form:
       preview: ნახვა

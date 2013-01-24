@@ -285,7 +285,8 @@ en:
       notification_visual_comments_yes: You will be sent notifications when a comment is made on %{org} visualizations.
       notification_visual_comments_no: You will not be sent notifications when a comment is made on %{org} visualizations.
       notification_language: You will be sent notifications in %{language}.
-      no_visual_records: No visualization records exist for your selection.
+      no_visual_records: No visualization records match your selection.
+      no_idea_records: No ideas match your selection.
   layouts:
     application:
       menu_visual: Visualizations
@@ -415,6 +416,8 @@ en:
       categories: Categories
     ideas_list:
       no_ideas: No Idea records were found.
+    ideas_grid:
+      idea_title: "Idea #%{number}"
   visualizations:
     form:
       preview: Preview

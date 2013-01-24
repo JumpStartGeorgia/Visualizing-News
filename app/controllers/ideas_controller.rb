@@ -2,31 +2,7 @@ class IdeasController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :follow_idea, :unfollow_idea]
 
   def index
-    respond_to do |format|
-      format.html {
-				new_ideas = Idea.with_private(current_user).new_ideas.appropriate#.paginate(:page => params[:page])
-				top_ideas = Idea.with_private(current_user).top_ideas.appropriate#.paginate(:page => params[:page])
-				in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).appropriate#.paginate(:page => params[:page])
-				realized_ideas = Idea.with_private(current_user).realized_ideas(current_user).appropriate#.paginate(:page => params[:page])
-				@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
-      }
-      format.js {
-				# test which tab to get data for
-				@ideas = nil
-				case params[:tab]
-					when @id_new
-						@ideas = Idea.with_private(current_user).new_ideas.appropriate#.paginate(:page => params[:page])
-					when @id_top
-						@ideas = Idea.with_private(current_user).top_ideas.appropriate#.paginate(:page => params[:page])
-					when @id_in_progress
-						@ideas = Idea.with_private(current_user).in_progress_ideas(current_user).appropriate#.paginate(:page => params[:page])
-					when @id_realized
-						@ideas = Idea.with_private(current_user).realized_ideas(current_user).appropriate#.paginate(:page => params[:page])
-				end
-			}
-    end
-
-
+		@ideas = Idea.with_private(current_user).new_ideas.appropriate
   end
 
   def show

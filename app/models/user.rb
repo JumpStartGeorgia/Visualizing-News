@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
 	has_many :notifications, :dependent => :destroy
 	has_many :organization_users, :dependent => :destroy
 	has_many :organizations, :through => :organization_users
+	has_many :ideas
+	has_many :idea_inappropriate_reports
+  accepts_nested_attributes_for :organization_users
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

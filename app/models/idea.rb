@@ -63,7 +63,7 @@ class Idea < ActiveRecord::Base
 	end
 
 	def self.with_private(user=nil)
-	  if user && !user.organizations.empty?
+	  if user && !user.organizations.blank?
       # only get private ideas if user is from the org that submitted the ideas
       includes(:user => :organization_users)
       .where("ideas.is_private = 0 or (ideas.is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})

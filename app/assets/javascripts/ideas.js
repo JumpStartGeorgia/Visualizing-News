@@ -11,37 +11,6 @@ $(document).ready(function(){
 
 	});
 
-	//////////////////////////////
-	// idea tabs
-	//////////////////////////////
-	// register tab pagination links for ajax calls
-	$('div#idea_list .pagination a').attr('data-remote', 'true');
-	// register tab pagination links to know which tab they are in
-	$('div#idea_list .pagination a').each(function() {
-		var href = $(this).attr('href');
-		href += (href.indexOf('?') == -1 ? '?' : '&') + "tab=" + $(this).parent().parent().parent().parent().attr('id');
-		$(this).attr('href', href);
-	});
-
-
-	// register click event for idea tabs
-	// when clicked, show appropriate idea block
-	$("ul#ideas_tabs a").click(function(event) {
-		id = $(this).parent().attr('id');
-		// activate the correct tab
-		$("ul#ideas_tabs li").removeClass('active'); // turn off all tabs
-		$("ul#ideas_tabs li#" + id).addClass('active'); // turn on correct one
-
-		// hide all item blocks
-		$("div.idea_list_block").hide();
-
-		// turn on the correct block
-		$("div#" + id).slideDown('300');
-
-		return false;
-	});
-
-
   // register jquery multi select for category list in new idea form
   $('select#idea_category_ids').multiselect({
     header: false,

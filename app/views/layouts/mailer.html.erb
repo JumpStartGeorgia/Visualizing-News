@@ -2,13 +2,13 @@
 
 
 <p>
-	<%= t('mailer.closing') %>
+	<%= t('mailer.closing', :locale => @message.locale) %>
 	<br />
-	<%= t('mailer.signature') %>
+	<%= t('mailer.signature', :locale => @message.locale) %>
 </p>
 
 <hr style="margin: 10px 0;" />
 
 <p style="font-size: 10px;">
-	<%= link_to t('mailer.unsubscribe'), notifications_url(:locale => @message.locale) %>
+	<%= link_to t('mailer.unsubscribe', :locale => @message.locale), notifications_url(:locale => @message.locale) %>
 </p>

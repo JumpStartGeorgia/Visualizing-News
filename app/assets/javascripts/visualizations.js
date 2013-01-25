@@ -36,7 +36,7 @@ function indicate_like_success(update_counter){
       $('span#like_count_text').fadeOut('slow', function(){
         var old_count = parseInt($('span#like_count_number').html());            
         var new_count = old_count + counter_action;
-        if (old_count < 0){
+        if (new_count < 0){
           new_count = 0;
         }
         $('span#like_count_number').html(new_count);

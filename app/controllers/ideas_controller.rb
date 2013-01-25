@@ -2,7 +2,15 @@ class IdeasController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :follow_idea, :unfollow_idea]
 
   def index
-		@ideas = Idea.with_private(current_user).new_ideas.appropriate
+		@ideas = process_idea_querystring(Idea.with_private(current_user).appropriate)
+
+    respond_to do |format|
+      format.html
+      format.js {
+        @ajax_call = true
+        render 'shared/ideas_index'
+      }
+    end
   end
 
   def show
@@ -64,8 +72,8 @@ class IdeasController < ApplicationController
 			new_ideas = Idea.with_private(current_user).new_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
 			top_ideas = Idea.with_private(current_user).top_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
 			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).search_by(params[:q]).appropriate#.paginate(:page => params[:page])
-			realized_ideas = Idea.with_private(current_user).realized_ideas(current_user).search_by(params[:q]).appropriate#.paginate(:page => params[:page])
-			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => realized_ideas}
+			completed_ideas = Idea.with_private(current_user).completed_ideas(current_user).search_by(params[:q]).appropriate#.paginate(:page => params[:page])
+			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => completed_ideas}
 		end
 	end
 

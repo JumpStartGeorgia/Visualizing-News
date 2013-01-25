@@ -61,8 +61,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 	def preload_global_variables
 		@categories = Category.sorted
-		@filter_type_selection = I18n.t('filters.visuals.type.all')
-		@filter_view_selection = I18n.t('filters.visuals.view.grid')
+		@visuals_filter_type_selection = I18n.t('filters.visuals.type.all')
+		@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
+		@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
+		@ideas_filter_filter_selection = I18n.t('filters.ideas.filter.all')
 		@idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
     @idea = Idea.new
 		@idea.idea_categories.build
@@ -130,19 +132,20 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     @param_options = CGI.parse(url.query).inject({}) { |h, (k, v)| h[k] = v.first; h } if url.query
   end
 
+  ## visual querystring
   def process_visualization_querystring(visual_objects)
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/visuals_list'
-			@filter_view_selection = I18n.t('filters.visuals.view.list')
+			@visuals_filter_view_selection = I18n.t('filters.visuals.view.list')
 	  else
 	    @view_type = 'shared/visuals_grid'
-			@filter_view_selection = I18n.t('filters.visuals.view.grid')
+			@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
 	  end
 
 		if params[:type]
 			type_id = Visualization.type_id(params[:type])
 			visual_objects = visual_objects.by_type(type_id) if type_id
-			@filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
+			@visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
 		end
 
 		if params[:organize]
@@ -154,11 +157,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
         when 'views'
     			visual_objects = visual_objects.views
       end
-			@filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
+			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
     else
       # if not set, default to recent
 			visual_objects = visual_objects.recent
-			@filter_organize_selection = I18n.t("filters.visuals.organize.recent")
+			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
 		end
 
 		if params[:category]
@@ -166,6 +169,56 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			visual_objects = visual_objects.by_category(@categories[index].id) if index
 		end
 		return visual_objects
+  end
+
+  ## idea querystring
+  def process_idea_querystring(idea_objects)
+	  if params[:view] && params[:view] == 'list'
+	    @view_type = 'shared/ideas_list'
+			@ideas_filter_view_selection = I18n.t('filters.ideas.view.list')
+	  else
+	    @view_type = 'shared/ideas_grid'
+			@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
+	  end
+
+		if params[:filter]
+      case params[:filter]
+        when 'all'
+    			# do nothing
+        when 'not_selected'
+    			idea_objects = idea_objects.not_selected(current_user)
+        when 'in_progress'
+    			idea_objects = idea_objects.in_progress(current_user)
+        when 'completed'
+    			idea_objects = idea_objects.completed(current_user)
+      end
+			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.#{params[:filter]}")
+    else
+      # if not set, default to all (no filter needed)
+			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.all")
+		end
+
+		if params[:organize]
+      case params[:organize]
+        when 'recent'
+    			idea_objects = idea_objects.recent
+        when 'likes'
+    			idea_objects = idea_objects.likes
+        when 'views'
+    			idea_objects = idea_objects.views
+      end
+			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.#{params[:organize]}")
+    else
+      # if not set, default to recent
+			idea_objects = idea_objects.recent
+			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.recent")
+		end
+
+		if params[:category]
+      index = @categories.index{|x| x.permalink == params[:category]}
+			idea_objects = idea_objects.by_category(@categories[index].id) if index
+		end
+		return idea_objects
   end
 
   #######################

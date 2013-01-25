@@ -7,7 +7,7 @@
   	<% @ideas.each do |idea| %>
 		  <div class="list_idea_item">
 	      <h2>
-          <%= link_to t('.idea_title', :number => idea.id), idea_path(idea.id) %>
+          <%= link_to t('.idea_title', :number => idea.id), idea_path(idea.id, @param_options) %>
           <% if user_signed_in? && idea.is_private &&
 					  (idea.organization_submitted_idea?(current_user) || idea.organization_claimed_idea?(current_user)) %>
 

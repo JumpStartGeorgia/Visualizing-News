@@ -31,20 +31,9 @@ class Idea < ActiveRecord::Base
 
  paginates_per 10
 
-	def self.explore(type)
-		if type
-			case type.downcase
-			when 'top'
-				top_ideas
-			when 'new'
-				new_ideas
-			when 'in_progress'
-				in_progress_ideas
-			when 'realized'
-				realized_ideas
-			end
-		end
-	end
+  scope :recent, order("ideas.created_at desc")
+  scope :likes, order("ideas.overall_votes desc, ideas.created_at desc")
+  scope :views, order("ideas.impressions_count desc, ideas.created_at desc")
 
 	# determine if the explaination is written in the locale
 	def in_locale?(locale)
@@ -72,19 +61,16 @@ class Idea < ActiveRecord::Base
 	  end
 	end
 
-	# get the top ideas based off of overall votes
-	def self.top_ideas
-		order("overall_votes desc, ideas.created_at desc")
-	end
+  # get ideas that have not been selected by an organization
+  def self.not_selected(user=nil)
+		selected_ideas = IdeaProgress.select("distinct idea_id").with_private(user)
 
-	# get the new ideas based off of the date the record was created
-	def self.new_ideas
-		order("ideas.created_at desc")
-	end
+    where("ideas.id not in (?)", selected_ideas.map{|x| x.idea_id})
+  end
 
 	# get ideas that have been claimed and have not been completed
 	# - if > 1 or has claimed idea and one is not finished, still show idea
-	def self.in_progress_ideas(user=nil)
+	def self.in_progress(user=nil)
 		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_completed => true).with_private(user)
 		if completed_ideas.nil? || completed_ideas.empty?
       progress_records = IdeaProgress.select("distinct idea_id, organization_id").with_private(user)
@@ -107,7 +93,7 @@ class Idea < ActiveRecord::Base
 
 	# get ideas that have only been completed
 	# - if > 1 or has claimed idea and one is not finished, still show idea
-	def self.realized_ideas(user=nil)
+	def self.completed(user=nil)
 		completed_ideas = IdeaProgress.select("distinct idea_id").where(:is_completed => true).with_private(user)
 
 		select("distinct ideas.*")
@@ -118,11 +104,8 @@ class Idea < ActiveRecord::Base
 		.order("idea_progresses.progress_date desc, ideas.created_at desc")
 	end
 
-
-	def self.categorized_ideas(category_id)
-		if category_id
-			joins(:idea_categories).where(:idea_categories => {:category_id => category_id})
-		end
+	def self.by_category(category_id)
+		joins(:idea_categories).where(:idea_categories => {:category_id => category_id})
 	end
 
 	def self.search_by(query)

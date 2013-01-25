@@ -436,6 +436,8 @@ ka:
       no_ideas: იდეა არ მოიძებნა.
     ideas_grid:
       idea_title: "Idea #%{number}"
+    ideas_form:
+      sign_in: Sign In to Submit
   visualizations:
     form:
       preview: ნახვა

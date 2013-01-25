@@ -1,46 +1,16 @@
-<%= page_title t('.title') %>
+<div id="post_idea">
 
-<div class="row-fluid">
-	<div class="span5">
-		<p style="font-size: 16px !important; margin-bottom: 15px;">
-			Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will claim it.
-		</p>
-		<p style="font-size: 16px !important;">
-			StoryBoard makes your stories social, allowing missed opportunities to become a treasure trove of journalistic brainstorming. Vote, share, and watch how ideas take shape and become the news.
-		</p>
-	</div>
-	<div class="span1">&nbsp;</div>
-	<div class="span5" style="border: solid 2px #ccc; padding: 5px;">
-		<%= semantic_form_for @idea, :url => :create_idea do |f| %>
-			<h3><%= t('app.common.post_idea') %></h3>
-			<%= f.error_messages %>
-			<%= f.inputs do %>
-				<% if user_signed_in? %>
-					<%= current_user.nickname %>
-					<%= f.hidden_field :user_id, :value => current_user.id %>
-				<% else %>
-					<%= link_to t('helpers.links.sign_in'), :new_user_session, :class => 'fancybox btn btn-mini' %>
-				<% end %>
+  <%= render "shared/ideas_form" %>
 
-				<%= f.input :categories, :as => :select, :collection => @categories, :multiple => true,
-				    :input_html => { :size => 1, :style => 'display: none;' },
-						:label => t('activerecord.attributes.idea_category.category_id') %>
+  <%= page_title t('.title') %>
 
-				<%= f.input :explaination, :as => :text, :input_html => {:rows => 5, :cols => 50} %>
+  <div id="ideas_text">
+    <%= t('.text_ideas') %>
+  </div>
 
-        <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
-					<%= f.input :is_private, :as => :select, :include_blank => false  %>
-        <% end %>
 
-			<% end %>
+  <%= render "shared/ideas_filter_bar" %>
 
-			<% if user_signed_in? %>
-				<%= f.submit nil, :class => 'btn btn-primary' %>
-			<% end %>
-		<% end %>
-	</div>
+  <%= render @view_type %>
+
 </div>
-
-<%= render "shared/ideas_filter_bar" %>
-
-<%= render @view_type %>

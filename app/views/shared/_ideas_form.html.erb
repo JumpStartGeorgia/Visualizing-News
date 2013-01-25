@@ -1,0 +1,43 @@
+<div id="navbar-idea-form">
+	<%= form_tag create_idea_path, :method => :post, :class => "form-inline" do %>
+    <ul>
+      <li>
+    		<span id="form_title"><%= t('app.common.post_idea') %></span>
+      </li>
+      <li>
+		    <% if user_signed_in? %>
+			    <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
+		    <% else %>
+			    <%= link_to t('.sign_in'), :new_user_session, :class => 'fancybox' %>
+		    <% end %>
+      </li>
+      <li>
+		    <label class="control-label" for="idea_idea_categories_attributes_0_category_id">
+			    <%= t('activerecord.attributes.idea_category.category_id') %>
+		    </label>
+		    <%= select_tag 'idea_category_ids', options_from_collection_for_select(@categories, "id", "name"), :name => 'idea[category_ids][]', :multiple => true, :size => 1, :style => 'display: none;' %>
+      </li>
+      <li>
+		    <label class="control-label" for="idea_explaination">
+			    <%= t('activerecord.attributes.idea.explaination') %>
+		    </label>
+		    <%= text_area_tag 'idea_explaination', nil, :rows => 2, :name => 'idea[explaination]' %>
+      </li>
+      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
+        <li>
+			    <label class="control-label" for="idea_is_private">
+				    <%= t('activerecord.attributes.idea.is_private') %>
+			    </label>
+			    <%= select_tag 'idea_is_private', "<option value='1'>#{t('app.common.yes')}</option><option selected=\"selected\" value='0'>#{t('app.common.no')}</option>".html_safe,  
+			          :name => 'idea[is_private]' %>
+        </li>
+      <% end %>
+	    <% if user_signed_in? %>
+        <li>
+			    <%= submit_tag t('helpers.links.post_idea')%>
+        </li>
+	    <% end %>
+    </ul>
+	<% end %>
+</div>
+

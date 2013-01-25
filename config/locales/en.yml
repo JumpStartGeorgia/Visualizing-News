@@ -436,6 +436,8 @@ en:
       idea_title: "Idea #%{number}"
     ideas_grid:
       idea_title: "Idea #%{number}"
+    ideas_form:
+      sign_in: Sign In to Submit
   visualizations:
     form:
       preview: Preview
@@ -471,6 +473,7 @@ en:
   ideas:
     index: 
       title: Post Ideas
+      text_ideas: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it."
     user:
       title: "Ideas by: %{name}"
     category:

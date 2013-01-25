@@ -61,7 +61,7 @@
 
       <ul class="nav-menu">
         <li><%= link_to t('.menu_visual'), visuals_path(@param_options), :class => assign_active_class(visuals_path) %></li>
-        <li><%= link_to t('.menu_idea'), ideas_path, :class => assign_active_class(ideas_path) %></li>
+        <li><%= link_to t('.menu_idea'), ideas_path(@param_options), :class => assign_active_class(ideas_path) %></li>
         <li><%= link_to t('.menu_submit_visual'), submit_visual_path, :class => assign_active_class(submit_visual_path)  %></li>
         <li><%= link_to t('.menu_data'), data_path, :class => assign_active_class(data_path)  %></li>
         <li><%= link_to t('.menu_about'), about_path, :class => assign_active_class(about_path)  %></li>

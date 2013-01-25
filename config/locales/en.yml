@@ -470,7 +470,7 @@ en:
       language_label: In what language do you want to receive the notifications?
   ideas:
     index: 
-      title: Ideas
+      title: Post Ideas
     user:
       title: "Ideas by: %{name}"
     category:

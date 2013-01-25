@@ -470,7 +470,7 @@ ka:
       language_label: რომელ ენაზე გსურთ შეტყობინების მიღება? 
   ideas:
     index:
-      title: Ideas
+      title: იდეების გამოქვეყნება
     user:
       title: "Ideas by: %{name}"
     category:

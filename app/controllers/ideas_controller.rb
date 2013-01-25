@@ -193,4 +193,58 @@ class IdeasController < ApplicationController
 			redirect_to root_path
 		end
 	end
+
+  def next
+    next_previous('next')
+  end
+
+  def previous
+    next_previous('previous')
+  end
+
+protected
+
+  def next_previous(type)
+		# get a list of idea ids in correct order
+    ideas = process_idea_querystring(Idea.select("ideas.id").with_private(current_user).appropriate)
+    
+    # get the idea that was showing
+    idea = Idea.find_by_id(params[:id])
+		record_id = nil
+
+		if !ideas.blank? && !idea.blank?
+			index = ideas.index{|x| x.id == idea.id}
+      if type == 'next'
+  			if index
+  				if index == ideas.length-1
+  					record_id = ideas[0].id
+  				else
+  					record_id = ideas[index+1].id
+  				end
+  			else
+  				record_id = ideas[0].id
+  			end
+  		elsif type == 'previous'
+				if index
+					if index == 0
+						record_id = ideas[ideas.length-1].id
+					else
+						record_id = ideas[index-1].id
+					end
+				else
+					record_id = ideas[0].id
+				end
+			end
+
+			if record_id
+			  # found next record, go to it
+        redirect_to idea_path(record_id, @param_options)
+        return
+      end
+    end
+
+		# if get here, then next record was not found
+    redirect_to(ideas_path, :alert => t("app.common.page_not_found"))
+    return
+  end
 end

@@ -35,22 +35,9 @@
                 </li>
                 <li>
                   <%= image_tag('comments_icon12.png', :alt => t('app.common.comments'), :title => t('app.common.comments')) %>
-                  <fb:comments-count href="<%= full_url(visualization_path(visualization.permalink)) %>"></fb:comments-count>
+                  <%= visualization.fb_count %>
                 </li>
               </ul>
-
-<%
-=begin %>
-  						<div class="comment_count">
-  							<%= "#{t('app.common.comments')}:" %>
-  							<fb:comments-count href="<%= full_url(visualization_path(visualization.permalink)) %>"></fb:comments-count>
-  						</div>
-  						<div class="like_count">
-  							<%= "#{t('app.common.likes')}:" %>
-  							<%= visualization.overall_votes %>
-  						</div>
-<%
-=end %>
   					</div>
   					<% if @user_in_org && params[:controller] == 'organizations' %>
   						<div>

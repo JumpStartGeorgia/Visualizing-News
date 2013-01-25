@@ -29,7 +29,7 @@ class Visualization < ActiveRecord::Base
 			:interactive_url_old,
 			:visual_is_cropped_old,
 			:data_source_url_old,
-			:languages, :languages_internal
+			:languages, :languages_internal, :fb_count
 	attr_accessor :send_notification, :was_published, :languages_internal
 
  paginates_per 8

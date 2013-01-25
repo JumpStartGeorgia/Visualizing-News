@@ -137,6 +137,10 @@ class VisualsController < ApplicationController
 	def comment_notification
     visualization = Visualization.published.find_by_permalink(params[:id])
 		if visualization
+      # update the fb_count value
+      visualization.fb_count = visualization.fb_count + 1
+      visualization.save
+
       # notify org users if want notification
 			message = Message.new
 			I18n.available_locales.each do |locale|

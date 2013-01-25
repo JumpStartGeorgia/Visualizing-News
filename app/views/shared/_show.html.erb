@@ -37,8 +37,7 @@
       </li>
       <li id="comment_count">
         <%= image_tag('comments_icon.png') %>
-        <fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
-        <%= t('app.common.comments_noun') %>
+        <%= "#{@visualization.fb_count} #{t('app.common.comments_noun')}" %>
       </li>
     </ul>
   </div>
@@ -196,8 +195,7 @@
 
 		<div class="main_block clear">
 			<h3 class="comments_count">
-				<%= "#{t('app.common.comments')}:" %>
-				<fb:comments-count href="<%= full_url(visualization_path(@visualization.permalink)) %>"></fb:comments-count>
+				<%= "#{t('app.common.comments')}: #{@visualization.fb_count}" %>
 			</h3>
 			<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="2" data-width="470"></div>
 		</div>

@@ -45,8 +45,7 @@
             <%= image_tag('comments_icon12.png') %>
           </div>
           <div class="count_text">
-            <fb:comments-count href="<%= full_url(visualization_path(visualization.permalink)) %>"></fb:comments-count>
-            <%= t('app.common.comments') %>
+            <%= "#{visualization.fb_count} #{t('app.common.comments_noun')}" %>
           </div>
         </div>
   			<% if @user_in_org && params[:controller] == 'organizations' %>

@@ -1,0 +1,96 @@
+<% 
+  show_toggle ||= false 
+  hide_slider = show_toggle ? "display: none;" : ""
+hide_slider = ''  
+%>
+<div id="filter_bar" class="navbar">
+
+  <% if show_toggle %>
+    <div id="toggle_categories" class="resp">
+      <%= t('.categories')%>
+      <br />
+      <%= image_tag('org_downarrow.png', :id => "category_arrow")%>
+    </div>
+  <% end %>
+
+
+  <div id="category_slider" style="<%=hide_slider%>">
+
+    <ul id="category_slider_content" class="elastislide-list">
+      <% @categories.each do |cat| %>
+        <% if cat.icon_file_name %>
+          <li>
+            <%= link_to(url_for(params.merge(:category => cat.permalink)), 
+              :'data-path' => cat.icon.url,
+              :title => cat.name) do %>
+              <%= image_tag(cat.icon.url) %>
+              <div class="slider_text">
+                <%= cat.name %>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+  </div>
+
+  <div id="filter_bar_inner" class="container">
+		<ul class="nav">
+			<li class="dropdown">
+				<a id="filter_type" class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<%= t('filters.ideas.filter.header')%>:
+					<span id="filter_type_selection" class="filter_selection"><%=@filter_type_selection%></span>
+	        <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>
+						<%= link_to t('filters.ideas.filter.all'), url_for(params.merge(:filter => 'all')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.ideas.filter.not_selected'), url_for(params.merge(:filter => 'not_selected')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.ideas.filter.in_progress'), url_for(params.merge(:filter => 'in_progress')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.ideas.filter.completed'), url_for(params.merge(:filter => 'completed')) %>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a id="filter_organize" class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<%= t('filters.ideas.organize.header')%>:
+					<span id="filter_organize_selection" class="filter_selection"><%=@filter_organize_selection%></span>
+	        <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>
+						<%= link_to t('filters.ideas.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.ideas.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.ideas.organize.views'), url_for(params.merge(:organize => 'views')) %>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a id="filter_view" class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<%= t('filters.ideas.view.header')%>:
+					<span id="filter_view_selection" class="filter_selection"><%=@filter_view_selection%></span>
+	        <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li>
+						<%= link_to t('filters.ideas.view.grid'), url_for(params.merge(:view => 'grid')) %>
+					</li>
+					<li>
+						<%= link_to t('filters.ideas.view.list'), url_for(params.merge(:view => 'list')) %>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

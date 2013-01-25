@@ -61,6 +61,10 @@ class Idea < ActiveRecord::Base
 	  end
 	end
 
+  def self.by_user(user_id)
+    where(:user_id => user_id)
+  end
+
   # get ideas that have not been selected by an organization
   def self.not_selected(user=nil)
 		selected_ideas = IdeaProgress.select("distinct idea_id").with_private(user)

@@ -80,8 +80,8 @@
         <li>
           <%= "#{t('app.common.author')}: "%>
 					<span class="val">
-            <%= link_to user_ideas_path(@idea.user_id) do %>
-              <%= t('.idea_by', :name => @idea.user.nickname) %>
+            <%= link_to user_ideas_path(@idea.user_id, @param_options.delete_if{|k,v| k == 'user_id'}) do %>
+              <%= @idea.user.nickname %>
         			<%= image_tag @idea.user.avatar, :id => 'user_avatar' if @idea.user.avatar %>
             <% end %>
 					</span>
@@ -90,7 +90,7 @@
           <%= "#{t('app.common.category')}: "%>
           <span class="val">
             <% @idea.idea_categories.each_with_index do |cat, index| %>
-              <% x = link_to cat.category.name, ideas_path(merge_idea_params([{:key => :category, :value => cat.category.permalink}])) %>
+              <% x = link_to cat.category.name, ideas_path(merge_idea_params([{:key => :category, :value => cat.category.permalink}]).delete_if{|k,v| k == 'user_id'}) %>
               <% if index != @idea.idea_categories.length-1 %>
                 <%= x + ", "%>
               <% else %>

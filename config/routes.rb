@@ -49,7 +49,7 @@ BootstrapStarter::Application.routes.draw do
     # ideas
 		match '/ideas', :to => 'ideas#index', :as => :ideas, :via => :get
 		match '/ideas/:id', :to => 'ideas#show', :as => :idea, :via => :get
-		match '/ideas/user/:id', :to => 'ideas#user', :as => :user_ideas, :via => :get
+		match '/ideas/user/:user_id', :to => 'ideas#user', :as => :user_ideas, :via => :get
 		match '/ideas/organization/:id', :to => 'ideas#organization', :as => :organization_ideas, :via => :get
 		match '/ideas/create', :to => 'ideas#create', :as => :create_idea, :via => :post
 		match '/ideas/search', :to => 'ideas#search', :as => :search_ideas, :via => :get
@@ -74,16 +74,6 @@ BootstrapStarter::Application.routes.draw do
 		  match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate, :via => :get
 		  match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate, :via => :post
     end
-=begin
-		match '/ideas/progress/claim/:idea_id/:organization_id', :to => 'idea_progress#claim', :as => :claim_idea, :via => :get
-		match '/ideas/progress/new/:idea_id/:organization_id', :to => 'idea_progress#new', :as => :idea_progress_update, :via => :get
-		match '/ideas/progress/edit/:id', :to => 'idea_progress#edit', :as => :idea_edit_progress, :via => :get
-		match '/ideas/progress/create', :to => 'idea_progress#create', :as => :idea_create_progress, :via => :post
-		match '/ideas/progress/update/:id', :to => 'idea_progress#update', :as => :idea_update_progress, :via => :put
-		# report idea
-		match '/ideas/report/inappropriate/:idea_id', :to => 'idea_report#inappropriate', :as => :report_inappropriate_idea, :via => :get
-		match '/ideas/report/inappropriate/:idea_id', :to => 'idea_report#inappropriate', :as => :report_inappropriate_idea, :via => :post
-=end
 
 		# notifications
 		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get

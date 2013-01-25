@@ -130,6 +130,13 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     @param_options = Hash.new
     url = URI.parse(request.fullpath)
     @param_options = CGI.parse(url.query).inject({}) { |h, (k, v)| h[k] = v.first; h } if url.query
+
+
+    # if user_id in params, make sure it is in this hash tag
+    if params[:user_id] && @param_options.keys.index('user_id').nil?
+      @param_options['user_id'] = params[:user_id]
+    end
+Rails.logger.debug "****************** param options = #{@param_options}"
   end
 
   ## visual querystring
@@ -218,6 +225,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
       index = @categories.index{|x| x.permalink == params[:category]}
 			idea_objects = idea_objects.by_category(@categories[index].id) if index
 		end
+
+		if params[:user_id]
+			idea_objects = idea_objects.by_user(params[:user_id])
+		end
+
 		return idea_objects
   end
 

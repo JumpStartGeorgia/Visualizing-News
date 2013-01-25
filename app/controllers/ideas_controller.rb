@@ -33,14 +33,22 @@ class IdeasController < ApplicationController
   end
 
 	def user
-		@user = User.find_by_id(params[:id])
+		@user = User.find_by_id(params[:user_id])
 
-		if @user
-  		@ideas = Idea.with_private(current_user).new_ideas.user_ideas(params[:id]).appropriate
+	  @ideas = process_idea_querystring(Idea.with_private(current_user).appropriate)
+
+    if @ideas.blank?
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path
 		else
-			flash[:info] =  t('app.msgs.does_not_exist')
-			redirect_to root_path
-		end
+      respond_to do |format|
+        format.html
+        format.js {
+          @ajax_call = true
+          render 'shared/ideas_index'
+        }
+      end
+  	end
 	end
 
 	def organization

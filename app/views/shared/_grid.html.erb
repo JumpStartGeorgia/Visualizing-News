@@ -9,13 +9,17 @@
   		  <div class="grid_visualization_item">
   		    <div class="visual">
   		       <%  if !visualization.image_file_name.blank? %>
-    		      <%= link_to(image_tag(visualization.image.url(:thumb, false)), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+    		      <%= link_to(image_tag(visualization.image.url(:thumb, false)), 
+                    create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]), 
+                    :title => visualization.title) %>
   		      <% else %>
-    		      <%= link_to(image_tag('image_placeholder.png'), create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+    		      <%= link_to(image_tag('image_placeholder.png'), 
+                    create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id], 
+                    :title => visualization.title)) %>
   		      <% end %>
   		    </div>
   		    <div class="title">
-  		      <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>
+  		      <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]), :title => visualization.title %></h2>
   					<% if !visualization.published %>
   					<div class="not_published"><%= t('app.common.not_published') %></div>
   					<% end %>

@@ -1,7 +1,7 @@
 class Visualization < ActiveRecord::Base
   is_impressionable :counter_cache => true
 	translates :title, :explanation, :reporter, :designer,
-		:interactive_url,	:permalink
+		:interactive_url,	:permalink, :fb_count
 
 
   require 'split_votes'
@@ -29,7 +29,7 @@ class Visualization < ActiveRecord::Base
 			:interactive_url_old,
 			:visual_is_cropped_old,
 			:data_source_url_old,
-			:languages, :languages_internal, :fb_count
+			:languages, :languages_internal
 	attr_accessor :send_notification, :was_published, :languages_internal
 
  paginates_per 8

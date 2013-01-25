@@ -16,7 +16,7 @@ class VisualizationTranslation < ActiveRecord::Base
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter,
 									:designer, :permalink,
                   :data_source_url_old,:data_source_name_old,
-									:interactive_url, :image_file_attributes,	:dataset_file_attributes, :datasources_attributes, :reload_file
+									:interactive_url, :image_file_attributes,	:dataset_file_attributes, :datasources_attributes, :reload_file, :fb_count
 
 	attr_accessor :reload_file
 

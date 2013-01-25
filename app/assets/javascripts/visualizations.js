@@ -49,7 +49,6 @@ function indicate_like_success(update_counter){
     }
   });            
 }
-
 function update_crop(coords) {
 	var rx = adjusted_size/coords.w;
 	var ry = adjusted_size/coords.h;

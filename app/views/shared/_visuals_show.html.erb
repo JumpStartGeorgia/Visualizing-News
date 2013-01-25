@@ -18,7 +18,7 @@
     </div>
     <div class="vote">
 			<% if params[:controller] == 'visuals' %>
-				<%= render :partial => 'shared/vote' %>
+				<%= render :partial => 'shared/visuals_vote' %>
 			<% end %>
     </div>
   </div>
@@ -28,12 +28,12 @@
         <span class="heart">❤</span>
         <span id="like_count_text">
           <span id="like_count_number"><%= @visualization.overall_votes %></span>
-          <%= t('filters.organize.likes') %>
+          <%= t('filters.visuals.organize.likes') %>
         </span>
       </li>
       <li id="view_count">
         <%= image_tag('view_icon.png') %>
-        <%= "#{@visualization.impressions_count} #{t('filters.organize.views')}" %>
+        <%= "#{@visualization.impressions_count} #{t('filters.visuals.organize.views')}" %>
       </li>
       <li id="comment_count">
         <%= image_tag('comments_icon.png') %>
@@ -186,7 +186,7 @@
   <div class="main_block clear">
     <div class="vote">
 			<% if params[:controller] == 'visuals' %>
-				<%= render 'shared/vote' %>
+				<%= render 'shared/visuals_vote' %>
 			<% end %>
     </div>
   </div>

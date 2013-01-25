@@ -61,8 +61,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 	def preload_global_variables
 		@categories = Category.sorted
-		@filter_type_selection = I18n.t('filters.type.all')
-		@filter_view_selection = I18n.t('filters.view.grid')
+		@filter_type_selection = I18n.t('filters.visuals.type.all')
+		@filter_view_selection = I18n.t('filters.visuals.view.grid')
 		@idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
     @idea = Idea.new
 		@idea.idea_categories.build
@@ -132,17 +132,17 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
   def process_visualization_querystring(visual_objects)
 	  if params[:view] && params[:view] == 'list'
-	    @view_type = 'shared/list'
-			@filter_view_selection = I18n.t('filters.view.list')
+	    @view_type = 'shared/visuals_list'
+			@filter_view_selection = I18n.t('filters.visuals.view.list')
 	  else
-	    @view_type = 'shared/grid'
-			@filter_view_selection = I18n.t('filters.view.grid')
+	    @view_type = 'shared/visuals_grid'
+			@filter_view_selection = I18n.t('filters.visuals.view.grid')
 	  end
 
 		if params[:type]
 			type_id = Visualization.type_id(params[:type])
 			visual_objects = visual_objects.by_type(type_id) if type_id
-			@filter_type_selection = I18n.t("filters.type.#{params[:type]}")
+			@filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
 		end
 
 		if params[:organize]
@@ -154,11 +154,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
         when 'views'
     			visual_objects = visual_objects.views
       end
-			@filter_organize_selection = I18n.t("filters.organize.#{params[:organize]}")
+			@filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
     else
       # if not set, default to recent
 			visual_objects = visual_objects.recent
-			@filter_organize_selection = I18n.t("filters.organize.recent")
+			@filter_organize_selection = I18n.t("filters.visuals.organize.recent")
 		end
 
 		if params[:category]

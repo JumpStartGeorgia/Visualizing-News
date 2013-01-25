@@ -7,7 +7,7 @@ class RootController < ApplicationController
       format.html
       format.js {
         @ajax_call = true
-        render 'shared/index'
+        render 'shared/visuals_index'
       }
     end
 	end

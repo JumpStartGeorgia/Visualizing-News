@@ -12,7 +12,7 @@ class VisualsController < ApplicationController
       format.html
       format.js {
         @ajax_call = true
-        render 'shared/index'
+        render 'shared/visuals_index'
       }
     end
 	end
@@ -23,10 +23,10 @@ class VisualsController < ApplicationController
 
 		if @visualization
 			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
-			  @view_type = 'shared/show_interactive'
+			  @view_type = 'shared/visuals_show_interactive'
 				gon.show_interactive = true
 			else
-			  @view_type = 'shared/show'
+			  @view_type = 'shared/visuals_show'
 			end
 
 			gon.show_fb_comments = true

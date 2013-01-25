@@ -209,20 +209,37 @@ ka:
     infographic: ინფოგრაფიკა
     interactive: ინტერაქტივი
   filters:
-    type:
-      header: ტიპი
-      all: ყველა
-      infographic: ინფოგრაფიკა
-      interactive: ინტერაქტივი
-    view:
-      header: განლაგება
-      grid: ბადე
-      list: სია
-    organize:
-      header: დახარისხება
-      recent: ბოლო
-      likes: Likes
-      views: ნახვა
+    visuals:
+      type:
+        header: ტიპი
+        all: ყველა
+        infographic: ინფოგრაფიკა
+        interactive: ინტერაქტივი
+      view:
+        header: განლაგება
+        grid: ბადე
+        list: სია
+      organize:
+        header: დახარისხება
+        recent: ბოლო
+        likes: Likes
+        views: ნახვა
+    ideas:
+      view:
+        header: განლაგება
+        grid: ბადე
+        list: სია
+      organize:
+        header: დახარისხება
+        recent: ბოლო
+        likes: Likes
+        views: ნახვა
+      filter:
+        header: Filter
+        all: All
+        not_selected: Not Being Worked On
+        in_progress: In Progress
+        completed: Completed
   app:
     language:
       en: English
@@ -401,7 +418,7 @@ ka:
       title: ვიზუალიზაციები
       title_feed: "%{app_name} ვიზუალიზაციები"
   shared:
-    show:
+    visuals_show:
       organization: ორგანიზაცია
       reporter: ჟურნალისტი
       designer: დიზაინერი
@@ -412,7 +429,7 @@ ka:
       embed_link_title: დიდი გამოსახულების სანახავად დააჭირეთ
       embed_link_interactive_title: ინტერაქტიული ვიზუალიზაციის სანახავად დააჭირეთ
       comment_count: კომენტარები
-    filter_bar:
+    visuals_filter_bar:
       categories: კატეგორიები
     ideas_list:
       idea_title: "Idea #%{number}"

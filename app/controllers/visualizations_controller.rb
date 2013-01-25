@@ -21,10 +21,10 @@ class VisualizationsController < ApplicationController
 
 		if @visualization
 			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
-			  @view_type = 'shared/show_interactive'
+			  @view_type = 'shared/visuals_show_interactive'
 				gon.show_interactive = true
 			else
-			  @view_type = 'shared/show'
+			  @view_type = 'shared/visuals_show'
 			end
 
 			respond_to do |format|

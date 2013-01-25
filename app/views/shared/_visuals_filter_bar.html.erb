@@ -39,52 +39,52 @@ hide_slider = ''
 		<ul class="nav">
 			<li class="dropdown">
 				<a id="filter_type" class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<%= t('filters.type.header')%>:
+					<%= t('filters.visuals.type.header')%>:
 					<span id="filter_type_selection" class="filter_selection"><%=@filter_type_selection%></span>
 	        <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to t('filters.type.all'), url_for(params.merge(:type => 'all')) %>
+						<%= link_to t('filters.visuals.type.all'), url_for(params.merge(:type => 'all')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.type.infographic'), url_for(params.merge(:type => 'infographic')) %>
+						<%= link_to t('filters.visuals.type.infographic'), url_for(params.merge(:type => 'infographic')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.type.interactive'), url_for(params.merge(:type => 'interactive')) %>
+						<%= link_to t('filters.visuals.type.interactive'), url_for(params.merge(:type => 'interactive')) %>
 					</li>
 				</ul>
 			</li>
 			<li class="dropdown">
 				<a id="filter_organize" class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<%= t('filters.organize.header')%>:
+					<%= t('filters.visuals.organize.header')%>:
 					<span id="filter_organize_selection" class="filter_selection"><%=@filter_organize_selection%></span>
 	        <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to t('filters.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
+						<%= link_to t('filters.visuals.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
+						<%= link_to t('filters.visuals.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.organize.views'), url_for(params.merge(:organize => 'views')) %>
+						<%= link_to t('filters.visuals.organize.views'), url_for(params.merge(:organize => 'views')) %>
 					</li>
 				</ul>
 			</li>
 			<li class="dropdown">
 				<a id="filter_view" class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<%= t('filters.view.header')%>:
+					<%= t('filters.visuals.view.header')%>:
 					<span id="filter_view_selection" class="filter_selection"><%=@filter_view_selection%></span>
 	        <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to t('filters.view.grid'), url_for(params.merge(:view => 'grid')) %>
+						<%= link_to t('filters.visuals.view.grid'), url_for(params.merge(:view => 'grid')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.view.list'), url_for(params.merge(:view => 'list')) %>
+						<%= link_to t('filters.visuals.view.list'), url_for(params.merge(:view => 'list')) %>
 					</li>
 				</ul>
 			</li>

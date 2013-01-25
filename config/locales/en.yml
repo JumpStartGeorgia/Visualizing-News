@@ -209,20 +209,37 @@ en:
     infographic: Infographic
     interactive: Interactive
   filters:
-    type:
-      header: Type
-      all: All
-      infographic: Infographic
-      interactive: Interactive
-    view:
-      header: Layout
-      grid: Grid
-      list: List
-    organize:
-      header: Sort
-      recent: Recent
-      likes: Likes
-      views: Views
+    visuals:
+      type:
+        header: Type
+        all: All
+        infographic: Infographic
+        interactive: Interactive
+      view:
+        header: Layout
+        grid: Grid
+        list: List
+      organize:
+        header: Sort
+        recent: Recent
+        likes: Likes
+        views: Views
+    ideas:
+      view:
+        header: Layout
+        grid: Grid
+        list: List
+      organize:
+        header: Sort
+        recent: Recent
+        likes: Likes
+        views: Views
+      filter:
+        header: Filter
+        all: All
+        not_selected: Not Being Worked On
+        in_progress: In Progress
+        completed: Completed
   app:
     language:
       en: English
@@ -401,7 +418,7 @@ en:
       title: Visualizations
       title_feed: "%{app_name} Visualizations"
   shared:
-    show:
+    visuals_show:
       organization: Organization
       reporter: Reporter
       designer: Designer
@@ -412,7 +429,7 @@ en:
       embed_link_title: Click to view larger image
       embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
-    filter_bar:
+    visuals_filter_bar:
       categories: Categories
     ideas_list:
       no_ideas: No Idea records were found.

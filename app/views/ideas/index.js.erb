@@ -1,5 +1,0 @@
-$('div#' + <%= "'#{params[:tab]}'" %>).html('<%= escape_javascript(render(:partial => 'shared/ideas_list',
-													:object => @ideas)) %>');
-
-// register tab pagination links for ajax calls
-$('div#idea_list .pagination a').attr('data-remote', 'true');

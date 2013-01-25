@@ -2,7 +2,7 @@ class IdeasController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :follow_idea, :unfollow_idea]
 
   def index
-		@ideas = process_idea_querystring(Idea.with_private(current_user).appropriate)
+		@ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]))
 
     respond_to do |format|
       format.html
@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
 	def user
 		@user = User.find_by_id(params[:user_id])
 
-	  @ideas = process_idea_querystring(Idea.with_private(current_user).appropriate)
+	  @ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]))
 
     if @ideas.blank?
 		  flash[:info] =  t('app.msgs.does_not_exist')

@@ -11,6 +11,10 @@
 
   <%= render "shared/ideas_filter_bar" %>
 
-  <%= render @view_type %>
+  <div id="idea_list" class="viz resp">
+    <%= render @view_type %>
+  </div>
+
+  <%= link_to_next_page @ideas, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>
 
 </div>

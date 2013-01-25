@@ -131,12 +131,13 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     url = URI.parse(request.fullpath)
     @param_options = CGI.parse(url.query).inject({}) { |h, (k, v)| h[k] = v.first; h } if url.query
 
+    # if page in params, remove it
+    @param_options.delete('page')
 
     # if user_id in params, make sure it is in this hash tag
     if params[:user_id] && @param_options.keys.index('user_id').nil?
       @param_options['user_id'] = params[:user_id]
     end
-Rails.logger.debug "****************** param options = #{@param_options}"
   end
 
   ## visual querystring

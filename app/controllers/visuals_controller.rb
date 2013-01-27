@@ -4,13 +4,11 @@
 ####################
 class VisualsController < ApplicationController
   def index
-    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]))
-
-
     respond_to do |format|
-      format.atom
-      format.html
+      format.atom {@visualizations = Visualization.published.recent}
+      format.html {@visualizations = process_visualization_querystring(Visualization.published.page(params[:page]))}
       format.js {
+        @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]))
         @ajax_call = true
         render 'shared/visuals_index'
       }

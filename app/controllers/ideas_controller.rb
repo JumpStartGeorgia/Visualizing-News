@@ -136,6 +136,10 @@ class IdeasController < ApplicationController
 	def comment_notification
 		idea = Idea.find_by_id(params[:id])
 		if idea
+      # update the fb_count value
+      idea.fb_count = idea.fb_count + 1
+      idea.save
+
 			# notify owner if wants notification
 			if idea.user.wants_notifications
 				message = Message.new

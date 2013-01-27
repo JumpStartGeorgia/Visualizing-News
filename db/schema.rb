@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125132807) do
+ActiveRecord::Schema.define(:version => 20130127072034) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20130125132807) do
     t.boolean  "is_private",        :default => false
     t.integer  "current_status_id"
     t.integer  "impressions_count", :default => 0
+    t.integer  "fb_count",          :default => 0
   end
 
   add_index "ideas", ["impressions_count"], :name => "index_ideas_on_impressions_count"

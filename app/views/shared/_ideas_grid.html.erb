@@ -27,7 +27,7 @@
               </li>
               <li>
                 <%= image_tag('comments_icon12.png', :alt => t('app.common.comments'), :title => t('app.common.comments')) %>
-                <fb:comments-count href="<%= full_url(idea_path(idea)) %>"></fb:comments-count>
+                <%= idea.fb_count %>
               </li>
             </ul>
 					</div>

@@ -19,7 +19,7 @@ class Idea < ActiveRecord::Base
 			:category_ids,
 			:is_private,
 			:current_status_id, 
-      :created_at, :updated_at
+      :created_at, :updated_at, :fb_count
 	attr_accessor :is_create
 
   validates :user_id, :explaination, :presence => true

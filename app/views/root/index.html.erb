@@ -16,12 +16,13 @@
 			<p><%= t('.text_get_involved') %></p>
 		</div>
 
+<% if !Rails.env.production? %>
 		<div id="ideas">
 			<h3><%= t('.header_ideas') %></h3>
 			<p><%= t('.text_ideas') %></p>
 			<%= link_to t('.button_ideas'), ideas_path %>
     </div>
-
+<% end %>
 		<div id="visuals">
 			<h3><%= t('.header_visuals') %></h3>
 			<p><%= t('.text_visuals') %></p>

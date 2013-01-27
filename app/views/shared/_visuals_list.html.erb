@@ -24,30 +24,22 @@
   		  <%= simple_format truncate(visualization.explanation, :length => 300, :separator => ' ') %>
   		</div>
   		<div class="item_footer clear">
-        <div class="count_item">
-          <div class="count_icon">
-            <span class="heart">❤</span>
-          </div>
-          <div class="count_text">
-            <%= "#{visualization.overall_votes} #{t('filters.visuals.organize.likes')}" %>
-          </div>
-        </div>
-        <div class="count_item">
-          <div class="count_icon">
-            <%= image_tag('view_icon12.png') %>
-          </div>
-          <div class="count_text">
-            <%= "#{visualization.impressions_count} #{t('filters.visuals.organize.views')}" %>
-          </div>
-        </div>
-        <div class="count_item">
-          <div class="count_icon">
-            <%= image_tag('comments_icon12.png') %>
-          </div>
-          <div class="count_text">
-            <%= "#{visualization.fb_count} #{t('app.common.comments_noun')}" %>
-          </div>
-        </div>
+				<div class="count_block clear">
+          <ul>
+            <li>
+              <span class="heart" title="<%= t('filters.visuals.organize.likes')%>">❤</span>
+              <%= visualization.overall_votes %>
+            </li>
+            <li>
+              <%= image_tag('view_icon12.png', :alt => t('filters.visuals.organize.views'), :title => t('filters.visuals.organize.views')) %>
+              <%= visualization.impressions_count %>
+            </li>
+            <li>
+              <%= image_tag('comments_icon12.png', :alt => t('app.common.comments'), :title => t('app.common.comments')) %>
+              <%= visualization.fb_count %>
+            </li>
+          </ul>
+				</div>
   			<% if @user_in_org && params[:controller] == 'organizations' %>
   				<div>
   			    <%= link_to t('.edit', :default => t("helpers.links.edit")),

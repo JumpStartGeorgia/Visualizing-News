@@ -37,10 +37,10 @@ class IdeasController < ApplicationController
 
 	  @ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]))
 
-    if @ideas.blank?
-		  flash[:info] =  t('app.msgs.does_not_exist')
-		  redirect_to root_path
-		else
+#    if @ideas.blank?
+#		  flash[:info] =  t('app.msgs.does_not_exist')
+#		  redirect_to root_path
+#		else
       respond_to do |format|
         format.html
         format.js {
@@ -48,7 +48,7 @@ class IdeasController < ApplicationController
           render 'shared/ideas_index'
         }
       end
-  	end
+#  	end
 	end
 
 	def organization
@@ -134,7 +134,7 @@ class IdeasController < ApplicationController
   end
 
 	def comment_notification
-		idea = Idea.find_by_id(params[:idea_id])
+		idea = Idea.find_by_id(params[:id])
 		if idea
 			# notify owner if wants notification
 			if idea.user.wants_notifications

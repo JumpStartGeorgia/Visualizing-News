@@ -2,7 +2,7 @@ class IdeaObserver < ActiveRecord::Observer
 
 	def after_create(idea)
 	Rails.logger.debug "===== idea create obs; idea send = #{idea.send_notification}; is private = #{idea.is_private}"
-		idea.send_notification = true if !idea.is_private
+		idea.send_notification = true if !idea.is_private && !idea.db_migrate
 	Rails.logger.debug "===== idea create obs end; idea send = #{idea.send_notification}"
 	end
 

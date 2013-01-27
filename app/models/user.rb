@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-		:role, :provider, :uid, :nickname, :avatar, :organization_ids, :wants_notifications, :notification_language
-	attr_accessor :is_create
+		:role, :provider, :uid, :nickname, :avatar, :organization_ids, :wants_notifications, :notification_language, :db_migrate
+	attr_accessor :send_notification, :db_migrate
 
   validates :email, :nickname, :presence => true
 	before_save :check_for_role

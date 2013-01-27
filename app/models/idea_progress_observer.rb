@@ -1,7 +1,7 @@
 class IdeaProgressObserver < ActiveRecord::Observer
 
 	def after_create(idea_progress)
-		if !idea_progress.is_private
+		if !idea_progress.is_private && !idea_progress.db_migrate
 			idea_progress.send_notification = true
 
 			# update idea status value to be this one

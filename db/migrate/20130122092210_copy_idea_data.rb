@@ -18,37 +18,48 @@ class CopyIdeaData < ActiveRecord::Migration
     if Rails.env.staging?
       news_db_name = '`news-ideas-staging`'
     end
+    puts "using ideas db: #{news_db_name}"
 
     # first have to match up users and if not exist, copy them over
     puts 'moving users, if needed'
     sql = "select id, email, encrypted_password, role, provider, uid, nickname, avatar, wants_notifications from #{news_db_name}.users"
     old_users = connection.execute(sql)
     new_users = User.all
+    dummy_password = 'asdfasdfasdfasdfasdfadfwer'
 
     user_id_match = []
     old_users.each do |old_user|
+      puts "looking at old user: #{old_user[1]}"
       # if user is not in new users, add them
       index = new_users.index{|x| x.email == old_user[1]}
       if index.nil?
+        puts "- old user not in visual db, adding"
         u = User.create(
           :email => old_user[1],
-          :encrypted_password => old_user[2], 
+          :password => dummy_password, 
+          :password_confirmation => dummy_password,
           :role => old_user[3], 
           :provider => old_user[4], 
           :uid => old_user[5], 
           :nickname => old_user[6], 
           :avatar => old_user[7], 
-          :wants_notifications => old_user[8]
+          :wants_notifications => old_user[8],
+          :db_migrate => true # don't send notification
         )
+
+        # have to manualy move the encrypted password
+        sql = "update users set encrypted_password = '#{old_user[2]}' where id = #{u.id}"
+        ActiveRecord::Base.connection.execute(sql)
 
         # create match from old user id to new
         user_id_match << [old_user[0], u.id]
       else
+        puts "- old user already in visual db"
         # found match
         user_id_match << [old_user[0], new_users[index].id]
       end
-
     end
+    puts "user_id_match: #{user_id_match}"
 
     # add ideas
     puts "adding ideas"
@@ -66,9 +77,9 @@ class CopyIdeaData < ActiveRecord::Migration
           :created_at => old_idea[7], 
           :updated_at => old_idea[8], 
           :is_private => old_idea[9], 
-          :current_status_id => old_idea[10]
+          :current_status_id => old_idea[10],
+          :db_migrate => true # don't send notification
       )
-
 
       # create match from old idea id to new
       idea_id_match << [old_idea[0], i.id]
@@ -101,7 +112,8 @@ class CopyIdeaData < ActiveRecord::Migration
         :created_at => old_prog[6], 
         :updated_at => old_prog[7], 
         :idea_status_id => old_prog[8], 
-        :is_private => old_prog[9]
+        :is_private => old_prog[9],
+        :db_migrate => true # don't send notification
       )
     end
 

@@ -19,8 +19,8 @@ class Idea < ActiveRecord::Base
 			:category_ids,
 			:is_private,
 			:current_status_id, 
-      :created_at, :updated_at, :fb_count
-	attr_accessor :send_notification
+      :created_at, :updated_at, :fb_count, :db_migrate
+	attr_accessor :send_notification, :db_migrate
 
   validates :user_id, :explaination, :presence => true
 

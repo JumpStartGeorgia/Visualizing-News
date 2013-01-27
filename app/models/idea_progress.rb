@@ -11,8 +11,8 @@ class IdeaProgress < ActiveRecord::Base
 			:url,
 			:is_private,
 			:idea_status_id, 
-      :created_at, :updated_at
-	attr_accessor :send_notification
+      :created_at, :updated_at, :db_migrate
+	attr_accessor :send_notification, :db_migrate
 
   validates :idea_id, :organization_id, :idea_status_id, :progress_date, :presence => true
 	validates :url, :format => {:with => URI::regexp(['http','https'])}, :if => "!url.blank?"

@@ -12,9 +12,10 @@ class IdeaProgress < ActiveRecord::Base
 			:is_private,
 			:idea_status_id, 
       :created_at, :updated_at
-	attr_accessor :is_create
+	attr_accessor :send_notification
 
   validates :idea_id, :organization_id, :idea_status_id, :progress_date, :presence => true
+	validates :url, :format => {:with => URI::regexp(['http','https'])}, :if => "!url.blank?"
 
   scope :public_only, where("idea_progresses.is_private = '0'")
   before_save :set_is_completed

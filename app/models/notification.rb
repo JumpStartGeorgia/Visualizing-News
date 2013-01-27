@@ -27,7 +27,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.new_idea_users(category_ids, locale)
-		return new_item(TYPES[:new_idea], category_ids)
+		return new_item(TYPES[:new_idea], category_ids, locale)
 	end
 
 	def self.follow_idea_users(idea_id, locale)

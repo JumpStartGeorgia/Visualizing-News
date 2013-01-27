@@ -51,6 +51,12 @@ $(document).ready(function(){
     });
   }
 
+  // register jquery multi select for category list in new idea form
+  $('select#idea_category_ids').multiselect({
+    header: false,
+    noneSelectedText: ''
+  });
+
 
 
 });

@@ -2,7 +2,7 @@ class IdeaProgressObserver < ActiveRecord::Observer
 
 	def after_create(idea_progress)
 		if !idea_progress.is_private
-			idea_progress.is_create = true
+			idea_progress.send_notification = true
 
 			# update idea status value to be this one
 	Rails.logger.debug "===== idea prog create obs"
@@ -20,7 +20,7 @@ class IdeaProgressObserver < ActiveRecord::Observer
 	def after_commit(idea_progress)
 		# only process if a create just occurred
 		# - see after_create method above
-		if idea_progress.is_create
+		if idea_progress.send_notification
 			# determine if idea is realized
 			if idea_progress.is_completed && idea_progress.url
 				# idea realized

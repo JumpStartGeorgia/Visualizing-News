@@ -20,7 +20,7 @@ class Idea < ActiveRecord::Base
 			:is_private,
 			:current_status_id, 
       :created_at, :updated_at, :fb_count
-	attr_accessor :is_create
+	attr_accessor :send_notification
 
   validates :user_id, :explaination, :presence => true
 

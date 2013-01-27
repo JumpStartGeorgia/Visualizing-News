@@ -27,7 +27,7 @@ class NotificationMailer < ActionMailer::Base
     mail(:bcc => message.bcc, :subject => message.subject)
   end
 
-  def new_comment_subscriber(message)
+  def idea_comment_subscriber(message)
     @message = message
     mail(:bcc => message.bcc, :subject => message.subject)
   end
@@ -63,7 +63,7 @@ class NotificationMailer < ActionMailer::Base
     mail(:to => message.email, :subject => message.subject)
   end
 
-  def new_comment_owner(message)
+  def idea_comment_owner(message)
     @message = message
     mail(:to => message.email, :subject => message.subject)
   end

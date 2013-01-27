@@ -147,7 +147,7 @@ class IdeasController < ApplicationController
 				message.email = idea.user.email
 				message.subject = I18n.t('mailer.notification.idea_comment_owner.subject')
 				message.message = I18n.t('mailer.notification.idea_comment_owner.message')
-				message.url_id = params[:idea_id]
+				message.url_id = params[:id]
 				NotificationMailer.idea_comment_owner(message).deliver
 			end
 
@@ -164,7 +164,7 @@ class IdeasController < ApplicationController
             message.locale = locale
 					  message.subject = I18n.t('mailer.notification.idea_comment_subscriber.subject')
 					  message.message = I18n.t('mailer.notification.idea_comment_subscriber.message')
-					  message.url_id = params[:idea_id]
+					  message.url_id = params[:id]
 					  NotificationMailer.idea_comment_subscriber(message).deliver
 				  end
 			  end

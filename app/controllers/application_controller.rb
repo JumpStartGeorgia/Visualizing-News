@@ -178,6 +178,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			visual_objects = visual_objects.by_category(@categories[index].id) if index
 		end
 
+		if params[:q]
+			visual_objects = visual_objects.search_for(params[:q])
+		end
+
 		return visual_objects
   end
 

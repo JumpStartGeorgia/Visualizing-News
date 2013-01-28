@@ -177,6 +177,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
       index = @categories.index{|x| x.permalink == params[:category]}
 			visual_objects = visual_objects.by_category(@categories[index].id) if index
 		end
+
 		return visual_objects
   end
 
@@ -230,6 +231,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 		if params[:user_id]
 			idea_objects = idea_objects.by_user(params[:user_id])
+		end
+
+		if params[:q]
+			idea_objects = idea_objects.search_for(params[:q])
 		end
 
 		return idea_objects

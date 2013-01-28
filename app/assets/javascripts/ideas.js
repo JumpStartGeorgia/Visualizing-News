@@ -1,3 +1,14 @@
+function updateQueryStringParameter(uri, key, value) {
+  var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
+  separator = uri.indexOf('?') !== -1 ? "&" : "?";
+  if (uri.match(re)) {
+    return uri.replace(re, '$1' + key + "=" + value + '$2');
+  }
+  else {
+    return uri + separator + key + "=" + value;
+  }
+}
+
 $(document).ready(function(){
 	// if an organization progress needs to be translated,
 	// get the text to be translated and put it in the link
@@ -38,8 +49,12 @@ $(document).ready(function(){
 				$('#idea_progress_url_input').hide(300);
 			}
 		});
-
 	}
 
-});
 
+  // when ideas search form submitted, stop form and make it link request
+  $('form#ideas_form_search').submit(function(){
+    window.location.href = updateQueryStringParameter($('form#ideas_form_search').attr('action'), 'q', $('form#ideas_form_search input#q').val());
+    return false;
+  });
+});

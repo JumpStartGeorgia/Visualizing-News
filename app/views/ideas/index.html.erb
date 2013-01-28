@@ -9,6 +9,13 @@
   </div>
 
 
+  <div id="idea_search">
+	  <%= form_tag ideas_path(@param_options), :method => :get, :class => "form-search", :id => 'ideas_form_search' do %>
+      <%= text_field_tag :q, params[:q], :class => 'input-large search-query'%>
+      <%= button_tag t('app.common.search'), :class => 'btn' %>
+    <% end %>
+  </div>
+
   <%= render "shared/ideas_filter_bar" %>
 
   <div id="idea_list" class="viz resp">

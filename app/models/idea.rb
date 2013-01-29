@@ -1,4 +1,5 @@
 class Idea < ActiveRecord::Base
+  scoped_search :on => [:explaination]
   is_impressionable :counter_cache => true
 	require 'utf8_converter'
 
@@ -18,7 +19,7 @@ class Idea < ActiveRecord::Base
       :is_duplicate,
 			:category_ids,
 			:is_private,
-			:current_status_id, 
+			:current_status_id,
       :created_at, :updated_at, :fb_count, :db_migrate
 	attr_accessor :send_notification, :db_migrate
 

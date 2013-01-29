@@ -5,7 +5,7 @@ function reset_interactive_iframe_height(){
 
 var adjusted_size = gon.thumbnail_size;
 
-function indicate_like_success(update_counter){  
+function indicate_like_success(update_counter){
   var counter_action = 1;
   $('body').animate({scrollTop: 0}, 300, function(){
     // switch button status
@@ -34,7 +34,7 @@ function indicate_like_success(update_counter){
     if (update_counter){
       // update the like counter
       $('span#like_count_text').fadeOut('slow', function(){
-        var old_count = parseInt($('span#like_count_number').html());            
+        var old_count = parseInt($('span#like_count_number').html());
         var new_count = old_count + counter_action;
         if (new_count < 0){
           new_count = 0;
@@ -47,7 +47,7 @@ function indicate_like_success(update_counter){
         })
       });
     }
-  });            
+  });
 }
 function update_crop(coords) {
 	var rx = adjusted_size/coords.w;
@@ -175,7 +175,7 @@ $(document).ready(function(){
           $('input[id$="_crop_h"]').val() != '' && $('input[id$="_crop_h"]').val() != '0' ) {
 
 			  setInit = [$('input[id$="_crop_x"]').val(), $('input[id$="_crop_y"]').val(),
-								  (parseInt($('input[id$="_crop_w"]').val()) + parseInt($('input[id$="_crop_x"]').val())), 
+								  (parseInt($('input[id$="_crop_w"]').val()) + parseInt($('input[id$="_crop_x"]').val())),
                   (parseInt($('input[id$="_crop_h"]').val()) + parseInt($('input[id$="_crop_y"]').val()))];
 		  }
 		  // assign the jcrop to the visual image
@@ -216,6 +216,13 @@ $(document).ready(function(){
         }
       }
     });
+    return false;
+  });
+
+
+  // when visual search form submitted, stop form and make it link request
+  $('form#visuals_form_search').submit(function(){
+    window.location.href = updateQueryStringParameter($('form#visuals_form_search').attr('action'), 'q', $('form#visuals_form_search input#q').val());
     return false;
   });
 

@@ -58,5 +58,11 @@ $(document).ready(function(){
   });
 
 
+  // register search box in menu
+  $('#follow-us #menu-search').keypress(function (e) {
+    if (e.which == 13) {
+      window.location.href = updateQueryStringParameter($(this).attr('data-path'), 'q', $(this).val());
+    }
+  });
 
 });

@@ -38,8 +38,12 @@ $(document).ready(function(){
 				$('#idea_progress_url_input').hide(300);
 			}
 		});
-
 	}
 
-});
 
+  // when ideas search form submitted, stop form and make it link request
+  $('form#ideas_form_search').submit(function(){
+    window.location.href = updateQueryStringParameter($('form#ideas_form_search').attr('action'), 'q', $('form#ideas_form_search input#q').val());
+    return false;
+  });
+});

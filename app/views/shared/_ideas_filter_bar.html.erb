@@ -1,17 +1,9 @@
 <%
   show_toggle ||= false
   hide_slider = show_toggle ? "display: none;" : ""
-hide_slider = ''
+  hide_slider = ''
 %>
 <div id="filter_bar" class="navbar">
-
-  <div id="idea_search">
-	  <%= form_tag ideas_path(@param_options), :method => :get, :class => "form-search", :id => 'ideas_form_search' do %>
-      <%= text_field_tag :q, params[:q], :class => 'input-large search-query'%>
-      <%= button_tag t('app.common.search'), :class => 'btn' %>
-    <% end %>
-  </div>
-
 
   <% if show_toggle %>
     <div id="toggle_categories" class="resp">
@@ -45,6 +37,12 @@ hide_slider = ''
 
   <div id="filter_bar_inner" class="container">
 		<ul class="nav">
+      <li id="idea_search">
+        <%= form_tag ideas_path(@param_options), :method => :get, :class => "form-search", :id => 'ideas_form_search' do %>
+          <%= text_field_tag :q, params[:q], :class => 'input-large search-query'%>
+          <%= button_tag t('app.common.search'), :class => 'btn' %>
+        <% end %>
+      </li>
 			<li class="dropdown">
 				<a id="filter_type" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.filter.header')%>:

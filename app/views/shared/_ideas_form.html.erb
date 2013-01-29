@@ -25,11 +25,11 @@
       </li>
       <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
         <li>
-			    <label class="control-label" for="idea_is_private">
-				    <%= t('activerecord.attributes.idea.is_private') %>
+			    <label class="control-label" for="idea_is_public">
+				    <%= t('activerecord.attributes.idea.is_public') %>
 			    </label>
-			    <%= select_tag 'idea_is_private', "<option value='1'>#{t('app.common.yes')}</option><option selected=\"selected\" value='0'>#{t('app.common.no')}</option>".html_safe,  
-			          :name => 'idea[is_private]' %>
+			    <%= select_tag 'idea_is_public', "<option selected=\"selected\" value='1'>#{t('app.common.yes')}</option><option value='0'>#{t('app.common.no')}</option>".html_safe,  
+			          :name => 'idea[is_public]' %>
         </li>
       <% end %>
 	    <% if user_signed_in? %>

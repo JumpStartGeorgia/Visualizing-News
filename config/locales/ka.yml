@@ -11,7 +11,7 @@ ka:
       datasource: მონაცემთა წყარო
       idea: იდეა
       idea_inappropriate_report: რეპორტი
-      idea_status: Idea Status
+      idea_status: იდეის სტატუსი
     attributes:
       user:
         email: ელ.ფოსტა
@@ -86,8 +86,8 @@ ka:
         overall_votes: ხმების სრული რაოდენობა
         is_duplicate: დუბლირებული?
         is_inappropriate: არ შეესაბამება
-        is_private: Is Private?
-        current_status_id: Current Status
+        is_public: საჯაროა?
+        current_status_id: მიმდინარე სტატუსი
       idea_category:
         idea_id: იდეა
         category_id: კატეგორია
@@ -98,20 +98,20 @@ ka:
         url: სიახლის ბმული
         progress_date: თარიღი
         explaination: განმარტება
-        idea_status_id: Status
-        idea_status: Status
-        is_private: Is Private?
+        idea_status_id: სტატუსი
+        idea_status: სტატუსი
+        is_public: საჯაროა?
       idea_inappropriate_report:
         user_id: მომხმარებელი
         idea_id: იდეა
         reason: რატომ არ შეესაბამება იდეა?
       idea_status:
-        sort: Sort Order
+        sort: დახარისხება
         sort_hint: "1, 2, 3, etc. (ascending order)"
-        is_published: Published?
-        is_published_hint: This status indicates that the idea is published
+        is_published: გამოქვეყნდა?
+        is_published_hint: ეს სტატუსი გამოხატავს, რომ იდეა გამოქვეყნდა
       idea_status_translation:
-        name: Name
+        name: სახელი
     messages:
       idea_progress:
         success: "ჩანაწერები წარმატებით შეინახა."
@@ -235,11 +235,11 @@ ka:
         likes: Likes
         views: ნახვა
       filter:
-        header: Filter
-        all: All
-        not_selected: Not Being Worked On
-        in_progress: In Progress
-        completed: Completed
+        header: გაფილტვრა
+        all: ყველა
+        not_selected: არ დაწყებულა მუშაობა
+        in_progress: მიმდინარეობს
+        completed: განხორციელებული იდეები
   app:
     language:
       en: English
@@ -283,8 +283,8 @@ ka:
       follow_idea_bad: იდეა ვერ მოიძებნა
       unfollow_idea: თქვენ არ მიიღებთ ელექტრონულ შეტყობინებებს სიახლეებზე.
       unfollow_idea_bad: იდეა ვერ მოიძებნა.
-      is_private: PRIVATE
-      last_update: Last Update
+      is_private: არასაჯარო
+      last_update:  ბოლო განახლება
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -302,8 +302,8 @@ ka:
       notification_visual_comments_yes: თქვენ მიიღებთ შეტყობინებას თქვენ მიერ განთავსებული ვიზუალიზაციაზე კომენტარის დამატების შესახებ %{org}
       notification_visual_comments_no: თქვენ არ მიიღებთ შეტყობინებას თქვენ მიერ განთავსებული ვიზუალიზაციაზე კომენტარის დამატების შესახებ %{org}.
       notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
-      no_visual_records: No visualization records match your selection.
-      no_idea_records: No ideas match your selection.
+      no_visual_records: თქვენი მოთხოვნის შესაბამისი ვიზუალიზაცია არ მოიძებნა.
+      no_idea_records: თქვენი მოთხოვნის შესაბამისი იდეა არ მოიძებნა.
   layouts:
     application:
       menu_visual: ვიზუალიზაციები
@@ -349,7 +349,7 @@ ka:
       visualizations: ვიზუალიზაციები
       users: მომხმარებლები
       pages: გვერდები
-      idea_statuses: Idea Status
+      idea_statuses: იდეის სტატუსი
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -432,12 +432,12 @@ ka:
     visuals_filter_bar:
       categories: კატეგორიები
     ideas_list:
-      idea_title: "Idea #%{number}"
+      idea_title: "იდეა #%{number}"
       no_ideas: იდეა არ მოიძებნა.
     ideas_grid:
-      idea_title: "Idea #%{number}"
+      idea_title: "იდეა #%{number}"
     ideas_form:
-      sign_in: Sign In to Submit
+      sign_in: გამოსაგზავნად გაიარეთ ავტორიზაცია
   visualizations:
     form:
       preview: ნახვა
@@ -473,15 +473,16 @@ ka:
   ideas:
     index:
       title: იდეების გამოქვეყნება
-      text_ideas: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it."
+      text_ideas1: "გაქვთ ახალი ამბის შექმნის იდეა? გსურთ მედიამ იმუშაოს თვენთვის საინტერესო საკითხებზე? გაგვიზიარეთ თქვენი იდეა აქ. კარგი იდეის მოწოდების შემთხვევაში ჯურნალისტი იმუშავებს ამ საკითხზე."
+      text_ideas2: "გამოაქვეყნეთ, შეაფასეთ, გააზიარეთ და თვალყური მიადევნეთ როგორ გარდაიქმნება იდეა ახალ ამბად."
     user:
-      title: "Ideas by: %{name}"
+      title: "%{name} იდეა"
     category:
       title: "კატეგორია: %{name}"
     explore:
       title: "აღმოაცინე იდეა"
     show:
-      title: "Idea #%{number}"
+      title: "იდეა #%{number}"
       idea_by: "%{name}-ის იდეა"
       claimed_by: "იდეა შეიმუშავა"
       finished: დასრულებული

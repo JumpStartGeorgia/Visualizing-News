@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128093151) do
+ActiveRecord::Schema.define(:version => 20130129140029) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -87,11 +87,13 @@ ActiveRecord::Schema.define(:version => 20130128093151) do
     t.datetime "updated_at"
     t.integer  "idea_status_id"
     t.boolean  "is_private",      :default => false
+    t.boolean  "is_public",       :default => true
   end
 
   add_index "idea_progresses", ["idea_id", "organization_id"], :name => "idea_prog_idea_org"
   add_index "idea_progresses", ["is_completed"], :name => "index_idea_progresses_on_is_completed"
   add_index "idea_progresses", ["is_private"], :name => "index_idea_progresses_on_is_private"
+  add_index "idea_progresses", ["is_public"], :name => "index_idea_progresses_on_is_public"
   add_index "idea_progresses", ["progress_date"], :name => "index_idea_progresses_on_progress_date"
 
   create_table "idea_status_translations", :force => true do |t|
@@ -127,11 +129,13 @@ ActiveRecord::Schema.define(:version => 20130128093151) do
     t.integer  "current_status_id"
     t.integer  "impressions_count", :default => 0
     t.integer  "fb_count",          :default => 0
+    t.boolean  "is_public",         :default => true
   end
 
   add_index "ideas", ["impressions_count"], :name => "index_ideas_on_impressions_count"
   add_index "ideas", ["is_inappropriate", "is_duplicate"], :name => "idea_must_hide"
   add_index "ideas", ["is_private"], :name => "index_ideas_on_is_private"
+  add_index "ideas", ["is_public"], :name => "index_ideas_on_is_public"
   add_index "ideas", ["overall_votes"], :name => "index_ideas_on_overall_votes"
   add_index "ideas", ["user_id"], :name => "index_ideas_on_user_id"
 

@@ -1,14 +1,12 @@
 class IdeaProgressObserver < ActiveRecord::Observer
 
 	def after_create(idea_progress)
-		if !idea_progress.is_private && !idea_progress.db_migrate
+		if idea_progress.is_public && !idea_progress.db_migrate
 			idea_progress.send_notification = true
 
 			# update idea status value to be this one
-	Rails.logger.debug "===== idea prog create obs"
 			i = Idea.find_by_id(idea_progress.idea_id)
 			if i
-	Rails.logger.debug "====== saving new status to idea"
 				i.current_status_id = idea_progress.idea_status_id
 				i.save
 			end

@@ -163,6 +163,23 @@ body {
   top: 0px;
   bottom: 0px;
   z-index: 1000;
+  a.menu-collapse {
+    display: none;
+    text-align: center;
+    font-family: themix_regular;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #469e72;
+    &:hover {
+      background: rgba(0, 0, 0, .03);
+    }
+  }
+  div.menu-collapse {
+    display: block;
+  }
   .brand {
     margin-top: 30px;
     margin-bottom: 45px;
@@ -174,22 +191,6 @@ body {
       & > img {
         display: inline-block;
       }
-    }
-  }
-}
-
-@media(max-height: 600px) {
-  #frozen-menu {
-    .brand {
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
-    .user-menu {
-      margin-top: 10px;
-    }
-    .nav-menu li a {
-      padding-top: 1px;
-      padding-bottom: 1px;
     }
   }
 }
@@ -486,4 +487,45 @@ footer, footer ul li, footer div#right ul li {
   background-color: #f00; 
   color: #fff;  
 }
+
+
+#fancybox-overlay {
+  height: auto;
+  position: fixed;
+  bottom: 0px;
+}
+
+
+
+@media (max-width: 979px) {
+  #frozen-menu {
+    a.menu-collapse {
+      display: block;
+    }
+    div.menu-collapse {
+      display: none;
+    }
+  }
+  #follow-us {
+    position: static;
+    margin-top: 15px;
+  }
+}
+
+@media (max-height: 600px) {
+  #frozen-menu {
+    .brand {
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+    .user-menu {
+      margin-top: 10px;
+    }
+    .nav-menu li a {
+      padding-top: 1px;
+      padding-bottom: 1px;
+    }
+  }
+}
+
 

@@ -86,7 +86,7 @@ en:
         overall_votes: Overall Votes
         is_duplicate: Duplicate?
         is_inappropriate: Inappropriate?
-        is_private: Is Private?
+        is_public: Is Public?
         current_status_id: Current Status
       idea_category:
         idea_id: Idea
@@ -100,7 +100,7 @@ en:
         explaination: Explaination
         idea_status_id: Status
         idea_status: Status
-        is_private: Is Private?
+        is_public: Is Public?
       idea_inappropriate_report:
         user_id: User
         idea_id: Idea
@@ -283,7 +283,7 @@ en:
       follow_idea_bad: The idea could not be found to follow.
       unfollow_idea: You will no longer be sent email notifications when updates occur to this idea.
       unfollow_idea_bad: The idea could not be found to unfollow.
-      is_private: PRIVATE
+      is_private: NOT PUBLIC
       last_update: Last Update
     msgs:
       does_not_exist: You tried to access a page that does not exist.
@@ -473,7 +473,8 @@ en:
   ideas:
     index: 
       title: Post Ideas
-      text_ideas: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it."
+      text_ideas1: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it."
+      text_ideas2: "feradi.info makes your ideas social, allowing missed opportunities to become a treasure trove of journalistic brainstorming. Post, vote, share, and watch how ideas take shape and become the news."
     user:
       title: "Ideas by: %{name}"
     category:

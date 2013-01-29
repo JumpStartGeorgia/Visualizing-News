@@ -33,7 +33,7 @@
 			<%= f.input :idea_status, :collection => IdeaStatus.sorted, :include_blank => false %>
 			<%= f.input :explaination, :as => :text, :input_html => {:rows => 4, :cols => 100} %>
       <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
-				<%= f.input :is_private, :as => :select, :include_blank => false  %>
+				<%= f.input :is_public, :as => :select, :include_blank => false  %>
       <% end %>
 			<%= f.input :url %>
 

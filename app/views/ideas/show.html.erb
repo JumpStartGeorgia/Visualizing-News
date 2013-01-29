@@ -17,6 +17,10 @@
     <div class="main_block clear">
       <div id="idea_date">
 			  <%= l @idea.created_at, :format => :long %>
+        <% if user_signed_in? && !@idea.is_public &&
+					      (@idea.organization_submitted_idea?(current_user) || @idea.organization_claimed_idea?(current_user)) %>
+          <span class="private_item"><%= t('app.common.is_private')%></span>
+        <% end %>
       </div>
       <div class="vote">
         <% 
@@ -88,13 +92,6 @@
       </div>
     </div>
     <div id="idea_sidebar" class="side_block">
-      <% if user_signed_in? && @idea.is_private &&
-					    (@idea.organization_submitted_idea?(current_user) || @idea.organization_claimed_idea?(current_user)) %>
-        <div>  
-          <span class="private_item"><%= t('app.common.is_private')%></span>
-        </div>
-      <% end %>
-
       <div id="source">
         <ul>
           <li>
@@ -188,7 +185,7 @@
                         <li>
     								      <strong><%= l progress.progress_date, :format => :default if progress.progress_date %>: </strong>
     								      <%= progress.idea_status.name if progress.idea_status_id %>
-		                      <% if user_signed_in? && progress.organization_wrote_progress?(current_user) && progress.is_private %>
+		                      <% if user_signed_in? && progress.organization_wrote_progress?(current_user) && !progress.is_public %>
                             <span class="private_item"><%= t('app.common.is_private')%></span>
                           <% end %>
 

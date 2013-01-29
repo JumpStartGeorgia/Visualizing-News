@@ -18,14 +18,15 @@ class Idea < ActiveRecord::Base
       :is_inappropriate,
       :is_duplicate,
 			:category_ids,
-			:is_private,
+#			:is_private,
+      :is_public,
 			:current_status_id,
       :created_at, :updated_at, :fb_count, :db_migrate
 	attr_accessor :send_notification, :db_migrate
 
   validates :user_id, :explaination, :presence => true
 
-  scope :public_only, where("ideas.is_private = '0'")
+  scope :public_only, where("ideas.is_public = '1'")
 
   require 'split_votes'
   include SplitVotes
@@ -56,7 +57,7 @@ class Idea < ActiveRecord::Base
 	  if user && !user.organizations.blank?
       # only get private ideas if user is from the org that submitted the ideas
       includes(:user => :organization_users)
-      .where("ideas.is_private = 0 or (ideas.is_private = 1 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
+      .where("ideas.is_public = 1 or (ideas.is_public = 0 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})
 	  else
 	    public_only
 	  end

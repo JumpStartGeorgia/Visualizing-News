@@ -9,7 +9,8 @@ class IdeaProgress < ActiveRecord::Base
       :explaination,
       :is_completed,
 			:url,
-			:is_private,
+#			:is_private,
+      :is_public,
 			:idea_status_id, 
       :created_at, :updated_at, :db_migrate
 	attr_accessor :send_notification, :db_migrate
@@ -17,7 +18,7 @@ class IdeaProgress < ActiveRecord::Base
   validates :idea_id, :organization_id, :idea_status_id, :progress_date, :presence => true
 	validates :url, :format => {:with => URI::regexp(['http','https'])}, :if => "!url.blank?"
 
-  scope :public_only, where("idea_progresses.is_private = '0'")
+  scope :public_only, where("idea_progresses.is_public = '1'")
   before_save :set_is_completed
 
   def set_is_completed
@@ -40,7 +41,7 @@ Rails.logger.debug "------- is completed is now #{self.is_completed}"
 	def self.with_private(user=nil)
 	  if user && !user.organizations.empty?
       # only get private progress if user is from the org that submitted the ideas
-      where("idea_progresses.is_private = 0 or (idea_progresses.is_private = 1 and organization_id in (?))", user.organization_users.map{|x| x.organization_id})
+      where("idea_progresses.is_public = 1 or (idea_progresses.is_public = 0 and organization_id in (?))", user.organization_users.map{|x| x.organization_id})
 	  else
 	    public_only
 	  end

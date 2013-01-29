@@ -15,6 +15,7 @@
 		          <span class="private_item"><%= t('app.common.is_private')%></span>
             <% end %>
           </h2>
+    			<h3><%= l idea.created_at, :format => :long if idea.created_at %></h3>
   				<div class="count_block clear">
             <ul>
               <li>

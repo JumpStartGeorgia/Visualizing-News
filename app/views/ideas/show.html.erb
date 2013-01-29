@@ -70,6 +70,20 @@
           <% end %>
 
       		<%= simple_format auto_link(@idea.explaination, :urls, :target => "_blank") %>
+
+          <ul id="idea_buttons">
+            <li>
+			        <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
+				        <%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'button'%>
+			        <% else %>
+				        <%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'button'%>
+			        <% end %>
+            </li>
+            <li>
+			        <%= link_to t('helpers.links.report_inappropriate'),
+					        ideas_report_inappropriate_path(@idea.id), :class => 'button fancybox' %>
+            </li>
+          </ul>
         <% end %>
       </div>
     </div>
@@ -106,19 +120,6 @@
             </span>
           </li>
         </ul>
-      </div>
-
-      <div id="follow_idea">
-			  <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
-				  <%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'button'%>
-			  <% else %>
-				  <%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'button'%>
-			  <% end %>
-      </div>
-
-      <div id="report_idea">
-			  <%= link_to t('helpers.links.report_inappropriate'),
-					  ideas_report_inappropriate_path(@idea.id), :class => 'button fancybox' %>
       </div>
 
       <div id="share">

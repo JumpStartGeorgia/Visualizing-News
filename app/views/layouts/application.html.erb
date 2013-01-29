@@ -60,9 +60,9 @@
       </div>
 
       <ul class="nav-menu">
-        <li><%= link_to t('.menu_visual'), visuals_path(@param_options.delete_if{|k,v| k == 'user_id'}), :class => assign_active_class(visuals_path) %></li>
+        <li><%= link_to t('.menu_visual'), visuals_path(remove_unwanted_params(@param_options, ['user_id', 'q'])), :class => assign_active_class(visuals_path) %></li>
 		<% if !Rails.env.production? %>
-        <li><%= link_to t('.menu_idea'), ideas_path(@param_options.delete_if{|k,v| k == 'user_id'}), :class => assign_active_class(ideas_path) %></li>
+        <li><%= link_to t('.menu_idea'), ideas_path(remove_unwanted_params(@param_options, ['user_id', 'q'])), :class => assign_active_class(ideas_path) %></li>
     <% end %>
         <li><%= link_to t('.menu_submit_visual'), submit_visual_path, :class => assign_active_class(submit_visual_path)  %></li>
         <li><%= link_to t('.menu_data'), data_path, :class => assign_active_class(data_path)  %></li>
@@ -109,7 +109,8 @@
       </ul>
 
       <ul id="follow-us">
-        <!--input type="text" class="search" placeholder="<%= t('.search')%>" /-->
+        <input type="text" class="search" placeholder="<%= t('.search')%>" id="menu-search" 
+                data-path="<%= visuals_path %>"/>
         <div class="clear">
           <li><a class="fb" title="<%= t('.facebook') %>" href="http://www.facebook.com/feradi.info" target="_blank"></a></li>
           <li><a class="twitter" title="<%= t('.twitter') %>" href="http://twitter.com/feradi_info" target="_blank"></a></li>

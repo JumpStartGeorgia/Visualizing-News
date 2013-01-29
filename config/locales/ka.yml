@@ -473,6 +473,7 @@ ka:
   ideas:
     index:
       title: იდეების გამოქვეყნება
+      text_ideas: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it."
     user:
       title: "Ideas by: %{name}"
     category:

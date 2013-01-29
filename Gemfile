@@ -35,7 +35,8 @@ gem "rails_autolink", "~> 1.0.9" # convert string to link if it is url
 #gem "imgkit", "~> 1.3.7" # create image of web page
 gem "headless" # use browser to load a web page via code
 gem "selenium-webdriver"  # create snapshot of web page
-gem "impressionist", "~> 1.1.1"
+gem "impressionist", "~> 1.1.1" # keep track of views
+gem "scoped_search", "~> 2.4.0" # search activerecord
 
 # Gems used only for assets and not required
 # in production environments by default.

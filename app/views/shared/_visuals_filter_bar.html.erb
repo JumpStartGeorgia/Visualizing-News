@@ -1,7 +1,7 @@
-<% 
-  show_toggle ||= false 
+<%
+  show_toggle ||= false
   hide_slider = show_toggle ? "display: none;" : ""
-hide_slider = ''  
+hide_slider = ''
 %>
 <div id="filter_bar" class="navbar">
 
@@ -20,7 +20,7 @@ hide_slider = ''
       <% @categories.each do |cat| %>
         <% if cat.icon_file_name %>
           <li>
-            <%= link_to(url_for(params.merge(:category => cat.permalink)), 
+            <%= link_to(url_for(params.merge(:category => cat.permalink)),
               :'data-path' => cat.icon.url,
               :title => cat.name) do %>
               <%= image_tag(cat.icon.url) %>
@@ -88,6 +88,12 @@ hide_slider = ''
 					</li>
 				</ul>
 			</li>
+      <li id="visual_search">
+        <%= form_tag visuals_path(@param_options), :method => :get, :class => "form-search", :id => 'visuals_form_search' do %>
+          <%= text_field_tag :q, params[:q], :class => 'input-large'%>
+          <%= button_tag t('app.common.search'), :class => 'btn' %>
+        <% end %>
+      </li>
 		</ul>
 	</div>
 </div>

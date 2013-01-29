@@ -70,6 +70,20 @@
           <% end %>
 
       		<%= simple_format auto_link(@idea.explaination, :urls, :target => "_blank") %>
+
+          <ul id="idea_buttons">
+            <li>
+			        <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
+				        <%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'button'%>
+			        <% else %>
+				        <%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'button'%>
+			        <% end %>
+            </li>
+            <li>
+			        <%= link_to t('helpers.links.report_inappropriate'),
+					        ideas_report_inappropriate_path(@idea.id), :class => 'button fancybox' %>
+            </li>
+          </ul>
         <% end %>
       </div>
     </div>
@@ -86,7 +100,7 @@
           <li>
             <%= "#{t('app.common.author')}: "%>
 					  <span class="val">
-              <%= link_to user_ideas_path(@idea.user_id, @param_options.delete_if{|k,v| k == 'user_id'}) do %>
+              <%= link_to user_ideas_path(@idea.user_id, remove_unwanted_params(@param_options, ['user_id', 'q'])) do %>
                 <%= @idea.user.nickname %>
           			<%= image_tag @idea.user.avatar, :id => 'user_avatar' if @idea.user.avatar %>
               <% end %>
@@ -96,7 +110,7 @@
             <%= "#{t('app.common.category')}: "%>
             <span class="val">
               <% @idea.idea_categories.each_with_index do |cat, index| %>
-                <% x = link_to cat.category.name, ideas_path(merge_idea_params([{:key => :category, :value => cat.category.permalink}]).delete_if{|k,v| k == 'user_id'}) %>
+                <% x = link_to cat.category.name, ideas_path(remove_unwanted_params(merge_idea_params([{:key => :category, :value => cat.category.permalink}]), ['user_id', 'q'])) %>
                 <% if index != @idea.idea_categories.length-1 %>
                   <%= x + ", "%>
                 <% else %>
@@ -106,19 +120,6 @@
             </span>
           </li>
         </ul>
-      </div>
-
-      <div id="follow_idea">
-			  <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
-				  <%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'button'%>
-			  <% else %>
-				  <%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'button'%>
-			  <% end %>
-      </div>
-
-      <div id="report_idea">
-			  <%= link_to t('helpers.links.report_inappropriate'),
-					  ideas_report_inappropriate_path(@idea.id), :class => 'button fancybox' %>
       </div>
 
       <div id="share">

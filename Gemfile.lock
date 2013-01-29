@@ -227,6 +227,8 @@ GEM
       sass (>= 3.1.4)
       sprockets (~> 2.0.0)
       tilt (~> 1.3.2)
+    scoped_search (2.4.0)
+      activerecord (>= 2.1.0)
     selenium-webdriver (2.27.2)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
@@ -308,6 +310,7 @@ DEPENDENCIES
   rails (= 3.1.10)
   rails_autolink (~> 1.0.9)
   sass-rails (= 3.1.4)
+  scoped_search (~> 2.4.0)
   selenium-webdriver
   therubyracer
   twitter-bootstrap-rails (~> 2.1.0)

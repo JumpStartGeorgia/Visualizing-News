@@ -67,10 +67,8 @@ $(document).ready(function(){
 
   $('#frozen-menu a.menu-collapse').click(function ()
   {
-    $('#frozen-menu div.menu-collapse').slideToggle(function ()
-    {
-      ($(window).width() > 979) && $('#frozen-menu div.menu-collapse:visible').removeAttr('style');
-    });
+    $('#frozen-menu div.menu-collapse').slideToggle();
+  //($(window).width() > 979) && $('#frozen-menu div.menu-collapse:visible').removeAttr('style');
   });
 
 });

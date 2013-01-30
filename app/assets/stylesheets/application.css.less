@@ -176,9 +176,11 @@ body {
     &:hover {
       background: rgba(0, 0, 0, .03);
     }
+    &:active {
+      background: rgba(0, 0, 0, .05);
+    }
   }
   div.menu-collapse {
-    display: block;
   }
   .brand {
     margin-top: 30px;
@@ -499,18 +501,45 @@ footer, footer ul li, footer div#right ul li {
 
 @media (max-width: 979px) {
   #frozen-menu {
+    position: static;
+    width: 100%;
     a.menu-collapse {
       display: block;
+      text-align: left;
+      padding-left: 41px;
     }
     div.menu-collapse {
       display: none;
+      overflow: hidden;
+      width: 200px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+    }
+    .brand {
+      display: none;
+    }
+    .user-menu, .nav-menu {
+      margin-top: 10px;
     }
   }
   #follow-us {
     position: static;
     margin-top: 15px;
   }
+  #everything-else {
+    padding-left: 0px;
+  }
 }
+
+@media (min-width: 980px) {
+  #frozen-menu {
+    div.menu-collapse {
+      display: block !important;
+    }
+  }
+}
+
+
 
 @media (max-height: 600px) {
   #frozen-menu {

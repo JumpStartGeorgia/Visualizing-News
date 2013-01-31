@@ -78,19 +78,35 @@ module ApplicationHelper
 			vis = VisualizationTranslation.where(:locale => locale, :visualization_id => @visualization.id)
 		end
 
+    category = nil
+    if params[:category]
+      category = params[:category]
+      index = @categories.index{|x| x.permalink == params[:category]}
+      if index
+        category = CategoryTranslation.where(:locale => locale, :category_id => @categories[index].id)
+        if !category.blank?
+          category = category.first.permalink
+        end
+      end
+    end
+
 		if !vis.blank? && !org.blank?
 			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
 				:organization_id => org.first.permalink,
-				:id => vis.first.permalink
+				:id => vis.first.permalink,
+        :category => category
 			)
 		elsif !vis.blank?
 			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
-				:id => vis.first.permalink)
+				:id => vis.first.permalink,
+        :category => category)
 		elsif !org.blank?
 			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
-				:id => org.first.permalink)
+				:id => org.first.permalink,
+        :category => category)
 		else
-			link_to t("app.language.#{locale}"), params.merge(:locale => locale)
+			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+        :category => category)
 		end
 	end
 

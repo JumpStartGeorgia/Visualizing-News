@@ -17,9 +17,15 @@ hide_slider = ''
   <div id="category_slider" style="<%=hide_slider%>">
 
     <ul id="category_slider_content" class="elastislide-list">
-      <% @categories.each do |cat| %>
+      <% @categories.each_with_index do |cat, cat_i| %>
         <% if cat.icon_file_name %>
-          <li>
+          <% if cat.name.downcase == params[:category]
+            li_class = 'class="active"'.html_safe
+            %><script id="slider_index" type="text/javascript">var slider_start_index = <%= cat_i.to_s %>;</script><%
+          else
+            li_class = ''  
+          end %>
+          <li <%= li_class %>>
             <%= link_to(url_for(params.merge(:category => cat.permalink)),
               :'data-path' => cat.icon.url,
               :title => cat.name) do %>

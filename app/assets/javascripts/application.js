@@ -28,7 +28,7 @@ $(document).ready(function(){
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
 
   // build category slider
-  $('#category_slider_content').elastislide();
+  $('#category_slider_content').elastislide({start: ((typeof slider_start_index == 'undefined') ? 0 : slider_start_index)});
 
 
 

@@ -1,4 +1,4 @@
-<% if params[:view] != 'interactive' %>
+<% if current_user.role?(User::ROLES[:org_admin]) && params[:view] != 'interactive' %>
   <div class="form-actions">
     <%= link_to t('.back', :default => t("helpers.links.back")),
                 organization_path(params[:organization_id]), :class => 'btn'  %>

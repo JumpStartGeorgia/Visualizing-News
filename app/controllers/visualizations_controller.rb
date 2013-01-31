@@ -5,7 +5,10 @@
 ####################
 class VisualizationsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter do |controller_instance|
+  before_filter(:only => [:show]) do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:user])
+  end
+  before_filter(:except => [:show]) do |controller_instance|
     controller_instance.send(:valid_role?, User::ROLES[:org_admin])
   end
   before_filter do |controller_instance|

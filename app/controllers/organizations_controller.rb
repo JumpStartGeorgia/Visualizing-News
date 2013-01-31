@@ -13,40 +13,17 @@ class OrganizationsController < ApplicationController
 
 		if @organization
 			# see if user is in this org
-      @visualizations = process_visualization_querystring(Visualization.page(params[:page]))
 			@user_in_org = false
-			if !user_signed_in? || current_user.organization_ids.index(@organization.id).nil?
-			  @visualizations = @visualizations.published
-			else
+      if user_signed_in? && !current_user.organization_ids.index(@organization.id).nil?
 				@user_in_org = true
 			end
 
-      process_visualization_querystring(@visualizations) # in app controller
+      @param_options[:format] = :js
+      @param_options[:max] = 5
+      @param_options[:org] = params[:id]
+      gon.ajax_path = visuals_ajax_path(@param_options)
 
-		  respond_to do |format|
-		    format.html
-        format.js {
-          vis_w = 270
-          gi_w = vis_w
-          menu_w = 200
-          max = 5
-          min = 3
-          screen_w = params[:screen_w].nil? ? 4 * vis_w : params[:screen_w].to_i
-          number = (screen_w - menu_w) / vis_w
-          if number > max
-            number = max
-          elsif number < min
-            number = min
-          end
-          number *= 2
-		      @visualizations = Visualization.recent.page(params[:page]).per(number)
-			    if !@user_in_org
-			      @visualizations = @visualizations.published
-			    end
-          @ajax_call = true
-          render 'shared/visuals_index'
-        }
-		  end
+      set_visualization_view_type # in app controller
 
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')

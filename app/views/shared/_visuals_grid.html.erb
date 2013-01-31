@@ -4,7 +4,11 @@
     <div class="grid_items clear">
   <% end %>
     <!--<div class="grid_visualization_row clear">-->
-    <img src="/assets/throbber.svg" id="throbber" />
+
+    <div id="throbber">
+      <img src="/assets/throbber.svg" />
+    </div>
+
   	<% @visualizations.each_with_index do |visualization, index| %>
 
   		  <div class="grid_visualization_item">

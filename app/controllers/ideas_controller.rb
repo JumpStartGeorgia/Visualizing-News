@@ -1,16 +1,38 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :follow_idea, :unfollow_idea]
 
-  def index
-		@ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]))
-
+  def ajax
     respond_to do |format|
       format.html
       format.js {
+        vis_w = 270
+        sidebar_w = params[:sidebar] == "true" ? vis_w : 0
+        menu_w = 200
+        max = params[:max].nil? ? 5 : params[:max].to_i
+        min = 2
+        screen_w = params[:screen_w].nil? ? 5 * vis_w : params[:screen_w].to_i
+        number = (screen_w - menu_w - sidebar_w) / vis_w
+        if number > max
+          number = max
+        elsif number < min
+          number = min
+        end
+        number *= 1
+
+    		@ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]).per(number))
+
         @ajax_call = true
         render 'shared/ideas_index'
       }
     end
+  end
+
+  def index
+    @param_options[:format] = :js
+    @param_options[:max] = 5
+    gon.ajax_path = ideas_ajax_path(@param_options)
+
+    set_visualization_view_type # in app controller
   end
 
   def show

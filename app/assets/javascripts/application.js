@@ -32,14 +32,12 @@ $(document).ready(function(){
 
 
 
-  //ajax call for visualizations
+  //if load more link exists, get the first page of items
   if ($('#load_more_link').length)
   {
-    $.get(gon.vis_ajax_path + '?screen_w=' + $(window).width(), function (response)
+    $.get(updateQueryStringParameter(gon.ajax_path, 'screen_w', $(window).width()), function (response)
     {
-      //$('#load_more_link').show();
       $('#throbber').hide();
-    //console.log(response);
     });
   }
 

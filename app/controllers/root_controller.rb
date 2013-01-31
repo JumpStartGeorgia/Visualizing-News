@@ -1,35 +1,10 @@
 class RootController < ApplicationController
 
   def index
+    gon.ajax_path = visuals_ajax_path(:format => :js, :max => 4, :sidebar => true)
 
-#    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]).per(6))
-    gon.vis_ajax_path = root_path(:format => :js)
-   #@visualizations = Visualization.published.recent.page(1)
-   #@visualizations = Visualization.published.recent.page(params[:page])
+    set_visualization_view_type # in app controller
 
-    process_visualization_querystring # in app controller
-
-    respond_to do |format|
-      format.html
-      format.js {
-        vis_w = 270
-        gi_w = vis_w
-        menu_w = 200
-        max = 4
-        min = 2
-        screen_w = params[:screen_w].nil? ? 4 * vis_w : params[:screen_w].to_i
-        number = (screen_w - menu_w - gi_w) / vis_w
-        if number > max
-          number = max
-        elsif number < min
-          number = min
-        end
-        number *= 1
-        @visualizations = Visualization.published.recent.page(params[:page]).per(number)
-        @ajax_call = true
-        render 'shared/visuals_index'
-      }
-    end
 	end
 
 	def about

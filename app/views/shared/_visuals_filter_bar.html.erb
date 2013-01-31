@@ -19,7 +19,7 @@ hide_slider = ''
     <ul id="category_slider_content" class="elastislide-list">
       <% @categories.each_with_index do |cat, cat_i| %>
         <% if cat.icon_file_name %>
-          <% if cat.name.downcase == params[:category]
+          <% if cat.permalink == params[:category]
             li_class = 'class="active"'.html_safe
             %><script id="slider_index" type="text/javascript">var slider_start_index = <%= cat_i.to_s %>;</script><%
           else

@@ -116,11 +116,10 @@ module ApplicationHelper
     request.fullpath.start_with?(path)
   end
 
-
-  def remove_unwanted_params(params, ary_params)
+  def remove_unwanted_params(params)
     p = params.clone
-    ary_params.each do |param|
-      p.delete_if{|k,v| k == param}
+    ['user_id', 'q', 'format', 'max', 'org', 'sidebar'].each do |param|
+      p.delete_if{|k,v| k.to_s == param}
     end
     return p
   end

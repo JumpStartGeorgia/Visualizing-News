@@ -53,7 +53,11 @@
 		<div id="fb-root"></div>
 
     <div id="frozen-menu">
-      <a class="menu-collapse" href="javascript:;"><%= t('app.common.app_name') %></a>
+      <a class="menu-collapse" href="javascript:;">
+        <%= t('app.common.app_name') %>
+        <img class="down" src="/assets/org_downarrow.png" />
+        <img class="up" src="/assets/org_uparrow.png" />
+      </a>
       <div class="menu-collapse">
         <div class="brand">
           <%= link_to(image_tag('logo.png', :alt => t('app.common.app_name')),

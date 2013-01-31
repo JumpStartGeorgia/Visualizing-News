@@ -39,7 +39,7 @@
                 </li>
               </ul>
   					</div>
-  					<% if @user_in_org && params[:controller] == 'organizations' %>
+  					<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && params[:controller] == 'organizations' %>
   						<div>
   					    <%= link_to t('.edit', :default => t("helpers.links.edit")),
   					                edit_organization_visualization_path(params[:id], visualization.permalink),

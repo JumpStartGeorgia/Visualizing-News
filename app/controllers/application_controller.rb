@@ -141,8 +141,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     end
   end
 
-  ## visual querystring
-  def process_visualization_querystring(visual_objects)
+  def set_visualization_view_type
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/visuals_list'
 			@visuals_filter_view_selection = I18n.t('filters.visuals.view.list')
@@ -150,6 +149,19 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	    @view_type = 'shared/visuals_grid'
 			@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
 	  end
+
+		if params[:organize]
+			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
+    else
+      # if not set, default to recent
+			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
+		end
+  end
+
+  ## visual querystring
+  def process_visualization_querystring(visual_objects)
+
+    set_visualization_view_type
 
 		if params[:type]
 			type_id = Visualization.type_id(params[:type])
@@ -186,7 +198,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   end
 
   ## idea querystring
-  def process_idea_querystring(idea_objects)
+  def set_idea_view_type
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/ideas_list'
 			@ideas_filter_view_selection = I18n.t('filters.ideas.view.list')
@@ -194,6 +206,25 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	    @view_type = 'shared/ideas_grid'
 			@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
 	  end
+
+		if params[:filter]
+			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.#{params[:filter]}")
+    else
+      # if not set, default to all (no filter needed)
+			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.all")
+		end
+
+		if params[:organize]
+			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.#{params[:organize]}")
+    else
+      # if not set, default to recent
+			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.recent")
+		end  end
+
+
+  def process_idea_querystring(idea_objects)
+    
+    set_idea_view_type
 
 		if params[:filter]
       case params[:filter]

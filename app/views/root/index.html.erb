@@ -8,7 +8,7 @@
 			<%= render @view_type %>
 		</div>
 
-		<%= link_to_next_page @visualizations, t('helpers.links.more'), :params => {:view => params[:view]}, :remote => true, :id=>"load_more_link" %>
+		<a id="load_more_link" href="#" style="display: none;"><%= t('helpers.links.more') %></a>
 	</div>
 	<div id="get_involved_container">
 		<h2><%= t('.header_get_involved') %></h2>

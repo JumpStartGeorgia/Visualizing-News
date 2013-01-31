@@ -1,15 +1,10 @@
 class RootController < ApplicationController
 
   def index
-    @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]).per(6))
+    gon.ajax_path = visuals_ajax_path(:format => :js, :max => 4, :sidebar => true)
 
-    respond_to do |format|
-      format.html
-      format.js {
-        @ajax_call = true
-        render 'shared/visuals_index'
-      }
-    end
+    set_visualization_view_type # in app controller
+
 	end
 
 	def about

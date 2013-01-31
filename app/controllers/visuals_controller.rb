@@ -3,16 +3,54 @@
 # this controller is the public view to the visuals
 ####################
 class VisualsController < ApplicationController
-  def index
+
+  def ajax
     respond_to do |format|
-      format.atom {@visualizations = Visualization.published.recent}
-      format.html {@visualizations = process_visualization_querystring(Visualization.published.page(params[:page]))}
       format.js {
-        @visualizations = process_visualization_querystring(Visualization.published.page(params[:page]))
+        vis_w = 270
+        sidebar_w = params[:sidebar] == "true" ? vis_w : 0
+        menu_w = 200
+        max = params[:max].nil? ? 4 : params[:max].to_i
+        min = 2
+        screen_w = params[:screen_w].nil? ? 4 * vis_w : params[:screen_w].to_i
+        number = (screen_w - menu_w - sidebar_w) / vis_w
+        if number > max
+          number = max
+        elsif number < min
+          number = min
+        end
+        number *= 2
+        
+        visualizations = Visualization.published
+
+        # if org is provided and user is in org, show unpublished
+        if !params[:org].blank?
+		      @organization = Organization.where(:organization_translations => {:permalink => params[:org]}).with_name.first
+
+		      if @organization
+			      @user_in_org = false
+			      if user_signed_in? && current_user.organization_ids.index(@organization.id)
+				      @user_in_org = true
+			        visualizations = Visualization
+			      end
+          end          
+        end
+
+        @visualizations = process_visualization_querystring(visualizations.page(params[:page]).per(number))
+
         @ajax_call = true
         render 'shared/visuals_index'
       }
     end
+  end
+
+  def index
+    @param_options[:format] = :js
+    @param_options[:max] = 5
+    gon.ajax_path = visuals_ajax_path(@param_options)
+
+    set_visualization_view_type # in app controller
+
 	end
 
   def show

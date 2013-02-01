@@ -90,7 +90,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@id_in_progress = gon.id_in_progress
 		@id_realized = gon.id_realized
 
-		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
+    if !Rails.env.production?
+  		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
+    end
 	end
 
 	# after user logs in go back to the last page or go to root page

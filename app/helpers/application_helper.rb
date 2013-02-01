@@ -132,9 +132,12 @@ module ApplicationHelper
     request.fullpath.start_with?(path)
   end
 
-  def remove_unwanted_params(params)
+  def remove_unwanted_params(params, remove_filters = false)
     p = params.clone
-    ['user_id', 'q', 'format', 'max', 'org', 'sidebar', 'screen_w'].each do |param|
+    js_params = ['format', 'max', 'org', 'sidebar', 'screen_w']
+    filter_params = ['user_id', 'q']
+    params = remove_filters ? js_params.concat(filter_params) : js_params
+    params.each do |param|
       p.delete_if{|k,v| k.to_s == param}
     end
     return p

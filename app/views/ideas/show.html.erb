@@ -107,7 +107,7 @@
             <%= "#{t('app.common.category')}: "%>
             <span class="val">
               <% @idea.idea_categories.each_with_index do |cat, index| %>
-                <% x = link_to cat.category.name, ideas_path(remove_unwanted_params(merge_idea_params([{:key => :category, :value => cat.category.permalink}]), ['user_id', 'q'])) %>
+                <% x = link_to cat.category.name, ideas_path(remove_unwanted_params(merge_idea_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
                 <% if index != @idea.idea_categories.length-1 %>
                   <%= x + ", "%>
                 <% else %>

@@ -4,7 +4,7 @@ module VisualizationsHelper
 		if user_in_org && organization_id
 			organization_visualization_path(organization_id,visualization_id)
 		else
-			visualization_path(visualization_id, @param_options)
+			visualization_path(visualization_id, remove_unwanted_params(@param_options))
 		end
 	end
 

@@ -134,7 +134,7 @@ module ApplicationHelper
 
   def remove_unwanted_params(params)
     p = params.clone
-    ['user_id', 'q', 'format', 'max', 'org', 'sidebar'].each do |param|
+    ['user_id', 'q', 'format', 'max', 'org', 'sidebar', 'screen_w'].each do |param|
       p.delete_if{|k,v| k.to_s == param}
     end
     return p

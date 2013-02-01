@@ -133,7 +133,7 @@ module ApplicationHelper
   end
 
   def remove_unwanted_params(params, remove_filters = false)
-    p = params.clone
+    p = params.blank? ? {} : params.clone
     js_params = ['format', 'max', 'org', 'sidebar', 'screen_w']
     filter_params = ['user_id', 'q']
     params = remove_filters ? js_params.concat(filter_params) : js_params

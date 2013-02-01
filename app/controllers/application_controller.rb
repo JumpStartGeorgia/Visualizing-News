@@ -65,9 +65,12 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
 		@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
 		@ideas_filter_filter_selection = I18n.t('filters.ideas.filter.all')
-		@idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
-    @idea = Idea.new
-		@idea.idea_categories.build
+
+    if !Rails.env.production?
+		  @idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
+      @idea = Idea.new
+		  @idea.idea_categories.build
+    end
 	end
 
 	def initialize_gon

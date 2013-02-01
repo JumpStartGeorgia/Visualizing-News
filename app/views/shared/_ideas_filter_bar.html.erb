@@ -98,7 +98,7 @@
 				</ul>
 			</li>
       <li id="idea_search">
-        <%= form_tag ideas_path(@param_options), :method => :get, :class => "form-search", :id => 'ideas_form_search' do %>
+        <%= form_tag ideas_path(remove_unwanted_params(@param_options)), :method => :get, :class => "form-search", :id => 'ideas_form_search' do %>
           <%= text_field_tag :q, params[:q], :class => 'input-large'%>
           <%= button_tag t('app.common.search'), :class => 'btn' %>
         <% end %>

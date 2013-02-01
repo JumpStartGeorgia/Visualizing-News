@@ -1,4 +1,8 @@
 class IdeasController < ApplicationController
+  before_filter do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:admin]) if Rails.env.production?
+  end
+
   before_filter :authenticate_user!, :only => [:create, :follow_idea, :unfollow_idea]
 
   def ajax

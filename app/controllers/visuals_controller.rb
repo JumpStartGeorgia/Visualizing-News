@@ -51,6 +51,10 @@ class VisualsController < ApplicationController
 
     set_visualization_view_type # in app controller
 
+    respond_to do |format|
+      format.atom { @visualizations = Visualization.published.recent }
+      format.html
+    end
 	end
 
   def show

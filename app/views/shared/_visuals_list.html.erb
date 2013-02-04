@@ -9,55 +9,55 @@
     </div>
 
   	<% @visualizations.each do |visualization| %>
-  	<div class="list_visualization_item clear">
-  		<div class="visual">
-	      <%  if !visualization.image_file_name.blank? %>
-    		  <%= link_to(image_tag(visualization.image.url(:thumb, false)),
-								create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
-	      <% else %>
-    		  <%= link_to(image_tag('image_placeholder.png'),
-								create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
-	      <% end %>
-  		</div>
-  		<div class="content">
-  		  <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>
-  			<h3><%= l visualization.published_date, :format => :no_time if visualization.published_date %></h3>
-  			<% if !visualization.published %>
-  			<div class="not_published"><%= t('app.common.not_published') %></div>
-  			<% end %>
-  		  <%= simple_format truncate(visualization.explanation, :length => 300, :separator => ' ') %>
-  		</div>
-  		<div class="item_footer clear">
-				<div class="count_block clear">
-          <ul>
-            <li>
-              <span class="heart" title="<%= t('filters.visuals.organize.likes')%>">❤</span>
-              <%= visualization.overall_votes %>
-            </li>
-            <li>
-              <%= image_tag('view_icon12.png', :alt => t('filters.visuals.organize.views'), :title => t('filters.visuals.organize.views')) %>
-              <%= visualization.impressions_count %>
-            </li>
-            <li>
-              <%= image_tag('comments_icon12.png', :alt => t('app.common.comments'), :title => t('app.common.comments')) %>
-              <%= visualization.fb_count %>
-            </li>
-          </ul>
-				</div>
-  			<% if @user_in_org && current_user.role?(User::ROLES[:org_admin] && params[:controller] == 'organizations' %>
-  				<div>
-  			    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-  			                edit_organization_visualization_path(params[:id], visualization.permalink),
-  											:class => 'btn btn-mini' %>
-  			    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-  			                organization_visualization_path(params[:id], visualization.permalink),
-  			                :method => :delete,
-  											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
-  			                :class => 'btn btn-mini btn-danger' %>
-  				</div>
-  			<% end %>
-  		</div>
-  	</div>
+    	<div class="list_visualization_item clear">
+    		<div class="visual">
+	        <%  if !visualization.image_file_name.blank? %>
+      		  <%= link_to(image_tag(visualization.image.url(:thumb, false)),
+								  create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+	        <% else %>
+      		  <%= link_to(image_tag('image_placeholder.png'),
+								  create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+	        <% end %>
+    		</div>
+    		<div class="content">
+    		  <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>
+    			<h3><%= l visualization.published_date, :format => :no_time if visualization.published_date %></h3>
+    			<% if !visualization.published %>
+    			<div class="not_published"><%= t('app.common.not_published') %></div>
+    			<% end %>
+    		  <%= simple_format truncate(visualization.explanation, :length => 300, :separator => ' ') %>
+    		</div>
+    		<div class="item_footer clear">
+				  <div class="count_block clear">
+            <ul>
+              <li>
+                <span class="heart" title="<%= t('filters.visuals.organize.likes')%>">❤</span>
+                <%= visualization.overall_votes %>
+              </li>
+              <li>
+                <%= image_tag('view_icon12.png', :alt => t('filters.visuals.organize.views'), :title => t('filters.visuals.organize.views')) %>
+                <%= visualization.impressions_count %>
+              </li>
+              <li>
+                <%= image_tag('comments_icon12.png', :alt => t('app.common.comments'), :title => t('app.common.comments')) %>
+                <%= visualization.fb_count %>
+              </li>
+            </ul>
+				  </div>
+    			<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && params[:controller] == 'organizations' %>
+    				<div>
+    			    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    			                edit_organization_visualization_path(params[:id], visualization.permalink),
+    											:class => 'btn btn-mini' %>
+    			    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+    			                organization_visualization_path(params[:id], visualization.permalink),
+    			                :method => :delete,
+    											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+    			                :class => 'btn btn-mini btn-danger' %>
+    				</div>
+    			<% end %>
+    		</div>
+    	</div>
   	<% end %>
   <% if !@ajax_call %>
     </div>

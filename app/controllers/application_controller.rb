@@ -113,7 +113,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	def store_location
 		session[:previous_urls] ||= []
 		# only record path if page is not for users (sign in, sign up, etc) and not for reporting problems
-		if session[:previous_urls].first != request.fullpath && request.fullpath.index("/users/").nil? && request.fullpath.index("/report/").nil?
+		if session[:previous_urls].first != request.fullpath && 
+        params[:format] != 'js' && params[:format] != 'json' && 
+        request.fullpath.index("/users/").nil? && request.fullpath.index("/report/").nil?
+
 			session[:previous_urls].unshift request.fullpath
 		end
 		session[:previous_urls].pop if session[:previous_urls].count > 1

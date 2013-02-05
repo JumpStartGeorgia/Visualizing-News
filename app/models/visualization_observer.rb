@@ -20,7 +20,7 @@ class VisualizationObserver < ActiveRecord::Observer
 						message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)
 						message.message = I18n.t("mailer.notification.new_visualization.message",
 							:title => title, :locale => locale)
-						message.url_id = visualization.permalink
+						message.url_id = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.permalink
 						NotificationMailer.new_visualization(message).deliver
 					end
 				end

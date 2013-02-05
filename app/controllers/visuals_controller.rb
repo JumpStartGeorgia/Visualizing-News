@@ -28,8 +28,10 @@ class VisualsController < ApplicationController
 		      @organization = Organization.where(:organization_translations => {:permalink => params[:org]}).with_name.first
 
 		      if @organization
+Rails.logger.debug "****************** @org exists"
 			      @user_in_org = false
 			      if user_signed_in? && current_user.organization_ids.index(@organization.id)
+Rails.logger.debug "****************** user is in org"
 				      @user_in_org = true
 			        visualizations = Visualization
 			      end

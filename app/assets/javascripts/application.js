@@ -15,7 +15,7 @@
 //= require fancybox
 //= require fancybox2
 //= require vendor
-//= require_tree .
+//= require_directory .
 
 $(document).ready(function(){
 	// set focus to first text box on page

@@ -18,9 +18,21 @@ $(document).ready(function(){
 	$('#fancybox-content a.fancybox-nested').click(fancybox_nested_links);
 
 	// register fancybox
-	$("a.fancybox").fancybox({ width: 400 });
+	$("a.fancybox").fancybox({
+    transitionIn: 'elastic',
+    transitionOut: 'elastic',
+	  width: 400,
+	  type: 'iframe',
+		onComplete: function ()
+		{
+	    if (gon.highlight_first_form_field)
+	    {
+	      $("#fancybox-content :input:visible:enabled:first").focus();
+	    }
+	  }
+  });
 	$("a.fancybox_visual").fancybox({
-		autoScale: false // use size of image to determine width/height
+		autoScale: false // use size of image to determine width/height,
 	});
 
 

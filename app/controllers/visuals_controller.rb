@@ -61,6 +61,8 @@ class VisualsController < ApplicationController
     @visualization = Visualization.published.find_by_permalink(params[:id])
     gon.highlight_first_form_field = false
 
+   #gon.current_content = {:type => 'visual', :id => @visualization.id}
+
 		if @visualization
 			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
 			  @view_type = 'shared/visuals_show_interactive'
@@ -91,6 +93,11 @@ class VisualsController < ApplicationController
   end
 
   def vote
+    if !user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     success = true
     
 		redirect_path = if request.env["HTTP_REFERER"]

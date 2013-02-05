@@ -24,14 +24,15 @@
       </div>
       <div class="vote">
         <% 
-          can_like = @idea.voted(request.remote_ip, 'down')
+          can_like = !@idea.voted(request.remote_ip, 'down')
           span_text = can_like ? t('app.common.like') : t('app.common.unlike')
           status = can_like ? 'up' : 'down'
         %>
         <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{span_text}</span>".html_safe,
 	          idea_vote_path(:id => @idea.id, :status => status),
 	          :class => 'like_btn', :title => span_text, 
-	          :'data-like' => t('app.common.like'), :'data-unlike' => t('app.common.unlike')) %>
+	          :'data-like' => t('app.common.like'), :'data-unlike' => t('app.common.unlike'),
+	          :'data-signed' => user_signed_in?.to_s) %>
       </div>
     </div>
     <div id="overall_counts" class="side_block">

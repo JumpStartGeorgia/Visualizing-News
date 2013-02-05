@@ -3,9 +3,10 @@
     can_like = !(@visualization.voted(request.remote_ip, 'up'))
     span_text = can_like ? t('app.common.like') : t('app.common.unlike')
     status = can_like ? 'up' : 'down'
-  %>
+  #abort gon.showpage_type; %>
   <%= link_to("<span class=\"heart\">❤</span><span class=\"text\">#{span_text}</span>".html_safe,
 		  visual_vote_path(:id => @visualization.permalink, :status => status),
 		  :class => 'like_btn', :title => span_text, 
 		  :'data-like' => t('app.common.like'), :'data-unlike' => t('app.common.unlike'),
+		  :'data-signed' => user_signed_in?.to_s,
 		  :'data-interactive' => is_interactive) %>

@@ -193,31 +193,54 @@ $(document).ready(function(){
 
 	}
 
+  (function ($)
+  {
 
-  // process like button click
-  $('a.like_btn').click(function(){
-    var update_counter = true;
-    if ($(this).attr('data-interactive') == 'true'){
-      update_counter = false;
-    }
-    $.ajax({
-      type: "GET",
-      url: $(this).attr('href') + '.js',
-      dataType:"json",
-      timeout: 3000,
-      error: function(response) {
-        indicate_like_success(update_counter);
-      },
-      success: function(response) {
-        if(response.status === "success") {
-          indicate_like_success(update_counter);
-        } else{
-          indicate_like_success(update_counter);
+    // process like button click
+    $('a.like_btn').click(function(){
+      if (!$(this).data('signed') || $(this).data('signed') == 'false')
+      {
+        if (typeof $.cookie == 'function')
+        {
+        //$.cookie.json = true;
+          //{type: gon.current_content.type, id: gon.current_content.id}
+          $.cookie('queued_like', 1, {expires: 1, path: '/'});
         }
+        $('#frozen-menu .user-menu .fancybox').click();
+        return false;
       }
+
+      var update_counter = true;
+      if ($(this).attr('data-interactive') == 'true'){
+        update_counter = false;
+      }
+      $.ajax({
+        type: "GET",
+        url: $(this).attr('href') + '.js',
+        dataType:"json",
+        timeout: 3000,
+        error: function(response) {
+          indicate_like_success(update_counter);
+        },
+        success: function(response) {
+          if(response.status === "success") {
+            indicate_like_success(update_counter);
+          } else{
+            indicate_like_success(update_counter);
+          }
+        }
+      });
+      return false;
     });
-    return false;
-  });
+
+    // if there is a like action queued, do it
+    if (typeof $.cookie == 'function' && typeof $.cookie('queued_like') != 'undefined' && $.cookie('queued_like') != null && $('a.like_btn:eq(0)').length)
+    {
+      $.cookie('queued_like', 1, {expires: -1, path: '/'});
+      $('a.like_btn:eq(0)').click();
+    }
+
+  })(jQuery);
 
 
   // when visual search form submitted, stop form and make it link request

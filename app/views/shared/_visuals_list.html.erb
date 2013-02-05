@@ -44,18 +44,18 @@
               </li>
             </ul>
 				  </div>
-    			<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && params[:controller] == 'organizations' %>
-    				<div>
-    			    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-    			                edit_organization_visualization_path(params[:id], visualization.permalink),
-    											:class => 'btn btn-mini' %>
-    			    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-    			                organization_visualization_path(params[:id], visualization.permalink),
-    			                :method => :delete,
-    											:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
-    			                :class => 'btn btn-mini btn-danger' %>
-    				</div>
-    			<% end %>
+					<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && !params[:org].blank? %>
+						<div>
+					    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+					                edit_organization_visualization_path(params[:org], visualization.permalink),
+													:class => 'btn btn-mini' %>
+					    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+					                organization_visualization_path(params[:org], visualization.permalink),
+					                :method => :delete,
+													:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+					                :class => 'btn btn-mini btn-danger' %>
+						</div>
+					<% end %>
     		</div>
     	</div>
   	<% end %>

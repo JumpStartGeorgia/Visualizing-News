@@ -109,7 +109,7 @@
 	          </li>
 				  <% else %>
 					  <li>
-						  <%= link_to t('helpers.links.sign_in2'), :new_user_session, :class => 'fancybox' %>
+						  <%= link_to t('helpers.links.sign_in2'), new_user_session_path({:load_media => false}), :class => 'fancybox' %>
 					  </li>
           <% end %>
         </ul>

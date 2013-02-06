@@ -35,11 +35,11 @@
 
 		  <div class="control-group">
 			  <%- if controller_name != 'sessions' %>
-				  <%= link_to t('helpers.links.sign_in'), new_session_path(resource_name), :class => 'btn btn-mini fancybox-nested sign-in-link' %>
+				  <%= link_to t('helpers.links.sign_in'), new_session_path(resource_name, {:load_media => false}), :class => 'btn btn-mini fancybox-nested sign-in-link' %>
 			  <% end -%>
 
 			  <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-				  <%= link_to t('helpers.links.forgot_password'), new_password_path(resource_name), :class => 'fancybox-nested forgot-link' %>
+				  <%= link_to t('helpers.links.forgot_password'), new_password_path(resource_name, {:load_media => false}), :class => 'fancybox-nested forgot-link' %>
 			  <% end -%>
 		  </div>
 

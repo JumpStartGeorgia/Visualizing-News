@@ -20,7 +20,7 @@ $(document).ready(function(){
         // check if visuals or ideas comments
         var url_ary = window.location.pathname.split( '/' );
 
-        if (url_ary.indexOf('visuals') > -1){
+        if (url_ary.indexOf('visualizations') > -1){
   				$.get(gon.visual_comment_notification_url.replace(gon.placeholder, id));
         } else if (url_ary.indexOf('ideas') > -1){
   				$.get(gon.idea_comment_notification_url.replace(gon.placeholder, id));

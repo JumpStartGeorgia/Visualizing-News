@@ -36,7 +36,7 @@ class IdeasController < ApplicationController
     @param_options[:max] = 5
     gon.ajax_path = ideas_ajax_path(@param_options)
 
-    set_visualization_view_type # in app controller
+    set_idea_view_type # in app controller
   end
 
   def show

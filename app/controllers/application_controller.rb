@@ -231,7 +231,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 
   def process_idea_querystring(idea_objects)
-    
+
     set_idea_view_type
 
 		if params[:filter]

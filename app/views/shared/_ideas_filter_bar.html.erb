@@ -46,60 +46,66 @@
 			<li class="dropdown">
 				<a id="filter_type" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.filter.header')%>:
-					<span id="filter_type_selection" class="filter_selection"><%=@ideas_filter_filter_selection%></span>
+					<span id="filter_type_selection" class="filter_selection">
+					  <%= image_tag('filter_icons/' + params[:filter] + '.png', :title => t('filters.ideas.filter.' + params[:filter])) %>
+				  </span>
 	        <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to t('filters.ideas.filter.all'), url_for(params.merge(:filter => 'all')) %>
+						<%= link_to image_tag('filter_icons/all.png') + ' ' + t('filters.ideas.filter.all'), url_for(params.merge(:filter => 'all')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.ideas.filter.not_selected'), url_for(params.merge(:filter => 'not_selected')) %>
+						<%= link_to image_tag('filter_icons/not_selected.png') + ' ' + t('filters.ideas.filter.not_selected'), url_for(params.merge(:filter => 'not_selected')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.ideas.filter.in_progress'), url_for(params.merge(:filter => 'in_progress')) %>
+						<%= link_to image_tag('filter_icons/in_progress.png') + ' ' + t('filters.ideas.filter.in_progress'), url_for(params.merge(:filter => 'in_progress')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.ideas.filter.completed'), url_for(params.merge(:filter => 'completed')) %>
+						<%= link_to image_tag('filter_icons/completed.png') + ' ' + t('filters.ideas.filter.completed'), url_for(params.merge(:filter => 'completed')) %>
 					</li>
 				</ul>
 			</li>
 			<li class="dropdown">
 				<a id="filter_organize" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.organize.header')%>:
-					<span id="filter_organize_selection" class="filter_selection"><%=@ideas_filter_organize_selection%></span>
+					<span id="filter_organize_selection" class="filter_selection">
+  					<%= (params[:organize] == 'likes' ? '<span class="heart" title="Likes">❤</span>'.html_safe : (params[:organize] ? image_tag('filter_icons/' + params[:organize] + '.png', :title => t('filters.ideas.organize.' + params[:organize])) : '')) %>
+					</span>
 	        <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to t('filters.ideas.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
+						<%= link_to image_tag('filter_icons/recent.png') + ' ' + t('filters.ideas.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.ideas.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
+						<%= link_to '<span class="heart">❤</span> '.html_safe + t('filters.ideas.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.ideas.organize.views'), url_for(params.merge(:organize => 'views')) %>
+						<%= link_to image_tag('filter_icons/views.png') + ' ' + t('filters.ideas.organize.views'), url_for(params.merge(:organize => 'views')) %>
 					</li>
 				</ul>
 			</li>
 			<li class="dropdown">
 				<a id="filter_view" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.view.header')%>:
-					<span id="filter_view_selection" class="filter_selection"><%=@ideas_filter_view_selection%></span>
+					<span id="filter_view_selection" class="filter_selection">
+            <%= image_tag('filter_icons/' + params[:view] + '.png', :title => t('filters.ideas.view.' + params[:view])) %>
+          </span>
 	        <b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to t('filters.ideas.view.grid'), url_for(params.merge(:view => 'grid')) %>
+						<%= link_to image_tag('filter_icons/grid.png') + ' ' + t('filters.ideas.view.grid'), url_for(params.merge(:view => 'grid')) %>
 					</li>
 					<li>
-						<%= link_to t('filters.ideas.view.list'), url_for(params.merge(:view => 'list')) %>
+						<%= link_to image_tag('filter_icons/list.png') + ' ' + t('filters.ideas.view.list'), url_for(params.merge(:view => 'list')) %>
 					</li>
 				</ul>
 			</li>
       <li id="idea_search">
         <%= form_tag ideas_path(remove_unwanted_params(@param_options)), :method => :get, :class => "form-search", :id => 'ideas_form_search' do %>
-          <%= text_field_tag :q, params[:q], :class => 'input-large'%>
+          <%= text_field_tag :q, params[:q], :class => 'input-large', :placeholder => t('app.common.search')%>
           <%= button_tag t('app.common.search'), :class => 'btn' %>
         <% end %>
       </li>

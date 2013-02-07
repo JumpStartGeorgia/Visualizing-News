@@ -151,7 +151,7 @@ class IdeasController < ApplicationController
       idea = Idea.find_by_id(params[:id])
 
       if !idea.blank?
-        idea.process_vote(request.remote_ip, params[:status])
+        idea.process_vote(current_user, params[:status])
       else
         success = false
       end

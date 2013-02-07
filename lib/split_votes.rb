@@ -29,18 +29,18 @@ module SplitVotes
     {:number => number, :color => color}
   end
 
-  def voted (ip, status)
-    if !ip.blank? && !status.blank?
-      record = VoterIp.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id, :status => status)
+  def voted (user, status)
+    if user.present? && status.present?
+      record = VoterId.where(:user_id => user.id, :votable_type => self.class.name.downcase, :votable_id => self.id, :status => status)
       return !(record.nil? || record.empty?)
     end
     return false
   end
 
-  def process_vote(ip, status)
+  def process_vote(user, status)
     success = false
-    if !ip.blank? && !status.blank?
-      record = VoterIp.where(:ip => ip, :votable_type => self.class.name.downcase, :votable_id => self.id)
+    if user.present? && status.present?
+      record = VoterId.where(:user_id => user.id, :votable_type => self.class.name.downcase, :votable_id => self.id)
 
       if record.blank?
 
@@ -63,7 +63,7 @@ module SplitVotes
 			  self.overall_votes = ups - downs
         self.save
 
-        VoterIp.create(:ip => ip, :votable_type => self.class.name.downcase,
+        VoterId.create(:user_id => user.id, :votable_type => self.class.name.downcase,
                         :votable_id => self.id, :status => status)
 
         success = true
@@ -76,9 +76,7 @@ module SplitVotes
 
         if status == 'up'
           ups = ups + 1
-          downs = downs - 1
         elsif status == 'down'
-          ups = ups - 1
           downs = downs + 1
         end
 
@@ -86,7 +84,7 @@ module SplitVotes
 			  self.overall_votes = ups - downs
         self.save
 
-        # update the ip record
+        # update the vote record
         record[0].status = status
         record[0].save
 

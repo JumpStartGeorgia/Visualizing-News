@@ -24,7 +24,7 @@
       </div>
       <div class="vote">
         <% 
-          can_like = !@idea.voted(request.remote_ip, 'down')
+          can_like = !@idea.voted(current_user, 'up')
           span_text = can_like ? t('app.common.like') : t('app.common.unlike')
           status = can_like ? 'up' : 'down'
         %>

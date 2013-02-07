@@ -110,7 +110,7 @@ class VisualsController < ApplicationController
       visualization = Visualization.published.find_by_permalink(params[:id])
 
       if !visualization.blank?
-        visualization.process_vote(request.remote_ip, params[:status])
+        visualization.process_vote(current_user, params[:status])
       else
         success = false
       end

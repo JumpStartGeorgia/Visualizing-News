@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129140029) do
+ActiveRecord::Schema.define(:version => 20130207172801) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -335,6 +335,17 @@ ActiveRecord::Schema.define(:version => 20130129140029) do
   add_index "visualizations", ["published"], :name => "index_visualizations_on_published"
   add_index "visualizations", ["published_date"], :name => "index_visualizations_on_published_date"
   add_index "visualizations", ["visualization_type_id"], :name => "index_visualizations_on_visualization_type_id"
+
+  create_table "voter_ids", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "voter_ids", ["user_id", "votable_type", "votable_id", "status"], :name => "idx_vote_record"
 
   create_table "voter_ips", :force => true do |t|
     t.string   "ip",           :limit => 50, :default => ""

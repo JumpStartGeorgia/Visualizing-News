@@ -13,14 +13,14 @@
     		<div class="visual">
 	        <%  if !visualization.image_file_name.blank? %>
       		  <%= link_to(image_tag(visualization.image.url(:thumb, false)),
-								  create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+								  create_visual_path(visualization.permalink, @user_in_org, params[:org])) %>
 	        <% else %>
       		  <%= link_to(image_tag('image_placeholder.png'),
-								  create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id])) %>
+								  create_visual_path(visualization.permalink, @user_in_org, params[:org])) %>
 	        <% end %>
     		</div>
     		<div class="content">
-    		  <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, organization_id=params[:id]) %></h2>
+    		  <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, params[:org]) %></h2>
     			<h3><%= l visualization.published_date, :format => :no_time if visualization.published_date %></h3>
     			<% if !visualization.published %>
     			<div class="not_published"><%= t('app.common.not_published') %></div>

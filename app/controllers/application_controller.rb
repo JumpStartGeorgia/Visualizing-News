@@ -62,6 +62,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	def preload_global_variables
 		@categories = Category.sorted
 		@visuals_filter_type_selection = I18n.t('filters.visuals.type.all')
+		@visuals_filter_type_icon = 'all'
 		@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
 		@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
 		@ideas_filter_filter_selection = I18n.t('filters.ideas.filter.all')
@@ -153,16 +154,20 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/visuals_list'
 			@visuals_filter_view_selection = I18n.t('filters.visuals.view.list')
+			@visuals_filter_view_icon = 'list'
 	  else
 	    @view_type = 'shared/visuals_grid'
 			@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
+			@visuals_filter_view_icon = 'grid'
 	  end
 
 		if params[:organize]
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
+			@visuals_filter_organize_icon = params[:organize]
     else
       # if not set, default to recent
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
+			@visuals_filter_organize_icon = 'recent'
 		end
   end
 
@@ -175,6 +180,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			type_id = Visualization.type_id(params[:type])
 			visual_objects = visual_objects.by_type(type_id) if type_id
 			@visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
+			@visuals_filter_type_icon = params[:type]
+		else
+			@visuals_filter_type_icon = 'all'
 		end
 
 		if params[:organize]

@@ -210,23 +210,29 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/ideas_list'
 			@ideas_filter_view_selection = I18n.t('filters.ideas.view.list')
+			@ideas_filter_view_icon = 'list'
 	  else
 	    @view_type = 'shared/ideas_grid'
 			@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
+			@ideas_filter_view_icon = 'grid'
 	  end
 
 		if params[:filter]
 			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.#{params[:filter]}")
+			@ideas_filter_filter_icon = params[:filter]
     else
       # if not set, default to all (no filter needed)
 			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.all")
+			@ideas_filter_filter_icon = 'all'
 		end
 
 		if params[:organize]
 			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.#{params[:organize]}")
+			@ideas_filter_organize_icon = params[:organize]
     else
       # if not set, default to recent
 			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.recent")
+			@ideas_filter_organize_icon = 'recent'
 		end  end
 
 

@@ -47,7 +47,7 @@
 				<a id="filter_type" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.filter.header')%>:
 					<span id="filter_type_selection" class="filter_selection">
-					  <%= image_tag('filter_icons/' + params[:filter] + '.png', :title => t('filters.ideas.filter.' + params[:filter])) %>
+					  <%= image_tag('filter_icons/' + @ideas_filter_filter_icon + '.png', :title => t('filters.ideas.filter.' + @ideas_filter_filter_icon)) %>
 				  </span>
 	        <b class="caret"></b>
 				</a>
@@ -70,7 +70,7 @@
 				<a id="filter_organize" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.organize.header')%>:
 					<span id="filter_organize_selection" class="filter_selection">
-  					<%= (params[:organize] == 'likes' ? '<span class="heart" title="Likes">❤</span>'.html_safe : (params[:organize] ? image_tag('filter_icons/' + params[:organize] + '.png', :title => t('filters.ideas.organize.' + params[:organize])) : '')) %>
+  					<%= (@ideas_filter_organize_icon == 'likes' ? '<span class="heart" title="Likes">❤</span>'.html_safe : (image_tag('filter_icons/' + @ideas_filter_organize_icon + '.png', :title => t('filters.ideas.organize.' + @ideas_filter_organize_icon)))) %>
 					</span>
 	        <b class="caret"></b>
 				</a>
@@ -90,7 +90,7 @@
 				<a id="filter_view" class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<%= t('filters.ideas.view.header')%>:
 					<span id="filter_view_selection" class="filter_selection">
-            <%= image_tag('filter_icons/' + params[:view] + '.png', :title => t('filters.ideas.view.' + params[:view])) %>
+            <%= image_tag('filter_icons/' + @ideas_filter_view_icon + '.png', :title => t('filters.ideas.view.' + @ideas_filter_view_icon)) %>
           </span>
 	        <b class="caret"></b>
 				</a>

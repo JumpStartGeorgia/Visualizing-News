@@ -1,4 +1,4 @@
-<% if @ideas && !@ideas.empty?%>
+<% @ideas = [] if !@ideas.present? %>
 
   <% if !@ajax_call %>
     <div class="grid_items clear">
@@ -54,8 +54,4 @@
   <% if !@ajax_call %>
     </div>
   <% end %>
-<% else %>
-  <div id="no_records">
-    <%= t('app.msgs.no_idea_records')%>
-  </div>
-<% end %>
+

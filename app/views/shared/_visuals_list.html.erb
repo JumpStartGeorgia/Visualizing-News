@@ -1,4 +1,4 @@
-<% @visualizations = [] if !@visualizations || @visualizations.empty?%>
+<% @visualizations = [] if !@visualizations.present? %>
 
   <% if !@ajax_call %>
     <div class="grid_items clear">
@@ -63,9 +63,3 @@
     </div>
   <% end %>
 
-
-<% if false#else %>
-  <div id="no_records">
-    <%= t('app.msgs.no_visual_records')%>
-  </div>
-<% end %>

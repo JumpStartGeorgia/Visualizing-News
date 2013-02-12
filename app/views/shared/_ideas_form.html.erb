@@ -1,10 +1,10 @@
 <div id="navbar-idea-form">
 	<%= form_tag create_idea_path, :method => :post, :class => "" do %>
     <ul>
-      <li>
+      <li class="title">
     		<span id="form_title"><%= t('app.common.post_idea') %></span>
       </li>
-      <li class="user-info">
+      <li class="user-info clear">
 		    <% if user_signed_in? %>
 			    <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
 		    <% else %>

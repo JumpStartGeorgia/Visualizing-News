@@ -25,6 +25,12 @@
     &.clear {
       display: block;
     }
+    &.title {
+      display: none;
+    }
+    &.user-info {
+      margin-bottom: 10px;
+    }
   }
 
   .control-label {
@@ -66,8 +72,10 @@
     width: 100%;
     margin-bottom: 0px;
   }
-  .user-info, .user-info a {
-    color: #469e72;
+  .user-info {
+    &, a {
+      color: #469e72;
+    }
   }
   input[type="checkbox"] {
     margin: -1px 0px 0px;
@@ -87,9 +95,12 @@
   .negative-margin {
     background: #f1f1f1;
     padding-left: 20px;
+    margin-top: -20px;
+    padding-top: 20px;
   }
 
   .page-header {
+    padding-bottom: 0px;
     h1 {
       color: #f86c5c;
     }

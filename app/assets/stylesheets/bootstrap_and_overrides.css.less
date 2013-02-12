@@ -48,7 +48,7 @@ html, body {
 }
 
 #wrapper > .container-fluid {
-	padding-top: 10px;
+	padding-top: 0px;
 	padding-bottom: 60px;
 	overflow: visible;
 	padding-left: 20px;
@@ -57,7 +57,11 @@ html, body {
 	  padding-left: 20px;
 	  padding-right: 20px;
 	}
+	& > .content > div > div > div {
+	  padding-top: 20px;
+	}
 }
+
 
 #visual_list, #about_page, #filter_bar, .negative-margin {
   margin-left: -20px;
@@ -213,15 +217,19 @@ body#interactive_layout {
        -moz-box-shadow: none;
             box-shadow: none;
   }
-  #locale-c {
-    text-align: right;
-    padding-right: 3px;
-    padding-top: 1px;
-    a {
-      color: #c17250;
-      &:hover {
-        color: #a6502b;
-      }
+}
+
+#locale-c {
+  position: absolute;
+  z-index: 9999;
+  right: 10px;
+  text-align: right;
+  padding-right: 3px;
+  padding-top: 1px;
+  a {
+    color: #c17250;
+    &:hover {
+      color: #a6502b;
     }
   }
 }

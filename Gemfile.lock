@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/thedarkone/rails-dev-boost.git
+  revision: d21b297863221d6682a99c0207ac3d219a5e7ba4
+  specs:
+    rails-dev-boost (0.2.1)
+      listen (>= 0.5)
+      rails (>= 3.0)
+
+GIT
   remote: https://github.com/cgunther/formtastic-bootstrap.git
   revision: 3428fef4f7870b01241d65893b882ad32cfc18d8
   branch: bootstrap-2
@@ -135,6 +143,7 @@ GEM
     libwebsocket (0.1.7.1)
       addressable
       websocket
+    listen (0.7.2)
     mail (2.3.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -216,6 +225,8 @@ GEM
       thor (~> 0.14.6)
     raindrops (0.10.0)
     rake (10.0.3)
+    rb-inotify (0.8.8)
+      ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
     ref (1.0.2)
@@ -308,7 +319,9 @@ DEPENDENCIES
   paperclip (~> 3.4.0)
   psych (= 1.2.2)
   rails (= 3.1.10)
+  rails-dev-boost!
   rails_autolink (~> 1.0.9)
+  rb-inotify (~> 0.8.8)
   sass-rails (= 3.1.4)
   scoped_search (~> 2.4.0)
   selenium-webdriver

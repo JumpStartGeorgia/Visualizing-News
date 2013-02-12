@@ -1,17 +1,32 @@
 <div id="post_idea">
 
-  <%= render "shared/ideas_form" %>
+  <div class="negative-margin">
 
-  <%= page_title t('.title') %>
+    <%= page_title t('.title') %>
 
-  <div id="ideas_text">
-    <p>
-      <%= t('.text_ideas1') %>
-    </p>
-    <p>
-      <%= t('.text_ideas2') %>
-    </p>
+    <div class="row-fluid top">
+      <div class="span3">
+        <%= render "shared/ideas_form" %>
+      </div>
+      <div class="span7">
+        <div id="ideas_text">
+          <p>
+            <%= t('.text_ideas1') %>
+          </p>
+          <p>
+            <%= t('.text_ideas2').sub('feradi.info', '<span style="color: #469e72;">feradi</span><span style="color: #f86c5c;">.info</span>').html_safe %>
+          </p>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
+
+
+
+
 
 
   <%= render "shared/ideas_filter_bar" %>

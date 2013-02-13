@@ -475,6 +475,7 @@ en:
       title: Post Ideas
       text_ideas1: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it."
       text_ideas2: "feradi.info makes your ideas social, allowing missed opportunities to become a treasure trove of journalistic brainstorming. Post, vote, share, and watch how ideas take shape and become the news."
+      sign_in: Sign In to Submit
     user:
       title: "Ideas by: %{name}"
     category:

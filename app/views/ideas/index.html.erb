@@ -3,6 +3,12 @@
   <div class="negative-margin">
 
     <div id="ideas_index_header">
+      <% after_title = ''
+         if !user_signed_in?
+           after_title << link_to(t('.sign_in'), :new_user_session, :class => 'fancybox title_link')
+         end
+       %>
+		  <% title_after after_title.html_safe if after_title.present? %>
       <%= page_title t('app.common.post_idea') %>
     </header>
     <div class="row-fluid top">
@@ -10,16 +16,12 @@
 
         <div id="navbar-idea-form">
 	        <%= form_tag create_idea_path, :method => :post, :class => "" do %>
+            <% if user_signed_in? %>
+	            <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
+            <% end %>
             <ul>
               <li class="title">
             		<span id="form_title"><%= t('app.common.post_idea') %></span>
-              </li>
-              <li class="user-info clear">
-		            <% if user_signed_in? %>
-			            <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
-		            <% else %>
-			            <%= link_to t('.sign_in'), :new_user_session, :class => 'fancybox' %>
-		            <% end %>
               </li>
               <li class="clear">
 		            <label class="control-label" for="idea_idea_categories_attributes_0_category_id">

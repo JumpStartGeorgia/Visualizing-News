@@ -7,6 +7,21 @@
   <div id="idea_row1" class="row-fluid">
 
     <div class="main_block clear">
+      <% after_title = ''
+          x = @idea.last_progress_report(current_user)
+         if x 
+           if x.is_completed 
+            after_title << image_tag('filter_icons/completed.png', :title => t('filters.ideas.filter.completed'), :alt => t('filters.ideas.filter.completed')) 
+          else 
+            after_title << image_tag('filter_icons/in_progress.png', :title => t('filters.ideas.filter.in_progress'), :alt => t('filters.ideas.filter.in_progress'))
+          end 
+        end
+
+        if user_signed_in? && !@idea.is_public && (@idea.organization_submitted_idea?(current_user) || @idea.organization_claimed_idea?(current_user)) 
+          after_title << "<span class=\"private_item\">#{t('app.common.is_private')}</span>"
+        end
+       %>
+		  <% title_after after_title.html_safe if after_title.present? %>
 		  <%= page_title t '.title', :number => @idea.id %>
     </div>
 
@@ -17,10 +32,6 @@
     <div class="main_block clear">
       <div id="idea_date">
 			  <%= l @idea.created_at, :format => :long %>
-        <% if user_signed_in? && !@idea.is_public &&
-					      (@idea.organization_submitted_idea?(current_user) || @idea.organization_claimed_idea?(current_user)) %>
-          <span class="private_item"><%= t('app.common.is_private')%></span>
-        <% end %>
       </div>
       <div class="vote">
         <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>

@@ -10,9 +10,55 @@
   color: #4e4e4e;
 }
 
-#navbar-idea-form{
+#navbar-idea-form, #shared-idea-form {
   font-size: 12px;
   font-family: themix_light;
+
+  .control-label {
+    color: #a7a7a7;
+    float: left;
+    text-align: left;
+    width: 33%;
+  }
+
+  ul li label {
+    cursor: pointer;
+  }
+
+  .ui-multiselect, textarea {
+    -webkit-border-radius: 0px;
+       -moz-border-radius: 0px;
+            border-radius: 0px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  .ui-multiselect {
+    width: 150px !important;
+  }
+  textarea {
+    resize: none;
+  }
+  .user-info {
+    &, a {
+      color: #469e72;
+    }
+  }
+  input[type="checkbox"] {
+    margin: -1px 0px 0px;
+  }
+
+  a {
+    color: #df4758;
+    font-family: 'themix_light';
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+#navbar-idea-form {
   margin-bottom: 15px;
   padding-bottom: 5px;
 
@@ -33,12 +79,6 @@
     }
   }
 
-  .control-label {
-    color: #a7a7a7;
-    float: left;
-    text-align: left;
-    width: 33%;
-  }
   .control-group {
     float: right;
     margin-left: 1%;
@@ -49,45 +89,56 @@
       color: #a7a7a7;
       margin-top: 4px;
       label {
-        cursor: pointer;
       }
     }
     .right {
       float: right;
     }
   }
-  .ui-multiselect, textarea {
-    -webkit-border-radius: 0px;
-       -moz-border-radius: 0px;
-            border-radius: 0px;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-  }
-  .ui-multiselect {
-    width: 150px !important;
-  }
   textarea {
-    resize: none;
     width: 100%;
     margin-bottom: 0px;
   }
-  .user-info {
-    &, a {
-      color: #469e72;
-    }
-  }
-  input[type="checkbox"] {
-    margin: -1px 0px 0px;
-  }
+}
 
-  a {
-    color: #df4758;
-    font-family: 'themix_light';
-    text-decoration: none;
-    &:hover{
-      text-decoration: underline;
+#shared-idea-form {
+  background: #f1f1f1;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  ul li {
+    font-size: 12px;
+    color: #7a7a7a;
+    display: block;
+    float: left;
+    margin-right: 15px;
+    &.title {
+      color: #f86c5c;
+      font-family: exo_regular;
+      letter-spacing: 1px;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 20px;
+      margin-top: 6px;
     }
+    &.lilabel, &.user-info {
+      margin-top: 8px;
+    }
+    &.categories {
+      margin-top: 7px;
+    }
+    &.submit {
+      margin-top: 5px;
+      input[type="submit"], button {
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+    }
+  }
+  .control-label {
+    display: inline-block;
+  }
+  textarea {
+    height: 35px;
   }
 }
 

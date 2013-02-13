@@ -39,6 +39,17 @@ class IdeasController < ApplicationController
     set_idea_view_type # in app controller
   end
 
+	def user
+		@user = User.find_by_id(params[:user_id])
+
+    @param_options[:format] = :js
+    @param_options[:max] = 5
+    @param_options[:user_id] = @user.id
+    gon.ajax_path = ideas_ajax_path(@param_options)
+
+    set_idea_view_type # in app controller
+	end
+
   def show
     @idea = Idea.with_private(current_user).find_by_id(params[:id])
 
@@ -57,25 +68,6 @@ class IdeasController < ApplicationController
 			redirect_to root_path
 		end
   end
-
-	def user
-		@user = User.find_by_id(params[:user_id])
-
-	  @ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]))
-
-#    if @ideas.blank?
-#		  flash[:info] =  t('app.msgs.does_not_exist')
-#		  redirect_to root_path
-#		else
-      respond_to do |format|
-        format.html
-        format.js {
-          @ajax_call = true
-          render 'shared/ideas_index'
-        }
-      end
-#  	end
-	end
 
 	def organization
 		@organization = Organization.find_by_id(params[:id])

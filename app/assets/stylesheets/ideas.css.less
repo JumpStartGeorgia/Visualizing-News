@@ -335,9 +335,6 @@ select#idea_is_public{
   }
   #idea_sidebar{
     padding-left: 5px;
-    #explanation{
-      color: #000;
-    }
 
     #source{
       padding: 0px 0px 19px;
@@ -345,6 +342,15 @@ select#idea_is_public{
       border-bottom: solid 1px #cacaca;
       ul li {
         margin-bottom: 7px;
+        &#idea_author{
+          & > div {
+            display:inline-block;
+            vertical-align: top;
+            img {
+              margin-top: 4px;
+            }
+          }
+        }
         .sidebar_heading{
           /*font-weight: bold;*/
         }

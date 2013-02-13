@@ -14,9 +14,18 @@
   		  <div class="grid_idea_item">
 		      <h2>
             <%= link_to t('.idea_title', :number => idea.id), idea_path(idea.id, remove_unwanted_params(@param_options)) %>
+
+            <% x = idea.last_progress_report(current_user)
+               if x 
+                 if x.is_completed %>
+                  <%= image_tag('filter_icons/completed.png', :title => t('filters.ideas.filter.completed'), :alt => t('filters.ideas.filter.completed')) %>
+                <% else %>
+                  <%= image_tag('filter_icons/in_progress.png', :title => t('filters.ideas.filter.in_progress'), :alt => t('filters.ideas.filter.in_progress')) %>
+              <% end %>
+            <% end %>
+
             <% if user_signed_in? && !idea.is_public &&
 						  (idea.organization_submitted_idea?(current_user) || idea.organization_claimed_idea?(current_user)) %>
-
 		          <span class="private_item"><%= t('app.common.is_private')%></span>
             <% end %>
           </h2>

@@ -23,6 +23,11 @@
         <% end %>
       </div>
       <div class="vote">
+        <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
+	        <%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'follow_btn'%>
+        <% else %>
+	        <%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'follow_btn'%>
+        <% end %>
         <% 
           can_like = @idea.voted(request.remote_ip, 'down')
           span_text = can_like ? t('app.common.like') : t('app.common.unlike')
@@ -68,34 +73,131 @@
 		        <%= t('.inappropriate_idea') %>
 	        </div>
         <% else %>
-			    <% if !@idea.in_locale?(I18n.locale) %>
-				    <%= link_to t('.translate_idea'), google_translate_url(@idea.explaination),
-					    :class => "btn btn-mini", :target => :blank %>
-          <% end %>
 
       		<%= simple_format auto_link(@idea.explaination, :urls, :target => "_blank") %>
 
-          <ul id="idea_buttons">
-            <li>
-			        <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
-				        <%= link_to t('helpers.links.unfollow_idea'), unfollow_idea_path(@idea.id), :class => 'button'%>
-			        <% else %>
-				        <%= link_to t('helpers.links.follow_idea'), follow_idea_path(@idea.id), :class => 'button'%>
-			        <% end %>
-            </li>
-            <li>
+          <div id="idea_buttons" class="clear">  
+            <div id="translate">
+			        <% if !@idea.in_locale?(I18n.locale) %>
+				        <%= link_to t('.translate_idea'), google_translate_url(@idea.explaination), :target => :blank %>
+              <% end %>
+            </div>
+            <div id="report">
 			        <%= link_to t('helpers.links.report_inappropriate'),
 					        ideas_report_inappropriate_path(@idea.id), :class => 'button fancybox' %>
-            </li>
-          </ul>
-        <% end %>
+            </div>
+          </div>
+
+          <div id="idea_progress_block">
+			      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
+						      !@idea.organization_claimed_idea?(current_user) %>
+
+              <div id="idea_progress_claim">
+				        <%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
+						        ideas_claim_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+						        :class => 'idea_progress_btn fancybox' %>
+              </div>
+			      <% end %>
+
+            <% orgs = @idea.claimed_by_organizations(current_user)
+              if orgs && !orgs.empty? %>
+
+                <div class="idea_progress clear">
+                  <% orgs.each_with_index do |org, index| %>
+	                  <% progresses = @idea.organization_progress(org.id, current_user) %>
+			              <% progress_in_locale = true
+					              progresses.each do |progress|
+						              if !progress.in_locale?(I18n.locale)
+							              progress_in_locale = false
+							              break
+						              end
+					              end
+			              %>
+
+                  <div class="idea_progress_left">
+                    <h3><%= t('.claimed_by') %></h3>
+
+
+                    <% if !progress_in_locale %>
+                      <%= link_to t('.translate_org_progress'), google_translate_url(t('app.common.placeholder')),
+                        :class => "translate_org_progress", :target => :blank,
+                        :"data-id" => index %>
+                    <% end %>
+
+                    <ul id="<%= "org_progress_#{index}" %>">
+      					      <% progresses.each do |progress| %>
+                        <li>
+    								      <strong><%= l progress.progress_date, :format => :long if progress.progress_date %>: </strong>
+    								      <%= progress.idea_status.name if progress.idea_status_id %>
+                          <% if user_signed_in? && progress.organization_wrote_progress?(current_user) && !progress.is_public %>
+                            <span class="private_item"><%= t('app.common.is_private')%></span>
+                          <% end %>
+			                    <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
+			                          !current_user.organization_users.blank? &&
+						                    @idea.organization_claimed_idea?(current_user) %>
+
+				                    <%= link_to t('.edit_progress'),
+						                    ideas_edit_progress_path(progress.id),
+						                    :class => 'idea_progress_btn fancybox' %>
+			                    <% end %>
+
+                           <div class="progress_text">
+          						      <%= simple_format progress.explaination %>
+                          </div>
+                        </li>
+                      <% end %>
+                    </ul>
+
+                  </div>
+                  <div class="idea_progress_right">
+                    <div class="idea_progress_logo">
+                      <% if org.logo_file_name %>
+                        <%= image_tag org.logo.url, :alt => org.name %>
+                      <% else %>
+                        <%= org.name %>
+                      <% end %>
+                    </div>
+                    <% last_progress = progresses.first %>
+
+			              <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
+			                    current_user.organization_users && !current_user.organization_users.empty? &&
+						              @idea.organization_claimed_idea?(current_user) &&
+						              !last_progress.is_completed %>
+                      <div class="idea_progress_add_item">
+				                <%= link_to t('.progress_update'),
+						                ideas_progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+						                :class => 'idea_progress_btn fancybox' %>
+                      </div>
+			              <% end %>
+
+                    <div class="progress_status">
+                      <span><%= t('.status')%>:</span>
+                      <% if last_progress.is_completed %>
+                        <%= last_progress.idea_status.name %>
+                      <% else %>
+                        <%= t('filters.ideas.filter.in_progress') %>
+                      <% end %>
+                    </div>
+
+                    <% if last_progress.is_completed && !last_progress.url.blank? %>
+                      <div class="progress_complete">
+                        <%= link_to t('.news_url'), last_progress.url, :target => :blank %>
+                      </div>
+                    <% end %>
+
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
     <div id="idea_sidebar" class="side_block">
       <div id="source">
         <ul>
           <li>
-            <%= "#{t('app.common.author')}: "%>
+            <span class="sidebar_heading"><%= "#{t('app.common.author')}: "%></span>
 					  <span class="val">
               <%= link_to user_ideas_path(@idea.user_id, remove_unwanted_params(@param_options)) do %>
                 <%= @idea.user.nickname %>
@@ -104,7 +206,7 @@
 					  </span>
           </li>
           <li>
-            <%= "#{t('app.common.category')}: "%>
+            <span class="sidebar_heading"><%= "#{t('app.common.category')}: "%></span>
             <span class="val">
               <% @idea.idea_categories.each_with_index do |cat, index| %>
                 <% x = link_to cat.category.name, ideas_path(remove_unwanted_params(merge_idea_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
@@ -121,7 +223,7 @@
 
       <div id="share">
         <div class="social-links clear">
-          <span><%= t('app.common.share'); %>: </span>
+          <span class="sidebar_heading"><%= t('app.common.share'); %>: </span>
           <div>
 				    <%= link_to(image_tag("share_fb.png"),
 							    "http://www.facebook.com/share.php?u=#{current_url(true)}",
@@ -135,93 +237,8 @@
 				  </div>
 			  </div>
       </div>
-
-      <div id="idea_progress">
-			  <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
-						  !@idea.organization_claimed_idea?(current_user) %>
-
-				  <%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
-						  ideas_claim_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
-						  :class => 'btn btn-mini btn-primary fancybox' %>
-			  <% end %>
-
-        <div id="idea_progress_block">
-	        <% orgs = @idea.claimed_by_organizations(current_user)
-	          if orgs && !orgs.empty? %>
-            <div><%= t('.claimed_by') %>: </div>
-            <ul class="organizations">
-	            <% orgs.each_with_index do |org, index| %>
-		            <% progresses = @idea.organization_progress(org.id, current_user) %>
-                <li>
-			            <%= org.name %>
-					        <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
-					              current_user.organization_users && !current_user.organization_users.empty? &&
-								        @idea.organization_claimed_idea?(current_user) &&
-								        !@idea.organization_realized_idea?(current_user) %>
-
-						        <%= link_to t('.progress_udpate'),
-								        ideas_progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
-								        :class => 'btn btn-mini btn-primary fancybox' %>
-					        <% end %>
-                  
-					        <% progress_in_locale = true
-							        progresses.each do |progress|
-								        if !progress.in_locale?(I18n.locale)
-									        progress_in_locale = false
-									        break
-								        end
-							        end
-					        %>
-
-						        <% if !progress_in_locale %>
-							        <%= link_to t('.translate_org_progress'), google_translate_url(t('app.common.placeholder')),
-								        :class => "btn btn-mini translate_org_progress", :target => :blank,
-								        :"data-id" => index %>
-						        <% end %>
-
-
-                    <ul id="<%= "org_progress_#{index}" %>" class="idea_progress">
-      					      <% progresses.each do |progress| %>
-                        <li>
-    								      <strong><%= l progress.progress_date, :format => :default if progress.progress_date %>: </strong>
-    								      <%= progress.idea_status.name if progress.idea_status_id %>
-		                      <% if user_signed_in? && progress.organization_wrote_progress?(current_user) && !progress.is_public %>
-                            <span class="private_item"><%= t('app.common.is_private')%></span>
-                          <% end %>
-
-                          <div class="progress_text">
-						                <% if progress.is_completed && !progress.url.blank? %>
-                              <div class="progress_complete">
-							                  <strong><%= "#{t('.finished')}!" %></strong>
-							                  <%= link_to t('.news_url'), progress.url, :target => :blank, :class => 'btn btn-mini' %>
-                              </div>
-						                <% end %>
-
-							              <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
-							                    !current_user.organization_users.blank? &&
-										              @idea.organization_claimed_idea?(current_user) %>
-
-								              <%= link_to t('.edit_progress'),
-										              ideas_edit_progress_path(progress.id),
-										              :class => 'btn btn-mini btn-primary fancybox' %>
-							              <% end %>
-
-
-          						      <%= simple_format progress.explaination %>
-                          </div>
-                        </li>
-                      <% end %>
-                    </ul>
-                </li>
-              <% end %>
-            </ul>
-	        <% end %>
-        </div>
-
-      </div>
-
     </div>
-
+ 
   </div>
 
   <div id="idea_row4" class="row-fluid clear">

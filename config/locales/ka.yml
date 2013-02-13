@@ -200,7 +200,7 @@ ka:
       new_visual: "%{org} - ატვირთეთ ვიზუალი"
       post_idea: იდეის გამოქვეყნება
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
-      follow_idea: მიყევი იდეას
+      follow_idea: მიყევი
       unfollow_idea: აღარ მიყვე
     titles:
       new: "ახალი %{model}"
@@ -488,11 +488,14 @@ ka:
       finished: დასრულებული
       news_url: იხილე სიახლეები
       take_ownership: "დაიწყე მუშაობა იდეაზე (%{org})"
-      progress_udpate: დაამატე პროგრესი
-      edit_progress: შეცვალე პროგრესი
+      progress_update: დამატება
+#      progress_update: დაამატე პროგრესი
+      edit_progress: შეცვლა
+#      edit_progress: შეცვალე პროგრესი
       translate_idea: იდეის თარგმნა
       translate_org_progress: ტექსტის თარგმნა
       inappropriate_idea: "იდეა არ მოიძებნა."
+      status: სტატუსი
     search:
       title: "ძებნა: %{q}"
   progress:

@@ -200,8 +200,8 @@ en:
       new_visual: "%{org} - Add Visualization"
       post_idea: Post Idea
       report_inappropriate: Report Inappropriate Idea
-      follow_idea: Follow Idea
-      unfollow_idea: Unfollow Idea
+      follow_idea: Follow
+      unfollow_idea: Unfollow
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -488,11 +488,14 @@ en:
       finished: Finished
       news_url: View News Article
       take_ownership: "Work on Idea (%{org})"
-      progress_udpate: Add Progress Update
-      edit_progress: Edit Progress
+      progress_update: Add
+#      progress_update: Add Update
+      edit_progress: Edit
+#      edit_progress: Edit#Edit Progress
       translate_idea: Translate the Idea
       translate_org_progress: Translate the Text
       inappropriate_idea: "This idea has been reported as inappropriate and is no longer available."
+      status: Status
     search:
       title: "Search: %{q}"
   progress:

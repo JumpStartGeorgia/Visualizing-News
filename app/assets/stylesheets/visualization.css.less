@@ -272,20 +272,30 @@
     padding-top: 4px;
     margin-right: 10px;
   }
-	a.like_btn, div.like_btn_voted {
+  
+	a.like_btn, div.like_btn_voted, a.follow_btn {
     display: inline-block;
     text-transform: uppercase;
     color: #fff;
-    background: #ddd;
     text-decoration: none;
     padding: 5px 9px 4px;
     font-size: 14px;
     text-align: center;
+    background: #ddd;
+  }
+	a.follow_btn {
+    margin-right: 10px;
+    &:hover{
+      background: #f88d86;
+    }
+  }
+	a.like_btn, div.like_btn_voted {
     .heart, .text {
       float: left;
       display: block;
     }
     .heart {
+      color: #fff;
       font-size: 15px;
       margin-right: 5px;
     }

@@ -40,7 +40,7 @@ class IdeasController < ApplicationController
   end
 
 	def user
-		@user = User.find_by_id(params[:user_id])
+		@user = User.find_by_permalink(params[:id])
 
     @param_options[:format] = :js
     @param_options[:max] = 5

@@ -199,7 +199,7 @@
           <li>
             <span class="sidebar_heading"><%= "#{t('app.common.author')}: "%></span>
 					  <span class="val">
-              <%= link_to user_ideas_path(@idea.user_id, remove_unwanted_params(@param_options)) do %>
+              <%= link_to user_ideas_path(@idea.user.permalink, remove_unwanted_params(@param_options)) do %>
                 <%= @idea.user.nickname %>
           			<%= image_tag @idea.user.avatar, :id => 'user_avatar' if @idea.user.avatar %>
               <% end %>

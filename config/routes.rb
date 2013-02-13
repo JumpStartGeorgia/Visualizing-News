@@ -51,7 +51,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/ideas/ajax', :to => 'ideas#ajax', :as => :ideas_ajax, :via => :get, :defaults => {:format => 'js'}
 		match '/ideas', :to => 'ideas#index', :as => :ideas, :via => :get
 		match '/ideas/:id', :to => 'ideas#show', :as => :idea, :via => :get
-		match '/ideas/user/:user_id', :to => 'ideas#user', :as => :user_ideas, :via => :get
+		match '/ideas/user/:id', :to => 'ideas#user', :as => :user_ideas, :via => :get
 		match '/ideas/organization/:id', :to => 'ideas#organization', :as => :organization_ideas, :via => :get
 		match '/ideas/create', :to => 'ideas#create', :as => :create_idea, :via => :post
 		match '/ideas/search', :to => 'ideas#search', :as => :search_ideas, :via => :get

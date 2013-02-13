@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129140029) do
+ActiveRecord::Schema.define(:version => 20130213162203) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -268,10 +268,12 @@ ActiveRecord::Schema.define(:version => 20130129140029) do
     t.string   "avatar"
     t.boolean  "wants_notifications",    :default => true
     t.string   "notification_language"
+    t.string   "permalink"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["notification_language"], :name => "index_users_on_notification_language"
+  add_index "users", ["permalink"], :name => "index_users_on_permalink"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["wants_notifications"], :name => "index_users_on_wants_notifications"
 
@@ -335,6 +337,17 @@ ActiveRecord::Schema.define(:version => 20130129140029) do
   add_index "visualizations", ["published"], :name => "index_visualizations_on_published"
   add_index "visualizations", ["published_date"], :name => "index_visualizations_on_published_date"
   add_index "visualizations", ["visualization_type_id"], :name => "index_visualizations_on_visualization_type_id"
+
+  create_table "voter_ids", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "voter_ids", ["user_id", "votable_type", "votable_id", "status"], :name => "idx_vote_record"
 
   create_table "voter_ips", :force => true do |t|
     t.string   "ip",           :limit => 50, :default => ""

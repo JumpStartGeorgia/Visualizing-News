@@ -14,10 +14,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-		:role, :provider, :uid, :nickname, :avatar, :organization_ids, :wants_notifications, :notification_language, :db_migrate
+		:role, :provider, :uid, :nickname, :avatar, :organization_ids, :wants_notifications, :notification_language, :db_migrate, :permalink
 	attr_accessor :send_notification, :db_migrate
 
   validates :email, :nickname, :presence => true
+	before_save :create_permalink
 	before_save :check_for_role
 	before_save :set_notification_language
 
@@ -40,6 +41,10 @@ class User < ActiveRecord::Base
   def role_name
     ROLES.keys[ROLES.values.index(self.role)].to_s
   end
+
+	def create_permalink
+		self.permalink = self.nickname.downcase.gsub('.', '-').gsub(/[^0-9A-Za-z_\- ]/,'').split.join('_')
+	end
 
 	# if no role is supplied, default to the basic user role
 	def check_for_role

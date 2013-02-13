@@ -1,50 +1,48 @@
-<div id="navbar-idea-form">
+<div id="shared-idea-form" class="negative-margin">
 	<%= form_tag create_idea_path, :method => :post, :class => "" do %>
-    <ul>
+    <ul class="clear">
       <li class="title">
-    		<span id="form_title"><%= t('app.common.post_idea') %></span>
+		    <%= t('app.common.post_idea') %>
       </li>
-      <li class="user-info clear">
+      <li class="user-info">
 		    <% if user_signed_in? %>
 			    <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
 		    <% else %>
 			    <%= link_to t('.sign_in'), :new_user_session, :class => 'fancybox' %>
 		    <% end %>
       </li>
-      <li class="clear">
-		    <label class="control-label" for="idea_idea_categories_attributes_0_category_id">
-			    <%= t('activerecord.attributes.idea_category.category_id') %>
+      <li class="lilabel">
+		    <label for="idea_idea_categories_attributes_0_category_id">
+			    <%= t('activerecord.attributes.idea_category.category_id') %>:
 		    </label>
-		    <div class="control-group">
-		      <%= select_tag 'idea_category_ids', options_from_collection_for_select(@categories, "id", "name"), :name => 'idea[category_ids][]', :multiple => true, :size => 1, :style => 'display: none;' %>
-		    </div>
       </li>
-      <li class="clear">
-		    <label class="control-label" for="idea_explaination">
-			    <%= t('activerecord.attributes.idea.explaination') %>
+      <li class="categories">
+	      <%= select_tag 'idea_category_ids', options_from_collection_for_select(@categories, "id", "name"), :name => 'idea[category_ids][]', :multiple => true, :size => 1, :style => 'display: none;' %>
+      </li>
+      <li class="lilabel">
+		    <label for="idea_explaination">
+			    <%= t('activerecord.attributes.idea.explaination') %>:
 		    </label>
-		    <div class="control-group">
-		      <%= text_area_tag 'idea_explaination', nil, :rows => 2, :name => 'idea[explaination]' %>
-		    </div>
+      </li>
+      <li>
+	      <%= text_area_tag 'idea_explaination', nil, :rows => 2, :name => 'idea[explaination]' %>
+      </li>
+      <li class="lilabel">
+	      <%#= select_tag 'idea_is_public', "<option selected=\"selected\" value='1'>#{}</option><option value='0'>#{t('app.common.no')}</option>".html_safe,  
+	          :name => 'idea[is_public]' %>
+        <input type="hidden" name="idea[is_public]" value="0" />
+        <label>
+          <input type="checkbox" name="idea[is_public]" value="1" />
+          <%= t('activerecord.attributes.idea.is_public') %>
+        </label>
       </li>
       <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
-        <li class="clear">
-		      <div class="control-group">
-			      <%#= select_tag 'idea_is_public', "<option selected=\"selected\" value='1'>#{}</option><option value='0'>#{t('app.common.no')}</option>".html_safe,  
-			          :name => 'idea[is_public]' %>
-			      <div class="left">
-			        <input type="hidden" name="idea[is_public]" value="0" />
-			        <label>
-			          <input type="checkbox" name="idea[is_public]" value="1" />
-			          <%= t('activerecord.attributes.idea.is_public') %>
-			        </label>
-			      </div>
-	          <% if user_signed_in? %>
-              <div class="right">
-			          <%= submit_tag t('helpers.links.post_idea')%>
-              </div>
-	          <% end %>
-			    </div>
+        <li class="submit">
+          <% if user_signed_in? %>
+            <div class="right">
+		          <%= submit_tag t('helpers.links.post_idea')%>
+            </div>
+          <% end %>
         </li>
       <% end %>
     </ul>

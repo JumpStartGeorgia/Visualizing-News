@@ -50,12 +50,12 @@ protected
 		if category_ids && type && locale
 			if category_ids.class == Array
 				if !category_ids.empty?
-					# visual belongs to multiple categories
+					# belongs to multiple categories
 					x = select("users.email").joins(:user)
 					.where("users.wants_notifications = 1 and users.notification_language = ? and notification_type = ? and (identifier is null or identifier in (?))", locale, type, category_ids)
 				end
 			else
-				# visual belongs to one category
+				# belongs to one category
 				x = select("users.email").joins(:user)
 				.where("users.wants_notifications = 1 and users.notification_language = ? and notification_type = ? and (identifier is null or identifier = ?)", locale, type, category_ids)
 			end

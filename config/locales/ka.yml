@@ -500,15 +500,19 @@ ka:
       status: სტატუსი
     search:
       title: "ძებნა: %{q}"
-  progress:
-    form:
-      title_claim: იდეაზე პასუხისმგებლობა
-      title_progress_update: პროგრესი
-      title_edit_progress: პროგრესის ცვლილება
-      title_error: შეცდომა
-      error: იდეა/ორგანიზაცია არ მოიძებნა
-  report:
-    inappropriate:
-      title: დაარეპორტე შეუსაბამო იდეა
-      success: იდეა დარეპორტდა.
+    progress:
+      form:
+        title_claim: იდეაზე პასუხისმგებლობა
+        title_progress_update: პროგრესი
+        title_edit_progress: პროგრესის ცვლილება
+        title_error: შეცდომა
+        error: იდეა/ორგანიზაცია არ მოიძებნა
+    report:
+      form:
+        title_old: განაცხადე იდეის შესახებ
+        title: რა არის შეტყობინების მიზეზი?
+        inappropriate: შეურაცხმყოფელი შინაარსი
+        duplicate: გამეორებული შინაარსი 
+        duplicate_reason: "რომელი იდეის შინაარსია აქ გამეორებული? (ჩასვით ბმული) "
+        success: იდეა დარეპორტდა.
 

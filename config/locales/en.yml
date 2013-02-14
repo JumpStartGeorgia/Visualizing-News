@@ -488,7 +488,7 @@ en:
       idea_by: "Idea by %{name}"
       claimed_by: "Idea Being Worked On"
       finished: Finished
-      news_url: View News Article
+      news_url: View Story
       take_ownership: "Work on Idea (%{org})"
       progress_update: Add
 #      progress_update: Add Update

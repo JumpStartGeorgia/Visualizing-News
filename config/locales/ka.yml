@@ -488,7 +488,7 @@ ka:
       idea_by: "%{name}-ის იდეა"
       claimed_by: "იდეაზე მუშაობა დაიწყო"
       finished: დასრულებული
-      news_url: იხილე სიახლეები
+      news_url: იხილე ამბავი
       take_ownership: "დაიწყე მუშაობა იდეაზე (%{org})"
       progress_update: დამატება
 #      progress_update: დაამატე პროგრესი

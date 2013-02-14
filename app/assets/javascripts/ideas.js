@@ -1,4 +1,39 @@
 $(document).ready(function(){
+  // if user is not logged in, activate login when click into form
+  $('#ideas_index_header a#ideas_form_signin').click(function(){
+    if (!gon.user_signed_in){
+      $('a#user_sign_in').fancybox().trigger('click');
+      return false;
+    } 
+  });
+  $('#shared-idea-form a#ideas_form_signin').click(function(){
+    if (!gon.user_signed_in){
+      $('a#user_sign_in').fancybox().trigger('click');
+      return false;
+    } 
+  });
+  $('form#form_new_idea textarea#idea_explaination').click(function(){
+    if (!gon.user_signed_in){
+      $('a#user_sign_in').fancybox().trigger('click');
+    } 
+  });
+  $('form#form_new_idea').submit(function(){
+    if (!gon.user_signed_in){
+      $('a#user_sign_in').fancybox().trigger('click');
+      return false;
+    } 
+  });
+  $('form#form_new_idea select#idea_category_ids').bind("multiselectopen", function(event, ui){
+    if (!gon.user_signed_in){
+      $('form#form_new_idea select#idea_category_ids').multiselect('close');
+      $('a#user_sign_in').fancybox().trigger('click');
+    } 
+  });
+
+});
+
+
+$(document).ready(function(){
 	// if an organization progress needs to be translated,
 	// get the text to be translated and put it in the link
 	$('.translate_org_progress').each(function(index){

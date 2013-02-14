@@ -1,5 +1,5 @@
 <div id="shared-idea-form" class="negative-margin">
-	<%= form_tag create_idea_path, :method => :post, :class => "" do %>
+	<%= form_tag create_idea_path, :method => :post, :id => "form_new_idea" do %>
     <ul class="clear">
       <li class="title">
 		    <%= t('app.common.post_idea') %>
@@ -8,7 +8,7 @@
 		    <% if user_signed_in? %>
 			    <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
 		    <% else %>
-			    <%= link_to t('.sign_in'), :new_user_session, :class => 'fancybox' %>
+			    <%= link_to t('.sign_in'), :new_user_session, :id => 'ideas_form_signin' %>
 		    <% end %>
       </li>
       <li class="lilabel">

@@ -5,7 +5,7 @@
     <div id="ideas_index_header">
       <% after_title = ''
          if !user_signed_in?
-           after_title << link_to(t('.sign_in'), :new_user_session, :class => 'fancybox title_link')
+           after_title << link_to(t('.sign_in'), :new_user_session, :class => 'title_link', :id => 'ideas_form_signin')
          end
        %>
 		  <% title_after after_title.html_safe if after_title.present? %>
@@ -15,7 +15,7 @@
       <div class="span4">
 
         <div id="navbar-idea-form">
-	        <%= form_tag create_idea_path, :method => :post, :class => "" do %>
+	        <%= form_tag create_idea_path, :method => :post, :id => "form_new_idea" do %>
             <% if user_signed_in? %>
 	            <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
             <% end %>
@@ -51,11 +51,11 @@
                         <%= t('activerecord.attributes.idea.is_public') %>
                       </label>
 		                </div>
+  		            </div>
                   <% end %>
                   <div class="right">
 	                  <%= submit_tag t('helpers.links.post_idea')%>
                   </div>
-		            </div>
               </li>
             </ul>
 	        <% end %>

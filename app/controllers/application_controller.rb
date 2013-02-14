@@ -75,6 +75,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
+    gon.user_signed_in = user_signed_in?
 		gon.placeholder = t('app.common.placeholder')
 		gon.visual_comment_notification_url = visual_comment_notification_path(gon.placeholder)
 		gon.idea_comment_notification_url = idea_comment_notification_path(gon.placeholder)

@@ -11,9 +11,9 @@
           x = @idea.last_progress_report(current_user)
          if x 
            if x.is_completed 
-            after_title << image_tag('filter_icons/completed.png', :title => t('filters.ideas.filter.completed'), :alt => t('filters.ideas.filter.completed')) 
+            after_title << image_tag('completed.png', :title => t('filters.ideas.filter.completed'), :alt => t('filters.ideas.filter.completed')) 
           else 
-            after_title << image_tag('filter_icons/in_progress.png', :title => t('filters.ideas.filter.in_progress'), :alt => t('filters.ideas.filter.in_progress'))
+            after_title << image_tag('in_progress.png', :title => t('filters.ideas.filter.in_progress'), :alt => t('filters.ideas.filter.in_progress'))
           end 
         end
 

@@ -2,23 +2,26 @@
 
   <div class="negative-margin">
 
-    <%= page_title t('app.common.post_idea') %>
-
+    <div id="ideas_index_header">
+      <% after_title = ''
+         if !user_signed_in?
+           after_title << link_to(t('.sign_in'), :new_user_session, :class => 'fancybox title_link')
+         end
+       %>
+		  <% title_after after_title.html_safe if after_title.present? %>
+      <%= page_title t('app.common.post_idea') %>
+    </div>
     <div class="row-fluid top">
-      <div class="span3">
+      <div class="span4">
 
         <div id="navbar-idea-form">
 	        <%= form_tag create_idea_path, :method => :post, :class => "" do %>
+            <% if user_signed_in? %>
+	            <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
+            <% end %>
             <ul>
               <li class="title">
             		<span id="form_title"><%= t('app.common.post_idea') %></span>
-              </li>
-              <li class="user-info clear">
-		            <% if user_signed_in? %>
-			            <%= hidden_field_tag 'idea_user_id', current_user.id, :name => 'idea[user_id]' %>
-		            <% else %>
-			            <%= link_to t('.sign_in'), :new_user_session, :class => 'fancybox' %>
-		            <% end %>
               </li>
               <li class="clear">
 		            <label class="control-label" for="idea_idea_categories_attributes_0_category_id">
@@ -43,10 +46,10 @@
 			                  :name => 'idea[is_public]' %>
 			              <div class="left">
 			                <input type="hidden" name="idea[is_public]" value="0" />
-			                <label>
-			                  <input type="checkbox" name="idea[is_public]" value="1" checked="checked" />
-			                  <%= t('activerecord.attributes.idea.is_public') %>
-			                </label>
+                      <label title="<%= t('app.common.is_public_explanation') %>">
+                        <input type="checkbox" name="idea[is_public]" value="1" checked="checked" title="<%= t('app.common.is_public_explanation') %>" />
+                        <%= t('activerecord.attributes.idea.is_public') %>
+                      </label>
 			              </div>
 	                  <% if user_signed_in? %>
                       <div class="right">
@@ -61,7 +64,7 @@
         </div>
 
       </div>
-      <div class="span7">
+      <div class="span6">
         <div id="ideas_text">
           <p>
             <%= t('.text_ideas1') %>

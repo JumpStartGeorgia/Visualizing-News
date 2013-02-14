@@ -22,12 +22,7 @@ class NotificationsController < ApplicationController
 					end
 
           # process visualization notifications
-  				if params[:visuals_none]
-  					# delete all notifications
-  					Notification.where(:notification_type => Notification::TYPES[:new_visual],
-  																					:user_id => current_user.id).delete_all
-  					msg << I18n.t('app.msgs.notification_new_visual_none_success')
-  				elsif params[:visuals_all]
+  				if params[:visuals_all]
   					# all notifications
   					# delete anything on file first
   					Notification.where(:notification_type => Notification::TYPES[:new_visual],
@@ -37,7 +32,7 @@ class NotificationsController < ApplicationController
   																					:user_id => current_user.id)
 
   					msg << I18n.t('app.msgs.notification_new_visual_all_success')
-  				elsif params[:visuals_categories] && !params[:visuals_categories].empty?
+  				elsif params[:visuals_categories].present?
   					# by category
   					# delete anything on file first
   					Notification.where(:notification_type => Notification::TYPES[:new_visual],
@@ -50,6 +45,11 @@ class NotificationsController < ApplicationController
   					end
   					msg << I18n.t('app.msgs.notification_new_visual_by_category_success',
   						:categories => @categories.select{|x| params[:visuals_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
+  				else
+  					# delete all notifications
+  					Notification.where(:notification_type => Notification::TYPES[:new_visual],
+  																					:user_id => current_user.id).delete_all
+  					msg << I18n.t('app.msgs.notification_new_visual_none_success')
           end
 
 					# process visual comment notifications for each org
@@ -75,12 +75,7 @@ class NotificationsController < ApplicationController
 					end
 
           # process idea notificatons
-  				if params[:ideas_none]
-  					# delete all notifications
-  					Notification.where(:notification_type => Notification::TYPES[:new_idea],
-  																					:user_id => current_user.id).delete_all
-  					msg << I18n.t('app.msgs.notification_new_idea_none_success')
-  				elsif params[:ideas_all]
+  				if params[:ideas_all]
   					# all notifications
   					# delete anything on file first
   					Notification.where(:notification_type => Notification::TYPES[:new_idea],
@@ -90,7 +85,7 @@ class NotificationsController < ApplicationController
   																					:user_id => current_user.id)
 
   					msg << I18n.t('app.msgs.notification_new_idea_all_success')
-  				elsif params[:ideas_categories] && !params[:ideas_categories].empty?
+  				elsif params[:ideas_categories].present?
   					# by category
   					# delete anything on file first
   					Notification.where(:notification_type => Notification::TYPES[:new_idea],
@@ -104,6 +99,11 @@ class NotificationsController < ApplicationController
   					msg << I18n.t('app.msgs.notification_new_idea_by_category_success',
   						:categories => @categories.select{|x| params[:ideas_categories].index(x.id.to_s)}.map{|x| x.name}.join(", "))
 
+  				else
+  					# delete all notifications
+  					Notification.where(:notification_type => Notification::TYPES[:new_idea],
+  																					:user_id => current_user.id).delete_all
+  					msg << I18n.t('app.msgs.notification_new_idea_none_success')
   				end
 
   			else
@@ -135,14 +135,9 @@ class NotificationsController < ApplicationController
   																			:user_id => current_user.id)
 
   		@visual_all = false
-  		@visual_none = false
 
-  		if @visual_notifications && !@visual_notifications.empty?
-  			if @visual_notifications.length == 1 && @visual_notifications.first.identifier.nil?
-  				@visual_all = true
-  			end
-  		else
-  			@visual_none = true
+  		if @visual_notifications.present? && @visual_notifications.length == 1 && @visual_notifications.first.identifier.nil?
+				@visual_all = true
   		end
 
 			# get visual comments for each org
@@ -162,14 +157,9 @@ class NotificationsController < ApplicationController
   																			:user_id => current_user.id)
 
   		@idea_all = false
-  		@idea_none = false
 
-  		if @idea_notifications && !@idea_notifications.empty?
-  			if @idea_notifications.length == 1 && @idea_notifications.first.identifier.nil?
-  				@idea_all = true
-  			end
-  		else
-  			@idea_none = true
+  		if @idea_notifications.present? && @idea_notifications.length == 1 && @idea_notifications.first.identifier.nil?
+				@idea_all = true
   		end
 
   		flash[:notice] = msg.join("<br />").html_safe if !msg.empty?

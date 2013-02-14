@@ -21,11 +21,13 @@ function enable_all_fields(type){
 function all_clicked(type){
 	$('input#' + type + '_none').removeAttr('checked');
 	$('select#' + type + '_categories').val([]);
+  $("select#" + type + "_categories").multiselect("uncheckAll");
 }
 
 function none_clicked(type){
 	$('input#' + type + '_all').removeAttr('checked');
 	$('select#' + type + '_categories').val([]);
+  $("select#" + type + "_categories").multiselect("uncheckAll");
 }
 
 function categories_clicked(type){
@@ -68,9 +70,12 @@ $(document).ready(function(){
 		$('input#visuals_none').click(function(){
 			none_clicked('visuals');
 		});
-		$('select#visuals_categories').click(function(){
+//		$('select#visuals_categories').click(function(){
+//			categories_clicked('visuals');
+//		});
+    $("select#visuals_categories").bind("multiselectclick", function(event, ui){
 			categories_clicked('visuals');
-		});
+    });
 
 		// for new ideas
 		$('input#ideas_all').click(function(){
@@ -79,9 +84,12 @@ $(document).ready(function(){
 		$('input#ideas_none').click(function(){
 			none_clicked('ideas');
 		});
-		$('select#ideas_categories').click(function(){
+//		$('select#ideas_categories').click(function(){
+//			categories_clicked('ideas');
+//		});
+    $("select#ideas_categories").bind("multiselectclick", function(event, ui){
 			categories_clicked('ideas');
-		});
+    });
 
 	}
 

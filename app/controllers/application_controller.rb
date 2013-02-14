@@ -169,6 +169,13 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
 			@visuals_filter_organize_icon = 'recent'
 		end
+
+		if params[:type]
+			@visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
+			@visuals_filter_type_icon = params[:type]
+		else
+			@visuals_filter_type_icon = 'all'
+		end
   end
 
   ## visual querystring

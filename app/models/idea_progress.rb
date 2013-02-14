@@ -9,7 +9,7 @@ class IdeaProgress < ActiveRecord::Base
       :explaination,
       :is_completed,
 			:url,
-#			:is_private,
+			:is_private,
       :is_public,
 			:idea_status_id, 
       :created_at, :updated_at, :db_migrate

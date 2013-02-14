@@ -39,8 +39,21 @@ class IdeasController < ApplicationController
     set_idea_view_type # in app controller
   end
 
+	def user
+		@user = User.find_by_permalink(params[:id])
+
+    @param_options[:format] = :js
+    @param_options[:max] = 5
+    @param_options[:user_id] = @user.id
+    gon.ajax_path = ideas_ajax_path(@param_options)
+
+    set_idea_view_type # in app controller
+	end
+
   def show
     @idea = Idea.with_private(current_user).find_by_id(params[:id])
+
+   #gon.current_content = {:type => 'idea', :id => @idea.id}
 
 		if @idea
 			gon.show_fb_comments = true
@@ -57,25 +70,6 @@ class IdeasController < ApplicationController
 			redirect_to root_path
 		end
   end
-
-	def user
-		@user = User.find_by_id(params[:user_id])
-
-	  @ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]))
-
-#    if @ideas.blank?
-#		  flash[:info] =  t('app.msgs.does_not_exist')
-#		  redirect_to root_path
-#		else
-      respond_to do |format|
-        format.html
-        format.js {
-          @ajax_call = true
-          render 'shared/ideas_index'
-        }
-      end
-#  	end
-	end
 
 	def organization
 		@organization = Organization.find_by_id(params[:id])
@@ -132,6 +126,11 @@ class IdeasController < ApplicationController
   end
 
   def vote
+    if !user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     success = true
 
 		redirect_path = if request.env["HTTP_REFERER"]
@@ -144,7 +143,7 @@ class IdeasController < ApplicationController
       idea = Idea.find_by_id(params[:id])
 
       if !idea.blank?
-        idea.process_vote(request.remote_ip, params[:status])
+        idea.process_vote(current_user, params[:status])
       else
         success = false
       end

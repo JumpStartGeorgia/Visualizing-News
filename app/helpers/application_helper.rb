@@ -11,6 +11,10 @@ module ApplicationHelper
           tag('img', {:src => content_for(:title_image), :style => 'vertical-align: middle; margin-right: 5px;'}) + 
           content_tag(:span, page_title)
         end
+      elsif content_for(:title_after)
+        h1_content = content_tag(:h1) do
+          content_tag(:span, page_title) + content_tag(:span, content_for(:title_after), :class => 'title_after')
+        end
       end
 
       x = content_tag(:div, content_tag(:div, h1_content, :class => 'block'), :class => 'page-header')
@@ -24,6 +28,10 @@ module ApplicationHelper
 
   def title_image(image_url)
     content_for(:title_image) { image_url }
+  end
+
+  def title_after(text)
+    content_for(:title_after) { text }
   end
 
 	def flash_translation(level)

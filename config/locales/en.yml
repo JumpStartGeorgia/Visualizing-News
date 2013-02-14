@@ -200,8 +200,8 @@ en:
       new_visual: "%{org} - Add Visualization"
       post_idea: Post Idea
       report_inappropriate: Report Inappropriate Idea
-      follow_idea: Follow Idea
-      unfollow_idea: Unfollow Idea
+      follow_idea: Follow
+      unfollow_idea: Unfollow
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -285,6 +285,7 @@ en:
       unfollow_idea_bad: The idea could not be found to unfollow.
       is_private: NOT PUBLIC
       last_update: Last Update
+      is_public_explanation: "Idea is public and anyone can see it. Uncheck the box if you want only people from your organization to see it." 
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -308,7 +309,7 @@ en:
     application:
       menu_visual: Visualizations
       menu_data: Send Data
-      menu_idea: Post Ideas
+      menu_idea: Ideas
       menu_submit_visual: Submit Visual
       menu_about: About
       menu_contact: Contact
@@ -475,6 +476,7 @@ en:
       title: Post Ideas
       text_ideas1: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it."
       text_ideas2: "feradi.info makes your ideas social, allowing missed opportunities to become a treasure trove of journalistic brainstorming. Post, vote, share, and watch how ideas take shape and become the news."
+      sign_in: Sign In to Submit
     user:
       title: "Ideas by: %{name}"
     category:
@@ -486,13 +488,16 @@ en:
       idea_by: "Idea by %{name}"
       claimed_by: "Idea Being Worked On"
       finished: Finished
-      news_url: View News Article
+      news_url: View Story
       take_ownership: "Work on Idea (%{org})"
-      progress_udpate: Add Progress Update
-      edit_progress: Edit Progress
+      progress_update: Add
+#      progress_update: Add Update
+      edit_progress: Edit
+#      edit_progress: Edit#Edit Progress
       translate_idea: Translate the Idea
       translate_org_progress: Translate the Text
       inappropriate_idea: "This idea has been reported as inappropriate and is no longer available."
+      status: Status
     search:
       title: "Search: %{q}"
   progress:

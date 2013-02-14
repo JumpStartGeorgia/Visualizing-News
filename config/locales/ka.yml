@@ -200,7 +200,7 @@ ka:
       new_visual: "%{org} - ატვირთეთ ვიზუალი"
       post_idea: იდეის გამოქვეყნება
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
-      follow_idea: მიყევი იდეას
+      follow_idea: მიყევი
       unfollow_idea: აღარ მიყვე
     titles:
       new: "ახალი %{model}"
@@ -222,7 +222,7 @@ ka:
       organize:
         header: დახარისხება
         recent: ბოლო
-        likes: Likes
+        likes: მოწონება
         views: ნახვა
     ideas:
       view:
@@ -232,14 +232,14 @@ ka:
       organize:
         header: დახარისხება
         recent: ბოლო
-        likes: Likes
+        likes: მოწონება
         views: ნახვა
       filter:
         header: გაფილტვრა
         all: ყველა
         not_selected: არ დაწყებულა მუშაობა
         in_progress: მიმდინარეობს
-        completed: განხორციელებული იდეები
+        completed: განხორციელებული
   app:
     language:
       en: English
@@ -264,9 +264,9 @@ ka:
       placeholder: placeholder # do not translate
       comments: კომენტარები
       comments_noun: კომენტარი
-      likes: Likes
-      like: like
-      unlike: unlike
+      likes: მოწონება
+      like: მომწონს
+      unlike: აღარ მომწონს
       share: გააზიარეთ
       not_published: გამოუქვეყნებელი
       author: ავტორები
@@ -285,6 +285,7 @@ ka:
       unfollow_idea_bad: იდეა ვერ მოიძებნა.
       is_private: არასაჯარო
       last_update:  ბოლო განახლება
+      is_public_explanation: "იდეა საჯაროა და მისი ნახვა ყველას შეუძლია. გააუქმეთ მონიშვნა, თუ გსურთ, რომ მას მხოლოდ თქვენი ორგანიზაციის წევრები ხედავდნენ."
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -308,7 +309,7 @@ ka:
     application:
       menu_visual: ვიზუალიზაციები
       menu_data: მონაცემების გაგზავნა
-      menu_idea: იდეების გამოქვეყნება
+      menu_idea: იდეები
       menu_submit_visual: ვიზუალის გაგზავნა
       menu_about: ჩვენ შესახებ
       menu_contact: დაგვიკავშირდი
@@ -475,6 +476,7 @@ ka:
       title: იდეების გამოქვეყნება
       text_ideas1: "გაქვთ იდეა ახალი ამბისთვის? გსურთ, მედიამ გააშუქოს თქვენთვის საინტერესო საკითხი? არ გაქვთ დრო ან მონაცემები, თვითონ გააკეთოთ ეს? გამოაქვეყნეთ თქვენი იდეა აქ. თუ იდეა კარგია, დიდი შანსია, ჟურნალისტმა მასზე მუშაობა დაიწყოს."
       text_ideas2: "feradi.info თქვენს იდეებს სოციალურს ხდის და საშუალებას აძლევს, ჟურნალისტური საქმიანობის განძად იქცეს. გამოაქვეყნეთ, შეაფასეთ, გააზიარეთ თქვენი იდეა და თვალყური მიადევნეთ, როგორ გარდაიქმნება იგი ახალ ამბად."
+      sign_in: გამოსაგზავნად გაიარეთ ავტორიზაცია
     user:
       title: "%{name} იდეა"
     category:
@@ -484,15 +486,18 @@ ka:
     show:
       title: "იდეა #%{number}"
       idea_by: "%{name}-ის იდეა"
-      claimed_by: "იდეა შეიმუშავა"
+      claimed_by: "იდეაზე მუშაობა დაიწყო"
       finished: დასრულებული
-      news_url: იხილე სიახლეები
+      news_url: იხილე ამბავი
       take_ownership: "დაიწყე მუშაობა იდეაზე (%{org})"
-      progress_udpate: დაამატე პროგრესი
-      edit_progress: შეცვალე პროგრესი
+      progress_update: დამატება
+#      progress_update: დაამატე პროგრესი
+      edit_progress: შეცვლა
+#      edit_progress: შეცვალე პროგრესი
       translate_idea: იდეის თარგმნა
       translate_org_progress: ტექსტის თარგმნა
       inappropriate_idea: "იდეა არ მოიძებნა."
+      status: სტატუსი
     search:
       title: "ძებნა: %{q}"
   progress:

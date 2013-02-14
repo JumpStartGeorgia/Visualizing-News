@@ -30,11 +30,11 @@
 
 		  <div class="control-group">
 			  <%- if controller_name != 'sessions' %>
-				  <%= link_to t('helpers.links.sign_in'), new_session_path(resource_name), :class => 'fancybox-nested sign-in-link' %>
+				  <%= link_to t('helpers.links.sign_in'), new_session_path(resource_name, {:load_media => false}), :class => 'fancybox-nested sign-in-link' %>
 			  <% end -%>
 
 			  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-				  <%= link_to t('helpers.links.sign_up'), new_registration_path(resource_name), :class => 'fancybox-nested sign-up-link' %>
+				  <%= link_to t('helpers.links.sign_up'), new_registration_path(resource_name, {:load_media => false}), :class => 'fancybox-nested sign-up-link' %>
 			  <% end -%>
 		  </div>
 

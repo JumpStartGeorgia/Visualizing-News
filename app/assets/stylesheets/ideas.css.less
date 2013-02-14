@@ -6,8 +6,22 @@
   margin-bottom: 25px;
   p {
     font-size: 13px;
+    &:first-of-type {
+      margin-top: 0;
+    }
   }
   color: #4e4e4e;
+}
+
+#ideas_index_header .page-header h1{
+  color: #f87364;
+  a.title_link{
+    color: #469e72;
+    font-size: 13px;
+    &:hover {
+      color: #f87364;
+    }
+  }
 }
 
 #navbar-idea-form, #shared-idea-form {
@@ -44,6 +58,10 @@
   .user-info {
     &, a {
       color: #469e72;
+      text-decoration: underline;
+      &:hover {
+        color: #f87364;
+      }
     }
   }
   input[type="checkbox"] {
@@ -58,6 +76,10 @@
       text-decoration: underline;
     }
   }
+}
+
+#ideas_index_header #navbar-idea-form .ui-multiselect {
+  width: 220px !important;
 }
 
 #navbar-idea-form {
@@ -152,13 +174,6 @@
     padding-top: 20px;
   }
 
-  .page-header {
-    padding-bottom: 0px;
-    h1 {
-      color: #f86c5c;
-    }
-  }
-
   input[type="submit"] {
     background: #f88d86;
     color: #fff;
@@ -244,13 +259,22 @@ select#idea_is_public{
       vertical-align: middle;
       margin-right: 3px;
     }
-    &#like_count{
+    &#like_count_ka{
+      width: 32%;
+    }
+    &#view_count_ka{
+      width: 27%;
+    }
+    &#comment_count_ka{
+      width: 38%;
+    }
+    &#like_count_en{
       width: 23%;
     }
-    &#view_count{
+    &#view_count_en{
       width: 31%;
     }
-    &#comment_count{
+    &#comment_count_en{
       width: 38%;
     }
   }
@@ -258,39 +282,96 @@ select#idea_is_public{
 
 #idea_row2{
   .main_block{
-    margin-top: 24px;
-    padding-top: 22px;
-    border-top: solid 1px #cacaca;
+    a{
+      color: #ce495f;
+      &:hover {
+        color: #e20025;
+      }
+    }
+    #idea_buttons{
+      font-family: themix_light;
+      &>div{
+        margin-top: 12px;
+      }
+      #translate{
+        float:left;
+      }
+      #report{
+        float:right;
+        text-align:right;
+      }
+    }
 
-    ul#idea_buttons{
+    #idea_progress_block{
       margin-top: 24px;
-      padding-top: 22px;
-      li {
-        margin-right: 10px;
-        display: inline-block;
-        a.button {
-          background: #469e72;
-          color: #fff;
-          padding: 4px 10px;
-          text-decoration: none;
-          &:hover {
+      a.idea_progress_btn {
+        padding: 3px 9px;
+        background-color: #f88d86;
+        color: #fff;
+        text-decoration: none;
+        &:hover{
+          background: #ddd;
+        }
+      }
+      .idea_progress{
+        font-family: themix_light;
+        padding: 15px;
+        background-color: #f1f1f1;
+        .idea_progress_left{
+          float: left;
+          width: 70%;
+          h3{
+            font-family: themix_light;
+            font-size: 16px;
+            color: #469e70;
+            margin-bottom: 10px;
+          }
+          .progress_text{
+            margin-left: 10px;
+          }
+        }
+        .idea_progress_right{
+          float: right;
+          text-align: right;
+          width: 30%;
+          .idea_progress_logo{
+            margin-bottom: 10px;
+          }
+          .idea_progress_add_item{
+            margin-bottom: 5px;
+          }
+          .progress_status {
+            margin-bottom: 5px;
+            span{
+              color: #ce495f;
+            }
           }
         }
       }
     }
+
   }
   #idea_sidebar{
     padding-left: 5px;
-    #explanation{
-      color: #000;
-    }
 
     #source{
-      padding: 22px 0px 19px;
-      border-top: solid 1px #cacaca;
-      margin: 24px 0px 17px;
+      padding: 0px 0px 19px;
+      margin: 8px 0px 17px;
+      border-bottom: solid 1px #cacaca;
       ul li {
         margin-bottom: 7px;
+        &#idea_author{
+          & > div {
+            display:inline-block;
+            vertical-align: top;
+            img {
+              margin-top: 4px;
+            }
+          }
+        }
+        .sidebar_heading{
+          /*font-weight: bold;*/
+        }
         .val {
           color: #469e72;
           a {
@@ -320,9 +401,11 @@ select#idea_is_public{
     }
 
     #share {
-      margin-top: 24px;
-      padding: 22px 7px 0;
-      border-top: solid 1px #cacaca;
+      padding: 7px;
+      margin: 7px 0;
+      .sidebar_heading{
+        /*font-weight: bold;*/
+      }
       .social-links {
         & > span {
           margin-right: 15px;
@@ -342,25 +425,6 @@ select#idea_is_public{
         }
       }
     }
-
-    #idea_progress{
-      margin-top: 24px;
-      padding-top: 22px;
-      border-top: solid 1px #cacaca;
-      ul.organizations{
-        margin-top: 5px;
-        margin-left: 10px;
-
-        ul.idea_progress{
-          margin-left: 5px;
-          .progress_text{
-            margin-left: 5px;
-          }
-        }
-      }
-    }
-
-
   }
 }
 
@@ -382,6 +446,7 @@ select#idea_is_public{
     font-family: themix_regular;
     color: gray;
     font-weight: normal;
+    margin-top: 24px;
   }
 }
 

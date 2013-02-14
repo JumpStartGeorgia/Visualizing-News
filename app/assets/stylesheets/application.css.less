@@ -4,6 +4,7 @@
  *= require fancybox
  *= require vendor
  *= require_tree .
+ *= require vendor_jquery
  *= require_self
  *= require resp.width
 */
@@ -509,8 +510,8 @@ footer, footer ul li, footer div#right ul li {
   position: fixed;
   bottom: 0px;
 }
-fancybox-title {
-  display: none;
+#fancybox-title {
+  display: none !important;
 }
 
 
@@ -595,8 +596,13 @@ fancybox-title {
 
 /* no record message */
 #no_records{
-  margin-left: 20px;
+  padding: 20px 20px;
 }
 
-
-
+/* for text/img that appears after page title*/
+.title_after{
+  margin-left: 10px;
+  &>span{
+    margin-left: 10px;
+  }
+}

@@ -31,8 +31,8 @@
 	      <%#= select_tag 'idea_is_public', "<option selected=\"selected\" value='1'>#{}</option><option value='0'>#{t('app.common.no')}</option>".html_safe,  
 	          :name => 'idea[is_public]' %>
         <input type="hidden" name="idea[is_public]" value="0" />
-        <label>
-          <input type="checkbox" name="idea[is_public]" value="1" checked="checked" />
+        <label title="<%= t('app.common.is_public_explanation') %>">
+          <input type="checkbox" name="idea[is_public]" value="1" checked="checked" title="<%= t('app.common.is_public_explanation') %>" />
           <%= t('activerecord.attributes.idea.is_public') %>
         </label>
       </li>

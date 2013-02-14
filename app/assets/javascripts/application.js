@@ -9,12 +9,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.cookie
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require fancybox
 //= require fancybox2
 //= require vendor
-//= require_tree .
+//= require_directory .
 
 $(document).ready(function(){
 	// set focus to first text box on page
@@ -51,8 +52,19 @@ $(document).ready(function(){
     });
   }
 
-  // register jquery multi select for category list in new idea form
+  // register jquery multi select
+  // - category list in ideas form
   $('select#idea_category_ids').multiselect({
+    header: false,
+    noneSelectedText: ''
+  });
+  // - visual notification categories
+  $('select#visuals_categories').multiselect({
+    header: false,
+    noneSelectedText: ''
+  });
+  // - idea notification categories
+  $('select#ideas_categories').multiselect({
     header: false,
     noneSelectedText: ''
   });

@@ -102,7 +102,8 @@ class MoveIdeaRecordsAgain < ActiveRecord::Migration
           :is_duplicate => old_idea[6], 
           :created_at => old_idea[7], 
           :updated_at => old_idea[8], 
-          :is_private => old_idea[9], 
+          :is_private => old_idea[9] == 0 ? false : true, 
+          :is_public => old_idea[9] == 0 ? true : false, 
           :current_status_id => old_idea[10],
           :db_migrate => true # don't send notification
       )
@@ -138,7 +139,8 @@ class MoveIdeaRecordsAgain < ActiveRecord::Migration
         :created_at => old_prog[6], 
         :updated_at => old_prog[7], 
         :idea_status_id => old_prog[8], 
-        :is_private => old_prog[9],
+        :is_private => old_prog[9] == 0 ? false : true, 
+        :is_public => old_prog[9] == 0 ? true : false, 
         :db_migrate => true # don't send notification
       )
     end

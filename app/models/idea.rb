@@ -18,7 +18,7 @@ class Idea < ActiveRecord::Base
       :is_inappropriate,
       :is_duplicate,
 			:category_ids,
-#			:is_private,
+			:is_private,
       :is_public,
 			:current_status_id,
       :created_at, :updated_at, :fb_count, :db_migrate

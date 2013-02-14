@@ -500,15 +500,19 @@ en:
       status: Status
     search:
       title: "Search: %{q}"
-  progress:
-    form:
-      title_claim: Claim Idea
-      title_progress_update: Progress Update
-      title_edit_progress: Edit Progress
-      title_error: Error
-      error: The requested Idea and/or Organization could not be found.
-  report:
-    inappropriate:
-      title: Report Inappropriate Idea
-      success: The Idea hs been reported.
+    progress:
+      form:
+        title_claim: Claim Idea
+        title_progress_update: Progress Update
+        title_edit_progress: Edit Progress
+        title_error: Error
+        error: The requested Idea and/or Organization could not be found.
+    report:
+      form:
+        title_old: Report Inappropriate Idea
+        title: What is the reason for the report?
+        inappropriate: Inappropriate Content
+        duplicate: Duplicate Idea
+        duplicate_reason: "Which idea is this a duplicate of? (Provide URL)"
+        success: The Idea hs been reported.
 

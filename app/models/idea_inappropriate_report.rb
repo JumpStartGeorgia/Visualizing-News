@@ -6,6 +6,7 @@ class IdeaInappropriateReport < ActiveRecord::Base
 
 	attr_accessible :user_id, :idea_id, :reason, 
       :created_at, :updated_at
+  attr_accessor :type
 
   validates :idea_id, :reason, :presence => true
 

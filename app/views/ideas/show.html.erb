@@ -81,7 +81,7 @@
     <div class="main_block">
       <div id="idea">
         <% if @idea.is_inappropriate %>
-	        <div>
+	        <div style="padding: 20px 10px;">
 		        <%= t('.inappropriate_idea') %>
 	        </div>
         <% else %>
@@ -112,7 +112,7 @@
 			      <% end %>
 
             <% orgs = @idea.claimed_by_organizations(current_user)
-              if orgs && !orgs.empty? %>
+              if orgs.present? %>
 
                 <div class="idea_progress clear">
                   <% orgs.each_with_index do |org, index| %>
@@ -201,8 +201,8 @@
                 </div>
               <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div id="idea_sidebar" class="side_block">

@@ -46,10 +46,10 @@
 			                  :name => 'idea[is_public]' %>
 			              <div class="left">
 			                <input type="hidden" name="idea[is_public]" value="0" />
-			                <label>
-			                  <input type="checkbox" name="idea[is_public]" value="1" />
-			                  <%= t('activerecord.attributes.idea.is_public') %>
-			                </label>
+                      <label title="<%= t('app.common.is_public_explanation') %>">
+                        <input type="checkbox" name="idea[is_public]" value="1" checked="checked" title="<%= t('app.common.is_public_explanation') %>" />
+                        <%= t('activerecord.attributes.idea.is_public') %>
+                      </label>
 			              </div>
 	                  <% if user_signed_in? %>
                       <div class="right">

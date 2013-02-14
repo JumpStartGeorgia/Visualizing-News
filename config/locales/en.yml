@@ -285,6 +285,7 @@ en:
       unfollow_idea_bad: The idea could not be found to unfollow.
       is_private: NOT PUBLIC
       last_update: Last Update
+      is_public_explanation: "Idea is public and anyone can see it. Uncheck the box if you want only people from your organization to see it." 
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.

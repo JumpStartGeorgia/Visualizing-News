@@ -222,7 +222,7 @@ ka:
       organize:
         header: დახარისხება
         recent: ბოლო
-        likes: Likes
+        likes: მოწონება
         views: ნახვა
     ideas:
       view:
@@ -232,7 +232,7 @@ ka:
       organize:
         header: დახარისხება
         recent: ბოლო
-        likes: Likes
+        likes: მოწონება
         views: ნახვა
       filter:
         header: გაფილტვრა
@@ -264,9 +264,9 @@ ka:
       placeholder: placeholder # do not translate
       comments: კომენტარები
       comments_noun: კომენტარი
-      likes: Likes
-      like: like
-      unlike: unlike
+      likes: მოწონება
+      like: მომწონს
+      unlike: აღარ მომწონს
       share: გააზიარეთ
       not_published: გამოუქვეყნებელი
       author: ავტორები
@@ -285,6 +285,7 @@ ka:
       unfollow_idea_bad: იდეა ვერ მოიძებნა.
       is_private: არასაჯარო
       last_update:  ბოლო განახლება
+      is_public_explanation: "იდეა საჯაროა და მისი ნახვა ყველას შეუძლია. გააუქმეთ მონიშვნა, თუ გსურთ, რომ მას მხოლოდ თქვენი ორგანიზაციის წევრები ხედავდნენ."
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.

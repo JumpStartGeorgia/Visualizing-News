@@ -1,20 +1,44 @@
-	<%= semantic_form_for([:ideas, @report], :url => :ideas_report_inappropriate, :remote => true) do |f| %>
-		<%= f.error_messages %>
-		<%= f.inputs do %>
-			<%= f.hidden_field :idea_id, :value => params[:idea_id] %>
 
-			<% if user_signed_in? %>
-				<%= f.hidden_field :user_id, :value => current_user.id %>
-			<% end %>
+<%= semantic_form_for([:ideas, @report], :url => :ideas_report_inappropriate, :remote => true, :html => {:class => 'clear'}) do |f| %>
+	<%= f.error_messages %>
+	<%= f.inputs do %>
+		<%= f.hidden_field :idea_id, :value => params[:idea_id] %>
 
-			<%= f.input :reason, :input_html => {:size => 75} %>
-
+		<% if user_signed_in? %>
+			<%= f.hidden_field :user_id, :value => current_user.id %>
 		<% end %>
 
-		<%= f.submit nil, :class => 'btn btn-primary' %>
 	<% end %>
 
+  <div class="header">
+    What is the reason of report?
+  </div>
 
+  <div class="clear">
+    <label>
+      <input type="radio" name="idea_inappropriate_report[type]" checked="checked" />
+      Inapropriate content
+    </label>
+    <input type="text" name="idea_inappropriate_report[reason]" placeholder="<%= t('activerecord.attributes.idea_inappropriate_report.reason') %>" />
 
+<%
+=begin %>
 
+    <label>
+      <input type="radio" name="idea_inappropriate_report[type]" />
+      Duplicated content
+    </label>
+    <input type="text" name="idea_inappropriate_report[duplicate_url]" placeholder="<%= t('activerecord.attributes.idea_inappropriate_report.reason') %>" style="display: none;" />
 
+<%
+=end %>
+
+  </div>
+
+  <div class="buttons">
+	  <input type="submit" value="<%= t('app.buttons.save') %>" />
+	  <button><%= t('app.buttons.cancel') %></button>
+  </div>
+</div>
+
+<% end %>

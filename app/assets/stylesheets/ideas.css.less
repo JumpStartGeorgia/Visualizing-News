@@ -37,7 +37,9 @@
     width: 150px !important;
   }
   textarea {
+  /*
     resize: none;
+  */
   }
   .user-info {
     &, a {
@@ -412,3 +414,110 @@ select#idea_is_public{
     }
   }
 }
+
+
+
+
+#new_idea_inappropriate_report {
+  padding: 15px 30px;
+  font-family: themix_light;
+  .header {
+    color: #ce495f;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  label {
+    margin-bottom: 3px;
+    cursor: pointer;
+  }
+  input[type="radio"] {
+    margin: 0px 3px 0px 0px;
+  }
+  input[type="text"] {
+    margin: 4px 0px 14px 19px;
+    border-color: #eee;
+    color: #9b9b9b;
+    height: 28px;
+    width: 272px;
+    max-width: none;
+  }
+  input[name="idea_inappropriate_report[reason]"] {
+    margin-bottom: 17px;
+  }
+  .buttons {
+    padding: 0px;
+    margin: 13px 0px 0px;
+    width: auto;
+    text-align: center;
+    input, button {
+      display: inline-block;
+      font-family: exo_regular;
+      height: 25px;
+      padding: 3px 9px;
+      font-size: 14px;
+      text-shadow: none;
+      border: none;
+    }
+    input {
+      margin-right: 13px;
+      background: #f88d86;
+      color: #fff;
+    }
+    button {
+      background: #dedede;
+      color: #666;
+    }
+  }
+}
+
+#new_idea_inappropriate_report, form#new_idea_progress {
+  input[type="text"], input[type="submit"], button, textarea, select {
+    -webkit-border-radius: 0px;
+       -moz-border-radius: 0px;
+            border-radius: 0px;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+}
+
+#ideas_progress_form_container {
+  padding: 0px 30px 15px;
+  form#new_idea_progress {
+    font-family: themix_light;
+    input[type="checkbox"] {
+      margin-top: 2px;
+    }
+    input[type="text"] {
+      height: 27px;
+    }
+    label.checkbox {
+      cursor: pointer;
+    }
+    input[type="submit"] {
+      margin-top: 15px;
+      font-family: exo_regular;
+      background: #f88d86;
+      color: #fff;
+      height: 25px;
+      padding: 3px 9px;
+      font-size: 14px;
+      text-shadow: none;
+      border: none;
+    }
+    label.checkbox {
+      cursor: pointer;
+    }
+    textarea {
+      padding: 3px 5px;
+      max-width: none;
+      width: auto;
+    }
+  }
+}
+

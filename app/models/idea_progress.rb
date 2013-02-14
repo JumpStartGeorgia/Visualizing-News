@@ -30,11 +30,15 @@ Rails.logger.debug "------- is completed is now #{self.is_completed}"
 	# determine if the explaination is written in the locale
 	def in_locale?(locale)
 		in_locale = false
-		if locale == :ka && Utf8Converter.is_geo?(self.explaination)
-			in_locale = true
-		elsif locale != :ka && !Utf8Converter.is_geo?(self.explaination)
-			in_locale = true
-		end
+    if self.explaination.present?
+		  if locale == :ka && Utf8Converter.is_geo?(self.explaination)
+			  in_locale = true
+		  elsif locale != :ka && !Utf8Converter.is_geo?(self.explaination)
+			  in_locale = true
+		  end
+    else
+		  in_locale = true
+    end
 		return in_locale
 	end
 

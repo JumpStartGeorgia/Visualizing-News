@@ -67,11 +67,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
 		@ideas_filter_filter_selection = I18n.t('filters.ideas.filter.all')
 
-    if !Rails.env.production?
-		  @idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
-      @idea = Idea.new
-		  @idea.idea_categories.build
-    end
+	  @idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
+    @idea = Idea.new
+	  @idea.idea_categories.build
 	end
 
 	def initialize_gon
@@ -91,9 +89,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@id_in_progress = gon.id_in_progress
 		@id_realized = gon.id_realized
 
-    if !Rails.env.production?
-  		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
-    end
+		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
 	end
 
 	# after user logs in go back to the last page or go to root page

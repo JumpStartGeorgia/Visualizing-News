@@ -39,22 +39,36 @@
     cursor: pointer;
   }
 
-  .ui-multiselect, textarea {
+  .ui-multiselect, textarea, textarea:focus {
     -webkit-border-radius: 0px;
        -moz-border-radius: 0px;
             border-radius: 0px;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
   }
   .ui-multiselect {
     width: 150px !important;
     background: #fff;
+    .ui-icon {
+      background: url('down_caret.png') 0px center no-repeat;
+    }
   }
   textarea {
   /*
     resize: none;
   */
+    font-size: 13px;
+  }
+  textarea:focus {
+    border-color: #ebebeb;
+    outline: none;
+  }
+  textarea, .ui-multiselect {
+    border-color: #ebebeb;
   }
   .user-info {
     &, a {

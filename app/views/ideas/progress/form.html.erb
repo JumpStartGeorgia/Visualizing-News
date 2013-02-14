@@ -1,3 +1,5 @@
+<div id="ideas_progress_form_container">
+
 <% if @idea && @org %>
 	<% if params[:action].downcase == "claim" %>
 		<% title t('.title_claim') %>
@@ -31,16 +33,20 @@
 
 			<%= f.input :progress_date, :as => :string, :input_html => {:size => 20} %>
 			<%= f.input :idea_status, :collection => IdeaStatus.sorted, :include_blank => false %>
-			<%= f.input :explaination, :as => :text, :input_html => {:rows => 4, :cols => 100} %>
+			<%= f.input :explaination, :as => :text, :input_html => {:rows => 4, :cols => 50} %>
       <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
-				<%= f.input :is_public, :as => :select, :include_blank => false  %>
+        <input type="hidden" name="idea_progress[is_public]" value="0" />
+        <label class="checkbox">
+          <input type="checkbox" name="idea_progress[is_public]" value="1" checked="checked" />
+          <%= t('activerecord.attributes.idea.is_public') %>
+        </label>
       <% end %>
 			<%= f.input :url %>
 
 		<% end %>
 
 		<% if user_signed_in? %>
-			<%= f.submit nil, :class => 'btn btn-primary' %>
+		  <%= f.submit nil, :class => 'btn btn-primary' %>
 		<% end %>
 	<% end %>
 
@@ -52,3 +58,5 @@
 	</p>
 
 <% end %>
+
+</div>

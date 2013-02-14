@@ -46,4 +46,17 @@ $(document).ready(function(){
     window.location.href = updateQueryStringParameter($('form#ideas_form_search').attr('action'), 'q', $('form#ideas_form_search input#q').val());
     return false;
   });
+
+
+
+
+
+
+  $('#new_idea_inappropriate_report input[type="radio"]').change(function ()
+  {
+    $(this).parent().siblings('input').hide();
+    $('#new_idea_inappropriate_report input[type="radio"]:checked').parent().next('input').show().focus();
+  });
+
+
 });

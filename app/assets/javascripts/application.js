@@ -9,12 +9,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.cookie
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require fancybox
 //= require fancybox2
 //= require vendor
-//= require_tree .
+//= require_directory .
 
 $(document).ready(function(){
 	// set focus to first text box on page

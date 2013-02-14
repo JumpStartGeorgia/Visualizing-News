@@ -63,6 +63,8 @@ Rails.logger.debug "****************** user is in org"
     @visualization = Visualization.published.find_by_permalink(params[:id])
     gon.highlight_first_form_field = false
 
+   #gon.current_content = {:type => 'visual', :id => @visualization.id}
+
 		if @visualization
 			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
 			  @view_type = 'shared/visuals_show_interactive'
@@ -93,6 +95,11 @@ Rails.logger.debug "****************** user is in org"
   end
 
   def vote
+    if !user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     success = true
     
 		redirect_path = if request.env["HTTP_REFERER"]
@@ -105,7 +112,7 @@ Rails.logger.debug "****************** user is in org"
       visualization = Visualization.published.find_by_permalink(params[:id])
 
       if !visualization.blank?
-        visualization.process_vote(request.remote_ip, params[:status])
+        visualization.process_vote(current_user, params[:status])
       else
         success = false
       end

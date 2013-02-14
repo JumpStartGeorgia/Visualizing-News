@@ -53,6 +53,8 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.with_private(current_user).find_by_id(params[:id])
 
+   #gon.current_content = {:type => 'idea', :id => @idea.id}
+
 		if @idea
 			gon.show_fb_comments = true
 
@@ -124,6 +126,11 @@ class IdeasController < ApplicationController
   end
 
   def vote
+    if !user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     success = true
 
 		redirect_path = if request.env["HTTP_REFERER"]
@@ -136,7 +143,7 @@ class IdeasController < ApplicationController
       idea = Idea.find_by_id(params[:id])
 
       if !idea.blank?
-        idea.process_vote(request.remote_ip, params[:status])
+        idea.process_vote(current_user, params[:status])
       else
         success = false
       end

@@ -1,3 +1,4 @@
+<% load_media = !(defined?(params[:load_media]) && params[:load_media] == 'false') %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,7 +15,12 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
     <![endif]-->
 
-    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag("application", :media => "all") if load_media %>
+    <style>
+      body {
+        overflow-y: visible;
+      }
+    </style>
 		<!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
 	  <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
 
@@ -46,11 +52,13 @@
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "fancybox_layout" %>
-		<script type="text/javascript">
-			I18n.defaultLocale = "<%= I18n.default_locale %>";
-			I18n.locale = "<%= I18n.locale %>";
-		</script>
+    <% if load_media %>
+      <%= javascript_include_tag("fancybox/layout") %>
+		  <script type="text/javascript">
+			  I18n.defaultLocale = "<%= I18n.default_locale %>";
+			  I18n.locale = "<%= I18n.locale %>";
+		  </script>
+		<% end %>
 		<% if Rails.env.production? %>
 			<!-- insert google analytics for production site here -->
 		<% elsif Rails.env.staging? %>

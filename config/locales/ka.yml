@@ -239,7 +239,7 @@ ka:
         all: ყველა
         not_selected: არ დაწყებულა მუშაობა
         in_progress: მიმდინარეობს
-        completed: განხორციელებული იდეები
+        completed: განხორციელებული
   app:
     language:
       en: English
@@ -308,7 +308,7 @@ ka:
     application:
       menu_visual: ვიზუალიზაციები
       menu_data: მონაცემების გაგზავნა
-      menu_idea: იდეების გამოქვეყნება
+      menu_idea: იდეები
       menu_submit_visual: ვიზუალის გაგზავნა
       menu_about: ჩვენ შესახებ
       menu_contact: დაგვიკავშირდი
@@ -485,7 +485,7 @@ ka:
     show:
       title: "იდეა #%{number}"
       idea_by: "%{name}-ის იდეა"
-      claimed_by: "იდეა შეიმუშავა"
+      claimed_by: "იდეაზე მუშაობა დაიწყო"
       finished: დასრულებული
       news_url: იხილე სიახლეები
       take_ownership: "დაიწყე მუშაობა იდეაზე (%{org})"

@@ -308,7 +308,7 @@ en:
     application:
       menu_visual: Visualizations
       menu_data: Send Data
-      menu_idea: Post Ideas
+      menu_idea: Ideas
       menu_submit_visual: Submit Visual
       menu_about: About
       menu_contact: Contact

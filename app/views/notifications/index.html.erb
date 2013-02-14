@@ -51,12 +51,6 @@
   						:multiple => true %>
   			</label>
   		</div>
-  		<div class="span2">
-  			<label for="visuals_none" class="checkbox">
-  				<%= check_box_tag 'visuals_none', 'true', @visual_none %>
-  				<%= t('.new_visuals_none') %>
-  			</label>
-  		</div>
   	</div>
 
 		<% if !current_user.organization_users.empty? %>
@@ -96,12 +90,6 @@
   				<%= select_tag "ideas_categories",
   						options_from_collection_for_select(@categories, "id", "name", @idea_notifications.map{|x| x.identifier}),
   						:multiple => true %>
-  			</label>
-  		</div>
-  		<div class="span2">
-  			<label for="ideas_none" class="checkbox">
-  				<%= check_box_tag 'ideas_none', 'true', @idea_none %>
-  				<%= t('.new_ideas_none') %>
   			</label>
   		</div>
   	</div>

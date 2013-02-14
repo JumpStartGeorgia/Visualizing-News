@@ -56,6 +56,6 @@ module BootstrapStarter
     config.assets.paths << "#{Rails.root}/public/css/"
 
     # tell the assest pipeline to include the fancybox.js and font styles
-    config.assets.precompile += ['fancybox_layout.js', 'fonts_en.css', 'fonts_ka.css']
+    config.assets.precompile += ['fancybox/layout.js', 'fonts_en.css', 'fonts_ka.css']
   end
 end

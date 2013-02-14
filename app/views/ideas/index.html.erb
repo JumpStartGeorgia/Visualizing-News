@@ -39,26 +39,24 @@
 		              <%= text_area_tag 'idea_explaination', nil, :rows => 2, :name => 'idea[explaination]' %>
 		            </div>
               </li>
-              <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
-                <li class="clear">
-		              <div class="control-group">
-			              <%#= select_tag 'idea_is_public', "<option selected=\"selected\" value='1'>#{}</option><option value='0'>#{t('app.common.no')}</option>".html_safe,  
-			                  :name => 'idea[is_public]' %>
-			              <div class="left">
-			                <input type="hidden" name="idea[is_public]" value="0" />
+              <li class="clear">
+                <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
+	                <div class="control-group">
+		                <%#= select_tag 'idea_is_public', "<option selected=\"selected\" value='1'>#{}</option><option value='0'>#{t('app.common.no')}</option>".html_safe,  
+		                    :name => 'idea[is_public]' %>
+		                <div class="left">
+		                  <input type="hidden" name="idea[is_public]" value="0" />
                       <label title="<%= t('app.common.is_public_explanation') %>">
                         <input type="checkbox" name="idea[is_public]" value="1" checked="checked" title="<%= t('app.common.is_public_explanation') %>" />
                         <%= t('activerecord.attributes.idea.is_public') %>
                       </label>
-			              </div>
-	                  <% if user_signed_in? %>
-                      <div class="right">
-			                  <%= submit_tag t('helpers.links.post_idea')%>
-                      </div>
-	                  <% end %>
-			            </div>
-                </li>
-              <% end %>
+		                </div>
+                  <% end %>
+                  <div class="right">
+	                  <%= submit_tag t('helpers.links.post_idea')%>
+                  </div>
+		            </div>
+              </li>
             </ul>
 	        <% end %>
         </div>

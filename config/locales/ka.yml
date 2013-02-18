@@ -64,7 +64,7 @@ ka:
         title: სათაური
         permalink: ბმულის სახელი
         permalink_hint: "თუ გსურთ ბმულის ახალი სახელის შექმნა წაშალეთ არსებული ტექსტი და შეინახეთ ახალი ჩანაწერი. ეს ოპერაცია განახორციელეთ ყველა ენაზე."
-        explanation: განმარტება
+        explanation: აღწერა
         reporter: "ჟურნალისტი (სახელი, ორგანიზაცია)"
         designer: "დიზაინერი (სახელი, ორგანიზაცია)"
         interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
@@ -80,7 +80,7 @@ ka:
         url: მონაცემთა წყაროს ბმული
       idea:
         user_id: მომხმარებელი
-        explaination: განმარტება
+        explaination: აღწერა
         created_at: თარიღი
         individual_votes: თითოეული ხმა
         overall_votes: ხმების სრული რაოდენობა
@@ -97,7 +97,7 @@ ka:
         is_completed: სიახლე დასრულებულია?
         url: სიახლის ბმული
         progress_date: თარიღი
-        explaination: განმარტება
+        explaination: აღწერა
         idea_status_id: სტატუსი
         idea_status: სტატუსი
         is_public: საჯაროა?

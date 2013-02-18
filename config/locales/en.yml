@@ -80,7 +80,7 @@ en:
         url: URL of Data Source
       idea:
         user_id: User
-        explaination: Explaination
+        explaination: Explanation
         created_at: Date
         individual_votes: Individual Votes
         overall_votes: Overall Votes
@@ -97,7 +97,7 @@ en:
         is_completed: News Story Completed?
         url: News Story URL
         progress_date: Date
-        explaination: Explaination
+        explaination: Explanation
         idea_status_id: Status
         idea_status: Status
         is_public: Is Public?

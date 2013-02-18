@@ -1,5 +1,6 @@
 class CopyIdeaData < ActiveRecord::Migration
   def up
+=begin # can skip all of this since doing it again later.
     puts "***************************************"
     puts "***************************************"
     puts "this migration assumes that if you are on prod or dev, the news ideas db name is news-ideas, "
@@ -142,7 +143,7 @@ class CopyIdeaData < ActiveRecord::Migration
         :identifier => old_not[2]
       )
     end
-
+=end
   end
 
   def down

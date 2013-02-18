@@ -1,5 +1,6 @@
 class MoveOrgUserData < ActiveRecord::Migration
   def up
+=begin # can skip all of this since doing it again later.
     puts "***************************************"
     puts "***************************************"
     puts "this migration assumes that if you are on prod or dev, the news ideas db name is news-ideas, "
@@ -58,7 +59,7 @@ class MoveOrgUserData < ActiveRecord::Migration
         end
       end
     end
-
+=end
   end
 
   def down

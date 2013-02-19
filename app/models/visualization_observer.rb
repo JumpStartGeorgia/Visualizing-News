@@ -14,7 +14,7 @@ class VisualizationObserver < ActiveRecord::Observer
 				message = Message.new
 				I18n.available_locales.each do |locale|
 					message.bcc = Notification.new_visual(category_ids, locale)
-					if message.bcc && !message.bcc.empty?
+					if message.bcc.provided?
 						message.locale = locale
             title = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.title
 						message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)

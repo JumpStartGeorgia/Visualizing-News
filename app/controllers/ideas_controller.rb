@@ -166,8 +166,8 @@ class IdeasController < ApplicationController
 				message = Message.new
         message.locale = idea.user.notification_language 
 				message.email = idea.user.email
-				message.subject = I18n.t('mailer.notification.idea_comment_owner.subject')
-				message.message = I18n.t('mailer.notification.idea_comment_owner.message')
+				message.subject = I18n.t('mailer.notification.idea_comment_owner.subject', :locale => locale)
+				message.message = I18n.t('mailer.notification.idea_comment_owner.message', :locale => locale)
 				message.url_id = params[:id]
 				NotificationMailer.idea_comment_owner(message).deliver
 			end
@@ -183,8 +183,8 @@ class IdeasController < ApplicationController
 				  # only continue if owner was not only subscriber
 				  if message.bcc.length > 0
             message.locale = locale
-					  message.subject = I18n.t('mailer.notification.idea_comment_subscriber.subject')
-					  message.message = I18n.t('mailer.notification.idea_comment_subscriber.message')
+					  message.subject = I18n.t('mailer.notification.idea_comment_subscriber.subject', :locale => locale)
+					  message.message = I18n.t('mailer.notification.idea_comment_subscriber.message', :locale => locale)
 					  message.url_id = params[:id]
 					  NotificationMailer.idea_comment_subscriber(message).deliver
 				  end

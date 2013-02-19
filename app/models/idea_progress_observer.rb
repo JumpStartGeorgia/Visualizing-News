@@ -29,9 +29,9 @@ class IdeaProgressObserver < ActiveRecord::Observer
           message.locale = idea_progress.idea.user.notification_language 
 					message.email = idea_progress.idea.user.email
 					message.subject = I18n.t("mailer.notification.idea_realized_owner.subject",
-															:organization => idea_progress.organization.name)
+															:organization => idea_progress.organization.name, :locale => locale)
 					message.message = I18n.t("mailer.notification.idea_realized_owner.message",
-															:organization => idea_progress.organization.name)
+															:organization => idea_progress.organization.name, :locale => locale)
 					message.org_message = idea_progress.explaination
 					message.url = idea_progress.url
 					NotificationMailer.idea_realized_owner(message).deliver
@@ -49,9 +49,9 @@ class IdeaProgressObserver < ActiveRecord::Observer
 					  if message.bcc.length > 0
               message.locale = locale
 						  message.subject = I18n.t("mailer.notification.idea_realized_subscriber.subject",
-																  :organization => idea_progress.organization.name)
+																  :organization => idea_progress.organization.name, :locale => locale)
 						  message.message = I18n.t("mailer.notification.idea_realized_subscriber.message",
-																  :organization => idea_progress.organization.name)
+																  :organization => idea_progress.organization.name, :locale => locale)
 						  message.org_message = idea_progress.explaination
 						  message.url = idea_progress.url
 						  NotificationMailer.idea_realized_subscriber(message).deliver
@@ -71,9 +71,9 @@ class IdeaProgressObserver < ActiveRecord::Observer
             message.locale = idea_progress.idea.user.notification_language 
 						message.email = idea_progress.idea.user.email
 						message.subject = I18n.t("mailer.notification.idea_progress_update_owner.subject",
-																:organization => idea_progress.organization.name)
+																:organization => idea_progress.organization.name, :locale => locale)
 						message.message = I18n.t("mailer.notification.idea_progress_update_owner.message",
-																:organization => idea_progress.organization.name)
+																:organization => idea_progress.organization.name, :locale => locale)
 						message.org_message = idea_progress.explaination
 						message.url_id = idea_progress.idea_id
 						NotificationMailer.idea_progress_update_owner(message).deliver
@@ -91,9 +91,9 @@ class IdeaProgressObserver < ActiveRecord::Observer
 						  if message.bcc.length > 0
                 message.locale = locale
 							  message.subject = I18n.t("mailer.notification.idea_progress_update_subscriber.subject",
-																	  :organization => idea_progress.organization.name)
+																	  :organization => idea_progress.organization.name, :locale => locale)
 							  message.message = I18n.t("mailer.notification.idea_progress_update_subscriber.message",
-																	  :organization => idea_progress.organization.name)
+																	  :organization => idea_progress.organization.name, :locale => locale)
 							  message.org_message = idea_progress.explaination
 							  message.url_id = idea_progress.idea_id
 							  NotificationMailer.idea_progress_update_subscriber(message).deliver
@@ -108,9 +108,9 @@ class IdeaProgressObserver < ActiveRecord::Observer
             message.locale = idea_progress.idea.user.notification_language 
 						message.email = idea_progress.idea.user.email
 						message.subject = I18n.t("mailer.notification.idea_claimed_owner.subject",
-																:organization => idea_progress.organization.name)
+																:organization => idea_progress.organization.name, :locale => locale)
 						message.message = I18n.t("mailer.notification.idea_claimed_owner.message",
-																:organization => idea_progress.organization.name)
+																:organization => idea_progress.organization.name, :locale => locale)
 						message.org_message = idea_progress.explaination
 						message.url_id = idea_progress.idea_id
 						NotificationMailer.idea_claimed_owner(message).deliver
@@ -128,9 +128,9 @@ class IdeaProgressObserver < ActiveRecord::Observer
 						  if message.bcc.length > 0
                 message.locale = locale
 							  message.subject = I18n.t("mailer.notification.idea_claimed_subscriber.subject",
-																	  :organization => idea_progress.organization.name)
+																	  :organization => idea_progress.organization.name, :locale => locale)
 							  message.message = I18n.t("mailer.notification.idea_claimed_subscriber.message",
-																	  :organization => idea_progress.organization.name)
+																	  :organization => idea_progress.organization.name, :locale => locale)
 							  message.org_message = idea_progress.explaination
 							  message.url_id = idea_progress.idea_id
 							  NotificationMailer.idea_claimed_subscriber(message).deliver

@@ -133,6 +133,10 @@ class Visualization < ActiveRecord::Base
     joins(:visualization_categories).where(:visualization_categories => {:category_id => category_id})
   end
 
+  def self.by_organization(organization_id)
+    where(:organization_id => organization_id)
+  end
+
 	##############################
 	## shortcut methods to get to
 	## image file in image_file object

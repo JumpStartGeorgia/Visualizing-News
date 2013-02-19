@@ -214,6 +214,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			visual_objects = visual_objects.search_for(params[:q])
 		end
 
+    if params[:org] && @organization
+			visual_objects = visual_objects.by_organization(@organization.id)
+    end
+
 		return visual_objects
   end
 

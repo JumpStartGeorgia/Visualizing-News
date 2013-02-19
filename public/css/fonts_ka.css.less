@@ -3,7 +3,8 @@
   font-family: 'exo_regular';
   font-style: normal;
   font-weight: normal;
-  src: url('/assets/bpg_nino_elite_caps.otf');
+/*  src: url('/assets/bpg_nino_elite_caps.otf');*/
+  src: url('/assets/BPG_Dejavu_Sans_M.ttf');
 }
 
 @font-face
@@ -11,7 +12,8 @@
   font-family: 'exo_light';
   font-style: normal;
   font-weight: normal;
-  src: url('/assets/bpg_nino_elite_caps.otf');
+/*  src: url('/assets/bpg_nino_elite_caps.otf');*/
+  src: url('/assets/BPG_Dejavu_Sans_M.ttf');
 }
 
 @font-face
@@ -38,6 +40,14 @@
   src: url('/assets/themix-3-light-webfont.ttf');
 }
 
+@font-face
+{
+  font-family: 'themix_regular_en';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/themix-5-regular-webfont.ttf');
+}
+
 
 #get_involved_container a {
   font-size: 17px;
@@ -53,5 +63,33 @@
 
 
 #visualization_date, .list_idea_item h3, .list_visualization_item .content h3 {
-  font-family: themix_light_en;
+  font-family: themix_regular_en;
+}
+
+#visualization_row1a {
+  #overall_counts ul li{
+    font-size: 14px;
+  }
+}
+
+#idea_row1a {
+  #overall_counts ul li{
+    font-size: 14px;
+  }
+}
+
+.grid_idea_item, .list_idea_item{
+  .count_block {
+    ul li{
+      font-family: themix_regular_en;
+    }
+  }
+}
+
+#idea_row1a {
+  .main_block {
+    #idea_date {
+      font-family: themix_regular_en;
+    }
+  }
 }

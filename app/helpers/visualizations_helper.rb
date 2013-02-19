@@ -2,7 +2,7 @@ module VisualizationsHelper
 
 	def create_visual_path(visualization_id, user_in_org=false, organization_id=nil)
 		if user_in_org && organization_id
-			organization_visualization_path(organization_id,visualization_id)
+			organization_visualization_path(organization_id,visualization_id, remove_unwanted_params(@param_options))
 		else
 			visualization_path(visualization_id, remove_unwanted_params(@param_options))
 		end

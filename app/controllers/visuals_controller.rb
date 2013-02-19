@@ -24,7 +24,7 @@ class VisualsController < ApplicationController
         visualizations = Visualization.published
 
         # if org is provided and user is in org, show unpublished
-        if !params[:org].blank?
+        if params[:org].present?
 		      @organization = Organization.where(:organization_translations => {:permalink => params[:org]}).with_name.first
 
 		      if @organization
@@ -166,6 +166,10 @@ Rails.logger.debug "****************** user is in org"
 protected
 
   def next_previous(type)
+    if params[:org].present?
+      @organization = Organization.where(:organization_translations => {:permalink => params[:org]}).with_name.first
+    end
+
 		# get a list of visual ids in correct order
     visualizations = process_visualization_querystring(Visualization.select("visualizations.id").published.recent)
     

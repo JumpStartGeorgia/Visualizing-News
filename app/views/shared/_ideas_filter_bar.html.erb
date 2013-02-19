@@ -53,16 +53,28 @@
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to image_tag('filter_icons/all.png') + ' ' + t('filters.ideas.filter.all'), url_for(params.merge(:filter => 'all')) %>
+						<%= link_to url_for(params.merge(:filter => 'all'))  do %>
+              <div><%= image_tag('filter_icons/all.png') %></div>
+              <div><%= t('filters.ideas.filter.all')%></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/not_selected.png') + ' ' + t('filters.ideas.filter.not_selected'), url_for(params.merge(:filter => 'not_selected')) %>
+						<%= link_to url_for(params.merge(:filter => 'not_selected'))  do %>
+              <div><%= image_tag('filter_icons/not_selected.png') %></div>
+              <div><%= t('filters.ideas.filter.not_selected')%></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/in_progress.png') + ' ' + t('filters.ideas.filter.in_progress'), url_for(params.merge(:filter => 'in_progress')) %>
+						<%= link_to url_for(params.merge(:filter => 'in_progress'))  do %>
+              <div><%= image_tag('filter_icons/in_progress.png') %></div>
+              <div><%= t('filters.ideas.filter.in_progress')%></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/completed.png') + ' ' + t('filters.ideas.filter.completed'), url_for(params.merge(:filter => 'completed')) %>
+						<%= link_to url_for(params.merge(:filter => 'completed'))  do %>
+              <div><%= image_tag('filter_icons/completed.png') %></div>
+              <div><%= t('filters.ideas.filter.completed')%></div>
+            <% end %>
 					</li>
 				</ul>
 			</li>
@@ -76,13 +88,22 @@
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to image_tag('filter_icons/recent.png') + ' ' + t('filters.ideas.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
+						<%= link_to url_for(params.merge(:organize => 'recent')) do %>
+              <div><%= image_tag('filter_icons/recent.png') %></div>
+              <div><%= t('filters.ideas.organize.recent') %></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to '<span class="heart">❤</span> '.html_safe + t('filters.ideas.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
+						<%= link_to url_for(params.merge(:organize => 'likes')) do %>
+              <div><span class="heart">❤</span></div>
+              <div><%= t('filters.ideas.organize.likes') %></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/views.png') + ' ' + t('filters.ideas.organize.views'), url_for(params.merge(:organize => 'views')) %>
+						<%= link_to url_for(params.merge(:organize => 'views')) do %>
+              <div><%= image_tag('filter_icons/views.png') %></div>
+              <div><%= t('filters.ideas.organize.views')%></div>
+            <% end %>
 					</li>
 				</ul>
 			</li>
@@ -96,10 +117,16 @@
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to image_tag('filter_icons/grid.png') + ' ' + t('filters.ideas.view.grid'), url_for(params.merge(:view => 'grid')) %>
+						<%= link_to url_for(params.merge(:view => 'grid')) do %>
+              <div><%= image_tag('filter_icons/grid.png') %></div>
+              <div><%= t('filters.ideas.view.grid')%></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/list.png') + ' ' + t('filters.ideas.view.list'), url_for(params.merge(:view => 'list')) %>
+						<%= link_to url_for(params.merge(:view => 'list')) do %>
+              <div><%= image_tag('filter_icons/list.png') %></div>
+              <div><%= t('filters.ideas.view.list')%></div>
+            <% end %>
 					</li>
 				</ul>
 			</li>

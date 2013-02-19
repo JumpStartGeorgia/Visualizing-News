@@ -278,7 +278,7 @@ ka:
       in_progress: მიმდინარეობს
       realized: განხორციელებული იდეები
       post_idea: გამოაქვეყნე შენი იდეა
-      search: ძებნა
+      search: ძიება
       follow_idea: თქვენ მიიღებთ ელექტრონულ შეტყობინებას  იდეისთან დაკავშირებით სიახლეებზე.
       follow_idea_bad: იდეა ვერ მოიძებნა
       unfollow_idea: თქვენ არ მიიღებთ ელექტრონულ შეტყობინებებს სიახლეებზე.
@@ -316,7 +316,6 @@ ka:
       admin: ადმინისტრატორი
       user_profile: შენი გვერდი
       notifications: შეტყობინებები
-      search: ძიება
       facebook: Facebook
       twitter: Twitter
       rss: RSS

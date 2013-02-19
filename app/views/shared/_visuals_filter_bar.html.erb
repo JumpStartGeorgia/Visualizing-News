@@ -53,13 +53,22 @@ hide_slider = ''
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to image_tag('filter_icons/all.png') + ' ' + t('filters.visuals.type.all'), url_for(params.merge(:type => 'all')) %>
+						<%= link_to url_for(params.merge(:type => 'all')) do %>
+              <div><%= image_tag('filter_icons/all.png') %></div>
+              <div><%= t('filters.visuals.type.all') %></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/infographic.png') + ' ' + t('filters.visuals.type.infographic'), url_for(params.merge(:type => 'infographic')) %>
+						<%= link_to url_for(params.merge(:type => 'infographic')) do %>
+              <div><%= image_tag('filter_icons/infographic.png') %></div>
+              <div><%= t('filters.visuals.type.infographic') %></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/interactive.png') + ' ' + t('filters.visuals.type.interactive'), url_for(params.merge(:type => 'interactive')) %>
+						<%= link_to url_for(params.merge(:type => 'interactive')) do %>
+              <div><%= image_tag('filter_icons/interactive.png') %></div>
+              <div><%= t('filters.visuals.type.interactive') %></div>
+            <% end %>
 					</li>
 				</ul>
 			</li>
@@ -73,13 +82,22 @@ hide_slider = ''
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to image_tag('filter_icons/recent.png') + ' ' + t('filters.visuals.organize.recent'), url_for(params.merge(:organize => 'recent')) %>
+						<%= link_to url_for(params.merge(:organize => 'recent')) do %>
+              <div><%= image_tag('filter_icons/recent.png') %></div>
+              <div><%= t('filters.visuals.organize.recent') %></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to '<span class="heart">❤</span> '.html_safe + t('filters.visuals.organize.likes'), url_for(params.merge(:organize => 'likes')) %>
+						<%= link_to url_for(params.merge(:organize => 'likes')) do %>
+              <div><span class="heart">❤</span></div>
+              <div><%= t('filters.visuals.organize.likes') %></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/views.png') + ' ' + t('filters.visuals.organize.views'), url_for(params.merge(:organize => 'views')) %>
+						<%= link_to url_for(params.merge(:organize => 'views')) do %>
+              <div><%= image_tag('filter_icons/views.png') %></div>
+              <div><%= t('filters.visuals.organize.views')%></div>
+            <% end %>
 					</li>
 				</ul>
 			</li>
@@ -93,10 +111,16 @@ hide_slider = ''
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 					<li>
-						<%= link_to image_tag('filter_icons/grid.png') + ' ' + t('filters.visuals.view.grid'), url_for(params.merge(:view => 'grid')) %>
+						<%= link_to url_for(params.merge(:view => 'grid')) do %>
+              <div><%= image_tag('filter_icons/grid.png') %></div>
+              <div><%= t('filters.visuals.view.grid')%></div>
+            <% end %>
 					</li>
 					<li>
-						<%= link_to image_tag('filter_icons/list.png') + ' ' + t('filters.visuals.view.list'), url_for(params.merge(:view => 'list')) %>
+						<%= link_to url_for(params.merge(:view => 'list')) do %>
+              <div><%= image_tag('filter_icons/list.png') %></div>
+              <div><%= t('filters.visuals.view.list')%></div>
+            <% end %>
 					</li>
 				</ul>
 			</li>

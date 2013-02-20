@@ -23,7 +23,7 @@ timeout tout
 #################################
 # Load app into the master before forking workers for super-fast
 # worker spawn times
-preload_app true
+#preload_app true
 
 # http://www.rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
 if GC.respond_to?(:copy_on_write_friendly=)

@@ -17,7 +17,7 @@ class IdeaObserver < ActiveRecord::Observer
 					  index = message.bcc.index(idea.user.email)
 					  message.bcc.delete_at(index) if index
 					  # only continue if owner was not only subscriber
-					  if message.bcc.provided?
+					  if message.bcc.length > 0
   						message.locale = locale
 						  message.subject = I18n.t("mailer.notification.new_idea_subscriber.subject", :locale => locale)
 						  message.message = I18n.t("mailer.notification.new_idea_subscriber.message", :locale => locale)

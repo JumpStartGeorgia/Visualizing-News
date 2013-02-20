@@ -85,6 +85,8 @@ BootstrapStarter::Application.routes.draw do
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever
 	end
 
+  match '/unset_cookie', :to => 'root#unset_cookie', :as => :unset_cookie, :via => :get
+
 	match '', :to => redirect("/#{I18n.default_locale}") # handles /
 	match '*path', :to => redirect("/#{I18n.default_locale}/%{path}") # handles /not-a-locale/anything
 

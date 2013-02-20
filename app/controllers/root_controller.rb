@@ -57,4 +57,12 @@ class RootController < ApplicationController
 	end
 
 
+  # method for deleting queued_like cookie on server-side
+  # javascript fails to unset cookie for some reason
+  def unset_cookie
+    cookies.delete :queued_like
+    render :nothing => true
+  end
+
+
 end

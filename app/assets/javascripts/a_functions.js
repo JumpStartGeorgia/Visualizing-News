@@ -96,9 +96,10 @@ $(document).ready(function(){
     });
 
     // if there is a like action queued, do it
-    if (typeof $.cookie == 'function' && typeof $.cookie('queued_like') != 'undefined' && $.cookie('queued_like') != null && $('a.like_btn:eq(0)').length)
+    if (typeof $.cookie == 'function' && +$.cookie('queued_like') == 1)
     {
-      $.cookie('queued_like', 1, {expires: -1, path: '/'});
+      //$.cookie('queued_like', 1, {expires: -100, path: '/'});
+      $.get('/unset_cookie');
       $('a.like_btn:eq(0)').click();
     }
 

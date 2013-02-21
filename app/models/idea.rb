@@ -17,6 +17,7 @@ class Idea < ActiveRecord::Base
       :overall_votes,
       :is_inappropriate,
       :is_duplicate,
+      :is_deleted,
 			:category_ids,
 			:is_private,
       :is_public,

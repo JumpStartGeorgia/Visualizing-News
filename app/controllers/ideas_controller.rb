@@ -111,8 +111,27 @@ class IdeasController < ApplicationController
     end
   end
 
+  def edit
+    @idea = Idea.with_private(current_user).is_available.find_by_id(params[:id])
+    if @idea && user_signed_in? && @idea.user_id == current_user.id
+      if request.post?
+        @idea.update_attributes(params[:idea])
+
+        redirect_to idea_path(@idea), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.idea'))
+      else
+        respond_to do |format|
+          format.html { render :layout => 'fancybox'}
+          format.json { render json: @idea }
+        end
+      end
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+    end
+  end
+
   def delete
-    @idea = Idea.with_private(current_user).find_by_id(params[:id])
+    @idea = Idea.with_private(current_user).is_available.find_by_id(params[:id])
     if @idea && user_signed_in? && @idea.user_id == current_user.id
       @idea.is_deleted = true
       @idea.save

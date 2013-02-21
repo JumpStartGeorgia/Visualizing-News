@@ -58,6 +58,8 @@ BootstrapStarter::Application.routes.draw do
 	  match '/ideas/:id/next', :to => 'ideas#next', :as => :idea_next, :via => :get
 	  match '/ideas/:id/previous', :to => 'ideas#previous', :as => :idea_previous, :via => :get
 	  match '/ideas/:id/delete', :to => 'ideas#delete', :as => :idea_delete, :via => :get
+	  match '/ideas/:id/edit', :to => 'ideas#edit', :as => :idea_edit, :via => :get
+	  match '/ideas/:id/edit', :to => 'ideas#edit', :as => :idea_edit, :via => :post
   
 
     namespace :ideas do

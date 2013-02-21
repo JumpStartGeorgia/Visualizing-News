@@ -104,10 +104,14 @@
 			      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 						      !@idea.organization_claimed_idea?(current_user) %>
 
-              <div id="idea_progress_claim">
-				        <%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
-						        ideas_claim_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
-						        :class => 'idea_progress_btn fancybox' %>
+              <div id="idea_progress_claim_block">
+                <% current_user.organization_users.each do |record| %>
+                  <div class="idea_progress_claim">
+				            <%= link_to t('.take_ownership', :org => record.organization.name),
+						            ideas_claim_path(:idea_id => @idea.id, :organization_id => record.organization_id),
+						            :class => 'idea_progress_btn fancybox' %>
+                  </div>
+                <% end %>
               </div>
 			      <% end %>
 
@@ -177,7 +181,7 @@
 						              !last_progress.is_completed %>
                       <div class="idea_progress_add_item">
 				                <%= link_to t('.progress_update'),
-						                ideas_progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+						                ideas_progress_update_path(:idea_id => @idea.id, :organization_id => org.id),
 						                :class => 'idea_progress_btn fancybox' %>
                       </div>
 			              <% end %>

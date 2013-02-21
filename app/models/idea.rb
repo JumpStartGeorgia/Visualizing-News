@@ -49,9 +49,10 @@ class Idea < ActiveRecord::Base
 		return in_locale
 	end
 
-	# only get appropriate ideas
-	def self.appropriate
-		where(:is_inappropriate => false)
+	# only get available ideas
+  # not available if deleted, inappropriate or duplicate
+	def self.is_available
+		where(:is_inappropriate => false, :is_duplicate => false, :is_deleted => false)
 	end
 
 	def self.with_private(user=nil)

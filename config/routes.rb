@@ -39,8 +39,6 @@ BootstrapStarter::Application.routes.draw do
 		match '/visualizations/ajax', :to => 'visuals#ajax', :as => :visuals_ajax, :via => :get, :defaults => {:format => 'js'}
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
 		match '/visualizations/:id', :to => 'visuals#show', :as => :visualization, :via => :get
-		match '/visualizations/search', :to => 'visuals#search', :as => :search, :via => :get
-		match '/visualizations/search', :to => 'visuals#search', :as => :search, :via => :post
 		match '/visualizations/:id/vote/:status', :to => 'visuals#vote', :as => :visual_vote, :via => :get
 		match '/visualizations/comment_notification/:id', :to => 'visuals#comment_notification', :as => :visual_comment_notification, :via => :get
 	  match '/visualizations/:id/next', :to => 'visuals#next', :as => :visual_next, :via => :get
@@ -53,18 +51,17 @@ BootstrapStarter::Application.routes.draw do
 		match '/ideas/user/:id', :to => 'ideas#user', :as => :user_ideas, :via => :get
 		match '/ideas/organization/:id', :to => 'ideas#organization', :as => :organization_ideas, :via => :get
 		match '/ideas/create', :to => 'ideas#create', :as => :create_idea, :via => :post
-		match '/ideas/search', :to => 'ideas#search', :as => :search_ideas, :via => :get
-		match '/ideas/search', :to => 'ideas#search', :as => :search_ideas, :via => :post
 		match '/ideas/:id/vote/:status', :to => 'ideas#vote', :as => :idea_vote, :via => :get
 		match '/ideas/comment_notification/:id', :to => 'ideas#comment_notification', :as => :idea_comment_notification, :via => :get
 		match '/ideas/follow_idea/:idea_id', :to => 'ideas#follow_idea', :as => :follow_idea, :via => :get
 		match '/ideas/unfollow_idea/:idea_id', :to => 'ideas#unfollow_idea', :as => :unfollow_idea, :via => :get
 	  match '/ideas/:id/next', :to => 'ideas#next', :as => :idea_next, :via => :get
 	  match '/ideas/:id/previous', :to => 'ideas#previous', :as => :idea_previous, :via => :get
+	  match '/ideas/:id/delete', :to => 'ideas#delete', :as => :idea_delete, :via => :get
+  
 
     namespace :ideas do
   		# idea progress
-
 		  match '/progress/claim/:idea_id/:organization_id', :to => 'progress#claim', :as => :claim, :via => :get
 		  match '/progress/new/:idea_id/:organization_id', :to => 'progress#new', :as => :progress_update, :via => :get
 		  match '/progress/edit/:id', :to => 'progress#edit', :as => :edit_progress, :via => :get

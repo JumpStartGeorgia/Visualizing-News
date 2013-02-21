@@ -12,7 +12,6 @@ BootstrapStarter::Application.routes.draw do
 
 		namespace :admin do
 			resources :users
-			resources :visualizations
 			resources :categories
       resources :pages
 			resources :organizations

@@ -111,9 +111,21 @@ class Visualization < ActiveRecord::Base
     end
   end
 
-	def visualization_type_name
-    name = TYPES.keys[TYPES.values.index(self.visualization_type_id)].to_s
-		I18n.t("visualization_types.#{name}") if name
+	def visualization_type_name(english_only=false)
+    index = TYPES.values.index(self.visualization_type_id)
+    if index
+      if english_only
+        I18n.t("visualization_types.#{Visualization::TYPES.keys[index]}", :locale => :en) 
+      else
+        I18n.t("visualization_types.#{Visualization::TYPES.keys[index]}")
+      end
+    else # if not found, default to all
+      if english_only
+        I18n.t("visualization_types.all", :locale => :en) 
+      else
+        I18n.t("visualization_types.all")
+      end
+    end
 	end
 
 	def self.type_id(name)

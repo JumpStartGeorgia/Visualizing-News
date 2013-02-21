@@ -85,32 +85,9 @@ class Idea < ActiveRecord::Base
       progress_records.delete_if{|x| x.idea_id == completed.idea_id && x.organization_id == completed.organization_id}
     end
 
-		select("distinct ideas.*")
-		.joins(:idea_progresses)
-		.with_private(user)
-		.where("idea_progresses.idea_id in (?)",
-			progress_records.map{|x| x.idea_id}.uniq)
-		.order("idea_progresses.progress_date desc, ideas.created_at desc")
+		with_private(user)
+		.where("ideas.id in (?)",	progress_records.map{|x| x.idea_id}.uniq)
 
-=begin
-		if completed_ideas.present?
-			select("distinct ideas.*")
-			.joins(:idea_progresses)
-			.with_private(user)
-			.where("idea_progresses.idea_id not in (?) or idea_progresses.organization_id not in (?)",
-				completed_ideas.map{|x| x.idea_id}, completed_ideas.map{|x| x.organization_id})
-			.order("idea_progresses.progress_date desc, ideas.created_at desc")
-		else
-      progress_records = IdeaProgress.select("distinct idea_id, organization_id").with_private(user)
-
-			select("distinct ideas.*")
-			.joins(:idea_progresses)
-			.with_private(user)
-			.where("idea_progresses.idea_id in (?)",
-				progress_records.map{|x| x.idea_id}.uniq)
-			.order("idea_progresses.progress_date desc, ideas.created_at desc")
-		end
-=end
 	end
 
 	# get ideas that have only been completed
@@ -118,12 +95,8 @@ class Idea < ActiveRecord::Base
 	def self.completed(user=nil)
 		completed_ideas = IdeaProgress.select("distinct idea_id").where(:is_completed => true).with_private(user)
 
-		select("distinct ideas.*")
-		.joins(:idea_progresses)
-		.with_private(user)
-		.where("ideas.id in (?)",
-			completed_ideas.map{|x| x.idea_id})
-		.order("idea_progresses.progress_date desc, ideas.created_at desc")
+		with_private(user)
+		.where("ideas.id in (?)",	completed_ideas.map{|x| x.idea_id}.uniq)
 	end
 
 	def self.by_category(category_id)

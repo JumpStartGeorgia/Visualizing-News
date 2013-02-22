@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
         end
         number *= 2
 
-    		@ideas = process_idea_querystring(Idea.with_private(current_user).is_available.page(params[:page]).per(number))
+    		@ideas = process_idea_querystring(Idea.with_private(current_user).is_available(current_user).page(params[:page]).per(number))
 
         @ajax_call = true
         render 'shared/ideas_index'
@@ -47,7 +47,7 @@ class IdeasController < ApplicationController
 	end
 
   def show
-    @idea = Idea.with_private(current_user).is_available.find_by_id(params[:id])
+    @idea = Idea.with_private(current_user).is_available(current_user).find_by_id(params[:id])
 
    #gon.current_content = {:type => 'idea', :id => @idea.id}
 
@@ -80,7 +80,7 @@ class IdeasController < ApplicationController
 				hash[:ideas] = []
 				# if the org has an idea at this stage, get it
 				if !latest_progress.select{|x| x.idea_status_id == status.id}.empty?
-					hash[:ideas] = Idea.with_private(current_user).is_available
+					hash[:ideas] = Idea.with_private(current_user).is_available(current_user)
 						.where(:id => latest_progress.select{|x| x.idea_status_id == status.id}.map{|x| x.idea_id})
 				end
 				@ideas << hash
@@ -261,7 +261,7 @@ protected
 
   def next_previous(type)
 		# get a list of idea ids in correct order
-    ideas = process_idea_querystring(Idea.select("ideas.id").with_private(current_user).is_available)
+    ideas = process_idea_querystring(Idea.select("ideas.id").with_private(current_user).is_available(current_user))
     
     # get the idea that was showing
     idea = Idea.find_by_id(params[:id])

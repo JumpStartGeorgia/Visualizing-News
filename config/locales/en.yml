@@ -12,6 +12,7 @@ en:
       idea: Idea
       idea_inappropriate_report: Report
       idea_status: Idea Status
+      idea_progress: Idea Progress
     attributes:
       user:
         email: Email Address

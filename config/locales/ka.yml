@@ -12,6 +12,7 @@ ka:
       idea: იდეა
       idea_inappropriate_report: რეპორტი
       idea_status: იდეის სტატუსი
+      idea_progress: პროგრესი
     attributes:
       user:
         email: ელ.ფოსტა

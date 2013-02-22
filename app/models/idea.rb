@@ -51,12 +51,22 @@ class Idea < ActiveRecord::Base
 
 	# only get available ideas
   # not available if deleted, inappropriate or duplicate
-	def self.is_available
-		where(:is_inappropriate => false, :is_duplicate => false, :is_deleted => false)
+	def self.is_available(user=nil)
+	  if user && user.organizations.present?
+      sql = "(ideas.is_inappropriate = 0 and ideas.is_duplicate = 0 and ideas.is_deleted = 0) or "
+      sql << "(ideas.is_inappropriate = 1 and idea_progresses.organization_id in (:org_ids)) or "
+      sql << "(ideas.is_duplicate = 1 and idea_progresses.organization_id in (:org_ids)) or "
+      sql << "(ideas.is_deleted = 1 and idea_progresses.organization_id in (:org_ids))"
+      # get ideas that are available or that the user's org is working on
+      includes(:idea_progresses)
+      .where(sql, :org_ids => user.organization_users.map{|x| x.organization_id})
+	  else
+  		where(:is_inappropriate => false, :is_duplicate => false, :is_deleted => false)
+	  end
 	end
 
 	def self.with_private(user=nil)
-	  if user && !user.organizations.blank?
+	  if user && user.organizations.present?
       # only get private ideas if user is from the org that submitted the ideas
       includes(:user => :organization_users)
       .where("ideas.is_public = 1 or (ideas.is_public = 0 and organization_users.organization_id in (?))", user.organization_users.map{|x| x.organization_id})

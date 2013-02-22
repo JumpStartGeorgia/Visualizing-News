@@ -292,7 +292,7 @@ ka:
       permalink_exists: უკვე არსებობს მონაცემთა ბაზაში
       success_created: "%{obj} შექმნილია."
       success_updated: "%{obj} განახლებულია."
-      success_deleted: "%{obj} was successfully deleted."
+      success_deleted: "%{obj} წარმატებით წაიშალა."
       notification_yes: თქვენ მიიღებთ შეტყობინებებს.
       notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
       notification_new_visual_all_success: თქვენ მიიღებთ ვიზუალიზაციის დამატების შეტყობინებას
@@ -501,7 +501,7 @@ ka:
     search:
       title: "ძებნა: %{q}"
     edit:
-      title: "Edit Idea #%{number}"
+      title: "იდეის რედაქტირება  #%{number}"
     progress:
       form:
         title_claim: იდეაზე პასუხისმგებლობა

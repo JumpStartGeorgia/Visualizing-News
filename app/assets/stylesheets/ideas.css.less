@@ -268,13 +268,21 @@ select#idea_is_public{
       a{
         display: inline-block;
         text-transform: uppercase;
-        margin-left: 5px;
+        margin-left: 10px;
         padding: 5px 9px 4px;
-        background-color: #f88d86;
         color: #fff;
         text-decoration: none;
-        &:hover{
-          background: #ddd;
+        &#edit_idea{
+          background-color: #469e72;
+          &:hover{
+            background: #ddd;
+          }
+        }
+        &#delete_idea{
+          background-color: #de4355;
+          &:hover{
+            background: #ddd;
+          }
         }
       }
     }

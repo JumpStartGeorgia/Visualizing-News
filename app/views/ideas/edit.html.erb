@@ -1,0 +1,50 @@
+<% heading = t('.title', :number => @idea.id) %>
+<%= title heading %>
+
+ <div id="edit-idea-form">
+
+  <div class="header">
+    <%= heading %>
+  </div>
+
+  <div id="post_idea">
+    <%= form_tag idea_edit_path(@idea), :method => :post, :id => "form_new_idea" do %>
+      <ul>
+        <li class="clear">
+          <label class="control-label" for="idea_idea_categories_attributes_0_category_id">
+            <%= t('activerecord.attributes.idea_category.category_id') %>
+          </label>
+          <div class="control-group">
+            <%= select_tag 'idea_category_ids_edit', options_from_collection_for_select(@categories, "id", "name", @idea.idea_categories.map{|x| x.category_id}), 
+                :name => 'idea[category_ids][]', :multiple => true, :size => 1, :style => 'display: none;' %>
+          </div>
+        </li>
+        <li class="clear">
+          <label class="control-label" for="idea_explaination">
+            <%= t('activerecord.attributes.idea.explaination') %>
+          </label>
+          <div class="control-group">
+            <%= text_area_tag 'idea_explaination', @idea.explaination, :rows => 4, 
+                :name => 'idea[explaination]', :class => 'span5' %>
+          </div>
+        </li>
+        <li class="clear">
+            <div class="control-group">
+              <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin])%>
+                <div class="left">
+                  <input type="hidden" name="idea[is_public]" value="0" />
+                  <label title="<%= t('app.common.is_public_explanation') %>">
+                    <input type="checkbox" name="idea[is_public]" value="1" checked="checked" title="<%= t('app.common.is_public_explanation') %>" />
+                    <%= t('activerecord.attributes.idea.is_public') %>
+                  </label>
+                </div>
+              <% end %>
+            <div class="right">
+              <%= submit_tag t('app.buttons.save') %>
+            </div>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>

@@ -24,7 +24,7 @@
   }
 }
 
-#navbar-idea-form, #shared-idea-form {
+#navbar-idea-form, #shared-idea-form, #edit-idea-form {
   font-size: 12px;
   font-family: themix_light;
 
@@ -90,6 +90,13 @@
     &:hover{
       text-decoration: underline;
     }
+  }
+}
+
+#edit-idea-form{
+  .control-label {
+    float: none;
+    width: auto;
   }
 }
 
@@ -258,6 +265,18 @@ select#idea_is_public{
     #idea_date {
       float: left;
       width: 50%;
+      a{
+        display: inline-block;
+        text-transform: uppercase;
+        margin-left: 5px;
+        padding: 5px 9px 4px;
+        background-color: #f88d86;
+        color: #fff;
+        text-decoration: none;
+        &:hover{
+          background: #ddd;
+        }
+      }
     }
     .vote{
       float: right;
@@ -517,7 +536,7 @@ select#idea_is_public{
 
 
 
-#new_idea_inappropriate_report {
+#new_idea_inappropriate_report, #edit-idea-form {
   padding: 15px 30px;
   font-family: themix_light;
   .header {

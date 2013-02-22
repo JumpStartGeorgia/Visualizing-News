@@ -1,5 +1,3 @@
-<%- model_class = Idea -%>
-
 <div id="post_idea">
 
   <%= render "shared/ideas_form" %>
@@ -32,6 +30,11 @@
     <div class="main_block clear">
       <div id="idea_date">
 			  <%= l @idea.created_at, :format => :long %>
+        <% if user_signed_in? && @idea.user_id == current_user.id %>
+          <%= link_to t('helpers.links.edit'), idea_edit_path(@idea.id), :class => 'fancybox' %>
+          <%= link_to t('helpers.links.destroy'), idea_delete_path(@idea.id),
+								:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %>
+        <% end %>
       </div>
       <div class="vote">
         <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>

@@ -1,13 +1,19 @@
 <div id="ideas_progress_form_container">
 
 <% if @idea && @org %>
-	<% if params[:action].downcase == "claim" %>
-		<% title t('.title_claim') %>
-	<% elsif params[:action].downcase == "edit" || params[:action].downcase == 'update' %>
-		<% title t('.title_edit_progress') %>
-	<% else %>
-		<% title t('.title_progress_update') %>
-	<% end %>
+  <% page_title = ''
+	   if params[:action].downcase == "claim" 
+		   page_title = t('.title_claim') 
+	   elsif params[:action].downcase == "edit" || params[:action].downcase == 'update' 
+		   page_title = t('.title_edit_progress') 
+	   else 
+		   page_title = t('.title_progress_update') 
+	   end %>
+
+	<% title page_title %>
+  <div class="header">
+    <%= page_title %>
+  </div>
 
 	<p>
 		<% if @org.logo_file_name %>
@@ -45,9 +51,7 @@
 
 		<% end %>
 
-		<% if user_signed_in? %>
-		  <%= f.submit nil, :class => 'btn btn-primary' %>
-		<% end %>
+	  <%= f.submit nil %>
 	<% end %>
 
 <% else %>

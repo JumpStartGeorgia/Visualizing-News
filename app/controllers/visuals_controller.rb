@@ -86,7 +86,7 @@ Rails.logger.debug "****************** user is in org"
 			end
 
       # record the view count
-      impressionist(@visualization)
+      impressionist(@visualization) if !(@visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive')
 
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')

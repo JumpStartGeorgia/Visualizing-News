@@ -149,10 +149,11 @@ Rails.logger.debug "****************** user is in org"
 				if message.bcc && !message.bcc.empty?
 					message.locale = locale
           title = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.title
+          permalink = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.permalink
 					message.subject = I18n.t("mailer.notification.visualization_comment.subject",
 						:title => title, :locale => locale)
 					message.message = I18n.t("mailer.notification.visualization_comment.message", :locale => locale)
-					message.url_id = visualization.permalink
+					message.url_id = permalink
 					NotificationMailer.visualization_comment(message).deliver
 				end
 			end

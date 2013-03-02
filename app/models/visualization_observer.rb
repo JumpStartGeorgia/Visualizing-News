@@ -8,7 +8,7 @@ class VisualizationObserver < ActiveRecord::Observer
 	# after visualization has been created, send notification
 	def after_commit(visualization)
 		if visualization.send_notification
-      users = nil
+      users = []
 
       # if visual is not promoted, send notification
       if !visualization.is_promoted
@@ -16,6 +16,7 @@ class VisualizationObserver < ActiveRecord::Observer
         users = User.visual_promotion_users
 			  I18n.available_locales.each do |locale|
 				  message.bcc = users.select{|x| x.notification_language == locale.to_s}.map{|x| x.email}
+Rails.logger.debug "*********************************visual notification promotion users = #{message.bcc}"
 				  if message.bcc.length > 0
 					  message.locale = locale
             trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
@@ -32,8 +33,10 @@ class VisualizationObserver < ActiveRecord::Observer
 			if category_ids && !category_ids.empty?
 				message = Message.new
 				I18n.available_locales.each do |locale|
+Rails.logger.debug "***********************************test for #{locale}"
 					message.bcc = Notification.new_visual(category_ids, locale)
 					if message.bcc.length > 0
+Rails.logger.debug "***********************************have users to send to"
   				  # if the email is of user that got sent needs promotion email, remove from list
             users.each do |user|
 				      index = message.bcc.index(user.email)
@@ -41,6 +44,7 @@ class VisualizationObserver < ActiveRecord::Observer
             end
 
 					  if message.bcc.length > 0
+Rails.logger.debug "***********************************visual notification users = #{message.bcc}"
 						  message.locale = locale
               trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
 						  message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)

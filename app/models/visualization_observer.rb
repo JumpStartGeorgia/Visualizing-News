@@ -16,11 +16,11 @@ class VisualizationObserver < ActiveRecord::Observer
 					message.bcc = Notification.new_visual(category_ids, locale)
 					if message.bcc.length > 0
 						message.locale = locale
-            title = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.title
+            trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
 						message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)
-						message.message = I18n.t("mailer.notification.new_visualization.message",
-							:title => title, :locale => locale)
-						message.url_id = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.permalink
+						message.message = I18n.t("mailer.notification.new_visualization.message", :title => trans.title, :locale => locale)
+						message.org_message = trans.explanation
+						message.url_id = trans.permalink
 						NotificationMailer.new_visualization(message).deliver
 					end
 				end

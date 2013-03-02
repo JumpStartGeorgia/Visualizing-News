@@ -14,7 +14,7 @@ class OrganizationsController < ApplicationController
 		if @organization
 			# see if user is in this org
 			@user_in_org = false
-      if user_signed_in? && !current_user.organization_ids.index(@organization.id).nil?
+      if user_signed_in? && current_user.organization_ids.index(@organization.id)
 				@user_in_org = true
 			end
 

@@ -216,6 +216,7 @@ en:
         all: All
         infographic: Infographic
         interactive: Interactive
+        not_published: Not Published
       view:
         header: Layout
         grid: Grid

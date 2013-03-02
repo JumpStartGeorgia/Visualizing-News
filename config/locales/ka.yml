@@ -216,6 +216,7 @@ ka:
         all: ყველა
         infographic: ინფოგრაფიკა
         interactive: ინტერაქტივი
+        not_published: გამოუქვეყნებელი
       view:
         header: განლაგება
         grid: ბადე

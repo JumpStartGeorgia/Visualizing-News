@@ -48,6 +48,7 @@ class Visualization < ActiveRecord::Base
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
 	validate :required_fields_for_type
   validate :validate_if_published
+  before_save :set_promoted_at
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :likes, lambda {with_translations(I18n.locale).order("visualizations.overall_votes DESC, visualization_translations.title ASC")}
@@ -59,6 +60,14 @@ class Visualization < ActiveRecord::Base
 	def set_languages
     if self.languages_internal
       self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",")
+    end
+  end
+
+  def set_promoted_at
+    if self.is_promoted
+      self.promoted_at = Date.today.strftime('%F')
+    else
+      self.promoted_at = nil
     end
   end
 

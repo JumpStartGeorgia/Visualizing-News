@@ -188,6 +188,10 @@
 				<%= f.input :categories, :as => :check_boxes, :collection => @categories %>
 				<%= f.input :published, :as => :radio %>
 				<%= f.input :published_date, :as => :string, :input_html => {:size => 20} %>
+
+        <% if current_user.role?(User::ROLES[:visual_promotion]) %>
+				  <%= f.input :is_promoted, :as => :radio %>
+        <% end %>
 			<% end %>
 
 		</div>

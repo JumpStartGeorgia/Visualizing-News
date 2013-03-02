@@ -61,6 +61,8 @@ ka:
         dataset: მონაცემები
 #        visual: ვიზუალური ფაილი
         visualization_categories: კატეგორიები
+        is_promoted: Promote to Home Page?
+        promoted_at: Date Promoted
       visualization_translation:
         title: სათაური
         permalink: ბმულის სახელი

@@ -61,6 +61,8 @@ en:
         dataset: Dataset File
 #        visual: Visual File
         visualization_categories: Categories
+        is_promoted: Promote to Home Page?
+        promoted_at: Date Promoted
       visualization_translation:
         title: Title
         permalink: Name in URL

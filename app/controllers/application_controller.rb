@@ -187,6 +187,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		if params[:type]
       if params[:type] == 'not_published'
 			  visual_objects = visual_objects.unpublished
+      elsif params[:type] == 'not_promoted'
+			  visual_objects = visual_objects.not_promoted
       else
 			  type_id = Visualization.type_id(params[:type])
 			  visual_objects = visual_objects.by_type(type_id) if type_id

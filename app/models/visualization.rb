@@ -56,6 +56,7 @@ class Visualization < ActiveRecord::Base
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
   scope :promoted, where("is_promoted = '1'")
+  scope :not_promoted, where("is_promoted = '0'")
 
 	def set_languages
     if self.languages_internal

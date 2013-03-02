@@ -221,6 +221,7 @@ en:
         infographic: Infographic
         interactive: Interactive
         not_published: Not Published
+        not_promoted: Not Promoted
       view:
         header: Layout
         grid: Grid

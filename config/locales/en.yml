@@ -136,10 +136,10 @@ en:
         message: "Thank you for becoming a member of feradi.info and contributing to colorful news.  You can manage when you would like to receive emails from feradi.info by clicking on the following link."
       new_visualization:
         subject: "A new visualization has been added to feradi.info!"
-        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+        message: "A new visualization titled '%{title}' has been added.  This is the description of the visual:"
       new_visualization_needs_promotion:
         subject: "A new visualization has been added to feradi.info and needs review for promotion to homepage"
-        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+        message: "A new visualization titled '%{title}' has been added.  This is the description of the visual:"
       visualization_comment:
         subject: "Someone has commented on your visualization '%{title}' on feradi.info"
         message: "Please click on the link below to view the comment."

@@ -30,7 +30,8 @@ class Visualization < ActiveRecord::Base
 			:interactive_url_old,
 			:visual_is_cropped_old,
 			:data_source_url_old,
-			:languages, :languages_internal
+			:languages, :languages_internal,
+      :is_promoted, :promoted_at
 	attr_accessor :send_notification, :was_published, :languages_internal
 
  paginates_per 8
@@ -53,6 +54,7 @@ class Visualization < ActiveRecord::Base
   scope :views, lambda {with_translations(I18n.locale).order("visualizations.impressions_count DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
+  scope :promoted, where("is_promoted = '1'")
 
 	def set_languages
     if self.languages_internal

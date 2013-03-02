@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221123142) do
+ActiveRecord::Schema.define(:version => 20130302074432) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -332,9 +332,12 @@ ActiveRecord::Schema.define(:version => 20130221123142) do
     t.boolean  "visual_is_cropped_old",    :default => false
     t.string   "languages"
     t.integer  "impressions_count",        :default => 0
+    t.boolean  "is_promoted",              :default => false
+    t.date     "promoted_at"
   end
 
   add_index "visualizations", ["impressions_count"], :name => "index_visualizations_on_impressions_count"
+  add_index "visualizations", ["is_promoted", "promoted_at"], :name => "idx_visuals_promotion"
   add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"
   add_index "visualizations", ["published"], :name => "index_visualizations_on_published"
   add_index "visualizations", ["published_date"], :name => "index_visualizations_on_published_date"

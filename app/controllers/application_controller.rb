@@ -180,6 +180,10 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
     set_visualization_view_type
 
+    if params[:promoted] == "true"
+		  visual_objects = visual_objects.promoted
+    end
+
 		if params[:type]
       if params[:type] == 'not_published'
 			  visual_objects = visual_objects.unpublished

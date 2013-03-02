@@ -1,7 +1,7 @@
 class RootController < ApplicationController
 
   def index
-    gon.ajax_path = visuals_ajax_path(:format => :js, :max => 4, :sidebar => true)
+    gon.ajax_path = visuals_ajax_path(:format => :js, :max => 4, :sidebar => true, :promoted => true)
 
     set_visualization_view_type # in app controller
 

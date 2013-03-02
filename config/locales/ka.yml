@@ -205,6 +205,8 @@ ka:
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
       follow_idea: მიყევი
       unfollow_idea: აღარ მიყვე
+      promote: Promote to Homepage
+      unpromote: Remove from Homepage
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -310,6 +312,8 @@ ka:
       notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
       no_visual_records: თქვენი მოთხოვნის შესაბამისი ვიზუალიზაცია არ მოიძებნა.
       no_idea_records: თქვენი მოთხოვნის შესაბამისი იდეა არ მოიძებნა.
+      visual_promoted: The visualization has been promoted to the home page.
+      visual_unpromoted: The visualization will no longer appear on the home page.
   layouts:
     application:
       menu_visual: ვიზუალიზაციები

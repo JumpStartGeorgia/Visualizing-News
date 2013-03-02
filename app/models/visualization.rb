@@ -64,12 +64,9 @@ class Visualization < ActiveRecord::Base
   end
 
   def set_promoted_at
-Rails.logger.debug "/***************************** is promoted = '#{self.is_promoted}'"
     if self.is_promoted.nil?
-Rails.logger.debug "/***************************** is promoted is nil"
       self.promoted_at = nil
-    elsif self.promoted_at.nil? && self.is_promoted
-Rails.logger.debug "/***************************** is promoted, setting date"
+    elsif self.is_promoted && self.promoted_at.nil?
       self.promoted_at = Date.today.strftime('%F')
     end
   end

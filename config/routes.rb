@@ -43,6 +43,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/visualizations/comment_notification/:id', :to => 'visuals#comment_notification', :as => :visual_comment_notification, :via => :get
 	  match '/visualizations/:id/next', :to => 'visuals#next', :as => :visual_next, :via => :get
 	  match '/visualizations/:id/previous', :to => 'visuals#previous', :as => :visual_previous, :via => :get
+	  match '/visualizations/:id/promote', :to => 'visuals#promote', :as => :visual_promote, :via => :get
+	  match '/visualizations/:id/unpromote', :to => 'visuals#unpromote', :as => :visual_unpromote, :via => :get
 
     # ideas
 		match '/ideas/ajax', :to => 'ideas#ajax', :as => :ideas_ajax, :via => :get, :defaults => {:format => 'js'}

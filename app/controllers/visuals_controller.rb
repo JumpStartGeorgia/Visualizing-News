@@ -3,6 +3,9 @@
 # this controller is the public view to the visuals
 ####################
 class VisualsController < ApplicationController
+  before_filter(:only => [:promote, :unpromote]) do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:visual_promotion])
+  end
 
   def ajax
     respond_to do |format|
@@ -165,6 +168,36 @@ Rails.logger.debug "****************** user is in org"
 		return false
 	end
 
+
+  def promote
+    visualization = Visualization.published.find_by_permalink(params[:id])
+    if visualization
+      if !visualization.is_promoted
+        visualization.is_promoted = true
+        visualization.save
+        flash[:notice] = t('app.msgs.visual_promoted')
+      end
+      redirect_to visualization_path(visualization.permalink, @param_options)
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
+    end
+  end
+
+  def unpromote
+    visualization = Visualization.published.find_by_permalink(params[:id])
+    if visualization
+      if visualization.is_promoted
+        visualization.is_promoted = false
+        visualization.save
+        flash[:notice] = t('app.msgs.visual_unpromoted')
+      end
+      redirect_to visualization_path(visualization.permalink, @param_options)
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
+    end
+  end
 protected
 
   def next_previous(type)

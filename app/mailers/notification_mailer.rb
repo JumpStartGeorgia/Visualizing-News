@@ -16,6 +16,11 @@ class NotificationMailer < ActionMailer::Base
     mail(:bcc => message.bcc, :subject => message.subject)
   end
 
+  def new_visualization_needs_promotion(message)
+    @message = message
+    mail(:bcc => message.bcc, :subject => message.subject)
+  end
+
   def visualization_comment(message)
     @message = message
     mail(:bcc => message.bcc, :subject => message.subject)

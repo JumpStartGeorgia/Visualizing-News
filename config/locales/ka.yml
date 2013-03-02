@@ -137,6 +137,9 @@ ka:
       new_visualization:
         subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
         message: "feradi.info-ს ახალი ვიზუალიზაცია, სახელწოდებით '%{title}', დაემატა. მიჰყევით შემდეგ ბმულს ახალი ვიზუალიზაციის სანახავად."
+      new_visualization_needs_promotion:
+        subject: "A new visualization has been added to feradi.info and needs review for promotion to homepage"
+        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
       visualization_comment:
         subject: "feradi.info-ზე თქვენ მიერ განთავსებულ ვიზუალიზაციაზე დატოვა '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყვეთ შემდეგ ბმულს."

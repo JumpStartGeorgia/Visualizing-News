@@ -75,6 +75,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+  def self.visual_promotion_users
+    where("role >= ?", ROLES[:visual_promotion])
+  end
+
 	##############################
 	## omniauth methods
 	##############################

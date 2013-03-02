@@ -86,8 +86,10 @@ $(document).ready(function(){
 		// if record is published, show pub date field by default
 		if ($('input:radio[name="visualization[published]"]:checked').val() === 'true') {
 			$('#visualization_published_date_input').show();
+			$('#visualization_is_promoted_input').show();
 		} else {
 			$('#visualization_published_date_input').hide();
+			$('#visualization_is_promoted_input').hide();
 		}
 
 		// if record is marked as published, show pub date field
@@ -95,10 +97,14 @@ $(document).ready(function(){
 			if ($(this).val() === 'true'){
 				// show url textbox
 			  $('#visualization_published_date_input').show(300);
+  			$('#visualization_is_promoted_input').show(300);
 			} else {
 				// clear and hide pub date textbox
 				$('#visualization_published_date').attr('value', '');
 			  $('#visualization_published_date_input').hide(300);
+				$('#visualization_is_promoted_true').removeAttr('checked');
+				$('#visualization_is_promoted_false').attr('checked', 'checked');
+  			$('#visualization_is_promoted_input').hide(300);
 			}
 		});
 

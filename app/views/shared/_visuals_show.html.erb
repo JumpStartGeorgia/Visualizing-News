@@ -15,7 +15,7 @@
 			<% else %>
 				<div class="not_published"><%= t('app.common.not_published') %></div>
 			<% end %>
-      <% if user_signed_in? && current_user.role?(User::ROLES[:visual_promotion]) %>
+      <% if @visualization.published && user_signed_in? && current_user.role?(User::ROLES[:visual_promotion]) %>
         <% if @visualization.is_promoted %>
           <%= link_to t('helpers.links.unpromote'), visual_unpromote_path(params[:id]), :id => 'unpromote_visual',
 							  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %>

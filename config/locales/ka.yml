@@ -61,8 +61,8 @@ ka:
         dataset: მონაცემები
 #        visual: ვიზუალური ფაილი
         visualization_categories: კატეგორიები
-        is_promoted: Promote to Home Page?
-        promoted_at: Date Promoted
+        is_promoted: საწყის გვერდზე დაწინაურება?
+        promoted_at: თარიღი დაწინაურდა
       visualization_translation:
         title: სათაური
         permalink: ბმულის სახელი
@@ -136,10 +136,10 @@ ka:
         message: "მადლობას გიხდით feradi.info-ზე გაწევრიანებისთვის. ამით თქვენ ეხმარებით ახალი ფერადი ამბების შექმნას. თქვენ შეგიძლიათ მართოთ feradi.info-სგან მიღებული ელექტრონული წერილები შემდეგი ბმულის საშუალებით."
       new_visualization:
         subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
-        message: "A new visualization titled '%{title}' has been added.  This is the description of the visual:"
+        message: "ახალი ვიზუალიზაცია სახელად '%{title}' დაემატა. ვიზუალის აღწერა:"
       new_visualization_needs_promotion:
-        subject: "A new visualization has been added to feradi.info and needs review for promotion to the homepage"
-        message: "A new visualization titled '%{title}' has been added.  This is the description of the visual:"
+        subject: "ახალი ვიზუალიზაცია დაემატა feradi.info-ს და სჭირდება განხილვა საწყის გვერდზე დასაწინაურებლად"
+        message: "ახალი ვიზუალიზაცია სახელად '%{title}' დაემატა. ვიზუალის აღწერა:"
       visualization_comment:
         subject: "feradi.info-ზე თქვენ მიერ განთავსებულ ვიზუალიზაციაზე დატოვა '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყვეთ შემდეგ ბმულს."
@@ -208,8 +208,8 @@ ka:
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
       follow_idea: მიყევი
       unfollow_idea: აღარ მიყვე
-      promote: Promote to Homepage
-      unpromote: Remove from Homepage
+      promote: საწყის გვერდზე დაწინაურება
+      unpromote: საწყისი გვერდიდან წაშლა
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -224,7 +224,7 @@ ka:
         infographic: ინფოგრაფიკა
         interactive: ინტერაქტივი
         not_published: გამოუქვეყნებელი
-        not_promoted: Not Promoted
+        not_promoted: არ დაწინაურდა
       view:
         header: განლაგება
         grid: ბადე
@@ -316,8 +316,8 @@ ka:
       notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
       no_visual_records: თქვენი მოთხოვნის შესაბამისი ვიზუალიზაცია არ მოიძებნა.
       no_idea_records: თქვენი მოთხოვნის შესაბამისი იდეა არ მოიძებნა.
-      visual_promoted: The visualization has been promoted to the home page.
-      visual_unpromoted: The visualization will no longer appear on the home page.
+      visual_promoted: ვიზუალიზაცია დაწინაურდა საწყის გვერდზე.
+      visual_unpromoted: ვიზუალიზაცია აღარ გამოჩნდება საწყის გვერდზე .
   layouts:
     application:
       menu_visual: ვიზუალიზაციები

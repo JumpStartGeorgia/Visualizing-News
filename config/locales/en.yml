@@ -143,6 +143,9 @@ en:
       visualization_comment:
         subject: "Someone has commented on your visualization '%{title}' on feradi.info"
         message: "Please click on the link below to view the comment."
+      visualization_promoted:
+        subject: "Your visualization '%{title}' has been promoted to the front page on feradi.info!"
+        message: "Congratulations!  feradi.info has promoted your visualization to the home page."
       idea_claimed_owner:
         subject: "%{organization} is interested in your idea!"
         message: "%{organization} has expressed interest in writing a story about your idea.  This is what they wrote:"

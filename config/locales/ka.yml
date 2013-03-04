@@ -61,8 +61,8 @@ ka:
         dataset: მონაცემები
 #        visual: ვიზუალური ფაილი
         visualization_categories: კატეგორიები
-        is_promoted: საწყის გვერდზე დაწინაურება?
-        promoted_at: თარიღი დაწინაურდა
+        is_promoted: მთავარ გვერდზე დაწინაურება?
+        promoted_at: დაწინაურების თარიღი
       visualization_translation:
         title: სათაური
         permalink: ბმულის სახელი
@@ -138,11 +138,14 @@ ka:
         subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
         message: "ახალი ვიზუალიზაცია სახელად '%{title}' დაემატა. ვიზუალის აღწერა:"
       new_visualization_needs_promotion:
-        subject: "ახალი ვიზუალიზაცია დაემატა feradi.info-ს და სჭირდება განხილვა საწყის გვერდზე დასაწინაურებლად"
+        subject: "ახალი ვიზუალიზაცია დაემატა feradi.info-ს და სჭირდება განხილვა მთავარ გვერდზე დასაწინაურებლად"
         message: "ახალი ვიზუალიზაცია სახელად '%{title}' დაემატა. ვიზუალის აღწერა:"
       visualization_comment:
         subject: "feradi.info-ზე თქვენ მიერ განთავსებულ ვიზუალიზაციაზე დატოვა '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყვეთ შემდეგ ბმულს."
+      visualization_promoted:
+        subject: "თქვენი ვიზუალიზაცია '%{title}'  დაწინაურდა  feradi.info-ს მთავარ გვერდზე!"
+        message: "გილოცავთ! feradi.info-მ თქვენი ვიზუალიზაცია განათავსა მთავარ გვერდზე."
       idea_claimed_owner:
         subject: "%{organization} დაინტერესებულია თქვენი იდეით!"
         message: "%{organization} გამოეხმაურა თქვენს იდეას.  მათ დაწერეს:"
@@ -208,8 +211,8 @@ ka:
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
       follow_idea: მიყევი
       unfollow_idea: აღარ მიყვე
-      promote: საწყის გვერდზე დაწინაურება
-      unpromote: საწყისი გვერდიდან წაშლა
+      promote: მთავარ გვერდზე დაწინაურება
+      unpromote: მთავარი გვერდიდან წაშლა
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -316,8 +319,8 @@ ka:
       notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
       no_visual_records: თქვენი მოთხოვნის შესაბამისი ვიზუალიზაცია არ მოიძებნა.
       no_idea_records: თქვენი მოთხოვნის შესაბამისი იდეა არ მოიძებნა.
-      visual_promoted: ვიზუალიზაცია დაწინაურდა საწყის გვერდზე.
-      visual_unpromoted: ვიზუალიზაცია აღარ გამოჩნდება საწყის გვერდზე .
+      visual_promoted: ვიზუალიზაცია დაწინაურდა მთავარ გვერდზე.
+      visual_unpromoted: ვიზუალიზაცია აღარ გამოჩნდება მთავარ გვერდზე.
   layouts:
     application:
       menu_visual: ვიზუალიზაციები

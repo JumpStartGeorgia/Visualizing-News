@@ -26,6 +26,11 @@ class NotificationMailer < ActionMailer::Base
     mail(:bcc => message.bcc, :subject => message.subject)
   end
 
+  def visualization_promoted(message)
+    @message = message
+    mail(:bcc => message.bcc, :subject => message.subject)
+  end
+
   ######### idea subscribers
   def new_idea_subscriber(message)
     @message = message

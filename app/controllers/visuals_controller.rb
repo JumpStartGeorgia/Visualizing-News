@@ -176,6 +176,22 @@ Rails.logger.debug "****************** user is in org"
         visualization.is_promoted = true
         visualization.save
         flash[:notice] = t('app.msgs.visual_promoted')
+
+        # notify org users
+			  message = Message.new
+        users = User.organization_users(visualization.organization_id)
+			  I18n.available_locales.each do |locale|
+				  message.bcc = users.select{|x| x.notification_language == locale.to_s}.map{|x| x.email}
+				  if message.bcc.length > 0
+					  message.locale = locale
+            trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+					  message.subject = I18n.t("mailer.notification.visualization_promoted.subject", :title => trans.title, :locale => locale)
+					  message.message = I18n.t("mailer.notification.visualization_promoted.message", :locale => locale)
+					  message.url_id = trans.permalink
+					  NotificationMailer.visualization_promoted(message).deliver
+				  end
+			  end
+
       end
       redirect_to visualization_path(visualization.permalink, @param_options)
     else

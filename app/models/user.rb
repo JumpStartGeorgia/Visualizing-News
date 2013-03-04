@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     where("role >= ?", ROLES[:visual_promotion])
   end
 
+  def self.organization_users(organization_id)
+    joins(:organization_users).where("users.role >= ? and organization_users.organization_id = ?", ROLES[:org_admin], organization_id)
+  end
+
 	##############################
 	## omniauth methods
 	##############################

@@ -12,6 +12,7 @@ en:
       idea: Idea
       idea_inappropriate_report: Report
       idea_status: Idea Status
+      idea_progress: Idea Progress
     attributes:
       user:
         email: Email Address
@@ -60,6 +61,8 @@ en:
         dataset: Dataset File
 #        visual: Visual File
         visualization_categories: Categories
+        is_promoted: Promote to Home Page?
+        promoted_at: Date Promoted
       visualization_translation:
         title: Title
         permalink: Name in URL
@@ -133,10 +136,16 @@ en:
         message: "Thank you for becoming a member of feradi.info and contributing to colorful news.  You can manage when you would like to receive emails from feradi.info by clicking on the following link."
       new_visualization:
         subject: "A new visualization has been added to feradi.info!"
-        message: "A new visualization titled '%{title}' has been added.  Click on the following link to view it."
+        message: "A new visualization titled '%{title}' has been added.  This is the description of the visual:"
+      new_visualization_needs_promotion:
+        subject: "A new visualization has been added to feradi.info and needs review for promotion to the homepage"
+        message: "A new visualization titled '%{title}' has been added.  This is the description of the visual:"
       visualization_comment:
         subject: "Someone has commented on your visualization '%{title}' on feradi.info"
         message: "Please click on the link below to view the comment."
+      visualization_promoted:
+        subject: "Your visualization '%{title}' has been promoted to the front page on feradi.info!"
+        message: "Congratulations!  feradi.info has promoted your visualization to the home page."
       idea_claimed_owner:
         subject: "%{organization} is interested in your idea!"
         message: "%{organization} has expressed interest in writing a story about your idea.  This is what they wrote:"
@@ -202,6 +211,8 @@ en:
       report_inappropriate: Report Inappropriate Idea
       follow_idea: Follow
       unfollow_idea: Unfollow
+      promote: Promote to Homepage
+      unpromote: Remove from Homepage
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -215,6 +226,8 @@ en:
         all: All
         infographic: Infographic
         interactive: Interactive
+        not_published: Not Published
+        not_promoted: Not Promoted
       view:
         header: Layout
         grid: Grid
@@ -292,6 +305,7 @@ en:
       permalink_exists: already exists in the database
       success_created: "%{obj} was successfully created."
       success_updated: "%{obj} was successfully updated."
+      success_deleted: "%{obj} was successfully deleted."
       notification_yes: You will be sent notifications.
       notification_no: You will not be sent notifications.
       notification_new_visual_all_success: You will recieve a notification whenever a visualization is added.
@@ -305,6 +319,8 @@ en:
       notification_language: You will be sent notifications in %{language}.
       no_visual_records: No visualization records match your selection.
       no_idea_records: No ideas match your selection.
+      visual_promoted: The visualization has been promoted to the home page.
+      visual_unpromoted: The visualization will no longer appear on the home page.
   layouts:
     application:
       menu_visual: Visualizations
@@ -499,6 +515,8 @@ en:
       status: Status
     search:
       title: "Search: %{q}"
+    edit:
+      title: "Edit Idea #%{number}"
     progress:
       form:
         title_claim: Claim Idea

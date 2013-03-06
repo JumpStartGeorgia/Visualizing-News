@@ -8,3 +8,11 @@
 //= require vendor
 //= require visualizations
 //= require ideas
+
+  // register jquery multi select
+  // - category list in ideas form
+  $('select#idea_category_ids_edit').multiselect({
+    header: false,
+    noneSelectedText: ''
+  });
+

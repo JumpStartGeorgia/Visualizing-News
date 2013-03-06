@@ -180,11 +180,21 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
     set_visualization_view_type
 
+    if params[:promoted] == "true"
+		  visual_objects = visual_objects.promoted
+    end
+
 		if params[:type]
-			type_id = Visualization.type_id(params[:type])
-			visual_objects = visual_objects.by_type(type_id) if type_id
-			@visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
-			@visuals_filter_type_icon = params[:type]
+      if params[:type] == 'not_published'
+			  visual_objects = visual_objects.unpublished
+      elsif params[:type] == 'not_promoted'
+			  visual_objects = visual_objects.not_promoted
+      else
+			  type_id = Visualization.type_id(params[:type])
+			  visual_objects = visual_objects.by_type(type_id) if type_id
+      end
+		  @visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
+		  @visuals_filter_type_icon = params[:type]
 		else
 			@visuals_filter_type_icon = 'all'
 		end

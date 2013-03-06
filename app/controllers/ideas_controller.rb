@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
         end
         number *= 2
 
-    		@ideas = process_idea_querystring(Idea.with_private(current_user).appropriate.page(params[:page]).per(number))
+    		@ideas = process_idea_querystring(Idea.with_private(current_user).is_available(current_user).page(params[:page]).per(number))
 
         @ajax_call = true
         render 'shared/ideas_index'
@@ -47,7 +47,7 @@ class IdeasController < ApplicationController
 	end
 
   def show
-    @idea = Idea.with_private(current_user).find_by_id(params[:id])
+    @idea = Idea.with_private(current_user).is_available(current_user).find_by_id(params[:id])
 
    #gon.current_content = {:type => 'idea', :id => @idea.id}
 
@@ -80,7 +80,7 @@ class IdeasController < ApplicationController
 				hash[:ideas] = []
 				# if the org has an idea at this stage, get it
 				if !latest_progress.select{|x| x.idea_status_id == status.id}.empty?
-					hash[:ideas] = Idea.with_private(current_user).appropriate
+					hash[:ideas] = Idea.with_private(current_user).is_available(current_user)
 						.where(:id => latest_progress.select{|x| x.idea_status_id == status.id}.map{|x| x.idea_id})
 				end
 				@ideas << hash
@@ -88,16 +88,6 @@ class IdeasController < ApplicationController
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
 			redirect_to root_path
-		end
-	end
-
-	def search
-		if params[:q]
-			new_ideas = Idea.with_private(current_user).new_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
-			top_ideas = Idea.with_private(current_user).top_ideas.search_by(params[:q]).appropriate#.paginate(:page => params[:page])
-			in_progress_ideas = Idea.with_private(current_user).in_progress_ideas(current_user).search_by(params[:q]).appropriate#.paginate(:page => params[:page])
-			completed_ideas = Idea.with_private(current_user).completed_ideas(current_user).search_by(params[:q]).appropriate#.paginate(:page => params[:page])
-			@ideas = {:new => new_ideas, :top => top_ideas, :in_progress => in_progress_ideas, :realized => completed_ideas}
 		end
 	end
 
@@ -112,12 +102,44 @@ class IdeasController < ApplicationController
 
     respond_to do |format|
       if @idea.save
-        format.html { redirect_to idea_path(@idea), notice: 'Idea was successfully created.' }
+        format.html { redirect_to idea_path(@idea), notice: t('app.msgs.success_created', :obj => t('activerecord.models.idea')) }
         format.json { render json: @idea, status: :created, location: @idea }
       else
         format.html { redirect_to previous_page }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def edit
+    @idea = Idea.with_private(current_user).is_available.find_by_id(params[:id])
+    if @idea && user_signed_in? && @idea.user_id == current_user.id
+      if request.post?
+        @idea.update_attributes(params[:idea])
+
+        redirect_to idea_path(@idea), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.idea'))
+      else
+        respond_to do |format|
+          format.html { render :layout => 'fancybox'}
+          format.json { render json: @idea }
+        end
+      end
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
+    end
+  end
+
+  def delete
+    @idea = Idea.with_private(current_user).is_available.find_by_id(params[:id])
+    if @idea && user_signed_in? && @idea.user_id == current_user.id
+      @idea.is_deleted = true
+      @idea.save
+
+      redirect_to ideas_path, notice: t('app.msgs.success_deleted', :obj => t('activerecord.models.idea'))
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path
     end
   end
 
@@ -166,8 +188,8 @@ class IdeasController < ApplicationController
 				message = Message.new
         message.locale = idea.user.notification_language 
 				message.email = idea.user.email
-				message.subject = I18n.t('mailer.notification.idea_comment_owner.subject', :locale => locale)
-				message.message = I18n.t('mailer.notification.idea_comment_owner.message', :locale => locale)
+				message.subject = I18n.t('mailer.notification.idea_comment_owner.subject', :locale => message.locale)
+				message.message = I18n.t('mailer.notification.idea_comment_owner.message', :locale => message.locale)
 				message.url_id = params[:id]
 				NotificationMailer.idea_comment_owner(message).deliver
 			end
@@ -239,7 +261,7 @@ protected
 
   def next_previous(type)
 		# get a list of idea ids in correct order
-    ideas = process_idea_querystring(Idea.select("ideas.id").with_private(current_user).appropriate)
+    ideas = process_idea_querystring(Idea.select("ideas.id").with_private(current_user).is_available(current_user))
     
     # get the idea that was showing
     idea = Idea.find_by_id(params[:id])

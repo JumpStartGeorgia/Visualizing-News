@@ -19,8 +19,8 @@
                     :title => visualization.title) %>
   		      <% else %>
     		      <%= link_to(image_tag('image_placeholder.png'), 
-                    create_visual_path(visualization.permalink, @user_in_org, params[:org], 
-                    :title => visualization.title)) %>
+                    create_visual_path(visualization.permalink, @user_in_org, params[:org]), 
+                    :title => visualization.title) %>
   		      <% end %>
   		    </div>
   		    <div class="title">
@@ -44,7 +44,7 @@
                 </li>
               </ul>
   					</div>
-  					<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && !params[:org].blank? %>
+  					<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && params[:org].present? %>
   						<div>
   					    <%= link_to t('.edit', :default => t("helpers.links.edit")),
   					                edit_organization_visualization_path(params[:org], visualization.permalink),

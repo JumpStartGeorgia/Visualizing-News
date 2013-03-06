@@ -12,6 +12,7 @@ ka:
       idea: იდეა
       idea_inappropriate_report: რეპორტი
       idea_status: იდეის სტატუსი
+      idea_progress: პროგრესი
     attributes:
       user:
         email: ელ.ფოსტა
@@ -60,6 +61,8 @@ ka:
         dataset: მონაცემები
 #        visual: ვიზუალური ფაილი
         visualization_categories: კატეგორიები
+        is_promoted: მთავარ გვერდზე დაწინაურება?
+        promoted_at: დაწინაურების თარიღი
       visualization_translation:
         title: სათაური
         permalink: ბმულის სახელი
@@ -133,10 +136,16 @@ ka:
         message: "მადლობას გიხდით feradi.info-ზე გაწევრიანებისთვის. ამით თქვენ ეხმარებით ახალი ფერადი ამბების შექმნას. თქვენ შეგიძლიათ მართოთ feradi.info-სგან მიღებული ელექტრონული წერილები შემდეგი ბმულის საშუალებით."
       new_visualization:
         subject: "feradi.info-ს ახალი ვიზუალიზაცია დაემატა!"
-        message: "feradi.info-ს ახალი ვიზუალიზაცია, სახელწოდებით '%{title}', დაემატა. მიჰყევით შემდეგ ბმულს ახალი ვიზუალიზაციის სანახავად."
+        message: "ახალი ვიზუალიზაცია სახელად '%{title}' დაემატა. ვიზუალის აღწერა:"
+      new_visualization_needs_promotion:
+        subject: "ახალი ვიზუალიზაცია დაემატა feradi.info-ს და სჭირდება განხილვა მთავარ გვერდზე დასაწინაურებლად"
+        message: "ახალი ვიზუალიზაცია სახელად '%{title}' დაემატა. ვიზუალის აღწერა:"
       visualization_comment:
         subject: "feradi.info-ზე თქვენ მიერ განთავსებულ ვიზუალიზაციაზე დატოვა '%{title}' დააკომენტარა."
         message: "გთხოვთ, კომენტარის სანახავად მიჰყვეთ შემდეგ ბმულს."
+      visualization_promoted:
+        subject: "თქვენი ვიზუალიზაცია '%{title}'  დაწინაურდა  feradi.info-ს მთავარ გვერდზე!"
+        message: "გილოცავთ! feradi.info-მ თქვენი ვიზუალიზაცია განათავსა მთავარ გვერდზე."
       idea_claimed_owner:
         subject: "%{organization} დაინტერესებულია თქვენი იდეით!"
         message: "%{organization} გამოეხმაურა თქვენს იდეას.  მათ დაწერეს:"
@@ -202,6 +211,8 @@ ka:
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
       follow_idea: მიყევი
       unfollow_idea: აღარ მიყვე
+      promote: მთავარ გვერდზე დაწინაურება
+      unpromote: მთავარი გვერდიდან წაშლა
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -215,6 +226,8 @@ ka:
         all: ყველა
         infographic: ინფოგრაფიკა
         interactive: ინტერაქტივი
+        not_published: გამოუქვეყნებელი
+        not_promoted: არ დაწინაურდა
       view:
         header: განლაგება
         grid: ბადე
@@ -292,6 +305,7 @@ ka:
       permalink_exists: უკვე არსებობს მონაცემთა ბაზაში
       success_created: "%{obj} შექმნილია."
       success_updated: "%{obj} განახლებულია."
+      success_deleted: "%{obj} წარმატებით წაიშალა."
       notification_yes: თქვენ მიიღებთ შეტყობინებებს.
       notification_no: თქვენ არ მიიღებთ შეტყობინებებს.
       notification_new_visual_all_success: თქვენ მიიღებთ ვიზუალიზაციის დამატების შეტყობინებას
@@ -305,6 +319,8 @@ ka:
       notification_language: თქვენ მიიღებთ შეტყობინებას %{language}.
       no_visual_records: თქვენი მოთხოვნის შესაბამისი ვიზუალიზაცია არ მოიძებნა.
       no_idea_records: თქვენი მოთხოვნის შესაბამისი იდეა არ მოიძებნა.
+      visual_promoted: ვიზუალიზაცია დაწინაურდა მთავარ გვერდზე.
+      visual_unpromoted: ვიზუალიზაცია აღარ გამოჩნდება მთავარ გვერდზე.
   layouts:
     application:
       menu_visual: ვიზუალიზაციები
@@ -499,6 +515,8 @@ ka:
       status: სტატუსი
     search:
       title: "ძებნა: %{q}"
+    edit:
+      title: "იდეის რედაქტირება  #%{number}"
     progress:
       form:
         title_claim: იდეაზე პასუხისმგებლობა

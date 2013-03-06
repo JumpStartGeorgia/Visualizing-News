@@ -1,5 +1,3 @@
-<%- model_class = Idea -%>
-
 <div id="post_idea">
 
   <%= render "shared/ideas_form" %>
@@ -32,6 +30,11 @@
     <div class="main_block clear">
       <div id="idea_date">
 			  <%= l @idea.created_at, :format => :long %>
+        <% if user_signed_in? && @idea.user_id == current_user.id %>
+          <%= link_to t('helpers.links.edit'), idea_edit_path(@idea.id), :class => 'fancybox', :id => 'edit_idea' %>
+          <%= link_to t('helpers.links.destroy'), idea_delete_path(@idea.id), :id => 'delete_idea',
+								:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %>
+        <% end %>
       </div>
       <div class="vote">
         <% if user_signed_in? && current_user.is_following_idea?(@idea.id) %>
@@ -104,10 +107,14 @@
 			      <% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) &&
 						      !@idea.organization_claimed_idea?(current_user) %>
 
-              <div id="idea_progress_claim">
-				        <%= link_to t('.take_ownership', :org => current_user.organization_users.first.organization.name),
-						        ideas_claim_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
-						        :class => 'idea_progress_btn fancybox' %>
+              <div id="idea_progress_claim_block">
+                <% current_user.organization_users.each do |record| %>
+                  <div class="idea_progress_claim">
+				            <%= link_to t('.take_ownership', :org => record.organization.name),
+						            ideas_claim_path(:idea_id => @idea.id, :organization_id => record.organization_id),
+						            :class => 'idea_progress_btn fancybox' %>
+                  </div>
+                <% end %>
               </div>
 			      <% end %>
 
@@ -177,7 +184,7 @@
 						              !last_progress.is_completed %>
                       <div class="idea_progress_add_item">
 				                <%= link_to t('.progress_update'),
-						                ideas_progress_update_path(:idea_id => @idea.id, :organization_id => current_user.organization_users.first.organization_id),
+						                ideas_progress_update_path(:idea_id => @idea.id, :organization_id => org.id),
 						                :class => 'idea_progress_btn fancybox' %>
                       </div>
 			              <% end %>

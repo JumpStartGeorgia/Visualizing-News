@@ -30,7 +30,8 @@ class Visualization < ActiveRecord::Base
 			:interactive_url_old,
 			:visual_is_cropped_old,
 			:data_source_url_old,
-			:languages, :languages_internal
+			:languages, :languages_internal,
+      :is_promoted, :promoted_at
 	attr_accessor :send_notification, :was_published, :languages_internal
 
  paginates_per 8
@@ -47,16 +48,27 @@ class Visualization < ActiveRecord::Base
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
 	validate :required_fields_for_type
   validate :validate_if_published
+  before_save :set_promoted_at
 
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :likes, lambda {with_translations(I18n.locale).order("visualizations.overall_votes DESC, visualization_translations.title ASC")}
   scope :views, lambda {with_translations(I18n.locale).order("visualizations.impressions_count DESC, visualization_translations.title ASC")}
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
+  scope :promoted, where("is_promoted = '1'")
+  scope :not_promoted, where("is_promoted = '0'")
 
 	def set_languages
     if self.languages_internal
       self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",")
+    end
+  end
+
+  def set_promoted_at
+    if self.is_promoted.nil?
+      self.promoted_at = nil
+    elsif self.is_promoted && self.promoted_at.nil?
+      self.promoted_at = Date.today.strftime('%F')
     end
   end
 
@@ -111,9 +123,21 @@ class Visualization < ActiveRecord::Base
     end
   end
 
-	def visualization_type_name
-    name = TYPES.keys[TYPES.values.index(self.visualization_type_id)].to_s
-		I18n.t("visualization_types.#{name}") if name
+	def visualization_type_name(english_only=false)
+    index = TYPES.values.index(self.visualization_type_id)
+    if index
+      if english_only
+        I18n.t("visualization_types.#{Visualization::TYPES.keys[index]}", :locale => :en) 
+      else
+        I18n.t("visualization_types.#{Visualization::TYPES.keys[index]}")
+      end
+    else # if not found, default to all
+      if english_only
+        I18n.t("visualization_types.all", :locale => :en) 
+      else
+        I18n.t("visualization_types.all")
+      end
+    end
 	end
 
 	def self.type_id(name)

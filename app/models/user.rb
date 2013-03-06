@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   # use role inheritence
   # - a role with a larger number can do everything that smaller numbers can do
-  ROLES = {:user => 0, :org_admin => 50, :admin => 99}
+  ROLES = {:user => 0, :org_admin => 50, :visual_promotion => 75, :admin => 99}
   def role?(base_role)
     if base_role && ROLES.values.index(base_role)
       return base_role <= self.role
@@ -74,6 +74,14 @@ class User < ActiveRecord::Base
 			end
 		end
 	end
+
+  def self.visual_promotion_users
+    where("role >= ?", ROLES[:visual_promotion])
+  end
+
+  def self.organization_users(organization_id)
+    joins(:organization_users).where("users.role >= ? and organization_users.organization_id = ?", ROLES[:org_admin], organization_id)
+  end
 
 	##############################
 	## omniauth methods

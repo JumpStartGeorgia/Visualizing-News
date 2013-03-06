@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213162203) do
+ActiveRecord::Schema.define(:version => 20130302074432) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -130,9 +130,11 @@ ActiveRecord::Schema.define(:version => 20130213162203) do
     t.integer  "impressions_count", :default => 0
     t.integer  "fb_count",          :default => 0
     t.boolean  "is_public",         :default => true
+    t.boolean  "is_deleted",        :default => false
   end
 
   add_index "ideas", ["impressions_count"], :name => "index_ideas_on_impressions_count"
+  add_index "ideas", ["is_deleted"], :name => "index_ideas_on_is_deleted"
   add_index "ideas", ["is_inappropriate", "is_duplicate"], :name => "idea_must_hide"
   add_index "ideas", ["is_private"], :name => "index_ideas_on_is_private"
   add_index "ideas", ["is_public"], :name => "index_ideas_on_is_public"
@@ -330,9 +332,12 @@ ActiveRecord::Schema.define(:version => 20130213162203) do
     t.boolean  "visual_is_cropped_old",    :default => false
     t.string   "languages"
     t.integer  "impressions_count",        :default => 0
+    t.boolean  "is_promoted",              :default => false
+    t.date     "promoted_at"
   end
 
   add_index "visualizations", ["impressions_count"], :name => "index_visualizations_on_impressions_count"
+  add_index "visualizations", ["is_promoted", "promoted_at"], :name => "idx_visuals_promotion"
   add_index "visualizations", ["organization_id"], :name => "index_visualizations_on_organization_id"
   add_index "visualizations", ["published"], :name => "index_visualizations_on_published"
   add_index "visualizations", ["published_date"], :name => "index_visualizations_on_published_date"

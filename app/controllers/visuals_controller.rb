@@ -3,6 +3,9 @@
 # this controller is the public view to the visuals
 ####################
 class VisualsController < ApplicationController
+  before_filter(:only => [:promote, :unpromote]) do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:visual_promotion])
+  end
 
   def ajax
     respond_to do |format|
@@ -86,7 +89,7 @@ Rails.logger.debug "****************** user is in org"
 			end
 
       # record the view count
-      impressionist(@visualization)
+      impressionist(@visualization) if !(@visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive')
 
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
@@ -148,10 +151,12 @@ Rails.logger.debug "****************** user is in org"
 				message.bcc = Notification.visual_comment(visualization.organization_id, locale)
 				if message.bcc && !message.bcc.empty?
 					message.locale = locale
+          title = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.title
+          permalink = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.permalink
 					message.subject = I18n.t("mailer.notification.visualization_comment.subject",
-						:title => visualization.title, :locale => locale)
+						:title => title, :locale => locale)
 					message.message = I18n.t("mailer.notification.visualization_comment.message", :locale => locale)
-					message.url_id = visualization.permalink
+					message.url_id = permalink
 					NotificationMailer.visualization_comment(message).deliver
 				end
 			end
@@ -163,6 +168,52 @@ Rails.logger.debug "****************** user is in org"
 		return false
 	end
 
+
+  def promote
+    visualization = Visualization.published.find_by_permalink(params[:id])
+    if visualization
+      if !visualization.is_promoted
+        visualization.is_promoted = true
+        visualization.save
+        flash[:notice] = t('app.msgs.visual_promoted')
+
+        # notify org users
+			  message = Message.new
+        users = User.organization_users(visualization.organization_id)
+			  I18n.available_locales.each do |locale|
+				  message.bcc = users.select{|x| x.notification_language == locale.to_s}.map{|x| x.email}
+				  if message.bcc.length > 0
+					  message.locale = locale
+            trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+					  message.subject = I18n.t("mailer.notification.visualization_promoted.subject", :title => trans.title, :locale => locale)
+					  message.message = I18n.t("mailer.notification.visualization_promoted.message", :locale => locale)
+					  message.url_id = trans.permalink
+					  NotificationMailer.visualization_promoted(message).deliver
+				  end
+			  end
+
+      end
+      redirect_to visualization_path(visualization.permalink, @param_options)
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
+    end
+  end
+
+  def unpromote
+    visualization = Visualization.published.find_by_permalink(params[:id])
+    if visualization
+      if visualization.is_promoted
+        visualization.is_promoted = false
+        visualization.save
+        flash[:notice] = t('app.msgs.visual_unpromoted')
+      end
+      redirect_to visualization_path(visualization.permalink, @param_options)
+    else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
+    end
+  end
 protected
 
   def next_previous(type)

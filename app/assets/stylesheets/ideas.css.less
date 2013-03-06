@@ -24,7 +24,7 @@
   }
 }
 
-#navbar-idea-form, #shared-idea-form {
+#navbar-idea-form, #shared-idea-form, #edit-idea-form {
   font-size: 12px;
   font-family: themix_light;
 
@@ -90,6 +90,13 @@
     &:hover{
       text-decoration: underline;
     }
+  }
+}
+
+#edit-idea-form{
+  .control-label {
+    float: none;
+    width: auto;
   }
 }
 
@@ -258,6 +265,26 @@ select#idea_is_public{
     #idea_date {
       float: left;
       width: 50%;
+      a{
+        display: inline-block;
+        text-transform: uppercase;
+        margin-left: 10px;
+        padding: 5px 9px 4px;
+        color: #fff;
+        text-decoration: none;
+        &#edit_idea{
+          background-color: #469e72;
+          &:hover{
+            background: #ddd;
+          }
+        }
+        &#delete_idea{
+          background-color: #de4355;
+          &:hover{
+            background: #ddd;
+          }
+        }
+      }
     }
     .vote{
       float: right;
@@ -328,6 +355,16 @@ select#idea_is_public{
 
     #idea_progress_block{
       margin-top: 24px;
+      #idea_progress_claim_block{
+        .idea_progress_claim{
+          float: left;
+          width: 20%;
+          margin-right: 10px;
+          a {
+            display: block;
+          }
+        }
+      }
       a.idea_progress_btn {
         padding: 3px 9px;
         background-color: #f88d86;
@@ -507,7 +544,7 @@ select#idea_is_public{
 
 
 
-#new_idea_inappropriate_report {
+#new_idea_inappropriate_report, #edit-idea-form {
   padding: 15px 30px;
   font-family: themix_light;
   .header {
@@ -576,8 +613,16 @@ select#idea_is_public{
 }
 
 #ideas_progress_form_container {
-  padding: 0px 30px 15px;
-  form#new_idea_progress {
+  padding: 15px 30px;
+  font-family: themix_light;
+  .header {
+    color: #ce495f;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  form {
     font-family: themix_light;
     input[type="checkbox"] {
       margin-top: 2px;

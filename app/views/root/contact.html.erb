@@ -1,6 +1,18 @@
 <div id="contact">
 
-  <%= page_title t('.title') %>
+  <%#= page_title t('.title') %>
+
+  <div class="header">
+    <%= page_title 'C<span class="l1">O</span>NTA<span class="l2">C</span>T'.html_safe %>
+
+    <div class="circles">
+      <div class="d1"></div>
+      <div class="d2"></div>
+      <div class="d3"></div>
+      <div class="d4"></div>
+      <div class="d5"></div>
+    </div>
+  </div>
 
   <% if @email_sent %>
 
@@ -10,7 +22,7 @@
 
   <% else %>
 
-			  <div class="p">
+			  <div class="p" style="display: none;">
           <%= mail_to "info@feradi.info", nil, :encode => "hex", :subject => t('.email_subject'),
             :title => t('.email_us')%>
 				  <br />
@@ -24,9 +36,9 @@
 		  <%= f.error_messages %>
 
 		  <%= f.inputs do %>
-			  <%= f.input :name, :label => t("activerecord.attributes.message.name") %>
-			  <%= f.input :email, :label => t("activerecord.attributes.message.email"), :required => true %>
-			  <%= f.input :message, :label => t("activerecord.attributes.message.message"), :required => true, :as => :text, :input_html => {:rows => 5} %>
+			  <%= f.input :name, :label => false, :placeholder => t("activerecord.attributes.message.name") %>
+			  <%= f.input :email, :label => false, :placeholder => t("activerecord.attributes.message.email"), :required => true %>
+			  <%= f.input :message, :label => false, :placeholder => t("activerecord.attributes.message.message"), :required => true, :as => :text, :input_html => {:rows => 5} %>
 		  <% end %>
 
     	<div>

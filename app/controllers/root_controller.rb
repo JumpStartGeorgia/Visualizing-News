@@ -47,6 +47,10 @@ class RootController < ApplicationController
 				@email_sent = true
 		  end
 	  end
+    respond_to do |format|
+      format.html { render :layout => 'fancybox'}
+     #format.json { render json: @idea }
+    end
   end
 
 	def terms

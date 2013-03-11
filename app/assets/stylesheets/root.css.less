@@ -1,3 +1,6 @@
+
+@import "twitter/bootstrap/mixins";
+
 #submit_visual, #send_data, #contact {
 
   .page-header {
@@ -131,3 +134,130 @@
   padding: 5px 10px 5px 42px;
   display: inline-block;
 }
+
+
+
+
+
+
+
+#contact {
+  width: 370px;
+  & > .header {
+    .clearfix();
+    .circles {
+      float: left;
+      margin-top: 25px;
+      margin-left: -16px;
+      div {
+        .border-radius(50%);
+        float: left;
+      }
+      .d1 {
+        width: 25px;
+        height: 25px;
+        background: #ce495f;
+        margin-top: 9px;
+      }
+      .d2 {
+        width: 12px;
+        height: 12px;
+        background: #076867;
+        margin-top: 30px;
+        margin-left: -2px;
+      }
+      .d3 {
+        width: 9px;
+        height: 9px;
+        background: #f87364;
+        margin-top: 5px;
+        margin-left: -4px;
+      }
+      .d4 {
+        width: 16px;
+        height: 16px;
+        background: #e9f0a8;
+        margin-top: 16px;
+      }
+      .d5 {
+        width: 13px;
+        height: 13px;
+        background: #3a8f5f;
+        margin-top: 35px;
+        margin-left: -6px;
+      }
+    }
+  }
+  .page-header {
+    float: left;
+    margin-top: 25px;
+    padding-left: 10px;
+    h1 {
+      letter-spacing: -2px;
+      font-weight: bold;
+      color: rgba(0, 0, 0, .37);
+      span {
+        .l1 {
+          color: #469E72;
+        }
+        .l2 {
+          color: #f87364;
+        }
+      }
+    }
+  }
+  & > .header, form {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  form {
+    display: table;
+    margin-bottom: 33px;
+  }
+  & > .header, input[type="text"], input[type="submit"], textarea {
+    width: 280px;
+  }
+  input[type="submit"] {
+    background-color: #e9f0a8;
+    color: #469E72;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  textarea {
+    padding-left: 30px;
+  /*
+    &:focus {
+    }
+    &::-webkit-input-placeholder {
+      padding-left: 21px;
+    }
+    &:-moz-placeholder {
+      padding-left: 21px;
+    }
+    &::-moz-placeholder {
+      padding-left: 21px;
+    }
+    &:-ms-input-placeholder {  
+      padding-left: 21px;
+    }
+  */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

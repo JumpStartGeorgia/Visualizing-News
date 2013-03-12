@@ -1,3 +1,12 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";//&appId=540756005946956";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div id="post_idea">
 
   <%= render "shared/ideas_form" %>
@@ -259,6 +268,16 @@
       </div>
     </div>
  
+  </div>
+
+  <div id="visualization_row3" class="row-fluid">
+
+    <div class="main_block clear">
+      <div class="vote">
+			  <div class="fb-like" data-href="<%= url_encode("#{request.protocol}#{request.host_with_port}#{request.fullpath}") %>" data-send="false" data-layout="button_count" data-width="auto" data-show-faces="false"></div>
+      </div>
+    </div>
+
   </div>
 
   <div id="idea_row4" class="row-fluid clear">

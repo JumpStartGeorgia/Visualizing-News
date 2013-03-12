@@ -206,16 +206,25 @@
       }
     }
   }
-  & > .header, form {
+  & > .header {
     margin-left: auto;
     margin-right: auto;
   }
   form {
-    display: table;
     margin-bottom: 33px;
   }
-  & > .header, input[type="text"], input[type="submit"], textarea {
+  & > .header, input[type="text"], input[type="submit"], textarea, .help-inline, .errorExplanation, .header + p {
     width: 280px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .errorExplanation {
+    margin-top: 1em;
+    .box-sizing(border-box);
+  }
+  .header + p {
+    margin-top: 15px;
   }
   input[type="submit"] {
     background-color: #e9f0a8;

@@ -84,4 +84,36 @@ $(document).ready(function(){
   //($(window).width() > 979) && $('#frozen-menu div.menu-collapse:visible').removeAttr('style');
   });
 
+
+  $('#user_new').live('submit', function ()
+  {
+    $.ajax({
+      type: "POST",
+      url: $(this).attr('action'),
+      data: $(this).serialize(),
+      success: function (data)
+      {
+        console.log($(data).find('#sign_in_c, #sign_up_c, #forgot_password_c'));
+        $('#sign_in_c, #sign_up_c, #forgot_password_c').replaceWith($(data).find('#sign_in_c, #sign_up_c, #forgot_password_c'));
+      },
+      error: function (data)
+      {
+        $('#sign_in_c').parent().find('.alert').remove();
+        $('#sign_in_c').before('<div class="alert alert-error fade in"><a href="#" data-dismiss="alert" class="close">×</a> ' + data.responseText + '</div>');
+      }
+    });
+    return false;
+  });
+
+
 });
+
+
+
+
+
+
+
+
+
+

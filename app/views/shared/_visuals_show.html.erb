@@ -88,7 +88,7 @@
         <li>
           <%= "#{t('.organization')}: "%>
 					<span class="val">
-						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
+						<%= link_to @visualization.organization.name, visualizations_path(params.merge(:organization => @visualization.organization.permalink)) %>
 					</span>
         </li>
         <li>
@@ -130,7 +130,7 @@
           <%= "#{t('app.common.category')}: "%>
           <span class="val">
           <% @visualization.visualization_categories.each_with_index do |cat, index| %>
-            <% x = link_to cat.category.name, visuals_path(remove_unwanted_params(merge_visual_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
+            <% x = link_to cat.category.name, visualizations_path(remove_unwanted_params(merge_visual_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
             <% if index != @visualization.visualization_categories.length-1 %>
               <%= x + ", "%>
             <% else %>
@@ -143,7 +143,7 @@
           <%= "#{t('.type')}:"%>
 						<span class="val">
 							<%= link_to @visualization.visualization_type_name, 
-                  visuals_path(remove_unwanted_params(merge_visual_params([{:key => :type, :value => @visualization.visualization_type_name(true).downcase}]), true)) %>
+                  visualizations_path(remove_unwanted_params(merge_visual_params([{:key => :type, :value => @visualization.visualization_type_name(true).downcase}]), true)) %>
 						</span>
         </li>
       </ul>
@@ -229,7 +229,7 @@
 
 <div id="visualization_row5" class="row-fluid">
   <div id="previous_visual">
-	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visual_previous_path(@param_options))%>
+	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visualization_previous_path(@param_options))%>
   </div>
 
   <div class="main_block clear">
@@ -237,7 +237,7 @@
   </div>
 
   <div id="next_visual">
-	  <%= link_to(image_tag('nav_next.png', :alt => '>'), visual_next_path(@param_options))%>
+	  <%= link_to(image_tag('nav_next.png', :alt => '>'), visualization_next_path(@param_options))%>
   </div>
 </div>
 

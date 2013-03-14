@@ -143,7 +143,7 @@ module ApplicationHelper
   def remove_unwanted_params(params, remove_filters = false)
     p = params.blank? ? {} : params.clone
     js_params = ['format', 'max', 'sidebar', 'screen_w', 'promoted']
-    filter_params = ['user_id', 'q', 'org']
+    filter_params = ['user_id', 'q', 'organization']
     params = remove_filters ? js_params.concat(filter_params) : js_params
     params.each do |param|
       p.delete_if{|k,v| k.to_s == param}

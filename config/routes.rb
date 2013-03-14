@@ -31,11 +31,21 @@ BootstrapStarter::Application.routes.draw do
 		match '/contact' => 'root#contact', :as => 'contact', :via => :post
 
 		# organization
-		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
-			resources :visualizations, :except => [:index]
-		end
+#		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
+#			resources :visualizations, :except => [:index]
+#		end
 
     # visualizations
+    resources :visualizations
+		match '/visualizations/ajax', :to => 'visualizations#ajax', :as => :visualizations_ajax, :via => :get, :defaults => {:format => 'js'}
+		match '/visualizations/:id/vote/:status', :to => 'visualizations#vote', :as => :visualization_vote, :via => :get
+		match '/visualizations/comment_notification/:id', :to => 'visualizations#comment_notification', :as => :visualization_comment_notification, :via => :get
+	  match '/visualizations/:id/next', :to => 'visualizations#next', :as => :visualization_next, :via => :get
+	  match '/visualizations/:id/previous', :to => 'visualizations#previous', :as => :visualization_previous, :via => :get
+	  match '/visualizations/:id/promote', :to => 'visualizations#promote', :as => :visualization_promote, :via => :get
+	  match '/visualizations/:id/unpromote', :to => 'visualizations#unpromote', :as => :visualization_unpromote, :via => :get
+    
+=begin
 		match '/visualizations/ajax', :to => 'visuals#ajax', :as => :visuals_ajax, :via => :get, :defaults => {:format => 'js'}
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
 		match '/visualizations/:id', :to => 'visuals#show', :as => :visualization, :via => :get
@@ -45,6 +55,7 @@ BootstrapStarter::Application.routes.draw do
 	  match '/visualizations/:id/previous', :to => 'visuals#previous', :as => :visual_previous, :via => :get
 	  match '/visualizations/:id/promote', :to => 'visuals#promote', :as => :visual_promote, :via => :get
 	  match '/visualizations/:id/unpromote', :to => 'visuals#unpromote', :as => :visual_unpromote, :via => :get
+=end
 
     # ideas
 		match '/ideas/ajax', :to => 'ideas#ajax', :as => :ideas_ajax, :via => :get, :defaults => {:format => 'js'}

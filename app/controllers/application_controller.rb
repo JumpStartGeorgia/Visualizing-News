@@ -66,10 +66,18 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@visuals_filter_view_selection = I18n.t('filters.visuals.view.grid')
 		@ideas_filter_view_selection = I18n.t('filters.ideas.view.grid')
 		@ideas_filter_filter_selection = I18n.t('filters.ideas.filter.all')
-
+  
 	  @idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
     @idea = Idea.new
 	  @idea.idea_categories.build
+
+    @organization = Organization.with_name.find_by_permalink(params[:organization]) if params[:organization].present?
+    @user_in_org = false
+    if user_signed_in? && @organization.present? && current_user.organization_ids.index(@organization.id)
+Rails.logger.debug "****************** user is in org"
+      @user_in_org = true
+    end
+
 	end
 
 	def initialize_gon
@@ -77,7 +85,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		gon.highlight_first_form_field = true
     gon.user_signed_in = user_signed_in?
 		gon.placeholder = t('app.common.placeholder')
-		gon.visual_comment_notification_url = visual_comment_notification_path(gon.placeholder)
+		gon.visual_comment_notification_url = visualization_comment_notification_path(gon.placeholder)
 		gon.idea_comment_notification_url = idea_comment_notification_path(gon.placeholder)
 		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 		gon.thumbnail_size = 230
@@ -103,8 +111,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   end
 
   def assigned_to_org?(organization_permalink)
-    org_id = OrganizationTranslation.get_org_id(organization_permalink)
-    redirect_to root_path(:locale => I18n.locale), :notice => t('app.msgs.not_authorized') if !current_user || !current_user.organization_ids.index(org_id)
+    org_id = OrganizationTranslation.get_org_id(organization_permalink) if organization_permalink
+    redirect_to root_path(:locale => I18n.locale), :notice => t('app.msgs.not_authorized') if !current_user || !org_id.present? || !current_user.organization_ids.index(org_id)
   end
 
 	# store the current path so after login, can go back
@@ -224,7 +232,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			visual_objects = visual_objects.search_for(params[:q])
 		end
 
-    if params[:org] && @organization
+    if params[:organization] && @organization.present?
 			visual_objects = visual_objects.by_organization(@organization.id)
     end
 

@@ -1,0 +1,10 @@
+<%= content_for :head, auto_discovery_link_tag(:atom, visualizations_path(:format => "atom")) %>
+<% title t('.title') %>
+
+<%= render "shared/visuals_filter_bar" %>
+
+<div id="visual_list" class="viz resp">
+	<%= render @view_type %>
+</div>
+
+<a id="load_more_link" href="#" style="display: none;"><%= t('helpers.links.more') %></a>

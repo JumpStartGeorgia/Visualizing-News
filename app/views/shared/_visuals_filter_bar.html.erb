@@ -70,7 +70,7 @@ hide_slider = ''
               <div><%= t('filters.visuals.type.interactive') %></div>
             <% end %>
 					</li>
-          <% if user_signed_in? && @user_in_org && current_user.role?(User::ROLES[:org_admin]) && @param_options[:org].present? %>
+          <% if user_signed_in? && @param_options[:organization].present? && @user_in_org && current_user.role?(User::ROLES[:org_admin]) %>
 					  <li>
 						  <%= link_to url_for(params.merge(:type => 'not_published')) do %>
                 <div><%= image_tag('filter_icons/not_published.png') %></div>
@@ -141,7 +141,7 @@ hide_slider = ''
 				</ul>
 			</li>
       <li id="visual_search">
-        <%= form_tag visuals_path(remove_unwanted_params(@param_options)), :method => :get, :class => "form-search", :id => 'visuals_form_search' do %>
+        <%= form_tag visualizations_path(remove_unwanted_params(@param_options)), :method => :get, :class => "form-search", :id => 'visuals_form_search' do %>
           <%= text_field_tag :q, params[:q], :class => 'input-large', :placeholder => t('app.common.search')%>
           <%= button_tag t('app.common.search'), :class => 'btn' %>
         <% end %>

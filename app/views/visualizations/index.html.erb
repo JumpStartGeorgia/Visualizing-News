@@ -10,7 +10,7 @@
       <%# link_to t("helpers.links.edit_org", :org => @organization.name),
           edit_organization_path(@organization.permalink), :class => 'btn' %>
 	    <%= link_to t('helpers.links.new_visual', :org => @organization.name),
-			    new_visualization_path, :class => 'btn btn-primary' %>
+			    new_visualization_path(:organization => @organization.permalink), :class => 'btn btn-primary' %>
     </div>
     <% end %>
 

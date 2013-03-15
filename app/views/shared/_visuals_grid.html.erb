@@ -47,10 +47,10 @@
   					<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && params[:organization].present? %>
   						<div>
   					    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-  					                edit_visualization_path(visualization.permalink),
-  													:class => 'btn btn-mini' %>
-  					    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-  					                visualization_path(visualization.permalink),
+					                  edit_visualization_path(:id => visualization.permalink, :organization => params[:organization]),
+													  :class => 'btn btn-mini' %>
+					      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+					                  visualization_path(:id => visualization.permalink, :organization => params[:organization]),
   					                :method => :delete,
   													:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
   					                :class => 'btn btn-mini btn-danger' %>

@@ -167,7 +167,7 @@ class VisualizationsController < ApplicationController
 
 =begin #old
   def show
-    @organization = Organization.find_by_permalink(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.find_by_permalink(params[:id])
     gon.highlight_first_form_field = false
 
@@ -241,7 +241,7 @@ class VisualizationsController < ApplicationController
   end
 
   def new
-    @organization = Organization.find_by_permalink(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.new
 	  # create the translation object for however many locales there are
 	  # so the form will properly create all of the nested form fields
@@ -265,7 +265,7 @@ class VisualizationsController < ApplicationController
   end
 
   def edit
-    @organization = Organization.find_by_permalink(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.find_by_permalink(params[:id])
 
 		# if dataset file obj not exist, build
@@ -314,7 +314,7 @@ logger.debug "************* load complete form"
   end
 
   def create
-    @organization = Organization.find_by_permalink(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.new(params[:visualization])
 
 		# if interactive, take screen shots of urls
@@ -353,7 +353,7 @@ logger.debug "//////////// -- adding image file"
         # - have to get it by hand
 				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
 
-        format.html { redirect_to edit_organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+        format.html { redirect_to edit_visualization_path(:id => permalink, :organization => params[:organization]), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
         format.json { render json: @visualization, status: :created, location: @visualization }
       else
 				gon.edit_visualization = true
@@ -381,7 +381,7 @@ logger.debug "//////////// -- adding image file"
   end
 
   def update
-    @organization = Organization.find_by_permalink(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.find_by_permalink(params[:id])
 
 		Visualization.transaction do
@@ -442,11 +442,11 @@ logger.debug "//////////// -- adding image file"
           format.html {
 					  if processed_crop || reset_crop
 						  # show form again
-						  redirect_to edit_organization_visualization_path(params[:organization_id], permalink),
+						  redirect_to edit_visualization_path(:id => permalink, :organization => params[:organization]),
 									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					  else
 						  # redirect to show page
-						  redirect_to organization_visualization_path(params[:organization_id], permalink),
+						  redirect_to visualization_path(:id => permalink, :organization => params[:organization]),
 									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
 					  end
 				  }
@@ -471,12 +471,12 @@ logger.debug "//////////// -- adding image file"
   end
 
   def destroy
-    @organization = Organization.find_by_permalink(params[:organization_id])
+    @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.find_by_permalink(params[:id])
-    @visualization.destroy
+    @visualization.destroy if @visualization && @organization
 
     respond_to do |format|
-      format.html { redirect_to visualizations_path(params[:organization_id]) }
+      format.html { redirect_to visualizations_path(:organization => params[:organization]), notice: t('app.msgs.success_deleted', :obj => t('activerecord.models.visualization'))}
       format.json { head :ok }
     end
   end

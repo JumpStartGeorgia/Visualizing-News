@@ -1,11 +1,11 @@
 <%
   if params[:action] == 'new' || params[:action] == 'create'
-    path = organization_visualizations_path(params[:organization_id])
+    path = visualizations_path(:organization => params[:organization])
   else
-    path = organization_visualization_path(params[:organization_id], params[:id])
+    path = visualization_path(:id => params[:id], :organization => params[:organization])
   end
 %>
-<%= semantic_nested_form_for([@organization, @visualization],
+<%= semantic_nested_form_for(@visualization,
       :url => path,
       :html => { :class => 'form-horizontal precrop' }) do |f| %>
 		<%= f.error_messages %>
@@ -203,6 +203,6 @@
     <%= f.submit nil, :class => 'btn btn-primary' %>
 	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('helpers.links.reset'), :name => :reset %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                organization_path(params[:organization_id]), :class => 'btn' %>
+                visualizations_path(:organization => params[:organization]), :class => 'btn' %>
   </div>
 <% end %>

@@ -28,6 +28,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/contact' => 'root#contact', :as => 'contact', :via => [:get, :post]
 
 		# organization
+		resources :organizations, :as => :organization, :path => :organization, :only => [:edit, :update]
 #		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
 #			resources :visualizations, :except => [:index]
 #		end

@@ -71,7 +71,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     @idea = Idea.new
 	  @idea.idea_categories.build
 
-    @organization = Organization.with_name.find_by_permalink(params[:organization]) if params[:organization].present?
+    @organization = Organization.with_name.find_by_permalink(params[:organization]) if params[:organization].present? && params[:organization].is_a?(String)
     @user_in_org = false
     if user_signed_in? && @organization.present? && current_user.organization_ids.index(@organization.id)
 Rails.logger.debug "****************** user is in org"

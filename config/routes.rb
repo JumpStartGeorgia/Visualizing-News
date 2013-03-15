@@ -21,14 +21,11 @@ BootstrapStarter::Application.routes.draw do
 
     # root pages
 		match '/about', :to => 'root#about', :as => :about, :via => :get
-		match '/data', :to => 'root#data', :as => :data, :via => :get
-		match '/data', :to => 'root#data', :as => :data, :via => :post
-		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => :get
-		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => :post
+		match '/data', :to => 'root#data', :as => :data, :via => [:get, :post]
+		match '/submit_visual', :to => 'root#submit_visual', :as => :submit_visual, :via => [:get, :post]
 		match '/terms', :to => 'root#terms', :as => :terms, :via => :get
 		match '/rss', :to => 'root#rss', :as => :rss, :via => :get
-		match '/contact' => 'root#contact', :as => 'contact', :via => :get
-		match '/contact' => 'root#contact', :as => 'contact', :via => :post
+		match '/contact' => 'root#contact', :as => 'contact', :via => [:get, :post]
 
 		# organization
 #		resources :organizations, :as => :organization, :path => :organization, :only => [:show, :edit, :update] do
@@ -36,14 +33,19 @@ BootstrapStarter::Application.routes.draw do
 #		end
 
     # visualizations
-    resources :visualizations
-		match '/visualizations/ajax', :to => 'visualizations#ajax', :as => :visualizations_ajax, :via => :get, :defaults => {:format => 'js'}
-		match '/visualizations/:id/vote/:status', :to => 'visualizations#vote', :as => :visualization_vote, :via => :get
-		match '/visualizations/comment_notification/:id', :to => 'visualizations#comment_notification', :as => :visualization_comment_notification, :via => :get
-	  match '/visualizations/:id/next', :to => 'visualizations#next', :as => :visualization_next, :via => :get
-	  match '/visualizations/:id/previous', :to => 'visualizations#previous', :as => :visualization_previous, :via => :get
-	  match '/visualizations/:id/promote', :to => 'visualizations#promote', :as => :visualization_promote, :via => :get
-	  match '/visualizations/:id/unpromote', :to => 'visualizations#unpromote', :as => :visualization_unpromote, :via => :get
+    resources :visualizations do
+      collection do
+        get :ajax, :defaults => {:format => 'js'}
+        get 'comment_notification/:id', :action => 'comment_notification', :as => 'comment_notification'
+      end
+      member do 
+        get :next
+        get :previous
+        get :promote
+        get :unpromote
+        get 'vote/:status', :action => 'vote', :as => 'vote'
+      end
+    end
     
 =begin
 		match '/visualizations/ajax', :to => 'visuals#ajax', :as => :visuals_ajax, :via => :get, :defaults => {:format => 'js'}

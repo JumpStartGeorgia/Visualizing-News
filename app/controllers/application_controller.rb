@@ -85,7 +85,7 @@ Rails.logger.debug "****************** user is in org"
 		gon.highlight_first_form_field = true
     gon.user_signed_in = user_signed_in?
 		gon.placeholder = t('app.common.placeholder')
-		gon.visual_comment_notification_url = visualization_comment_notification_path(gon.placeholder)
+		gon.visual_comment_notification_url = comment_notification_visualizations_path(gon.placeholder)
 		gon.idea_comment_notification_url = idea_comment_notification_path(gon.placeholder)
 		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 		gon.thumbnail_size = 230

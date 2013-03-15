@@ -26,17 +26,15 @@
 			<% end %>
       <% if @visualization.published && user_signed_in? && current_user.role?(User::ROLES[:visual_promotion]) %>
         <% if @visualization.is_promoted %>
-          <%= link_to t('helpers.links.unpromote'), visual_unpromote_path(params[:id]), :id => 'unpromote_visual',
+          <%= link_to t('helpers.links.unpromote'), unpromote_visualization_path(params[:id]), :id => 'unpromote_visual',
 							  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %>
         <% else %>
-          <%= link_to t('helpers.links.promote'), visual_promote_path(params[:id]), :id => 'promote_visual' %>
+          <%= link_to t('helpers.links.promote'), promote_visualization_path(params[:id]), :id => 'promote_visual' %>
         <% end %>
       <% end %>
     </div>
     <div class="vote">
-			<% if params[:controller] == 'visuals' %>
-				<%= render :partial => 'shared/visuals_vote' %>
-			<% end %>
+			<%= render :partial => 'shared/visuals_vote' %>
     </div>
   </div>
   <div id="overall_counts">
@@ -88,7 +86,7 @@
         <li>
           <%= "#{t('.organization')}: "%>
 					<span class="val">
-						<%= link_to @visualization.organization.name, visualizations_path(params.merge(:organization => @visualization.organization.permalink)) %>
+						<%= link_to(@visualization.organization.name, visualizations_path(:organization => @visualization.organization.permalink)) %>
 					</span>
         </li>
         <li>
@@ -202,34 +200,30 @@
 
   <div class="main_block clear">
     <div class="vote">
-			<% if params[:controller] == 'visuals' %>
-				<%#= render 'shared/visuals_vote' %>
-				<div class="fb-like" data-href="<%= url_encode("#{request.protocol}#{request.host_with_port}#{request.fullpath}") %>" data-send="false" data-layout="button_count" data-width="auto" data-show-faces="false"></div>
-			<% end %>
+			<%#= render 'shared/visuals_vote' %>
+			<div class="fb-like" data-href="<%= url_encode("#{request.protocol}#{request.host_with_port}#{request.fullpath}") %>" data-send="false" data-layout="button_count" data-width="auto" data-show-faces="false"></div>
     </div>
   </div>
 
 </div>
 
-<% if params[:controller] == 'visuals' %>
-	<div id="visualization_row4" class="row-fluid clear">
+<div id="visualization_row4" class="row-fluid clear">
 
-		<div class="main_block clear">
-			<h3 class="comments_count">
-        <span id="comment_count_text">
-				  <%= "#{t('app.common.comments')}: "%>
-          <span class="comment_count_number"><%=@visualization.fb_count%></span>
-        </span>
-			</h3>
-			<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="5" data-width="470"></div>
-		</div>
-
+	<div class="main_block clear">
+		<h3 class="comments_count">
+      <span id="comment_count_text">
+			  <%= "#{t('app.common.comments')}: "%>
+        <span class="comment_count_number"><%=@visualization.fb_count%></span>
+      </span>
+		</h3>
+		<div class="fb-comments" data-href="<%= current_url%>" data-num-posts="5" data-width="470"></div>
 	</div>
-<% end %>
+
+</div>
 
 <div id="visualization_row5" class="row-fluid">
   <div id="previous_visual">
-	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visualization_previous_path(@param_options))%>
+	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), previous_visualization_path(@param_options))%>
   </div>
 
   <div class="main_block clear">
@@ -237,7 +231,7 @@
   </div>
 
   <div id="next_visual">
-	  <%= link_to(image_tag('nav_next.png', :alt => '>'), visualization_next_path(@param_options))%>
+	  <%= link_to(image_tag('nav_next.png', :alt => '>'), next_visualization_path(@param_options))%>
   </div>
 </div>
 

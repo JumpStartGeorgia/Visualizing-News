@@ -49,7 +49,7 @@ class VisualizationsController < ApplicationController
   def index
     @param_options[:format] = :js
     @param_options[:max] = 5
-    gon.ajax_path = visualizations_ajax_path(@param_options)
+    gon.ajax_path = ajax_visualizations_path(@param_options)
 
     set_visualization_view_type # in app controller
 

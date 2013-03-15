@@ -85,11 +85,11 @@
 							  <% current_user.organizations.each do |org| %>
 					        <li>
 		   		         <%= link_to t('helpers.links.org_profile', :org => org.name),
-											  organization_path(org.permalink) %>
+											  visualizations_path(:organization => org.permalink) %>
 								  </li>
 					        <li>
 		   		         <%= link_to t('helpers.links.new_visual', :org => org.name),
-											  new_organization_visualization_path(org.permalink) %>
+											  new_visualization_path(:organization => org.permalink) %>
 								  </li>
 							  <% end %>
 			          <li>

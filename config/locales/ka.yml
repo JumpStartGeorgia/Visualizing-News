@@ -453,6 +453,7 @@ ka:
   visualizations:
     index:
       title: ვიზუალიზაციები
+      title_org: "%{name} Visualizations"
       title_feed: "%{app_name} ვიზუალიზაციები"
     form:
       preview: ნახვა

@@ -453,6 +453,7 @@ en:
   visualizations:
     index:
       title: Visualizations
+      title_org: "%{name} Visualizations"
       title_feed: "%{app_name} Visualizations"
     form:
       preview: Preview

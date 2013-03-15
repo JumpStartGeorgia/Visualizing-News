@@ -3,7 +3,7 @@ class VisualizationsController < ApplicationController
     controller_instance.send(:valid_role?, User::ROLES[:visual_promotion])
   end
   before_filter(:only => [:new, :edit, :create, :update, :destroy]) do |controller_instance|
-    controller_instance.send(:valid_role?, User::ROLES[:visual_promotion])
+    controller_instance.send(:valid_role?, User::ROLES[:org_admin])
   end
   before_filter(:only => [:new, :edit, :create, :update, :destroy]) do |controller_instance|
     controller_instance.send(:assigned_to_org?, params[:organization])

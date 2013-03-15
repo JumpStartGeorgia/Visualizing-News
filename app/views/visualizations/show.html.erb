@@ -1,1 +1,15 @@
+<% if current_user && current_user.role?(User::ROLES[:org_admin]) && @user_in_org && params[:organization] && params[:view] != 'interactive' %>
+  <div class="form-actions">
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                visualizations_path(@param_options), :class => 'btn'  %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_visualization_path(@visualization.permalink), :class => 'btn' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                visualization_path(@visualization.permalink),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+                :class => 'btn btn-danger' %>
+  </div>
+<% end %>
+
 <%= render @view_type %>

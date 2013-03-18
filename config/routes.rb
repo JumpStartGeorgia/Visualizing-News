@@ -87,13 +87,11 @@ BootstrapStarter::Application.routes.draw do
 		  match '/progress/update/:id', :to => 'progress#update', :as => :update_progress, :via => :put
 
 		  # report idea
-		  match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate, :via => :get
-		  match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate, :via => :post
+		  match '/report/inappropriate/:idea_id', :to => 'report#inappropriate', :as => :report_inappropriate, :via => [:get, :post]
     end
 
-		# notifications
-		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get
-		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :post
+		# profile settings
+		match '/profile', :to => 'profile#index', :as => :profile, :via => [:get, :post]
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

@@ -1,0 +1,138 @@
+<%= page_title t('.title') %>
+
+<div id="profile_page">
+  <% if user_signed_in? %>
+    
+    <% if current_user.organizations.present? %>
+      <div id="org_container" class="clear">
+        <h2><%= t('.org_header') %></h2>
+	      <% current_user.organizations.each do |org| %>
+          <div class="org_item">
+            <h3>
+              <% if org.logo_file_name %>
+                <%= image_tag org.logo.url, :alt => org.name, :title => org.name %>
+              <% else %>
+                <%= org.name %>
+              <% end %>
+            </h3>
+            <div>
+              <%= link_to t('helpers.links.new_visual'),
+                  new_visualization_path(:organization => org.permalink), :class => 'btn btn-mini btn-primary' %>
+            </div>
+            <div>
+              <%= link_to t('helpers.links.org_profile'),
+                  visualizations_path(:organization => org.permalink), :class => 'btn btn-mini' %>
+              <%= link_to t("helpers.links.edit_org", :org => org.name),
+                 edit_organization_path(org.permalink), :class => 'btn btn-mini' %>
+            </div>
+          </div>
+        <% end %>    
+      </div>
+    <% end %>
+
+    <%= form_tag profile_path, :id => "notifications" do %>
+      <h2><%= t('.notification_header') %></h2>
+    	<h3><%= t('.all_sub_title') %></h3>
+    	<div class="fluid-row clear">
+    		<div class="span12">
+    			<%= t('.all_label') %>
+    			<label for="enable_notifications_true" class="radio">
+    				<%= radio_button_tag 'enable_notifications', 'true', @enable_notifications %>
+    				<%= t('.all_yes') %>
+    			</label>
+    			<label for="enable_notifications_false" class="radio">
+    				<%= radio_button_tag 'enable_notifications', 'false', !@enable_notifications %>
+    				<%= t('.all_no') %>
+    			</label>
+    		</div>
+    	</div>
+
+
+    	<h3><%= t('.language_sub_title') %></h3>
+    	<div class="fluid-row clear" id="language_notifications">
+    		<div class="span12">
+    			<%= t('.language_label') %>
+				  <% I18n.available_locales.each do |locale| %>
+					  <label for="<%= "language_#{locale}"%>" class="radio">
+						  <%= radio_button_tag 'language', locale, locale.to_s == @language ? true : false %>
+						  <%= t("app.language.#{locale}") %>
+					  </label>
+				  <% end %>
+    		</div>
+    	</div>
+
+
+
+    	<h3><%= t('.new_visuals_sub_title') %></h3>
+    	<div class="fluid-row clear <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_visual_notifications">
+    		<div class="span3">
+    			<label for="visuals_all" class="checkbox">
+    				<%= check_box_tag 'visuals_all', 'true', @visual_all %>
+    				<%= t('.new_visuals_all') %>
+    			</label>
+    		</div>
+    		<div class="span3">
+    			<label for="visuals_categories">
+    				<%= t('.new_visuals_by_category') %>
+    				<br />
+    				<%= select_tag "visuals_categories",
+    						options_from_collection_for_select(@categories, "id", "name", @visual_notifications.map{|x| x.identifier}),
+    						:multiple => true %>
+    			</label>
+    		</div>
+    	</div>
+
+		  <% if !current_user.organization_users.empty? %>
+			  <% current_user.organizations.each do |org| %>
+				  <h3><%= t('.visual_comment_sub_title', :org => org.name) %></h3>
+				  <%= hidden_field_tag "visual_comment[#{org.id}][name]", org.name %>
+				  <div class="fluid-row clear" id="visual_comment_notifications">
+					  <div class="span12">
+						  <%= t('.visual_comment_label') %>
+						  <label for="<%= "visual_comment_#{org.id}_wants_true"%>" class="radio">
+							  <%= radio_button_tag "visual_comment[#{org.id}][wants]", 'true', @visual_comment[org.id] %>
+							  <%= t('.visual_comment_yes') %>
+						  </label>
+						  <label for="<%= "visual_comment_#{org.id}_wants_false"%>" class="radio">
+							  <%= radio_button_tag "visual_comment[#{org.id}][wants]", 'false', !@visual_comment[org.id] %>
+							  <%= t('.visual_comment_no') %>
+						  </label>
+					  </div>
+				  </div>
+			  <% end %>
+		  <% end %>
+
+
+
+    	<h3><%= t('.new_ideas_sub_title') %></h3>
+    	<div class="fluid-row clear <%= @enable_notifications ? 'enable_notifications' : 'disable_notifications'%>" id="new_idea_notifications">
+    		<div class="span3">
+    			<label for="ideas_all" class="checkbox">
+    				<%= check_box_tag 'ideas_all', 'true', @idea_all %>
+    				<%= t('.new_ideas_all') %>
+    			</label>
+    		</div>
+    		<div class="span3">
+    			<label for="ideas_categories">
+    				<%= t('.new_ideas_by_category') %>
+    				<br />
+    				<%= select_tag "ideas_categories",
+    						options_from_collection_for_select(@categories, "id", "name", @idea_notifications.map{|x| x.identifier}),
+    						:multiple => true %>
+    			</label>
+    		</div>
+    	</div>
+
+    	<div>
+    		<%= submit_tag nil, :class => 'btn btn-mini' %>
+    	</div>
+    <% end %>
+  <% else %>
+    <p>
+      <%= t('.explain')%>
+    </p>
+    <p>
+      <%= link_to t('helpers.links.sign_in2'), :new_user_session, :class => 'btn btn-mini fancybox' %>
+    </p>
+  <% end %>
+</div>

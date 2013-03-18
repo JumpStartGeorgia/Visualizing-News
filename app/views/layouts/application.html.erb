@@ -82,18 +82,8 @@
 	                  <b class="caret"></b>
 	            </a>
 	            <ul class="dropdown-menu">
-							  <% current_user.organizations.each do |org| %>
-					        <li>
-		   		         <%= link_to t('helpers.links.org_profile', :org => org.name),
-											  visualizations_path(:organization => org.permalink) %>
-								  </li>
-					        <li>
-		   		         <%= link_to t('helpers.links.new_visual', :org => org.name),
-											  new_visualization_path(:organization => org.permalink) %>
-								  </li>
-							  <% end %>
 			          <li>
-	   		         <%= link_to t('.notifications'), notifications_path %>
+	   		         <%= link_to t('.user_profile'), profile_path %>
 							  </li>
 							  <% if current_user.role?(User::ROLES[:admin]) %>
 					        <li>
@@ -119,7 +109,7 @@
             <li><a class="twitter" title="<%= t('.twitter') %>" href="http://twitter.com/feradi_info" target="_blank"></a></li>
             <li><a class="pinterest" title="<%= t('.pinterest') %>" href="http://pinterest.com/feradi/" target="_blank"></a></li>
 			      <li><%= link_to "", visualizations_path(:format => :atom), :class => 'rss', :title => t('.rss') %></li>
-			      <li><%= link_to "", notifications_path, :class => 'mail', :title => t('.notifications') %></li>
+			      <li><%= link_to "", profile_path, :class => 'mail', :title => t('.notifications') %></li>
 			    </div>
         </ul>
 

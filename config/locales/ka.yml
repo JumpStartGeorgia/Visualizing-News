@@ -204,9 +204,12 @@ ka:
       download: ჩამოტვირთვა
       existing_file: არსებული ფაილის ნახვა
       more: ვრცლად
-      org_profile: "%{org} - გვერდი"
-      edit_org: "%{org} - რედაქტირება"
-      new_visual: "%{org} - ატვირთეთ ვიზუალი"
+      edit_org: "Edit Profile"
+      org_profile: "View Profile"
+      new_visual: "ატვირთეთ ვიზუალი"
+      edit_org_old: "%{org} - რედაქტირება"
+      org_profile_old: "%{org} - გვერდი"
+      new_visual_old: "%{org} - ატვირთეთ ვიზუალი"
       post_idea: იდეის გამოქვეყნება
       report_inappropriate: დაარეპორტე შეუსაბამო იდეა
       follow_idea: მიყევი
@@ -330,7 +333,7 @@ ka:
       menu_about: ჩვენ შესახებ
       menu_contact: დაგვიკავშირდი
       admin: ადმინისტრატორი
-      user_profile: შენი გვერდი
+      user_profile: User Profile
       notifications: შეტყობინებები
       facebook: Facebook
       twitter: Twitter
@@ -464,9 +467,11 @@ ka:
       add_datasource: მონაცემთა წყაროს დამატება
     datasource_fields:
       remove_link: მონაცემთა წყაროს წაშლა
-  notifications:
+  profile:
     index:
-      title: შეტყობინებები
+      title: User Profile
+      org_header: Organizations
+      notification_header: შეტყობინებები
       explain: "თქვენ მიიღებთ ვიზუალიზაციის  feradi.info-ზე დამატების შეტყობინებას ელ. წერილის სახით. სისტემაში შესვლა შეტყობინებების გამოსაწერად ხდება Facebook-ის ან feradi.info-ზე რეგისტრაციის გავლის მეშვეობით."
       all_sub_title: ყველა შეტყობინება
       all_label: გინდათ მიიღოთ შეტყობინება საიტიდან?

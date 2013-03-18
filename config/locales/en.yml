@@ -204,9 +204,12 @@ en:
       download: Download
       existing_file: View Existing File
       more: Show More
-      org_profile: "%{org} - Profile"
-      edit_org: "%{org} - Edit"
-      new_visual: "%{org} - Add Visualization"
+      edit_org: "Edit Profile"
+      org_profile: "View Profile"
+      new_visual: "Add Visualization"
+      edit_org_old: "%{org} - Edit"
+      org_profile_old: "%{org} - Profile"
+      new_visual_old: "%{org} - Add Visualization"
       post_idea: Post Idea
       report_inappropriate: Report Inappropriate Idea
       follow_idea: Follow
@@ -330,7 +333,7 @@ en:
       menu_about: About
       menu_contact: Contact
       admin: Admin
-      user_profile: Your Profile
+      user_profile: User Profile
       notifications: Notifications
       facebook: Facebook
       twitter: Twitter
@@ -464,9 +467,11 @@ en:
       add_datasource: Add Data Source
     datasource_fields:
       remove_link: Remove Data Source
-  notifications:
+  profile:
     index:
-      title: Notifications
+      title: User Profile
+      org_header: Organizations
+      notification_header: Notifications
       explain: "You can recieve email notifications whenever a visualization is added to feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe."
       all_sub_title: All Notifications
       all_label: Do you want to recieve any notifications from this site?

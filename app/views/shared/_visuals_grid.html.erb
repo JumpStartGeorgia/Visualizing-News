@@ -44,7 +44,7 @@
                 </li>
               </ul>
   					</div>
-  					<% if @user_in_org && current_user.role?(User::ROLES[:org_admin]) && params[:organization].present? %>
+  					<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && ((@user_in_org && params[:organization].present?) || (visualization.organization_id.present? && current_user.organization_ids.present? && current_user.organization_ids.index(visualization.organization_id))) %>
   						<div>
   					    <%= link_to t('.edit', :default => t("helpers.links.edit")),
 					                  edit_visualization_path(:id => visualization.permalink, :organization => params[:organization]),

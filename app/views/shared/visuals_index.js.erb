@@ -9,6 +9,12 @@
     }
   })(0, $('div.grid_items').append($("<%= escape_javascript(render @view_type)%>").hide()).find('[class*="visualization_item"]:not(:visible)'));
 
+  // if the user is logged in and belongs to an org, increase the height of the title box in the visual grid to account for the buttons
+  // and so the grid items wrap nicely
+  if (gon.user_belongs_to_orgs == true){
+    $('.grid_visualization_item .title').css('min-height', '80px');
+  }
+
   $('#load_more_link').show().replaceWith("<%= escape_javascript(link_to_next_page(@visualizations, t('helpers.links.more'), :remote => true, :id=>'load_more_link', :params => params))%>");
 <% else %>
   $('div.grid_items').parent().append('<div id="no_records"><%= t("app.msgs.no_visual_records")%></div>');

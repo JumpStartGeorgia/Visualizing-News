@@ -99,6 +99,12 @@ Rails.logger.debug "****************** user is in org"
 		@id_realized = gon.id_realized
 
 		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
+
+    # if user in org, increase visual grid height to account for buttons and so visual grid wraps nicely
+    gon.user_belongs_to_orgs = false
+    if user_signed_in? && current_user.organization_ids.present? && current_user.role?(User::ROLES[:org_admin])
+      gon.user_belongs_to_orgs = true
+    end
 	end
 
 	# after user logs in go back to the last page or go to root page

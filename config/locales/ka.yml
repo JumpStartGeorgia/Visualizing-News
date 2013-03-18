@@ -219,6 +219,8 @@ ka:
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
+      new_visual: "%{org} - ახალი %{model}"
+      edit_visual: "%{org} - შეცვლა %{model}"
   visualization_types:
     infographic: ინფოგრაფიკა
     interactive: ინტერაქტივი

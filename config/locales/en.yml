@@ -219,6 +219,8 @@ en:
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
+      new_visual: "%{org} - New %{model}"
+      edit_visual: "%{org} - Edit %{model}"
   visualization_types:
     infographic: Infographic
     interactive: Interactive

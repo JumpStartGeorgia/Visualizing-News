@@ -1,6 +1,9 @@
 <%- model_class = Visualization -%>
-<%= page_title t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-                                 :default => "New #{model_class.model_name.human}") %>
+<% if @organization.present? %>
+  <%= page_title t('helpers.titles.new_visual', :model => model_class.model_name.human, :org => @organization.name) %>
+<% else %>
+  <%= page_title t('helpers.titles.new_visual', :model => model_class.model_name.human) %>
+<% end %>
 
 <div class="form-actions">
 	<%= link_to t('helpers.links.list'), visualizations_path(:organization => params[:organization_id]),

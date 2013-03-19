@@ -6,6 +6,10 @@
   padding-right: 0px;
 }
 
+#fancybox-wrap .alert.alert-info {
+  margin-bottom: 0px;
+}
+
 #sign_in_c, #forgot_password_c, #sign_up_c {
 /*
   border: 9px solid #dcdcdc;
@@ -128,10 +132,6 @@
   }
 
   #error_explanation {
-    .box-sizing(border-box);
-    width: 279px;
-    margin-left: auto;
-    margin-right: auto;
     li {
       list-style: none;
     }
@@ -142,6 +142,13 @@
   /*
     text-align: left;
   */
+  }
+
+  #error_explanation, .alert {
+    .box-sizing(border-box);
+    width: 279px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
 

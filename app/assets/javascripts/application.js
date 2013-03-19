@@ -84,22 +84,44 @@ $(document).ready(function(){
   //($(window).width() > 979) && $('#frozen-menu div.menu-collapse:visible').removeAttr('style');
   });
 
+  function delayed_reload (delay)
+  {
+    var delay = delay || 3000;
+    setTimeout('window.location.reload();', delay);
+  }
+
 
   $('#user_new').live('submit', function ()
   {
     $.ajax({
       type: "POST",
-      url: $(this).attr('action'),
+      url: $(this).attr('action'),//.replace(/.json$/, '') + '.json',
       data: $(this).serialize(),
+      //dataType: 'json',
       success: function (data)
       {
-        console.log($(data).find('#sign_in_c, #sign_up_c, #forgot_password_c'));
-        $('#sign_in_c, #sign_up_c, #forgot_password_c').replaceWith($(data).find('#sign_in_c, #sign_up_c, #forgot_password_c'));
+        var rhtml = $(data);
+        var rform = rhtml.find('#sign_in_c, #sign_up_c, #forgot_password_c');
+        if (rform.length && rform.find('#error_explanation').length)
+        {
+          $('#sign_in_c, #sign_up_c, #forgot_password_c').replaceWith(rform);
+        }
+        else if (rhtml.find('.alert.alert-info').length)
+        {
+          $('#sign_in_c, #sign_up_c, #forgot_password_c').replaceWith(rhtml.find('.alert.alert-info').children().remove().end());
+          delayed_reload(3000);
+        }
+        else
+        {
+          window.location.reload();
+        }
       },
       error: function (data)
       {
         $('#sign_in_c').parent().find('.alert').remove();
-        $('#sign_in_c').before('<div class="alert alert-error fade in"><a href="#" data-dismiss="alert" class="close">×</a> ' + data.responseText + '</div>');
+        $('#sign_in_c form').before('<div class="alert alert-error fade in"><a href="#" data-dismiss="alert" class="close">×</a> ' + data.responseText + '</div>');
+        $('#sign_in_c input[type="password"]').val(null);
+        $('#sign_in_c :input:visible:enabled:first').focus();
       }
     });
     return false;

@@ -15,6 +15,23 @@
 
 </div>
 
+<% if user_signed_in? && current_user.role?(User::ROLES[:org_admin]) && params[:view] != 'interactive' && ((@user_in_org && params[:organization].present?) || (@visualization.organization_id.present? && current_user.organization_ids.present? && current_user.organization_ids.index(@visualization.organization_id))) %>
+  <div class="form-actions">
+    <% params[:organization] = @visualization.organization.permalink if !params[:organization].present? %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_visualization_path(@visualization.permalink, :organization => params[:organization]), :class => 'btn' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                visualization_path(@visualization.permalink, :organization => params[:organization]),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+                :class => 'btn btn-danger' %>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                visualizations_path(merge_visual_params([{:key => :organization, :value => params[:organization]}])), :class => 'btn'  %>
+    <%= link_to t('helpers.links.new_visual'),
+        		    new_visualization_path(:organization => params[:organization]), :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+
 <div id="visualization_row1a" class="row-fluid">
 
   <div class="main_block clear">

@@ -14,11 +14,11 @@
   		  <div class="grid_visualization_item">
   		    <div class="visual">
   		       <%  if !visualization.image_file_name.blank? %>
-    		      <%= link_to(image_tag(visualization.image.url(:thumb, false)), 
+    		      <%= link_to(image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text), 
                     create_visual_path(visualization.permalink, @user_in_org, params[:org]), 
                     :title => visualization.title) %>
   		      <% else %>
-    		      <%= link_to(image_tag('image_placeholder.png'), 
+    		      <%= link_to(image_tag('image_placeholder.png', :alt => visualization.image_text), 
                     create_visual_path(visualization.permalink, @user_in_org, params[:org]), 
                     :title => visualization.title) %>
   		      <% end %>

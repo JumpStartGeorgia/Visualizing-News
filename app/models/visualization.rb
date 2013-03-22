@@ -73,6 +73,10 @@ class Visualization < ActiveRecord::Base
     end
   end
 
+  def image_text
+    "#{self.title} - #{self.explanation}"
+  end
+
 	# this validation is done here and not in trans obj because
 	# when creating objs, the relationship between vis and trans do not exist
 	# and so cannot get type id

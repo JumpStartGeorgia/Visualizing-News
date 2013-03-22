@@ -22,7 +22,8 @@ class Idea < ActiveRecord::Base
 			:is_private,
       :is_public,
 			:current_status_id,
-      :created_at, :updated_at, :fb_count, :db_migrate
+      :created_at, :updated_at, :fb_count, :db_migrate,
+      :fb_likes
 	attr_accessor :send_notification, :db_migrate
 
   validates :user_id, :explaination, :presence => true

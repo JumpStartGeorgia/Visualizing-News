@@ -77,6 +77,7 @@ Rails.logger.debug "****************** user is in org"
 			end
 
 			gon.show_fb_comments = true
+      gon.show_fb_like = true
 
       # if from_embed in url, set gon so large image loads automatically
       if params[:from_embed] && @visualization.visualization_type_id == Visualization::TYPES[:infographic]
@@ -95,6 +96,12 @@ Rails.logger.debug "****************** user is in org"
 			flash[:info] =  t('app.msgs.does_not_exist')
 			redirect_to root_path(:locale => I18n.locale)
 		end
+  end
+
+  def fb_like
+    visualization = Visualization.published.find_by_permalink(params[:id])
+    visualization.process_like if visualization.present?  
+    render :nothing => true
   end
 
   def vote

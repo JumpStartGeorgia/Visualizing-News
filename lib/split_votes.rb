@@ -60,7 +60,7 @@ module SplitVotes
         end
 
         self.individual_votes = "+#{ups}-#{downs}"
-			  self.overall_votes = ups - downs
+			  self.overall_votes = ups - downs + self.fb_likes
         self.save
 
         VoterId.create(:user_id => user.id, :votable_type => self.class.name.downcase,
@@ -81,7 +81,7 @@ module SplitVotes
         end
 
         self.individual_votes = "+#{ups}-#{downs}"
-			  self.overall_votes = ups - downs
+			  self.overall_votes = ups - downs + self.fb_likes
         self.save
 
         # update the vote record
@@ -92,6 +92,12 @@ module SplitVotes
       end
     end
     return success
+  end
+
+  def process_like
+	  self.overall_votes += 1
+	  self.fb_likes += 1
+    self.save
   end
 
   module ClassMethods

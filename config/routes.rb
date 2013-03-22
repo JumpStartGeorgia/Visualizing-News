@@ -45,6 +45,7 @@ BootstrapStarter::Application.routes.draw do
 	  match '/visualizations/:id/previous', :to => 'visuals#previous', :as => :visual_previous, :via => :get
 	  match '/visualizations/:id/promote', :to => 'visuals#promote', :as => :visual_promote, :via => :get
 	  match '/visualizations/:id/unpromote', :to => 'visuals#unpromote', :as => :visual_unpromote, :via => :get
+	  match '/visualizations/:id/fb_like', :to => 'visuals#fb_like', :as => :visual_fb_like, :via => :get
 
     # ideas
 		match '/ideas/ajax', :to => 'ideas#ajax', :as => :ideas_ajax, :via => :get, :defaults => {:format => 'js'}
@@ -62,6 +63,7 @@ BootstrapStarter::Application.routes.draw do
 	  match '/ideas/:id/delete', :to => 'ideas#delete', :as => :idea_delete, :via => :get
 	  match '/ideas/:id/edit', :to => 'ideas#edit', :as => :idea_edit, :via => :get
 	  match '/ideas/:id/edit', :to => 'ideas#edit', :as => :idea_edit, :via => :post
+	  match '/ideas/:id/fb_like', :to => 'ideas#fb_like', :as => :idea_fb_like, :via => :get
   
 
     namespace :ideas do
@@ -86,6 +88,21 @@ BootstrapStarter::Application.routes.draw do
 	end
 
   match '/unset_cookie', :to => 'root#unset_cookie', :as => :unset_cookie, :via => :get
+
+  #facebook channel url - speeds up fb sdk loading
+  # http://blog.quov.is/2012/01/23/setting-up-the-facebook-javascript-sdk-channel-file-the-easy-way-with-rails/    
+  get '/channel.html' => proc {
+    [
+      200,
+      {
+        'Pragma'        => 'public',
+        'Cache-Control' => "max-age=#{1.year.to_i}",
+        'Expires'       => 1.year.from_now.to_s(:rfc822),
+        'Content-Type'  => 'text/html'
+      },
+      ['<script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>']
+    ]
+  }
 
 	match '', :to => redirect("/#{I18n.default_locale}") # handles /
 	match '*path', :to => redirect("/#{I18n.default_locale}/%{path}") # handles /not-a-locale/anything

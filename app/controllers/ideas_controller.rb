@@ -53,6 +53,7 @@ class IdeasController < ApplicationController
 
 		if @idea
 			gon.show_fb_comments = true
+      gon.show_fb_like = true
 
 		  respond_to do |format|
 		    format.html # idea.html.erb
@@ -143,6 +144,12 @@ class IdeasController < ApplicationController
     end
   end
 
+  def fb_like
+    idea = Idea.find_by_id(params[:id])
+    idea.process_like if idea.present?    
+    render :nothing => true
+  end
+
   def vote
     if !user_signed_in?
       redirect_to new_user_session_path
@@ -160,7 +167,7 @@ class IdeasController < ApplicationController
     if ['down', 'up'].include?(params[:status])
       idea = Idea.find_by_id(params[:id])
 
-      if !idea.blank?
+      if idea.present?
         idea.process_vote(current_user, params[:status])
       else
         success = false

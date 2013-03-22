@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	// facebook comments
+/*
 	(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
 		if (d.getElementById(id)) return;
@@ -12,6 +12,7 @@ $(document).ready(function(){
 		// when a comment is submitted, notify the user of the idea
 		if (gon.show_fb_comments){
 			FB.Event.subscribe('comment.create', function(response){
+alert("comments!");
 				// get id of record
 				var resp_url_ary = response.href.split("/");
 				var id = resp_url_ary[resp_url_ary.length-1].split("?")[0];
@@ -40,8 +41,29 @@ $(document).ready(function(){
         });
 			});
 		}
-  };
 
+
+		// when a like is submitted, record it locally
+		if (gon.show_fb_like){
+			FB.Event.subscribe('edge.create', function(response){
+				// get id of record
+				var resp_url_ary = response.href.split("/");
+				var id = resp_url_ary[resp_url_ary.length-1].split("?")[0];
+
+        // record the like
+        // check if visuals or ideas comments
+        var url_ary = window.location.pathname.split( '/' );
+alert("facebook like!");
+
+        if (url_ary.indexOf('visualizations') > -1){
+  				$.get(gon.visual_comment_notification_url.replace(gon.placeholder, id));
+        } else if (url_ary.indexOf('ideas') > -1){
+  				$.get(gon.idea_comment_notification_url.replace(gon.placeholder, id));
+        }
+			});
+		}
+  };
+*/
 	// set the width of the facebook comments box
 	if (gon.show_fb_comments){
 		$('div.fb-comments').attr('data-width',$('div.page-header').width());

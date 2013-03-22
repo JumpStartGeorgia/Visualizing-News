@@ -79,6 +79,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		gon.placeholder = t('app.common.placeholder')
 		gon.visual_comment_notification_url = visual_comment_notification_path(gon.placeholder)
 		gon.idea_comment_notification_url = idea_comment_notification_path(gon.placeholder)
+		gon.visual_fb_like_url = visual_fb_like_path(gon.placeholder)
+		gon.idea_fb_like_url = idea_fb_like_path(gon.placeholder)
 		gon.fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 		gon.thumbnail_size = 230
 		gon.id_top = t('app.common.top_ideas').gsub(" ", "_").downcase

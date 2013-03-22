@@ -31,7 +31,8 @@ class Visualization < ActiveRecord::Base
 			:visual_is_cropped_old,
 			:data_source_url_old,
 			:languages, :languages_internal,
-      :is_promoted, :promoted_at
+      :is_promoted, :promoted_at,
+      :fb_likes
 	attr_accessor :send_notification, :was_published, :languages_internal
 
  paginates_per 8

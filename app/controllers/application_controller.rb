@@ -70,6 +70,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 	  @idea_statuses = IdeaStatus.with_translations(I18n.locale).sorted
     @idea = Idea.new
 	  @idea.idea_categories.build
+
+
+		@fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 	end
 
 	def initialize_gon

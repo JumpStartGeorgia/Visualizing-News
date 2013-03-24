@@ -53,26 +53,15 @@
 		<!-- facebook api -->
 		<div id="fb-root"></div>
     <script>
-
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=" + gon.fb_app_id;
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
       window.fbAsyncInit = function() {
-/*
-        // init the FB JS SDK
         FB.init({
-          appId      : gon.fb_app_id, // App ID from the App Dashboard
-          channelUrl : '<%= "#{request.protocol}#{request.host_with_port}/channel.html" %>', // Channel File for x-domain communication
-          status     : true, // check the login status upon init?
-          cookie     : true, // set sessions cookies to allow your server to access the session?
-          xfbml      : true  // parse XFBML tags on this page?
+          appId      : gon.fb_app_id,
+          channelUrl : '<%= "#{request.protocol}#{request.host_with_port}/channel.html" %>',
+          status     : true,
+          cookie     : true,
+          xfbml      : true
         });
-*/
+
 		    // when a comment is submitted, notify the user of the idea
 		    if (gon.show_fb_comments){
 			    FB.Event.subscribe('comment.create', function(response){
@@ -126,6 +115,14 @@
 
       };
 
+      // Load FB's JS SDK
+      (function(d, debug){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document, /*debug*/ false));
     </script>
 
     <div id="frozen-menu">

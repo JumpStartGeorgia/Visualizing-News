@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322065528) do
+ActiveRecord::Schema.define(:version => 20130322131126) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -250,6 +250,22 @@ ActiveRecord::Schema.define(:version => 20130322065528) do
   end
 
   add_index "pages", ["name"], :name => "index_pages_on_name"
+
+  create_table "stories", :force => true do |t|
+    t.datetime "published_date"
+    t.boolean  "published",        :default => false
+    t.integer  "story_type_id"
+    t.string   "data_source_url"
+    t.string   "individual_votes"
+    t.integer  "overall_votes",    :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stories", ["overall_votes"], :name => "index_stories_on_overall_votes"
+  add_index "stories", ["published"], :name => "index_stories_on_published"
+  add_index "stories", ["published_date"], :name => "index_stories_on_published_date"
+  add_index "stories", ["story_type_id"], :name => "index_stories_on_story_type_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false

@@ -68,7 +68,7 @@ module ApplicationHelper
 	def current_url_no_querystring
 		x = nil
     uri = URI("#{request.protocol}#{request.host_with_port}#{request.fullpath}")
-    port = uri.port.present? ? ":#{uri.port}" : ""
+    port = uri.port.present? && [80,443].index(uri.port).nil? ? ":#{uri.port}" : ""
 		return "#{uri.scheme}://#{uri.host}#{port}#{uri.path}" 
 	end
 

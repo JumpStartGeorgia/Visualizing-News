@@ -1,5 +1,7 @@
 module ApplicationHelper
 	require 'utf8_converter'
+  require 'uri'
+
 	def page_title(page_title)
 		title(page_title)
 		x = nil
@@ -61,6 +63,13 @@ module ApplicationHelper
 			end
 		end
 		return x
+	end
+
+	def current_url_no_querystring
+		x = nil
+    uri = URI("#{request.protocol}#{request.host_with_port}#{request.fullpath}")
+    port = uri.port.present? ? ":#{uri.port}" : ""
+		return "#{uri.scheme}://#{uri.host}#{port}#{uri.path}" 
 	end
 
 	def full_url(path)

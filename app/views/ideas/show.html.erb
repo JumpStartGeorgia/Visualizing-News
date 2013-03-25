@@ -246,13 +246,13 @@
           <span class="sidebar_heading"><%= t('app.common.share'); %>: </span>
           <div>
 				    <%= link_to(image_tag("share_fb.png"),
-							    "http://www.facebook.com/share.php?u=#{current_url(true)}",
+							    "http://www.facebook.com/share.php?u=#{current_url_no_querystring}",
 							    :title => "facebook",	:target => "_blank") %>
 				    <%= link_to(image_tag("share_twitter.png"),
-							    "https://twitter.com/share?url=#{current_url(true)}", :title => "twitter",
+							    "https://twitter.com/share?url=#{current_url_no_querystring}", :title => "twitter",
 							    :target => "_blank") %>
 				    <%= link_to(image_tag("share_gplus.png"),
-							    "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url(true)}", :title => "google+",
+							    "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url_no_querystring}", :title => "google+",
 							    :target => "_blank") %>
 				  </div>
 			  </div>
@@ -265,7 +265,7 @@
 
     <div class="main_block clear">
       <div class="vote">
-				<div class="fb-like" data-href="<%= current_url(true) %>" data-send="false" data-layout="button_count" data-width="auto" data-show-faces="false"></div>
+				<div class="fb-like" data-href="<%= current_url_no_querystring %>" data-send="false" data-layout="button_count" data-width="auto" data-show-faces="false"></div>
       </div>
     </div>
 
@@ -280,7 +280,7 @@
           <span class="comment_count_number"><%=@idea.fb_count%></span>
         </span>
 		  </h3>
-		  <div class="fb-comments" data-href="<%= current_url%>" data-num-posts="5" data-width="470"></div>
+		  <div class="fb-comments" data-href="<%= current_url_no_querystring %>" data-num-posts="5" data-width="470"></div>
 	  </div>
 
   </div>

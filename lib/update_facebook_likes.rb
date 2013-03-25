@@ -92,7 +92,7 @@ puts "response = #{JSON.parse(response.body)}"
 
     end
 
-    puts '*** total time = #{Time.now - start} seconds'
+    puts "*** total time = #{Time.now - start} seconds"
     puts "update visuals end"
     puts "***************************************"
   end
@@ -155,7 +155,7 @@ puts "response = #{JSON.parse(response.body)}"
 
     end
 
-    puts '*** total time = #{Time.now - start} seconds'
+    puts "*** total time = #{Time.now - start} seconds"
     puts "update ideas end"
     puts "***************************************"
   end

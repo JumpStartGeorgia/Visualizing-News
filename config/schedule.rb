@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => "12:30pm" do
+every 1.day, :at => "12:30am" do
   rake "facebook_update:visuals"
   rake "facebook_update:ideas"
 end

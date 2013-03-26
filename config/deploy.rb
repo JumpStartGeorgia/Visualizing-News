@@ -4,9 +4,11 @@
 
 set :stages, %w(production staging)
 set :default_stage, "staging" # if just run 'cap deploy' the staging environment will be used
+set :whenever_environment, defer { stage } # whenever gem to update crontab
 
 require 'capistrano/ext/multistage' # so we can deploy to staging and production servers
 require "bundler/capistrano" # Load Bundler's capistrano plugin.
+require "whenever/capistrano" # whenever gem to update crontab
 
 # these vars are set in deploy/env.rb
 #set :user, "placeholder"
@@ -100,16 +102,6 @@ namespace :deploy do
       else
         logger.info "#{changed_asset_count} assets have changed. Skipping asset pre-compilation"
       end
-    end
-  end
-
-  # make sure the latest cron tasks are being used
-  after "deploy:symlink", "deploy:update_crontab"
-  namespace :deploy do
-    desc "Update the crontab file"
-    task :update_crontab, :roles => :db do
-      puts "updating crontab file"
-      run "cd #{release_path} && bundle exec whenever -w #{application}"
     end
   end
 

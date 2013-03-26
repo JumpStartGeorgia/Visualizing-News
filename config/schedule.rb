@@ -19,10 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, { :standard => "/var/log/cron.feradi.log", :error => "/var/log/cron.feradi.errors.log" }
-
 every 1.day, :at => "12:30am" do
-  rake "facebook_update:visuals"
-  rake "facebook_update:ideas"
+  rake "facebook_update:visuals", :output => {:standard => "/var/log/cron.feradi.visuals.log", :error => "/var/log/cron.feradi.visuals.errors.log"}
+  rake "facebook_update:ideas", :output => {:standard => "/var/log/cron.ideas.feradi.log", :error => "/var/log/cron.feradi.ideas.errors.log"}
 end
+
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322131126) do
+ActiveRecord::Schema.define(:version => 20130403113918) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(:version => 20130322131126) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.integer  "sort_order",        :default => 1
   end
+
+  add_index "categories", ["sort_order"], :name => "index_categories_on_sort_order"
 
   create_table "category_translations", :force => true do |t|
     t.integer  "category_id"

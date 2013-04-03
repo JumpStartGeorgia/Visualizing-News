@@ -178,6 +178,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		else
 			@visuals_filter_type_icon = 'all'
 		end
+
+		params[:category] = I18n.t('filters.category_default') if !params[:category].present?
+
   end
 
   ## visual querystring
@@ -220,7 +223,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
 		end
 
-		if params[:category]
+		if params[:category] && params[:category] != I18n.t('filters.category_default')
       index = @categories.index{|x| x.permalink == params[:category]}
 			visual_objects = visual_objects.by_category(@categories[index].id) if index
 		end

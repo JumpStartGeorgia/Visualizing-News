@@ -220,6 +220,7 @@ ka:
     infographic: ინფოგრაფიკა
     interactive: ინტერაქტივი
   filters:
+    category_default: qkhvela
     visuals:
       type:
         header: ტიპი
@@ -391,7 +392,7 @@ ka:
       button_data: მონაცემების გაგზავნა
     about:
       title: ჩვენ შესახებ
-      meta_description: "Visualization provides a unique perspective on data. We seek out data from a variety of organizations, both public and private. We make information colourful by visualizing stories using a variety of tools.	We publish these visualizations on our website, make them freely available for others to use, share them with you, and hope you share them with others."
+      meta_description: "ვიზუალიზაცია მონაცემებს უნიკალურ პერსპექტივას ანიჭებს. ჩვენ ვეძებთ მონაცემებს სხვადასხვა საჯარო და კერძო ორგანიზაციებში. ჩვენ ვაფერადებთ ინფორმაციას ამბების სხვადასხვა ხერხების გამოყენებით ვიზუალურად გამოსახვით. ჩვენ ვაქვეყნებთ ამ ვიზუალიზაციებს ჩვენს ვებ-საიტზე და ვხდით მათ ხელმისაწვდომს, ვიზიარებთ მას თქვენთან და ვიმედოვნებთ თქვენც გაუზიარებთ მას სხვებს."
     data:
       title: მონაცემების გაგზავნა
       meta_description: "ფლობთ მონაცემებს და გსურთ მათი ვიზუალიზაცია, თუმცა არ გაქვთ საკმარისი დრო ან ტექნიკური ცოდნა? გაგვიზიარეთ თქვენი მონაცემები აქ. თუ ეს მონაცემები საინტერესო აღმოჩნდება, ჩვენ გამოვსახავთ მათ ვიზუალურად და ამ ვიზუალიზაციის გამოყენებას შეძლებთ თქვენც. მონაცემების გაზიარებით თქვენ ხდებით ერთი დიდი საზოგადოების წევრი, სადაც ყველა წევრი რჩება მოგებული."

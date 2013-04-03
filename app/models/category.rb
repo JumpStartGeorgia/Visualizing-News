@@ -11,14 +11,14 @@ class Category < ActiveRecord::Base
     :path => ":rails_root/public/system/category/:attachment/:id/:filename"
 
   accepts_nested_attributes_for :category_translations
-  attr_accessible :id, :icon, :category_translations_attributes, :icon_content_type, :icon_file_size, :icon_updated_at, :icon_file_name
+  attr_accessible :id, :icon, :sort_order, :category_translations_attributes, :icon_content_type, :icon_file_size, :icon_updated_at, :icon_file_name
 
   def permalink
     Utf8Converter.convert_ka_to_en(self.name.downcase.gsub(" ","_").gsub("/","_").gsub("__","_").gsub("__","_"))
   end
 
 	def self.sorted
-		with_translations(I18n.locale).order("category_translations.name asc")
+		with_translations(I18n.locale).order("categories.sort_order asc, category_translations.name asc")
 	end
 
 end

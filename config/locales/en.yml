@@ -220,6 +220,7 @@ en:
     infographic: Infographic
     interactive: Interactive
   filters:
+    category_default: all
     visuals:
       type:
         header: Type

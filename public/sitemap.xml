@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://feradi.info/ka</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/visualizations</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/visualizations/all</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/ideas</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/ideas/all</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/submit_visual</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/data</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/about</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/ka/contact</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/visualizations</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/visualizations/all</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/ideas</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/ideas/all</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/submit_visual</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/data</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/about</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://feradi.info/en/contact</loc>
+  <changefreq>daily</changefreq>
+</url>
+
+</urlset>

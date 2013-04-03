@@ -267,7 +267,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
       # if not set, default to recent
 			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.recent")
 			@ideas_filter_organize_icon = 'recent'
-		end  end
+		end  
+
+		params[:category] = I18n.t('filters.category_default') if !params[:category].present?
+
+  end
 
 
   def process_idea_querystring(idea_objects)
@@ -307,7 +311,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.recent")
 		end
 
-		if params[:category]
+		if params[:category] && params[:category] != I18n.t('filters.category_default')
       index = @categories.index{|x| x.permalink == params[:category]}
 			idea_objects = idea_objects.by_category(@categories[index].id) if index
 		end

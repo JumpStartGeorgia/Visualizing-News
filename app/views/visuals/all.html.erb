@@ -1,0 +1,4 @@
+<% @no_index_meta = true %>
+<% @visualizations.each do |visualization| %>
+  <%= link_to visualization_path(visualization.id), visualization_path(visualization.id) %>
+<% end %>

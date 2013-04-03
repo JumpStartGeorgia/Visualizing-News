@@ -36,6 +36,7 @@ BootstrapStarter::Application.routes.draw do
 		end
 
     # visualizations
+    match '/visualizations/all', :to => 'visuals#all', :as => :all_visuals, :via => :get
 		match '/visualizations/ajax', :to => 'visuals#ajax', :as => :visuals_ajax, :via => :get, :defaults => {:format => 'js'}
 		match '/visualizations', :to => 'visuals#index', :as => :visuals, :via => :get
 		match '/visualizations/:id', :to => 'visuals#show', :as => :visualization, :via => :get
@@ -48,6 +49,7 @@ BootstrapStarter::Application.routes.draw do
 	  match '/visualizations/:id/fb_like', :to => 'visuals#fb_like', :as => :visual_fb_like, :via => :get
 
     # ideas
+    match '/ideas/all', :to => 'ideas#all', :as => :all_ideas, :via => :get
 		match '/ideas/ajax', :to => 'ideas#ajax', :as => :ideas_ajax, :via => :get, :defaults => {:format => 'js'}
 		match '/ideas', :to => 'ideas#index', :as => :ideas, :via => :get
 		match '/ideas/:id', :to => 'ideas#show', :as => :idea, :via => :get

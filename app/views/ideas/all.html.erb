@@ -1,0 +1,4 @@
+<% @no_index_meta = true %>
+<% @ideas.each do |idea| %>
+  <%= link_to idea_path(idea.id), idea_path(idea.id) %>
+<% end %>

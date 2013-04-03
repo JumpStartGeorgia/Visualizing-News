@@ -5,20 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
-				t('app.common.app_name') %>" />
-		<% if @visualization && @visualization.id && !@visualization.explanation.blank? %>
-  		<meta property="og:description" content="<%= @visualization.explanation%>" />
-    <% end %>
-		<meta property="og:type" content="non_profit" />
-		<meta property="og:url" content="<%= current_url %>" />
-		<% if @visualization && @visualization.id && !@visualization.image_file_name.blank? %>
-			<meta property="og:image" content="<%= full_url(@visualization.image.url(:thumb, false)) %>" />
+    <% if @no_index_meta %>
+      <META NAME="ROBOTS" CONTENT="NOINDEX, FOLLOW">
     <% else %>
-			<meta property="og:image" content="<%= full_url(image_path('logo.png')) %>" />
-		<% end %>
-		<meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
-		<meta property="fb:app_id" content="<%= ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID'] %>" />
+      <%
+        desc = t("#{params[:controller]}.#{params[:action]}.meta_description", :default => '')
+        desc = @visualization.explanation.gsub("\n", " ") if @visualization && @visualization.id && @visualization.explanation.present?
+        desc = @idea.explaination.gsub("\n", " ") if @idea && @idea.id && @idea.explaination.present?
+      %>
+
+      <meta name="description" content="<%= desc %>">
+
+		  <meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
+				  t('app.common.app_name') %>" />
+		  <% if @visualization && @visualization.id && @visualization.explanation.present? %>
+    		<meta property="og:description" content="<%= @visualization.explanation%>" />
+      <% end %>
+		  <meta property="og:type" content="non_profit" />
+		  <meta property="og:url" content="<%= current_url %>" />
+		  <% if @visualization && @visualization.id && @visualization.image_file_name.present? %>
+			  <meta property="og:image" content="<%= full_url(@visualization.image.url(:thumb, false)) %>" />
+      <% else %>
+			  <meta property="og:image" content="<%= full_url(image_path('logo.png')) %>" />
+		  <% end %>
+		  <meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
+		  <meta property="fb:app_id" content="<%= ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID'] %>" />
+    <% end %>
 
     <title><%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
 				t('app.common.app_name') %></title>

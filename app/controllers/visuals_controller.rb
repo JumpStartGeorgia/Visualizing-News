@@ -62,6 +62,11 @@ Rails.logger.debug "****************** user is in org"
     end
 	end
 
+  # this is so crawlers can find all reocrds since they are loaded via ajax
+  def all
+    @visualizations = Visualization.published.recent
+  end
+
   def show
     @visualization = Visualization.published.find_by_permalink(params[:id])
     gon.highlight_first_form_field = false

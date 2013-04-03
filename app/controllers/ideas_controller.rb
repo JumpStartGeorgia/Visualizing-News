@@ -35,6 +35,11 @@ class IdeasController < ApplicationController
     set_idea_view_type # in app controller
   end
 
+  # this is so crawlers can find all reocrds since they are loaded via ajax
+  def all
+    @ideas = Idea.public_only.recent
+  end
+
 	def user
 		@user = User.find_by_permalink(params[:id])
 

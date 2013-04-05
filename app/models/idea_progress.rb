@@ -8,6 +8,7 @@ class IdeaProgress < ActiveRecord::Base
       :progress_date,
       :explaination,
       :is_completed,
+      :is_cancelled,
 			:url,
 			:is_private,
       :is_public,
@@ -20,11 +21,14 @@ class IdeaProgress < ActiveRecord::Base
 
   scope :public_only, where("idea_progresses.is_public = '1'")
   before_save :set_is_completed
+  before_save :set_is_cancelled
 
   def set_is_completed
-Rails.logger.debug "------- is completed was #{self.is_completed}"
     self.is_completed = self.idea_status.is_published
-Rails.logger.debug "------- is completed is now #{self.is_completed}"
+  end
+
+  def set_is_cancelled
+    self.is_cancelled = self.idea_status.is_cancelled
   end
 
 	# determine if the explaination is written in the locale

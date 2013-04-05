@@ -4,7 +4,8 @@ class IdeaStatus < ActiveRecord::Base
 	has_many :idea_status_translations, :dependent => :destroy
   accepts_nested_attributes_for :idea_status_translations
 
-  attr_accessible :id, :sort, :is_published, :idea_status_translations_attributes
+  attr_accessible :id, :sort, :is_published, :is_cancelled, :idea_status_translations_attributes
 
 	scope :sorted, order("sort asc")
+
 end

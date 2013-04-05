@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403113918) do
+ActiveRecord::Schema.define(:version => 20130405090835) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -91,9 +91,11 @@ ActiveRecord::Schema.define(:version => 20130403113918) do
     t.integer  "idea_status_id"
     t.boolean  "is_private",      :default => false
     t.boolean  "is_public",       :default => true
+    t.boolean  "is_cancelled",    :default => false
   end
 
   add_index "idea_progresses", ["idea_id", "organization_id"], :name => "idea_prog_idea_org"
+  add_index "idea_progresses", ["is_cancelled"], :name => "index_idea_progresses_on_is_cancelled"
   add_index "idea_progresses", ["is_completed"], :name => "index_idea_progresses_on_is_completed"
   add_index "idea_progresses", ["is_private"], :name => "index_idea_progresses_on_is_private"
   add_index "idea_progresses", ["is_public"], :name => "index_idea_progresses_on_is_public"
@@ -115,8 +117,10 @@ ActiveRecord::Schema.define(:version => 20130403113918) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_published", :default => false
+    t.boolean  "is_cancelled", :default => false
   end
 
+  add_index "idea_statuses", ["is_cancelled"], :name => "index_idea_statuses_on_is_cancelled"
   add_index "idea_statuses", ["sort"], :name => "index_idea_statuses_on_sort"
 
   create_table "ideas", :force => true do |t|

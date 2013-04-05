@@ -7,7 +7,7 @@
     <div class="main_block clear">
       <% after_title = ''
           x = @idea.last_progress_report(current_user)
-         if x 
+         if x.present? && !x.is_cancelled
            if x.is_completed 
             after_title << image_tag('completed.png', :title => t('filters.ideas.filter.completed'), :alt => t('filters.ideas.filter.completed')) 
           else 

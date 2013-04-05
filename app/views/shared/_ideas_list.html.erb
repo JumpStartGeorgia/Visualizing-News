@@ -14,7 +14,7 @@
           <%= link_to t('.idea_title', :number => idea.id), idea_path(idea.id, remove_unwanted_params(@param_options)) %>
 
           <% x = idea.last_progress_report(current_user)
-             if x 
+             if x.present? && !x.is_cancelled
                if x.is_completed %>
                 <%= image_tag('filter_icons/completed.png', :title => t('filters.ideas.filter.completed'), :alt => t('filters.ideas.filter.completed')) %>
               <% else %>

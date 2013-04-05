@@ -82,7 +82,15 @@ class Idea < ActiveRecord::Base
 
   # get ideas that have not been selected by an organization
   def self.not_selected(user=nil)
-		selected_ideas = IdeaProgress.select("distinct idea_id").with_private(user)
+
+    # get list of ideas that are cancelled or in progress
+		cancelled_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_cancelled => true).with_private(user)
+		selected_ideas = IdeaProgress.select("distinct idea_id, organization_id").with_private(user)
+
+    # remove cancelled records
+    cancelled_ideas.each do |cancelled|
+      selected_ideas.delete_if{|x| x.idea_id == cancelled.idea_id && x.organization_id == cancelled.organization_id}
+    end
 
     where("ideas.id not in (?)", selected_ideas.map{|x| x.idea_id})
   end
@@ -90,7 +98,8 @@ class Idea < ActiveRecord::Base
 	# get ideas that have been claimed and have not been completed
 	# - if > 1 or has claimed idea and one is not finished, still show idea
 	def self.in_progress(user=nil)
-		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where(:is_completed => true).with_private(user)
+    # get list of ideas that are completed or cancelled
+		completed_ideas = IdeaProgress.select("distinct idea_id, organization_id").where("is_completed = 1 or is_cancelled = 1").with_private(user)
     progress_records = IdeaProgress.select("distinct idea_id, organization_id").with_private(user)
 
     # remove completed records

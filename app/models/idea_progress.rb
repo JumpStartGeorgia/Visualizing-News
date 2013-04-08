@@ -24,11 +24,13 @@ class IdeaProgress < ActiveRecord::Base
   before_save :set_is_cancelled
 
   def set_is_completed
-    self.is_completed = self.idea_status.is_published
+    self.is_completed = self.idea_status.is_published if self.idea_status.present?
+    return # not sure why this is required - if not here save is cancelled
   end
 
   def set_is_cancelled
-    self.is_cancelled = self.idea_status.is_cancelled
+    self.is_cancelled = self.idea_status.is_cancelled if self.idea_status.present?
+    return # not sure why this is required - if not here save is cancelled
   end
 
 	# determine if the explaination is written in the locale

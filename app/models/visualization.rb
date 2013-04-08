@@ -35,22 +35,6 @@ class Visualization < ActiveRecord::Base
       :fb_likes
 	attr_accessor :send_notification, :was_published, :languages_internal
 
- paginates_per 8
-
-	after_find :check_if_published
-
-	# have to check if published exists because some find methods do not get the published attribute
-	def check_if_published
-		self.was_published = self.has_attribute?(:published) && self.published ? true : false
-	end
-
-	before_validation :set_languages
-  validates :organization_id, :visualization_type_id, :languages, :presence => true
-  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validate :required_fields_for_type
-  validate :validate_if_published
-  before_save :set_promoted_at
-
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :likes, lambda {with_translations(I18n.locale).order("visualizations.overall_votes DESC, visualization_translations.title ASC")}
   scope :views, lambda {with_translations(I18n.locale).order("visualizations.impressions_count DESC, visualization_translations.title ASC")}
@@ -59,10 +43,51 @@ class Visualization < ActiveRecord::Base
   scope :promoted, where("is_promoted = '1'")
   scope :not_promoted, where("is_promoted = '0'")
 
-	def set_languages
-    if self.languages_internal
-      self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",")
+ paginates_per 8
+
+	after_find :check_if_published
+	after_find :set_internal_languages
+  after_initialize :set_internal_languages
+
+	# have to check if published exists because some find methods do not get the published attribute
+	def check_if_published
+		self.was_published = self.has_attribute?(:published) && self.published ? true : false
+	end
+
+  def set_internal_languages
+    if self.languages_internal.present?
+      self.languages = self.languages_internal.join(",") if !self.languages.present?
+    else
+      if read_attribute("languages").present?
+        self.languages_internal = read_attribute("languages").split(",")
+      else
+        self.languages_internal = I18n.available_locales.map{|x| x.to_s}
+        self.languages = I18n.available_locales.join(",")
+      end
     end
+  end
+
+  validates :organization_id, :visualization_type_id, :languages, :presence => true
+  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
+	validate :required_fields_for_type
+  validate :validate_if_published
+  before_save :set_promoted_at
+  before_save :remove_unneeded_locales
+
+  # delete the un needed translation objects
+  def remove_unneeded_locales
+Rails.logger.debug "////////////////// lang internal = #{self.languages_internal}"
+Rails.logger.debug "////////////////// lang  = #{self.languages}"
+Rails.logger.debug "////////////////// trans obj length = #{self.visualization_translations.length}"
+
+    I18n.available_locales.each do |locale|
+      if self.languages.index(locale.to_s).nil?
+        # this locale is not desired, delete translation object
+        trans = self.visualization_translations.select{|x| x.locale == locale.to_s}
+        self.visualization_translations.delete_if{|x| x.locale == locale.to_s}
+      end
+    end
+Rails.logger.debug "////////////////// now trans obj length = #{self.visualization_translations.length}"
   end
 
   def set_promoted_at

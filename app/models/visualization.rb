@@ -72,7 +72,24 @@ class Visualization < ActiveRecord::Base
 	validate :required_fields_for_type
   validate :validate_if_published
   before_save :set_promoted_at
+  after_validation :remove_unneeded_locales_errors
   before_save :remove_unneeded_locales
+
+  def remove_unneeded_locales_errors
+Rails.logger.debug "////////////////// remove errors start"
+Rails.logger.debug "////////////////// - vis errors = #{self.errors.full_messages}"
+    self.visualization_translations.each do |trans|
+Rails.logger.debug "////////////////// - checking locale #{trans.locale}"
+      if !trans.errors.empty? && !self.languages.index(trans.locale).present?
+        # errors found, but this obj is going to be removed, so ignore errors
+        trans.errors.clear()
+Rails.logger.debug "////////////////// - errors found, but do not care; errors empty = #{trans.errors.empty?}"
+      end
+
+    end
+Rails.logger.debug "////////////////// - now vis errors = #{self.errors.full_messages}"
+Rails.logger.debug "////////////////// remove errors end"
+  end
 
   # delete the un needed translation objects
   def remove_unneeded_locales

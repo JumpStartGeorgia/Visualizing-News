@@ -5,9 +5,42 @@
   <%= page_title t('helpers.titles.new_visual', :model => model_class.model_name.human) %>
 <% end %>
 
-<div class="form-actions">
-	<%= link_to t('helpers.links.list'), visualizations_path(:organization => params[:organization_id]),
-  :class => 'btn' %>
-</div>
+<%= semantic_form_for(@visualization,
+      :url => visualizations_path(:organization => params[:organization]),
+      :html => { :class => 'form-horizontal precrop' }) do |f| %>
+	<%= f.error_messages %>
 
-<%= render :partial => 'form' %>
+  <div id="fields-panel">
+		<%= f.inputs do %>
+			<%= f.hidden_field :organization_id ,	:value => @organization.id %>
+
+			<%= f.input :visualization_type_id, :as => :radio, :collection => visualization_type_collection %>
+
+			<div>
+        <div class="check_boxes control-group optional" id="visualization_languages_internal_input">
+          <label class=" control-label"><%= Visualization.human_attribute_name(:languages_internal) %></label>
+          <div class="choices controls">
+            <% I18n.available_locales.each do |locale| %>
+              <label class="choice checkbox" for="visualization_languages_internal_<%= locale.to_s %>">
+                <input <%= @visualization.languages_internal.index(locale.to_s).present? ? 'checked=checked' : '' %> 
+                  id="visualization_languages_internal_<%= locale.to_s %>" name="visualization[languages_internal][]" 
+                  type="checkbox" value="<%= locale.to_s %>" />
+                <%= t("app.language.#{locale}") %>
+              </label>
+            <% end %>
+          </div>
+        </div>
+
+			  <%# f.input :languages_internal, :as => :check_boxes,
+			    :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
+			    :input_html => {:checked => 'checked'} %>
+			</div>
+		<% end %>
+	</div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('helpers.links.reset'), :name => :reset %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                visualizations_path(:organization => params[:organization]), :class => 'btn' %>
+  </div>
+<% end %>

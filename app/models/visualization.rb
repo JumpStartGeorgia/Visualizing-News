@@ -36,20 +36,6 @@ class Visualization < ActiveRecord::Base
 
  paginates_per 8
 
-	after_find :check_if_published
-
-	# have to check if published exists because some find methods do not get the published attribute
-	def check_if_published
-		self.was_published = self.has_attribute?(:published) && self.published ? true : false
-	end
-
-	before_validation :set_languages
-  validates :organization_id, :visualization_type_id, :languages, :presence => true
-  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validate :required_fields_for_type
-  validate :validate_if_published
-  before_save :set_promoted_at
-
   scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
   scope :likes, lambda {with_translations(I18n.locale).order("visualizations.overall_votes DESC, visualization_translations.title ASC")}
   scope :views, lambda {with_translations(I18n.locale).order("visualizations.impressions_count DESC, visualization_translations.title ASC")}
@@ -58,11 +44,33 @@ class Visualization < ActiveRecord::Base
   scope :promoted, where("is_promoted = '1'")
   scope :not_promoted, where("is_promoted = '0'")
 
-	def set_languages
-    if self.languages_internal
-      self.languages = self.languages_internal.delete_if{|x| x.empty?}.join(",")
+	after_find :check_if_published
+	after_find :set_internal_languages
+  after_initialize :set_internal_languages
+
+	# have to check if published exists because some find methods do not get the published attribute
+	def check_if_published
+		self.was_published = self.has_attribute?(:published) && self.published ? true : false
+	end
+
+  def set_internal_languages
+    if self.languages_internal.present?
+      self.languages = self.languages_internal.join(",") if !self.languages.present?
+    else
+      if read_attribute("languages").present?
+        self.languages_internal = read_attribute("languages").split(",")
+      else
+        self.languages_internal = I18n.available_locales.map{|x| x.to_s}
+        self.languages = I18n.available_locales.join(",")
+      end
     end
   end
+
+  validates :organization_id, :visualization_type_id, :languages, :presence => true
+  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
+	validate :required_fields_for_type
+  validate :validate_if_published
+  before_save :set_promoted_at
 
   def set_promoted_at
     if self.is_promoted.nil?
@@ -166,13 +174,14 @@ class Visualization < ActiveRecord::Base
 	## image file in image_file object
 	##############################
 	def image_record
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.image_record
+		x = self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}
+    return x.first.image_record if x.present?
 	end
 	def image_file_name
-		image_record.file_file_name if !image_record.blank?
+		image_record.file_file_name if image_record.present?
 	end
 	def image
-		image_record.file if !image_record.blank?
+		image_record.file if image_record.present?
 	end
 
 	##############################
@@ -180,13 +189,14 @@ class Visualization < ActiveRecord::Base
 	## dataset file in dataset_file object
 	##############################
 	def dataset_record
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.dataset_record
+		x = self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}
+    return x.first.dataset_record if x.present?
 	end
 	def dataset_file_name
-		dataset_record.file_file_name if !dataset_record.blank?
+		dataset_record.file_file_name if dataset_record.present?
 	end
 	def dataset
-		dataset_record.file if !dataset_record.blank?
+		dataset_record.file if dataset_record.present?
 	end
 
 	##############################
@@ -194,7 +204,8 @@ class Visualization < ActiveRecord::Base
 	## datasource records
 	##############################
 	def datasources
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.datasources
+		x = self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}
+    return x.first.datasources if x.present?
 	end
 
 

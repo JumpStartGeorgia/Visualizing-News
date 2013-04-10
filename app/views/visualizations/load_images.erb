@@ -1,0 +1,71 @@
+<%- model_class = Visualization -%>
+<%= page_title t('helpers.titles.load_images', :org => @organization.name) %>
+
+<%= semantic_form_for(@visualization,
+      :url => save_images_visualization_path(:id => params[:id], :organization => params[:organization]),
+      :html => { :class => 'form-horizontal precrop' }) do |f| %>
+	<%= f.error_messages %>
+
+
+  <div id="fields-panel">
+		<%= f.inputs do %>
+	    <% if @locale_to_reset.present? %>
+		    <% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
+		    <%= f.fields_for :visualization_translations, trans do |translation| %>
+				    <%= translation.hidden_field :reload_file, :value => 'true' %>
+
+          <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+      			<h3><%= t('.reset_file', :language => t("app.language.#{@locale_to_reset}")) %></h3>
+			      <%= translation.fields_for :image_file do |upload| %>
+				      <%= upload.input :file, :as => :file %>
+			        <%= upload.hidden_field :reset_crop, :value => true %>
+			        <%= upload.hidden_field :image_is_cropped, :value => false %>
+			      <% end %>
+          <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+        			<h3><%= t('.reset_url', :language => t("app.language.#{@locale_to_reset}")) %></h3>
+      				<%= translation.input :interactive_url, :as => :url %>
+			        <%= translation.fields_for :image_file do |upload| %>
+      			    <%= upload.hidden_field :reset_crop, :value => true %>
+				        <%= upload.hidden_field :image_is_cropped, :value => false %>
+              <% end %>
+          <% end %>
+
+		    <% end %>
+      <% else %>
+			  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
+				  <%= f.fields_for :visualization_translations, trans do |translation| %>
+
+					  <div id="form-<%= trans.locale %>" class="multilanguage">
+						  <h3><%= t("app.language.#{trans.locale}") %></h3>
+
+						  <%= translation.hidden_field :locale , :value => trans.locale %>
+						  <%= translation.input :title %>
+
+              <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+						    <div class="trans_visual_file">
+							    <%= translation.fields_for :image_file do |upload| %>
+          				  <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
+          				  <%= upload.input :file, :as => :file %>
+
+							    <% end %>
+        				</div>
+              <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+        				<div class="trans_interactive_url">
+          				<%= translation.input :interactive_url, :as => :url %>
+        				</div>
+              <% end %>
+					  </div>
+
+				  <% end %>
+			  <% end %>
+		  <% end %>
+		<% end %>
+	</div>
+  
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('helpers.links.reset'), :name => :reset %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                visualizations_path(:organization => params[:organization]), :class => 'btn' %>
+  </div>
+<% end %>

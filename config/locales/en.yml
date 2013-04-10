@@ -221,6 +221,8 @@ en:
       edit: "Edit %{model}"
       new_visual: "%{org} - New %{model}"
       edit_visual: "%{org} - Edit %{model}"
+      load_images: "%{org} - Load Images for New Visualization"
+      crop_image: "%{org} - Create Thumbnail for %{name}"
   visualization_types:
     infographic: Infographic
     interactive: Interactive
@@ -460,7 +462,7 @@ en:
       title: Visualizations
       title_org: "%{name} Visualizations"
       title_feed: "%{app_name} Visualizations"
-    form:
+    edit:
       preview: Preview
       crop_image: Create %{language} Thumbnail Image
       reset_file: Load New %{language} Infographic
@@ -469,6 +471,11 @@ en:
       add_datasource: Add Data Source
     datasource_fields:
       remove_link: Remove Data Source
+    load_images:
+      reset_file: Load New %{language} Infographic
+    crop_image:
+      preview: Preview
+      crop_image: Create %{language} Thumbnail Image
   profile:
     index:
       title: User Profile

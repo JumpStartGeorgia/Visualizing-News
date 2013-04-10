@@ -40,6 +40,10 @@ BootstrapStarter::Application.routes.draw do
         get 'comment_notification/:id', :action => 'comment_notification', :as => 'comment_notification'
       end
       member do 
+        get :load_images
+        put :save_images
+        get :crop_image
+        put :save_crop
         get :next
         get :previous
         get :promote

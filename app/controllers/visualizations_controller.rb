@@ -2,7 +2,7 @@ class VisualizationsController < ApplicationController
   before_filter(:only => [:promote, :unpromote]) do |controller_instance|
     controller_instance.send(:valid_role?, User::ROLES[:visual_promotion])
   end
-  before_filter(:only => [:new, :edit, :create, :update, :destroy]) do |controller_instance|
+  before_filter(:only => [:new, :edit, :create, :update, :destroy, :load_images, :save_images, :crop_image, :save_crop]) do |controller_instance|
     controller_instance.send(:valid_role?, User::ROLES[:org_admin])
   end
   before_filter(:only => [:new, :edit, :create, :update, :destroy]) do |controller_instance|
@@ -60,7 +60,12 @@ class VisualizationsController < ApplicationController
 	end
 
   def show
-    @visualization = Visualization.published.find_by_permalink(params[:id])
+    x = Visualization.published
+    if params[:organization].present? && @organization && @user_in_org
+      x = Visualization
+    end          
+
+    @visualization = x.find_by_permalink(params[:id])
     gon.highlight_first_form_field = false
 
    #gon.current_content = {:type => 'visual', :id => @visualization.id}
@@ -192,7 +197,7 @@ class VisualizationsController < ApplicationController
 
 
   ##########################
-  ## restricted pages
+  ## promote
   #########################
   def promote
     visualization = Visualization.published.find_by_permalink(params[:id])
@@ -240,18 +245,13 @@ class VisualizationsController < ApplicationController
     end
   end
 
+  ##########################
+  ## create basic record
+  #########################  
   def new
     @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.new
-	  # create the translation object for however many locales there are
-	  # so the form will properly create all of the nested form fields
-		if @visualization.visualization_translations.length != I18n.available_locales.length
-			I18n.available_locales.each do |locale|
-				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
-				# add image file record
-				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
-			end
-		end
+
 		gon.edit_visualization = true
 
 		# initialize to be infographic
@@ -264,15 +264,231 @@ class VisualizationsController < ApplicationController
     end
   end
 
+  def create
+    @organization = Organization.find_by_permalink(params[:organization])
+    @visualization = Visualization.new(params[:visualization])
+
+    respond_to do |format|
+      if @visualization.save
+        format.html { redirect_to load_images_visualization_path(:id => @visualization.id, :organization => params[:organization]), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
+        format.json { render json: @visualization, status: :created, location: @visualization }
+      else
+				gon.edit_visualization = true
+				gon.visualization_type = @visualization.visualization_type_id
+        format.html { render action: "new" }
+        format.json { render json: @visualization.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  ##########################
+  ## load images
+  #########################  
+  def load_images
+    @organization = Organization.find_by_permalink(params[:organization])
+    @visualization = Visualization.find(params[:id])
+
+    if params[:reset_file] && I18n.available_locales.index(params[:reset_file].to_sym) && 
+        @visualization.visualization_translations.map{|x| x.locale}.index(params[:reset_crop])
+logger.debug "************* reseting file for #{params[:reset_file]}"
+			@locale_to_reset = params[:reset_file]
+    end
+
+    # create the translation object for the locales that were selected
+	  # so the form will properly create all of the nested form fields
+		I18n.available_locales.each do |locale|
+      if @visualization.languages_internal.index(locale.to_s) && !@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.present?
+				@visualization.visualization_translations.build(:locale => locale.to_s)
+
+				# add image and dataset file record
+				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
+			end
+		end
+
+		gon.edit_visualization = true
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @visualization }
+    end
+  end
+
+  def save_images
+    @organization = Organization.find_by_permalink(params[:organization])
+    @temp = Visualization.find(params[:id])
+
+    # preload from temp obj
+    params[:visualization][:languages] = @temp.languages
+    params[:visualization][:organization_id] = @temp.organization_id
+    params[:visualization][:visualization_type_id] = @temp.visualization_type_id
+
+    # create new object  
+    @visualization = Visualization.new(params[:visualization])
+
+		# if interactive, take screen shots of urls
+		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
+logger.debug "//////////// is interactive, taking snapshots"
+			files = Hash.new
+			@visualization.visualization_translations.each do |trans|
+logger.debug "//////////// - locale = #{trans.locale}"
+				# only proceed if the url is valid
+				if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
+						trans.interactive_url.present? && !trans.image_file_name.present?
+logger.debug "//////////// -- records are valid, taking screen shot"
+					# get screenshot of interactive site
+          filename = Screenshot.take(trans.interactive_url)
+          if filename
+            files[trans.locale] = filename
+    				trans.build_image_file(:file => File.new(filename, 'r'), :visualization_type_id => Visualization::TYPES[:interactive])
+          end
+				end
+			end
+		end
+
+    respond_to do |format|
+      if @visualization.save
+        format.html { redirect_to crop_image_visualization_path(:id => @visualization.id, :organization => params[:organization]), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization')) }
+        format.json { render json: @visualization, status: :updated, location: @visualization }
+      else
+				gon.edit_visualization = true
+				gon.visualization_type = @visualization.visualization_type_id
+        format.html { render action: "load_images" }
+        format.json { render json: @visualization.errors, status: :unprocessable_entity }
+      end
+    end
+
+		# if a temp file was created, go ahead and delete it
+		if !files.blank?
+			files.keys.each do |key|
+				File.delete(files[key])
+			end
+		end
+  end
+
+
+  ##########################
+  ## crop image
+  #########################  
+  def crop_image
+    @organization = Organization.find_by_permalink(params[:organization])
+    @visualization = Visualization.find(params[:id])
+
+    if params[:reset_crop] && I18n.available_locales.index(params[:reset_crop].to_sym) && 
+        @visualization.visualization_translations.map{|x| x.locale}.index(params[:reset_crop])
+logger.debug "************* reseting crop for #{params[:reset_crop]}"
+			@locale_to_crop = params[:reset_crop]
+			to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
+			gon.largeW = to_crop.visual_geometry(:large).width
+			gon.largeH = to_crop.visual_geometry(:large).height
+			gon.originalW = to_crop.visual_geometry(:original).width
+    else
+	    locales_to_crop = @visualization.locales_to_crop
+	    if locales_to_crop.present?
+  logger.debug "************* setting crop for #{locales_to_crop.first}"
+		    @locale_to_crop = locales_to_crop.first
+		    to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
+		    gon.largeW = to_crop.visual_geometry(:large).width
+		    gon.largeH = to_crop.visual_geometry(:large).height
+		    gon.originalW = to_crop.visual_geometry(:original).width
+	    else
+  logger.debug "************* all images cropped redirecting to complete form"
+		    redirect_to :edit
+	    end
+    end
+
+		gon.edit_visualization = true
+		gon.visualization_type = @visualization.visualization_type_id
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: @visualization }
+    end
+  end
+
+  def save_crop
+    @organization = Organization.find_by_permalink(params[:organization])
+    @visualization = Visualization.find(params[:id])
+
+=begin
+		  # if reset crop flag set, reset image is cropped falg
+		  reset_crop = false
+		  params[:visualization][:visualization_translations_attributes].keys.each do |key|
+			  x = params[:visualization][:visualization_translations_attributes][key][:image_file_attributes]
+			  if x[:reset_crop] == "true"
+				  x[:image_is_cropped] = false
+				  reset_crop = true
+			  end
+		  end
+=end
+=begin
+      # if reload file flag is set, erase file record so that the new file will be processed
+      # - and if this is interactive, retake screenshot
+		  params[:visualization][:visualization_translations_attributes].keys.each do |key|
+			  ptrans = params[:visualization][:visualization_translations_attributes][key]
+			  if ptrans[:reload_file] == "true"
+				  trans = @visualization.visualization_translations.select{|x| x.id.to_s == ptrans[:id]}.first
+          # remove the file on record
+          trans.image_file.file = nil
+          trans.image_file.reload_file = true
+#          trans.image_file.save
+
+          # if this is interactive, redo screenshot
+  				if trans.image_file.visualization_type_id == Visualization::TYPES[:interactive] && !ptrans[:interactive_url].blank?
+  logger.debug "//////////// -- taking screen shot"
+					  # get screenshot of interactive site
+            filename = Screenshot.take(ptrans[:interactive_url])
+            if filename
+              files[trans.locale] = filename
+					    trans.image_file.file = File.new(filename, 'r')
+            end
+          end
+
+			  end
+		  end
+=end      
+
+    respond_to do |format|
+      if @visualization.update_attributes(params[:visualization])
+			  # if the visuals need to be re-cropped, do it now
+			  @visualization.visualization_translations.each do |trans|
+				  if trans.image_record && (!trans.image_record.was_cropped && trans.image_record.image_is_cropped) || 
+              (trans.image_record.redid_crop && trans.image_record.image_is_cropped)
+					  trans.image_record.reprocess_file
+				  end
+			  end
+
+        format.html {
+          if @visualization.locales_to_crop.present?
+  				  redirect_to crop_image_visualization_path(:id => params[:id], :organization => params[:organization]),
+							  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+          else
+  				  redirect_to edit_visualization_path(:id => params[:id], :organization => params[:organization]),
+							  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
+          end
+			  }
+        format.json { head :ok }
+      else
+			  gon.edit_visualization = true
+			  gon.visualization_type = @visualization.visualization_type_id
+        format.html { render action: "crop_image" }
+        format.json { render json: @visualization.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  ##########################
+  ## complete form
+  #########################  
   def edit
     @organization = Organization.find_by_permalink(params[:organization])
-    @visualization = Visualization.find_by_permalink(params[:id])
+    @visualization = Visualization.find(params[:id])
 
 		# if dataset file obj not exist, build
 		@visualization.visualization_translations.each do |trans|
 			trans.build_dataset_file if !trans.dataset_file
 		end
-
+=begin
     new_layout = nil
     if params[:reset_crop] && I18n.available_locales.index(params[:reset_crop].to_sym)
 logger.debug "************* reseting crop for #{params[:reset_crop]}"
@@ -300,84 +516,17 @@ logger.debug "************* load complete form"
 			  @visualization.visualization_categories.build if @visualization.visualization_categories.nil? || @visualization.visualization_categories.empty?
 		  end
     end
+=end
+	  @visualization.visualization_categories.build if !@visualization.visualization_categories.present?
 
 		gon.edit_visualization = true
 		gon.visualization_type = @visualization.visualization_type_id
 		gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
     
-    if new_layout
-      respond_to do |format|
-        format.html { render :layout => new_layout}
-        format.json { render json: @visualization }
-      end
-    end
-  end
-
-  def create
-    @organization = Organization.find_by_permalink(params[:organization])
-    @visualization = Visualization.new(params[:visualization])
-
-		# if interactive, take screen shots of urls
-		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
-logger.debug "//////////// is interactive, taking snapshots"
-			files = Hash.new
-			@visualization.visualization_translations.each do |trans|
-logger.debug "//////////// - locale = #{trans.locale}"
-				# only proceed if the url is valid
-				if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
-						!trans.interactive_url.blank? && trans.image_file_name.blank?
-logger.debug "//////////// -- records are valid, taking screen shot"
-					# get screenshot of interactive site
-          filename = Screenshot.take(trans.interactive_url)
-          if filename
-            files[trans.locale] = filename
-					  trans.image_file.file = File.new(filename, 'r')
-          end
-=begin
-					kit   = IMGKit.new(trans.interactive_url, :'javascript-delay' => 10000)
-					img   = kit.to_img(:png)
-					files[trans.locale] = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
-										           :encoding => 'ascii-8bit')
-					files[trans.locale].write(img)
-					files[trans.locale].flush
-logger.debug "//////////// -- adding image file"
-					trans.image_file.file = files[trans.locale]
-=end
-				end
-			end
-		end
-
     respond_to do |format|
-      if @visualization.save
-        # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
-        # - have to get it by hand
-				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
-
-        format.html { redirect_to edit_visualization_path(:id => permalink, :organization => params[:organization]), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
-        format.json { render json: @visualization, status: :created, location: @visualization }
-      else
-				gon.edit_visualization = true
-				gon.visualization_type = @visualization.visualization_type_id
-				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
-        format.html { render action: "new" }
-        format.json { render json: @visualization.errors, status: :unprocessable_entity }
-      end
+      format.html 
+      format.json { render json: @visualization }
     end
-
-		# if a temp file was created, go ahead and delete it
-		if !files.blank?
-			files.keys.each do |key|
-				File.delete(files[key])
-			end
-		end
-
-=begin
-		if !files.blank?
-			files.keys.each do |key|
-				files[key].unlink
-			end
-		end
-=end
   end
 
   def update
@@ -470,6 +619,9 @@ logger.debug "//////////// -- adding image file"
     end
   end
 
+  ##########################
+  ## delete
+  #########################  
   def destroy
     @organization = Organization.find_by_permalink(params[:organization])
     @visualization = Visualization.find_by_permalink(params[:id])

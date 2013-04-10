@@ -11,18 +11,36 @@
 		<%= f.error_messages %>
 
 	<% if @visualization.id.nil? %>
-		<div id="fields-panel">
+    <div id="fields-panel">
 			<%= f.inputs do %>
 				<%= f.hidden_field :organization_id ,	:value => @organization.id %>
 
 				<%= f.input :visualization_type_id, :as => :radio, :collection => visualization_type_collection %>
 
-				<div style="display: none;">
-				<%= f.input :languages_internal, :as => :check_boxes,
-				  :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
-				  :input_html => {:checked => 'checked'} %>
-				</div>
+				<div>
+          <div class="check_boxes control-group optional" id="visualization_languages_internal_input">
+            <label class=" control-label"><%= Visualization.human_attribute_name(:languages_internal) %></label>
+            <div class="choices controls">
+              <% I18n.available_locales.each do |locale| %>
+                <label class="choice checkbox" for="visualization_languages_internal_<%= locale.to_s %>">
+                  <input <%= @visualization.languages_internal.index(locale.to_s).present? ? 'checked=checked' : '' %> 
+                    id="visualization_languages_internal_<%= locale.to_s %>" name="visualization[languages_internal][]" 
+                    type="checkbox" value="<%= locale.to_s %>" />
+                  <%= t("app.language.#{locale}") %>
+                </label>
+              <% end %>
+            </div>
+          </div>
 
+				  <%# f.input :languages_internal, :as => :check_boxes,
+				    :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
+				    :input_html => {:checked => 'checked'} %>
+				</div>
+			<% end %>
+		</div>
+	<% elsif @visualization.visualization_translations.present? %>
+		<div id="fields-panel">
+			<%= f.inputs do %>
 				<% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 					<%= f.fields_for :visualization_translations, trans do |translation| %>
 

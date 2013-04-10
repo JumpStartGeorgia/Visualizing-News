@@ -19,7 +19,7 @@
   <div class="form-actions">
     <% params[:organization] = @visualization.organization.permalink if !params[:organization].present? %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_visualization_path(@visualization.permalink, :organization => params[:organization]), :class => 'btn' %>
+                edit_visualization_path(@visualization.id, :organization => params[:organization]), :class => 'btn' %>
     <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 visualization_path(@visualization.permalink, :organization => params[:organization]),
                 :method => 'delete',
@@ -121,7 +121,7 @@
         <li>
           <%= "#{t('.data_source')}: "%>
 					<span class="val-source">
-            <% if !@visualization.datasources.blank? %>
+            <% if @visualization.datasources.present? %>
               <ul class="datasource_list">
               <% @visualization.datasources.each_with_index do |source, index| %>
 						    <% if !source.name.blank? %>

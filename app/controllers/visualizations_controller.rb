@@ -43,15 +43,7 @@ class VisualizationsController < ApplicationController
   def new
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new
-	  # create the translation object for however many locales there are
-	  # so the form will properly create all of the nested form fields
-		if @visualization.visualization_translations.length != I18n.available_locales.length
-			I18n.available_locales.each do |locale|
-				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
-				# add image file record
-				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
-			end
-		end
+
 		gon.edit_visualization = true
 
 		# initialize to be infographic
@@ -68,11 +60,22 @@ class VisualizationsController < ApplicationController
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.find_by_permalink(params[:id])
 
+	  # create the translation object for the locales that were selected
+	  # so the form will properly create all of the nested form fields
+		I18n.available_locales.each do |locale|
+      if @visualization.languages_internal.index(locale.to_s) && !@visualization.visualization_translations.select{|x| x.locale == locale.to_s}
+				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+				# add image and dataset file record
+				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
+				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_dataset_file
+			end
+		end
+=begin
 		# if dataset file obj not exist, build
 		@visualization.visualization_translations.each do |trans|
 			trans.build_dataset_file if !trans.dataset_file
 		end
-
+=end
     new_layout = nil
     if params[:reset_crop] && I18n.available_locales.index(params[:reset_crop].to_sym)
 logger.debug "************* reseting crop for #{params[:reset_crop]}"
@@ -86,7 +89,7 @@ logger.debug "************* reseting crop for #{params[:reset_crop]}"
 logger.debug "************* reseting file for #{params[:reset_file]}"
 			@locale_to_reset = params[:reset_file]
 #      new_layout = 'fancybox' 
-    else 
+    elsif !params[:add_files]
 		  locales_to_crop = @visualization.locales_to_crop
 		  if !locales_to_crop.empty?
 logger.debug "************* setting crop for #{locales_to_crop.first}"
@@ -116,7 +119,7 @@ logger.debug "************* load complete form"
   def create
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
-
+=begin
 		# if interactive, take screen shots of urls
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
 logger.debug "//////////// is interactive, taking snapshots"
@@ -133,20 +136,10 @@ logger.debug "//////////// -- records are valid, taking screen shot"
             files[trans.locale] = filename
 					  trans.image_file.file = File.new(filename, 'r')
           end
-=begin
-					kit   = IMGKit.new(trans.interactive_url, :'javascript-delay' => 10000)
-					img   = kit.to_img(:png)
-					files[trans.locale] = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
-										           :encoding => 'ascii-8bit')
-					files[trans.locale].write(img)
-					files[trans.locale].flush
-logger.debug "//////////// -- adding image file"
-					trans.image_file.file = files[trans.locale]
-=end
 				end
 			end
 		end
-
+=end
     respond_to do |format|
       if @visualization.save
         # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
@@ -158,7 +151,6 @@ logger.debug "//////////// -- adding image file"
       else
 				gon.edit_visualization = true
 				gon.visualization_type = @visualization.visualization_type_id
-				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
         format.html { render action: "new" }
         format.json { render json: @visualization.errors, status: :unprocessable_entity }
       end

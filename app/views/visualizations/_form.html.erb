@@ -36,7 +36,11 @@
 				    :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
 				    :input_html => {:checked => 'checked'} %>
 				</div>
-
+			<% end %>
+		</div>
+	<% elsif @visualization.visualization_translations.present? %>
+		<div id="fields-panel">
+			<%= f.inputs do %>
 				<% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 					<%= f.fields_for :visualization_translations, trans do |translation| %>
 
@@ -59,7 +63,6 @@
 
 					<% end %>
 				<% end %>
-
 			<% end %>
 		</div>
 	<% elsif !@locale_to_reset.blank? %>

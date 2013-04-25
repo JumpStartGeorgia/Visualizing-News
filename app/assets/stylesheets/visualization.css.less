@@ -19,9 +19,20 @@
     font-family: themix_regular;
     font-size: 14px;
   }
+
+  .side_block{
+    margin-top: -10px;
+    #fb_iframe{
+      border:none; 
+      overflow:hidden; 
+      width:200px; 
+      height:60px;
+    }
+  }
 }
 
 #visualization_row1a {
+  padding-top: 5px !important;
   margin-bottom: 5px;
   .main_block {
     color: #808080;
@@ -98,6 +109,7 @@
 }
 
 #visualization_row2{
+  padding-top: 10px !important;
   .main_block{
     text-align: center;
     #visual{
@@ -116,6 +128,9 @@
     padding-left: 5px;
     #explanation{
       color: #000;
+      p:first-of-type{
+        margin-top: 0;      
+      }
     }
 
     #source{
@@ -379,6 +394,9 @@ div#share a:hover, ul#share-links a:hover {
 @media (min-width: 1023px) and (max-width: 1240px) {
   .side_block {
     width: 184px;
+    #fb_iframe{
+      width: 184px;
+    }
   }
   #visualization_row2 #visualization_sidebar #share .embed {
     textarea {

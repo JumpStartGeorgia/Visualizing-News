@@ -100,6 +100,14 @@
 						<%= @visualization.designer %>
 					</span>
         </li>
+        <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+          <li>
+            <%= "#{t('.developer')}: "%>
+					  <span class="val">
+						  <%= @visualization.developer %>
+					  </span>
+          </li>
+        <% end %>
         <li>
           <%= "#{t('.data_source')}: "%>
 					<span class="val-source">

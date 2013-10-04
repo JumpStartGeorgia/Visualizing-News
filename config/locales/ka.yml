@@ -70,6 +70,7 @@ ka:
         explanation: აღწერა
         reporter: "ჟურნალისტი (სახელი, ორგანიზაცია)"
         designer: "დიზაინერი (სახელი, ორგანიზაცია)"
+        developer: "დეველოპერი (სახელი, ორგანიზაცია)"
         interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
       image_file:
         file: ვიზუალის ფაილი
@@ -442,6 +443,7 @@ ka:
       organization: ორგანიზაცია
       reporter: ჟურნალისტი
       designer: დიზაინერი
+      developer: დეველოპერი
       data_source: მონაცემთა წყარო
       data_set: მონაცემები
       type: ტიპი

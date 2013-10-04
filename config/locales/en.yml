@@ -70,6 +70,7 @@ en:
         explanation: Explanation
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
+        developer: "Developer (Name, Organization)"
         interactive_url: URL to Interactive Visualization
       image_file:
         file: Visual File
@@ -442,6 +443,7 @@ en:
       organization: Organization
       reporter: Reporter
       designer: Designer
+      developer: Developer
       data_source: Data Source
       data_set: Data Set
       type: Type

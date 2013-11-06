@@ -9,7 +9,7 @@ module Screenshot
       headless.start
       driver = Selenium::WebDriver.for :chrome
       driver.navigate.to url
-      sleep 8
+      sleep 30
       filename = "#{Rails.root}/tmp/screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}.png"
       driver.save_screenshot(filename)
       driver.quit

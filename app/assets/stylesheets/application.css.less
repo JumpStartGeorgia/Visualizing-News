@@ -49,7 +49,6 @@ a.brand:hover{
 }
 
 
-
 h1, h2, h3 {
    font-family: Arial;
    color: #555;
@@ -609,4 +608,25 @@ footer, footer ul li, footer div#right ul li {
 /* hide link to all page for crawlers */
 .hide_for_crawler{
   display: none;
+}
+
+
+
+
+/* temp style for blasphemy ban */
+#frozen-menu .brand{
+  img#logo{
+    display: inline-block;
+  }
+  img#logo_rollover{
+    display: none;
+  }
+  a:hover{
+    img#logo{
+      display: none;
+    }
+    img#logo_rollover{
+      display: inline-block;
+    }
+  }
 }

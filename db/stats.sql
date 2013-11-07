@@ -15,6 +15,28 @@ group by v.id, v.published_date, v.impressions_count, v.overall_votes, v.fb_like
 where vt.locale = 'en'
 and v.organization_id = 2;
 
+/* stats by day released */
+select
+dayofweek(v.published_date) as `day`, count(*) as num_visuals, 
+sum(v.impressions_count) as num_views, sum(v.overall_votes) as overall_votes, 
+sum(v.fb_likes) as fb_likes, sum(x.fb_comments) as fb_comments
+from visualizations as v
+inner join visualization_translations as vt on vt.visualization_id = v.id
+inner join (
+select
+v.id, sum(vt.fb_count) as fb_comments
+from
+visualizations as v
+inner join visualization_translations as vt on vt.visualization_id = v.id
+where v.organization_id = 2
+group by v.id, v.published_date, v.impressions_count, v.overall_votes, v.fb_likes
+) as x on v.id = x.id
+where vt.locale = 'en'
+and v.organization_id = 2
+group by dayofweek(v.published_date)
+order by `day`
+
+
 /* category stats */
 select
 ct.name, count(*) as num_visuals, sum(v.impressions_count) as num_views,

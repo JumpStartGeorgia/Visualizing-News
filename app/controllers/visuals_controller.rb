@@ -65,6 +65,10 @@ Rails.logger.debug "****************** user is in org"
   # this is so crawlers can find all reocrds since they are loaded via ajax
   def all
     @visualizations = Visualization.published.recent
+	  respond_to do |format|
+	    format.html
+	    format.json { render json: @visalizations }
+	  end
   end
 
   def show

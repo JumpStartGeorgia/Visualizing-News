@@ -33,22 +33,39 @@ class IdeasController < ApplicationController
     gon.ajax_path = ideas_ajax_path(@param_options)
 
     set_idea_view_type # in app controller
+
+		respond_to do |format|
+		  format.html
+		end
   end
 
   # this is so crawlers can find all reocrds since they are loaded via ajax
   def all
     @ideas = Idea.public_only.recent
+
+		respond_to do |format|
+		  format.html
+		end
   end
 
 	def user
 		@user = User.find_by_permalink(params[:id])
 
-    @param_options[:format] = :js
-    @param_options[:max] = 5
-    @param_options[:user_id] = @user.id
-    gon.ajax_path = ideas_ajax_path(@param_options)
+		if @user
+      @param_options[:format] = :js
+      @param_options[:max] = 5
+      @param_options[:user_id] = @user.id
+      gon.ajax_path = ideas_ajax_path(@param_options)
 
-    set_idea_view_type # in app controller
+      set_idea_view_type # in app controller
+
+			respond_to do |format|
+			  format.html
+			end
+		else
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
+		end
 	end
 
   def show
@@ -91,6 +108,10 @@ class IdeasController < ApplicationController
 				end
 				@ideas << hash
 			end
+
+		  respond_to do |format|
+		    format.html
+		  end
 		else
 			flash[:info] =  t('app.msgs.does_not_exist')
 			redirect_to root_path

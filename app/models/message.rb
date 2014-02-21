@@ -24,7 +24,7 @@ class Message
 	 :organization, :phone, :locale, :file, :datasource, :type, :what_is_data, :why_visualize, :how_use
 
 #  validates_presence_of :email, :message => I18n.t('activerecord.errors.models.message.attributes.email.blank')
-  validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, :message => I18n.t('activerecord.errors.models.message.attributes.email.invalid')
+  validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
   validates_length_of :message, :maximum => 500
   validate :validate_by_type
 
@@ -51,7 +51,7 @@ class Message
     else
       missing_fields << :message if !self.message || self.message.empty?
 
-      error_message = I18n.t('activerecord.errors.models.message.attributes.message.blank')
+      error_message = I18n.t('activemodel.errors.models.message.attributes.message.blank')
     end
 
     if !missing_fields.empty?

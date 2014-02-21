@@ -120,13 +120,6 @@ ka:
       idea_progress:
         success: "ჩანაწერები წარმატებით შეინახა."
     errors:
-      models:
-        message:
-          attributes:
-            email:
-              invalid: "ელ.ფოსტის მისამართი არ უნდა იყოს ცარიელი"
-            message:
-              blank: "შეტყობილების ველი არ უნდა იყოს ცარიელი"
       messages:
         published_visual_missing_fields: "სავალდებულოა, როდესაც ვიზუალი გამოქვეყნდება."
         contact_missing_fields: "არ დატოვოთ ცარიელი"
@@ -134,6 +127,15 @@ ka:
         submit_visual_missing_fields: "არ დატოვოთ ცარიელი"
         required_field: "სავალდებულოა"
         already_exists: 'უკვე არსებობს მონაცემთა ბაზაში'
+  activemodel:
+    errors:
+      models:
+        message:
+          attributes:
+            email:
+              invalid: "ელ.ფოსტის მისამართი არ უნდა იყოს ცარიელი"
+            message:
+              blank: "შეტყობილების ველი არ უნდა იყოს ცარიელი"
   mailer:
     closing: "პატივისცემით,"
     signature: feradi.info

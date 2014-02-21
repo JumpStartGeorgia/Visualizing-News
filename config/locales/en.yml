@@ -120,6 +120,13 @@ en:
       idea_progress:
         success: "The record was successfully saved."
     errors:
+      models:
+        message:
+          attributes:
+            email:
+              invalid: "Please provide an Email Address"
+            message:
+              blank: "Please provide a Message"
       messages:
         published_visual_missing_fields: "is required when the visual is published."
         contact_missing_fields: "can't be blank."
@@ -435,6 +442,7 @@ en:
       email_us: Send us an email
       email_subject: "feradi.info Contact Form"
       address: "#5 Shevchenko St, Apt 2, 0108, Tbilisi, Georgia"
+      error_title: An error has occurred
   visuals:
     index:
       title: Visualizations

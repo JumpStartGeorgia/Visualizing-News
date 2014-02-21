@@ -135,7 +135,7 @@ en:
             email:
               invalid: "Please provide an Email Address"
             message:
-              blank: "Please provide a Message!!"
+              blank: "Please provide a Message"
   mailer:
     closing: "Sincerely,"
     signature: feradi.info

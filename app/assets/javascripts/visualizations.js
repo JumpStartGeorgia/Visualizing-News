@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 		// show correct fields for visualization type
 		if (gon.visualization_type){
-			if (gon.visualization_type == 1){
+			if (gon.visualization_type == 1 || gon.visualization_type == 3){
 				$('.trans_visual_file').show();
 				$('.trans_interactive_url').hide();
 			} else if (gon.visualization_type == 2){
@@ -77,6 +77,10 @@ $(document).ready(function(){
 				$('.trans_interactive_url').show(300);
 				$('.trans_visual_file').hide(300);
 				$('input[id$="_visual"]').val('');;
+			} else if ($(this).val() == '3'){ // fact
+				$('.trans_visual_file').show(300);
+				$('.trans_interactive_url').hide(300);
+				$('input[id$="_interactive_url"]').val('');
 			} else {
 				$('.trans_interactive_url').hide(300);
 				$('.trans_visual_file').hide(300);

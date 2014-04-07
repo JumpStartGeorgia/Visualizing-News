@@ -53,7 +53,8 @@
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
 				<%= translation.hidden_field :reload_file, :value => 'true' %>
 
-      <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+      <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+            @visualization.visualization_type_id == Visualization::TYPES[:fact] %>
   			<h3><%= t('.reset_file', :language => t("app.language.#{@locale_to_reset}")) %></h3>
 			  <%= translation.fields_for :image_file do |upload| %>
 				  <%= upload.input :file, :as => :file %>
@@ -135,7 +136,8 @@
 									<%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
 									<%# upload.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
                   <%= link_to t('activerecord.attributes.image_file.reset_crop'), url_for(params.merge(:reset_crop => trans.locale)), :class => 'btn btn-mini' %> 
-                  <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+                  <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                        @visualization.visualization_type_id == Visualization::TYPES[:fact] %>
                     <%= link_to t('activerecord.attributes.image_file.reset_file'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %> 
                   <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
                     <%= link_to t('activerecord.attributes.image_file.reset_url'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %> 
@@ -151,6 +153,7 @@
 						<% end %>
 
 						<%= translation.input :explanation %>
+						<%= translation.input :visualization_text, :hint => t('activerecord.attributes.visualization_translation.visualization_text_hint') %>
 						<%= translation.input :reporter %>
 						<%= translation.input :designer %>
 						<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>

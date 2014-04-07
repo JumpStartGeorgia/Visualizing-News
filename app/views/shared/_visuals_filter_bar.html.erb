@@ -70,6 +70,12 @@ hide_slider = ''
               <div><%= t('filters.visuals.type.interactive') %></div>
             <% end %>
 					</li>
+					<li>
+						<%= link_to url_for(params.merge(:type => 'fact')) do %>
+              <div><%= image_tag('filter_icons/fact.png') %></div>
+              <div><%= t('filters.visuals.type.fact') %></div>
+            <% end %>
+					</li>
           <% if user_signed_in? && @user_in_org && current_user.role?(User::ROLES[:org_admin]) && @param_options[:org].present? %>
 					  <li>
 						  <%= link_to url_for(params.merge(:type => 'not_published')) do %>

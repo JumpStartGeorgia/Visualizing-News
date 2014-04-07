@@ -1,14 +1,14 @@
 class Visualization < ActiveRecord::Base
   is_impressionable :counter_cache => true
 	translates :title, :explanation, :reporter, :designer, :developer,
-		:interactive_url,	:permalink, :fb_count
+		:interactive_url,	:permalink, :fb_count, :visualization_text
   scoped_search :in => :visualization_translations, :on => [:title, :explanation]
 
 
   require 'split_votes'
   include SplitVotes
 
-  TYPES = {:infographic => 1, :interactive => 2}
+  TYPES = {:infographic => 1, :interactive => 2, :fact => 3}
 
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories
@@ -74,7 +74,7 @@ class Visualization < ActiveRecord::Base
   end
 
   def image_text
-    "#{self.title} - #{self.explanation}"
+    "#{self.title} - #{self.explanation} - #{self.visualization_text}"
   end
 
 	# this validation is done here and not in trans obj because
@@ -83,7 +83,8 @@ class Visualization < ActiveRecord::Base
   def required_fields_for_type
     missing_fields = []
     self.visualization_translations.each do |trans|
-      if self.visualization_type_id == Visualization::TYPES[:infographic]
+      if self.visualization_type_id == Visualization::TYPES[:infographic] ||
+          self.visualization_type_id == Visualization::TYPES[:fact]
         missing_fields << :visual if trans.image_file_name.blank?
       elsif self.visualization_type_id == Visualization::TYPES[:interactive]
         missing_fields << :interactive_url if trans.interactive_url.blank?

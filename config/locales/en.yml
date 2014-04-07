@@ -68,6 +68,8 @@ en:
         permalink: Name in URL
         permalink_hint: "If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages."
         explanation: Explanation
+        visualization_text: Text from Visualization
+        visualization_text_hint: Text from the Visual that should be made available to the search engines.
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
         developer: "Developer (Name, Organization)"
@@ -229,6 +231,7 @@ en:
   visualization_types:
     infographic: Infographic
     interactive: Interactive
+    fact: Fact
   filters:
     category_default: all
     visuals:
@@ -237,6 +240,7 @@ en:
         all: All
         infographic: Infographic
         interactive: Interactive
+        fact: Fact
         not_published: Not Published
         not_promoted: Not Promoted
       view:

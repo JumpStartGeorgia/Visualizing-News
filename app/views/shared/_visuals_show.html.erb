@@ -174,7 +174,9 @@
 			</div>
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
-        <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] %>
+        <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||  
+              @visualization.visualization_type_id == Visualization::TYPES[:fact]%>
+              
 			    <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
 					  onmouseup="return false;"><%= link_to(
 						  image_tag(full_url(@visualization.image.url(:medium, false)),

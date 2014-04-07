@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131004100459) do
+ActiveRecord::Schema.define(:version => 20140407104625) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -329,6 +329,7 @@ ActiveRecord::Schema.define(:version => 20131004100459) do
     t.boolean  "visual_is_cropped_old", :default => false
     t.integer  "fb_count",              :default => 0
     t.string   "developer"
+    t.text     "visualization_text"
   end
 
   add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"

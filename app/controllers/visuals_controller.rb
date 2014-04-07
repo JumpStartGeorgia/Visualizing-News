@@ -89,7 +89,8 @@ Rails.logger.debug "****************** user is in org"
       gon.show_fb_like = true
 
       # if from_embed in url, set gon so large image loads automatically
-      if params[:from_embed] && @visualization.visualization_type_id == Visualization::TYPES[:infographic]
+      if params[:from_embed] && (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                                 @visualization.visualization_type_id == Visualization::TYPES[:fact])
         gon.trigger_fancybox_large_image = true
       end
 

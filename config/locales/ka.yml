@@ -68,6 +68,8 @@ ka:
         permalink: ბმულის სახელი
         permalink_hint: "თუ გსურთ ბმულის ახალი სახელის შექმნა წაშალეთ არსებული ტექსტი და შეინახეთ ახალი ჩანაწერი. ეს ოპერაცია განახორციელეთ ყველა ენაზე."
         explanation: აღწერა
+        visualization_text: ტექსტი ვიზუალიზაციიდან
+        visualization_text_hint: ტექსტი ვიზუალიზაციიდან, რომელიც ხელმისაწვდომი უნდა იყოს საძიებო სისტემებისთვის.
         reporter: "ჟურნალისტი (სახელი, ორგანიზაცია)"
         designer: "დიზაინერი (სახელი, ორგანიზაცია)"
         developer: "დეველოპერი (სახელი, ორგანიზაცია)"
@@ -229,6 +231,7 @@ ka:
   visualization_types:
     infographic: ინფოგრაფიკა
     interactive: ინტერაქტივი
+    fact: ფაქტი
   filters:
     category_default: qkhvela
     visuals:
@@ -237,6 +240,7 @@ ka:
         all: ყველა
         infographic: ინფოგრაფიკა
         interactive: ინტერაქტივი
+        fact: ფაქტი
         not_published: გამოუქვეყნებელი
         not_promoted: არ დაწინაურდა
       view:

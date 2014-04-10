@@ -2,7 +2,7 @@ class VisualizationObserver < ActiveRecord::Observer
 
 	def after_save(visualization)
 		# set flag to true if the published flag is true and the record was not published before
-		visualization.send_notification = true if visualization.published && !visualization.was_published
+		visualization.send_notification = true if visualization.published && !visualization.was_published && Rails.env.production?
 	end
 
 	# after visualization has been created, send notification

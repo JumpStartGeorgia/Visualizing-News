@@ -1,7 +1,7 @@
 class UserObserver < ActiveRecord::Observer
 
 	def after_create(user)
-		user.send_notification = true if !user.db_migrate
+		user.send_notification = true if !user.db_migrate && Rails.env.production?
 	end
 
 	# after user has been created, send welcome message

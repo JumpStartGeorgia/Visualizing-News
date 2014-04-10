@@ -1,7 +1,7 @@
 class IdeaObserver < ActiveRecord::Observer
 
 	def after_create(idea)
-		idea.send_notification = true if idea.is_public && !idea.db_migrate
+		idea.send_notification = true if idea.is_public && !idea.db_migrate && Rails.env.production?
 	end
 
 	# after an idea has been created, notify subscribers

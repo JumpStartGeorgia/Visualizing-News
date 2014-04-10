@@ -74,13 +74,19 @@
     </div>
   </div>
   <div id="visualization_sidebar" class="side_block">
-    <% if @visualization.explanation %>
-    <div id="explanation">
-      <%= simple_format @visualization.explanation %>
-    </div>
+    <% if @visualization.explanation.present? && @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
+      <div id="explanation">
+        <%= simple_format @visualization.explanation %>
+      </div>
     <% end %>
 
-    <div id="source">
+    <% 
+       source_class = '' 
+		   if @visualization.visualization_type_id == Visualization::TYPES[:fact] 
+		    source_class = "class=no_explanation"
+       end 
+    %>
+    <div id="source" <%= source_class %>>
       <ul>
         <li>
           <%= "#{t('.organization')}: "%>
@@ -88,12 +94,14 @@
 						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
 					</span>
         </li>
-        <li>
-          <%= "#{t('.reporter')}: "%>
-					<span class="val">
-						<%= @visualization.reporter %>
-					</span>
-        </li>
+				<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+          <li>
+            <%= "#{t('.reporter')}: "%>
+					  <span class="val">
+						  <%= @visualization.reporter %>
+					  </span>
+          </li>
+        <% end %>
         <li>
           <%= "#{t('.designer')}: "%>
 					<span class="val">
@@ -127,10 +135,12 @@
             <% end %>
 					</span>
         </li>
-        <li>
-          <%= "#{t('.data_set')}: " %>
-          <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>
-        </li>
+				<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+          <li>
+            <%= "#{t('.data_set')}: " %>
+            <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>
+          </li>
+        <% end %>
         <li>
           <%= "#{t('app.common.category')}: "%>
           <span class="val">

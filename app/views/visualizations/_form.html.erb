@@ -152,10 +152,18 @@
 									:hint => t('activerecord.attributes.visualization_translation.permalink_hint') %>
 						<% end %>
 
-						<%= translation.input :explanation %>
+						<% if @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
+  						<%= translation.input :explanation %>
+            <% end %>
+            
 						<%= translation.input :visualization_text, :hint => t('activerecord.attributes.visualization_translation.visualization_text_hint') %>
-						<%= translation.input :reporter %>
+
+						<% if @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
+  						<%= translation.input :reporter %>
+            <% end %>
+            
 						<%= translation.input :designer %>
+
 						<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
   						<%= translation.input :developer %>
 						<% end %>
@@ -172,16 +180,18 @@
 							</div>
 	          </div>
 
-						<%= translation.fields_for :dataset_file do |upload| %>
-							<%= upload.input :file, :as => :file %>
-							<div class="control-group">
-								<div class="controls">
-									<%= link_to t('helpers.links.existing_file'), @visualization.dataset.url, :class => 'btn' if @visualization.dataset_file_name %>
-								</div>
-							</div>
+						<% if @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
+						  <%= translation.fields_for :dataset_file do |upload| %>
+							  <%= upload.input :file, :as => :file %>
+							  <div class="control-group">
+								  <div class="controls">
+									  <%= link_to t('helpers.links.existing_file'), @visualization.dataset.url, :class => 'btn' if @visualization.dataset_file_name %>
+								  </div>
+							  </div>
 
-						<% end %>
-
+						  <% end %>
+            <% end %>
+            
 						<%= translation.hidden_field :locale , :value => trans.locale %>
 					</div>
 

@@ -11,8 +11,25 @@
       display: block;
       position: relative;
       z-index: 1;
+      &:hover{
+        background-color: #eef2cb;
+        opacity: 0.78;
+        img.hover_img{
+          display: block;
+        }
+      }
       img {
         display: block;
+        &.hover_img{
+          position: absolute;
+          z-index: 9999;
+          width: 35px;
+          top: 50%;
+          left: 50%;
+          margin-top: -17.5px;
+          margin-left: -17.5px;
+          display: none;
+        }
       }
       &::after {
         position: absolute;

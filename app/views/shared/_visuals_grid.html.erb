@@ -13,14 +13,26 @@
 
   		  <div class="grid_visualization_item">
   		    <div class="visual">
+      		    <% 
+      		      type = ''
+      		      if visualization.visualization_type_id == Visualization::TYPES[:infographic]
+      		        type='infographic'
+      		      elsif visualization.visualization_type_id == Visualization::TYPES[:interactive]
+      		        type='interactive'
+      		      elsif visualization.visualization_type_id == Visualization::TYPES[:fact]
+      		        type='fact'
+      		      end
+      		    %>
   		       <%  if !visualization.image_file_name.blank? %>
-    		      <%= link_to(image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text), 
-                    create_visual_path(visualization.permalink, @user_in_org, params[:org]), 
-                    :title => visualization.title) %>
+    		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title do %>
+    		        <%= image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text) %>
+      		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
+    		      <% end %>
   		      <% else %>
-    		      <%= link_to(image_tag('image_placeholder.png', :alt => visualization.image_text), 
-                    create_visual_path(visualization.permalink, @user_in_org, params[:org]), 
-                    :title => visualization.title) %>
+    		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title do %>
+                <%= image_tag('image_placeholder.png', :alt => visualization.image_text) %>
+      		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
+    		      <% end %>
   		      <% end %>
   		    </div>
   		    <div class="title">

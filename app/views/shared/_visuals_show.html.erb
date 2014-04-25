@@ -74,7 +74,8 @@
     </div>
   </div>
   <div id="visualization_sidebar" class="side_block">
-    <% if @visualization.explanation.present? && @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
+		<% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
+		      @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
       <div id="explanation">
         <%= simple_format @visualization.explanation %>
       </div>
@@ -94,7 +95,8 @@
 						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
 					</span>
         </li>
-				<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+				<% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
+				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
           <li>
             <%= "#{t('.reporter')}: "%>
 					  <span class="val">
@@ -135,7 +137,8 @@
             <% end %>
 					</span>
         </li>
-				<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+				<% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
+				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
           <li>
             <%= "#{t('.data_set')}: " %>
             <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>

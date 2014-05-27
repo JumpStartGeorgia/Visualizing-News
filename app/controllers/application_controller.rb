@@ -163,7 +163,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_view_icon = 'grid'
 	  end
 
-		if params[:organize]
+		if params[:organize] && I18n.t('filters.visuals.organize').keys.map{|x| x.to_s}.include?(params[:organize])
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
 			@visuals_filter_organize_icon = params[:organize]
     else
@@ -172,7 +172,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_organize_icon = 'recent'
 		end
 
-		if params[:type]
+		if params[:type] && I18n.t('filters.visuals.type').keys.map{|x| x.to_s}.include?(params[:type])
 			@visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
 			@visuals_filter_type_icon = params[:type]
 		else
@@ -192,7 +192,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		  visual_objects = visual_objects.promoted
     end
 
-		if params[:type]
+		if params[:type] && I18n.t('filters.visuals.type').keys.map{|x| x.to_s}.include?(params[:type])
       if params[:type] == 'not_published'
 			  visual_objects = visual_objects.unpublished
       elsif params[:type] == 'not_promoted'
@@ -207,7 +207,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_type_icon = 'all'
 		end
 
-		if params[:organize]
+		if params[:organize] && I18n.t('filters.visuals.organize').keys.map{|x| x.to_s}.include?(params[:organize])
       case params[:organize]
         when 'recent'
     			visual_objects = visual_objects.recent
@@ -251,7 +251,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@ideas_filter_view_icon = 'grid'
 	  end
 
-		if params[:filter]
+		if params[:filter] && I18n.t('filters.ideas.filter').keys.map{|x| x.to_s}.include?(params[:filter])
 			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.#{params[:filter]}")
 			@ideas_filter_filter_icon = params[:filter]
     else
@@ -260,7 +260,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@ideas_filter_filter_icon = 'all'
 		end
 
-		if params[:organize]
+		if params[:organize] && I18n.t('filters.ideas.organize').keys.map{|x| x.to_s}.include?(params[:organize])
 			@ideas_filter_organize_selection = I18n.t("filters.ideas.organize.#{params[:organize]}")
 			@ideas_filter_organize_icon = params[:organize]
     else
@@ -278,7 +278,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
     set_idea_view_type
 
-		if params[:filter]
+		if params[:filter] && I18n.t('filters.ideas.filter').keys.map{|x| x.to_s}.include?(params[:filter])
       case params[:filter]
         when 'all'
     			# do nothing
@@ -295,7 +295,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@ideas_filter_filter_selection = I18n.t("filters.ideas.filter.all")
 		end
 
-		if params[:organize]
+		if params[:organize] && I18n.t('filters.ideas.organize').keys.map{|x| x.to_s}.include?(params[:organize])
       case params[:organize]
         when 'recent'
     			idea_objects = idea_objects.recent

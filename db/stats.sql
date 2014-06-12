@@ -1,5 +1,31 @@
 /* visaul stats */
 select
+vt.title, v.published_date, 
+(case v.visualization_type_id
+  when 1 then 'infographic'
+  when 2 then 'interactive'
+  when 3 then 'factograph'
+end) as type,
+og.name as organization,
+v.impressions_count as num_views, v.overall_votes, v.fb_likes, x.fb_comments
+from visualizations as v
+inner join visualization_translations as vt on vt.visualization_id = v.id
+inner join organization_translations as og on og.organization_id = v.organization_id
+inner join (
+select
+v.id, sum(vt.fb_count) as fb_comments
+from
+visualizations as v
+inner join visualization_translations as vt on vt.visualization_id = v.id
+where v.organization_id = 2
+group by v.id, v.published_date, v.impressions_count, v.overall_votes, v.fb_likes
+) as x on v.id = x.id
+where vt.locale = 'en' 
+and og.locale = 'en' 
+and v.published_date >= '2013-12-01'
+order by v.published_date;
+
+select
 vt.title, v.published_date, v.impressions_count as num_views, v.overall_votes, v.fb_likes, x.fb_comments
 from visualizations as v
 inner join visualization_translations as vt on vt.visualization_id = v.id

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '~> 1.2.0'
+gem 'bundler', '>= 1.6.0'
 gem "rails", "3.1.10"
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
 
@@ -38,6 +38,7 @@ gem "selenium-webdriver"  # create snapshot of web page
 gem "impressionist", "~> 1.1.1" # keep track of views
 gem "scoped_search", "~> 2.4.0" # search activerecord
 gem "whenever", "~> 0.8.2", require: false # easily schedule cron jobs
+gem 'utf8-cleaner', '~> 0.0.9' # prevent invalid encoding error
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -56,10 +57,7 @@ group :development do
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git' # speed up loading page in dev mode
 end
 
-group :staging do
+group :staging, :production do
 	gem "unicorn", "4.2.1" # http server
 end
 
-group :production do
-	gem "unicorn", "4.2.1" # http server
-end

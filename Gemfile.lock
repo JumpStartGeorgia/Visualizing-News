@@ -284,6 +284,7 @@ GEM
       rack
       raindrops (~> 0.7)
     use_tinymce (0.0.15)
+    utf8-cleaner (0.0.9)
     warden (1.1.1)
       rack (>= 1.0)
     websocket (1.0.6)
@@ -296,7 +297,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_attr (~> 0.5.1)
-  bundler (~> 1.2.0)
+  bundler (>= 1.6.0)
   cancan (~> 1.6.8)
   capistrano (~> 2.12.0)
   coffee-rails (~> 3.1.1)
@@ -335,4 +336,5 @@ DEPENDENCIES
   unicorn (= 4.2.1)
   use_tinymce (~> 0.0.15)
   useragent!
+  utf8-cleaner (~> 0.0.9)
   whenever (~> 0.8.2)

@@ -38,7 +38,8 @@ gem "selenium-webdriver"  # create snapshot of web page
 gem "impressionist", "~> 1.1.1" # keep track of views
 gem "scoped_search", "~> 2.4.0" # search activerecord
 gem "whenever", "~> 0.8.2", require: false # easily schedule cron jobs
-gem 'utf8-cleaner', '~> 0.0.9' # prevent invalid encoding error
+#gem 'utf8-cleaner', '~> 0.0.9' # prevent invalid encoding error
+gem 'rack-utf8_sanitizer', '~> 1.2.2' # prevent invalid encoding error
 
 # Gems used only for assets and not required
 # in production environments by default.

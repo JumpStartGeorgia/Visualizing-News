@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -57,5 +58,16 @@ module BootstrapStarter
 
     # tell the assest pipeline to include the fancybox.js and font styles
     config.assets.precompile += ['fancybox/layout.js', 'fonts_en.css', 'fonts_ka.css']
+    
+    
+
+    # from: http://stackoverflow.com/a/24727310
+    # to try and catch the following errors:
+    # - invalid byte sequence in UTF-8
+    # - invalid %-encoding
+    require "#{Rails.root}/app/middleware/handle_invalid_percent_encoding.rb"
+    config.middleware.insert 0, HandleInvalidPercentEncoding
+    config.middleware.insert 0, Rack::UTF8Sanitizer    
+    
   end
 end

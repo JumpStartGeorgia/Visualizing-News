@@ -207,6 +207,8 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack-utf8_sanitizer (1.2.2)
+      rack (~> 1.0)
     rails (3.1.10)
       actionmailer (= 3.1.10)
       actionpack (= 3.1.10)
@@ -284,7 +286,6 @@ GEM
       rack
       raindrops (~> 0.7)
     use_tinymce (0.0.15)
-    utf8-cleaner (0.0.9)
     warden (1.1.1)
       rack (>= 1.0)
     websocket (1.0.6)
@@ -323,6 +324,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip (~> 3.4.0)
   psych (= 1.2.2)
+  rack-utf8_sanitizer (~> 1.2.2)
   rails (= 3.1.10)
   rails-dev-boost!
   rails_autolink (~> 1.0.9)
@@ -336,5 +338,4 @@ DEPENDENCIES
   unicorn (= 4.2.1)
   use_tinymce (~> 0.0.15)
   useragent!
-  utf8-cleaner (~> 0.0.9)
   whenever (~> 0.8.2)

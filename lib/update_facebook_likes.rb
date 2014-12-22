@@ -3,6 +3,14 @@ module UpdateFacebookLikes
   require 'net/https'
   require "uri"
 
+  def self.access_token
+    ENV['VISUALIZING_NEWS_FACEBOOK_APP_ACCESS_TOKEN']
+  end
+
+  def self.graph_api
+    "https://graph.facebook.com/v2.2/?access_token=#{access_token}&format=json&method=get&id="
+  end
+
   def self.host_url
     host = "http://feradi.info"
 =begin
@@ -21,7 +29,7 @@ module UpdateFacebookLikes
     host = host_url
     root_count = {'ka' => 0, 'en' => 0}
     root_count.keys.each do |locale|
-      uri = URI.parse("https://graph.facebook.com/?ids=#{host}/#{locale}")
+      uri = URI.parse(URI.escape("#{graph_api}#{host}/#{locale}"))
       http = Net::HTTP.new(uri.host, 443)
       http.use_ssl = true 
       request = Net::HTTP::Get.new(uri.request_uri)
@@ -29,7 +37,7 @@ module UpdateFacebookLikes
 
       if response.body.present?
         json = JSON.parse(response.body)
-        root_count[locale] = json.first[1]["shares"] if json.present? && json.first.present?
+        root_count[locale] = json['share']['share_count'] if json.present? && json['share'].present?
       end
     end
 
@@ -56,7 +64,7 @@ module UpdateFacebookLikes
       count = {'ka' => 0, 'en' => 0}
       sum = 0
       visual.visualization_translations.each do |trans|
-		    uri = URI.parse("https://graph.facebook.com/?ids=#{host}/#{trans.locale}/visualizations/#{trans.permalink}")
+        uri = URI.parse(URI.escape("#{graph_api}#{host}/#{trans.locale}/visualizations/#{trans.permalink}"))
         http = Net::HTTP.new(uri.host, 443)
         http.use_ssl = true 
         request = Net::HTTP::Get.new(uri.request_uri)
@@ -66,7 +74,7 @@ module UpdateFacebookLikes
         if response.body.present?
 puts "response = #{JSON.parse(response.body)}"
           json = JSON.parse(response.body)
-          x = json.first[1]["shares"] if json.present? && json.first.present?
+          x = json['share']['share_count'] if json.present? && json['share'].present?
           # if the count is the same as the root count, reset to 0
           x = 0 if x == root_count[trans.locale] || !x.present?
         end
@@ -118,7 +126,7 @@ puts "response = #{JSON.parse(response.body)}"
       count = {'ka' => 0, 'en' => 0}
 
       I18n.available_locales.each do |locale|
-		    uri = URI.parse("https://graph.facebook.com/?ids=#{host}/#{locale}/ideas/#{idea.id}")
+        uri = URI.parse(URI.escape("#{graph_api}#{host}/#{locale}/ideas/#{idea.id}"))
         http = Net::HTTP.new(uri.host, 443)
         http.use_ssl = true 
         request = Net::HTTP::Get.new(uri.request_uri)
@@ -128,7 +136,7 @@ puts "response = #{JSON.parse(response.body)}"
         if response.body.present?
 puts "response = #{JSON.parse(response.body)}"
           json = JSON.parse(response.body)
-          x = json.first[1]["shares"] if json.present? && json.first.present?
+          x = json['share']['share_count'] if json.present? && json['share'].present?
           # if the count is the same as the root count, reset to 0
           x = 0 if x == root_count[locale.to_s] || !x.present?
         end

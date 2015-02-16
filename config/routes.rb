@@ -85,7 +85,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :get
 		match '/notifications', :to => 'notifications#index', :as => :notifications, :via => :post
 
-		root :to => 'root#index'
+#		root :to => 'root#index'
+    root :to => redirect("/%{locale}/visualizations", status: 302)
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever
 	end
 

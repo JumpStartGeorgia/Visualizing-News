@@ -5,6 +5,7 @@ vt.title, v.published_date,
   when 1 then 'infographic'
   when 2 then 'interactive'
   when 3 then 'factograph'
+  when 4 then 'comic'
 end) as type,
 og.name as organization,
 v.impressions_count as num_views, v.overall_votes, v.fb_likes, x.fb_comments

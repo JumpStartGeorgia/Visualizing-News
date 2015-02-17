@@ -68,6 +68,21 @@ Rails.logger.debug "///////////// -> generating new thumb style"
 					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
 				}
 			end
+		elsif self.visualization_type_id == Visualization::TYPES[:comic]
+Rails.logger.debug "///////////// -> in comic"
+			if self.id.nil? || self.reload_file || self.crop_x.nil? || self.crop_y.nil? || self.crop_w.nil? || self.crop_h.nil?
+Rails.logger.debug "///////////// -> generating all styles"
+				styles = {
+					:thumb => {:geometry => "230x230#"},
+					:medium => {:geometry => "600x>"},
+					:large => {:geometry => "900x>"}
+				}
+			else
+Rails.logger.debug "///////////// -> generating new thumb style"
+				styles = {
+					:thumb => {:geometry => "230x230#", :processors => [:cropper]}
+				}
+			end
 		end
 Rails.logger.debug "///////////// attachment styles end"
 		return styles

@@ -19,6 +19,8 @@
       		        type='interactive'
       		      elsif visualization.visualization_type_id == Visualization::TYPES[:fact]
       		        type='fact'
+                elsif visualization.visualization_type_id == Visualization::TYPES[:comic]
+                  type='comic'
       		      end
       		    %>
   		       <%  if !visualization.image_file_name.blank? %>

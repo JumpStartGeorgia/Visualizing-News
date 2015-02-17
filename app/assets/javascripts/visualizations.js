@@ -81,6 +81,10 @@ $(document).ready(function(){
 				$('.trans_visual_file').show(300);
 				$('.trans_interactive_url').hide(300);
 				$('input[id$="_interactive_url"]').val('');
+      } else if ($(this).val() == '4'){ // comic
+        $('.trans_visual_file').show(300);
+        $('.trans_interactive_url').hide(300);
+        $('input[id$="_interactive_url"]').val('');
 			} else {
 				$('.trans_interactive_url').hide(300);
 				$('.trans_visual_file').hide(300);

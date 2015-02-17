@@ -232,6 +232,7 @@ en:
     infographic: Infographic
     interactive: Interactive
     fact: Fact
+    comic: Comic
   filters:
     category_default: all
     visuals:
@@ -241,6 +242,7 @@ en:
         infographic: Infographic
         interactive: Interactive
         fact: Fact
+        comic: Comic
         not_published: Not Published
         not_promoted: Not Promoted
       view:

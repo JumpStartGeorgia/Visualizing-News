@@ -74,8 +74,10 @@
     </div>
   </div>
   <div id="visualization_sidebar" class="side_block">
-		<% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
-		      @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+		<% if @visualization.explanation.present? && 
+          (@visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
+           @visualization.visualization_type_id == Visualization::TYPES[:interactive]  || 
+           @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
       <div id="explanation">
         <%= simple_format @visualization.explanation %>
       </div>
@@ -83,20 +85,24 @@
 
     <% 
        source_class = '' 
-		   if @visualization.visualization_type_id == Visualization::TYPES[:fact] 
+		   if @visualization.explanation.blank? || @visualization.visualization_type_id == Visualization::TYPES[:fact] 
 		    source_class = "class=no_explanation"
        end 
     %>
     <div id="source" <%= source_class %>>
       <ul>
-        <li>
-          <%= "#{t('.organization')}: "%>
-					<span class="val">
-						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
-					</span>
-        </li>
-				<% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
-				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+        <% if @visualization.organization.present? %>
+          <li>
+            <%= "#{t('.organization')}: "%>
+  					<span class="val">
+  						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
+  					</span>
+          </li>
+        <% end %>
+				<% if @visualization.reporter.present? && 
+              (@visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
+              @visualization.visualization_type_id == Visualization::TYPES[:interactive] || 
+              @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
           <li>
             <%= "#{t('.reporter')}: "%>
 					  <span class="val">
@@ -104,13 +110,15 @@
 					  </span>
           </li>
         <% end %>
-        <li>
-          <%= "#{t('.designer')}: "%>
-					<span class="val">
-						<%= @visualization.designer %>
-					</span>
-        </li>
-        <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+        <% if @visualization.designer.present? %>
+          <li>
+            <%= "#{t('.designer')}: "%>
+  					<span class="val">
+  						<%= @visualization.designer %>
+  					</span>
+          </li>
+        <% end %>
+        <% if @visualization.developer.present? && @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
           <li>
             <%= "#{t('.developer')}: "%>
 					  <span class="val">
@@ -118,45 +126,49 @@
 					  </span>
           </li>
         <% end %>
-        <li>
-          <%= "#{t('.data_source')}: "%>
-					<span class="val-source">
-            <% if !@visualization.datasources.blank? %>
+        <% if @visualization.datasources.present? %>
+          <li>
+            <%= "#{t('.data_source')}: "%>
+  					<span class="val-source">
               <ul class="datasource_list">
               <% @visualization.datasources.each_with_index do |source, index| %>
-						    <% if !source.name.blank? %>
+  					    <% if source.name.present? %>
                   <li>
-						      <% if !source.url.blank? %>
-		                <%= link_to source.name, source.url, :target => "blank" %>
-						      <% else %>
-							      <%= source.name %>
-						      <% end %></li>
-					      <% end %>
+  					      <% if source.url.present? %>
+  	                <%= link_to source.name, source.url, :target => "blank" %>
+  					      <% else %>
+  						      <%= source.name %>
+  					      <% end %></li>
+  				      <% end %>
               <% end %>
               </ul>
-            <% end %>
-					</span>
-        </li>
-				<% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
-				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-          <li>
-            <%= "#{t('.data_set')}: " %>
-            <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download' if @visualization.dataset_file_name%>
+  					</span>
           </li>
         <% end %>
-        <li>
-          <%= "#{t('app.common.category')}: "%>
-          <span class="val">
-          <% @visualization.visualization_categories.each_with_index do |cat, index| %>
-            <% x = link_to cat.category.name, visuals_path(remove_unwanted_params(merge_visual_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
-            <% if index != @visualization.visualization_categories.length-1 %>
-              <%= x + ", "%>
-            <% else %>
-              <%= x %>
+				<% if @visualization.dataset_file_name.present? && 
+              (@visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
+				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] || 
+              @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+          <li>
+            <%= "#{t('.data_set')}: " %>
+            <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download'%>
+          </li>
+        <% end %>
+        <% if @visualization.visualization_categories.present? %>
+          <li>
+            <%= "#{t('app.common.category')}: "%>
+            <span class="val">
+            <% @visualization.visualization_categories.each_with_index do |cat, index| %>
+              <% x = link_to cat.category.name, visuals_path(remove_unwanted_params(merge_visual_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
+              <% if index != @visualization.visualization_categories.length-1 %>
+                <%= x + ", "%>
+              <% else %>
+                <%= x %>
+              <% end %>
             <% end %>
-          <% end %>
-          </span>
-        </li>
+            </span>
+          </li>
+        <% end %>
         <li>
           <%= "#{t('.type')}:"%>
 						<span class="val">
@@ -188,7 +200,8 @@
 			<div class="embed">
 			  <span><%= t('.embed')%>:</span>
         <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||  
-              @visualization.visualization_type_id == Visualization::TYPES[:fact]%>
+              @visualization.visualization_type_id == Visualization::TYPES[:fact] ||  
+              @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
               
 			    <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
 					  onmouseup="return false;"><%= link_to(

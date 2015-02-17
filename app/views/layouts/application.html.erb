@@ -16,7 +16,7 @@
 
       <meta name="description" content="<%= desc %>">
 
-		  <meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
+		  <meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} | #{t('app.common.app_name')}" :
 				  t('app.common.app_name') %>" />
 		  <% if @visualization && @visualization.id && @visualization.explanation.present? %>
     		<meta property="og:description" content="<%= @visualization.explanation%>" />
@@ -32,7 +32,7 @@
 		  <meta property="fb:app_id" content="<%= ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID'] %>" />
     <% end %>
 
-    <title><%= content_for?(:title) ? "#{yield(:title)} > #{t('app.common.app_name')}" :
+    <title><%= content_for?(:title) ? "#{yield(:title)} | #{t('app.common.app_name')}" :
 				t('app.common.app_name') %></title>
     <%= csrf_meta_tags %>
 	  <%= include_gon %>

@@ -8,7 +8,7 @@ class Visualization < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
-  TYPES = {:infographic => 1, :interactive => 2, :fact => 3}
+  TYPES = {:infographic => 1, :interactive => 2, :fact => 3, :comic => 4}
 
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories
@@ -84,7 +84,8 @@ class Visualization < ActiveRecord::Base
     missing_fields = []
     self.visualization_translations.each do |trans|
       if self.visualization_type_id == Visualization::TYPES[:infographic] ||
-          self.visualization_type_id == Visualization::TYPES[:fact]
+          self.visualization_type_id == Visualization::TYPES[:fact] ||
+          self.visualization_type_id == Visualization::TYPES[:comic]
         missing_fields << :visual if trans.image_file_name.blank?
       elsif self.visualization_type_id == Visualization::TYPES[:interactive]
         missing_fields << :interactive_url if trans.interactive_url.blank?

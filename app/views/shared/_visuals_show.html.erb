@@ -159,7 +159,7 @@
           <li>
             <%= "#{t('app.common.language')}: "%>
             <span class="val">
-            <% @visualization.translated_locales.each_with_index do |locale, index| %>
+            <% @visualization.languages.split(",").each_with_index do |locale, index| %>
               <% x = link_to t("app.language.#{locale}"), params.merge(language: locale) %>
               <% if index != @visualization.translated_locales.length-1 %>
                 <%= x + ", "%>

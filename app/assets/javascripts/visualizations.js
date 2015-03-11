@@ -55,6 +55,7 @@ $(document).ready(function(){
 			}
 		}
 
+
 		// if language changes, show appropriate fields
 		$('input[id^="visualization_languages"]').change(function() {
       var id = $(this).attr('id').split('_');

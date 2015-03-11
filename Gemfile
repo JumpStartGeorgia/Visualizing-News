@@ -46,9 +46,9 @@ group :assets do
   gem "sass-rails", "3.2.6"
   gem "coffee-rails", "~> 3.2.2"
   gem "uglifier", ">= 1.0.3"
-	gem "twitter-bootstrap-rails", "~> 2.2.8"
   gem 'therubyracer'
   gem 'less-rails', git: 'git://github.com/metaskills/less-rails.git'
+	gem "twitter-bootstrap-rails", "~> 2.2.8"
   gem "jquery-ui-rails" , "~> 5.0.3"  
 end
 

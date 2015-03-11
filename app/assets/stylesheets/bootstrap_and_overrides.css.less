@@ -1,24 +1,26 @@
 @import "twitter/bootstrap/bootstrap";
 body {
-//	padding-top: 60px;
+//  padding-top: 60px;
 }
 
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
-@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
-@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
 
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not
-//       have the proper paths. So for now we use the absolute path.
-@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
-@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
-@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
-@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
 
 // Font Awesome
-@import "fontawesome";
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
 
 // Your custom LESS stylesheets goes here
 //
@@ -36,30 +38,30 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 html, body {
   height: 100%;
-	font-size: 13px;
+  font-size: 13px;
 }
 
 /*#wrapper {*/
 #everything-else .stretch {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -155px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -155px;
 }
 
 #wrapper > .container-fluid {
-	padding-top: 0px;
-	padding-bottom: 60px;
-	overflow: visible;
-	padding-left: 20px;
-	padding-right: 0px;
-	&.resp {
-	  padding-left: 20px;
-	  padding-right: 20px;
-	}
-	& > .content > div > div > div {
-	  padding-top: 20px;
-	}
+  padding-top: 0px;
+  padding-bottom: 60px;
+  overflow: visible;
+  padding-left: 20px;
+  padding-right: 0px;
+  &.resp {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  & > .content > div > div > div {
+    padding-top: 20px;
+  }
 }
 
 
@@ -69,21 +71,21 @@ html, body {
 
 /* style for looking at interactive visual with iframe */
 body#interactive_layout {
-	.navbar {
+  .navbar {
 /*
-		border-bottom: solid 3px #9a9a9a;
+    border-bottom: solid 3px #9a9a9a;
 */
     border: none;
-		.navbar-inner {
-		  .box-shadow(0px 3px 3px 1px rgba(0, 0, 0, 0.38));
+    .navbar-inner {
+      .box-shadow(0px 3px 3px 1px rgba(0, 0, 0, 0.38));
       background: #fbfbfb;
       a.brand {
       }
-		}
-		.container-fluid {
-		  padding-right: 0px;
-		}
-	}
+    }
+    .container-fluid {
+      padding-right: 0px;
+    }
+  }
 
   #social {
     padding: 0px 40px 14px 30px;
@@ -120,8 +122,8 @@ body#interactive_layout {
           &#like_btn_item{
             margin-right: 25px;
             margin-top: 3px;
-          	a.like_btn {
-          	  text-shadow: none;
+            a.like_btn {
+              text-shadow: none;
               font-family: themix_regular;
               display: inline-block;
               text-transform: uppercase;
@@ -149,7 +151,7 @@ body#interactive_layout {
                   cursor: default;
                 }
               }
-          	}
+            }
           }
         }
       }
@@ -167,34 +169,34 @@ body#interactive_layout {
     }
   }
 
-	iframe#interactive {
-		padding-top: 83px;
-	}
+  iframe#interactive {
+    padding-top: 83px;
+  }
 }
 
 .push { height: 135px; } /* Just some arbitrary space to add between footer and rest of the content, when they are close */
 
 @media (max-width: 979px) {
   body {
-  	margin-top: 0;
+    margin-top: 0;
   }
   #wrapper > .container-fluid {
-  	padding: 0px 0 1em 20px;
+    padding: 0px 0 1em 20px;
   }
-	.navbar-fixed-top  {
-		margin: 0;
-	}
+  .navbar-fixed-top  {
+    margin: 0;
+  }
 
-	/* style for looking at interactive visual with iframe */
-	body#interactive_layout {
-		iframe#interactive {
-			padding-top: 0;
-		}
-	}
+  /* style for looking at interactive visual with iframe */
+  body#interactive_layout {
+    iframe#interactive {
+      padding-top: 0;
+    }
+  }
 }
 
 .container-fluid > ul.nav  {
-	line-height: 20px;
+  line-height: 20px;
 }
 .navbar-fixed-top .navbar-inner .container-fluid .brand {
   font-size: 19px;

@@ -268,25 +268,29 @@ logger.debug "//////////// -- records are valid, taking screen shot"
       # if reload file flag is set, erase file record so that the new file will be processed
       # - and if this is interactive, retake screenshot
 		  params[:visualization][:visualization_translations_attributes].keys.each do |key|
+        logger.debug "@@@@@@ vis trans key #{key}"
 			  ptrans = params[:visualization][:visualization_translations_attributes][key]
+        logger.debug "@@@@@@ ptrans = #{ptrans.inspect}"
 			  if ptrans[:reload_file] == "true"
 				  trans = @visualization.visualization_translations.select{|x| x.id.to_s == ptrans[:id]}.first
-          # remove the file on record
-          trans.image_file.file = nil
-          trans.image_file.reload_file = true
-#          trans.image_file.save
+          logger.debug "@@@@@@ trans #{trans.inspect}"
+          if trans.present?
+            # remove the file on record
+            trans.image_file.file = nil
+            trans.image_file.reload_file = true
+  #          trans.image_file.save
 
-          # if this is interactive, redo screenshot
-  				if trans.image_file.visualization_type_id == Visualization::TYPES[:interactive] && !ptrans[:interactive_url].blank?
-  logger.debug "//////////// -- taking screen shot"
-					  # get screenshot of interactive site
-            filename = Screenshot.take(ptrans[:interactive_url])
-            if filename
-              files[trans.locale] = filename
-					    trans.image_file.file = File.new(filename, 'r')
+            # if this is interactive, redo screenshot
+    				if trans.image_file.visualization_type_id == Visualization::TYPES[:interactive] && !ptrans[:interactive_url].blank?
+    logger.debug "//////////// -- taking screen shot"
+  					  # get screenshot of interactive site
+              filename = Screenshot.take(ptrans[:interactive_url])
+              if filename
+                files[trans.locale] = filename
+  					    trans.image_file.file = File.new(filename, 'r')
+              end
             end
           end
-
 			  end
 		  end
       
@@ -320,6 +324,7 @@ logger.debug "//////////// -- records are valid, taking screen shot"
 				  }
           format.json { head :ok }
         else
+          logger.debug "%%%%%%%%%%%% error = #{@visualization.errors.full_messages}"
 				  gon.edit_visualization = true
 				  gon.visualization_type = @visualization.visualization_type_id
 				  gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?

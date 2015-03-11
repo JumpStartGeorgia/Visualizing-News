@@ -65,7 +65,7 @@ class VisualizationTranslation < ActiveRecord::Base
 
 
   def create_permalink
-    Utf8Converter.convert_ka_to_en(self.title) if self.title
+    Utf8Converter.convert_ka_to_en(self.title).to_ascii if self.title
   end
 
   def self.get_visual_id(permalink)

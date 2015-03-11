@@ -13,7 +13,7 @@ class OrganizationTranslation < ActiveRecord::Base
 			:message => I18n.t('activerecord.errors.messages.already_exists')}
 
   def create_permalink
-    Utf8Converter.convert_ka_to_en(self.name)
+    Utf8Converter.convert_ka_to_en(self.name).to_ascii
   end
 
   def self.get_org_id(permalink)

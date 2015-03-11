@@ -292,6 +292,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    unidecoder (1.1.2)
     use_tinymce (0.0.17)
     warden (1.1.1)
       rack (>= 1.0)
@@ -345,6 +346,7 @@ DEPENDENCIES
   twitter-bootstrap-rails (~> 2.2.8)
   uglifier (>= 1.0.3)
   unicorn (= 4.8.3)
+  unidecoder (~> 1.1.2)
   use_tinymce (~> 0.0.15)
   useragent!
   whenever (~> 0.9.4)

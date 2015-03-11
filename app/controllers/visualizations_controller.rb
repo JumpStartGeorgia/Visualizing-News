@@ -52,6 +52,7 @@ class VisualizationsController < ApplicationController
 				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
 			end
 		end
+    @visualization.languages_internal = @visualization.visualization_translations.map{|x| x.locale}
 		gon.edit_visualization = true
 
 		# initialize to be infographic
@@ -74,7 +75,7 @@ class VisualizationsController < ApplicationController
 		end
 
     new_layout = nil
-    if params[:reset_crop] && I18n.available_locales.index(params[:reset_crop].to_sym)
+    if params[:reset_crop].present? && I18n.available_locales.index(params[:reset_crop].to_sym)
 logger.debug "************* reseting crop for #{params[:reset_crop]}"
 			@locale_to_crop = params[:reset_crop]
 			to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
@@ -82,10 +83,23 @@ logger.debug "************* reseting crop for #{params[:reset_crop]}"
 			gon.largeH = to_crop.visual_geometry(:large).height
 			gon.originalW = to_crop.visual_geometry(:original).width
 #      new_layout = 'fancybox' 
-    elsif params[:reset_file] && I18n.available_locales.index(params[:reset_file].to_sym)
+    elsif params[:reset_file].present? && I18n.available_locales.index(params[:reset_file].to_sym)
 logger.debug "************* reseting file for #{params[:reset_file]}"
 			@locale_to_reset = params[:reset_file]
 #      new_layout = 'fancybox' 
+
+    elsif params[:reset_languages].present?
+      @reset_lanaguages = true
+      # make sure any missing translation locales are added
+      if @visualization.visualization_translations.length != I18n.available_locales.length
+        I18n.available_locales.each do |locale|
+          @visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+          # add image file record
+          x = @visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+          x.build_image_file if x.image_file.blank?
+        end
+      end
+
     else 
 		  locales_to_crop = @visualization.locales_to_crop
 		  if !locales_to_crop.empty?
@@ -117,6 +131,14 @@ logger.debug "************* load complete form"
     @organization = Organization.find_by_permalink(params[:organization_id])
     @visualization = Visualization.new(params[:visualization])
 
+    # only keep translation records for languages that are selected
+    locales_to_remove = I18n.available_locales.map{|x| x.to_s} - @visualization.languages_internal
+    if locales_to_remove.present?
+      locales_to_remove.each do |locale|
+        @visualization.visualization_translations.delete_if{|x| x.locale == locale}
+      end
+    end
+
 		# if interactive, take screen shots of urls
 		if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
 logger.debug "//////////// is interactive, taking snapshots"
@@ -133,16 +155,6 @@ logger.debug "//////////// -- records are valid, taking screen shot"
             files[trans.locale] = filename
 					  trans.image_file.file = File.new(filename, 'r')
           end
-=begin
-					kit   = IMGKit.new(trans.interactive_url, :'javascript-delay' => 10000)
-					img   = kit.to_img(:png)
-					files[trans.locale] = Tempfile.new(["visual_screenshot_#{Time.now.strftime("%Y%m%dT%H%M%S%z")}", '.png'], 'tmp',
-										           :encoding => 'ascii-8bit')
-					files[trans.locale].write(img)
-					files[trans.locale].flush
-logger.debug "//////////// -- adding image file"
-					trans.image_file.file = files[trans.locale]
-=end
 				end
 			end
 		end
@@ -159,6 +171,16 @@ logger.debug "//////////// -- adding image file"
 				gon.edit_visualization = true
 				gon.visualization_type = @visualization.visualization_type_id
 				gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
+
+        if @visualization.visualization_translations.length != I18n.available_locales.length
+          I18n.available_locales.each do |locale|
+            @visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+            # add image file record
+            x = @visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+            x.build_image_file if x.image_file.blank?
+          end
+        end
+
         format.html { render action: "new" }
         format.json { render json: @visualization.errors, status: :unprocessable_entity }
       end
@@ -182,10 +204,56 @@ logger.debug "//////////// -- adding image file"
 
   def update
     @organization = Organization.find_by_permalink(params[:organization_id])
-    @visualization = Visualization.find_by_permalink(params[:id])
+    @visualization = Visualization.readonly(false).find_by_permalink(params[:id])
 
 		Visualization.transaction do
 			files = Hash.new
+
+      # if reset languages selected, destory any translation records no longer needed
+      reset_languages = false
+      if params[:visualization][:reset_languages].present? && params[:visualization][:reset_languages] == 'true'
+        reset_languages = true
+        logger.debug "%%%%%% reset lang!"
+        # inidcate if need to destroy existing langauges
+        locales_to_remove = I18n.available_locales.map{|x| x.to_s} - params[:visualization][:languages_internal]
+        if locales_to_remove.present?
+          locales_to_remove.each do |locale|
+            x = params[:visualization][:visualization_translations_attributes].values.select{|x| x[:locale] == locale}.first
+            if x.present?
+              if x[:id].present?
+                # mark it for destruction
+                x[:_destroy] = "1"
+              else
+                # not in database, so just delete the key/value pair
+                params[:visualization][:visualization_translations_attributes].delete_if{|k,v| v[:locale] == locale}
+              end
+            end
+          end
+        end
+
+        logger.debug "%%%%%%% attributes now #{params[:visualization][:visualization_translations_attributes].values}"
+
+        # if there is a new language, record that we need to make a thumbnail of the image
+        # if interactive and new, take screen shots of urls
+        if params[:visualization][:visualization_type_id] == Visualization::TYPES[:interactive]
+    logger.debug "//////////// is interactive, taking snapshots"
+    #       @visualization.visualization_translations.each do |trans|
+    # logger.debug "//////////// - locale = #{trans.locale}"
+    #         # only proceed if the url is valid
+    #         if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
+    #             !trans.interactive_url.blank? && trans.image_file_name.blank?
+    # logger.debug "//////////// -- records are valid, taking screen shot"
+    #           # get screenshot of interactive site
+    #           filename = Screenshot.take(trans.interactive_url)
+    #           if filename
+    #             files[trans.locale] = filename
+    #             trans.image_file.file = File.new(filename, 'r')
+    #           end
+    #         end
+    #       end
+        end
+
+      end 
 
 		  # if reset crop flag set, reset image is cropped falg
 		  reset_crop = false
@@ -240,11 +308,11 @@ logger.debug "//////////// -- adding image file"
 				  permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
 
           format.html {
-					  if processed_crop || reset_crop
+					  if processed_crop || reset_crop || reset_languages
 						  # show form again
 						  redirect_to edit_organization_visualization_path(params[:organization_id], permalink),
 									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
-					  else
+            else
 						  # redirect to show page
 						  redirect_to organization_visualization_path(params[:organization_id], permalink),
 									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))

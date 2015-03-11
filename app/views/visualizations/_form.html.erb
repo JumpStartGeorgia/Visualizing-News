@@ -1,3 +1,6 @@
+<%- model_class = Visualization -%>
+<%- model_class_trans = VisualizationTranslation -%>
+
 <%
   if params[:action] == 'new' || params[:action] == 'create'
     path = organization_visualizations_path(params[:organization_id])
@@ -11,15 +14,37 @@
 		<%= f.error_messages %>
 
 	<% if @visualization.id.nil? %>
+
 		<div id="fields-panel">
 			<%= f.inputs do %>
 				<%= f.hidden_field :organization_id ,	:value => @organization.id %>
 
-				<%= f.input :visualization_type_id, :as => :radio, :collection => visualization_type_collection %>
+        <div class="radio control-group required" id="visualization_visualization_type_id_input">
+          <label class=" control-label"><%= model_class.human_attribute_name(:visualization_type_id) %><abbr title="required">*</abbr></label>
+          <div class="choices controls">
+            <% visualization_type_collection.each do |type| %>
+              <label class="choice radio" for="visualization_visualization_type_id_<%=type[1]%>">
+                <% checked = @visualization.visualization_type_id.to_s == type[1].to_s ? 'checked=checked' : '' %>
+                <input <%= checked %> id="visualization_visualization_type_id_<%=type[1]%>" name="visualization[visualization_type_id]" type="radio" value="<%=type[1]%>">
+                <%=type[0]%>
+              </label>
+            <% end %>
+          </div>
+        </div>
 
-				<%= f.input :languages_internal, :as => :check_boxes,
-				  :collection => I18n.available_locales.map{|x| [t("app.language.#{x}"), x]},
-				  :input_html => {:checked => 'checked'} %>
+        <div class="check_boxes control-group required" id="visualization_languages_internal_input">
+          <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="required">*</abbr></label>
+          <input id="visualization_languages_internal_none" name="visualization[languages_internal][]" type="hidden" value="">
+          <div class="choices controls">
+            <% I18n.available_locales.each do |locale| %>
+              <label class="choice checkbox" for="visualization_languages_internal_<%=locale%>">
+                <% checked = @visualization.languages_internal.include?(locale.to_s) ? 'checked=checked' : '' %>
+                <input <%= checked %> id="visualization_languages_internal_<%=locale%>" name="visualization[languages_internal][]" type="checkbox" value="<%=locale%>">
+                <%= I18n.t("app.language.#{locale}") %>
+              </label>
+            <% end %>
+          </div>
+        </div>
 
 				<% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 					<%= f.fields_for :visualization_translations, trans do |translation| %>
@@ -31,7 +56,7 @@
 							<div class="trans_visual_file" style="display: none">
 								<%= translation.fields_for :image_file do |upload| %>
 	      				  <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
-	      				  <%= upload.input :file, :as => :file %>
+	      				  <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
 
 								<% end %>
       				</div>
@@ -46,7 +71,9 @@
 
 			<% end %>
 		</div>
+
 	<% elsif !@locale_to_reset.blank? %>
+
 		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
 				<%= translation.hidden_field :reload_file, :value => 'true' %>
@@ -56,7 +83,7 @@
             @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
   			<h3><%= t('.reset_file', :language => t("app.language.#{@locale_to_reset}")) %></h3>
 			  <%= translation.fields_for :image_file do |upload| %>
-				  <%= upload.input :file, :as => :file %>
+				  <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
 			    <%= upload.hidden_field :reset_crop, :value => true %>
 			    <%= upload.hidden_field :image_is_cropped, :value => false %>
 			  <% end %>
@@ -70,7 +97,9 @@
       <% end %>
 
 		<% end %>
+
 	<% elsif !@locale_to_crop.blank? %>
+
 		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first %>
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
 
@@ -96,16 +125,70 @@
 
 			</div>
 		<% end %>
+
+  <% elsif @reset_lanaguages == true %>
+
+    <div id="fields-panel">
+      <%= f.hidden_field :reset_languages, :value => true %>
+      <%= f.hidden_field :visualization_type_id , :value => @visualization.visualization_type_id %>
+      <div class="check_boxes control-group required" id="visualization_languages_internal_input">
+        <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="required">*</abbr></label>
+        <input id="visualization_languages_internal_none" name="visualization[languages_internal][]" type="hidden" value="">
+        <div class="choices controls">
+          <% I18n.available_locales.each do |locale| %>
+            <label class="choice checkbox" for="visualization_languages_internal_<%=locale%>">
+              <% checked = @visualization.languages_internal.include?(locale.to_s) ? 'checked=checked' : '' %>
+              <input <%= checked %> id="visualization_languages_internal_<%=locale%>" name="visualization[languages_internal][]" type="checkbox" value="<%=locale%>">
+              <%= I18n.t("app.language.#{locale}") %>
+            </label>
+          <% end %>
+        </div>
+      </div>
+
+      <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
+        <%= f.fields_for :visualization_translations, trans do |translation| %>
+
+          <div id="form-<%= trans.locale %>" class="multilanguage" data-locale="<%= trans.locale%>">
+            <h3><%= t("app.language.#{trans.locale}") %></h3>
+
+            <%= translation.input :title %>
+            <div class="trans_visual_file" style="display: none">
+              <%= translation.fields_for :image_file do |upload| %>
+                <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
+                <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
+
+              <% end %>
+            </div>
+            <div class="trans_interactive_url" style="display: none">
+            <%= translation.input :interactive_url, :as => :url %>
+            </div>
+            <%= translation.hidden_field :locale , :value => trans.locale %>
+          </div>
+
+        <% end %>
+      <% end %>
+    </div>
+
 	<% else %>
+
 		<div id="fields-panel">
 			<div class="control-group">
 				<div class="control-label">
-					<%= Visualization.human_attribute_name(:visualization_type_id)%>
+					<%= model_class.human_attribute_name(:visualization_type_id)%>
 				</div>
 				<div class="controls">
 					<%= @visualization.visualization_type_name %>
 				</div>
 			</div>
+      <div class="control-group">
+        <div class="control-label">
+          <%= model_class.human_attribute_name(:languages)%>
+        </div>
+        <div class="controls">
+          <%= @visualization.languages.split(',').map{|x| I18n.t("app.language.#{x}")}.join(', ') %>
+          <%= link_to t('activerecord.attributes.visualization.reset_languages'), url_for(params.merge(:reset_languages => true)), :class => 'btn btn-mini' %> 
+        </div>
+      </div>
 
 		  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
 				<%= f.fields_for :visualization_translations, trans do |translation| %>
@@ -118,7 +201,7 @@
 						<% if !trans.interactive_url.blank? %>
 							<div class="control-group">
 								<div class="control-label">
-									<%= VisualizationTranslation.human_attribute_name(:interactive_url)%>
+									<%= model_class_trans.human_attribute_name(:interactive_url)%>
 								</div>
 								<div class="controls">
 									<%= link_to trans.interactive_url, trans.interactive_url, :target => :blank %>

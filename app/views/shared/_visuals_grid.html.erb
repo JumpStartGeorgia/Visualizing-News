@@ -11,6 +11,7 @@
 
     <% Globalize.with_locale(@language) do %>
     	<% @visualizations.each_with_index do |visualization, index| %>
+        <% visualization.visualization_locale = @language %>
 
     		  <div class="grid_visualization_item">
     		    <div class="visual">

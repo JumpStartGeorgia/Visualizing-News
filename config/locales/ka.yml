@@ -63,6 +63,9 @@ ka:
         visualization_categories: კატეგორიები
         is_promoted: მთავარ გვერდზე დაწინაურება?
         promoted_at: დაწინაურების თარიღი
+        languages: ენები
+        languages_internal: ენები
+        reset_languages: Change the Languages
       visualization_translation:
         title: სათაური
         permalink: ბმულის სახელი

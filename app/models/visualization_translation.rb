@@ -11,7 +11,7 @@ class VisualizationTranslation < ActiveRecord::Base
   accepts_nested_attributes_for :datasources, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
 
 	# this is only here so old migrations will work - no longer used
-	has_many :upload_files, :dependent => :destroy
+	has_many :upload_files#, :dependent => :destroy
 
  attr_accessible :visualization_id, :locale, :title, :explanation,	:reporter, :developer,
 									:designer, :permalink, :visualization_text,

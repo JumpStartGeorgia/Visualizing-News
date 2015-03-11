@@ -63,6 +63,9 @@ hy:
         visualization_categories: Կատեգորիաներ
         is_promoted: Բարձրացնե՞լ Հիմնական էջ
         promoted_at: Բարձրացման ամսաթիվը
+        languages: Languages
+        languages_internal: Languages
+        reset_languages: Change the Languages
       visualization_translation:
         title: Վերնագիր
         permalink: Հղումի անվանումը

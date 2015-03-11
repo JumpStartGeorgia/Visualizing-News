@@ -15,7 +15,7 @@ class Visualization < ActiveRecord::Base
 	has_many :visualization_translations, :dependent => :destroy
 	belongs_to :organization
 
-  accepts_nested_attributes_for :visualization_translations
+  accepts_nested_attributes_for :visualization_translations, allow_destroy: true
 
 	attr_accessible :published_date,
       :published,
@@ -32,20 +32,32 @@ class Visualization < ActiveRecord::Base
 			:data_source_url_old,
 			:languages, :languages_internal,
       :is_promoted, :promoted_at,
-      :fb_likes
-	attr_accessor :send_notification, :was_published, :languages_internal
+      :fb_likes, :reset_languages
+	attr_accessor :send_notification, :was_published, :languages_internal, :reset_languages, :visualization_locale
 
  paginates_per 8
 
 	after_find :check_if_published
+  after_find :load_languages_internal
+  after_find :set_visualization_locale
 
 	# have to check if published exists because some find methods do not get the published attribute
 	def check_if_published
 		self.was_published = self.has_attribute?(:published) && self.published ? true : false
 	end
 
+  # set the languages internal local variable
+  def load_languages_internal
+    self.languages_internal = self.languages.split(',') if self.languages.present?
+  end
+
+  # set the locale to use for this visualization
+  def set_visualization_locale(locale=I18n.locale)
+    self.visualization_locale = locale.to_s
+  end
+
 	before_validation :set_languages
-  validates :organization_id, :visualization_type_id, :languages, :presence => true
+  validates :languages_internal, :organization_id, :visualization_type_id, :languages, :presence => true
   validates :visualization_type_id, :inclusion => {:in => TYPES.values}
 	validate :required_fields_for_type
   validate :validate_if_published
@@ -172,12 +184,17 @@ class Visualization < ActiveRecord::Base
     where(:organization_id => organization_id)
   end
 
+  # have to override default method because permalink does not have to match current locale
+  def self.find_by_permalink(permalink)
+    joins(:visualization_translations).where('visualization_translations.permalink = ?', permalink).first
+  end
+
 	##############################
 	## shortcut methods to get to
 	## image file in image_file object
 	##############################
 	def image_record
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.image_record
+		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.image_record
 	end
 	def image_file_name
 		image_record.file_file_name if !image_record.blank?
@@ -191,7 +208,7 @@ class Visualization < ActiveRecord::Base
 	## dataset file in dataset_file object
 	##############################
 	def dataset_record
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.dataset_record
+		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.dataset_record
 	end
 	def dataset_file_name
 		dataset_record.file_file_name if !dataset_record.blank?
@@ -205,7 +222,7 @@ class Visualization < ActiveRecord::Base
 	## datasource records
 	##############################
 	def datasources
-		self.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.datasources
+		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.datasources
 	end
 
 

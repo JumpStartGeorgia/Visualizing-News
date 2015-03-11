@@ -10,6 +10,7 @@
 
     <% Globalize.with_locale(@language) do %>
     	<% @visualizations.each do |visualization| %>
+        <% visualization.visualization_locale = @language %>
       	<div class="list_visualization_item clear">
       		<div class="visual">
     		    <% 

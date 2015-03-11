@@ -21,6 +21,31 @@ function update_crop(coords) {
   $('input[id$="_crop_h"]').val(Math.round(coords.h * ratio));
 }
 
+// show the correct fields for the visualization type id
+function show_visualization_type_fields(type_id){
+  if (type_id == '1' || type_id == '3' || type_id == '4'){ // infographic, fact, comic
+    $('.trans_visual_file').show(300);
+    $('.trans_interactive_url').hide(300);
+    $('input[id$="_interactive_url"]').val('');
+  } else if (type_id == '2'){ // interactive
+    $('.trans_interactive_url').show(300);
+    $('.trans_visual_file').hide(300);
+    $('input[id$="_visual"]').val('');;
+  } else {
+    $('.trans_interactive_url').hide(300);
+    $('.trans_visual_file').hide(300);
+  }
+}
+
+// show the correct fields for the locale
+function show_language_fields(ths, locale){
+  if ($(ths).is(':checked')) {
+    $('#form-' + locale).show(300);
+  } else {
+    $('#form-' + locale).hide(300);
+  }
+}
+
 $(document).ready(function(){
 	// visualization show interactive
 	// - adjust iframe height when window changes
@@ -35,6 +60,18 @@ $(document).ready(function(){
 
 	// visualization form
 	if (gon.edit_visualization){
+    // make sure the form is pre-loaded with the correct types and languages set
+    if($('input[name="visualization[visualization_type_id]"]:checked').length > 0){      
+      // this happens when form is add 
+      show_visualization_type_fields($('input[name="visualization[visualization_type_id]"]:checked').attr('value'));
+    }else if ($('input#visualization_visualization_type_id').length > 0){
+      // this happens when editing languages of existing record
+      show_visualization_type_fields($('input#visualization_visualization_type_id').val());
+    }
+    $('input[id^="visualization_languages"]').each(function(){
+      show_language_fields(this, $(this).attr('value'));
+    });
+
 		// load the date time pickers
 		$('#visualization_published_date').datepicker({
 				dateFormat: 'dd/mm/yy',
@@ -56,41 +93,16 @@ $(document).ready(function(){
 		}
 
 
-		// if language changes, show appropriate fields
-		$('input[id^="visualization_languages"]').change(function() {
-      var id = $(this).attr('id').split('_');
-      var locale = id[id.length-1];
-      if ($(this).is(':checked')) {
-        $('#form-' + locale).show(300);
-      } else {
-        $('#form-' + locale).hide(300);
-      }
-		});
-
 		// if type changes, show appropriate fields
 		$('input[id^="visualization_visualization_type_id"]').change(function() {
       $('input[id$="_image_file_attributes_visualization_type_id"]').val($(this).val());
-			if ($(this).val() == '1'){ // infographic
-				$('.trans_visual_file').show(300);
-				$('.trans_interactive_url').hide(300);
-				$('input[id$="_interactive_url"]').val('');
-			} else if ($(this).val() == '2'){ // interactive
-				$('.trans_interactive_url').show(300);
-				$('.trans_visual_file').hide(300);
-				$('input[id$="_visual"]').val('');;
-			} else if ($(this).val() == '3'){ // fact
-				$('.trans_visual_file').show(300);
-				$('.trans_interactive_url').hide(300);
-				$('input[id$="_interactive_url"]').val('');
-      } else if ($(this).val() == '4'){ // comic
-        $('.trans_visual_file').show(300);
-        $('.trans_interactive_url').hide(300);
-        $('input[id$="_interactive_url"]').val('');
-			} else {
-				$('.trans_interactive_url').hide(300);
-				$('.trans_visual_file').hide(300);
-			}
+      show_visualization_type_fields($(this).val());
 		});
+
+    // if language changes, show appropriate fields
+    $('input[id^="visualization_languages"]').change(function() {
+      show_language_fields(this, $(this).attr('value'));
+    });
 
 		// if record is published, show pub date field by default
 		if ($('input:radio[name="visualization[published]"]:checked').val() === 'true') {

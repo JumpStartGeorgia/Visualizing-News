@@ -72,7 +72,6 @@ Rails.logger.debug "****************** user is in org"
   end
 
   def show
-    logger.debug "@@@@@@@@@@@@@ language = #{@language}"
     visual = Visualization.select('visualizations.id').published.find_by_permalink(params[:id])
     gon.highlight_first_form_field = false
 
@@ -80,7 +79,6 @@ Rails.logger.debug "****************** user is in org"
 
 		if visual.present?
       @visualization = Visualization.by_language(@language).find_by_id(visual.id)
-      logger.debug "@!!!!!!!!!!! title = #{@visualization.title}"
 			if @visualization.visualization_type_id == Visualization::TYPES[:interactive] && params[:view] == 'interactive'
 			  @view_type = 'shared/visuals_show_interactive'
 				gon.show_interactive = true

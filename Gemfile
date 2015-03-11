@@ -34,7 +34,8 @@ gem "rails_autolink", "~> 1.0.9" # convert string to link if it is url
 #gem "paper_trail", "~> 2.6.3" # keep audit log of all transactions
 #gem "imgkit", "~> 1.3.7" # create image of web page
 gem "headless" # use browser to load a web page via code
-gem "selenium-webdriver"  # create snapshot of web page
+gem 'rubyzip', '0.9.9'
+gem "selenium-webdriver", '2.27.2'  # create snapshot of web page
 gem "impressionist", "~> 1.5.1" # keep track of views
 gem "scoped_search", "~> 3.2.0" # search activerecord
 gem "whenever", "~> 0.9.4", require: false # easily schedule cron jobs

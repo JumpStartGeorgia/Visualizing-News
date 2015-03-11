@@ -107,23 +107,25 @@ module ApplicationHelper
       end
     end
 
+    clas = locale == I18n.locale ? 'active' : ''
+
 		if !vis.blank? && !org.blank?
-			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+			link_to t("app.language_abbreviation.#{locale}"), params.merge(:locale => locale,
 				:organization_id => org.first.permalink,
 				:id => vis.first.permalink,
         :category => category
-			)
+			), title: t("app.language.#{locale}"), class: clas
 		elsif !vis.blank?
-			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+			link_to t("app.language_abbreviation.#{locale}"), params.merge(:locale => locale,
 				:id => vis.first.permalink,
-        :category => category)
+        :category => category), title: t("app.language.#{locale}"), class: clas
 		elsif !org.blank?
-			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
+			link_to t("app.language_abbreviation.#{locale}"), params.merge(:locale => locale,
 				:id => org.first.permalink,
-        :category => category)
+        :category => category), title: t("app.language.#{locale}"), class: clas
 		else
-			link_to t("app.language.#{locale}"), params.merge(:locale => locale,
-        :category => category)
+			link_to t("app.language_abbreviation.#{locale}"), params.merge(:locale => locale,
+        :category => category), title: t("app.language.#{locale}"), class: clas
 		end
 	end
 

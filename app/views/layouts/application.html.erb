@@ -230,9 +230,7 @@
             <div id="locale-c">
               <ul>
 		            <% I18n.available_locales.each do |locale| %>
-			            <% if locale != I18n.locale %>
-								    <li><%= generate_language_switcher_link(locale) %></li>
-			            <% end %>
+							    <li><%= generate_language_switcher_link(locale) %></li>
 		            <% end %>
 		          </ul>
             </div>

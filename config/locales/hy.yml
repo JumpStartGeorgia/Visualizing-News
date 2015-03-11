@@ -280,6 +280,10 @@ hy:
       en: English
       ka: ქართული
       hy: Հայերեն      
+    language_abbreviation:
+      en: EN
+      ka: ქა
+      hy: Հա
     buttons:
       back: Հետ
       list: Տեսնել բոլորը

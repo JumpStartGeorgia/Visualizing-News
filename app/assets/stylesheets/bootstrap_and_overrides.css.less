@@ -229,10 +229,28 @@ body#interactive_layout {
   text-align: right;
   padding-right: 3px;
   padding-top: 1px;
-  a {
-    color: #c17250;
-    &:hover {
-      color: #a6502b;
+  ul li{
+    display: inline-block;
+    a {
+      color: #c17250;
+      opacity: 0.6;
+      &:hover {
+        color: #a6502b;
+        opacity: 0.9;
+      }
+      &.active{
+        font-weight: bold;
+        opacity: 0.9;
+      }
+    }
+    &:after{
+      color: #c17250;
+      opacity: 0.6 !important;
+      font-weight: normal !important;
+      content: " / ";
+    }
+    &:last-of-type:after{
+      content: '';
     }
   }
 }

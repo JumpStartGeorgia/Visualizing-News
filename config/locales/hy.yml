@@ -234,7 +234,7 @@ hy:
     fact: Փաստ
     comic: Ծաղրանկար
   filters:
-    category_default: բոլորը
+    category_default: Բոլորը
     visuals:
       type:
         header: Տիպ

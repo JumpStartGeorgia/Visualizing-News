@@ -74,10 +74,12 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
 		@fb_app_id = ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID']
 
-    logger.debug "$$$$$$$$$$$$ params lang was #{params[:language]}"
+    # reset language param if it is the current locale
     params[:language] = nil if params[:language].present? && params[:language] == I18n.locale.to_s
     @language = params[:language].present? && I18n.available_locales.include?(params[:language].to_sym) ? params[:language] : I18n.locale.to_s
-    logger.debug "$$$$$$$$$$$$ params lang now #{params[:language]}"
+
+    # reset category if it is the all option, which is the default
+    params[:category] = nil if params[:category] == I18n.t('filters.category_default')
 
 	end
 
@@ -156,6 +158,9 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     # if language in params and is equal to I18n.locale, remove it
     @param_options.delete('language') if @param_options['language'].present? && @param_options['language'] == I18n.locale.to_s
 
+    # if category is the all category, remove it for this is the default 
+    @param_options.delete('category') if @param_options['category'] == I18n.t('filters.category_default')
+
     # if user_id in params, make sure it is in this hash tag
     if params[:user_id] && @param_options.keys.index('user_id').nil?
       @param_options['user_id'] = params[:user_id]
@@ -201,7 +206,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_type_icon = 'all'
 		end
 
-		params[:category] = I18n.t('filters.category_default') if !params[:category].present?
+	#	params[:category] = I18n.t('filters.category_default') if !params[:category].present?
 
   end
 
@@ -237,6 +242,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		  @visuals_filter_type_icon = params[:type]
 		else
 			@visuals_filter_type_icon = 'all'
+      params[:type] = nil
 		end
 
     # sort order
@@ -244,6 +250,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
       case params[:organize]
         when 'recent'
     			visual_objects = visual_objects.recent
+          params[:organize] = nil
         when 'likes'
     			visual_objects = visual_objects.likes
         when 'views'
@@ -254,12 +261,15 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
       # if not set, default to recent
 			visual_objects = visual_objects.recent
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
+      params[:organize] = nil
 		end
 
     # category
 		if params[:category] && params[:category] != I18n.t('filters.category_default')
       index = @categories.index{|x| x.permalink == params[:category]}
 			visual_objects = visual_objects.by_category(@categories[index].id) if index
+    else
+      params[:category] = nil
 		end
 
     # search
@@ -270,6 +280,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
     # organizations
     if params[:org] && @organization
 			visual_objects = visual_objects.by_organization(@organization.id)
+    else
+      params[:org] = nil
     end
 
 		return visual_objects

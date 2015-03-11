@@ -1,3 +1,11 @@
+<% # if visual does not have @language, then use current locale, else use first in list
+  if !@visualization.languages_internal.include?(@language)
+    @language = I18n.locale.to_s if @language.to_s != I18n.locale.to_s
+    if !@visualization.languages_internal.include?(@language)
+      @language = @visualization.languages_internal.first
+    end
+  end
+%>
 <% Globalize.with_locale(@language) do %>
   <% @visualization.visualization_locale = @language %>
 

@@ -57,14 +57,14 @@ Rails.logger.debug "****************** user is in org"
     set_visualization_view_type # in app controller
 
     respond_to do |format|
-      format.atom { @visualizations = Visualization.published.recent }
+      format.atom { @visualizations = Visualization.published.by_language.recent }
       format.html
     end
 	end
 
   # this is so crawlers can find all reocrds since they are loaded via ajax
   def all
-    @visualizations = Visualization.published.recent
+    @visualizations = Visualization.published.by_language.recent
 	  respond_to do |format|
 	    format.html
 	    format.json { render json: @visalizations }

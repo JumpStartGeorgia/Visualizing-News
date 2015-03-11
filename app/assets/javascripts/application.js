@@ -91,7 +91,7 @@ $(document).ready(function(){
   }
 
 
-  $('#user_new').live('submit', function ()
+  $('#user_new').on('submit', function ()
   {
     $.ajax({
       type: "POST",

@@ -20,8 +20,8 @@ class Message
   attribute :datasource
   attribute :type
   
-	attr_accessible :name, :email, :message, :subject, :org_message, :url, :bcc, :url_id,
-	 :organization, :phone, :locale, :file, :datasource, :type, :what_is_data, :why_visualize, :how_use
+	# attr_accessible :name, :email, :message, :subject, :org_message, :url, :bcc, :url_id,
+	#  :organization, :phone, :locale, :file, :datasource, :type, :what_is_data, :why_visualize, :how_use
 
 #  validates_presence_of :email, :message => I18n.t('activerecord.errors.models.message.attributes.email.blank')
   validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i

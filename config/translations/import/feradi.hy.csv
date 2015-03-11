@@ -1,0 +1,436 @@
+Line #,Key,hy Version,ka Translation
+1,hy.activerecord.models.user,User,Օգտատեր
+2,hy.activerecord.models.category,Category,Կատեգորիա
+3,hy.activerecord.models.organization,Organization,Կազմակերպություն
+4,hy.activerecord.models.visualization,Visualization,Վիզուալիզացիա
+5,hy.activerecord.models.page,Page,Էջ
+6,hy.activerecord.models.message,Message,Հաղորդագրություն
+7,hy.activerecord.models.datasource,Data Source,Տվյալների աղբյուր
+8,hy.activerecord.models.idea,Idea,Գաղափար
+9,hy.activerecord.models.idea_inappropriate_report,Report,Հաշվետվություն
+10,hy.activerecord.models.idea_status,Idea Status,Գաղափարի կարգավիճակը
+11,hy.activerecord.models.idea_progress,Idea Progress,Գաղափարի առաջընթացը
+12,hy.activerecord.attributes.user.email,Email Address,Էլ. հասցե
+13,hy.activerecord.attributes.user.password,Password,Գաղտնաբառ
+14,hy.activerecord.attributes.user.password_confirmation,Password Confirmation,Գաղտնաբառի հաստատում
+15,hy.activerecord.attributes.user.role,Role,Դեր
+16,hy.activerecord.attributes.user.remember_me,Remeber Me,Հիշիր ինձ
+17,hy.activerecord.attributes.message.name,Name,Անուն
+18,hy.activerecord.attributes.message.phone,Phone Number,Հեռախոսահամար
+19,hy.activerecord.attributes.message.email,Email Address,Էլ. հասցե
+20,hy.activerecord.attributes.message.message,Message,Հաղորդագրություն
+21,hy.activerecord.attributes.message.what_is_data,Briefly describe the data that you want to visualize,"Համառոտ ներկայացրեք, թե ինչ տվյալներ եք ուզում պատկերավորել"
+22,hy.activerecord.attributes.message.why_visualize,Why do you want to visualize this data?,Ինչո՞ւ եք ուզում պատկերավորել այս տվյալները
+23,hy.activerecord.attributes.message.datasource,What is the data source?,Տվյալների աղբյուրը
+24,hy.activerecord.attributes.message.file,Attach the data file,Կցեք տվյալների ֆայլը
+25,hy.activerecord.attributes.message.how_use,Why would you like to use feradi.info to show your visualiations?,Ինչո՞ւ եք ուզում օգտագործել feradi.info-ն ձեր վիզուալիզացիայի համար
+26,hy.activerecord.attributes.message.organization,Organization,Կազմակերպություն
+27,hy.activerecord.attributes.category.icon,Icon,Պատկեր
+28,hy.activerecord.attributes.category_translation.name,Name,Անուն
+29,hy.activerecord.attributes.organization.logo,Logo,Լոգո
+30,hy.activerecord.attributes.organization.url,Website,Կայքէջ
+31,hy.activerecord.attributes.organization_translation.name,Name,Անուն
+32,hy.activerecord.attributes.organization_translation.bio,About,Ձեր մասին
+33,hy.activerecord.attributes.organization_translation.permalink,Name in URL,Հղումի անվանումը
+34,hy.activerecord.attributes.organization_translation.permalink_hint,"If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages.","Եթե ցանկանում եք ստեղծել նոր հղում, պարզապես ջնջեք տեքսը, և գրառման պահպանումից հետո կստեղծվի նորը: Կրկնեք գործողությունը բոլոր լեզուների համար:"
+35,hy.activerecord.attributes.organization_user.is_active,Active?,Ակտի՞վ է
+36,hy.activerecord.attributes.organization_user.user_id,User,Օգտատեր
+37,hy.activerecord.attributes.organization_user.organization_id,Organization,Կազմակերպություն
+38,hy.activerecord.attributes.page.name,Name,Անուն
+39,hy.activerecord.attributes.page_translation.title,Title,Վերնագիր
+40,hy.activerecord.attributes.page_translation.description,Content,Բովանդակություն
+41,hy.activerecord.attributes.visualization.published_date,Publication Date,Հրատարակման ամսաթիվ
+42,hy.activerecord.attributes.visualization.published,Release to Public?,Հրապարակե՞լ
+43,hy.activerecord.attributes.visualization.visualization_type_id,Visualization Type,Վիզուալիզացիայի տեսակ
+44,hy.activerecord.attributes.visualization.individual_votes,Individual Votes,Անհատական քվեներ
+45,hy.activerecord.attributes.visualization.overall_votes,Overall Votes,Ընդհանուր քվեներ
+46,hy.activerecord.attributes.visualization.dataset,Dataset File,Տվյալների բազա
+47,hy.activerecord.attributes.visualization.visualization_categories,Categories,Կատեգորիաներ
+48,hy.activerecord.attributes.visualization.is_promoted,Promote to Home Page?,Բարձրացնե՞լ Հիմնական էջ
+49,hy.activerecord.attributes.visualization.promoted_at,Date Promoted,Բարձրացման ամսաթիվը
+50,hy.activerecord.attributes.visualization_translation.title,Title,Վերնագիր
+51,hy.activerecord.attributes.visualization_translation.permalink,Name in URL,Հղումի անվանումը
+52,hy.activerecord.attributes.visualization_translation.permalink_hint,"If you want to generate a new URL name, simply delete the text and a new one will be generated when the record is saved.  Make sure you do this for all languages.","եթե ցանկանում եք ստեղծել նոր հղում, պարզապես ջնջեք տեքսը, և գրառման պահպանումից հետո կստեղծվի նորը: Կրկնեք գործողությունը բոլոր լեզուների համար:"
+53,hy.activerecord.attributes.visualization_translation.explanation,Explanation,Բացատրություն
+54,hy.activerecord.attributes.visualization_translation.visualization_text,Text from Visualization,Վիզուալիզացիայի տեքստը
+55,hy.activerecord.attributes.visualization_translation.visualization_text_hint,Text from the Visual that should be made available to the search engines.,"Վիզուալիզագիայի տեքստը, որը հասանելի կլինի որոնման համար"
+56,hy.activerecord.attributes.visualization_translation.reporter,"Reporter (Name, Organization)","Զեկուցող (անուն, կազմակերպություն)"
+57,hy.activerecord.attributes.visualization_translation.designer,"Designer (Name, Organization)","Ձևավորող (անուն, կազմակերպություն)"
+58,hy.activerecord.attributes.visualization_translation.developer,"Developer (Name, Organization)","Ծրագրավորող (անուն, կազմակերպություն)"
+59,hy.activerecord.attributes.visualization_translation.interactive_url,URL to Interactive Visualization,Ինտերակտիվ վիզուալիզացիայի հղում
+60,hy.activerecord.attributes.image_file.file,Visual File,Վիզուալ ֆայլը
+61,hy.activerecord.attributes.image_file.reset_crop,Redo the Thumbnail Image,Չեղարկել նմուշի պատկերը
+62,hy.activerecord.attributes.image_file.reset_file,Load a New File,Նոր ֆայլ ներբեռնել
+63,hy.activerecord.attributes.image_file.reset_url,Retake URL Screenshot,Կրկնել հղումի սքրինշոթը
+64,hy.activerecord.attributes.dataset_file.file,Dataset File,Տվյալների բազա
+65,hy.activerecord.attributes.datasource.name,Name of Data Source,Տվյալների աղբյուրի անվանումը
+66,hy.activerecord.attributes.datasource.url,URL of Data Source,Տվյալների աղբյուրի հղումը
+67,hy.activerecord.attributes.idea.user_id,User,Օգտատեր
+68,hy.activerecord.attributes.idea.explaination,Explanation,Բացատրություն
+69,hy.activerecord.attributes.idea.created_at,Date,Ամսաթիվ
+70,hy.activerecord.attributes.idea.individual_votes,Individual Votes,Անհատական քվեներ
+71,hy.activerecord.attributes.idea.overall_votes,Overall Votes,Ընդհանուր քվեներ
+72,hy.activerecord.attributes.idea.is_duplicate,Duplicate?,Կրկնօրինա՞կ է
+73,hy.activerecord.attributes.idea.is_inappropriate,Inappropriate?,Անպատշա՞ճ է
+74,hy.activerecord.attributes.idea.is_public,Is Public?,Հանրայի՞ն է
+75,hy.activerecord.attributes.idea.current_status_id,Current Status,Ներկա կարգավիճակը
+76,hy.activerecord.attributes.idea_category.idea_id,Idea,Գաղափար
+77,hy.activerecord.attributes.idea_category.category_id,Category,Կատեգորիա
+78,hy.activerecord.attributes.idea_progress.idea_id,Idea,Գաղափար
+79,hy.activerecord.attributes.idea_progress.organization_id,Organization,Կազմակերպություն
+80,hy.activerecord.attributes.idea_progress.is_completed,News Story Completed?,Ավարտե՞լ էք նորությունը
+81,hy.activerecord.attributes.idea_progress.url,News Story URL,Նորության հղումը
+82,hy.activerecord.attributes.idea_progress.progress_date,Date,Ամսաթիվ
+83,hy.activerecord.attributes.idea_progress.explaination,Explanation,Բացատրություն
+84,hy.activerecord.attributes.idea_progress.idea_status_id,Status,Կարգավիճակ
+85,hy.activerecord.attributes.idea_progress.idea_status,Status,Կարգավիճակ
+86,hy.activerecord.attributes.idea_progress.is_public,Is Public?,Հանրայի՞ն է
+87,hy.activerecord.attributes.idea_inappropriate_report.user_id,User,Օգտատեր
+88,hy.activerecord.attributes.idea_inappropriate_report.idea_id,Idea,Գաղափար
+89,hy.activerecord.attributes.idea_inappropriate_report.reason,Why is Idea Inappropriate?,Ինչո՞ւ է գաղափարը անհարկի
+90,hy.activerecord.attributes.idea_status.sort,Sort Order,Դասավորության կարգը
+91,hy.activerecord.attributes.idea_status.sort_hint,"1, 2, 3, etc. (ascending order)","1, 2, 3, և այլն (աճման կարգով)"
+92,hy.activerecord.attributes.idea_status.is_published,Published?,Հրապարակվա՞ծ է
+93,hy.activerecord.attributes.idea_status.is_published_hint,This status indicates that the idea is published,"Կարգավիճակը ցույց է տալիս, որ գաղափարը հրապարակված է"
+94,hy.activerecord.attributes.idea_status_translation.name,Name,Անուն
+95,hy.activerecord.messages.idea_progress.success,The record was successfully saved.,Գրառումը հաջողոււթյամբ պահպանված է
+96,hy.activerecord.errors.messages.published_visual_missing_fields,is required when the visual is published.,անհրաժեշտ է պատկերի հրապարակման ժամանակ
+97,hy.activerecord.errors.messages.contact_missing_fields,can't be blank.,չի կարելի բաց թողնել
+98,hy.activerecord.errors.messages.send_data_missing_fields,can't be blank.,չի կարելի բաց թողնել
+99,hy.activerecord.errors.messages.submit_visual_missing_fields,can't be blank.,չի կարելի բաց թողնել
+100,hy.activerecord.errors.messages.required_field,is a required field.,պարտադիր կետ է
+101,hy.activerecord.errors.messages.already_exists,already exists in the database.,արդեն գոյություն ունի տվյալների բազայում
+102,hy.activemodel.errors.models.message.attributes.email.invalid,Please provide an Email Address,Խնդրում ենք տրամադրել էլ. հասցե
+103,hy.activemodel.errors.models.message.attributes.message.blank,Please provide a Message,Խնդրում ենք տրամադրել հաղորդագրություն
+104,hy.mailer.closing,"Sincerely,",Հարգանքով՝
+105,hy.mailer.signature,feradi.info,feradi.info
+106,hy.mailer.unsubscribe,Click here to unsubscribe,Սեղմեք՝ գրացումը չեղյալ համարելու համար
+107,hy.mailer.notification.new_user.subject,Welcome to feradi.info!,Բարի գալուստ feradi.info 
+108,hy.mailer.notification.new_user.message,Thank you for becoming a member of feradi.info and contributing to colorful news.  You can manage when you would like to receive emails from feradi.info by clicking on the following link.,"Շնորհակալություն feradi.info-ի անդամ դառնալու և մեր բազմերանգ նորույթուններին թղթակցելու համար: Սեղմելով հետևյալ հղումին՝ դուք կարող եք ինքներդ որոշել, թե երբ եք ուզում ստանալ էլ. նամակներ feradi.info-ից:"
+109,hy.mailer.notification.new_visualization.subject,A new visualization has been added to feradi.info!,Նոր վիզուալիզացիա է ավելացվել feradi.info-ին
+110,hy.mailer.notification.new_visualization.message,A new visualization titled '%{title}' has been added.  This is the description of the visual:,%{title}' նոր վիզուալիզացիա է ավելացվել: Պատկերի նկարագիրը.
+111,hy.mailer.notification.new_visualization_needs_promotion.subject,A new visualization has been added to feradi.info and needs review for promotion to the homepage,feradi.info ավելացվել է նոր վիզուալիզացիա և ստուգման կարիք ունի՝ Հիմնական էջ տեղափոխելու համար
+112,hy.mailer.notification.new_visualization_needs_promotion.message,A new visualization titled '%{title}' has been added.  This is the description of the visual:,%{title}' նոր վիզուալիզացիա է ավելացվել: Պատկերի նկարագիրը.
+113,hy.mailer.notification.visualization_comment.subject,Someone has commented on your visualization '%{title}' on feradi.info,feradi.info-ի Ձեր '%{title}' վիզուալիզացիային մեկնաբանություն է ավելացվել
+114,hy.mailer.notification.visualization_comment.message,Please click on the link below to view the comment.,Սեղմեք հետևյալ հղումը՝ մեկնաբանությունը տեսնելու համար
+115,hy.mailer.notification.visualization_promoted.subject,Your visualization '%{title}' has been promoted to the front page on feradi.info!,Ձեր '%{title}' վիզուալիզացիան տեղափոխվել է feradi.info-ի Հինական էջ
+116,hy.mailer.notification.visualization_promoted.message,Congratulations!  feradi.info has promoted your visualization to the home page.,Շնորհավորում ենք Ձեզ: feradi.info-ն տեղափոխել է Ձեր վիզուալիզացիան Հիմնական էջ
+117,hy.mailer.notification.idea_claimed_owner.subject,%{organization} is interested in your idea!,%{organization} հետաքրքրված է Ձեր գաղափարով:
+118,hy.mailer.notification.idea_claimed_owner.message,%{organization} has expressed interest in writing a story about your idea.  This is what they wrote:,%{organization} հետաքրքրություն է հայտնել պատմություն գրել Ձեր գաղափարի վերաբերյալ: Գրվածը.
+119,hy.mailer.notification.idea_progress_update_owner.subject,%{organization} has updated their progress on your idea,%{organization} թարմացրել է Ձեր գաղափարի վերաբերյալ իրենց առաջընթացը
+120,hy.mailer.notification.idea_progress_update_owner.message,%{organization} has made a progress report on your idea.  This is what they wrote:,"%{organization} առաջընթացի զեկույց է կազմել Ձեր գաղափարի վերաբերյալ: Ահա, թե ինչ են նրանք գրել."
+121,hy.mailer.notification.idea_realized_owner.subject,%{organization} has completed their work on your idea!,%{organization} վերջացրել է իր աշխատանքը Ձեր գաղափարի շուրջ
+122,hy.mailer.notification.idea_realized_owner.message,%{organization} has published a story about your idea.  This is what they wrote:,"%{organization} պատմություն է հրապարակել Ձեր գաղափարի շուրջ: Ահա, թե ինչ են նրանք գրել."
+123,hy.mailer.notification.idea_comment_owner.subject,Someone has commented on your idea,Ինչ-որ մեկը մեկնաբանություն է թողել Ձեր գաղափարի վերաբերյալ
+124,hy.mailer.notification.idea_comment_owner.message,Please click on the link below to view the comment.,Սեղմեք հետևյալ հղումը՝ մեկնաբանությունը տեսնելու համար
+125,hy.mailer.notification.new_idea_subscriber.subject,A new idea has been submitted,Նոր գաղափար է ներկայացվել
+126,hy.mailer.notification.new_idea_subscriber.message,This is the new idea:,Սա է նոր գաղափարը.
+127,hy.mailer.notification.idea_claimed_subscriber.subject,%{organization} is interested in an idea you care about,%{organization} հետաքրքրված է Ձեր հավանած գաղափարով:
+128,hy.mailer.notification.idea_claimed_subscriber.message,%{organization} has expressed interest in writing a story on an idea you care about.  This is what they wrote:,%{organization} հետաքրքրություն է հայտնել պատմություն գրել Ձեր հավանած գաղափարի վերաբերյալ: Գրվածը.
+129,hy.mailer.notification.idea_progress_update_subscriber.subject,%{organization} has updated their progress on an idea you care about,%{organization} թարմացրել է Ձեր հավանած գաղափարի վերաբերյալ իրենց առաջընթացը
+130,hy.mailer.notification.idea_progress_update_subscriber.message,%{organization} has made a progress report on an idea you care about.  This is what they wrote:,"%{organization} առաջընթացի զեկույց է կազմել Ձեր հավանած գաղափարի վերաբերյալ: Ահա, թե ինչ են նրանք գրել."
+131,hy.mailer.notification.idea_realized_subscriber.subject,%{organization} has completed their work on an idea you care about!,%{organization} վերջացրել է իր աշխատանքը Ձեր հավանած գաղափարի շուրջ
+132,hy.mailer.notification.idea_realized_subscriber.message,%{organization} has published a story about an idea you care about.  This is what they wrote:,"%{organization} պատմություն է հրապարակել Ձեր հավանած գաղափարի շուրջ: Ահա, թե ինչ են նրանք գրել."
+133,hy.mailer.notification.idea_comment_subscriber.subject,Someone has commented on an idea you care about,Ինչ-որ մեկը մեկնաբանություն է թողել Ձեր հավանած գաղափարի վերաբերյալ
+134,hy.mailer.notification.idea_comment_subscriber.message,Please click on the link below to view the comment.,Սեղմեք հետևյալ հղումը՝ մեկնաբանությունը տեսնելու համար:
+135,hy.mailer.contact.contact_form.subject,feradi.info Contact Form,feradi.info Կապի ձև
+136,hy.mailer.contact.submit_visual.subject,feradi.info Submit Visual Form,feradi.info Վիզուալիզացիայի ներկայացման ձև
+137,hy.mailer.contact.send_data.subject,feradi.info Send Data Form,feradi.info Տվյալների ուղարկման ձև
+138,hy.helpers.actions,Actions,Գործողություններ
+139,hy.helpers.links.admin,Admin Section,Ադմինիստրատիվ մաս
+140,hy.helpers.links.edit,Edit,Խմբագրել
+141,hy.helpers.links.confirm,Are you sure?,Համոզված ե՞ք
+142,hy.helpers.links.destroy,Delete,Ջնջել
+143,hy.helpers.links.new,New,Նոր
+144,hy.helpers.links.back,View All,Տեսնել բոլորը
+145,hy.helpers.links.list,View All,Տեսնել բոլորը
+146,hy.helpers.links.cancel,Cancel,Չեղարկել 
+147,hy.helpers.links.reset,Reset,Զրոյացնել
+148,hy.helpers.links.sign_in2,Sign In,Մուտք գործել
+149,hy.helpers.links.sign_in,Already have an account?,Արդեն իսկ ունե՞ք հաշիվ 
+150,hy.helpers.links.sign_up2,Sign Up,Գրացվել
+151,hy.helpers.links.sign_up,Don't have an account yet?,Դեռ չունե՞ք հաշիվ
+152,hy.helpers.links.sign_out,Sign Out,Ելք
+153,hy.helpers.links.website,View Website,Դիտել կայքէջը
+154,hy.helpers.links.forgot_password,Forgot Password?,Մոռացե՞լ եք գաղտնաբառը
+155,hy.helpers.links.password_reset,Send Password Reset Instructions,Ուղարկել գաղտնաբառը փոխելու համար ցուցումներ
+156,hy.helpers.links.sign_in_provider,Sign in with %{provider},Մուտք գործել %{provider}-ով
+157,hy.helpers.links.download,Download,Բեռնել
+158,hy.helpers.links.existing_file,View Existing File,Տեսնել գոյություն ունեցող փաստաթղթերը
+159,hy.helpers.links.more,Show More,Ցույց տալ ավելին
+160,hy.helpers.links.org_profile,%{org} - Profile,%{org} Մասին
+161,hy.helpers.links.edit_org,%{org} - Edit,%{org} Խմբագրել
+162,hy.helpers.links.new_visual,%{org} - Add Visualization,%{org} Ավելացնել վիզուալիզացիա
+163,hy.helpers.links.post_idea,Post Idea,Գրել գաղափար
+164,hy.helpers.links.report_inappropriate,Report Inappropriate Idea,Զեկուցել ոչ պատշաճ գաղափարը
+165,hy.helpers.links.follow_idea,Follow,Հետևել
+166,hy.helpers.links.unfollow_idea,Unfollow,Չհետևել
+167,hy.helpers.links.promote,Promote to Homepage,Տանել Հիմնական էջ
+168,hy.helpers.links.unpromote,Remove from Homepage,Հանել Հիմնական էջից
+169,hy.helpers.titles.new,New %{model},Նոր %{model}
+170,hy.helpers.titles.edit,Edit %{model},Խմբագրել %{model}
+171,hy.visualization_types.infographic,Infographic,Ինֆոգրաֆիկա
+172,hy.visualization_types.interactive,Interactive,Ինտերակտիվ
+173,hy.visualization_types.fact,Fact,Փաստ
+174,hy.filters.category_default,all,բոլորը
+175,hy.filters.visuals.type.header,Type,Տիպ
+176,hy.filters.visuals.type.all,All,Բոլորը
+177,hy.filters.visuals.type.infographic,Infographic,Ինֆոգրաֆիկա
+178,hy.filters.visuals.type.interactive,Interactive,Ինտերակտիվ
+179,hy.filters.visuals.type.fact,Fact,Փաստ
+180,hy.filters.visuals.type.not_published,Not Published,Չի հրապարակված
+181,hy.filters.visuals.type.not_promoted,Not Promoted,Առաջընթաց չունի 
+182,hy.filters.visuals.view.header,Layout,Դասավորություն
+183,hy.filters.visuals.view.grid,Grid,Վանդակացանց
+184,hy.filters.visuals.view.list,List,Ցանկ
+185,hy.filters.visuals.organize.header,Sort,Դասակարգել
+186,hy.filters.visuals.organize.recent,Recent,Վերջին
+187,hy.filters.visuals.organize.likes,Likes,Հավանություններ
+188,hy.filters.visuals.organize.views,Views,Դիտումներ
+189,hy.filters.ideas.view.header,Layout,Դասավորություն
+190,hy.filters.ideas.view.grid,Grid,Վանդակացանց
+191,hy.filters.ideas.view.list,List,Ցանկ
+192,hy.filters.ideas.organize.header,Sort,Դասակարգել
+193,hy.filters.ideas.organize.recent,Recent,Վերջին
+194,hy.filters.ideas.organize.likes,Likes,Հավանություններ
+195,hy.filters.ideas.organize.views,Views,Դիտումներ
+196,hy.filters.ideas.filter.header,Filter,Ֆիլտր
+197,hy.filters.ideas.filter.all,All,Բոլորը
+198,hy.filters.ideas.filter.not_selected,Not Being Worked On,Վրան չեն աշխատում
+199,hy.filters.ideas.filter.in_progress,In Progress,Ընթացիկ
+200,hy.filters.ideas.filter.completed,Completed,Ավարտված
+201,hy.app.language.en,English,English
+202,hy.app.language.ka,ქართული,ქართული
+203,hy.app.buttons.back,Back,Հետ
+204,hy.app.buttons.list,View All,Տեսնել բոլորը
+205,hy.app.buttons.admin,Admin Section,Ադմինիստրատիվ մաս
+206,hy.app.buttons.delete,Delete,Ջնջել
+207,hy.app.buttons.edit,Edit,Խմբագրել
+208,hy.app.buttons.show,Show,Ցույց տալ
+209,hy.app.buttons.cancel,Cancel,Չեղարկել
+210,hy.app.buttons.update,Update,Թարմացնել
+211,hy.app.buttons.save,Save,Պահպանել
+212,hy.app.buttons.create,Create,Ստեղծել
+213,hy.app.buttons.reset,Reset,Զրոյացնել
+214,hy.app.buttons.remove,Remove,Հեռացնել
+215,hy.app.buttons.confirm,Are you sure?,Համոզված ե՞ք
+216,hy.app.buttons.new,New,Նոր
+217,hy.app.common.app_name,feradi.info,feradi.info
+218,hy.app.common.placeholder,placeholder,placeholder
+219,hy.app.common.comments,Comments,Մեկնաբանություն
+220,hy.app.common.comments_noun,Comments,Մեկնաբանություն
+221,hy.app.common.likes,Likes,Հավանություններ
+222,hy.app.common.like,like,հավանել
+223,hy.app.common.unlike,unlike,չհավանել
+224,hy.app.common.share,Share,Կիսվել
+225,hy.app.common.not_published,Not Published,Չի հրապարակված
+226,hy.app.common.category,Category,Կատեգորիա
+227,hy.app.common.author,Author,Հեղինակ
+228,hy.app.common.rating,Rating,Վարկանիշ
+229,hy.app.common.rate_it,Rate It!,Գնահատի՛ր
+230,hy.app.common.top_ideas,Top Ideas,Առաջատար գաղափարներ
+231,hy.app.common.new_ideas,New Ideas,Նոր գաղափարներ
+232,hy.app.common.in_progress,In Progress,Ընթացքում է
+233,hy.app.common.realized,Realized Ideas,Իրականացված գաղափարներ
+234,hy.app.common.post_idea,Post Your Idea,Գրեք Ձեր գաղափարը
+235,hy.app.common.search,Search,Որոնել
+236,hy.app.common.follow_idea,You will now be sent email notifications when updates occur to this idea.,Ձեզ կուղարկվի էլեկտրոնային հաղորդագրություն՝ այս գաղափարը թարմացվի:
+237,hy.app.common.follow_idea_bad,The idea could not be found to follow.,Անհնար էր գտնել գաղափարը հետևելու համար:
+238,hy.app.common.unfollow_idea,You will no longer be sent email notifications when updates occur to this idea.,Ձեզ այլևս չեն ուղարկվի էլեկտրոնային հաղորդագրություններ՝ այս գաղափարի թարմացման դեպքում:
+239,hy.app.common.unfollow_idea_bad,The idea could not be found to unfollow.,Անհնար էր գտնել գաղափարը՝ հետևելը դադարեցնելու համար
+240,hy.app.common.is_private,NOT PUBLIC,ՀԱՆՐԱՅԻՆ ՉԷ
+241,hy.app.common.last_update,Last Update,Վերջին թարմացում
+242,hy.app.common.is_public_explanation,Idea is public and anyone can see it. Uncheck the box if you want only people from your organization to see it.,"Գաղափարը հանրային է, և յուրաքանչյուր ոք կարող է տեսնել այն: Հանեք նշումը, եթե ուզում եք, որ միայն Ձեր կազմակերպության անդամները տեսնեն այն:"
+243,hy.app.common.article_169,Say No To Article 169. Support Freedom of Expression.,Ասեք ո՛չ Հոդված 169-ին: Աջակցեք արտահայտման ազատությանը:
+244,hy.app.msgs.does_not_exist,You tried to access a page that does not exist.,"Դուք փորձում եք մուտք գործել մի էջ, որը գոյություն չունի:"
+245,hy.app.msgs.not_authorized,You are not authorized to view that page.,Դուք չունեք թույլտվություն դիտելու այդ էջը:
+246,hy.app.msgs.permalink_exists,already exists in the database,արդեն գոյություն ունի տվյալների բազայում
+247,hy.app.msgs.success_created,%{obj} was successfully created.,%{obj} հաջողությամբ ստեղծված է:
+248,hy.app.msgs.success_updated,%{obj} was successfully updated.,%{obj} հաջողությամբ թարմացվել է:
+249,hy.app.msgs.success_deleted,%{obj} was successfully deleted.,%{obj} հաջողությամբ հեռացվել է:
+250,hy.app.msgs.notification_yes,You will be sent notifications.,Ձեզ ծանուցում կուղարկվի:
+251,hy.app.msgs.notification_no,You will not be sent notifications.,Ձեզ ծանուցում չի ուղարկվի:
+252,hy.app.msgs.notification_new_visual_all_success,You will recieve a notification whenever a visualization is added.,"Ձեզ ծանուցում կուղարկվի, երբ վիզուալիզացիա ավելացվի:"
+253,hy.app.msgs.notification_new_visual_none_success,You will not receive any notifications when visualizations are added.,"Ձեզ ծանուցում չի ուղարկվի, երբ վիզուալիզացիա ուղարկվի:"
+254,hy.app.msgs.notification_new_visual_by_category_success,You will receive a notification when a visualization is added to these categories: %{categories}.,"Ձեզ ծանուցում կուղարկվի, երբ վիզուալիզացիա ավելացվի հետևյալ կատեգորիաներում.%{categories}:"
+255,hy.app.msgs.notification_new_idea_all_success,You will recieve a notification whenever an idea is added.,"Ձեզ ծանուցում կուղարկվի, երբ գաղափար է ավելացվում:"
+256,hy.app.msgs.notification_new_idea_none_success,You will not receive any notifications when ideas are added.,"Ձեզ ծանուցում չի ուղարկվի, երբ գաղափարներ են ավելացվում:"
+257,hy.app.msgs.notification_new_idea_by_category_success,You will receive a notification when an idea is added to these categories: %{categories}.,"Ձեզ ծանուցում կուղարկվի, երբ գաղափար է ավելացվում հետևյալ կատեգորիաներում. %{categories}:"
+258,hy.app.msgs.notification_visual_comments_yes,You will be sent notifications when a comment is made on %{org} visualizations.,"Ձեզ ծանուցում կուղարկվի, երբ %{org} վիզուալիզացիային մեկնաբանություն կթողնվի:"
+259,hy.app.msgs.notification_visual_comments_no,You will not be sent notifications when a comment is made on %{org} visualizations.,"Ձեզ ծանուցում չի ուղարկվի, երբ %{org} վիզուալիզացիային մեկնաբանություն թողնվի:"
+260,hy.app.msgs.notification_language,You will be sent notifications in %{language}.,Ձեզ ծանուցում կուղարկվի %{language} լեզվով:
+261,hy.app.msgs.no_visual_records,No visualization records match your selection.,Ձեր ընտրությանը համապատասխան վիզուալիզացիա չկա բազայում:
+262,hy.app.msgs.no_idea_records,No ideas match your selection.,Ձեր ընտրությանը համապատասխան գաղափար չկա:
+263,hy.app.msgs.visual_promoted,The visualization has been promoted to the home page.,Վիզուալիզացիան առաջադրվել է Հինական էջ:
+264,hy.app.msgs.visual_unpromoted,The visualization will no longer appear on the home page.,Վիզուալիզացիան այլևս չի հայտնվի Հինական էջում:
+265,hy.layouts.application.menu_visual,Visualizations,Վիզուալիզացիաներ
+266,hy.layouts.application.menu_data,Send Data,Ուղարկել տվյալներ
+267,hy.layouts.application.menu_idea,Ideas,Գաղափարներ
+268,hy.layouts.application.menu_submit_visual,Submit Visual,Ներկայացնել վիզուալիզացիա
+269,hy.layouts.application.menu_about,About,Մասին
+270,hy.layouts.application.menu_contact,Contact,Կապ
+271,hy.layouts.application.admin,Admin,Ադմինիստրատոր
+272,hy.layouts.application.user_profile,Your Profile,Ձեր պրոֆիլը
+273,hy.layouts.application.notifications,Notifications,Ծանուցումներ
+274,hy.layouts.application.facebook,Facebook,Facebook
+275,hy.layouts.application.twitter,Twitter,Twitter
+276,hy.layouts.application.rss,RSS,RSS
+277,hy.layouts.application.pinterest,Pinterest,Pinterest
+278,hy.layouts.application.subscription,Email Subscription,Էլեկտրոնային բաժանորդագրություն 
+279,hy.layouts.application.sign_out,Sign Out,Ելք
+280,hy.layouts.application.terms,Terms of Service,Ծառայության մատուցման պայմաններ
+281,hy.layouts.application.js_link_title,Visit JumpStart Georgia's website,Այցելեք ՋամփՍթարթ Ջորջիայի էջկայքը
+282,hy.layouts.application.js_link_text,Built by,Ստեղծվել է
+283,hy.layouts.interactive.go_back,go back,Հետ գնալ
+284,hy.layouts.unsupported_browser.title,Unsupported Browser,Չօժանդակվող բրաուզեր
+285,hy.layouts.unsupported_browser.p1,We are sorry to report that your browser is out of date and will not properly render the content from this website.,"Ցավում ենք տեղեկացնել, որ Ձեր բրաուզերը հնացել է և չի կարող պատշաճ կերպով ներկայացնել էջկայքի բովանդակությունը:"
+286,hy.layouts.unsupported_browser.p2,"On the bright side, there are several free browsers that you can download that are compatible with this site.","Ուրախացնենք Ձեզ, որ կան մեր էջկայքի հետ համատեղելի մի շարք անվճար բրաուզերներ, որոնք Դուք կարող եք բեռնել: "
+287,hy.layouts.unsupported_browser.chrome,Chrome,Chrome
+288,hy.layouts.unsupported_browser.firefox,Firefox,Firefox
+289,hy.layouts.unsupported_browser.ie,Internet Explorer (Windows only),Internet Explorer (միայն Windows-ի)
+290,hy.layouts.unsupported_browser.opera,Opera,Opera
+291,hy.layouts.unsupported_browser.Safari,Safari,Safari
+292,hy.layouts.unsupported_browser.admin,Admin,Ադմինիստրատոր
+293,hy.layouts.unsupported_browser.sign_out,Sign Out,Ելք
+294,hy.layouts.unsupported_browser.terms,Terms of Service,Ծառայության մատուցման պայմաններ
+295,hy.layouts.unsupported_browser.js_link_title,Visit JumpStart Georgia's website,Այցելեք ՋամփՍթարթ Ջորջիայի էջկայքը
+296,hy.layouts.unsupported_browser.js_link_text,Built by,Ստեղծվել է
+297,hy.admin.index.title,Administration Section,Ադմինիստրատիվ մաս
+298,hy.admin.index.categories,Categories,Կատեգորիաներ
+299,hy.admin.index.organizations,Organizations,Կազմակերպություն
+300,hy.admin.index.visualizations,Visualizations,Վիզուալիզացիաներ
+301,hy.admin.index.users,Users,Օգտատերեր
+302,hy.admin.index.pages,Pages,Էջեր
+303,hy.admin.index.idea_statuses,Idea Status,Գաղափարի կարգավիճակ
+304,hy.admin.users.edit.title,Editing User,Խմբագրելու իրավունք ունեցող օգտատեր
+305,hy.admin.users.index.title,Users,Օգտատերեր
+306,hy.admin.users.new.title,New User,Նոր օգտատեր
+307,hy.admin.users.show.title,User Details,Օգտատերի մասին 
+308,hy.root.index.title,Visualizations,Վիզուալիզացիա
+309,hy.root.index.header_get_involved,Get Involved!,Ներգրավվի՛ր
+310,hy.root.index.header_ideas,Ideas,Գաղափարներ
+311,hy.root.index.header_visuals,Visuals,Վիզուալներ
+312,hy.root.index.header_data,Data,Տվյալներ
+313,hy.root.index.text_get_involved,"If you are passionate about exploring and visualizing data, or just have interesting questions that we could answer visually, then get involved!","Եթե Ձեզ հետաքրքրում է տվյալների ուսումնասիրությունը և պատկերավորումը, կամ ունեք հետաքրքիր հարցեր, որոնց մենք կարող ենք պատկերավոր պատասխանել, միացե՛ք"
+314,hy.root.index.text_ideas,"Have an idea for a news story? Wish the media would report on an issue that is important to you? Post your idea here. If it is a good one, chances are, a journalist will work on it.","Նորության գաղափա՞ր ունեք: Կցանկանայիք, որ լրատվամիջոցները լուսաբանեն Ձեզ համար կարևոր խնդիրը: Ներկայացրեք Ձեր գաղափարներն այստեղ: Եթե այն լավն է, շատ հավանական է, որ լրագրողը կաշխատի դրա վրա:"
+315,hy.root.index.text_visuals,You too can contribute your visual ideas. Go ahead and register with us and begin posting your visuals under your or your organization’s name!,Դուք կարող եք ներկայացնել Ձեր վիզուալ գաղափարները: Գրանցվեք մեզ մոտ և սկսեք ներկայացնել Ձեր վիզուլները Ձեր կամ Ձեր կազմակերպության անունից:
+316,hy.root.index.text_data,"If you or your organization possess data that you think is of social interest and you would like someone to visualize it, please send us your data. ","եթե Դուք կամ Ձեր կազմակերպությունը ունի տվյալներ, որոնք Ձեր կարծիքով հանրային հետաքրքրության առարկա են, և ցանկանում եք որևէ մեկը պատկերավորի դրանք, ուղարկեք այդ տվյալները մեզ:"
+317,hy.root.index.button_ideas,Post Idea,Ներկայացնել գաղափար
+318,hy.root.index.button_visuals,Register,Գրանցվել
+319,hy.root.index.button_data,Send Data,Ուղարկել տվյալներ
+320,hy.root.about.title,About,Մասին
+321,hy.root.about.meta_description,"Visualization provides a unique perspective on data. We seek out data from a variety of organizations, both public and private. We make information colourful by visualizing stories using a variety of tools.	We publish these visualizations on our website, make them freely available for others to use, share them with you, and hope you share them with others.","Վիզուալիզացիան յուրօրինակ մոտեցում է տվյալներին: Մենք տվյալներ ենք փնտրում մի շարք կազմակերպություններից՝ հանրային և մասնավոր: Մենք օգտագործում ենք տարբեր միջոցներ՝ տվյալները պատկերավորելու համար: Մենք տեղադրում ենք այս վիզուալիզացիաները մեր էջկայքում՝ ազատ օգտագորպման համար, կիսվում Ձեզ հետ և հույս ունենք, որ Դուք էլ կկիսվեք ուրիշների հետ:"
+322,hy.root.data.title,Send Data,Ուղարկել տվյալներ
+323,hy.root.data.meta_description,"Do you have data that you would like to see visualized, but do not have the time or skills? Share your data here! If it is interesting, there is a good chance someone will use it, which means you can then reuse their visualization. By sharing with the community, you are becoming part of something larger in which everyone involved benefits.","Ունե՞ք տվյալներ, որը կցանկանայիք պատկերավորել, բայց չունեք ժամանակ կամ հմտություններ: Տեղադրեք տվյալները այստեղ: Եթե հետաքրքիր են, շատ հնարավոր է, որ որևէ մեկը կօգտագործի այն,և Դուք կկարողանաք օգտագործել վիզուալիզացիան: Կիսվելով համայնքի հետ՝ Դուք դառնում եք ավելի մեծի մի մաս, որտեղ բոլորը շահում են:"
+324,hy.root.data.message_sent,Your message has been sent! Thank you for contacting us.,Ձեր հաղորդագրությունը ուղարկված է: Շնորհակալություն մեզ հետ կապնվելու համար:
+325,hy.root.data.send,Send,Ուղարկել
+326,hy.root.data.name,Name,Անուն
+327,hy.root.data.phone,Phone Number,Հեռախոսահամար
+328,hy.root.data.email,Email Address,Էլ. հասցե
+329,hy.root.data.what_is_data,Briefly describe the data that you want to visualize,"Հակիրճ ներկայացրեք տվյալները, որոնք ոցանկանում եք պատկերավորել"
+330,hy.root.data.why_visualize,Why do you want to visualize this data?,Ինո՞ւ եք ցանկանում պատկերավորել այս տվյալները
+331,hy.root.data.datasource,What is the data source?,Ո՞րն է տվյալների աղբյուրը
+332,hy.root.data.file,Attach the data file,Կցեք տվյալների ֆայլը
+333,hy.root.data.email_us,Send us an email,Ուղարկեք մեզ հաղորդագրություն
+334,hy.root.data.email_subject,feradi.info Send Data Request,feradi.info ուղարկեք տվյալների հայցում
+335,hy.root.submit_visual.title,Submit a Visual,Ներկայացնել պատկեր
+336,hy.root.submit_visual.message_sent,Your message has been sent! Thank you for contacting us.,Ձեր հաղորդագրությունը ուղարկված է: Շնորհակալություն մեզ հետ կապնվելու համար:
+337,hy.root.submit_visual.send,Send,Ուղարկել
+338,hy.root.submit_visual.name,Name,Անուն
+339,hy.root.submit_visual.phone,Phone Number,Հեռախոսահամար
+340,hy.root.submit_visual.email,Email Address,Էլ. հասցե
+341,hy.root.submit_visual.how_use,Why would you like to use feradi.info to post your visualiations?,Ինչո՞ւ էք ցանկանում feradi.info-ում ներկայացնել Ձեր վիզուալիզացիան
+342,hy.root.submit_visual.email_us,Send us an email,Ուղարկեք մեզ նամակ
+343,hy.root.submit_visual.email_subject,feradi.info Submit Visual Request,feradi.info ուղարկեք պատկերի հայցում
+344,hy.root.terms.title,Terms of Service,Ծառայության մատուցման պայմաններ
+345,hy.root.rss.title,RSS,RSS
+346,hy.root.contact.title,Contact Us,Կապնվեք մեզ հետ
+347,hy.root.contact.meta_description,"If you are interested in visualizing data, but do not know how to do it, get in touch with us. We would love to invite you to our office, share our knowledge and experience, and welcome you to data visualization community!","Եթե հետաքրքրված եք տվյալներ պատկերավորել, բայց չգիտեք, թե ինչպես, կապնվեք մեզ հետ: Մենք սիրով կհրավիրենք Ձեզ մեր գրասենյակ՝ կիսվելու մեր գիտելիքներով և փորձառությամբ և ընդունելու Ձեզ տվյալների պատկերավորման համայնք:"
+348,hy.root.contact.message_sent,Your message has been sent! Thank you for contacting us.,Ձեր հաղորդագրությունը ուղարկված է: Շնորհակալություն մեզ հետ կապնվելու համար:
+349,hy.root.contact.send,Send,Ուղարկել
+350,hy.root.contact.name,Name,Անուն
+351,hy.root.contact.email,Email Address,Էլ.հասցե
+352,hy.root.contact.message,Message,Հաղորդագրություն
+353,hy.root.contact.address_map,Find our office on the map,Գտեք մեր գրասենյակը քարտեզի վրա
+354,hy.root.contact.email_us,Send us an email,Ուղարկեք մեզ նամակ
+355,hy.root.contact.email_subject,feradi.info Contact Form,feradi.info կապի ձև
+356,hy.root.contact.address,"#5 Shevchenko St, Apt 2, 0108, Tbilisi, Georgia","Շևչենկո փ. 5, բնակարան 2, Թբիլիսի, 0108, Վրաստան"
+357,hy.root.contact.error_title,An error has occurred,Սխալ է տեղի ունեցել
+358,hy.visuals.index.title,Visualizations,Վիզուալիզացիա
+359,hy.visuals.index.title_feed,%{app_name} Visualizations,%{app_name} վիզուալիզացիա
+360,hy.shared.visuals_show.organization,Organization,Կազմակերպություն
+361,hy.shared.visuals_show.reporter,Reporter,Թղթակից
+362,hy.shared.visuals_show.designer,Designer,Ձևավորող
+363,hy.shared.visuals_show.developer,Developer,Ծրագրավորող
+364,hy.shared.visuals_show.data_source,Data Source,Տվյալների աղբյուր
+365,hy.shared.visuals_show.data_set,Data Set,Տվյալների բազա
+366,hy.shared.visuals_show.type,Type,Տիպ
+367,hy.shared.visuals_show.embed,Embed,Կցել
+368,hy.shared.visuals_show.embed_link_title,Click to view larger image,Տեսնել մեծ պատկերը
+369,hy.shared.visuals_show.embed_link_interactive_title,Click to view interactive visualization,Տեսնել ինտերակտիվ վիզուալիզացիան
+370,hy.shared.visuals_show.comment_count,Comments,Մեկնաբանություններ
+371,hy.shared.visuals_filter_bar.categories,Categories,Կատեգորիաներ
+372,hy.shared.ideas_list.no_ideas,No Idea records were found.,Գաղափարը չի գտնված
+373,hy.shared.ideas_list.idea_title,Idea #%{number},Գաղափար #%{number}
+374,hy.shared.ideas_grid.idea_title,Idea #%{number},Գաղափար #%{number}
+375,hy.shared.ideas_form.sign_in,Sign In to Post,Մուտք գործեք՝ գրառում կատարելու համար
+376,hy.visualizations.form.preview,Preview,Նախնական դիտարկում
+377,hy.visualizations.form.crop_image,Create %{language} Thumbnail Image,Ստեղծել %{language} նմուշի պատկեր
+378,hy.visualizations.form.reset_file,Load New %{language} Infographic,Բեռնել նոր %{language} ինֆոգրաֆիկա
+379,hy.visualizations.form.reset_url,Load New %{language} URL,Բեռնել նոր %{language} հղում
+380,hy.visualizations.form.datasources_header,Data Sources,Տվյալների աղբյուր
+381,hy.visualizations.form.add_datasource,Add Data Source,Ավելացնել տվյալների աղբյուր
+382,hy.visualizations.datasource_fields.remove_link,Remove Data Source,Հեռացնել տվյալների աղբյուր
+383,hy.notifications.index.title,Notifications,Ծանուցումներ
+384,hy.notifications.index.explain,You can recieve email notifications whenever a visualization is added to feradi.info.  Simply sign in via Facebook or sign up with feradi.info to subscribe.,"Դուք կարող եք ստանալ էլեկտրոնային ծանուցումներ, երբ feradi.info-ում վիզուալիզացիա է ավելացվում: Պարզապես մուտք գործեք Facebook-ով կամ գրանցվեք feradi.info-ում"
+385,hy.notifications.index.all_sub_title,All Notifications,Բոլոր ծանուցումները
+386,hy.notifications.index.all_label,Do you want to recieve any notifications from this site?,Ցանկանո՞ւմ եք ստանալ ծանուցումներ այս կայքէջից
+387,hy.notifications.index.all_no,"No, do not send me any notifications.","Ոչ, մի ուղարկեք ինձ ծանուցումներ"
+388,hy.notifications.index.all_yes,"Yes, I want notifications sent to me.","Այո, ես ուզում եմ ստանալ ծանուցումներ"
+389,hy.notifications.index.visual_comment_sub_title,New Visualization Comment Notifications for %{org},Նոր վիզուալիզացիայի մեկնաբանությունների ծանուցումներ %{org} համար
+390,hy.notifications.index.visual_comment_label,Do you want to recieve notifications when a comment is made to your organization's visualizations?,"Ցանկանո՞ւմ եք ստանալ ծանուցումներ, երբ Ձեր կազմակերպության վիզուալիզացիային մեկնաբանություն է ավելացվում"
+391,hy.notifications.index.visual_comment_no,"No, do not send me any notifications.","Ոչ, մի ուղարկեք ինձ ծանուցումներ"
+392,hy.notifications.index.visual_comment_yes,"Yes, I want notifications sent to me.","Այո, ես ուզում եմ ստանալ ծանուցումներ"
+393,hy.notifications.index.new_visuals_sub_title,New Visualization Notifications,Նոր վիզուալիզացիայի ծանուցումներ
+394,hy.notifications.index.new_visuals_all,Notify me when any visualization is added.,"Ծանուցեք ինձ, երբ վիզուալիզացիա է ավելացվում"
+395,hy.notifications.index.new_visuals_none,I do not want to receive notifications when a new visualization is added.,"Ես չեմ ուզում ստանալ ծանուցում, երբ նոր վիզուալիզացիա է ավելացվում"
+396,hy.notifications.index.new_visuals_by_category,Notify me when a visualization is added to:,"Ծանուցեք ինձ, երբ վիզուալիզացիա է ավելացվում."
+397,hy.notifications.index.new_ideas_sub_title,New Idea Notifications,Նոր գաղափարի ծանուցումներ
+398,hy.notifications.index.new_ideas_all,Notify me when any idea is added.,"Ծանուցեք ինձ, երբ ցանկացած գաղափար է ավելացվում"
+399,hy.notifications.index.new_ideas_none,I do not want to receive notifications when a new idea is added.,"Ես չեմ ուզում ստանալ ծանուցում, երբ նոր գաղափար է ավելացվում"
+400,hy.notifications.index.new_ideas_by_category,Notify me when an idea is added to:,"Ծանուցեք ինձ, երբ գաղափար է ավելացվում."
+401,hy.notifications.index.language_sub_title,Notification Language,Ծանուցման լեզուն
+402,hy.notifications.index.language_label,In what language do you want to receive the notifications?,Ի՞նչ լեզվով եք ցանկանում ստանալ ծանուցումները
+403,hy.ideas.index.title,Post Ideas,Ներկայացնել գաղափարներ
+404,hy.ideas.index.meta_description,"Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it.","Նորության գաղափա՞ր ունեք: Կցանկանայիք, որ լրատվամիջոցները լուսաբանեն Ձեզ համար կարևոր խնդիրը: Չունե՞ք ժամանակ կամ հմտություններ, որպեսզի ինքներդ լուսաբանեք: Ներկայացրեք Ձեր գաղափարներն այստեղ: Եթե այն լավն է, շատ հավանական է, որ լրագրողը կաշխատի դրա վրա:"
+405,hy.ideas.index.text_ideas1,"Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it.","Նորության գաղափա՞ր ունեք: Կցանկանայիք, որ լրատվամիջոցները լուսաբանեն Ձեզ համար կարևոր խնդիրը: Չունե՞ք ժամանակ կամ հմտություններ, որպեսզի ինքներդ լուսաբանեք: Ներկայացրեք Ձեր գաղափարներն այստեղ: Եթե այն լավն է, շատ հավանական է, որ լրագրողը կաշխատի դրա վրա:"
+406,hy.ideas.index.text_ideas2,"feradi.info makes your ideas social, allowing missed opportunities to become a treasure trove of journalistic brainstorming. Post, vote, share, and watch how ideas take shape and become the news.","feradi.info-ն հանրայնացնում է Ձեր գաղափարները՝ թույլ տալով բաց թողնված հնարավորություններին վերածվելու լրագրողական գաղափարների գանձարանի: Ներկայացրեք, քվեարկեք, կիսվեք, և տեսք, թե ինչպես են գաղափարները նոր ձև ստանում և դառնում լուր:"
+407,hy.ideas.index.sign_in,Sign In to Post,Մուտք գործեք՝ գրառում կատարելու համար
+408,hy.ideas.user.title,Ideas by: %{name},Գաղափար. %{name}-ով
+409,hy.ideas.category.title,Category: %{name},Կատեգորիա. %{name}
+410,hy.ideas.explore.title,Explore Ideas,Հետազոտել գաղափարներ
+411,hy.ideas.show.title,Idea #%{number},Գաղափար #%{number}
+412,hy.ideas.show.idea_by,Idea by %{name},Գաղափար #%{number}-ով
+413,hy.ideas.show.claimed_by,Idea Being Worked On,Գաղափարի վրա աշխատում են
+414,hy.ideas.show.finished,Finished,Ավարտված է
+415,hy.ideas.show.news_url,View Story,Տեսնել պատմությունը
+416,hy.ideas.show.take_ownership,Work on Idea (%{org}),Աշխատել գաղափարի վրա (%{org})
+417,hy.ideas.show.progress_update,Add,Ավելացնել
+418,hy.ideas.show.edit_progress,Edit,Խմբագրել
+419,hy.ideas.show.translate_idea,Translate the Idea,Թարգմանել գաղափարը
+420,hy.ideas.show.translate_org_progress,Translate the Text,Թարգմանել տեքստը
+421,hy.ideas.show.inappropriate_idea,This idea has been reported as inappropriate and is no longer available.,Գաղափարը հայտարարագրվել է որպես անպատշաճ և այլևս հասանելի չէ:
+422,hy.ideas.show.status,Status,Կարգավիճակ
+423,hy.ideas.search.title,Search: %{q},Որոնել. %{q}
+424,hy.ideas.edit.title,Edit Idea #%{number},Խմբագրել գաղափար #%{number}
+425,hy.ideas.progress.form.title_claim,Claim Idea,Պահանջել գաղափարը
+426,hy.ideas.progress.form.title_progress_update,Progress Update,Առաջընթացի մասին նորություն
+427,hy.ideas.progress.form.title_edit_progress,Edit Progress,Խմբագրել առաջընթացը
+428,hy.ideas.progress.form.title_error,Error,Սխալ 
+429,hy.ideas.progress.form.error,The requested Idea and/or Organization could not be found.,Անհնար էր գտնել հայցվող գաղափարը և/կամ կազմակերպությունը 
+430,hy.ideas.report.form.title_old,Report Inappropriate Idea,Զեկուցել անպատշաճ գաղափար
+431,hy.ideas.report.form.title,What is the reason for the report?,Ո՞րն է զեկույցի պահանջը
+432,hy.ideas.report.form.inappropriate,Inappropriate Content,Անպատշաճ բովանդակություն
+433,hy.ideas.report.form.duplicate,Duplicate Idea,Գաղափարի կրկնօրինակ
+434,hy.ideas.report.form.duplicate_reason,Which idea is this a duplicate of? (Provide URL),Ո՞ր գաղափարի կրկնօրինակ է սա /տրամադրեք հղում/
+435,hy.ideas.report.form.success,The Idea hs been reported.,Գաղափարը զեկուցվել է

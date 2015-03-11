@@ -51,9 +51,9 @@ class Visualization < ActiveRecord::Base
   validate :validate_if_published
   before_save :set_promoted_at
 
-  scope :recent, lambda {with_translations(I18n.locale).order("visualizations.published_date DESC, visualization_translations.title ASC")}
-  scope :likes, lambda {with_translations(I18n.locale).order("visualizations.overall_votes DESC, visualization_translations.title ASC")}
-  scope :views, lambda {with_translations(I18n.locale).order("visualizations.impressions_count DESC, visualization_translations.title ASC")}
+  scope :recent, order("visualizations.published_date DESC, visualization_translations.title ASC")
+  scope :likes, order("visualizations.overall_votes DESC, visualization_translations.title ASC")
+  scope :views, order("visualizations.impressions_count DESC, visualization_translations.title ASC")
   scope :published, where("published = '1'")
   scope :unpublished, where("published != '1'")
   scope :promoted, where("is_promoted = '1'")
@@ -155,6 +155,10 @@ class Visualization < ActiveRecord::Base
 		end
 		return id
 	end
+
+  def self.by_language(locale=I18n.locale)
+    with_translations(locale)
+  end
 
 	def self.by_type(type_id)
 		where(:visualization_type_id => type_id) if type_id

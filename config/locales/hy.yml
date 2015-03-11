@@ -1,0 +1,561 @@
+# encoding: utf-8
+hy:
+  activerecord:
+    models:
+      user: Օգտատեր
+      category: Կատեգորիա
+      organization: Կազմակերպություն
+      visualization: Վիզուալիզացիա
+      page: Էջ
+      message: Հաղորդագրություն
+      datasource: Տվյալների աղբյուր
+      idea: Գաղափար
+      idea_inappropriate_report: Հաշվետվություն
+      idea_status: Գաղափարի կարգավիճակը
+      idea_progress: Գաղափարի առաջընթացը
+    attributes:
+      user:
+        email: Էլ. հասցե
+        password: Գաղտնաբառ
+        password_confirmation: Գաղտնաբառի հաստատում
+        role: Դեր
+        remember_me: Հիշիր ինձ
+      message:
+        name: Անուն
+        phone: Հեռախոսահամար
+        email: Էլ. հասցե
+        message: Հաղորդագրություն
+        what_is_data: Համառոտ ներկայացրեք, թե ինչ տվյալներ եք ուզում պատկերավորել
+        why_visualize: Ինչո՞ւ եք ուզում պատկերավորել այս տվյալները
+        datasource: Տվյալների աղբյուրը
+        file: Կցեք տվյալների ֆայլը
+        how_use: Ինչո՞ւ եք ուզում օգտագործել feradi.info-ն ձեր վիզուալիզացիայի համար
+        organization: Կազմակերպություն
+      category:
+        icon: Պատկեր
+      category_translation:
+        name: Անուն
+      organization:
+        logo: Լոգո
+        url: Կայքէջ
+      organization_translation:
+        name: Անուն
+        bio: Ձեր մասին
+        permalink: Հղումի անվանումը
+        permalink_hint: 'Եթե ցանկանում եք ստեղծել նոր հղում, պարզապես ջնջեք տեքսը, և գրառման պահպանումից հետո կստեղծվի նորը: Կրկնեք գործողությունը բոլոր լեզուների համար:'
+      organization_user:
+        is_active: Ակտի՞վ է
+        user_id: Օգտատեր
+        organization_id: Կազմակերպություն
+      page:
+        name: Անուն
+      page_translation:
+        title: Վերնագիր
+        description: Բովանդակություն
+      visualization:
+        published_date: Հրատարակման ամսաթիվ
+        published: Հրապարակե՞լ
+        visualization_type_id: Վիզուալիզացիայի տեսակ
+        individual_votes: Անհատական քվեներ
+        overall_votes: Ընդհանուր քվեներ
+        dataset: Տվյալների բազա
+#        visual: Visual File
+        visualization_categories: Կատեգորիաներ
+        is_promoted: Բարձրացնե՞լ Հիմնական էջ
+        promoted_at: Բարձրացման ամսաթիվը
+      visualization_translation:
+        title: Վերնագիր
+        permalink: Հղումի անվանումը
+        permalink_hint: 'եթե ցանկանում եք ստեղծել նոր հղում, պարզապես ջնջեք տեքսը, և գրառման պահպանումից հետո կստեղծվի նորը: Կրկնեք գործողությունը բոլոր լեզուների համար:'
+        explanation: Բացատրություն
+        visualization_text: Վիզուալիզացիայի տեքստը
+        visualization_text_hint: Վիզուալիզագիայի տեքստը, որը հասանելի կլինի որոնման համար
+        reporter: Զեկուցող (անուն, կազմակերպություն)
+        designer: Ձևավորող (անուն, կազմակերպություն)
+        developer: Ծրագրավորող (անուն, կազմակերպություն)
+        interactive_url: Ինտերակտիվ վիզուալիզացիայի հղում
+      image_file:
+        file: Վիզուալ ֆայլը
+        reset_crop: Չեղարկել նմուշի պատկերը
+        reset_file: Նոր ֆայլ ներբեռնել
+        reset_url: Կրկնել հղումի սքրինշոթը
+      dataset_file:
+        file: Տվյալների բազա
+      datasource:
+        name: Տվյալների աղբյուրի անվանումը
+        url: Տվյալների աղբյուրի հղումը
+      idea:
+        user_id: Օգտատեր
+        explaination: Բացատրություն
+        created_at: Ամսաթիվ
+        individual_votes: Անհատական քվեներ
+        overall_votes: Ընդհանուր քվեներ
+        is_duplicate: Կրկնօրինա՞կ է
+        is_inappropriate: Անպատշա՞ճ է
+        is_public: Հանրայի՞ն է
+        current_status_id: Ներկա կարգավիճակը
+      idea_category:
+        idea_id: Գաղափար
+        category_id: Կատեգորիա
+      idea_progress:
+        idea_id: Գաղափար
+        organization_id: Կազմակերպություն
+        is_completed: Ավարտե՞լ էք նորությունը
+        url: Նորության հղումը
+        progress_date: Ամսաթիվ
+        explaination: Բացատրություն
+        idea_status_id: Կարգավիճակ
+        idea_status: Կարգավիճակ
+        is_public: Հանրայի՞ն է
+      idea_inappropriate_report:
+        user_id: Օգտատեր
+        idea_id: Գաղափար
+        reason: Ինչո՞ւ է գաղափարը անհարկի
+      idea_status:
+        sort: Դասավորության կարգը
+        sort_hint: 1, 2, 3, և այլն (աճման կարգով)
+        is_published: Հրապարակվա՞ծ է
+        is_published_hint: Կարգավիճակը ցույց է տալիս, որ գաղափարը հրապարակված է
+      idea_status_translation:
+        name: Անուն
+    messages:
+      idea_progress:
+        success: Գրառումը հաջողոււթյամբ պահպանված է
+    errors:
+      messages:
+        published_visual_missing_fields: անհրաժեշտ է պատկերի հրապարակման ժամանակ
+        contact_missing_fields: չի կարելի բաց թողնել
+        send_data_missing_fields: չի կարելի բաց թողնել
+        submit_visual_missing_fields: չի կարելի բաց թողնել
+        required_field: պարտադիր կետ է
+        already_exists: արդեն գոյություն ունի տվյալների բազայում
+  activemodel:
+    errors:
+      models:
+        message:
+          attributes:
+            email:
+              invalid: Խնդրում ենք տրամադրել էլ. հասցե
+            message:
+              blank: Խնդրում ենք տրամադրել հաղորդագրություն
+  mailer:
+    closing: Հարգանքով՝
+    signature: feradi.info
+    unsubscribe: Սեղմեք՝ գրացումը չեղյալ համարելու համար
+    notification:
+      new_user:
+        subject: 'Բարի գալուստ feradi.info '
+        message: "Շնորհակալություն feradi.info-ի անդամ դառնալու և մեր բազմերանգ նորույթուններին թղթակցելու համար: Սեղմելով հետևյալ հղումին՝ դուք կարող եք ինքներդ որոշել, թե երբ եք ուզում ստանալ էլ. նամակներ feradi.info-ից:"
+      new_visualization:
+        subject: Նոր վիզուալիզացիա է ավելացվել feradi.info-ին
+        message: '%{title}'' նոր վիզուալիզացիա է ավելացվել: Պատկերի նկարագիրը.'
+      new_visualization_needs_promotion:
+        subject: feradi.info ավելացվել է նոր վիզուալիզացիա և ստուգման կարիք ունի՝ Հիմնական էջ տեղափոխելու համար
+        message: '%{title}'' նոր վիզուալիզացիա է ավելացվել: Պատկերի նկարագիրը.'
+      visualization_comment:
+        subject: "feradi.info-ի Ձեր '%{title}' վիզուալիզացիային մեկնաբանություն է ավելացվել"
+        message: Սեղմեք հետևյալ հղումը՝ մեկնաբանությունը տեսնելու համար
+      visualization_promoted:
+        subject: Ձեր '%{title}' վիզուալիզացիան տեղափոխվել է feradi.info-ի Հինական էջ
+        message: 'Շնորհավորում ենք Ձեզ: feradi.info-ն տեղափոխել է Ձեր վիզուալիզացիան Հիմնական էջ'
+      idea_claimed_owner:
+        subject: '%{organization} հետաքրքրված է Ձեր գաղափարով:'
+        message: '%{organization} հետաքրքրություն է հայտնել պատմություն գրել Ձեր գաղափարի վերաբերյալ: Գրվածը.'
+      idea_progress_update_owner:
+        subject: '%{organization} թարմացրել է Ձեր գաղափարի վերաբերյալ իրենց առաջընթացը'
+        message: '%{organization} առաջընթացի զեկույց է կազմել Ձեր գաղափարի վերաբերյալ: Ահա, թե ինչ են նրանք գրել.'
+      idea_realized_owner:
+        subject: '%{organization} վերջացրել է իր աշխատանքը Ձեր գաղափարի շուրջ'
+        message: '%{organization} պատմություն է հրապարակել Ձեր գաղափարի շուրջ: Ահա, թե ինչ են նրանք գրել.'
+      idea_comment_owner:
+        subject: Ինչ-որ մեկը մեկնաբանություն է թողել Ձեր գաղափարի վերաբերյալ
+        message: Սեղմեք հետևյալ հղումը՝ մեկնաբանությունը տեսնելու համար
+      new_idea_subscriber:
+        subject: Նոր գաղափար է ներկայացվել
+        message: Սա է նոր գաղափարը.
+      idea_claimed_subscriber:
+        subject: '%{organization} հետաքրքրված է Ձեր հավանած գաղափարով:'
+        message: '%{organization} հետաքրքրություն է հայտնել պատմություն գրել Ձեր հավանած գաղափարի վերաբերյալ: Գրվածը.'
+      idea_progress_update_subscriber:
+        subject: '%{organization} թարմացրել է Ձեր հավանած գաղափարի վերաբերյալ իրենց առաջընթացը'
+        message: '%{organization} առաջընթացի զեկույց է կազմել Ձեր հավանած գաղափարի վերաբերյալ: Ահա, թե ինչ են նրանք գրել.'
+      idea_realized_subscriber:
+        subject: '%{organization} վերջացրել է իր աշխատանքը Ձեր հավանած գաղափարի շուրջ'
+        message: '%{organization} պատմություն է հրապարակել Ձեր հավանած գաղափարի շուրջ: Ահա, թե ինչ են նրանք գրել.'
+      idea_comment_subscriber:
+        subject: Ինչ-որ մեկը մեկնաբանություն է թողել Ձեր հավանած գաղափարի վերաբերյալ
+        message: 'Սեղմեք հետևյալ հղումը՝ մեկնաբանությունը տեսնելու համար:'
+    contact:
+      contact_form:
+        subject: feradi.info Կապի ձև
+      submit_visual:
+        subject: feradi.info Վիզուալիզացիայի ներկայացման ձև
+      send_data:
+        subject: feradi.info Տվյալների ուղարկման ձև
+  helpers:
+    actions: Գործողություններ
+    links:
+      admin: Ադմինիստրատիվ մաս
+      edit: Խմբագրել
+      confirm: Համոզված ե՞ք
+      destroy: Ջնջել
+      new: Նոր
+      back: Տեսնել բոլորը
+      list: Տեսնել բոլորը
+      cancel: 'Չեղարկել '
+      reset: Զրոյացնել
+      sign_in2: Մուտք գործել
+      sign_in: 'Արդեն իսկ ունե՞ք հաշիվ '
+      sign_up2: Գրացվել
+      sign_up: Դեռ չունե՞ք հաշիվ
+      sign_out: Ելք
+      website: Դիտել կայքէջը
+      forgot_password: Մոռացե՞լ եք գաղտնաբառը
+      password_reset: Ուղարկել գաղտնաբառը փոխելու համար ցուցումներ
+      sign_in_provider: Մուտք գործել %{provider}-ով
+      download: Բեռնել
+      existing_file: Տեսնել գոյություն ունեցող փաստաթղթերը
+      more: Ցույց տալ ավելին
+      org_profile: '%{org} Մասին'
+      edit_org: '%{org} Խմբագրել'
+      new_visual: '%{org} Ավելացնել վիզուալիզացիա'
+      post_idea: Գրել գաղափար
+      report_inappropriate: Զեկուցել ոչ պատշաճ գաղափարը
+      follow_idea: Հետևել
+      unfollow_idea: Չհետևել
+      promote: Տանել Հիմնական էջ
+      unpromote: Հանել Հիմնական էջից
+    titles:
+      new: Նոր %{model}
+      edit: Խմբագրել %{model}
+  visualization_types:
+    infographic: Ինֆոգրաֆիկա
+    interactive: Ինտերակտիվ
+    fact: Փաստ
+    comic: Ծաղրանկար
+  filters:
+    category_default: բոլորը
+    visuals:
+      type:
+        header: Տիպ
+        all: Բոլորը
+        infographic: Ինֆոգրաֆիկա
+        interactive: Ինտերակտիվ
+        fact: Փաստ
+        comic: Ծաղրանկար
+        not_published: Չի հրապարակված
+        not_promoted: 'Առաջընթաց չունի '
+      view:
+        header: Դասավորություն
+        grid: Վանդակացանց
+        list: Ցանկ
+      organize:
+        header: Դասակարգել
+        recent: Վերջին
+        likes: Հավանություններ
+        views: Դիտումներ
+      language:
+        header: Language
+    ideas:
+      view:
+        header: Դասավորություն
+        grid: Վանդակացանց
+        list: Ցանկ
+      organize:
+        header: Դասակարգել
+        recent: Վերջին
+        likes: Հավանություններ
+        views: Դիտումներ
+      filter:
+        header: Ֆիլտր
+        all: Բոլորը
+        not_selected: Վրան չեն աշխատում
+        in_progress: Ընթացիկ
+        completed: Ավարտված
+  app:
+    language:
+      en: English
+      ka: ქართული
+      hy: Հայերեն      
+    buttons:
+      back: Հետ
+      list: Տեսնել բոլորը
+      admin: Ադմինիստրատիվ մաս
+      delete: Ջնջել
+      edit: Խմբագրել
+      show: Ցույց տալ
+      cancel: Չեղարկել
+      update: Թարմացնել
+      save: Պահպանել
+      create: Ստեղծել
+      reset: Զրոյացնել
+      remove: Հեռացնել
+      confirm: Համոզված ե՞ք
+      new: Նոր
+    common:
+      app_name: feradi.info
+      placeholder: placeholder
+      comments: Մեկնաբանություն
+      comments_noun: Մեկնաբանություն
+      likes: Հավանություններ
+      like: հավանել
+      unlike: չհավանել
+      share: Կիսվել
+      not_published: Չի հրապարակված
+      category: Կատեգորիա
+      author: Հեղինակ
+      rating: Վարկանիշ
+      rate_it: Գնահատի՛ր
+      top_ideas: Առաջատար գաղափարներ
+      new_ideas: Նոր գաղափարներ
+      in_progress: Ընթացքում է
+      realized: Իրականացված գաղափարներ
+      post_idea: Գրեք Ձեր գաղափարը
+      search: Որոնել
+      follow_idea: 'Ձեզ կուղարկվի էլեկտրոնային հաղորդագրություն՝ այս գաղափարը թարմացվի:'
+      follow_idea_bad: 'Անհնար էր գտնել գաղափարը հետևելու համար:'
+      unfollow_idea: 'Ձեզ այլևս չեն ուղարկվի էլեկտրոնային հաղորդագրություններ՝ այս գաղափարի թարմացման դեպքում:'
+      unfollow_idea_bad: Անհնար էր գտնել գաղափարը՝ հետևելը դադարեցնելու համար
+      is_private: ՀԱՆՐԱՅԻՆ ՉԷ
+      last_update: Վերջին թարմացում
+      is_public_explanation: 'Գաղափարը հանրային է, և յուրաքանչյուր ոք կարող է տեսնել այն: Հանեք նշումը, եթե ուզում եք, որ միայն Ձեր կազմակերպության անդամները տեսնեն այն:'
+      article_169: 'Ասեք ո՛չ Հոդված 169-ին: Աջակցեք արտահայտման ազատությանը:'
+    msgs:
+      does_not_exist: 'Դուք փորձում եք մուտք գործել մի էջ, որը գոյություն չունի:'
+      not_authorized: 'Դուք չունեք թույլտվություն դիտելու այդ էջը:'
+      permalink_exists: արդեն գոյություն ունի տվյալների բազայում
+      success_created: '%{obj} հաջողությամբ ստեղծված է:'
+      success_updated: '%{obj} հաջողությամբ թարմացվել է:'
+      success_deleted: '%{obj} հաջողությամբ հեռացվել է:'
+      notification_yes: 'Ձեզ ծանուցում կուղարկվի:'
+      notification_no: 'Ձեզ ծանուցում չի ուղարկվի:'
+      notification_new_visual_all_success: 'Ձեզ ծանուցում կուղարկվի, երբ վիզուալիզացիա ավելացվի:'
+      notification_new_visual_none_success: 'Ձեզ ծանուցում չի ուղարկվի, երբ վիզուալիզացիա ուղարկվի:'
+      notification_new_visual_by_category_success: 'Ձեզ ծանուցում կուղարկվի, երբ վիզուալիզացիա ավելացվի հետևյալ կատեգորիաներում.%{categories}:'
+      notification_new_idea_all_success: 'Ձեզ ծանուցում կուղարկվի, երբ գաղափար է ավելացվում:'
+      notification_new_idea_none_success: 'Ձեզ ծանուցում չի ուղարկվի, երբ գաղափարներ են ավելացվում:'
+      notification_new_idea_by_category_success: 'Ձեզ ծանուցում կուղարկվի, երբ գաղափար է ավելացվում հետևյալ կատեգորիաներում. %{categories}:'
+      notification_visual_comments_yes: 'Ձեզ ծանուցում կուղարկվի, երբ %{org} վիզուալիզացիային մեկնաբանություն կթողնվի:'
+      notification_visual_comments_no: 'Ձեզ ծանուցում չի ուղարկվի, երբ %{org} վիզուալիզացիային մեկնաբանություն թողնվի:'
+      notification_language: 'Ձեզ ծանուցում կուղարկվի %{language} լեզվով:'
+      no_visual_records: 'Ձեր ընտրությանը համապատասխան վիզուալիզացիա չկա բազայում:'
+      no_idea_records: 'Ձեր ընտրությանը համապատասխան գաղափար չկա:'
+      visual_promoted: 'Վիզուալիզացիան առաջադրվել է Հինական էջ:'
+      visual_unpromoted: 'Վիզուալիզացիան այլևս չի հայտնվի Հինական էջում:'
+  layouts:
+    application:
+      menu_visual: Վիզուալիզացիաներ
+      menu_data: Ուղարկել տվյալներ
+      menu_idea: Գաղափարներ
+      menu_submit_visual: Ներկայացնել վիզուալիզացիա
+      menu_about: Մասին
+      menu_contact: Կապ
+      admin: Ադմինիստրատոր
+      user_profile: Ձեր պրոֆիլը
+      notifications: Ծանուցումներ
+      facebook: Facebook
+      twitter: Twitter
+      rss: RSS
+      pinterest: Pinterest
+      subscription: 'Էլեկտրոնային բաժանորդագրություն '
+      sign_out: Ելք
+      terms: Ծառայության մատուցման պայմաններ
+      js_link_title: Այցելեք ՋամփՍթարթ Ջորջիայի էջկայքը
+      js_link_text: Ստեղծվել է
+    interactive:
+      go_back: Հետ գնալ
+    unsupported_browser:
+      title: Չօժանդակվող բրաուզեր
+      p1: 'Ցավում ենք տեղեկացնել, որ Ձեր բրաուզերը հնացել է և չի կարող պատշաճ կերպով ներկայացնել էջկայքի բովանդակությունը:'
+      p2: 'Ուրախացնենք Ձեզ, որ կան մեր էջկայքի հետ համատեղելի մի շարք անվճար բրաուզերներ, որոնք Դուք կարող եք բեռնել: '
+      chrome: Chrome
+      firefox: Firefox
+      ie: Internet Explorer (միայն Windows-ի)
+      opera: Opera
+      Safari: Safari
+      admin: Ադմինիստրատոր
+      sign_out: Ելք
+      terms: Ծառայության մատուցման պայմաններ
+      js_link_title: Այցելեք ՋամփՍթարթ Ջորջիայի էջկայքը
+      js_link_text: Ստեղծվել է
+  admin:
+    index:
+      title: Ադմինիստրատիվ մաս
+      categories: Կատեգորիաներ
+      organizations: Կազմակերպություն
+      visualizations: Վիզուալիզացիաներ
+      users: Օգտատերեր
+      pages: Էջեր
+      idea_statuses: Գաղափարի կարգավիճակ
+    users:
+      edit:
+        title: Խմբագրելու իրավունք ունեցող օգտատեր
+      index:
+        title: Օգտատերեր
+      new:
+        title: Նոր օգտատեր
+      show:
+        title: 'Օգտատերի մասին '
+  root:
+    index:
+      title: Վիզուալիզացիա
+      header_get_involved: Ներգրավվի՛ր
+      header_ideas: Գաղափարներ
+      header_visuals: Վիզուալներ
+      header_data: Տվյալներ
+      text_get_involved: Եթե Ձեզ հետաքրքրում է տվյալների ուսումնասիրությունը և պատկերավորումը, կամ ունեք հետաքրքիր հարցեր, որոնց մենք կարող ենք պատկերավոր պատասխանել, միացե՛ք
+      text_ideas: 'Նորության գաղափա՞ր ունեք: Կցանկանայիք, որ լրատվամիջոցները լուսաբանեն Ձեզ համար կարևոր խնդիրը: Ներկայացրեք Ձեր գաղափարներն այստեղ: Եթե այն լավն է, շատ հավանական է, որ լրագրողը կաշխատի դրա վրա:'
+      text_visuals: 'Դուք կարող եք ներկայացնել Ձեր վիզուալ գաղափարները: Գրանցվեք մեզ մոտ և սկսեք ներկայացնել Ձեր վիզուլները Ձեր կամ Ձեր կազմակերպության անունից:'
+      text_data: 'եթե Դուք կամ Ձեր կազմակերպությունը ունի տվյալներ, որոնք Ձեր կարծիքով հանրային հետաքրքրության առարկա են, և ցանկանում եք որևէ մեկը պատկերավորի դրանք, ուղարկեք այդ տվյալները մեզ:'
+      button_ideas: Ներկայացնել գաղափար
+      button_visuals: Գրանցվել
+      button_data: Ուղարկել տվյալներ
+    about:
+      title: Մասին
+      meta_description: 'Վիզուալիզացիան յուրօրինակ մոտեցում է տվյալներին: Մենք տվյալներ ենք փնտրում մի շարք կազմակերպություններից՝ հանրային և մասնավոր: Մենք օգտագործում ենք տարբեր միջոցներ՝ տվյալները պատկերավորելու համար: Մենք տեղադրում ենք այս վիզուալիզացիաները մեր էջկայքում՝ ազատ օգտագորպման համար, կիսվում Ձեզ հետ և հույս ունենք, որ Դուք էլ կկիսվեք ուրիշների հետ:'
+    data:
+      title: Ուղարկել տվյալներ
+      meta_description: 'Ունե՞ք տվյալներ, որը կցանկանայիք պատկերավորել, բայց չունեք ժամանակ կամ հմտություններ: Տեղադրեք տվյալները այստեղ: Եթե հետաքրքիր են, շատ հնարավոր է, որ որևէ մեկը կօգտագործի այն,և Դուք կկարողանաք օգտագործել վիզուալիզացիան: Կիսվելով համայնքի հետ՝ Դուք դառնում եք ավելի մեծի մի մաս, որտեղ բոլորը շահում են:'
+      message_sent: 'Ձեր հաղորդագրությունը ուղարկված է: Շնորհակալություն մեզ հետ կապնվելու համար:'
+      send: Ուղարկել
+      name: Անուն
+      phone: Հեռախոսահամար
+      email: Էլ. հասցե
+      what_is_data: Հակիրճ ներկայացրեք տվյալները, որոնք ոցանկանում եք պատկերավորել
+      why_visualize: Ինո՞ւ եք ցանկանում պատկերավորել այս տվյալները
+      datasource: Ո՞րն է տվյալների աղբյուրը
+      file: Կցեք տվյալների ֆայլը
+      email_us: Ուղարկեք մեզ հաղորդագրություն
+      email_subject: feradi.info ուղարկեք տվյալների հայցում
+    submit_visual:
+      title: Ներկայացնել պատկեր
+      message_sent: 'Ձեր հաղորդագրությունը ուղարկված է: Շնորհակալություն մեզ հետ կապնվելու համար:'
+      send: Ուղարկել
+      name: Անուն
+      phone: Հեռախոսահամար
+      email: Էլ. հասցե
+      how_use: Ինչո՞ւ էք ցանկանում feradi.info-ում ներկայացնել Ձեր վիզուալիզացիան
+      email_us: Ուղարկեք մեզ նամակ
+      email_subject: feradi.info ուղարկեք պատկերի հայցում
+    terms:
+      title: Ծառայության մատուցման պայմաններ
+    rss:
+      title: RSS
+    contact:
+      title: Կապնվեք մեզ հետ
+      meta_description: 'Եթե հետաքրքրված եք տվյալներ պատկերավորել, բայց չգիտեք, թե ինչպես, կապնվեք մեզ հետ: Մենք սիրով կհրավիրենք Ձեզ մեր գրասենյակ՝ կիսվելու մեր գիտելիքներով և փորձառությամբ և ընդունելու Ձեզ տվյալների պատկերավորման համայնք:'
+      message_sent: 'Ձեր հաղորդագրությունը ուղարկված է: Շնորհակալություն մեզ հետ կապնվելու համար:'
+      send: Ուղարկել
+      name: Անուն
+      email: Էլ.հասցե
+      message: Հաղորդագրություն
+      address_map: Գտեք մեր գրասենյակը քարտեզի վրա
+      email_us: Ուղարկեք մեզ նամակ
+      email_subject: feradi.info կապի ձև
+      address: Շևչենկո փ. 5, բնակարան 2, Թբիլիսի, 0108, Վրաստան
+      error_title: Սխալ է տեղի ունեցել
+  visuals:
+    index:
+      title: Վիզուալիզացիա
+      title_feed: '%{app_name} վիզուալիզացիա'
+  shared:
+    visuals_show:
+      organization: Կազմակերպություն
+      reporter: Թղթակից
+      designer: Ձևավորող
+      developer: Ծրագրավորող
+      data_source: Տվյալների աղբյուր
+      data_set: Տվյալների բազա
+      type: Տիպ
+      embed: Կցել
+      embed_link_title: Տեսնել մեծ պատկերը
+      embed_link_interactive_title: Տեսնել ինտերակտիվ վիզուալիզացիան
+      comment_count: Մեկնաբանություններ
+    visuals_filter_bar:
+      categories: Կատեգորիաներ
+    ideas_list:
+      no_ideas: Գաղափարը չի գտնված
+      idea_title: 'Գաղափար #%{number}'
+    ideas_grid:
+      idea_title: 'Գաղափար #%{number}'
+    ideas_form:
+      sign_in: Մուտք գործեք՝ գրառում կատարելու համար
+  visualizations:
+    form:
+      preview: Նախնական դիտարկում
+      crop_image: Ստեղծել %{language} նմուշի պատկեր
+      reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
+      reset_url: Բեռնել նոր %{language} հղում
+      datasources_header: Տվյալների աղբյուր
+      add_datasource: Ավելացնել տվյալների աղբյուր
+    datasource_fields:
+      remove_link: Հեռացնել տվյալների աղբյուր
+  notifications:
+    index:
+      title: Ծանուցումներ
+      explain: 'Դուք կարող եք ստանալ էլեկտրոնային ծանուցումներ, երբ feradi.info-ում վիզուալիզացիա է ավելացվում: Պարզապես մուտք գործեք Facebook-ով կամ գրանցվեք feradi.info-ում'
+      all_sub_title: Բոլոր ծանուցումները
+      all_label: Ցանկանո՞ւմ եք ստանալ ծանուցումներ այս կայքէջից
+      all_no: Ոչ, մի ուղարկեք ինձ ծանուցումներ
+      all_yes: Այո, ես ուզում եմ ստանալ ծանուցումներ
+      visual_comment_sub_title: Նոր վիզուալիզացիայի մեկնաբանությունների ծանուցումներ %{org} համար
+      visual_comment_label: Ցանկանո՞ւմ եք ստանալ ծանուցումներ, երբ Ձեր կազմակերպության վիզուալիզացիային մեկնաբանություն է ավելացվում
+      visual_comment_no: Ոչ, մի ուղարկեք ինձ ծանուցումներ
+      visual_comment_yes: Այո, ես ուզում եմ ստանալ ծանուցումներ
+      new_visuals_sub_title: Նոր վիզուալիզացիայի ծանուցումներ
+      new_visuals_all: Ծանուցեք ինձ, երբ վիզուալիզացիա է ավելացվում
+      new_visuals_none: Ես չեմ ուզում ստանալ ծանուցում, երբ նոր վիզուալիզացիա է ավելացվում
+      new_visuals_by_category: Ծանուցեք ինձ, երբ վիզուալիզացիա է ավելացվում.
+      new_ideas_sub_title: Նոր գաղափարի ծանուցումներ
+      new_ideas_all: Ծանուցեք ինձ, երբ ցանկացած գաղափար է ավելացվում
+      new_ideas_none: Ես չեմ ուզում ստանալ ծանուցում, երբ նոր գաղափար է ավելացվում
+      new_ideas_by_category: Ծանուցեք ինձ, երբ գաղափար է ավելացվում.
+      language_sub_title: Ծանուցման լեզուն
+      language_label: Ի՞նչ լեզվով եք ցանկանում ստանալ ծանուցումները
+  ideas:
+    index:
+      title: Ներկայացնել գաղափարներ
+      meta_description: 'Նորության գաղափա՞ր ունեք: Կցանկանայիք, որ լրատվամիջոցները լուսաբանեն Ձեզ համար կարևոր խնդիրը: Չունե՞ք ժամանակ կամ հմտություններ, որպեսզի ինքներդ լուսաբանեք: Ներկայացրեք Ձեր գաղափարներն այստեղ: Եթե այն լավն է, շատ հավանական է, որ լրագրողը կաշխատի դրա վրա:'
+      text_ideas1: 'Նորության գաղափա՞ր ունեք: Կցանկանայիք, որ լրատվամիջոցները լուսաբանեն Ձեզ համար կարևոր խնդիրը: Չունե՞ք ժամանակ կամ հմտություններ, որպեսզի ինքներդ լուսաբանեք: Ներկայացրեք Ձեր գաղափարներն այստեղ: Եթե այն լավն է, շատ հավանական է, որ լրագրողը կաշխատի դրա վրա:'
+      text_ideas2: 'feradi.info-ն հանրայնացնում է Ձեր գաղափարները՝ թույլ տալով բաց թողնված հնարավորություններին վերածվելու լրագրողական գաղափարների գանձարանի: Ներկայացրեք, քվեարկեք, կիսվեք, և տեսք, թե ինչպես են գաղափարները նոր ձև ստանում և դառնում լուր:'
+      sign_in: Մուտք գործեք՝ գրառում կատարելու համար
+    user:
+      title: Գաղափար. %{name}-ով
+    category:
+      title: Կատեգորիա. %{name}
+    explore:
+      title: Հետազոտել գաղափարներ
+    show:
+      title: 'Գաղափար #%{number}'
+      idea_by: 'Գաղափար #%{number}-ով'
+      claimed_by: Գաղափարի վրա աշխատում են
+      finished: Ավարտված է
+      news_url: Տեսնել պատմությունը
+      take_ownership: Աշխատել գաղափարի վրա (%{org})
+      progress_update: Ավելացնել
+#      progress_update: Add Update
+      edit_progress: Խմբագրել
+#      edit_progress: Edit#Edit Progress
+      translate_idea: Թարգմանել գաղափարը
+      translate_org_progress: Թարգմանել տեքստը
+      inappropriate_idea: 'Գաղափարը հայտարարագրվել է որպես անպատշաճ և այլևս հասանելի չէ:'
+      status: Կարգավիճակ
+    search:
+      title: Որոնել. %{q}
+    edit:
+      title: 'Խմբագրել գաղափար #%{number}'
+    progress:
+      form:
+        title_claim: Պահանջել գաղափարը
+        title_progress_update: Առաջընթացի մասին նորություն
+        title_edit_progress: Խմբագրել առաջընթացը
+        title_error: 'Սխալ '
+        error: 'Անհնար էր գտնել հայցվող գաղափարը և/կամ կազմակերպությունը '
+    report:
+      form:
+        title_old: Զեկուցել անպատշաճ գաղափար
+        title: Ո՞րն է զեկույցի պահանջը
+        inappropriate: Անպատշաճ բովանդակություն
+        duplicate: Գաղափարի կրկնօրինակ
+        duplicate_reason: Ո՞ր գաղափարի կրկնօրինակ է սա /տրամադրեք հղում/
+        success: Գաղափարը զեկուցվել է

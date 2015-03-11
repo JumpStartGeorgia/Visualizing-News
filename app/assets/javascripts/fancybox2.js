@@ -24,21 +24,25 @@ $(document).ready(function(){
 	}
 
 	// register click function for 'fancybox-nested' class that should only be used on pages that are opened in fancybox
-	$('#fancybox-content a.fancybox-nested').live('click', fancybox_nested_links);
+	$('#fancybox-content a.fancybox-nested').on('click', fancybox_nested_links);
 
 	// register fancybox
-	$("a.fancybox").fancybox({
-    transitionIn: 'elastic',
-    transitionOut: 'elastic',
-	  width: 400,
-		onComplete: function ()
-		{
-		  focus_fancybox_input();
-	  }
-  });
-	$("a.fancybox_visual").fancybox({
-		autoScale: false // use size of image to determine width/height,
-	});
+	if ($("a.fancybox").length > 0){
+    $("a.fancybox").fancybox({
+      transitionIn: 'elastic',
+      transitionOut: 'elastic',
+  	  width: 400,
+  		onComplete: function ()
+  		{
+  		  focus_fancybox_input();
+  	  }
+    });
+  }
+  if ($("a.fancybox_visual").length > 0){
+  	$("a.fancybox_visual").fancybox({
+  		autoScale: false // use size of image to determine width/height,
+  	});
+  }
 
 
 });

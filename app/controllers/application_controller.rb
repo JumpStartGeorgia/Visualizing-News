@@ -95,7 +95,8 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 		@id_in_progress = gon.id_in_progress
 		@id_realized = gon.id_realized
 
-		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s
+    idea_status_published = @idea_statuses.select{|x| x.is_published}
+		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s if idea_status_published.present?
 	end
 
 	# after user logs in go back to the last page or go to root page
@@ -153,6 +154,16 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   end
 
   def set_visualization_view_type
+    # language
+    if params[:language] && I18n.available_locales.include?(params[:language].to_sym)
+      @visuals_filter_language_selection = I18n.t("app.language.#{params[:language]}")
+      @visuals_filter_language_icon = params[:language]
+    else
+      @visuals_filter_language_selection = I18n.t("app.language.#{I18n.locale}")
+      @visuals_filter_language_icon = I18n.locale.to_s
+    end
+
+    # view type
 	  if params[:view] && params[:view] == 'list'
 	    @view_type = 'shared/visuals_list'
 			@visuals_filter_view_selection = I18n.t('filters.visuals.view.list')
@@ -163,6 +174,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_view_icon = 'grid'
 	  end
 
+    # sort type
 		if params[:organize] && I18n.t('filters.visuals.organize').keys.map{|x| x.to_s}.include?(params[:organize])
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.#{params[:organize]}")
 			@visuals_filter_organize_icon = params[:organize]
@@ -172,6 +184,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_organize_icon = 'recent'
 		end
 
+    # type
 		if params[:type] && I18n.t('filters.visuals.type').keys.map{|x| x.to_s}.include?(params[:type])
 			@visuals_filter_type_selection = I18n.t("filters.visuals.type.#{params[:type]}")
 			@visuals_filter_type_icon = params[:type]
@@ -188,10 +201,20 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
     set_visualization_view_type
 
+    # language
+    if params[:language].present? && I18n.available_locales.include?(params[:language].to_sym)
+      visual_objects = visual_objects.by_language(params[:language])
+    else
+      # default to current locale
+      visual_objects = visual_objects.by_language
+    end
+
+    # promoted visuals
     if params[:promoted] == "true"
 		  visual_objects = visual_objects.promoted
     end
 
+    # type of visuals
 		if params[:type] && I18n.t('filters.visuals.type').keys.map{|x| x.to_s}.include?(params[:type])
       if params[:type] == 'not_published'
 			  visual_objects = visual_objects.unpublished
@@ -207,6 +230,7 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_type_icon = 'all'
 		end
 
+    # sort order
 		if params[:organize] && I18n.t('filters.visuals.organize').keys.map{|x| x.to_s}.include?(params[:organize])
       case params[:organize]
         when 'recent'
@@ -223,15 +247,18 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 			@visuals_filter_organize_selection = I18n.t("filters.visuals.organize.recent")
 		end
 
+    # category
 		if params[:category] && params[:category] != I18n.t('filters.category_default')
       index = @categories.index{|x| x.permalink == params[:category]}
 			visual_objects = visual_objects.by_category(@categories[index].id) if index
 		end
 
+    # search
 		if params[:q]
 			visual_objects = visual_objects.search_for(params[:q])
 		end
 
+    # organizations
     if params[:org] && @organization
 			visual_objects = visual_objects.by_organization(@organization.id)
     end

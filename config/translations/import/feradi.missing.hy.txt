@@ -1,0 +1,4 @@
+Untranslated String ID
+======================
+hy.visualization_types.comic
+hy.filters.visuals.type.comic

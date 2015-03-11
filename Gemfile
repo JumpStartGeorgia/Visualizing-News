@@ -1,24 +1,24 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '>= 1.6.0'
-gem "rails", "3.1.10"
-gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
+gem 'bundler'
+gem "rails", "3.2.21"
+gem "mysql2", "~> 0.3.18" # this gem works better with utf-8
 
 gem "json"
-gem "jquery-rails", "2.1.4"
-gem "fancybox-rails", "~> 0.1.4" # use fancybox js
+gem "jquery-rails", "3.1.2"
+gem "fancybox-rails", "~> 0.2.1" # use fancybox js
 gem "devise", "2.0.4" # user authentication
 gem 'omniauth' # to login via facebook
 gem 'omniauth-facebook' # to login via facebook
 gem "cancan", "~> 1.6.8" # user authorization
 gem "formtastic", "2.1.1" # create forms easier
 gem "formtastic-bootstrap", :git => "https://github.com/cgunther/formtastic-bootstrap.git", :branch => "bootstrap-2"
-gem "nested_form", "~> 0.1.1", :git => "https://github.com/davidray/nested_form.git" # easily build nested model forms with ajax links
-gem "globalize3", "0.2.0" # internationalization
-gem "psych", "1.2.2" # yaml parser - default psych in rails has issues
+gem "nested_form", "~> 0.3.2", :git => "https://github.com/davidray/nested_form.git" # easily build nested model forms with ajax links
+gem "globalize", "3.1.0" # internationalization
+gem "psych", "2.0.13" # yaml parser - default psych in rails has issues
 #gem "will_paginate", "3.0.3" # add paging to long lists
-gem "kaminari", "~> 0.14.1"
-gem "gon", "2.2.2" # push data into js
+gem "kaminari", "~> 0.16.3"
+gem "gon", "5.2.3" # push data into js
 gem "dynamic_form", "1.1.4" # to see form error messages
 gem "i18n-js", "~> 2.1.2" # to show translations in javascript
 gem "paperclip", "~> 3.4.0" # to upload files
@@ -26,7 +26,7 @@ gem "has_permalink", "~> 0.1.4" # create permalink slugs for nice urls
 gem "capistrano", "~> 2.12.0" # to deploy to server
 gem "exception_notification", "2.5.2" # send an email when exception occurs
 gem "useragent", :git => "https://github.com/jilion/useragent.git" # browser detection
-gem "active_attr", "~> 0.5.1" # to create tabless models; using for contact form
+gem "active_attr", "~> 0.8.5" # to create tabless models; using for contact form
 gem "use_tinymce", "~> 0.0.15" # wysiwyg
 gem "rails_autolink", "~> 1.0.9" # convert string to link if it is url
 #gem "pdfkit", "~> 0.5.2" # generate pdfs
@@ -35,19 +35,21 @@ gem "rails_autolink", "~> 1.0.9" # convert string to link if it is url
 #gem "imgkit", "~> 1.3.7" # create image of web page
 gem "headless" # use browser to load a web page via code
 gem "selenium-webdriver"  # create snapshot of web page
-gem "impressionist", "~> 1.1.1" # keep track of views
-gem "scoped_search", "~> 2.4.0" # search activerecord
-gem "whenever", "~> 0.8.2", require: false # easily schedule cron jobs
+gem "impressionist", "~> 1.5.1" # keep track of views
+gem "scoped_search", "~> 3.2.0" # search activerecord
+gem "whenever", "~> 0.9.4", require: false # easily schedule cron jobs
 gem 'rack-utf8_sanitizer', '~> 1.2.2' # prevent invalid encoding error
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem "sass-rails", "3.1.4"
-  gem "coffee-rails", "~> 3.1.1"
+  gem "sass-rails", "3.2.6"
+  gem "coffee-rails", "~> 3.2.2"
   gem "uglifier", ">= 1.0.3"
-	gem "twitter-bootstrap-rails", "~> 2.1.0"
+	gem "twitter-bootstrap-rails", "~> 2.2.8"
   gem 'therubyracer'
+  gem 'less-rails', git: 'git://github.com/metaskills/less-rails.git'
+  gem "jquery-ui-rails" , "~> 5.0.3"  
 end
 
 group :development do
@@ -58,6 +60,6 @@ group :development do
 end
 
 group :staging, :production do
-	gem "unicorn", "4.2.1" # http server
+	gem "unicorn", "4.8.3" # http server
 end
 

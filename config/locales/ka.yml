@@ -254,6 +254,8 @@ ka:
         recent: ბოლო
         likes: მოწონება
         views: ნახვა
+      language:
+        header: Language
     ideas:
       view:
         header: განლაგება
@@ -274,6 +276,7 @@ ka:
     language:
       en: English
       ka: ქართული
+      hy: Հայերեն      
     buttons:
       back: უკან
       list: იხილეთ სრულად

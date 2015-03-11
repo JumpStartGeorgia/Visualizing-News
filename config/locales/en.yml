@@ -254,6 +254,8 @@ en:
         recent: Recent
         likes: Likes
         views: Views
+      language:
+        header: Language
     ideas:
       view:
         header: Layout
@@ -274,6 +276,7 @@ en:
     language:
       en: English
       ka: ქართული
+      hy: Հայերեն      
     buttons:
       back: Back
       list: View All

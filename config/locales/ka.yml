@@ -65,7 +65,7 @@ ka:
         promoted_at: დაწინაურების თარიღი
         languages: ენები
         languages_internal: ენები
-        reset_languages: Change the Languages
+        reset_languages: ენის შეცვლა
       visualization_translation:
         title: სათაური
         permalink: ბმულის სახელი

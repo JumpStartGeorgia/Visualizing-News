@@ -56,7 +56,10 @@ $(document).ready(function(){
   // - category list in ideas form
   $('select#idea_category_ids').multiselect({
     header: false,
-    noneSelectedText: ''
+    checkAllText: gon.multiselect_checkall,
+    uncheckAllText: gon.multiselect_uncheckall,
+    noneSelectedText: gon.multiselect_noneselected,
+    selectedText: gon.multiselect_selected
   });
   // - visual notification categories
   $('select#visuals_categories').multiselect({

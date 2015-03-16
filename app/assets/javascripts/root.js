@@ -1,7 +1,7 @@
 $(function ()
 {
 
-  $('#new_message').on('submit', function ()
+  $(document).on('submit', '#new_message', function ()
   {
     $.post($(this).attr('action'), $(this).serialize(), function (data)
     {

@@ -20,6 +20,7 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
+        nickname: "მომხმარებლის სახელი"
       message:
         name: სახელი
         phone: ტელეფონი ნომერი
@@ -236,6 +237,11 @@ ka:
     interactive: ინტერაქტივი
     fact: ფაქტი
     comic: კომიქსი
+  multiselect:
+    checkAllText: 'ყველას მონიშვნა'
+    uncheckAllText: 'მონიშვნის მოხსნა'
+    noneSelectedText: '' #'მონიშვნის პარამეტრები'
+    selectedText: 'მონიშნულთა #'
   filters:
     category_default: qkhvela
     visuals:
@@ -328,6 +334,7 @@ ka:
       is_public_explanation: "იდეა საჯაროა და მისი ნახვა ყველას შეუძლია. გააუქმეთ მონიშვნა, თუ გსურთ, რომ მას მხოლოდ თქვენი ორგანიზაციის წევრები ხედავდნენ."
       article_169: "უთხარი “არა” 169-ე მუხლს! მხარი დაუჭირე გამოხატვის თავისუფლებას!"
       language: ენა
+      submit: Submit
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.

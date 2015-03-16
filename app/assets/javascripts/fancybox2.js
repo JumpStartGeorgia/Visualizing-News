@@ -24,7 +24,7 @@ $(document).ready(function(){
 	}
 
 	// register click function for 'fancybox-nested' class that should only be used on pages that are opened in fancybox
-	$('#fancybox-content a.fancybox-nested').on('click', fancybox_nested_links);
+	$(document).on('click', '#fancybox-content a.fancybox-nested', fancybox_nested_links);
 
 	// register fancybox
 	if ($("a.fancybox").length > 0){

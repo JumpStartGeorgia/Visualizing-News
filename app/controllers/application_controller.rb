@@ -105,6 +105,11 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
 
     idea_status_published = @idea_statuses.select{|x| x.is_published}
 		gon.idea_status_id_published = @idea_statuses.select{|x| x.is_published}.first.id.to_s if idea_status_published.present?
+
+    gon.multiselect_checkall = I18n.t('multiselect.checkAllText')
+    gon.multiselect_uncheckall = I18n.t('multiselect.uncheckAllText')
+    gon.multiselect_noneselected = I18n.t('multiselect.noneSelectedText')
+    gon.multiselect_selected = I18n.t('multiselect.selectedText')
 	end
 
 	# after user logs in go back to the last page or go to root page

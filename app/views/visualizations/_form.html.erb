@@ -20,7 +20,7 @@
 				<%= f.hidden_field :organization_id ,	:value => @organization.id %>
 
         <div class="radio control-group required" id="visualization_visualization_type_id_input">
-          <label class=" control-label"><%= model_class.human_attribute_name(:visualization_type_id) %><abbr title="required">*</abbr></label>
+          <label class=" control-label"><%= model_class.human_attribute_name(:visualization_type_id) %><abbr title="<%= t('formtastic.required') %>">*</abbr></label>
           <div class="choices controls">
             <% visualization_type_collection.each do |type| %>
               <label class="choice radio" for="visualization_visualization_type_id_<%=type[1]%>">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="check_boxes control-group required" id="visualization_languages_internal_input">
-          <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="required">*</abbr></label>
+          <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="<%= t('formtastic.required') %>">*</abbr></label>
           <input id="visualization_languages_internal_none" name="visualization[languages_internal][]" type="hidden" value="">
           <div class="choices controls">
             <% I18n.available_locales.each do |locale| %>
@@ -132,7 +132,7 @@
       <%= f.hidden_field :reset_languages, :value => true %>
       <%= f.hidden_field :visualization_type_id , :value => @visualization.visualization_type_id %>
       <div class="check_boxes control-group required" id="visualization_languages_internal_input">
-        <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="required">*</abbr></label>
+        <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="<%= t('formtastic.required') %>">*</abbr></label>
         <input id="visualization_languages_internal_none" name="visualization[languages_internal][]" type="hidden" value="">
         <div class="choices controls">
           <% I18n.available_locales.each do |locale| %>
@@ -302,6 +302,6 @@
     <%= f.submit nil, :class => 'btn btn-primary' %>
 	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('helpers.links.reset'), :name => :reset %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                organization_path(params[:organization_id]), :class => 'btn' %>
+                organization_path(params[:organization_id]), :class => 'btn btn-mini btn-warning' %>
   </div>
 <% end %>

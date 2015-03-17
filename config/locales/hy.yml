@@ -518,6 +518,9 @@ hy:
       add_datasource: Ավելացնել տվյալների աղբյուր
     datasource_fields:
       remove_link: Հեռացնել տվյալների աղբյուր
+  organizations:
+    edit:
+      title: Խմբագրել Կազմակերպություն տվյալները
   notifications:
     index:
       title: Ծանուցումներ

@@ -397,13 +397,21 @@
 			// width for the items (%)
 			var w = this.options.orientation === 'horizontal' ? ( Math.floor( this.$carousel.width() / this.options.minItems ) * 100 ) / this.$carousel.width() : 100;
 			
-// hard code max height to 70px
-			this.$items.css( {
-				'width' : w + '%',
-				'max-width' : this.imgSize.width,
-//				'max-height' : this.imgSize.height
-				'max-height' : 70
-			} );
+			// hard code max height to 70px
+			// if armenian, then set width
+			if ($('html').attr('lang') == 'hy'){
+				this.$items.css( {
+					'width' : 115,
+					'max-height' : 70
+				} );
+			}else{
+				this.$items.css( {
+					'width' : w + '%',
+					'max-width' : this.imgSize.width,
+	//				'max-height' : this.imgSize.height
+					'max-height' : 70
+				} );
+			}
 
 			if( this.options.orientation === 'vertical' ) {
 			

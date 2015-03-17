@@ -106,9 +106,9 @@ hy:
     select:
       prompt: "խնդրում ենք, ընտրեք"
     submit:
-      create: "կազմել %{model}"
+      create: "Ստեղծել %{model}"
       submit: "պահել %{model} "
-      update: "նորացնել %{model}"
+      update: "Թարմացնել %{model}"
   number:
     currency:
       format:

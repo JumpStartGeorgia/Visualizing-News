@@ -5,7 +5,7 @@ hy:
     :yes: այո
     :no: ոչ
     create: "Ստեղծել %{model} "
-    update: "պահել %{model} "
+    update: "Թարմացնել %{model} "
     submit: "պահել %{model} "
     cancel: "վերացնել %{model}"
     reset: "բեռնել %{model} "

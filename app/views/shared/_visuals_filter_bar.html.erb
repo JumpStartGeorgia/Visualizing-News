@@ -25,7 +25,7 @@ hide_slider = ''
           else
             li_class = ''  
           end %>
-          <li <%= li_class %>>
+          <li <%= li_class %> id="category_item_<%= cat.id %>">
             <%= link_to(url_for(params.merge(:category => cat.permalink)),
               :'data-path' => cat.icon.url,
               :title => cat.name) do %>

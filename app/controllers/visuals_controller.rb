@@ -171,13 +171,14 @@ Rails.logger.debug "****************** user is in org"
 				message.bcc = Notification.visual_comment(visualization.organization_id, locale)
 				if message.bcc && !message.bcc.empty?
 					message.locale = locale
-          title = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.title
-          permalink = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.permalink
-					message.subject = I18n.t("mailer.notification.visualization_comment.subject",
-						:title => title, :locale => locale)
-					message.message = I18n.t("mailer.notification.visualization_comment.message", :locale => locale)
-					message.url_id = permalink
-					NotificationMailer.visualization_comment(message).deliver
+          trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+          if trans.present?
+  					message.subject = I18n.t("mailer.notification.visualization_comment.subject",
+  						:title => trans.title, :locale => locale)
+  					message.message = I18n.t("mailer.notification.visualization_comment.message", :locale => locale)
+  					message.url_id = trans.permalink
+  					NotificationMailer.visualization_comment(message).deliver
+          end
 				end
 			end
 
@@ -205,10 +206,12 @@ Rails.logger.debug "****************** user is in org"
 				  if message.bcc.length > 0
 					  message.locale = locale
             trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
-					  message.subject = I18n.t("mailer.notification.visualization_promoted.subject", :title => trans.title, :locale => locale)
-					  message.message = I18n.t("mailer.notification.visualization_promoted.message", :locale => locale)
-					  message.url_id = trans.permalink
-					  NotificationMailer.visualization_promoted(message).deliver
+            if trans.present?
+  					  message.subject = I18n.t("mailer.notification.visualization_promoted.subject", :title => trans.title, :locale => locale)
+  					  message.message = I18n.t("mailer.notification.visualization_promoted.message", :locale => locale)
+  					  message.url_id = trans.permalink
+  					  NotificationMailer.visualization_promoted(message).deliver
+            end
 				  end
 			  end
 

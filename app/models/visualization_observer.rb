@@ -19,11 +19,13 @@ class VisualizationObserver < ActiveRecord::Observer
 				  if message.bcc.length > 0
 					  message.locale = locale
             trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
-					  message.subject = I18n.t("mailer.notification.new_visualization_needs_promotion.subject", :locale => locale)
-					  message.message = I18n.t("mailer.notification.new_visualization_needs_promotion.message", :title => trans.title, :locale => locale)
-					  message.org_message = trans.explanation
-					  message.url_id = trans.permalink
-					  NotificationMailer.new_visualization_needs_promotion(message).deliver
+            if trans.present?
+						  message.subject = I18n.t("mailer.notification.new_visualization_needs_promotion.subject", :locale => locale)
+						  message.message = I18n.t("mailer.notification.new_visualization_needs_promotion.message", :title => trans.title, :locale => locale)
+						  message.org_message = trans.explanation
+						  message.url_id = trans.permalink
+						  NotificationMailer.new_visualization_needs_promotion(message).deliver
+					  end
 				  end
 			  end
 		  end
@@ -43,11 +45,13 @@ class VisualizationObserver < ActiveRecord::Observer
 					  if message.bcc.length > 0
 						  message.locale = locale
               trans = visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
-						  message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)
-						  message.message = I18n.t("mailer.notification.new_visualization.message", :title => trans.title, :locale => locale)
-						  message.org_message = trans.explanation
-						  message.url_id = trans.permalink
-						  NotificationMailer.new_visualization(message).deliver
+              if trans.present?
+							  message.subject = I18n.t("mailer.notification.new_visualization.subject", :locale => locale)
+							  message.message = I18n.t("mailer.notification.new_visualization.message", :title => trans.title, :locale => locale)
+							  message.org_message = trans.explanation
+							  message.url_id = trans.permalink
+							  NotificationMailer.new_visualization(message).deliver
+						  end
   					end
 					end
 				end

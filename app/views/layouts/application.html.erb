@@ -10,24 +10,27 @@
     <% else %>
       <%
         desc = t("#{params[:controller]}.#{params[:action]}.meta_description", :default => '')
-        desc = @visualization.explanation.gsub("\n", " ") if @visualization && @visualization.id && @visualization.explanation.present?
-        desc = @idea.explaination.gsub("\n", " ") if @idea && @idea.id && @idea.explaination.present?
-      %>
+        share_image = full_url(image_path('logo.png'))
+        Globalize.with_locale(@language) do
+          if @visualization && @visualization.id && @visualization.explanation.present?
+            desc = @visualization.explanation.gsub("\n", " ") 
+          elsif @idea && @idea.id && @idea.explaination.present?
+            desc = @idea.explaination.gsub("\n", " ") 
+          end
 
-      <meta name="description" content="<%= desc %>">
+          if @visualization && @visualization.id && @visualization.image_file_name.present?
+            share_image = full_url(@visualization.image.url(:thumb, false))
+          end
+        end
+      %>
 
 		  <meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} | #{t('app.common.app_name')}" :
 				  t('app.common.app_name') %>" />
-		  <% if @visualization && @visualization.id && @visualization.explanation.present? %>
-    		<meta property="og:description" content="<%= @visualization.explanation%>" />
-      <% end %>
+  		<meta property="og:description" content="<%= desc %>" />
+      <meta name="description" content="<%= desc %>">
 		  <meta property="og:type" content="non_profit" />
 		  <meta property="og:url" content="<%= current_url %>" />
-		  <% if @visualization && @visualization.id && @visualization.image_file_name.present? %>
-			  <meta property="og:image" content="<%= full_url(@visualization.image.url(:thumb, false)) %>" />
-      <% else %>
-			  <meta property="og:image" content="<%= full_url(image_path('logo.png')) %>" />
-		  <% end %>
+		  <meta property="og:image" content="<%= share_image %>" />
 		  <meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
 		  <meta property="fb:app_id" content="<%= ENV['VISUALIZING_NEWS_FACEBOOK_APP_ID'] %>" />
     <% end %>

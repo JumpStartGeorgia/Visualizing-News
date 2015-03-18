@@ -112,7 +112,7 @@ Rails.logger.debug "****************** user is in org"
   end
 
   def fb_like
-    visualization = Visualization.published.find_by_permalink(params[:id])
+    visualization = Visualization.published.readonly(false).find_by_permalink(params[:id])
     visualization.process_like if visualization.present?  
     render :nothing => true
   end
@@ -132,7 +132,7 @@ Rails.logger.debug "****************** user is in org"
 		end
 
     if ['down', 'up'].include?(params[:status])
-      visualization = Visualization.published.find_by_permalink(params[:id])
+      visualization = Visualization.published.readonly(false).find_by_permalink(params[:id])
 
       if !visualization.blank?
         visualization.process_vote(current_user, params[:status])
@@ -159,7 +159,7 @@ Rails.logger.debug "****************** user is in org"
   end
 
 	def comment_notification
-    visualization = Visualization.published.find_by_permalink(params[:id])
+    visualization = Visualization.published.readonly(false).find_by_permalink(params[:id])
 		if visualization
       # update the fb_count value
       visualization.fb_count = visualization.fb_count + 1
@@ -190,7 +190,7 @@ Rails.logger.debug "****************** user is in org"
 
 
   def promote
-    visualization = Visualization.published.find_by_permalink(params[:id])
+    visualization = Visualization.published.readonly(false).find_by_permalink(params[:id])
     if visualization
       if !visualization.is_promoted
         visualization.is_promoted = true
@@ -221,7 +221,7 @@ Rails.logger.debug "****************** user is in org"
   end
 
   def unpromote
-    visualization = Visualization.published.find_by_permalink(params[:id])
+    visualization = Visualization.published.readonly(false).find_by_permalink(params[:id])
     if visualization
       if visualization.is_promoted
         visualization.is_promoted = false

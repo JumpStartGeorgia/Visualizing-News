@@ -64,12 +64,18 @@ $(document).ready(function(){
   // - visual notification categories
   $('select#visuals_categories').multiselect({
     header: false,
-    noneSelectedText: ''
+    checkAllText: gon.multiselect_checkall,
+    uncheckAllText: gon.multiselect_uncheckall,
+    noneSelectedText: gon.multiselect_noneselected,
+    selectedText: gon.multiselect_selected
   });
   // - idea notification categories
   $('select#ideas_categories').multiselect({
     header: false,
-    noneSelectedText: ''
+    checkAllText: gon.multiselect_checkall,
+    uncheckAllText: gon.multiselect_uncheckall,
+    noneSelectedText: gon.multiselect_noneselected,
+    selectedText: gon.multiselect_selected
   });
 
 

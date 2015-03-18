@@ -13,6 +13,9 @@
   // - category list in ideas form
   $('select#idea_category_ids_edit').multiselect({
     header: false,
-    noneSelectedText: ''
+    checkAllText: gon.multiselect_checkall,
+    uncheckAllText: gon.multiselect_uncheckall,
+    noneSelectedText: gon.multiselect_noneselected,
+    selectedText: gon.multiselect_selected
   });
 

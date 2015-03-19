@@ -194,7 +194,11 @@ class Visualization < ActiveRecord::Base
 	## image file in image_file object
 	##############################
 	def image_record
-		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.image_record
+		x = self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first
+    if x.present?
+      return x.image_record
+    end
+    return nil
 	end
 	def image_file_name
 		image_record.file_file_name if !image_record.blank?

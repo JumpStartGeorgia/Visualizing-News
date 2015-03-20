@@ -251,7 +251,7 @@ protected
     visualization = Visualization.published.find_by_permalink(params[:id])
 		record_id = nil
 
-		if !visualizations.blank? && !visualization.blank?
+		if visualizations.present? && visualization.present?
 			index = visualizations.index{|x| x.id == visualization.id}
       if type == 'next'
   			if index
@@ -279,11 +279,20 @@ protected
   			# get the next record
   			visual = Visualization.published.find_by_id(record_id)
 
-  			if visual
-  			  # found next record, go to it
-          redirect_to visualization_path(visual.permalink, @param_options)
-          return
-  	    end
+        if visual
+          # decide which locale to use
+          permalink = ''
+          if visual.translated_locales.include?(I18n.locale)
+            # found next record, go to it
+            redirect_to visualization_path(visual.permalink, @param_options)
+            return
+          elsif params[:language].present? && visual.translated_locales.include?(params[:language].to_sym)
+            # found next record, go to it
+            redirect_to visualization_path(visual.translation_for(params[:language]).permalink, @param_options)
+            return
+          end
+        end
+
       end
     end
 

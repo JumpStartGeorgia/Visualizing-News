@@ -212,7 +212,11 @@ class Visualization < ActiveRecord::Base
 	## dataset file in dataset_file object
 	##############################
 	def dataset_record
-		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.dataset_record
+		x = self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first
+    if x.present?
+      return x.dataset_record
+    end
+    return nil
 	end
 	def dataset_file_name
 		dataset_record.file_file_name if !dataset_record.blank?

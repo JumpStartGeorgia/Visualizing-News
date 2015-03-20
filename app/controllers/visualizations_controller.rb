@@ -226,7 +226,7 @@ class VisualizationsController < ApplicationController
   		Visualization.transaction do
   			files = Hash.new
 
-        # if reset languages selected, destory any translation records no longer needed
+        # if reset languages selected, destroy any translation records no longer needed
         reset_languages = false
         if params[:visualization][:reset_languages].present? && params[:visualization][:reset_languages] == 'true'
           reset_languages = true
@@ -238,6 +238,7 @@ class VisualizationsController < ApplicationController
               x = params[:visualization][:visualization_translations_attributes].values.select{|x| x[:locale] == locale}.first
               if x.present?
                 if x[:id].present?
+                  logger.debug "%%%%%%% removing locale #{locale}"
                   # mark it for destruction
                   x[:_destroy] = "1"
                 else
@@ -326,7 +327,14 @@ class VisualizationsController < ApplicationController
 
             # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
             # - have to get it by hand
-  				  permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+            permalink = ''
+            lang = ''
+            if @visualization.translated_locales.include?(I18n.locale)
+              permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+            else
+    				  permalink = @visualization.visualization_translations.first.permalink
+              lang = @visualization.visualization_translations.first.locale
+            end
 
             format.html {
   					  if processed_crop || reset_crop || reset_languages
@@ -335,13 +343,28 @@ class VisualizationsController < ApplicationController
   									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
               else
   						  # redirect to show page
-  						  redirect_to organization_visualization_path(params[:organization_id], permalink),
+  						  redirect_to organization_visualization_path(params[:organization_id], permalink, language: lang),
   									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
   					  end
   				  }
             format.json { head :ok }
           else
             logger.debug "%%%%%%%%%%%% error = #{@visualization.errors.full_messages}"
+
+            if params[:visualization][:reset_languages].present?
+              logger.debug "%%%%% error was in reset languages"
+              @reset_lanaguages = true
+              # make sure any missing translation locales are added
+              if @visualization.visualization_translations.length != I18n.available_locales.length
+                I18n.available_locales.each do |locale|
+                  @visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
+                  # add image file record
+                  x = @visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+                  x.build_image_file if x.image_file.blank?
+                end
+              end
+            end
+
   				  gon.edit_visualization = true
   				  gon.visualization_type = @visualization.visualization_type_id
   				  gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?

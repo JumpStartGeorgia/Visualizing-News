@@ -251,26 +251,6 @@ class VisualizationsController < ApplicationController
 
           logger.debug "%%%%%%% attributes now #{params[:visualization][:visualization_translations_attributes].values}"
 
-          # if there is a new language, record that we need to make a thumbnail of the image
-          # if interactive and new, take screen shots of urls
-          if params[:visualization][:visualization_type_id] == Visualization::TYPES[:interactive]
-      logger.debug "//////////// is interactive, taking snapshots"
-      #       @visualization.visualization_translations.each do |trans|
-      # logger.debug "//////////// - locale = #{trans.locale}"
-      #         # only proceed if the url is valid
-      #         if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
-      #             !trans.interactive_url.blank? && trans.image_file_name.blank?
-      # logger.debug "//////////// -- records are valid, taking screen shot"
-      #           # get screenshot of interactive site
-      #           filename = Screenshot.take(trans.interactive_url)
-      #           if filename
-      #             files[trans.locale] = filename
-      #             trans.image_file.file = File.new(filename, 'r')
-      #           end
-      #         end
-      #       end
-          end
-
         end 
 
   		  # if reset crop flag set, reset image is cropped falg
@@ -290,6 +270,7 @@ class VisualizationsController < ApplicationController
   			  ptrans = params[:visualization][:visualization_translations_attributes][key]
           logger.debug "@@@@@@ ptrans = #{ptrans.inspect}"
   			  if ptrans[:reload_file] == "true"
+            logger.debug "@@@@@@ reload file = true!"
   				  trans = @visualization.visualization_translations.select{|x| x.id.to_s == ptrans[:id]}.first
             logger.debug "@@@@@@ trans #{trans.inspect}"
             if trans.present?
@@ -300,7 +281,7 @@ class VisualizationsController < ApplicationController
 
               # if this is interactive, redo screenshot
       				if trans.image_file.visualization_type_id == Visualization::TYPES[:interactive] && !ptrans[:interactive_url].blank?
-      logger.debug "//////////// -- taking screen shot"
+                logger.debug "//////////// -- taking screen shot"
     					  # get screenshot of interactive site
                 filename = Screenshot.take(ptrans[:interactive_url])
                 if filename
@@ -312,9 +293,30 @@ class VisualizationsController < ApplicationController
   			  end
   		  end
         
+        @visualization.assign_attributes(params[:visualization])
+
+        # if interactive and new, take screen shots of urls
+        if @visualization.visualization_type_id == Visualization::TYPES[:interactive]
+          logger.debug "//////////// is interactive, taking snapshots"
+          @visualization.visualization_translations.each do |trans|
+            logger.debug "//////////// - locale = #{trans.locale}"
+            # only proceed if the url is valid
+            if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
+                !trans.interactive_url.blank? && trans.image_file_name.blank?
+              
+              logger.debug "//////////// -- records are valid, taking screen shot"
+              # get screenshot of interactive site
+              filename = Screenshot.take(trans.interactive_url)
+              if filename
+                files[trans.locale] = filename
+                trans.image_file.file = File.new(filename, 'r')
+              end
+            end
+          end
+        end
 
         respond_to do |format|
-          if @visualization.update_attributes(params[:visualization])
+          if @visualization.save
   				  # if the visuals need to be re-cropped, do it now
   				  processed_crop = false
   				  @visualization.visualization_translations.each do |trans|

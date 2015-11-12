@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bundler'
-gem "rails", "3.2.21"
+gem "rails", "3.2.22"
 gem "mysql2", "~> 0.3.18" # this gem works better with utf-8
 
 gem "json"

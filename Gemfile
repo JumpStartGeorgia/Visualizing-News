@@ -51,7 +51,7 @@ group :assets do
   gem 'therubyracer'
   gem 'less-rails', git: 'git://github.com/metaskills/less-rails.git'
 	gem "twitter-bootstrap-rails", "~> 2.2.8"
-  gem "jquery-ui-rails" , "~> 5.0.3"  
+  gem "jquery-ui-rails" , "~> 5.0.3"
 end
 
 group :development do
@@ -64,4 +64,3 @@ end
 group :staging, :production do
 	gem "unicorn", "4.8.3" # http server
 end
-

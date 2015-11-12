@@ -15,10 +15,7 @@
 /tmp
 
 # ignore file uploads
-/public/system/visualization/*
-/public/system/visualizations/*
-/public/system/organization/*
-/public/system/story/*
+/public/system/*
 
 #ignore db config
 /config/database.yml

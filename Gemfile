@@ -77,6 +77,12 @@ group :test do
   # Feature testing
   gem 'capybara', '~> 2.4.4'
 
+  # Can launch browser in case of feature spec errors
+  gem 'launchy', '~> 2.4.3'
+
+  # Tasks screenshots when capybara feature test fails
+  gem 'capybara-screenshot', '~> 1.0.4'
+
   # Fast web driver with JavaScript support for feature tests
   gem 'poltergeist', '~> 1.7'
 end

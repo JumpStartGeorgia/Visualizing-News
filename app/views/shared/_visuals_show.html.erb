@@ -75,30 +75,30 @@
     <div class="main_block">
       <div id="visual">
   			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-  		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text), 
+  		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
               url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
           <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
   			<% else %>
-  		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text), 
+  		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
               @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
   			<% end %>
       </div>
     </div>
     <div id="visualization_sidebar" class="side_block">
-  		<% if @visualization.explanation.present? && 
-            (@visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
-             @visualization.visualization_type_id == Visualization::TYPES[:interactive]  || 
+  		<% if @visualization.explanation.present? &&
+            (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+             @visualization.visualization_type_id == Visualization::TYPES[:interactive]  ||
              @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
         <div id="explanation">
           <%= simple_format @visualization.explanation %>
         </div>
       <% end %>
 
-      <% 
-         source_class = '' 
-  		   if @visualization.explanation.blank? || @visualization.visualization_type_id == Visualization::TYPES[:fact] 
+      <%
+         source_class = ''
+  		   if @visualization.explanation.blank? || @visualization.visualization_type_id == Visualization::TYPES[:fact]
   		    source_class = "class=no_explanation"
-         end 
+         end
       %>
       <div id="source" <%= source_class %>>
         <ul>
@@ -110,9 +110,9 @@
     					</span>
             </li>
           <% end %>
-  				<% if @visualization.reporter.present? && 
-                (@visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
-                @visualization.visualization_type_id == Visualization::TYPES[:interactive] || 
+  				<% if @visualization.reporter.present? &&
+                (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
                 @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
             <li>
               <%= "#{t('.reporter')}: "%>
@@ -156,9 +156,9 @@
     					</span>
             </li>
           <% end %>
-  				<% if @visualization.dataset_file_name.present? && 
-                (@visualization.visualization_type_id == Visualization::TYPES[:infographic] || 
-  				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] || 
+  				<% if @visualization.dataset_file_name.present? &&
+                (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+  				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
                 @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
             <li>
               <%= "#{t('.data_set')}: " %>
@@ -196,7 +196,7 @@
           <li>
             <%= "#{t('.type')}:"%>
   						<span class="val">
-  							<%= link_to @visualization.visualization_type_name, 
+  							<%= link_to @visualization.visualization_type_name,
                     visuals_path(remove_unwanted_params(merge_visual_params([{:key => :type, :value => @visualization.visualization_type_name(true).downcase}]), true)) %>
   						</span>
           </li>
@@ -223,10 +223,10 @@
   			</div>
   			<div class="embed">
   			  <span><%= t('.embed')%>:</span>
-          <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||  
-                @visualization.visualization_type_id == Visualization::TYPES[:fact] ||  
+          <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
                 @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
-                
+
   			    <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
   					  onmouseup="return false;"><%= link_to(
   						  image_tag(full_url(@visualization.image.url(:medium, false)),
@@ -298,4 +298,3 @@
     </div>
   </div>
 <% end %>
-

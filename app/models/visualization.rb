@@ -8,7 +8,7 @@ class Visualization < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
-  TYPES = {:infographic => 1, :interactive => 2, :fact => 3, :comic => 4}
+  TYPES = {:infographic => 1, :interactive => 2, :fact => 3, :comic => 4, :video => 5}
 
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories

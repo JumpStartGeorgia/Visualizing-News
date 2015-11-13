@@ -6,7 +6,7 @@ RSpec.describe 'Video', type: :feature do
   end
 
   it 'embed code is visible on show page' do
-    visit visualization_path(video_visualization)
+    visit visualization_path(video_visualization.reload.permalink)
 
     expect(page).to have_content('VIDEO EMBED CODE RUNS HERE')
   end

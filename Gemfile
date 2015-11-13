@@ -61,6 +61,31 @@ group :development do
   # gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git' # speed up loading page in dev mode
 end
 
+group :test do
+  # Specification testing
+  gem 'rspec-rails', '~> 3.1.0'
+
+  # Easy data creation in tests
+  gem 'factory_girl_rails', '~> 4.5.0'
+
+  # Cleans database during tests
+  gem 'database_cleaner', '~> 1.3.0'
+
+  # Testing API for Rack apps
+  gem 'rack-test', '0.6.3'
+
+  # Feature testing
+  gem 'capybara', '~> 2.4.4'
+
+  # Fast web driver with JavaScript support for feature tests
+  gem 'poltergeist', '~> 1.7'
+end
+
+group :development, :test do
+  # Debugging: write 'binding.pry' in Ruby code to debug in terminal
+  gem 'pry-byebug', '~> 3.1.0'
+end
+
 group :staging, :production do
 	gem "unicorn", "4.8.3" # http server
 end

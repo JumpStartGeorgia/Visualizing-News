@@ -13,6 +13,12 @@ RSpec.describe 'Video', type: :feature, js: true do
 
     visit visualization_path(video_visualization.permalink)
 
-    expect(page).to have_content(video_visualization.video_embed)
+    # get html content of #visual div
+    visual_html = page.evaluate_script(
+      "document.getElementById('visual').innerHTML"
+    ).strip
+
+    # Check that the html is the video embed code
+    expect(visual_html).to eq(video_visualization.video_embed)
   end
 end

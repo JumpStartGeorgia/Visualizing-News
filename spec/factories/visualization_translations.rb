@@ -11,9 +11,9 @@ FactoryGirl.define do
     end
 
     factory :video_visualization_translation do
-      video_url 'http://www.youtube.com/not-sure-what-path-to-put-here'
+      video_url 'https://www.youtube.com/watch?v=KN56RvmK5_Y'
       video_embed do
-        "This is the video embed code for video url #{video_url}"
+        '<iframe width="560" height="315" src="https://www.youtube.com/embed/KN56RvmK5_Y" frameborder="0" allowfullscreen=""></iframe>'
       end
     end
   end

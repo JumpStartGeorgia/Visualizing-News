@@ -8,10 +8,7 @@ RSpec.describe 'Video', type: :feature do
   it 'embed code is visible on show page' do
     video_visualization.update_column(:published, true)
     video_visualization.update_column(:published_date, Time.now)
-    c = Category.create
-    c.name = 'test category 1'
-    c.save!
-    video_visualization.categories << c
+    video_visualization.categories << FactoryGirl.create(:category)
 
     video_visualization.organization.name = 'Test organization 1'
     video_visualization.organization.save!

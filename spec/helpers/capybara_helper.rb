@@ -8,4 +8,14 @@ RSpec.configure do |_config|
 
   # Use poltergeist driver for specs requiring JavaScript
   Capybara.javascript_driver = :poltergeist
+
+  # Run feature tests in chrome (change out when not debugging)
+  run_in_chrome = true
+  if run_in_chrome
+    Capybara.register_driver :chrome do |app|
+      Capybara::Selenium::Driver.new(app, browser: :chrome)
+    end
+
+    Capybara.javascript_driver = :chrome
+  end
 end

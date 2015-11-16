@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Video', type: :feature do
+  let(:category) { FactoryGirl.create(:category) }
   let(:video_visualization) do
-    FactoryGirl.create(:video_visualization)
+    FactoryGirl.create(:video_visualization_published,
+                       categories: [category])
   end
 
   it 'embed code is visible on show page' do
-    video_visualization.update_column(:published, true)
-    video_visualization.update_column(:published_date, Time.now)
-    video_visualization.categories << FactoryGirl.create(:category)
-
     video_visualization.reload
 
     visit visualization_path(video_visualization.permalink)

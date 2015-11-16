@@ -20,6 +20,11 @@ FactoryGirl.define do
       before :create do |visualization|
         visualization.load_languages_internal
       end
+
+      factory :video_visualization_published do
+        published true
+        published_date Time.now
+      end
     end
   end
 end

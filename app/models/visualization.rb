@@ -1,7 +1,7 @@
 class Visualization < ActiveRecord::Base
   is_impressionable :counter_cache => true
 	translates :title, :explanation, :reporter, :designer, :developer,
-		:interactive_url,	:permalink, :fb_count, :visualization_text
+		:interactive_url,	:permalink, :fb_count, :visualization_text, :video_url
   scoped_search :in => :visualization_translations, :on => [:title, :explanation]
 
 

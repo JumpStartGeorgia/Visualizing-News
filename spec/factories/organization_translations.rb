@@ -6,5 +6,9 @@ FactoryGirl.define do
     sequence :name do |n|
       "test organization #{n}"
     end
+
+    permalink do
+      Utf8Converter.convert_ka_to_en(name).to_ascii.downcase.gsub(' ', '-')
+    end
   end
 end

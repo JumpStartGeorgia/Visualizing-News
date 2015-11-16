@@ -10,10 +10,8 @@ RSpec.describe 'Video', type: :feature do
     video_visualization.update_column(:published_date, Time.now)
     video_visualization.categories << FactoryGirl.create(:category)
 
-    video_visualization.organization.name = 'Test organization 1'
-    video_visualization.organization.save!
-    ot = video_visualization.organization.translations.first
-    ot.permalink = Utf8Converter.convert_ka_to_en(ot.name).to_ascii.downcase!.gsub!(' ', '-')
+    ot = video_visualization.organization.reload.translations.first
+    ot.permalink = Utf8Converter.convert_ka_to_en(ot.name).to_ascii.downcase.gsub(' ', '-')
     ot.save!
 
     video_visualization.reload

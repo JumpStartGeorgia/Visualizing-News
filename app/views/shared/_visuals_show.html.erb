@@ -78,6 +78,8 @@
   		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
               url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
           <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
+        <% elsif @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+          VIDEO EMBED CODE RUNS HERE
   			<% else %>
   		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
               @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
@@ -216,9 +218,11 @@
   				  <%= link_to(image_tag("share_gplus.png"),
   							  "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url}", :title => "google+",
   							  :target => "_blank") %>
-  				  <%= link_to(image_tag("share_pinterest.png"),
+            <% if @visualization.image.present? %>
+  				    <%= link_to(image_tag("share_pinterest.png"),
   							"http://pinterest.com/pin/create/button/?url=#{current_url}&media=#{full_url(image_path(@visualization.image.url(:medium, false)))}&description=#{@visualization.title}", :title => "pinterest",
   							:onclick => "window.open(this.href); return false;") %>
+            <% end %>
   				</div>
   			</div>
   			<div class="embed">

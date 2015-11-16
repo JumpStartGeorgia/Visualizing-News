@@ -12,6 +12,9 @@ FactoryGirl.define do
 
     factory :video_visualization_translation do
       video_url 'http://www.youtube.com/not-sure-what-path-to-put-here'
+      video_embed do
+        "This is the video embed code for video url #{video_url}"
+      end
     end
   end
 end

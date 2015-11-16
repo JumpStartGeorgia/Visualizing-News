@@ -79,8 +79,7 @@
               url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
           <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
         <% elsif @visualization.visualization_type_id == Visualization::TYPES[:video] %>
-          <%= @visualization.video_url %>
-          VIDEO EMBED CODE RUNS HERE
+          <%= @visualization.video_embed %>
   			<% else %>
   		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
               @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>

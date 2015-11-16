@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Video', type: :feature do
+RSpec.describe 'Video', type: :feature, js: true do
   let(:category) { FactoryGirl.create(:category) }
   let(:video_visualization) do
     FactoryGirl.create(:video_visualization_published,
@@ -13,7 +13,6 @@ RSpec.describe 'Video', type: :feature do
 
     visit visualization_path(video_visualization.permalink)
 
-    expect(page).to have_content('VIDEO EMBED CODE RUNS HERE')
-    expect(page).to have_content(video_visualization.video_url)
+    expect(page).to have_content(video_visualization.video_embed)
   end
 end

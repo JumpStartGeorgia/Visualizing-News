@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'helpers/capybara_helper'
 require 'helpers/database_cleaner_helper'
 require 'helpers/locale_helper'
+require 'helpers/authentication_helper.rb'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

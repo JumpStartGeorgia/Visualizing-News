@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Video', type: :feature, js: true do
+  let(:organization) { FactoryGirl.create(:organization) }
+
+  let(:user) { FactoryGirl.create(:user) }
+
   let(:category) { FactoryGirl.create(:category) }
+
   let(:video_visualization) do
     FactoryGirl.create(:video_visualization_published,
                        categories: [category])
@@ -20,5 +25,15 @@ RSpec.describe 'Video', type: :feature, js: true do
 
     # Check that the html is the video embed code
     expect(visual_html).to eq(video_visualization.video_embed)
+  end
+
+  it 'can be created through form' do
+    login_as user, scope: :user
+    user.organizations << organization
+
+    visit new_organization_visualization_path(organization.reload.permalink)
+    expect(page).to have_content('New Visualization')
+    # visit visualization form
+    # fill everything out
   end
 end

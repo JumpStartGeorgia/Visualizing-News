@@ -26,12 +26,18 @@ function show_visualization_type_fields(type_id){
   if (type_id == '1' || type_id == '3' || type_id == '4'){ // infographic, fact, comic
     $('.trans_visual_file').show(300);
     $('.trans_interactive_url').hide(300);
+		$('.trans_video_url').hide(300);
     $('input[id$="_interactive_url"]').val('');
   } else if (type_id == '2'){ // interactive
     $('.trans_interactive_url').show(300);
+		$('.trans_video_url').hide(300);
     $('.trans_visual_file').hide(300);
     $('input[id$="_visual"]').val('');;
-  } else {
+  } else if (type_id == '5'){
+		$('.trans_video_url').show(300);
+		$('.trans_visual_file').show(300);
+	} else {
+		$('.trans_video_url').hide(300);
     $('.trans_interactive_url').hide(300);
     $('.trans_visual_file').hide(300);
   }
@@ -61,8 +67,8 @@ $(document).ready(function(){
 	// visualization form
 	if (gon.edit_visualization){
     // make sure the form is pre-loaded with the correct types and languages set
-    if($('input[name="visualization[visualization_type_id]"]:checked').length > 0){      
-      // this happens when form is add 
+    if($('input[name="visualization[visualization_type_id]"]:checked').length > 0){
+      // this happens when form is add
       show_visualization_type_fields($('input[name="visualization[visualization_type_id]"]:checked').attr('value'));
     }else if ($('input#visualization_visualization_type_id').length > 0){
       // this happens when editing languages of existing record
@@ -85,10 +91,16 @@ $(document).ready(function(){
 		if (gon.visualization_type){
 			if (gon.visualization_type == 1 || gon.visualization_type == 3){
 				$('.trans_visual_file').show();
+				$('.trans_video_url').hide();
 				$('.trans_interactive_url').hide();
 			} else if (gon.visualization_type == 2){
 				$('.trans_interactive_url').show();
+				$('.trans_video_url').hide();
 				$('.trans_visual_file').hide();
+			} else if (gon.visualization_type == 5) {
+				$('.trans_visual_file').show();
+				$('.trans_video_url').show();
+				$('.trans_interactive_url').hide();
 			}
 		}
 
@@ -175,7 +187,7 @@ $(document).ready(function(){
     });
 
 	}
-  
+
 
   // when visual search form submitted, stop form and make it link request
   $('form#visuals_form_search').submit(function(){

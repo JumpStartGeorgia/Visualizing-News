@@ -54,16 +54,23 @@
 							<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 							<%= translation.input :title %>
-							<div class="trans_visual_file" style="display: none">
+
+              <div class="trans_visual_file" style="display: none">
 								<%= translation.fields_for :image_file do |upload| %>
 	      				  <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
 	      				  <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
 
 								<% end %>
       				</div>
-      				<div class="trans_interactive_url" style="display: none">
+
+              <div class="trans_interactive_url" style="display: none">
       				<%= translation.input :interactive_url, :as => :url %>
       				</div>
+
+              <div class="trans_video_url" style="display: none">
+      				<%= translation.input :video_url, :as => :url %>
+      				</div>
+
 							<%= translation.hidden_field :locale , :value => trans.locale %>
 						</div>
 
@@ -187,7 +194,7 @@
         </div>
         <div class="controls">
           <%= @visualization.languages.split(',').map{|x| I18n.t("app.language.#{x}")}.join(', ') %>
-          <%= link_to t('activerecord.attributes.visualization.reset_languages'), url_for(params.merge(:reset_languages => true)), :class => 'btn btn-mini' %> 
+          <%= link_to t('activerecord.attributes.visualization.reset_languages'), url_for(params.merge(:reset_languages => true)), :class => 'btn btn-mini' %>
         </div>
       </div>
 
@@ -218,13 +225,13 @@
 								<div class="controls">
 									<%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
 									<%# upload.input :reset_crop, :as => :select, :include_blank => false, :selected => false %>
-                  <%= link_to t('activerecord.attributes.image_file.reset_crop'), url_for(params.merge(:reset_crop => trans.locale)), :class => 'btn btn-mini' %> 
+                  <%= link_to t('activerecord.attributes.image_file.reset_crop'), url_for(params.merge(:reset_crop => trans.locale)), :class => 'btn btn-mini' %>
                   <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
                         @visualization.visualization_type_id == Visualization::TYPES[:fact]  ||
                         @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
-                    <%= link_to t('activerecord.attributes.image_file.reset_file'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %> 
+                    <%= link_to t('activerecord.attributes.image_file.reset_file'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %>
                   <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-                    <%= link_to t('activerecord.attributes.image_file.reset_url'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %> 
+                    <%= link_to t('activerecord.attributes.image_file.reset_url'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %>
                   <% end %>
 								</div>
 							</div>
@@ -239,13 +246,13 @@
 						<% if @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
   						<%= translation.input :explanation %>
             <% end %>
-            
+
 						<%= translation.input :visualization_text, :hint => t('activerecord.attributes.visualization_translation.visualization_text_hint') %>
 
 						<% if @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
   						<%= translation.input :reporter %>
             <% end %>
-            
+
 						<%= translation.input :designer %>
 
 						<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
@@ -275,7 +282,7 @@
 
 						  <% end %>
             <% end %>
-            
+
 						<%= translation.hidden_field :locale , :value => trans.locale %>
 					</div>
 

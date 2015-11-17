@@ -10,7 +10,7 @@ RSpec.configure do |_config|
   Capybara.javascript_driver = :poltergeist
 
   # Run feature tests in chrome (change to false for faster tests)
-  run_in_chrome = false
+  run_in_chrome = true
   if run_in_chrome
     Capybara.register_driver :chrome do |app|
       Capybara::Selenium::Driver.new(app, browser: :chrome)

@@ -78,6 +78,8 @@ en:
         designer: "Designer (Name, Organization)"
         developer: "Developer (Name, Organization)"
         interactive_url: URL to Interactive Visualization
+        video_url: Video URL
+        video_embed: Video Embed Code
       image_file:
         file: Visual File
         reset_crop: Redo the Thumbnail Image
@@ -237,6 +239,7 @@ en:
     interactive: Interactive
     fact: Fact
     comic: Comic
+    video: Video
   multiselect:
     checkAllText: 'Check all'
     uncheckAllText: 'Uncheck all'
@@ -285,7 +288,7 @@ en:
     language:
       en: English
       ka: ქართული
-      hy: Հայերեն    
+      hy: Հայերեն
     language_abbreviation:
       en: EN
       ka: ქა
@@ -331,7 +334,7 @@ en:
       unfollow_idea_bad: The idea could not be found to unfollow.
       is_private: NOT PUBLIC
       last_update: Last Update
-      is_public_explanation: "Idea is public and anyone can see it. Uncheck the box if you want only people from your organization to see it." 
+      is_public_explanation: "Idea is public and anyone can see it. Uncheck the box if you want only people from your organization to see it."
       article_169: "Say No To Article 169. Support Freedom of Expression."
       language: Language
       submit: Submit
@@ -444,7 +447,7 @@ en:
         45% more web users will click on a link if it features an infographic
         30% of those will forward it even if the information is pointless
         40 % of people respond better to visual information than text
-        90 % of information that comes to the brain is visual      
+        90 % of information that comes to the brain is visual
     data:
       title: Send Data
       meta_description: "Do you have data that you would like to see visualized, but do not have the time or skills? Share your data here! If it is interesting, there is a good chance someone will use it, which means you can then reuse their visualization. By sharing with the community, you are becoming part of something larger in which everyone involved benefits."
@@ -545,7 +548,7 @@ en:
       language_sub_title: Notification Language
       language_label: In what language do you want to receive the notifications?
   ideas:
-    index: 
+    index:
       title: Post Ideas
       meta_description: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it."
       text_ideas1: "Have an idea for a news story? Wish the media would report on an issue that is important to you? Don't have the time or skills to do it yourself? Post your idea here. If it is a good one, chances are, a journalist will work on it."
@@ -591,4 +594,3 @@ en:
         duplicate: Duplicate Idea
         duplicate_reason: "Which idea is this a duplicate of? (Provide URL)"
         success: The Idea hs been reported.
-

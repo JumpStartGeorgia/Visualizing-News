@@ -106,7 +106,6 @@ $(document).ready(function(){
 
 		$('.js-generate-video-embed').change(function() {
 			set_video_embed_code(this);
-			$('.js')
 		});
 
 		// if type changes, show appropriate fields
@@ -205,13 +204,13 @@ function get_video_url_input_val(container) {
 	return $(container).find('input').val();
 }
 
-function find_video_embed_sibling(element) {
+function get_video_embed_sibling(element) {
 	return $(element).siblings('.js-receive-video-embed')[0];
 }
 
 function set_video_embed_code(video_url_div) {
 	video_url = get_video_url_input_val(video_url_div);
-	video_embed_div = find_video_embed_sibling(video_url_div);
+	video_embed_div = get_video_embed_sibling(video_url_div);
 
 	olly.embed(video_url, video_embed_div);
 }

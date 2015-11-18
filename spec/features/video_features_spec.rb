@@ -44,13 +44,14 @@ RSpec.describe 'Video', type: :feature, js: true do
     end
 
     within '#form-en' do
-      fill_in 'Title', with: 'Test Video Visualization'
-
       attach_file 'visualization_visualization_translations_attributes_0_image_file_attributes_file',
                   Rails.root.join('spec', 'example_files', 'how-dependent-is-georgia-on-russia-economically_en_medium.jpg')
 
       fill_in 'Video URL',
               with: 'https://www.youtube.com/watch?v=KN56RvmK5_Y'
+
+      fill_in 'Title', with: 'Test Video Visualization'
+
     end
 
     click_on 'Create Visualization'

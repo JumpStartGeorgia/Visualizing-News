@@ -105,6 +105,7 @@ class Visualization < ActiveRecord::Base
         missing_fields << :visual if trans.image_file_name.blank?
       elsif self.visualization_type_id == Visualization::TYPES[:video]
         missing_fields << :video_url if trans.video_url.blank?
+        missing_fields << :video_embed if trans.video_embed.blank?
       end
     end
     if !missing_fields.empty?

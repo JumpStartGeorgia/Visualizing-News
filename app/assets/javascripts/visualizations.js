@@ -209,7 +209,7 @@ function get_video_url_input_val(container) {
 }
 
 function get_video_embed_sibling(element) {
-	return $(element).siblings('.js-receive-video-embed')[0];
+	return $(element).siblings('.js-container-receive-video-embed')[0];
 }
 
 function get_video_embed_hidden_input_sibling(element) {

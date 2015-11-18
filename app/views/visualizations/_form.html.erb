@@ -67,9 +67,11 @@
       				<%= translation.input :interactive_url, :as => :url %>
       				</div>
 
-              <div class="trans_video_url" style="display: none">
+              <div class="trans_video_url js-generate-video-embed" style="display: none">
       				<%= translation.input :video_url, :as => :url %>
       				</div>
+
+              <div class="js-receive-video-embed"></div>
 
 							<%= translation.hidden_field :locale , :value => trans.locale %>
 						</div>

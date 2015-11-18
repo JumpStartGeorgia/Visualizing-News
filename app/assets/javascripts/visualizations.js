@@ -104,6 +104,9 @@ $(document).ready(function(){
 			}
 		}
 
+		$('.js-generate-video-embed').change(function() {
+			set_video_embed_code(this);
+		});
 
 		// if type changes, show appropriate fields
 		$('input[id^="visualization_visualization_type_id"]').change(function() {
@@ -197,7 +200,12 @@ $(document).ready(function(){
 
 });
 
+function set_video_embed_code(video_url_div) {
+	video_url = $(video_url_div).find('input').val();
+	video_embed_div = $(video_url_div).siblings('.js-receive-video-embed')[0];
 
+	olly.embed(video_url, video_embed_div);
+}
 
 $(document).ready(function(){
   $('#category_slider_content li a').each(function(){

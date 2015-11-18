@@ -14,6 +14,7 @@
 //= require jquery_nested_form
 //= require fancybox
 //= require fancybox2
+//= require olly.min
 //= require vendor
 //= require_directory .
 
@@ -138,13 +139,3 @@ $(document).ready(function(){
 
 
 });
-
-
-
-
-
-
-
-
-
-

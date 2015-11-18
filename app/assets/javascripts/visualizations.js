@@ -107,8 +107,9 @@ $(document).ready(function(){
 		$('.js-generate-video-embed').change(function() {
 			video_embed_sibling = get_video_embed_sibling(this);
 			set_video_embed_code(this, video_embed_sibling);
+
 			embed_code = video_embed_sibling.innerHTML;
-			$(this).siblings('.js-hidden-input-receive-video-embed').val(embed_code);
+			get_video_embed_hidden_input_sibling(this).val(embed_code);
 		});
 
 		// if type changes, show appropriate fields
@@ -209,6 +210,10 @@ function get_video_url_input_val(container) {
 
 function get_video_embed_sibling(element) {
 	return $(element).siblings('.js-receive-video-embed')[0];
+}
+
+function get_video_embed_hidden_input_sibling(element) {
+	return $(element).siblings('.js-hidden-input-receive-video-embed');
 }
 
 function set_video_embed_code(video_url_div, video_embed_div) {

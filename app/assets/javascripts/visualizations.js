@@ -105,7 +105,7 @@ $(document).ready(function(){
 		}
 
 		$('.js-generate-video-embed').change(function() {
-			video_embed_sibling = get_video_embed_sibling(this);
+			video_embed_sibling = get_video_embed_container_sibling(this);
 			set_video_embed_code(this, video_embed_sibling);
 
 			embed_code = video_embed_sibling.innerHTML;
@@ -208,7 +208,7 @@ function get_video_url_input_val(container) {
 	return $(container).find('input').val();
 }
 
-function get_video_embed_sibling(element) {
+function get_video_embed_container_sibling(element) {
 	return $(element).siblings('.js-container-receive-video-embed')[0];
 }
 

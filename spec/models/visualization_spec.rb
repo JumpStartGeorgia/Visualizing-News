@@ -8,17 +8,19 @@ RSpec.describe 'Visualization', type: :model do
       expect(video.valid?).to eq(true)
     end
 
-    describe 'translation #video_url' do
-      it 'causes error if blank' do
-        video = FactoryGirl.create(:video_visualization).reload
-        translation = video.translations[0]
-        translation.video_url = nil
-        translation.save!
+    describe 'translation fields' do
+      describe '#video_url' do
+        it 'causes error if blank' do
+          video = FactoryGirl.create(:video_visualization).reload
+          translation = video.translations[0]
+          translation.video_url = nil
+          translation.save!
 
-        video.valid?
+          video.valid?
 
-        video_url_required_error = video.errors.messages[:video_url][0]
-        expect(video_url_required_error).to eq('is a required field.')
+          video_url_required_error = video.errors.messages[:video_url][0]
+          expect(video_url_required_error).to eq('is a required field.')
+        end
       end
     end
   end

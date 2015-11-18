@@ -17,7 +17,8 @@ RSpec.describe 'Visualization', type: :model do
 
         video.valid?
 
-        expect(video.errors.messages.length).to eq(1)
+        video_url_required_error = video.errors.messages[:video_url][0]
+        expect(video_url_required_error).to eq('is a required field.')
       end
     end
   end

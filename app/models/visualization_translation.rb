@@ -30,7 +30,8 @@ class VisualizationTranslation < ActiveRecord::Base
 								 :datasources_attributes,
 								 :reload_file,
 								 :fb_count,
-								 :video_url
+								 :video_url,
+								 :video_embed
 
 	attr_accessor :reload_file
 

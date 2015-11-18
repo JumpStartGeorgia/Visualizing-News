@@ -105,9 +105,10 @@ $(document).ready(function(){
 		}
 
 		$('.js-generate-video-embed').change(function() {
-			set_video_embed_code(this);
-			embed_code = get_video_embed_sibling(this).innerHTML;
-			$('.js-hidden-input-receive-video-embed').val(embed_code);
+			video_embed_sibling = get_video_embed_sibling(this);
+			set_video_embed_code(this, video_embed_sibling);
+			embed_code = video_embed_sibling.innerHTML;
+			$(this).siblings('.js-hidden-input-receive-video-embed').val(embed_code);
 		});
 
 		// if type changes, show appropriate fields
@@ -210,9 +211,8 @@ function get_video_embed_sibling(element) {
 	return $(element).siblings('.js-receive-video-embed')[0];
 }
 
-function set_video_embed_code(video_url_div) {
+function set_video_embed_code(video_url_div, video_embed_div) {
 	video_url = get_video_url_input_val(video_url_div);
-	video_embed_div = get_video_embed_sibling(video_url_div);
 
 	olly.embed(video_url, video_embed_div);
 }

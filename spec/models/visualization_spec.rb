@@ -22,6 +22,20 @@ RSpec.describe 'Visualization', type: :model do
           expect(video_url_required_error).to eq('is a required field.')
         end
       end
+
+      describe '#video_embed' do
+        it 'causes error if blank' do
+          video = FactoryGirl.create(:video_visualization).reload
+          translation = video.translations[0]
+          translation.video_embed = nil
+          translation.save!
+
+          video.valid?
+
+          video_embed_required_error = video.errors.messages[:video_embed][0]
+          expect(video_embed_required_error).to eq('is a required field.')
+        end
+      end
     end
   end
 end

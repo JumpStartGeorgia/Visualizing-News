@@ -9,6 +9,8 @@ RSpec.describe 'Visualization', type: :model do
         translation.video_url = nil
         translation.save!
 
+        video.valid?
+
         expect(video.errors.messages.length).to eq(1)
       end
     end

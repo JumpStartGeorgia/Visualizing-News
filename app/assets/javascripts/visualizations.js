@@ -106,6 +106,8 @@ $(document).ready(function(){
 
 		$('.js-generate-video-embed').change(function() {
 			set_video_embed_code(this);
+			embed_code = get_video_embed_sibling(this).innerHTML;
+			$('.js-hidden-input-receive-video-embed').val(embed_code);
 		});
 
 		// if type changes, show appropriate fields

@@ -34,7 +34,13 @@ RSpec.describe 'Visualization Translation', type: :model do
       end
       context 'with present video url' do
         it 'causes error if blank' do
+          vt = FactoryGirl.create(:video_visualization_translation)
+          vt.video_embed = nil
 
+          vt.valid?
+
+          video_embed_required_error = vt.errors.messages[:video_embed][0]
+          expect(video_embed_required_error).to eq("can't be blank")
         end
       end
     end

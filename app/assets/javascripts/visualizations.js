@@ -36,6 +36,8 @@ function show_visualization_type_fields(type_id){
   } else if (type_id == '5'){
 		$('.trans_video_url').show(300);
 		$('.trans_visual_file').show(300);
+
+		$('.trans_interactive_url').hide(300);
 	} else {
 		$('.trans_video_url').hide(300);
     $('.trans_interactive_url').hide(300);

@@ -43,6 +43,8 @@ class VisualizationTranslation < ActiveRecord::Base
 			:message => I18n.t('activerecord.errors.messages.already_exists')}
 	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!interactive_url.blank?"
 
+	validates :video_url, :format => {:with => URI::regexp(['http','https'])}, :if => "video_url.present?"
+
   # when a record is published, the following fields must be provided
   # - reporter, designer, data source name
   # -> this method is called from the visualization model

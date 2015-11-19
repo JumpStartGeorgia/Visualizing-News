@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Visualization Translation', type: :model do
   context 'with valid fields' do
     it 'is valid' do
+      vt = FactoryGirl.create(:visualization_translation)
 
+      expect(vt.valid?).to eq(true)
     end
   end
 

@@ -4,12 +4,12 @@ FactoryGirl.define do
     organization
     languages 'en'
 
+    before :create do |visualization|
+      visualization.load_languages_internal
+    end
+
     factory :video_visualization do
       visualization_type_id 5
-
-      before :create do |visualization|
-        visualization.load_languages_internal
-      end
 
       # Add video visualization translations
       transient do

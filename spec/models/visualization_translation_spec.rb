@@ -12,7 +12,13 @@ RSpec.describe 'Visualization Translation', type: :model do
 
     describe '#video_url' do
       it 'causes error if does not contain protocol' do
-        
+        vt = FactoryGirl.create(:video_visualization_translation)
+        vt.video_url = 'www.youtube.com/watch?v=KN56RvmK5_Y'
+
+        vt.valid?
+
+        video_url_wrong_format_error = vt.errors.messages[:video_url][0]
+        expect(video_url_wrong_format_error).to eq('is invalid')
       end
     end
 

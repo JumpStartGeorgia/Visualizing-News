@@ -5,6 +5,11 @@ RSpec.describe 'Visualization', type: :model do
     it 'is valid with required fields' do
       video = FactoryGirl.create(:video_visualization).reload
 
+      t = video.visualization_translations[0]
+
+      FactoryGirl.create(:image_file, visualization_translation: t)
+      t.reload
+
       expect(video.valid?).to eq(true)
     end
 

@@ -44,6 +44,7 @@ class VisualizationTranslation < ActiveRecord::Base
 	validates :interactive_url, :format => {:with => URI::regexp(['http','https'])}, :if => "!interactive_url.blank?"
 
 	validates :video_url, :format => {:with => URI::regexp(['http','https'])}, :if => "video_url.present?"
+	validates :video_embed, presence: true, if: 'video_url.present?'
 
   # when a record is published, the following fields must be provided
   # - reporter, designer, data source name

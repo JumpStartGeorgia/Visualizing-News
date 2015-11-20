@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151116095215) do
+ActiveRecord::Schema.define(:version => 20151120075218) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20151116095215) do
     t.text     "visualization_text"
     t.string   "video_url"
     t.string   "video_embed"
+    t.string   "researcher"
   end
 
   add_index "visualization_translations", ["locale"], :name => "index_visualization_translations_on_locale"

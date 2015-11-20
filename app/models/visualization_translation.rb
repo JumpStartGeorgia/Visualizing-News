@@ -13,25 +13,28 @@ class VisualizationTranslation < ActiveRecord::Base
 	# this is only here so old migrations will work - no longer used
 	has_many :upload_files#, :dependent => :destroy
 
- attr_accessible :visualization_id,
- 								 :locale,
-								 :title,
-								 :explanation,
-								 :reporter,
-								 :developer,
-								 :designer,
-								 :permalink,
-								 :visualization_text,
-                 :data_source_url_old,
-								 :data_source_name_old,
-								 :interactive_url,
-								 :image_file_attributes,
-								 :dataset_file_attributes,
-								 :datasources_attributes,
-								 :reload_file,
-								 :fb_count,
-								 :video_url,
-								 :video_embed
+  attr_accessible(
+    :visualization_id,
+  	:locale,
+	  :title,
+	  :explanation,
+	  :reporter,
+	  :developer,
+	  :designer,
+	  :researcher,
+	  :permalink,
+	  :visualization_text,
+	  :data_source_url_old,
+	  :data_source_name_old,
+	  :interactive_url,
+	  :image_file_attributes,
+	  :dataset_file_attributes,
+	  :datasources_attributes,
+	  :reload_file,
+	  :fb_count,
+	  :video_url,
+	  :video_embed
+	)
 
 	attr_accessor :reload_file
 

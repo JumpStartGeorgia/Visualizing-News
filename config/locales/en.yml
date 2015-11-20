@@ -77,6 +77,7 @@ en:
         reporter: "Reporter (Name, Organization)"
         designer: "Designer (Name, Organization)"
         developer: "Developer (Name, Organization)"
+        researcher: "Researcher (Name, Organization)"
         interactive_url: URL to Interactive Visualization
         video_url: Video URL
         video_embed: Video
@@ -499,6 +500,7 @@ en:
       reporter: Reporter
       designer: Designer
       developer: Developer
+      researcher: Researcher
       data_source: Data Source
       data_set: Data Set
       type: Type

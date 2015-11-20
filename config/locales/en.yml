@@ -79,7 +79,7 @@ en:
         developer: "Developer (Name, Organization)"
         interactive_url: URL to Interactive Visualization
         video_url: Video URL
-        video_embed: Video Embed Code
+        video_embed: Video
       image_file:
         file: Visual File
         reset_crop: Redo the Thumbnail Image

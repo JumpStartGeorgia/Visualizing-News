@@ -29,6 +29,7 @@ RSpec.describe 'Video', type: :feature, js: true do
 
   it 'can be created through form', js: true do
     login_as user, scope: :user
+    category # load category
     user.organizations << organization
 
     visit new_organization_visualization_path(organization.reload.permalink)
@@ -57,6 +58,12 @@ RSpec.describe 'Video', type: :feature, js: true do
     end
 
     click_on 'Create Visualization'
+
+    # Allow page to load to avoid 'stale element reference' error
+    sleep 1
+
+    # Goes to 2nd visualization form page
+
     expect(page).to have_content 'Visualization was successfully created.'
 
     video = Visualization.first
@@ -68,8 +75,10 @@ RSpec.describe 'Video', type: :feature, js: true do
     click_on 'Update Visualization'
 
     expect(page).to have_content('Edit Visualization')
-    expect(page).to have_content('Visualization was successfully updated.')
 
+    # Goes to 3rd visualization form page
+
+    expect(page).to have_content('Visualization was successfully updated.')
     expect(page).to have_content('Video URL https://www.youtube.com/watch?v=KN56RvmK5_Y')
 
     # check that video embed code is displayed in browser
@@ -78,5 +87,28 @@ RSpec.describe 'Video', type: :feature, js: true do
     ).strip
 
     expect(video.video_embed).to eq(embedded_video_html)
+
+    # Add visualization to category
+    find(:css, "#visualization_category_ids_#{category.id}").set(true)
+
+    within '#visualization_published_input' do
+      choose 'Yes'
+    end
+
+    fill_in 'Publication Date', with: Time.now.strftime('%d/%m/%Y')
+
+    click_on 'Update Visualization'
+
+    # Goes to video show page
+
+    expect(page).to have_content('Visualization was successfully updated.')
+
+    # get html content of #visual div
+    visual_html = page.evaluate_script(
+      "document.getElementById('visual').innerHTML"
+    ).strip
+
+    # Check that the html is the video embed code
+    expect(visual_html).to eq(video.video_embed)
   end
 end

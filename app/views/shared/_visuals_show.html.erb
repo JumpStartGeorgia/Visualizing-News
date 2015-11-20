@@ -148,7 +148,16 @@
               </span>
             </li>
           <% end %>
-          
+
+          <% if @visualization.narrator.present? %>
+            <li>
+              <%= "#{t('.narrator')}: "%>
+              <span class="val">
+                <%= @visualization.narrator %>
+              </span>
+            </li>
+          <% end %>
+
           <% if @visualization.datasources.present? %>
             <li>
               <%= "#{t('.data_source')}: "%>

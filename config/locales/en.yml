@@ -78,6 +78,7 @@ en:
         designer: "Designer (Name, Organization)"
         developer: "Developer (Name, Organization)"
         researcher: "Researcher (Name, Organization)"
+        narrator: "Narrator (Name, Organization)"
         interactive_url: URL to Interactive Visualization
         video_url: Video URL
         video_embed: Video
@@ -501,6 +502,7 @@ en:
       designer: Designer
       developer: Developer
       researcher: Researcher
+      narrator: Narrator
       data_source: Data Source
       data_set: Data Set
       type: Type

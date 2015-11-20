@@ -92,6 +92,10 @@ RSpec.describe 'Video', type: :feature, js: true do
     fill_in 'Researcher (Name, Organization)',
             with: researcher_value
 
+    narrator_value = 'Test Narrator Name 1, Test Organization 1'
+    fill_in 'Narrator (Name, Organization)',
+            with: narrator_value
+
     # Add visualization to category
     find(:css, "#visualization_category_ids_#{category.id}").set(true)
 
@@ -116,5 +120,6 @@ RSpec.describe 'Video', type: :feature, js: true do
     expect(visual_html).to eq(video.video_embed)
 
     expect(page).to have_content("Researcher: #{researcher_value}")
+    expect(page).to have_content("Narrator: #{narrator_value}")
   end
 end

@@ -22,6 +22,7 @@ class VisualizationTranslation < ActiveRecord::Base
 	  :developer,
 	  :designer,
 	  :researcher,
+		:narrator,
 	  :permalink,
 	  :visualization_text,
 	  :data_source_url_old,

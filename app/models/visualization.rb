@@ -8,6 +8,7 @@ class Visualization < ActiveRecord::Base
     :designer,
     :developer,
     :researcher,
+    :narrator,
 		:interactive_url,
     :permalink,
     :fb_count,

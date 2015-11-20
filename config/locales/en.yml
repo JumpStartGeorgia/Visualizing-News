@@ -79,6 +79,11 @@ en:
         developer: "Developer (Name, Organization)"
         researcher: "Researcher (Name, Organization)"
         narrator: "Narrator (Name, Organization)"
+        producer: "Producer (Name, Organization)"
+        director: "Director (Name, Organization)"
+        writer: "Writer (Name, Organization)"
+        sound_music: "Sound / Music Designer (Name, Organization)"
+        designer_animator: "Designer / Animator (Name, Organization)"
         interactive_url: URL to Interactive Visualization
         video_url: Video URL
         video_embed: Video
@@ -503,6 +508,11 @@ en:
       developer: Developer
       researcher: Researcher
       narrator: Narrator
+      producer: Producer
+      director: Director
+      writer: Writer
+      sound_music: "Sound / Music Designer"
+      designer_animator: "Designer / Animator"
       data_source: Data Source
       data_set: Data Set
       type: Type

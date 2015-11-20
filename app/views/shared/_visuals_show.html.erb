@@ -158,6 +158,51 @@
             </li>
           <% end %>
 
+          <% if @visualization.producer.present? %>
+            <li>
+              <%= "#{t('.producer')}: "%>
+              <span class="val">
+                <%= @visualization.producer %>
+              </span>
+            </li>
+          <% end %>
+
+          <% if @visualization.director.present? %>
+            <li>
+              <%= "#{t('.director')}: "%>
+              <span class="val">
+                <%= @visualization.director %>
+              </span>
+            </li>
+          <% end %>
+
+          <% if @visualization.writer.present? %>
+            <li>
+              <%= "#{t('.writer')}: "%>
+              <span class="val">
+                <%= @visualization.writer %>
+              </span>
+            </li>
+          <% end %>
+
+          <% if @visualization.designer_animator.present? %>
+            <li>
+              <%= "#{t('.designer_animator')}: "%>
+              <span class="val">
+                <%= @visualization.designer_animator %>
+              </span>
+            </li>
+          <% end %>
+
+          <% if @visualization.sound_music.present? %>
+            <li>
+              <%= "#{t('.sound_music')}: "%>
+              <span class="val">
+                <%= @visualization.sound_music %>
+              </span>
+            </li>
+          <% end %>
+
           <% if @visualization.datasources.present? %>
             <li>
               <%= "#{t('.data_source')}: "%>

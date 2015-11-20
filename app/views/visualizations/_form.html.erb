@@ -286,6 +286,26 @@
               <%= translation.input :narrator %>
             <% end %>
 
+            <% if @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+              <%= translation.input :producer %>
+            <% end %>
+
+            <% if @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+              <%= translation.input :director %>
+            <% end %>
+
+            <% if @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+              <%= translation.input :writer %>
+            <% end %>
+
+            <% if @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+              <%= translation.input :designer_animator %>
+            <% end %>
+
+            <% if @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+              <%= translation.input :sound_music %>
+            <% end %>
+
 						<% if @visualization.visualization_type_id != Visualization::TYPES[:fact] %>
   						<%= translation.input :reporter %>
             <% end %>

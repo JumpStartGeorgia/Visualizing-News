@@ -96,6 +96,30 @@ RSpec.describe 'Video', type: :feature, js: true do
     fill_in 'Narrator (Name, Organization)',
             with: narrator_value
 
+    researcher_value = 'Test Researcher Name 1, Test Organization 1'
+    fill_in 'Researcher (Name, Organization)',
+            with: researcher_value
+
+    producer_value = 'Test Producer Name 1, Test Organization 1'
+    fill_in 'Producer (Name, Organization)',
+            with: producer_value
+
+    director_value = 'Test Director Name 1, Test Organization 1'
+    fill_in 'Director (Name, Organization)',
+            with: director_value
+
+    writer_value = 'Test Writer Name 1, Test Organization 1'
+    fill_in 'Writer (Name, Organization)',
+            with: writer_value
+
+    designer_animator_value = 'Test Designer Animator Name 1, Test Organization 1'
+    fill_in 'Designer / Animator (Name, Organization)',
+            with: designer_animator_value
+
+    sound_music_value = 'Test Sound Music Name 1, Test Organization 1'
+    fill_in 'Sound / Music Designer (Name, Organization)',
+            with: sound_music_value
+
     # Add visualization to category
     find(:css, "#visualization_category_ids_#{category.id}").set(true)
 
@@ -121,5 +145,14 @@ RSpec.describe 'Video', type: :feature, js: true do
 
     expect(page).to have_content("Researcher: #{researcher_value}")
     expect(page).to have_content("Narrator: #{narrator_value}")
+    expect(page).to have_content("Producer: #{producer_value}")
+    expect(page).to have_content("Director: #{director_value}")
+    expect(page).to have_content("Writer: #{writer_value}")
+
+    expect(page).to have_content(
+      "Designer / Animator: #{designer_animator_value}"
+    )
+
+    expect(page).to have_content("Sound / Music Designer: #{sound_music_value}")
   end
 end

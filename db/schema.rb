@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151120085234) do
+ActiveRecord::Schema.define(:version => 20151120092350) do
 
   create_table "categories", :force => true do |t|
     t.datetime "created_at"
@@ -326,12 +326,12 @@ ActiveRecord::Schema.define(:version => 20151120085234) do
     t.string   "permalink"
     t.string   "data_source_url_old"
     t.string   "interactive_url"
-    t.boolean  "visual_is_cropped_old", :default => false
-    t.integer  "fb_count",              :default => 0
+    t.boolean  "visual_is_cropped_old",                 :default => false
+    t.integer  "fb_count",                              :default => 0
     t.string   "developer"
     t.text     "visualization_text"
     t.string   "video_url"
-    t.string   "video_embed"
+    t.string   "video_embed",           :limit => 1000
     t.string   "researcher"
     t.string   "narrator"
     t.string   "producer"

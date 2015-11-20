@@ -35,12 +35,14 @@ RSpec.describe 'Video', type: :feature, js: true do
     expect(page).to have_content('New Visualization')
 
     within '#fields-panel' do
-      choose 'Video'
-
       # select languages
       find(:css, '#visualization_languages_internal_en').set(true)
       find(:css, '#visualization_languages_internal_hy').set(false)
       find(:css, '#visualization_languages_internal_ka').set(false)
+
+      # Choosing video after selecting languages to give JavaScript time to
+      # load (otherwise the fields Video URL and Embed don't always appear)
+      choose 'Video'
     end
 
     within '#form-en' do

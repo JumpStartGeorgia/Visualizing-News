@@ -213,6 +213,17 @@
 
 						<%= translation.input :title %>
 
+            <% if trans.video_url.present? %>
+              <div class="control-group">
+                <div class="control-label">
+									<%= model_class_trans.human_attribute_name(:video_url)%>
+								</div>
+								<div class="controls">
+									<%= link_to trans.video_url, trans.video_url, :target => :blank %>
+								</div>
+              </div>
+            <% end %>
+
 						<% if !trans.interactive_url.blank? %>
 							<div class="control-group">
 								<div class="control-label">

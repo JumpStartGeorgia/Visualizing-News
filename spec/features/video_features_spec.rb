@@ -69,5 +69,7 @@ RSpec.describe 'Video', type: :feature, js: true do
 
     expect(page).to have_content('Edit Visualization')
     expect(page).to have_content('Visualization was successfully updated.')
+
+    expect(page).to have_content('Video URL https://www.youtube.com/watch?v=KN56RvmK5_Y')
   end
 end

@@ -224,6 +224,17 @@
               </div>
             <% end %>
 
+            <% if trans.video_embed.present? %>
+              <div class="control-group">
+                <div class="control-label">
+                  <%= model_class_trans.human_attribute_name(:video_embed) %>
+                </div>
+                <div class="controls" id="embedded-video-<%= trans.locale %>">
+                  <%= trans.video_embed.html_safe %>
+                </div>
+              </div>
+            <% end %>
+
 						<% if !trans.interactive_url.blank? %>
 							<div class="control-group">
 								<div class="control-label">

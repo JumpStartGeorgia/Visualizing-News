@@ -64,5 +64,10 @@ RSpec.describe 'Video', type: :feature, js: true do
     expect(video.title).to eq('Test Video Visualization')
     expect(video.video_url).to eq('https://www.youtube.com/watch?v=KN56RvmK5_Y')
     expect(video.video_embed).to eq('<iframe width="560" height="315" src="http://www.youtube.com/embed/KN56RvmK5_Y" frameborder="0" allowfullscreen=""></iframe>')
+
+    click_on 'Update Visualization'
+
+    expect(page).to have_content('Edit Visualization')
+    expect(page).to have_content('Visualization was successfully updated.')
   end
 end

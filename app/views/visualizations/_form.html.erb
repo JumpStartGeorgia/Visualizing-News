@@ -16,9 +16,9 @@
 	<% if @visualization.id.nil? %>
 
 		<%= render partial: 'visualizations/form/new', locals: {
-        f: f,
-        model_class: model_class
-      } %>
+          f: f,
+          model_class: model_class
+        } %>
 
 	<% elsif !@locale_to_reset.blank? %>
 

@@ -308,6 +308,7 @@
   					  <%= link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank %>
 
   				  </textarea>
+
           <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
 
             <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
@@ -329,6 +330,7 @@
                           :target => :blank %>
 
   				  </textarea>
+
           <% end %>
   			</div>
       </div>

@@ -89,11 +89,16 @@ class VisualizationsController < ApplicationController
   			gon.largeW = to_crop.visual_geometry(:large).width
   			gon.largeH = to_crop.visual_geometry(:large).height
   			gon.originalW = to_crop.visual_geometry(:original).width
-  #      new_layout = 'fancybox' 
+  #      new_layout = 'fancybox'
       elsif params[:reset_file].present? && I18n.available_locales.index(params[:reset_file].to_sym)
   logger.debug "************* reseting file for #{params[:reset_file]}"
   			@locale_to_reset = params[:reset_file]
-  #      new_layout = 'fancybox' 
+        @visual_image_file_reset = true
+  #      new_layout = 'fancybox'
+
+      elsif params[:video_url_reset] && I18n.available_locales.index(params[:locale_to_reset].to_sym)
+        @locale_to_reset = params[:locale_to_reset]
+        @video_url_reset = params[:video_url_reset]
 
       elsif params[:reset_languages].present?
         @reset_lanaguages = true
@@ -107,7 +112,7 @@ class VisualizationsController < ApplicationController
           end
         end
 
-      else 
+      else
   		  locales_to_crop = @visualization.locales_to_crop
   		  if !locales_to_crop.empty?
   logger.debug "************* setting crop for #{locales_to_crop.first}"
@@ -125,7 +130,7 @@ class VisualizationsController < ApplicationController
   		gon.edit_visualization = true
   		gon.visualization_type = @visualization.visualization_type_id
   		gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
-      
+
       if new_layout
         respond_to do |format|
           format.html { render :layout => new_layout}
@@ -251,13 +256,13 @@ class VisualizationsController < ApplicationController
 
           logger.debug "%%%%%%% attributes now #{params[:visualization][:visualization_translations_attributes].values}"
 
-        end 
+        end
 
   		  # if reset crop flag set, reset image is cropped falg
   		  reset_crop = false
   		  params[:visualization][:visualization_translations_attributes].keys.each do |key|
   			  x = params[:visualization][:visualization_translations_attributes][key][:image_file_attributes]
-  			  if x[:reset_crop] == "true"
+  			  if x && x[:reset_crop] == "true"
   				  x[:image_is_cropped] = false
   				  reset_crop = true
   			  end
@@ -292,7 +297,7 @@ class VisualizationsController < ApplicationController
             end
   			  end
   		  end
-        
+
         @visualization.assign_attributes(params[:visualization])
 
         # if interactive and new, take screen shots of urls
@@ -303,7 +308,7 @@ class VisualizationsController < ApplicationController
             # only proceed if the url is valid
             if @visualization.languages_internal.index(trans.locale) && trans.valid? &&
                 !trans.interactive_url.blank? && trans.image_file_name.blank?
-              
+
               logger.debug "//////////// -- records are valid, taking screen shot"
               # get screenshot of interactive site
               filename = Screenshot.take(trans.interactive_url)
@@ -320,7 +325,7 @@ class VisualizationsController < ApplicationController
   				  # if the visuals need to be re-cropped, do it now
   				  processed_crop = false
   				  @visualization.visualization_translations.each do |trans|
-  					  if trans.image_record && (!trans.image_record.was_cropped && trans.image_record.image_is_cropped) || 
+  					  if trans.image_record && (!trans.image_record.was_cropped && trans.image_record.image_is_cropped) ||
                   (trans.image_record.redid_crop && trans.image_record.image_is_cropped)
   						  trans.image_record.reprocess_file
   						  processed_crop = true

@@ -92,28 +92,55 @@
 		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
 
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
-				<%= translation.hidden_field :reload_file, :value => 'true' %>
 
       <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
             @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
-            @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
+            @visualization.visualization_type_id == Visualization::TYPES[:comic] ||
+            @visualization.visualization_type_id == Visualization::TYPES[:video] %>
 
-      	<h3>
-          <%= t('.reset_file',
-                :language => t("app.language.#{@locale_to_reset}")) %>
-        </h3>
+        <% if @visual_image_file_reset %>
 
-        <%= translation.fields_for :image_file do |upload| %>
+        	<h3>
+            <%= t('.reset_file',
+                  :language => t("app.language.#{@locale_to_reset}")) %>
+          </h3>
 
-          <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
-			    <%= upload.hidden_field :reset_crop, :value => true %>
-			    <%= upload.hidden_field :image_is_cropped, :value => false %>
+          <%= translation.hidden_field :reload_file, :value => 'true' %>
 
-		    <% end %>
+          <%= translation.fields_for :image_file do |upload| %>
+
+            <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
+  			    <%= upload.hidden_field :reset_crop, :value => true %>
+  			    <%= upload.hidden_field :image_is_cropped, :value => false %>
+
+  		    <% end %>
+
+        <% elsif @video_url_reset %>
+
+          <h3>
+            <%= t('.change_video_url',
+                  language: t("app.language.#{@locale_to_reset}")) %>
+          </h3>
+
+          <div class="trans_video_url js-generate-video-embed">
+            <%= translation.input :video_url, :as => :url %>
+          </div>
+
+          <div class="js-container-receive-video-embed"></div>
+
+          <%= translation.hidden_field(
+                :video_embed,
+                class: 'js-hidden-input-receive-video-embed'
+              ) %>
+
+        <% end %>
 
       <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
     			<h3><%= t('.reset_url', :language => t("app.language.#{@locale_to_reset}")) %></h3>
   				<%= translation.input :interactive_url, :as => :url %>
+
+          <%= translation.hidden_field :reload_file, :value => 'true' %>
+
 			    <%= translation.fields_for :image_file do |upload| %>
   			    <%= upload.hidden_field :reset_crop, :value => true %>
 				    <%= upload.hidden_field :image_is_cropped, :value => false %>
@@ -228,7 +255,16 @@
 									<%= model_class_trans.human_attribute_name(:video_url)%>
 								</div>
 								<div class="controls">
-									<%= link_to trans.video_url, trans.video_url, :target => :blank %>
+
+                  <%= link_to trans.video_url, trans.video_url, :target => :blank %>
+
+                  <%= link_to t('.change_video_url',
+                                language: t("app.language.#{trans.locale}")),
+                              url_for(params.merge(
+                                :locale_to_reset => trans.locale,
+                                :video_url_reset => true)),
+                              :class => 'btn btn-mini' %>
+
 								</div>
               </div>
             <% end %>

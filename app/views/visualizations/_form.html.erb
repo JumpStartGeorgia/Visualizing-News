@@ -90,6 +90,7 @@
 	<% elsif !@locale_to_reset.blank? %>
 
 		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
+
 		<%= f.fields_for :visualization_translations, trans do |translation| %>
 				<%= translation.hidden_field :reload_file, :value => 'true' %>
 

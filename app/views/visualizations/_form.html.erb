@@ -257,7 +257,8 @@
                   <%= link_to t('activerecord.attributes.image_file.reset_crop'), url_for(params.merge(:reset_crop => trans.locale)), :class => 'btn btn-mini' %>
                   <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
                         @visualization.visualization_type_id == Visualization::TYPES[:fact]  ||
-                        @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
+                        @visualization.visualization_type_id == Visualization::TYPES[:comic] ||
+                        @visualization.visualization_type_id == Visualization::TYPES[:video] %>
                     <%= link_to t('activerecord.attributes.image_file.reset_file'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %>
                   <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
                     <%= link_to t('activerecord.attributes.image_file.reset_url'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %>

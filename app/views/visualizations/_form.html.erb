@@ -96,12 +96,20 @@
       <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
             @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
             @visualization.visualization_type_id == Visualization::TYPES[:comic] %>
-  			<h3><%= t('.reset_file', :language => t("app.language.#{@locale_to_reset}")) %></h3>
-			  <%= translation.fields_for :image_file do |upload| %>
-				  <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
+
+      	<h3>
+          <%= t('.reset_file',
+                :language => t("app.language.#{@locale_to_reset}")) %>
+        </h3>
+
+        <%= translation.fields_for :image_file do |upload| %>
+
+          <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
 			    <%= upload.hidden_field :reset_crop, :value => true %>
 			    <%= upload.hidden_field :image_is_cropped, :value => false %>
-			  <% end %>
+
+		    <% end %>
+
       <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
     			<h3><%= t('.reset_url', :language => t("app.language.#{@locale_to_reset}")) %></h3>
   				<%= translation.input :interactive_url, :as => :url %>

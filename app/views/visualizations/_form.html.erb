@@ -28,31 +28,9 @@
 
 	<% elsif !@locale_to_crop.blank? %>
 
-		<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first %>
-		<%= f.fields_for :visualization_translations, trans do |translation| %>
-
-			<h3><%= t('.crop_image', :language => t("app.language.#{@locale_to_crop}")) %></h3>
-			<%= translation.fields_for :image_file do |upload| %>
-				<%= upload.hidden_field :image_is_cropped, :value => true %>
-				<%= upload.hidden_field :redid_crop, :value => true %>
-				<%= upload.hidden_field :crop_x %>
-				<%= upload.hidden_field :crop_y %>
-				<%= upload.hidden_field :crop_w %>
-				<%= upload.hidden_field :crop_h %>
-			<% end %>
-
-			<div id="crop-panel">
-				<h4><%= t('.preview')%>:</h4>
-				<div class="preview">
-					<%= image_tag trans.image.url(:large, false), :id => "cropbox_preview" %>
-				</div>
-
-				<hr />
-
-				<%= image_tag trans.image.url(:large, false), :id => "cropbox" %>
-
-			</div>
-		<% end %>
+		<%= render partial: 'visualizations/form/locale_to_crop', locals: {
+          f: f
+        } %>
 
   <% elsif @reset_lanaguages == true %>
 

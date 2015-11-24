@@ -15,26 +15,7 @@
     </div>
   </div>
 
-  <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
-    <%= f.fields_for :visualization_translations, trans do |translation| %>
-
-      <div id="form-<%= trans.locale %>" class="multilanguage" data-locale="<%= trans.locale%>">
-        <h3><%= t("app.language.#{trans.locale}") %></h3>
-
-        <%= translation.input :title %>
-        <div class="trans_visual_file" style="display: none">
-          <%= translation.fields_for :image_file do |upload| %>
-            <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
-            <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
-
-          <% end %>
-        </div>
-        <div class="trans_interactive_url" style="display: none">
-        <%= translation.input :interactive_url, :as => :url %>
-        </div>
-        <%= translation.hidden_field :locale , :value => trans.locale %>
-      </div>
-
-    <% end %>
-  <% end %>
+  <%= render partial: 'visualizations/form/trans_primary_fields', locals: {
+        f: f
+      } %>
 </div>

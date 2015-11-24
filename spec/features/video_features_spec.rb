@@ -88,6 +88,10 @@ RSpec.describe 'Video', type: :feature, js: true do
 
     expect(video.video_embed).to eq(embedded_video_html)
 
+    explanation_value = "Hello!!\n\nThis is an explanation of the video"
+    fill_in 'Explanation',
+            with: explanation_value
+
     researcher_value = 'Test Researcher Name 1, Test Organization 1'
     fill_in 'Researcher (Name, Organization)',
             with: researcher_value
@@ -143,6 +147,7 @@ RSpec.describe 'Video', type: :feature, js: true do
     # Check that the html is the video embed code
     expect(visual_html).to eq(video.video_embed)
 
+    expect(page).to have_content(explanation_value)
     expect(page).to have_content("Researcher: #{researcher_value}")
     expect(page).to have_content("Narrator: #{narrator_value}")
     expect(page).to have_content("Producer: #{producer_value}")

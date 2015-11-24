@@ -87,10 +87,7 @@
       </div>
     </div>
     <div id="visualization_sidebar" class="side_block">
-  		<% if @visualization.explanation.present? &&
-            (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-             @visualization.visualization_type_id == Visualization::TYPES[:interactive]  ||
-             @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+  		<% if @visualization.explanation.present? %>
         <div id="explanation">
           <%= simple_format @visualization.explanation %>
         </div>
@@ -98,7 +95,7 @@
 
       <%
          source_class = ''
-  		   if @visualization.explanation.blank? || @visualization.visualization_type_id == Visualization::TYPES[:fact]
+  		   if @visualization.explanation.blank?
   		    source_class = "class=no_explanation"
          end
       %>

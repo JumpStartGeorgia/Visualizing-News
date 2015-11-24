@@ -34,46 +34,10 @@
 
   <% elsif @reset_lanaguages == true %>
 
-    <div id="fields-panel">
-      <%= f.hidden_field :reset_languages, :value => true %>
-      <%= f.hidden_field :visualization_type_id , :value => @visualization.visualization_type_id %>
-      <div class="check_boxes control-group required" id="visualization_languages_internal_input">
-        <label class=" control-label"><%= model_class.human_attribute_name(:languages_internal) %><abbr title="<%= t('formtastic.required') %>">*</abbr></label>
-        <input id="visualization_languages_internal_none" name="visualization[languages_internal][]" type="hidden" value="">
-        <div class="choices controls">
-          <% I18n.available_locales.each do |locale| %>
-            <label class="choice checkbox" for="visualization_languages_internal_<%=locale%>">
-              <% checked = @visualization.languages_internal.include?(locale.to_s) ? 'checked=checked' : '' %>
-              <input <%= checked %> id="visualization_languages_internal_<%=locale%>" name="visualization[languages_internal][]" type="checkbox" value="<%=locale%>">
-              <%= I18n.t("app.language.#{locale}") %>
-            </label>
-          <% end %>
-        </div>
-      </div>
-
-      <% @visualization.visualization_translations.sort{|x,y| x.locale <=> y.locale}.each do |trans| %>
-        <%= f.fields_for :visualization_translations, trans do |translation| %>
-
-          <div id="form-<%= trans.locale %>" class="multilanguage" data-locale="<%= trans.locale%>">
-            <h3><%= t("app.language.#{trans.locale}") %></h3>
-
-            <%= translation.input :title %>
-            <div class="trans_visual_file" style="display: none">
-              <%= translation.fields_for :image_file do |upload| %>
-                <%= upload.hidden_field :visualization_type_id, :value => @visualization.visualization_type_id %>
-                <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
-
-              <% end %>
-            </div>
-            <div class="trans_interactive_url" style="display: none">
-            <%= translation.input :interactive_url, :as => :url %>
-            </div>
-            <%= translation.hidden_field :locale , :value => trans.locale %>
-          </div>
-
-        <% end %>
-      <% end %>
-    </div>
+    <%= render partial: 'visualizations/form/reset_languages', locals: {
+          f: f,
+          model_class: model_class
+        } %>
 
 	<% else %>
 

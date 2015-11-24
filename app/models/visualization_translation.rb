@@ -63,8 +63,8 @@ class VisualizationTranslation < ActiveRecord::Base
     datasource_errors = []
     missing_fields << :title if !self.title || self.title.empty?
     missing_fields << :explanation if !self.explanation || self.explanation.empty?
-    missing_fields << :reporter if !self.reporter || self.reporter.empty?
-    missing_fields << :designer if !self.designer || self.designer.empty?
+    # missing_fields << :reporter if !self.reporter || self.reporter.empty?
+    # missing_fields << :designer if !self.designer || self.designer.empty?
 #    missing_fields << :data_source_name if !self.data_source_name || self.data_source_name.empty?
 
     # validate each datasource object

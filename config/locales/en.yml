@@ -262,6 +262,7 @@ en:
         interactive: Interactive
         fact: Fact
         comic: Comic
+        video: Video
         not_published: Not Published
         not_promoted: Not Promoted
       view:

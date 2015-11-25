@@ -30,6 +30,12 @@ class Visualization < ActiveRecord::Base
 
   TYPES = {:infographic => 1, :interactive => 2, :fact => 3, :comic => 4, :video => 5}
 
+  def type
+    id_index = Visualization::TYPES.values.index(visualization_type_id)
+    return :infographic if id_index == nil
+    Visualization::TYPES.keys[id_index]
+  end
+
 	has_many :visualization_categories, :dependent => :destroy
 	has_many :categories, :through => :visualization_categories
 	has_many :visualization_translations, :dependent => :destroy

@@ -13,15 +13,8 @@
         <% visualization.visualization_locale = @language %>
       	<div class="list_visualization_item clear">
       		<div class="visual">
-    		    <% 
-    		      type = 'infographic'
-    		      if visualization.visualization_type_id == Visualization::TYPES[:interactive]
-    		        type='interactive'
-    		      elsif visualization.visualization_type_id == Visualization::TYPES[:fact]
-    		        type='fact'
-              elsif visualization.visualization_type_id == Visualization::TYPES[:comic]
-                type='comic'
-    		      end
+    		    <%
+              type = visualization.type
     		    %>
   	         <%  if !visualization.image_file_name.blank? %>
   		        <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]) do %>
@@ -82,4 +75,3 @@
   <% if !@ajax_call %>
     </div>
   <% end %>
-

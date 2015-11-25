@@ -23,7 +23,7 @@ hide_slider = ''
             li_class = 'class="active"'.html_safe
             %><script id="slider_index" type="text/javascript">var slider_start_index = <%= cat_i.to_s %>;</script><%
           else
-            li_class = ''  
+            li_class = ''
           end %>
           <li <%= li_class %> id="category_item_<%= cat.id %>">
             <%= link_to(url_for(params.merge(:category => cat.permalink)),

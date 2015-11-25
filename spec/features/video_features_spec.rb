@@ -77,6 +77,10 @@ RSpec.describe 'Video', type: :feature, js: true do
     fill_in 'Explanation',
             with: explanation_value
 
+    visualization_text_value = "WOFEHWFEWFEF!!\n\ndsfjds;fjds;ljfd"
+    fill_in 'Text from Visualization',
+            with: visualization_text_value
+
     researcher_value = 'Test Researcher Name 1, Test Organization 1'
     fill_in 'Researcher (Name, Organization)',
             with: researcher_value
@@ -133,6 +137,7 @@ RSpec.describe 'Video', type: :feature, js: true do
     expect(visual_html).to eq(video.video_embed)
 
     expect(page).to have_content(explanation_value)
+    expect(page).to have_content(visualization_text_value)
     expect(page).to have_content("Researcher: #{researcher_value}")
     expect(page).to have_content("Narrator: #{narrator_value}")
     expect(page).to have_content("Producer: #{producer_value}")

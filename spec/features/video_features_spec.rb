@@ -77,7 +77,7 @@ RSpec.describe 'Video', type: :feature, js: true do
     fill_in 'Explanation',
             with: explanation_value
 
-    visualization_text_value = "WOFEHWFEWFEF!!\n\ndsfjds;fjds;ljfd"
+    visualization_text_value = "And this\n\nis some text from the video"
     fill_in 'Text from Visualization',
             with: visualization_text_value
 
@@ -131,13 +131,12 @@ RSpec.describe 'Video', type: :feature, js: true do
     # get html content of #visual div
     visual_html = page.evaluate_script(
       "document.getElementById('visual').innerHTML"
-    ).strip
+    ).strip.split("\n")[0]
 
     # Check that the html is the video embed code
     expect(visual_html).to eq(video.video_embed)
 
     expect(page).to have_content(explanation_value)
-    expect(page).to have_content(visualization_text_value)
     expect(page).to have_content("Researcher: #{researcher_value}")
     expect(page).to have_content("Narrator: #{narrator_value}")
     expect(page).to have_content("Producer: #{producer_value}")

@@ -7,7 +7,7 @@ class ImageFile < ActiveRecord::Base
 
 	attr_accessor :reset_crop, :was_cropped, :redid_crop, :reload_file
 
-  validates :file_file_name, :presence => true, :if => "visualization_type_id == Visualization::TYPES[:infographic]"
+  validates :file_file_name, :presence => true, :if => "!visualization_type_id == Visualization::TYPES[:interactive]"
 
 	has_attached_file :file,
     :url => "/system/visualizations/:visual_id/image/:permalink_:locale_:style.:extension",

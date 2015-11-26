@@ -276,10 +276,12 @@
 					  <!--li id="js_link_text">
 						  <%= t(".js_link_text") %>:
 					  </li-->
-					  <li id="js_logo">
+					  <li class="js-logo">
 						  <%= link_to(image_tag("jumpstart-logo.png"), "http://www.jumpstart.ge", :target => "_blank",
 								  :title => t(".js_link_title")	) %>
-							<div><img src="/assets/logo-wheel.png" /></div>
+							<div class='custom-container is-hidden-on-small-screen'>
+                <img src="/assets/logo-wheel.png" />
+              </div>
 					  </li>
 				  </ul>
 			  </div>

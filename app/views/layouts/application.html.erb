@@ -13,9 +13,9 @@
         share_image = full_url(image_path('logo.png'))
         Globalize.with_locale(@language) do
           if @visualization && @visualization.id && @visualization.explanation.present?
-            desc = @visualization.explanation.gsub("\n", " ") 
+            desc = @visualization.explanation.gsub("\n", " ")
           elsif @idea && @idea.id && @idea.explaination.present?
-            desc = @idea.explaination.gsub("\n", " ") 
+            desc = @idea.explaination.gsub("\n", " ")
           end
 
           if @visualization && @visualization.id && @visualization.image_file_name.present?

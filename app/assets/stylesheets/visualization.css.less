@@ -19,16 +19,6 @@
     font-family: themix_regular;
     font-size: 14px;
   }
-
-  .side_block{
-    margin-top: -10px;
-    #fb_iframe{
-      border:none;
-      overflow:hidden;
-      width:300px;
-      height:60px;
-    }
-  }
 }
 
 #visualization_row1a {
@@ -394,6 +384,15 @@ div#share a:hover, ul#share-links a:hover {
           box-sizing: border-box;
 }
 
+.side_block.mod-feradi {
+	#fb_iframe {
+		border:none;
+		overflow:hidden;
+		width:300px;
+		height:60px;
+	}
+}
+
 @small-screen: 600px;
 
 @media (max-width: @small-screen) {
@@ -403,12 +402,8 @@ div#share a:hover, ul#share-links a:hover {
 
 	.side_block {
 		width: 100%;
-
-	}
-
-	.side_block.mod-visualization {
-		margin-left: 0px;
 		padding-left: 0px;
+		margin-left: 0px;
 	}
 
 	#overall_counts {

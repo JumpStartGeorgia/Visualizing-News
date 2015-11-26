@@ -124,8 +124,8 @@
       }
     }
   }
-  #visualization_sidebar{
-    padding-left: 5px;
+
+  .side_block.mod-visualization {
     #explanation{
       color: #000;
       p:first-of-type{
@@ -403,6 +403,12 @@ div#share a:hover, ul#share-links a:hover {
 
 	.side_block {
 		width: 100%;
+
+	}
+
+	.side_block.mod-visualization {
+		margin-left: 0px;
+		padding-left: 0px;
 	}
 
 	#overall_counts {
@@ -417,7 +423,7 @@ div#share a:hover, ul#share-links a:hover {
       width: 184px;
     }
   }
-  #visualization_row2 #visualization_sidebar #share .embed {
+  #visualization_row2 .side_block.mod-visualization #share .embed {
     textarea {
       width: 100%;
     }

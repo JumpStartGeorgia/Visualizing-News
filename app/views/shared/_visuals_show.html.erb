@@ -80,7 +80,9 @@
           <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
         <% elsif @visualization.visualization_type_id == Visualization::TYPES[:video] %>
 
-          <%= @visualization.video_embed.html_safe %>
+          <div class='custom-container mod-responsive-video'>
+            <%= @visualization.video_embed.html_safe %>
+          </div>
 
           <% if @visualization.image_text.present? %>
             <div id='video-visualization-text' class='custom-container is-hidden'>

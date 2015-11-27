@@ -180,7 +180,7 @@ hide_slider = ''
       <li class="visual_search">
         <%= form_tag visuals_path(remove_unwanted_params(@param_options)), :method => :get, :class => "form-search", :id => 'visuals_form_search' do %>
           <%= text_field_tag :q, params[:q], :class => 'input-large', :placeholder => t('app.common.search')%>
-          <%= button_tag t('app.common.search'), :class => 'btn' %>
+          <%= button_tag t('app.common.search'), :class => 'visual_search_button btn' %>
         <% end %>
       </li>
 		</ul>

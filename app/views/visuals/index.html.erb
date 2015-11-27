@@ -3,11 +3,10 @@
 
 <%= render "shared/visuals_filter_bar" %>
 
-<div id="visual_list" class="viz resp">
+<div class="visual_list viz resp">
 	<%= render @view_type %>
 </div>
 
 <a id="load_more_link" href="#" style="display: none;"><%= t('helpers.links.more') %></a>
 
 <div class="hide_for_crawler"><%= link_to all_visuals_path, all_visuals_path %></div>
-

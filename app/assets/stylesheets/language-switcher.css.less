@@ -7,8 +7,7 @@
   padding-top: 1px;
 }
 
-  // Using nested language-switcher to override other link styles
-  .language-switcher .language-switcher-item {
+  .language-switcher-item {
     display: inline-block;
   }
 
@@ -23,17 +22,20 @@
     content: '';
   }
 
-    .language-switcher-item-link {
+    // Using nested language-switcher to override other link styles
+    .language-switcher .language-switcher-item-link {
       color: #c17250;
       opacity: 0.6;
     }
 
-    .language-switcher-item-link:hover {
+    // Using nested language-switcher to override other link styles
+    .language-switcher .language-switcher-item-link:hover {
       color: #a6502b;
       opacity: 0.9;
     }
 
-    .language-switcher-item-link.is-active{
+    // Using nested language-switcher to override other link styles
+    .language-switcher .language-switcher-item-link.is-active{
       font-weight: bold;
       opacity: 0.9;
     }

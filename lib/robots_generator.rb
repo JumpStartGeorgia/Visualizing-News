@@ -1,4 +1,5 @@
 # Generates different robots.txt for production and for all other environments
+# Source: http://avandamiri.com/2011/10/11/serving-different-robots-using-rack.html
 class RobotsGenerator
   # Use the config/robots.txt in production.
   # Disallow everything for all other environments.

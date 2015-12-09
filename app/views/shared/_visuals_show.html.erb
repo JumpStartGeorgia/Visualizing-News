@@ -9,255 +9,243 @@
 <% Globalize.with_locale(@language) do %>
   <% @visualization.visualization_locale = @language %>
 
-  <div id="visualization_row1" class="row-fluid">
+  <section class='visualization-container'>
+    
+    <div id="visualization_row1" class="row-fluid">
 
-    <div class="main_block clear">
-  		<%= page_title @visualization.title.html_safe %>
+      <div class="main_block clear">
+        <%= page_title @visualization.title.html_safe %>
+      </div>
+
+      <div class="side_block mod-feradi">
+        <iframe id="fb_iframe" src="//www.facebook.com/plugins/likebox.php?href=http://www.facebook.com/feradi.info&amp;width=230&amp;height=100&amp;show_faces=false&amp;colorscheme=light&amp;stream=false&amp;border_color=%23fff&amp;header=false" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+
     </div>
 
-    <div class="side_block mod-feradi">
-      <iframe id="fb_iframe" src="//www.facebook.com/plugins/likebox.php?href=http://www.facebook.com/feradi.info&amp;width=230&amp;height=100&amp;show_faces=false&amp;colorscheme=light&amp;stream=false&amp;border_color=%23fff&amp;header=false" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
-    </div>
+    <div id="visualization_row1a" class="row-fluid">
 
-  </div>
-
-  <div id="visualization_row1a" class="row-fluid">
-
-    <div class="main_block clear">
-      <div id="visualization_date">
-  			<% if @visualization.published %>
-  	      <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
-  			<% else %>
-  				<div class="not_published"><%= t('app.common.not_published') %></div>
-  			<% end %>
-        <% if @visualization.published && user_signed_in? && current_user.role?(User::ROLES[:visual_promotion]) %>
-          <% if @visualization.is_promoted %>
-            <%= link_to t('helpers.links.unpromote'), visual_unpromote_path(params[:id]), :id => 'unpromote_visual',
-  							  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %>
+      <div class="main_block clear">
+        <div id="visualization_date">
+          <% if @visualization.published %>
+            <%= l @visualization.published_date, :format => :no_time if @visualization.published_date %>
           <% else %>
-            <%= link_to t('helpers.links.promote'), visual_promote_path(params[:id]), :id => 'promote_visual' %>
+            <div class="not_published"><%= t('app.common.not_published') %></div>
           <% end %>
-        <% end %>
-      </div>
-      <div class="vote">
-  			<% if params[:controller] == 'visuals' %>
-  				<%= render :partial => 'shared/visuals_vote' %>
-  			<% end %>
-      </div>
-    </div>
-    <div id="overall_counts">
-      <ul>
-        <li id="<%= "like_count_#{I18n.locale}"%>">
-          <span class="heart">❤</span>
-          <span id="like_count_text">
-            <span id="like_count_number"><%= @visualization.overall_votes %></span>
-            <%= t('filters.visuals.organize.likes') %>
-          </span>
-        </li>
-        <li id="<%= "view_count_#{I18n.locale}"%>">
-          <%= image_tag('view_icon.png') %>
-          <%= "#{@visualization.impressions_count} #{t('filters.visuals.organize.views')}" %>
-        </li>
-        <li id="<%= "comment_count_#{I18n.locale}"%>">
-          <%= image_tag('comments_icon.png') %>
-          <span id="comment_count_text">
-            <span class="comment_count_number"><%= @visualization.fb_count %></span>
-            <%= t('app.common.comments_noun') %>
-          </span>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div id="visualization_row2" class="row-fluid">
-
-    <div class="main_block">
-      <div id="visual">
-  			<% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-  		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
-              url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
-          <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
-        <% elsif @visualization.visualization_type_id == Visualization::TYPES[:video] %>
-
-          <div class='custom-container mod-responsive-video'>
-            <%= @visualization.video_embed.html_safe %>
-          </div>
-
-          <% if @visualization.image_text.present? %>
-            <div id='video-visualization-text' class='custom-container is-hidden'>
-              <%= @visualization.image_text %>
-            </div>
-          <% end %>
-
-  			<% else %>
-  		    <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
-              @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
-  			<% end %>
-      </div>
-    </div>
-    <div class="side_block mod-visualization">
-  		<% if @visualization.explanation.present? %>
-        <div id="explanation">
-          <%= simple_format @visualization.explanation %>
-        </div>
-      <% end %>
-
-      <%
-         source_class = ''
-  		   if @visualization.explanation.blank?
-  		    source_class = "class=no_explanation"
-         end
-      %>
-      <div id="source" <%= source_class %>>
-        <ul>
-          <% if @visualization.organization.present? %>
-            <li>
-              <%= "#{t('.organization')}: "%>
-    					<span class="val">
-    						<%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
-    					</span>
-            </li>
-          <% end %>
-  				<% if @visualization.reporter.present? &&
-                (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
-                @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
-            <li>
-              <%= "#{t('.reporter')}: "%>
-  					  <span class="val">
-  						  <%= @visualization.reporter %>
-  					  </span>
-            </li>
-          <% end %>
-          <% if @visualization.designer.present? %>
-            <li>
-              <%= "#{t('.designer')}: "%>
-    					<span class="val">
-    						<%= @visualization.designer %>
-    					</span>
-            </li>
-          <% end %>
-          <% if @visualization.developer.present? && @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-            <li>
-              <%= "#{t('.developer')}: "%>
-  					  <span class="val">
-  						  <%= @visualization.developer %>
-  					  </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.researcher.present? %>
-            <li>
-              <%= "#{t('.researcher')}: "%>
-              <span class="val">
-                <%= @visualization.researcher %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.narrator.present? %>
-            <li>
-              <%= "#{t('.narrator')}: "%>
-              <span class="val">
-                <%= @visualization.narrator %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.producer.present? %>
-            <li>
-              <%= "#{t('.producer')}: "%>
-              <span class="val">
-                <%= @visualization.producer %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.director.present? %>
-            <li>
-              <%= "#{t('.director')}: "%>
-              <span class="val">
-                <%= @visualization.director %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.writer.present? %>
-            <li>
-              <%= "#{t('.writer')}: "%>
-              <span class="val">
-                <%= @visualization.writer %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.designer_animator.present? %>
-            <li>
-              <%= "#{t('.designer_animator')}: "%>
-              <span class="val">
-                <%= @visualization.designer_animator %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.sound_music.present? %>
-            <li>
-              <%= "#{t('.sound_music')}: "%>
-              <span class="val">
-                <%= @visualization.sound_music %>
-              </span>
-            </li>
-          <% end %>
-
-          <% if @visualization.datasources.present? %>
-            <li>
-              <%= "#{t('.data_source')}: "%>
-    					<span class="val-source">
-                <ul class="datasource_list">
-                <% @visualization.datasources.each_with_index do |source, index| %>
-    					    <% if source.name.present? %>
-                    <li>
-    					      <% if source.url.present? %>
-    	                <%= link_to source.name, source.url, :target => "blank" %>
-    					      <% else %>
-    						      <%= source.name %>
-    					      <% end %></li>
-    				      <% end %>
-                <% end %>
-                </ul>
-    					</span>
-            </li>
-          <% end %>
-  				<% if @visualization.dataset_file_name.present? &&
-                (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-  				      @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
-                @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
-            <li>
-              <%= "#{t('.data_set')}: " %>
-              <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download'%>
-            </li>
-          <% end %>
-          <li>
-            <%= "#{t('app.common.language')}: "%>
-            <span class="val">
-            <% @visualization.languages.split(",").each_with_index do |locale, index| %>
-              <% x = link_to t("app.language.#{locale}"), params.merge(language: locale) %>
-              <% if index != @visualization.translated_locales.length-1 %>
-                <%= x + ", "%>
-              <% else %>
-                <%= x %>
-              <% end %>
+          <% if @visualization.published && user_signed_in? && current_user.role?(User::ROLES[:visual_promotion]) %>
+            <% if @visualization.is_promoted %>
+              <%= link_to t('helpers.links.unpromote'), visual_unpromote_path(params[:id]), :id => 'unpromote_visual',
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) } %>
+            <% else %>
+              <%= link_to t('helpers.links.promote'), visual_promote_path(params[:id]), :id => 'promote_visual' %>
             <% end %>
+          <% end %>
+        </div>
+        <div class="vote">
+          <% if params[:controller] == 'visuals' %>
+            <%= render :partial => 'shared/visuals_vote' %>
+          <% end %>
+        </div>
+      </div>
+      <div id="overall_counts">
+        <ul>
+          <li id="<%= "like_count_#{I18n.locale}"%>">
+            <span class="heart">❤</span>
+            <span id="like_count_text">
+              <span id="like_count_number"><%= @visualization.overall_votes %></span>
+              <%= t('filters.visuals.organize.likes') %>
             </span>
           </li>
-          <% if @visualization.visualization_categories.present? %>
+          <li id="<%= "view_count_#{I18n.locale}"%>">
+            <%= image_tag('view_icon.png') %>
+            <%= "#{@visualization.impressions_count} #{t('filters.visuals.organize.views')}" %>
+          </li>
+          <li id="<%= "comment_count_#{I18n.locale}"%>">
+            <%= image_tag('comments_icon.png') %>
+            <span id="comment_count_text">
+              <span class="comment_count_number"><%= @visualization.fb_count %></span>
+              <%= t('app.common.comments_noun') %>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div id="visualization_row2" class="row-fluid">
+
+      <div class="main_block">
+        <div id="visual">
+          <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+            <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
+                url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
+            <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
+          <% elsif @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+
+            <div class='custom-container mod-responsive-video'>
+              <%= @visualization.video_embed.html_safe %>
+            </div>
+
+            <% if @visualization.image_text.present? %>
+              <div id='video-visualization-text' class='custom-container is-hidden'>
+                <%= @visualization.image_text %>
+              </div>
+            <% end %>
+
+          <% else %>
+            <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
+                @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
+          <% end %>
+        </div>
+      </div>
+      <div class="side_block mod-visualization">
+        <% if @visualization.explanation.present? %>
+          <div id="explanation">
+            <%= simple_format @visualization.explanation %>
+          </div>
+        <% end %>
+
+        <%
+           source_class = ''
+           if @visualization.explanation.blank?
+            source_class = "class=no_explanation"
+           end
+        %>
+        <div id="source" <%= source_class %>>
+          <ul>
+            <% if @visualization.organization.present? %>
+              <li>
+                <%= "#{t('.organization')}: "%>
+                <span class="val">
+                  <%= link_to @visualization.organization.name, organization_path(@visualization.organization.permalink) %>
+                </span>
+              </li>
+            <% end %>
+            <% if @visualization.reporter.present? &&
+                  (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+              <li>
+                <%= "#{t('.reporter')}: "%>
+                <span class="val">
+                  <%= @visualization.reporter %>
+                </span>
+              </li>
+            <% end %>
+            <% if @visualization.designer.present? %>
+              <li>
+                <%= "#{t('.designer')}: "%>
+                <span class="val">
+                  <%= @visualization.designer %>
+                </span>
+              </li>
+            <% end %>
+            <% if @visualization.developer.present? && @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+              <li>
+                <%= "#{t('.developer')}: "%>
+                <span class="val">
+                  <%= @visualization.developer %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.researcher.present? %>
+              <li>
+                <%= "#{t('.researcher')}: "%>
+                <span class="val">
+                  <%= @visualization.researcher %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.narrator.present? %>
+              <li>
+                <%= "#{t('.narrator')}: "%>
+                <span class="val">
+                  <%= @visualization.narrator %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.producer.present? %>
+              <li>
+                <%= "#{t('.producer')}: "%>
+                <span class="val">
+                  <%= @visualization.producer %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.director.present? %>
+              <li>
+                <%= "#{t('.director')}: "%>
+                <span class="val">
+                  <%= @visualization.director %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.writer.present? %>
+              <li>
+                <%= "#{t('.writer')}: "%>
+                <span class="val">
+                  <%= @visualization.writer %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.designer_animator.present? %>
+              <li>
+                <%= "#{t('.designer_animator')}: "%>
+                <span class="val">
+                  <%= @visualization.designer_animator %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.sound_music.present? %>
+              <li>
+                <%= "#{t('.sound_music')}: "%>
+                <span class="val">
+                  <%= @visualization.sound_music %>
+                </span>
+              </li>
+            <% end %>
+
+            <% if @visualization.datasources.present? %>
+              <li>
+                <%= "#{t('.data_source')}: "%>
+                <span class="val-source">
+                  <ul class="datasource_list">
+                  <% @visualization.datasources.each_with_index do |source, index| %>
+                    <% if source.name.present? %>
+                      <li>
+                      <% if source.url.present? %>
+                        <%= link_to source.name, source.url, :target => "blank" %>
+                      <% else %>
+                        <%= source.name %>
+                      <% end %></li>
+                    <% end %>
+                  <% end %>
+                  </ul>
+                </span>
+              </li>
+            <% end %>
+            <% if @visualization.dataset_file_name.present? &&
+                  (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+              <li>
+                <%= "#{t('.data_set')}: " %>
+                <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download'%>
+              </li>
+            <% end %>
             <li>
-              <%= "#{t('app.common.category')}: "%>
+              <%= "#{t('app.common.language')}: "%>
               <span class="val">
-              <% @visualization.visualization_categories.each_with_index do |cat, index| %>
-                <% x = link_to cat.category.name, visuals_path(remove_unwanted_params(merge_visual_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
-                <% if index != @visualization.visualization_categories.length-1 %>
+              <% @visualization.languages.split(",").each_with_index do |locale, index| %>
+                <% x = link_to t("app.language.#{locale}"), params.merge(language: locale) %>
+                <% if index != @visualization.translated_locales.length-1 %>
                   <%= x + ", "%>
                 <% else %>
                   <%= x %>
@@ -265,128 +253,144 @@
               <% end %>
               </span>
             </li>
-          <% end %>
-          <li>
-            <%= "#{t('.type')}:"%>
-  						<span class="val">
-  							<%= link_to @visualization.visualization_type_name,
-                    visuals_path(remove_unwanted_params(merge_visual_params([{:key => :type, :value => @visualization.visualization_type_name(true).downcase}]), true)) %>
-  						</span>
-          </li>
-        </ul>
-      </div>
-
-      <div id="share">
-        <div class="social-links clear">
-          <span><%= t('app.common.share'); %>: </span>
-          <div>
-  				  <%= link_to(image_tag("share_fb.png"),
-  							  "http://www.facebook.com/share.php?u=#{current_url}",
-  							  :title => "facebook",	:target => "_blank") %>
-  				  <%= link_to(image_tag("share_twitter.png"),
-  							  "https://twitter.com/share?url=#{current_url}", :title => "twitter",
-  							  :target => "_blank") %>
-  				  <%= link_to(image_tag("share_gplus.png"),
-  							  "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url}", :title => "google+",
-  							  :target => "_blank") %>
-            <% if @visualization.image.present? %>
-  				    <%= link_to(image_tag("share_pinterest.png"),
-  							"http://pinterest.com/pin/create/button/?url=#{current_url}&media=#{full_url(image_path(@visualization.image.url(:medium, false)))}&description=#{@visualization.title}", :title => "pinterest",
-  							:onclick => "window.open(this.href); return false;") %>
+            <% if @visualization.visualization_categories.present? %>
+              <li>
+                <%= "#{t('app.common.category')}: "%>
+                <span class="val">
+                <% @visualization.visualization_categories.each_with_index do |cat, index| %>
+                  <% x = link_to cat.category.name, visuals_path(remove_unwanted_params(merge_visual_params([{:key => :category, :value => cat.category.permalink}]), true)) %>
+                  <% if index != @visualization.visualization_categories.length-1 %>
+                    <%= x + ", "%>
+                  <% else %>
+                    <%= x %>
+                  <% end %>
+                <% end %>
+                </span>
+              </li>
             <% end %>
-  				</div>
-  			</div>
-  			<div class="embed">
-  			  <span><%= t('.embed')%>:</span>
-          <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
-                @visualization.visualization_type_id == Visualization::TYPES[:comic] ||
-                @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+            <li>
+              <%= "#{t('.type')}:"%>
+                <span class="val">
+                  <%= link_to @visualization.visualization_type_name,
+                      visuals_path(remove_unwanted_params(merge_visual_params([{:key => :type, :value => @visualization.visualization_type_name(true).downcase}]), true)) %>
+                </span>
+            </li>
+          </ul>
+        </div>
 
-  			    <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
-  					  onmouseup="return false;"><%=
+        <div id="share">
+          <div class="social-links clear">
+            <span><%= t('app.common.share'); %>: </span>
+            <div>
+              <%= link_to(image_tag("share_fb.png"),
+                    "http://www.facebook.com/share.php?u=#{current_url}",
+                    :title => "facebook",	:target => "_blank") %>
+              <%= link_to(image_tag("share_twitter.png"),
+                    "https://twitter.com/share?url=#{current_url}", :title => "twitter",
+                    :target => "_blank") %>
+              <%= link_to(image_tag("share_gplus.png"),
+                    "https://plusone.google.com/_/+1/confirm?hl=en&url=#{current_url}", :title => "google+",
+                    :target => "_blank") %>
+              <% if @visualization.image.present? %>
+                <%= link_to(image_tag("share_pinterest.png"),
+                  "http://pinterest.com/pin/create/button/?url=#{current_url}&media=#{full_url(image_path(@visualization.image.url(:medium, false)))}&description=#{@visualization.title}", :title => "pinterest",
+                  :onclick => "window.open(this.href); return false;") %>
+              <% end %>
+            </div>
+          </div>
+          <div class="embed">
+            <span><%= t('.embed')%>:</span>
+            <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:comic] ||
+                  @visualization.visualization_type_id == Visualization::TYPES[:video] %>
 
-                link_to(
-    						  image_tag(full_url(@visualization.image.url(:medium, false)),
-    							          :alt => @visualization.title),
-    						  full_url(url_for(params.merge(:from_embed => true))),
-    						  :title => t('.embed_link_title'),
-    						  :target => :blank
-                ) %><br /><%=
+              <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
+                onmouseup="return false;"><%=
 
-                link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank
-
-             %></textarea>
-
-          <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-
-            <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
-  					  onmouseup="return false;">
-
-              <%= link_to(
+                  link_to(
                     image_tag(full_url(@visualization.image.url(:medium, false)),
-      							          :alt => @visualization.title),
-                    full_url(url_for(params.merge(:view => 'interactive',
-                                                  :from_embed => true))),
-      					    :title => t('.embed_link_interactive_title'),
-      					    :target => :blank
-                  ) %>
+                              :alt => @visualization.title),
+                    full_url(url_for(params.merge(:from_embed => true))),
+                    :title => t('.embed_link_title'),
+                    :target => :blank
+                  ) %><br /><%=
 
-  					  <br />
+                  link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank
 
-  					  <%= link_to t('app.common.app_name'),
-                          full_url(root_path(:from_embed => true)),
-                          :target => :blank %>
+               %></textarea>
 
-  				  </textarea>
+            <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
 
+              <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
+                onmouseup="return false;">
+
+                <%= link_to(
+                      image_tag(full_url(@visualization.image.url(:medium, false)),
+                                :alt => @visualization.title),
+                      full_url(url_for(params.merge(:view => 'interactive',
+                                                    :from_embed => true))),
+                      :title => t('.embed_link_interactive_title'),
+                      :target => :blank
+                    ) %>
+
+                <br />
+
+                <%= link_to t('app.common.app_name'),
+                            full_url(root_path(:from_embed => true)),
+                            :target => :blank %>
+
+              </textarea>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="visualization_row3" class="row-fluid">
+
+      <div class="main_block clear">
+        <div class="vote">
+          <% if params[:controller] == 'visuals' %>
+            <%#= render 'shared/visuals_vote' %>
+            <div class="fb-like" data-href="<%= current_url %>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
           <% end %>
-  			</div>
+        </div>
+      </div>
+
+    </div>
+
+    <% if params[:controller] == 'visuals' %>
+      <div id="visualization_row4" class="row-fluid clear">
+
+        <div class="main_block clear">
+          <h3 class="comments_count">
+            <span id="comment_count_text">
+              <%= "#{t('app.common.comments')}: "%>
+              <span class="comment_count_number"><%=@visualization.fb_count%></span>
+            </span>
+          </h3>
+          <div class="fb-comments" data-href="<%= current_url %>" data-num-posts="5" data-width="470"></div>
+        </div>
+
+      </div>
+    <% end %>
+
+    <div id="visualization_row5" class="row-fluid">
+      <div id="previous_visual">
+        <%= link_to(image_tag('nav_previous.png', :alt => '<'), visual_previous_path(@param_options))%>
+      </div>
+
+      <div class="main_block clear">
+        &nbsp;
+      </div>
+
+      <div id="next_visual">
+        <%= link_to(image_tag('nav_next.png', :alt => '>'), visual_next_path(@param_options))%>
       </div>
     </div>
 
-  </div>
-
-  <div id="visualization_row3" class="row-fluid">
-
-    <div class="main_block clear">
-      <div class="vote">
-  			<% if params[:controller] == 'visuals' %>
-  				<%#= render 'shared/visuals_vote' %>
-  				<div class="fb-like" data-href="<%= current_url %>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
-  			<% end %>
-      </div>
-    </div>
-
-  </div>
-
-  <% if params[:controller] == 'visuals' %>
-  	<div id="visualization_row4" class="row-fluid clear">
-
-  		<div class="main_block clear">
-  			<h3 class="comments_count">
-          <span id="comment_count_text">
-  				  <%= "#{t('app.common.comments')}: "%>
-            <span class="comment_count_number"><%=@visualization.fb_count%></span>
-          </span>
-  			</h3>
-  			<div class="fb-comments" data-href="<%= current_url %>" data-num-posts="5" data-width="470"></div>
-  		</div>
-
-  	</div>
-  <% end %>
-
-  <div id="visualization_row5" class="row-fluid">
-    <div id="previous_visual">
-  	  <%= link_to(image_tag('nav_previous.png', :alt => '<'), visual_previous_path(@param_options))%>
-    </div>
-
-    <div class="main_block clear">
-      &nbsp;
-    </div>
-
-    <div id="next_visual">
-  	  <%= link_to(image_tag('nav_next.png', :alt => '>'), visual_next_path(@param_options))%>
-    </div>
-  </div>
+  </section>
 <% end %>

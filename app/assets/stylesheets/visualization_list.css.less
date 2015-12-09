@@ -1,9 +1,11 @@
+@visualization-thumbnail-width: 230px;
+
 .list_visualization_item{
   padding: 10px;
   margin-bottom: 20px;
   .visual{
     float: left;
-	  width: 230px;
+	  width: @visualization-thumbnail-width;
 		margin-right: 10px;
 
     a {
@@ -64,6 +66,9 @@
 
     @media (max-width: 500px) {
       clear: left;
+
+      // Limit width of text below image to image's width
+      max-width: @visualization-thumbnail-width;
     }
   }
   .item_footer > .count_block {

@@ -10,7 +10,7 @@ module ApplicationHelper
       h1_content = content_tag(:h1, page_title)
       if content_for?(:title_image)
         h1_content = content_tag(:h1) do
-          tag('img', {:src => content_for(:title_image), :style => 'vertical-align: middle; margin-right: 5px;'}) + 
+          tag('img', {:src => content_for(:title_image), :style => 'vertical-align: middle; margin-right: 5px;'}) +
           content_tag(:span, page_title)
         end
       elsif content_for(:title_after)
@@ -69,7 +69,7 @@ module ApplicationHelper
 		x = nil
     uri = URI("#{request.protocol}#{request.host_with_port}#{request.fullpath}")
     port = uri.port.present? && [80,443].index(uri.port).nil? ? ":#{uri.port}" : ""
-		return "#{uri.scheme}://#{uri.host}#{port}#{uri.path}" 
+		return "#{uri.scheme}://#{uri.host}#{port}#{uri.path}"
 	end
 
 	def full_url(path)
@@ -107,7 +107,8 @@ module ApplicationHelper
       end
     end
 
-    clas = locale == I18n.locale ? 'active' : ''
+		clas = 'language-switcher-item-link'
+    clas += locale == I18n.locale ? ' active' : ''
 
 		if !vis.blank? && !org.blank?
 			link_to t("app.language_abbreviation.#{locale}"), params.merge(:locale => locale,

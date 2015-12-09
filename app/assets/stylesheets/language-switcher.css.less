@@ -10,19 +10,6 @@
   // Using nested language-switcher to override other link styles
   .language-switcher .language-switcher-item {
     display: inline-block;
-
-    a {
-      color: #c17250;
-      opacity: 0.6;
-      &:hover {
-        color: #a6502b;
-        opacity: 0.9;
-      }
-      &.active{
-        font-weight: bold;
-        opacity: 0.9;
-      }
-    }
   }
 
   .language-switcher-item:after {
@@ -35,3 +22,18 @@
   .language-switcher-item:last-of-type:after {
     content: '';
   }
+
+    .language-switcher-item-link {
+      color: #c17250;
+      opacity: 0.6;
+    }
+
+    .language-switcher-item-link:hover {
+      color: #a6502b;
+      opacity: 0.9;
+    }
+    
+    .language-switcher-item-link.active{
+      font-weight: bold;
+      opacity: 0.9;
+    }

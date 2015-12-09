@@ -233,7 +233,9 @@
             <div class="language-switcher">
               <ul>
 		            <% I18n.available_locales.each do |locale| %>
-							    <li><%= generate_language_switcher_link(locale) %></li>
+							    <li class='language-switcher-item'>
+                    <%= generate_language_switcher_link(locale) %>
+                  </li>
 		            <% end %>
 		          </ul>
             </div>

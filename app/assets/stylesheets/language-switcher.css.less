@@ -5,8 +5,12 @@
   text-align: right;
   padding-right: 3px;
   padding-top: 1px;
-  ul li{
+}
+
+  // Using nested language-switcher to override other link styles
+  .language-switcher .language-switcher-item {
     display: inline-block;
+
     a {
       color: #c17250;
       opacity: 0.6;
@@ -19,14 +23,15 @@
         opacity: 0.9;
       }
     }
-    &:after{
-      color: #c17250;
-      opacity: 0.6 !important;
-      font-weight: normal !important;
-      content: " / ";
-    }
-    &:last-of-type:after{
-      content: '';
-    }
   }
-}
+
+  .language-switcher-item:after {
+    color: #c17250;
+    opacity: 0.6 !important;
+    font-weight: normal !important;
+    content: " / ";
+  }
+
+  .language-switcher-item:last-of-type:after {
+    content: '';
+  }

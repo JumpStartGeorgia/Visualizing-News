@@ -139,6 +139,16 @@
       }(document, /*debug*/ false));
     </script>
 
+    <div class="language-switcher">
+      <ul>
+        <% I18n.available_locales.each do |locale| %>
+          <li class='language-switcher-item'>
+            <%= generate_language_switcher_link(locale) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
     <div id="frozen-menu">
       <a class="menu-collapse" href="javascript:;">
         <%= t('app.common.app_name') %>
@@ -225,24 +235,6 @@
     <div id="everything-else">
 
       <div class="stretch">
-
-      <!--
-        <div class="navbar def">
-          <div class="navbar-inner">
-      -->
-            <div class="language-switcher">
-              <ul>
-		            <% I18n.available_locales.each do |locale| %>
-							    <li class='language-switcher-item'>
-                    <%= generate_language_switcher_link(locale) %>
-                  </li>
-		            <% end %>
-		          </ul>
-            </div>
-      <!--
-          </div>
-        </div>
-      -->
 
 		    <div id="wrapper">
 		      <div class="container-fluid">

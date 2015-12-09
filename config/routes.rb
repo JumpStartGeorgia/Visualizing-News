@@ -66,7 +66,7 @@ BootstrapStarter::Application.routes.draw do
 	  match '/ideas/:id/edit', :to => 'ideas#edit', :as => :idea_edit, :via => :get
 	  match '/ideas/:id/edit', :to => 'ideas#edit', :as => :idea_edit, :via => :post
 	  match '/ideas/:id/fb_like', :to => 'ideas#fb_like', :as => :idea_fb_like, :via => :get
-  
+
 
     namespace :ideas do
   		# idea progress
@@ -93,7 +93,7 @@ BootstrapStarter::Application.routes.draw do
   match '/unset_cookie', :to => 'root#unset_cookie', :as => :unset_cookie, :via => :get
 
   #facebook channel url - speeds up fb sdk loading
-  # http://blog.quov.is/2012/01/23/setting-up-the-facebook-javascript-sdk-channel-file-the-easy-way-with-rails/    
+  # http://blog.quov.is/2012/01/23/setting-up-the-facebook-javascript-sdk-channel-file-the-easy-way-with-rails/
   get '/channel.html' => proc {
     [
       200,

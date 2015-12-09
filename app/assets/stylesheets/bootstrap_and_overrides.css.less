@@ -223,40 +223,6 @@ body#interactive_layout {
   }
 }
 
-#locale-c {
-  position: absolute;
-  z-index: 9999;
-  right: 20px;
-  text-align: right;
-  padding-right: 3px;
-  padding-top: 1px;
-  ul li{
-    display: inline-block;
-    a {
-      color: #c17250;
-      opacity: 0.6;
-      &:hover {
-        color: #a6502b;
-        opacity: 0.9;
-      }
-      &.active{
-        font-weight: bold;
-        opacity: 0.9;
-      }
-    }
-    &:after{
-      color: #c17250;
-      opacity: 0.6 !important;
-      font-weight: normal !important;
-      content: " / ";
-    }
-    &:last-of-type:after{
-      content: '';
-    }
-  }
-}
-
-
 [class^="icon-"], [class*="icon-"] {
   background-position: inherit;
 }

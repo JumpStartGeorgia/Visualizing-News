@@ -108,7 +108,7 @@ module ApplicationHelper
     end
 
 		clas = 'language-switcher-item-link'
-    clas += locale == I18n.locale ? ' active' : ''
+    clas += locale == I18n.locale ? ' is-active' : ''
 
 		if !vis.blank? && !org.blank?
 			link_to t("app.language_abbreviation.#{locale}"), params.merge(:locale => locale,

@@ -223,16 +223,3 @@ function set_video_embed_code(video_url_div, video_embed_div) {
 
 	olly.embed(video_url, video_embed_div);
 }
-
-$(document).ready(function(){
-  $('#category_slider_content li a').each(function(){
-    $(this).css('background', "url('" + $(this).attr('data-path') + "')");
-    $(this).css('background-position', 'top');
-    $(this).css('background-repeat', 'no-repeat');
-    $(this).hover(function(){
-      $(this).css('background-position', '50% -31px');
-    }, function(){
-      $(this).css('background-position', 'top');
-    });
-  });
-});

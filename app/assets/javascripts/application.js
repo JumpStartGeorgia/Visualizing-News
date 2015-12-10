@@ -29,10 +29,6 @@ $(document).ready(function(){
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
 
-  // build category slider
-  $('#category_slider_content').elastislide({start: ((typeof slider_start_index == 'undefined') ? 0 : slider_start_index)});
-
-
 
   //if load more link exists, get the first page of items
   if ($('#load_more_link').length)

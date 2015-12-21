@@ -78,6 +78,16 @@ ka:
         designer: "დიზაინერი (სახელი, ორგანიზაცია)"
         developer: "დეველოპერი (სახელი, ორგანიზაცია)"
         interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
+        researcher: "მკვლევარი (სახელი, ორგანიზაცია)"
+        narrator: "მთხრობელი (სახელი, ორგანიზაცია)"
+        producer: "პროდიუსერი (სახელი, ორგანიზაცია)"
+        director: "რეჟისორი (სახელი, ორგანიზაცია)"
+        writer: "სცენარისტი (სახელი, ორგანიზაცია)"
+        sound_music: "მუსიკა / ხმის დიზაინერი (სახელი, ორგანიზაცია)"
+        designer_animator: "დიზაინერი / ანიმატორი (სახელი, ორგანიზაცია)"
+        interactive_url: ინტერაქტიული ვიზუალიზაციის ბმული
+        video_url: ვიდეოს ბმული
+        video_embed: ვიდეო
       image_file:
         file: ვიზუალის ფაილი
         reset_crop: ესკიზის განახლება
@@ -237,6 +247,7 @@ ka:
     interactive: ინტერაქტივი
     fact: ფაქტი
     comic: კომიქსი
+    video: ვიდეო
   multiselect:
     checkAllText: 'ყველას მონიშვნა'
     uncheckAllText: 'მონიშვნის მოხსნა'
@@ -252,6 +263,7 @@ ka:
         interactive: ინტერაქტივი
         fact: ფაქტი
         comic: კომიქსი
+        video: ვიდეო
         not_published: გამოუქვეყნებელი
         not_promoted: არ დაწინაურდა
       view:
@@ -496,6 +508,13 @@ ka:
       reporter: ჟურნალისტი
       designer: დიზაინერი
       developer: დეველოპერი
+      researcher: მკველვარი
+      narrator: მთხრობელ
+      producer: პროდიუსერი
+      director: რეჟისორი
+      writer: სცენარისტი
+      sound_music: "მუსიკა / ხმის დიზაინერი" 
+      designer_animator: "დიზაინერი / ანიმატორი"
       data_source: მონაცემთა წყარო
       data_set: მონაცემები
       type: ტიპი
@@ -518,6 +537,7 @@ ka:
       crop_image: ესკიზის %{language} შექმნა
       reset_file:  ჩატვირთე ახალი %{language} ინფოგრაფიკა
       reset_url: ჩატვირთე ახალი %{language} ბმული
+      change_video_url: "%{language} ვიდეოს ბმულის შეცვლა"
       datasources_header: მონაცემთა წყაროები
       add_datasource: მონაცემთა წყაროს დამატება
     datasource_fields:

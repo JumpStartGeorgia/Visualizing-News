@@ -78,6 +78,16 @@ hy:
         designer: Ձևավորող (անուն, կազմակերպություն)
         developer: Ծրագրավորող (անուն, կազմակերպություն)
         interactive_url: Ինտերակտիվ վիզուալիզացիայի հղում
+        researcher: "Researcher (Name, Organization)"
+        narrator: "Narrator (Name, Organization)"
+        producer: "Producer (Name, Organization)"
+        director: "Director (Name, Organization)"
+        writer: "Writer (Name, Organization)"
+        sound_music: "Sound / Music Designer (Name, Organization)"
+        designer_animator: "Designer / Animator (Name, Organization)"
+        interactive_url: URL to Interactive Visualization
+        video_url: Video URL
+        video_embed: Video
       image_file:
         file: Վիզուալ ֆայլը
         reset_crop: Չեղարկել նմուշի պատկերը
@@ -237,6 +247,7 @@ hy:
     interactive: Ինտերակտիվ
     fact: Փաստ
     comic: Ծաղրանկար
+    video: Video
   multiselect:
     checkAllText: 'Նշել բոլորը'
     uncheckAllText: 'Հանել բոլոր նշումները'
@@ -252,6 +263,7 @@ hy:
         interactive: Ինտերակտիվ
         fact: Փաստ
         comic: Ծաղրանկար
+        video: Video
         not_published: Չի հրապարակված
         not_promoted: 'Առաջընթաց չունի '
       view:
@@ -492,6 +504,13 @@ hy:
       reporter: Թղթակից
       designer: Ձևավորող
       developer: Ծրագրավորող
+      researcher: Researcher
+      narrator: Narrator
+      producer: Producer
+      director: Director
+      writer: Writer
+      sound_music: "Sound / Music Designer"
+      designer_animator: "Designer / Animator"
       data_source: Տվյալների աղբյուր
       data_set: Տվյալների բազա
       type: Տիպ
@@ -514,6 +533,7 @@ hy:
       crop_image: Ստեղծել %{language} նմուշի պատկեր
       reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
       reset_url: Բեռնել նոր %{language} հղում
+      change_video_url: Change %{language} Video URL
       datasources_header: Տվյալների աղբյուր
       add_datasource: Ավելացնել տվյալների աղբյուր
     datasource_fields:

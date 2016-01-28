@@ -1,4 +1,8 @@
 <% @no_index_meta = true %>
+<ul>
 <% @visualizations.each do |visualization| %>
-  <%= link_to visualization_path(visualization.id), visualization_path(visualization.id) %>
+  <li>
+    <%= link_to visualization_path(visualization.permalink), visualization_path(visualization.permalink) %>
+  </li>
 <% end %>
+</ul>

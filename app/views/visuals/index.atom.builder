@@ -5,7 +5,7 @@ atom_feed do |feed|
   feed.updated @visualizations.maximum(:published_date)
 
 	@visualizations.each do |visual|
-		feed.entry visual, :published => visual.published_date do |entry|
+		feed.entry visual, :published => visual.published_date, url: visualization_path(visual.permalink) do |entry|
 			entry.title visual.title
 
 			entry.content(simple_format(visual.explanation), :type => 'html')

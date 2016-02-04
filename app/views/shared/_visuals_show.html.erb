@@ -10,7 +10,7 @@
   <% @visualization.visualization_locale = @language %>
 
   <section class='visualization-container'>
-    
+
     <div id="visualization_row1" class="row-fluid">
 
       <div class="main_block clear">
@@ -298,6 +298,7 @@
               <% end %>
             </div>
           </div>
+
           <div class="embed">
             <span><%= t('.embed')%>:</span>
             <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
@@ -344,6 +345,14 @@
 
             <% end %>
           </div>
+
+          <div class='print-visualization'>
+            <span class='print-visualization-label'>Print:</span>
+            <div class='print-visualization-text'>
+              Want a beautiful, high-resolution print of this infographic? <%= link_to 'Contact us!', 'contact_path', class: 'fancybox' %>
+            </div>
+          </div>
+
         </div>
       </div>
 

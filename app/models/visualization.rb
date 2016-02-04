@@ -276,6 +276,6 @@ class Visualization < ActiveRecord::Base
   # Other helpful methods
 
   def printable?
-    (type == :infographic) || (type == :fact)
+    [:infographic, :fact, :comic].include? type
   end
 end

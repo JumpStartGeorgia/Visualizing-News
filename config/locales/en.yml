@@ -523,6 +523,7 @@ en:
       embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
       print:
+        label: Print
         question: Want a beautiful, high-resolution print of this infographic?
         contact_us: Contact us!
     visuals_filter_bar:

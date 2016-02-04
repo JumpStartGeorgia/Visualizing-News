@@ -522,6 +522,10 @@ ka:
       embed_link_title: დიდი გამოსახულების სანახავად დააჭირეთ
       embed_link_interactive_title: ინტერაქტიული ვიზუალიზაციის სანახავად დააჭირეთ
       comment_count: კომენტარები
+      print:
+        label: ბეჭდვა
+        question: გსურთ ინფოგრაფიკის მაღალი რეზოლუციის საბეჭდი ფაილი?
+        contact_us:  დაგვიკავშირდით!
     visuals_filter_bar:
       categories: კატეგორიები
     ideas_list:

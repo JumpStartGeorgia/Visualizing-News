@@ -273,5 +273,9 @@ class Visualization < ActiveRecord::Base
 		return to_crop
 	end
 
+  # Other helpful methods
 
+  def printable?
+    (type == :infographic) || (type == :fact)
+  end
 end

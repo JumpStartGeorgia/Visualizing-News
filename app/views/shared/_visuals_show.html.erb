@@ -346,6 +346,8 @@
             <% end %>
           </div>
 
+          <% if @visualization.printable? %>
+
             <div class='print-visualization'>
 
               <span class='print-visualization-label'>Print:</span>
@@ -358,6 +360,8 @@
               </div>
 
             </div>
+
+          <% end %>
 
         </div>
       </div>

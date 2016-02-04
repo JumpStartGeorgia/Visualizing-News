@@ -522,6 +522,9 @@ en:
       embed_link_title: Click to view larger image
       embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
+      print:
+        question: Want a beautiful, high-resolution print of this infographic?
+        contact_us: Contact us!
     visuals_filter_bar:
       categories: Categories
     ideas_list:

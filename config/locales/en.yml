@@ -524,7 +524,11 @@ en:
       comment_count: Comments
       print:
         label: Print
-        question: Want a beautiful, high-resolution print of this infographic?
+        question:
+          default: Want a beautiful, high-resolution print of this visualization?
+          infographic: Want a beautiful, high-resolution print of this infographic?
+          fact: Want a beautiful, high-resolution print of this fact?
+          comic: Want a beautiful, high-resolution print of this comic?
         contact_us: Contact us!
     visuals_filter_bar:
       categories: Categories

@@ -355,7 +355,7 @@
               </span>
 
               <div class='print-visualization-text'>
-                <%=t '.print.question' %>
+                <%=t ".print.question.#{@visualization.type}", default: t('.print.question.default') %>
                 <%= link_to t('.print.contact_us'),
                             contact_path,
                             class: 'print-visualization-text-contact fancybox' %>

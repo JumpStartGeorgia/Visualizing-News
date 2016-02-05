@@ -10,7 +10,7 @@
   <% @visualization.visualization_locale = @language %>
 
   <section class='visualization-container'>
-    
+
     <div id="visualization_row1" class="row-fluid">
 
       <div class="main_block clear">
@@ -93,8 +93,14 @@
             <% end %>
 
           <% else %>
-            <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
-                @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
+            <% if @visualization.image_file_name.present? %>
+              <%= link_to(
+                    image_tag(@visualization.image.url(:medium, false),
+                              alt: @visualization.image_text),
+                    @visualization.image.url(:original, false),
+                    class: 'fancybox_visual',
+                    title: t('.embed_link_title')) %>
+            <% end %>
           <% end %>
         </div>
       </div>

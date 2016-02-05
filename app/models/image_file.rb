@@ -31,7 +31,7 @@ class ImageFile < ActiveRecord::Base
   def attachment_styles
     styles = {}
 
-    if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
+    if id.nil? || reload_file || !all_crop_dimensions_present?
       styles = {
         thumb: { geometry: '230x230#' },
         medium: medium_attachment_styles,
@@ -64,7 +64,11 @@ class ImageFile < ActiveRecord::Base
   end
 
   def cropping?
-    image_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+    image_is_cropped && all_crop_dimensions_present?
+  end
+
+  def all_crop_dimensions_present?
+    crop_x.present? && crop_y.present? && crop_w.present? && crop_h.present?
   end
 
   def visual_geometry(style = :original)

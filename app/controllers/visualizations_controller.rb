@@ -81,8 +81,6 @@ class VisualizationsController < ApplicationController
         trans.build_dataset_file if !trans.dataset_file
       end
 
-      new_layout = nil
-
       if params[:reset_crop].present? && I18n.available_locales.index(params[:reset_crop].to_sym)
         @locale_to_crop = params[:reset_crop]
         to_crop = @visualization.visualization_translations.find{|x| x.locale == @locale_to_crop}.image_record
@@ -128,12 +126,6 @@ class VisualizationsController < ApplicationController
       gon.visualization_type = @visualization.visualization_type_id
       gon.published_date = @visualization.published_date.strftime('%m/%d/%Y') if !@visualization.published_date.nil?
 
-      if new_layout
-        respond_to do |format|
-          format.html { render :layout => new_layout}
-          format.json { render json: @visualization }
-        end
-      end
     else
       flash[:info] =  t('app.msgs.does_not_exist')
       redirect_to root_path(:locale => I18n.locale)

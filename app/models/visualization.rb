@@ -28,7 +28,13 @@ class Visualization < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
-  TYPES = {:infographic => 1, :interactive => 2, :fact => 3, :comic => 4, :video => 5}
+  TYPES = {
+    infographic: 1,
+    interactive: 2,
+    fact: 3,
+    comic: 4,
+    video: 5
+  }
 
   def type
     id_index = Visualization::TYPES.values.index(visualization_type_id)

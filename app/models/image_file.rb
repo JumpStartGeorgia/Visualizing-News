@@ -1,11 +1,26 @@
 class ImageFile < ActiveRecord::Base
   belongs_to :visualization_translation
 
-  attr_accessible :visualization_translation_id, :visualization_type_id,
-                      :file, :file_file_name, :file_content_type, :file_file_size, :file_updated_at,
-                      :crop_x, :crop_y, :crop_w, :crop_h, :reset_crop, :image_is_cropped, :redid_crop, :reload_file
+  attr_accessible :visualization_translation_id,
+                  :visualization_type_id,
+                  :file,
+                  :file_file_name,
+                  :file_content_type,
+                  :file_file_size,
+                  :file_updated_at,
+                  :crop_x,
+                  :crop_y,
+                  :crop_w,
+                  :crop_h,
+                  :reset_crop,
+                  :image_is_cropped,
+                  :redid_crop,
+                  :reload_file
 
-  attr_accessor :reset_crop, :was_cropped, :redid_crop, :reload_file
+  attr_accessor :reset_crop,
+                :was_cropped,
+                :redid_crop,
+                :reload_file
 
   has_attached_file :file,
                     url: '/system/visualizations/:visual_id/image/:permalink_:locale_:style.:extension',

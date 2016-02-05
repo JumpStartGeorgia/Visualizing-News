@@ -127,6 +127,7 @@ class Visualization < ActiveRecord::Base
 	# and so cannot get type id
   def required_fields_for_type
     missing_fields = []
+
     visualization_translations.each do |trans|
       if [:infographic, :fact, :comic].include? type
         missing_fields << :visual if trans.image_file_name.blank?
@@ -139,10 +140,11 @@ class Visualization < ActiveRecord::Base
         missing_fields << :video_embed if trans.video_embed.blank?
       end
     end
-    if !missing_fields.empty?
-      missing_fields.each do |field|
-        errors.add(field, I18n.t('activerecord.errors.messages.required_field'))
-      end
+
+    return if missing_fields.blank?
+
+    missing_fields.each do |field|
+      errors.add(field, I18n.t('activerecord.errors.messages.required_field'))
     end
   end
 

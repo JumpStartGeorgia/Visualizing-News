@@ -21,69 +21,30 @@ class ImageFile < ActiveRecord::Base
   def attachment_styles
     styles = {}
 
-    if visualization_type_id == Visualization::TYPES[:infographic]
-      if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
-        styles = {
-          thumb: { geometry: '230x230#' },
-          medium: { geometry: '600x>' },
-          large: { geometry: '900x>' }
-        }
-      else
-        styles = {
-          thumb: { geometry: '230x230#', processors: [:cropper] }
-        }
-      end
-    elsif visualization_type_id == Visualization::TYPES[:interactive]
-      if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
-        styles = {
-          thumb: { geometry: '230x230#' },
-          medium: { geometry: '600x>', convert_options: '-gravity northwest -thumbnail 600x500^ -extent 600x500' },
-          large: { geometry: '900x>' }
-        }
-      else
-        styles = {
-          thumb: { geometry: '230x230#', processors: [:cropper] }
-        }
-      end
-    elsif visualization_type_id == Visualization::TYPES[:fact]
-      if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
-        styles = {
-          thumb: { geometry: '230x230#' },
-          medium: { geometry: '600x>' },
-          large: { geometry: '900x>' }
-        }
-      else
-        styles = {
-          thumb: { geometry: '230x230#', processors: [:cropper] }
-        }
-      end
-    elsif visualization_type_id == Visualization::TYPES[:comic]
-      if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
-        styles = {
-          thumb: { geometry: '230x230#' },
-          medium: { geometry: '600x>' },
-          large: { geometry: '900x>' }
-        }
-      else
-        styles = {
-             thumb: { geometry: '230x230#', processors: [:cropper] }
-        }
-      end
-    elsif visualization_type_id == Visualization::TYPES[:video]
-      if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
-        styles = {
-          thumb: { geometry: '230x230#' },
-          medium: { geometry: '600x>' },
-          large: { geometry: '900x>' }
-        }
-      else
-        styles = {
-          thumb: { geometry: '230x230#', processors: [:cropper] }
-        }
-      end
+    if id.nil? || reload_file || crop_x.nil? || crop_y.nil? || crop_w.nil? || crop_h.nil?
+      styles = {
+        thumb: { geometry: '230x230#' },
+        medium: medium_attachment_styles,
+        large: { geometry: '900x>' }
+      }
+    else
+      styles = {
+        thumb: { geometry: '230x230#', processors: [:cropper] }
+      }
     end
 
     styles
+  end
+
+  def medium_attachment_styles
+    if visualization_type_id == Visualization::TYPES[:interactive]
+      {
+        geometry: '600x>',
+        convert_options: '-gravity northwest -thumbnail 600x500^ -extent 600x500'
+      }
+    else
+      { geometry: '600x>' }
+    end
   end
 
   # with new version of paperclip, can no longer run this as after update because

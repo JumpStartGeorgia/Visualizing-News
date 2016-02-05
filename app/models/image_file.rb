@@ -7,14 +7,9 @@ class ImageFile < ActiveRecord::Base
 
   attr_accessor :reset_crop, :was_cropped, :redid_crop, :reload_file
 
-  # validates :file_file_name, :presence => true, :if => "visualization_type_id != Visualization::TYPES[:interactive]"
-
   has_attached_file :file,
                     url: '/system/visualizations/:visual_id/image/:permalink_:locale_:style.:extension',
                     styles: proc { |attachment| attachment.instance.attachment_styles }
-  #:convert_options => {
-  #     :thumb => "-gravity north -thumbnail 230x230^ -extent 230x230"
-  # },
 
   # if this is a new record, do not apply the cropping processor
   # - the user must be able to set the crop size first
@@ -47,16 +42,11 @@ class ImageFile < ActiveRecord::Base
     end
   end
 
-  # with new version of paperclip, can no longer run this as after update because
-  # paperclip updates the file updated date after reprocessing, thus causing infinite loop
-  # - reprocess_file now called in edit controller
-  #  after_update :reprocess_file, :if => :cropping?
+  after_find :set_flags
 
-   after_find :set_flags
-
-   def set_flags
-      self.was_cropped = image_is_cropped
-   end
+  def set_flags
+    self.was_cropped = image_is_cropped
+  end
 
   def cropping?
     image_is_cropped && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
@@ -67,8 +57,7 @@ class ImageFile < ActiveRecord::Base
     geometry[style] ||= Paperclip::Geometry.from_file(file.path(style))
   end
 
-  # private
-   def reprocess_file
-      file.reprocess!
-   end
+  def reprocess_file
+    file.reprocess!
+  end
 end

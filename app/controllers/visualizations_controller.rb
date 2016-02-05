@@ -113,7 +113,7 @@ class VisualizationsController < ApplicationController
       else
         locales_to_crop = @visualization.locales_to_crop
 
-        if !locales_to_crop.empty?
+        if locales_to_crop.present?
           @locale_to_crop = locales_to_crop.first
           to_crop = @visualization.visualization_translations.find{|x| x.locale == @locale_to_crop}.image_record
           gon.largeW = to_crop.visual_geometry(:large).width

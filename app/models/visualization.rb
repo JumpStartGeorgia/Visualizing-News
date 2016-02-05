@@ -127,15 +127,13 @@ class Visualization < ActiveRecord::Base
 	# and so cannot get type id
   def required_fields_for_type
     missing_fields = []
-    self.visualization_translations.each do |trans|
-      if self.visualization_type_id == Visualization::TYPES[:infographic] ||
-          self.visualization_type_id == Visualization::TYPES[:fact] ||
-          self.visualization_type_id == Visualization::TYPES[:comic]
+    visualization_translations.each do |trans|
+      if [:infographic, :fact, :comic].include? type
         missing_fields << :visual if trans.image_file_name.blank?
-      elsif self.visualization_type_id == Visualization::TYPES[:interactive]
+      elsif type == :interactive
         missing_fields << :interactive_url if trans.interactive_url.blank?
         missing_fields << :visual if trans.image_file_name.blank?
-      elsif self.visualization_type_id == Visualization::TYPES[:video]
+      elsif type == :video
         missing_fields << :visual if trans.image_file_name.blank?
         missing_fields << :video_url if trans.video_url.blank?
         missing_fields << :video_embed if trans.video_embed.blank?

@@ -248,6 +248,7 @@ en:
     fact: Fact
     comic: Comic
     video: Video
+    gifographic: Gifographic
   multiselect:
     checkAllText: 'Check all'
     uncheckAllText: 'Uncheck all'

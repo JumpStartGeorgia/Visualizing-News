@@ -33,7 +33,8 @@ class Visualization < ActiveRecord::Base
     interactive: 2,
     fact: 3,
     comic: 4,
-    video: 5
+    video: 5,
+    gifographic: 6
   }
 
   def type

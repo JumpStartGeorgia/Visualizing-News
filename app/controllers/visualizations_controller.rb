@@ -51,7 +51,7 @@ class VisualizationsController < ApplicationController
   			I18n.available_locales.each do |locale|
   				@visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
   				# add image file record
-  				@visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first.build_image_file
+  				@visualization.visualization_translations.find{|x| x.locale == locale.to_s}.build_image_file
   			end
   		end
       @visualization.languages_internal = @visualization.visualization_translations.map{|x| x.locale}
@@ -85,7 +85,7 @@ class VisualizationsController < ApplicationController
       if params[:reset_crop].present? && I18n.available_locales.index(params[:reset_crop].to_sym)
   logger.debug "************* reseting crop for #{params[:reset_crop]}"
   			@locale_to_crop = params[:reset_crop]
-  			to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
+  			to_crop = @visualization.visualization_translations.find{|x| x.locale == @locale_to_crop}.image_record
   			gon.largeW = to_crop.visual_geometry(:large).width
   			gon.largeH = to_crop.visual_geometry(:large).height
   			gon.originalW = to_crop.visual_geometry(:original).width
@@ -107,7 +107,7 @@ class VisualizationsController < ApplicationController
           I18n.available_locales.each do |locale|
             @visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
             # add image file record
-            x = @visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+            x = @visualization.visualization_translations.find{|x| x.locale == locale.to_s}
             x.build_image_file if x.image_file.blank?
           end
         end
@@ -117,7 +117,7 @@ class VisualizationsController < ApplicationController
   		  if !locales_to_crop.empty?
   logger.debug "************* setting crop for #{locales_to_crop.first}"
   			  @locale_to_crop = locales_to_crop.first
-  			  to_crop = @visualization.visualization_translations.select{|x| x.locale == @locale_to_crop}.first.image_record
+  			  to_crop = @visualization.visualization_translations.find{|x| x.locale == @locale_to_crop}.image_record
   			  gon.largeW = to_crop.visual_geometry(:large).width
   			  gon.largeH = to_crop.visual_geometry(:large).height
   			  gon.originalW = to_crop.visual_geometry(:original).width
@@ -180,7 +180,7 @@ class VisualizationsController < ApplicationController
         if @visualization.save
           # if permalink is re-generated, the permalink value gotten through the translation object is not refreshed
           # - have to get it by hand
-  				permalink = @visualization.visualization_translations.select{|x| x.locale == I18n.locale.to_s}.first.permalink
+  				permalink = @visualization.visualization_translations.find{|x| x.locale == I18n.locale.to_s}.permalink
 
           format.html { redirect_to edit_organization_visualization_path(params[:organization_id], permalink), notice: t('app.msgs.success_created', :obj => t('activerecord.models.visualization')) }
           format.json { render json: @visualization, status: :created, location: @visualization }
@@ -193,7 +193,7 @@ class VisualizationsController < ApplicationController
             I18n.available_locales.each do |locale|
               @visualization.visualization_translations.build(:locale => locale.to_s) if !@visualization.visualization_translations.index{|x| x.locale == locale.to_s}
               # add image file record
-              x = @visualization.visualization_translations.select{|x| x.locale == locale.to_s}.first
+              x = @visualization.visualization_translations.find{|x| x.locale == locale.to_s}
               x.build_image_file if x.image_file.blank?
             end
           end
@@ -248,7 +248,7 @@ class VisualizationsController < ApplicationController
                   x[:_destroy] = "1"
                 else
                   # not in database, so just delete the key/value pair
-                  params[:visualization][:visualization_translations_attributes].delete_if{|k,v| v[:locale] == locale}
+                  params[:visualization][:visualization_translations_attributes].delete_if{|_k,v| v[:locale] == locale}
                 end
               end
             end
@@ -353,7 +353,7 @@ class VisualizationsController < ApplicationController
   						  redirect_to organization_visualization_path(params[:organization_id], permalink, language: lang),
   									  notice: t('app.msgs.success_updated', :obj => t('activerecord.models.visualization'))
   					  end
-  				  }
+  				      }
             format.json { head :ok }
           else
             logger.debug "%%%%%%%%%%%% error = #{@visualization.errors.full_messages}"
@@ -387,7 +387,7 @@ class VisualizationsController < ApplicationController
   			  end
   		  end
 
-      end
+    end
     else
       flash[:info] =  t('app.msgs.does_not_exist')
       redirect_to root_path(:locale => I18n.locale)

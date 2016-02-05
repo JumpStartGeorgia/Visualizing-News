@@ -29,21 +29,17 @@ class ImageFile < ActiveRecord::Base
   # if this is a new record, do not apply the cropping processor
   # - the user must be able to set the crop size first
   def attachment_styles
-    styles = {}
-
     if id.nil? || reload_file || !all_crop_dimensions_present?
-      styles = {
+      {
         thumb: { geometry: '230x230#' },
         medium: medium_attachment_styles,
         large: { geometry: '900x>' }
       }
     else
-      styles = {
+      {
         thumb: { geometry: '230x230#', processors: [:cropper] }
       }
     end
-
-    styles
   end
 
   def medium_attachment_styles

@@ -129,7 +129,7 @@ class Visualization < ActiveRecord::Base
     missing_fields = []
 
     visualization_translations.each do |trans|
-      if [:infographic, :fact, :comic].include? type
+      if [:infographic, :fact, :comic, :gifographic].include? type
         missing_fields << :visual if trans.image_file_name.blank?
       elsif type == :interactive
         missing_fields << :interactive_url if trans.interactive_url.blank?

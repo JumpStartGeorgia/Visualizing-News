@@ -270,6 +270,13 @@ class Visualization < ActiveRecord::Base
 		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.datasources
 	end
 
+  def croppable?
+    [:infographic,
+     :fact,
+     :comic,
+     :interactive,
+     :video].include? type
+  end
 
 	# check which visuals in trans objects need to be cropped
 	def locales_to_crop

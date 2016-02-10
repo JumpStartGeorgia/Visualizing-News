@@ -110,6 +110,7 @@ class VisualizationsController < ApplicationController
 
       else
         locales_to_crop = @visualization.locales_to_crop
+        locales_to_crop = [] if @visualization.type == :gifographic
 
         if locales_to_crop.present?
           @locale_to_crop = locales_to_crop.first

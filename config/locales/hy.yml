@@ -518,6 +518,16 @@ hy:
       embed_link_title: Տեսնել մեծ պատկերը
       embed_link_interactive_title: Տեսնել ինտերակտիվ վիզուալիզացիան
       comment_count: Մեկնաբանություններ
+      print:
+        label: տպագրել
+        question:
+          default: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+          # Using default for below keys because otherwise I18n falls back to
+          # English translations (instead of using default Armenian translation)
+          infographic: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+          fact: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+          comic: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+        contact_us: "դիմեք մեզ:"
     visuals_filter_bar:
       categories: Կատեգորիաներ
     ideas_list:

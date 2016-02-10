@@ -73,7 +73,7 @@
               <%= ImageFile.human_attribute_name(:file)%>
             </div>
             <div class="controls">
-              
+
               <%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
 
               <% if @visualization.croppable? %>
@@ -125,7 +125,7 @@
           <%= translation.input :writer %>
         <% end %>
 
-        <% if @visualization.visualization_type_id == Visualization::TYPES[:video] %>
+        <% if [:video, :gifographic].include? @visualization.type %>
           <%= translation.input :designer_animator %>
         <% end %>
 
@@ -133,12 +133,11 @@
           <%= translation.input :sound_music %>
         <% end %>
 
-        <% if @visualization.visualization_type_id != Visualization::TYPES[:fact] &&
-              @visualization.visualization_type_id != Visualization::TYPES[:video] %>
+        <% if [:infographic, :interactive, :comic, :gifographic].include? @visualization.type %>
           <%= translation.input :reporter %>
         <% end %>
 
-        <% if @visualization.visualization_type_id != Visualization::TYPES[:video] %>
+        <% if [:infographic, :interactive, :comic, :fact].include? @visualization.type %>
           <%= translation.input :designer %>
         <% end %>
 

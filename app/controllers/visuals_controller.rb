@@ -23,7 +23,7 @@ class VisualsController < ApplicationController
           number = min
         end
         number *= 2
-        
+
         visualizations = Visualization.published
 
         # if org is provided and user is in org, show unpublished
@@ -38,7 +38,7 @@ Rails.logger.debug "****************** user is in org"
 				      @user_in_org = true
 			        visualizations = Visualization
 			      end
-          end          
+          end
         end
 
         @visualizations = process_visualization_querystring(visualizations.page(params[:page]).per(number))
@@ -113,7 +113,7 @@ Rails.logger.debug "****************** user is in org"
 
   def fb_like
     visualization = Visualization.published.readonly(false).find_by_permalink(params[:id])
-    visualization.process_like if visualization.present?  
+    visualization.process_like if visualization.present?
     render :nothing => true
   end
 
@@ -124,7 +124,7 @@ Rails.logger.debug "****************** user is in org"
     end
 
     success = true
-    
+
 		redirect_path = if request.env["HTTP_REFERER"]
 	    :back
 		else
@@ -142,12 +142,12 @@ Rails.logger.debug "****************** user is in org"
     else
       success = false
     end
-    
+
     respond_to do |format|
       format.html{ redirect_to redirect_path}
       format.js {render json: {'status' => success ? 'success' : 'fail'} }
     end
-    
+
   end
 
   def next
@@ -246,7 +246,7 @@ protected
 
 		# get a list of visual ids in correct order
     visualizations = process_visualization_querystring(Visualization.select("visualizations.id").published.recent)
-    
+
     # get the visual that was showing
     visualization = Visualization.published.find_by_permalink(params[:id])
 		record_id = nil

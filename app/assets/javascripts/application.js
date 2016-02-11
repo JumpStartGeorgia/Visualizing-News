@@ -10,6 +10,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.cookie
+//= require imagesloaded
 //= require twitter/bootstrap
 //= require jquery_nested_form
 //= require fancybox

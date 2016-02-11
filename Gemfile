@@ -41,6 +41,7 @@ gem "scoped_search", "~> 3.2.0" # search activerecord
 gem "whenever", "~> 0.9.4", require: false # easily schedule cron jobs
 gem 'rack-utf8_sanitizer', '~> 1.2.2' # prevent invalid encoding error
 gem "unidecoder", "~> 1.1.2" #convert utf8 to ascii for permalinks
+gem 'imagesLoaded_rails', '~> 3.1', '>= 3.1.8'
 
 # Gems used only for assets and not required
 # in production environments by default.

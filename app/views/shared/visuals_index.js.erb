@@ -1,18 +1,25 @@
 <% if !@visualizations.blank? %>
 
-  (function show_item (i, items)
-  {
+  (function show_item (i, items) {
     if (items.eq(i).length)
     {
       items.eq(i).fadeIn(800);
       setTimeout(show_item, 170, +i + 1, items);
     }
-  })(0, $('div.grid_items').append($("<%= escape_javascript(render @view_type)%>").hide()).find('[class*="visualization_item"]:not(:visible)'));
+  })(0,
+    $('div.grid_items')
+      .append($("<%= escape_javascript(render @view_type)%>")
+        .hide()
+      ).find('[class*="visualization_item"]:not(:visible)'));
 
-  $('#load_more_link').show().replaceWith("<%= escape_javascript(link_to_next_page(@visualizations, t('helpers.links.more'), :remote => true, :id=>'load_more_link', :params => params))%>");
+  $('#load_more_link')
+    .show()
+    .replaceWith("<%= escape_javascript(link_to_next_page(@visualizations, t('helpers.links.more'), :remote => true, :id=>'load_more_link', :params => params))%>");
 
   setup_gifographics();
 
 <% else %>
-  $('div.grid_items').parent().append('<div id="no_records"><%= t("app.msgs.no_visual_records")%></div>');
+  $('div.grid_items')
+    .parent()
+    .append('<div id="no_records"><%= t("app.msgs.no_visual_records")%></div>');
 <% end %>

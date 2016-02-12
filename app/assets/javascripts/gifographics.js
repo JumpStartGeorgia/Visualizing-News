@@ -11,8 +11,6 @@ function is_gif_image(i) {
 }
 
 function freeze_gif(i) {
-	console.log('Stopping gifographic!');
-
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
 	var h = c.height = i.height;

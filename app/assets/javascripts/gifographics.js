@@ -3,6 +3,8 @@ function is_gif_image(i) {
 }
 
 function freeze_gif(i) {
+	console.log('Stopping gifographic!');
+
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
 	var h = c.height = i.height;
@@ -16,8 +18,19 @@ function freeze_gif(i) {
 	}
 }
 
+function play_gif(image) {
+	console.log('Playing gifographic!');
+}
+
 function setup_gifographic(image) {
   freeze_gif(image);
+
+	$(image).hover(
+		function() {
+			play_gif(image);
+		}, function() {
+			freeze_gif(image);
+	});
 }
 
 function setup_gifographics() {

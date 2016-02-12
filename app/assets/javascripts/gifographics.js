@@ -1,3 +1,11 @@
+function set_data_src_to_src(tag) {
+	$(tag).data('src', tag.src)	;
+}
+
+function set_src_to_data_src(tag) {
+	tag.src = $(tag).data().src;
+}
+
 function is_gif_image(i) {
 	return /^(?!data:).*\.gif/i.test(i.src);
 }
@@ -19,10 +27,11 @@ function freeze_gif(i) {
 }
 
 function play_gif(image) {
-	console.log('Playing gifographic!');
+	set_src_to_data_src(image);
 }
 
 function setup_gifographic(image) {
+	set_data_src_to_src(image);
   freeze_gif(image);
 
 	$(image).hover(

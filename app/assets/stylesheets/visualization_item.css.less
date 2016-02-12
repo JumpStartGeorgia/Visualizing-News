@@ -1,50 +1,50 @@
 @visualization-thumbnail-width: 230px;
 
 .visualization-item {
-  .visual {
-    a {
-      display: block;
-      position: relative;
-      z-index: 1;
 
-      &:hover {
-        .hover_mask {
-          display: block;
-        }
-        .hover_img {
-          display: block;
-        }
-      }
+}
 
-      img {
+  .visualization-item-visual-link {
+    display: block;
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+      .hover_mask {
         display: block;
       }
-
-      .hover_mask {
-        position: absolute;
-        z-index: 9998;
-        background-color: #eef2cb;
-        opacity: 0.78;
-        display: none;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
       .hover_img {
-        position: absolute;
-        z-index: 9999;
-        width: 35px;
-        top: 50%;
-        left: 50%;
-        margin-top: -17.5px;
-        margin-left: -17.5px;
-        display: none;
+        display: block;
       }
     }
+
+    img {
+      display: block;
+    }
+
+    .hover_mask {
+      position: absolute;
+      z-index: 9998;
+      background-color: #eef2cb;
+      opacity: 0.78;
+      display: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hover_img {
+      position: absolute;
+      z-index: 9999;
+      width: 35px;
+      top: 50%;
+      left: 50%;
+      margin-top: -17.5px;
+      margin-left: -17.5px;
+      display: none;
+    }
   }
-}
 
 .visualization-item.mod-list {
   padding: 10px;
@@ -106,21 +106,21 @@
 /*  padding: 10px 15px; */
   padding: 10px 20px;
   margin: 0px;
-  .visual{
-    a {
-      &::after {
-        position: absolute;
-        bottom: 0px;
-        left: 10px;
-        z-index: 9999;
-        display: block;
-        content: '';
-        border-right: 11px solid transparent;
-        border-bottom: 11px solid #E4F1EA;
-        border-left: 11px solid transparent;
-      }
+
+  .visualization-item-visual-link  {
+    &::after {
+      position: absolute;
+      bottom: 0px;
+      left: 10px;
+      z-index: 9999;
+      display: block;
+      content: '';
+      border-right: 11px solid transparent;
+      border-bottom: 11px solid #E4F1EA;
+      border-left: 11px solid transparent;
     }
   }
+
   .title {
 		margin-top: -4px;
 		padding: 5px;

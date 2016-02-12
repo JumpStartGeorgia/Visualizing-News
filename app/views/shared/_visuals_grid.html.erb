@@ -18,7 +18,7 @@
         		    <%
         		      type = visualization.type
         		    %>
-    		       <%  if !visualization.image_file_name.blank? %>
+    		       <%  if visualization.image_file_name.present? %>
       		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title do %>
       		        <%= image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text) %>
                   <div class="hover_mask"></div>

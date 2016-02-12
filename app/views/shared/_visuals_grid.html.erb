@@ -11,9 +11,17 @@
 
     <% Globalize.with_locale(@language) do %>
     	<% @visualizations.each_with_index do |visualization, index| %>
-        <% visualization.visualization_locale = @language %>
 
-    		  <div class="visualization-item mod-grid js-vis-stay-visible">
+        <%
+          visualization.visualization_locale = @language
+
+          if visualization.type == :gifographic
+            gifographic_mod_class = 'mod-gifographic'
+          else
+            gifographic_mod_class = ''
+          end
+        %>
+    		  <div class="visualization-item mod-grid js-vis-stay-visible <%= gifographic_mod_class %>">
     		    <div class="visual">
         		    <%
         		      type = visualization.type

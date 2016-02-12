@@ -10,7 +10,7 @@
     $('div.grid_items')
       .append($("<%= escape_javascript(render @view_type)%>")
         .hide()
-      ).find('[class*="visualization_item"]:not(:visible)'));
+      ).find('[class*="js-vis-stay-visible"]:not(:visible)'));
 
   $('#load_more_link')
     .show()

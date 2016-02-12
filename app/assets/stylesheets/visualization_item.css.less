@@ -1,12 +1,13 @@
-.grid_visualization_item{
-  float: left;
-  width: 230px;
-  /*   reduced padding by 10 so that pages with scrollbars will not cause a shorter width */
-/*  padding: 10px 15px; */
-  padding: 10px 20px;
-  margin: 0px;
+@visualization-thumbnail-width: 230px;
+
+.visualization-item.mod-list {
+  padding: 10px;
+  margin-bottom: 20px;
   .visual{
-    
+    float: left;
+	  width: @visualization-thumbnail-width;
+		margin-right: 10px;
+
     a {
       display: block;
       position: relative;
@@ -14,7 +15,101 @@
       &:hover{
         .hover_mask{
           display: block;
-        } 
+        }
+        .hover_img{
+          display: block;
+        }
+      }
+      img {
+        display: block;
+      }
+      .hover_mask{
+        position: absolute;
+        z-index: 9998;
+        background-color: #eef2cb;
+        opacity: 0.78;
+        display: none;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .hover_img{
+        position: absolute;
+        z-index: 9999;
+        width: 35px;
+        top: 50%;
+        left: 50%;
+        margin-top: -17.5px;
+        margin-left: -17.5px;
+        display: none;
+      }
+    }
+  }
+  .content{
+    padding-top: 2px;
+    h2 {
+      a {
+        font-family: themix_regular;
+        font-size: 17px;
+        color: rgba(0, 0, 0, .8);
+        font-weight: normal;
+        text-decoration: none;
+      }
+    }
+    h3 {
+      font-weight: normal;
+    }
+    p {
+      font-family: verdana, arial, sans-serif;
+    }
+
+    @media (max-width: 500px) {
+      clear: left;
+
+      // Limit width of text below image to image's width
+      max-width: @visualization-thumbnail-width;
+    }
+  }
+  .item_footer > .count_block {
+    ul li{
+      padding-top: 5px;
+      display: inline-block;
+      color: #757575;
+      font-size: 12px;
+      font-family: themix_light;
+      margin-right: 15px;
+      .heart {
+        color: #b1b1b1;
+        font-size: 18px;
+        vertical-align: middle;
+        margin-right: 3px;
+      }
+      img{
+        vertical-align: middle;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.visualization-item.mod-grid {
+  float: left;
+  width: 230px;
+  /*   reduced padding by 10 so that pages with scrollbars will not cause a shorter width */
+/*  padding: 10px 15px; */
+  padding: 10px 20px;
+  margin: 0px;
+  .visual{
+
+    a {
+      display: block;
+      position: relative;
+      z-index: 1;
+      &:hover{
+        .hover_mask{
+          display: block;
+        }
         .hover_img{
           display: block;
         }

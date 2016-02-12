@@ -13,7 +13,7 @@
     	<% @visualizations.each_with_index do |visualization, index| %>
         <% visualization.visualization_locale = @language %>
 
-    		  <div class="grid_visualization_item">
+    		  <div class="visualization-item mod-grid js-vis-stay-visible">
     		    <div class="visual">
         		    <%
         		      type = visualization.type

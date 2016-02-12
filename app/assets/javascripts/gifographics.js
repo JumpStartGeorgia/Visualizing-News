@@ -1,9 +1,9 @@
 function set_data_src_to_src(tag) {
-	$(tag).data('src', tag.src)	;
+	$(tag).data('srcOriginal', tag.src);
 }
 
 function set_src_to_data_src(tag) {
-	tag.src = $(tag).data().src;
+	tag.src = $(tag).data().srcOriginal;
 }
 
 function is_gif_image(i) {

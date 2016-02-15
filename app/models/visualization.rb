@@ -300,6 +300,14 @@ class Visualization < ActiveRecord::Base
      :video].include? type
   end
 
+  def has_uploaded_image_file?
+    [:infographic,
+     :fact,
+     :comic,
+     :video,
+     :gifographic].include? type
+  end
+
 	# check which visuals in trans objects need to be cropped
 	def locales_to_crop
 		to_crop = []

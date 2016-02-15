@@ -7,10 +7,18 @@ function set_src_to_data_src(tag) {
 }
 
 function is_gif_image(i) {
-	return /^(?!data:).*\.gif/i.test(i.src);
+	var is_gif = /^(?!data:).*\.gif/i.test(i.src);
+
+	if (is_gif) {
+		console.log('Determined that image is gif:' + i.src);
+	}
+
+	return is_gif;
 }
 
 function freeze_gif(i) {
+	console.log('Freezing gif: ' + i.src);
+
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
 	var h = c.height = i.height;
@@ -25,10 +33,14 @@ function freeze_gif(i) {
 }
 
 function play_gif(image) {
+	console.log('Playing gif!');
+
 	set_src_to_data_src(image);
 }
 
 function setup_gifographic(image) {
+	console.log('Setting up gifographic:' + image.src);
+
 	set_data_src_to_src(image);
   freeze_gif(image);
 
@@ -41,10 +53,14 @@ function setup_gifographic(image) {
 }
 
 function setup_gifographics() {
+	console.log('Setting up gifographics!');
+
   $('.js-setup-gifographics')
     .imagesLoaded()
     .progress( function() {
       var image = this[0];
-      if (is_gif_image(image)) setup_gifographic(image);
+      if (is_gif_image(image)) {
+				setup_gifographic(image);
+			}
     });
 }

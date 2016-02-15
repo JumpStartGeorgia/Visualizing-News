@@ -55,7 +55,7 @@ function setup_gifographic(image) {
 function setup_gifographics() {
 	console.log('Setting up gifographics!');
 
-  $('.js-setup-gifographics')
+  $('.js-setup-visuals')
     .imagesLoaded()
     .progress( function() {
       var image = this[0];

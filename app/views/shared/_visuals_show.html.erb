@@ -143,7 +143,7 @@
                 </span>
               </li>
             <% end %>
-            <% if @visualization.developer.present? && @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+            <% if @visualization.developer.present? %>
               <li>
                 <%= "#{t('.developer')}: "%>
                 <span class="val">
@@ -234,10 +234,7 @@
                 </span>
               </li>
             <% end %>
-            <% if @visualization.dataset_file_name.present? &&
-                  (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+            <% if @visualization.dataset_file_name.present? %>
               <li>
                 <%= "#{t('.data_set')}: " %>
                 <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download'%>

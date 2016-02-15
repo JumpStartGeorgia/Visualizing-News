@@ -173,9 +173,28 @@ class Visualization < ActiveRecord::Base
   end
   validate :validate_if_published
 
+  def image_file_type_matches_vis_type
+    visualization_translations.each do |trans|
+      errors.add(
+        :visual,
+        I18n.t('activerecord.errors.messages.image_type_does_not_match_vis_type',
+               extension: trans.image_file.file_content_type,
+               vis_type: I18n.t("visualization_types.#{type}"),
+               allowed_types: allowed_image_types.join(', '))
+      )
+    end
+  end
+  validate :image_file_type_matches_vis_type
+
   ############################################################
 
-
+  def allowed_image_types
+    if type == :gifographic
+      ['image/gif']
+    else
+      ['image/jpg', 'image/jpeg', 'image/gif']
+    end
+  end
 
 	def visualization_type_name(english_only=false)
     index = TYPES.values.index(self.visualization_type_id)

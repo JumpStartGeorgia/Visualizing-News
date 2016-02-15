@@ -175,10 +175,15 @@ class Visualization < ActiveRecord::Base
 
   def image_file_type_matches_vis_type
     visualization_translations.each do |trans|
+      image_file_type = trans.image_file.file_content_type
+
+      next if image_file_type.blank?
+      next if allowed_image_types.include?(image_file_type)
+
       errors.add(
         :visual,
         I18n.t('activerecord.errors.messages.image_type_does_not_match_vis_type',
-               extension: trans.image_file.file_content_type,
+               extension: image_file_type,
                vis_type: I18n.t("visualization_types.#{type}"),
                allowed_types: allowed_image_types.join(', '))
       )
@@ -192,7 +197,7 @@ class Visualization < ActiveRecord::Base
     if type == :gifographic
       ['image/gif']
     else
-      ['image/jpg', 'image/jpeg', 'image/gif']
+      ['image/jpg', 'image/jpeg', 'image/png']
     end
   end
 

@@ -1,15 +1,21 @@
-<h3>
-  <%= t('.change_video_url',
-        language: t("app.language.#{@locale_to_reset}")) %>
-</h3>
+<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
 
-<div class="trans_video_url js-generate-video-embed">
-  <%= translation.input :video_url, :as => :url %>
-</div>
+<%= f.fields_for :visualization_translations, trans do |translation| %>
 
-<div class="js-container-receive-video-embed"></div>
+  <h3>
+    <%= t('.change_video_url',
+          language: t("app.language.#{@locale_to_reset}")) %>
+  </h3>
 
-<%= translation.hidden_field(
-      :video_embed,
-      class: 'js-hidden-input-receive-video-embed'
-    ) %>
+  <div class="trans_video_url js-generate-video-embed">
+    <%= translation.input :video_url, :as => :url %>
+  </div>
+
+  <div class="js-container-receive-video-embed"></div>
+
+  <%= translation.hidden_field(
+        :video_embed,
+        class: 'js-hidden-input-receive-video-embed'
+      ) %>
+
+<% end %>

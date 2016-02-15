@@ -1,14 +1,20 @@
-<h3>
-  <%= t('.reset_file',
-        :language => t("app.language.#{@locale_to_reset}")) %>
-</h3>
+<% trans = @visualization.visualization_translations.select{|x| x.locale == @locale_to_reset}.first %>
 
-<%= translation.hidden_field :reload_file, :value => 'true' %>
+<%= f.fields_for :visualization_translations, trans do |translation| %>
 
-<%= translation.fields_for :image_file do |upload| %>
+  <h3>
+    <%= t('.reset_file',
+          :language => t("app.language.#{@locale_to_reset}")) %>
+  </h3>
 
-  <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
-  <%= upload.hidden_field :reset_crop, :value => true %>
-  <%= upload.hidden_field :image_is_cropped, :value => false %>
+  <%= translation.hidden_field :reload_file, :value => 'true' %>
+
+  <%= translation.fields_for :image_file do |upload| %>
+
+    <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
+    <%= upload.hidden_field :reset_crop, :value => true %>
+    <%= upload.hidden_field :image_is_cropped, :value => false %>
+
+  <% end %>
 
 <% end %>

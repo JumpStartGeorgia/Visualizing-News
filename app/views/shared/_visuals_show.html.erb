@@ -306,49 +306,37 @@
           </div>
           <div class="embed">
             <span><%= t('.embed')%>:</span>
-            <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:comic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:video] %>
-
               <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
                 onmouseup="return false;"><%=
 
+                if @visualization.type == :interactive
                   link_to(
-                    image_tag(full_url(@visualization.image.url(:medium, false)),
-                              :alt => @visualization.title),
-                    full_url(url_for(params.merge(:from_embed => true))),
-                    :title => t('.embed_link_title'),
-                    :target => :blank
-                  ) %><br /><%=
+                    image_tag(
+                      full_url(@visualization.image.url(:medium, false)),
+                      alt: @visualization.title),
+                    full_url(url_for(params.merge(view: 'interactive',
+                                                  from_embed: true))),
+                    title: t('.embed_link_interactive_title'),
+                    target: :blank
+                  )
+                else
+                  link_to(
+                    image_tag(
+                      full_url(@visualization.image.url(:medium, false)),
+                      alt: @visualization.title),
+                    full_url(url_for(params.merge(from_embed: true))),
+                    title: t('.embed_link_title'),
+                    target: :blank
+                  )
+                end
 
-                  link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank
+                %><br /><%=
 
-               %></textarea>
+                link_to t('app.common.app_name'),
+                        full_url(root_path(from_embed: true)),
+                        target: :blank
 
-            <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-
-              <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
-                onmouseup="return false;">
-
-                <%= link_to(
-                      image_tag(full_url(@visualization.image.url(:medium, false)),
-                                :alt => @visualization.title),
-                      full_url(url_for(params.merge(:view => 'interactive',
-                                                    :from_embed => true))),
-                      :title => t('.embed_link_interactive_title'),
-                      :target => :blank
-                    ) %>
-
-                <br />
-
-                <%= link_to t('app.common.app_name'),
-                            full_url(root_path(:from_embed => true)),
-                            :target => :blank %>
-
-              </textarea>
-
-            <% end %>
+             %></textarea>
           </div>
         </div>
       </div>

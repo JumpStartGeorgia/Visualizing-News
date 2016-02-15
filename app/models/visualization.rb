@@ -90,10 +90,6 @@ class Visualization < ActiveRecord::Base
   end
 
 	before_validation :set_languages
-  validates :languages_internal, :organization_id, :visualization_type_id, :languages, :presence => true
-  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validate :required_fields_for_type
-  validate :validate_if_published
   before_save :set_promoted_at
 
   scope :recent, order("visualizations.published_date DESC, visualization_translations.title ASC")
@@ -122,9 +118,12 @@ class Visualization < ActiveRecord::Base
     "#{self.title} - #{self.explanation} - #{self.visualization_text}"
   end
 
-	# this validation is done here and not in trans obj because
-	# when creating objs, the relationship between vis and trans do not exist
-	# and so cannot get type id
+  ############################################################
+  ##################### Validations ##########################
+
+  validates :languages_internal, :organization_id, :visualization_type_id, :languages, :presence => true
+  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
+
   def required_fields_for_type
     missing_fields = []
 
@@ -148,6 +147,8 @@ class Visualization < ActiveRecord::Base
     end
   end
 
+  validate :required_fields_for_type
+
   # when a record is published, the following fields must be provided
   # - published date, visual file, at least one category,
   #   reporter, designer, data source name
@@ -168,16 +169,13 @@ class Visualization < ActiveRecord::Base
           errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
         end
       end
-=begin
-      # if there were missing fields from the translation object, add the errors
-      if !trans_errors.empty?
-        trans_errors.flatten.each do |field|
-          errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
-        end
-      end
-=end
     end
   end
+  validate :validate_if_published
+
+  ############################################################
+
+
 
 	def visualization_type_name(english_only=false)
     index = TYPES.values.index(self.visualization_type_id)

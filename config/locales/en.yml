@@ -265,6 +265,7 @@ en:
         fact: Fact
         comic: Comic
         video: Video
+        gifographic: Gifographic
         not_published: Not Published
         not_promoted: Not Promoted
       view:

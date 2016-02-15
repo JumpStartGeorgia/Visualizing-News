@@ -88,13 +88,17 @@ class VisualizationsController < ApplicationController
         gon.largeH = to_crop.visual_geometry(:large).height
         gon.originalW = to_crop.visual_geometry(:original).width
 
-      elsif params[:reset_file].present? && I18n.available_locales.index(params[:reset_file].to_sym)
-        @locale_to_reset = params[:reset_file]
+      elsif params[:reset_image_file] && I18n.available_locales.index(params[:locale_to_reset].to_sym)
         @visual_image_file_reset = true
+        @locale_to_reset = params[:locale_to_reset]
+
+      elsif params[:reset_interactive_url] && I18n.available_locales.index(params[:locale_to_reset].to_sym)
+        @interactive_url_reset = true
+        @locale_to_reset = params[:locale_to_reset]
 
       elsif params[:video_url_reset] && I18n.available_locales.index(params[:locale_to_reset].to_sym)
+        @video_url_reset = true
         @locale_to_reset = params[:locale_to_reset]
-        @video_url_reset = params[:video_url_reset]
 
       elsif params[:reset_languages].present?
         @reset_lanaguages = true

@@ -84,14 +84,18 @@
 
               <% if @visualization.has_uploaded_image_file? %>
                 <%= link_to t('activerecord.attributes.image_file.reset_file'),
-                            url_for(params.merge(reset_file: trans.locale)),
+                            url_for(params.merge(
+                              reset_image_file: true,
+                              locale_to_reset: trans.locale)),
                             class: 'btn btn-mini' %>
               <% end %>
 
               <% if @visualization.type == :interactive %>
                 <%= link_to t('activerecord.attributes.image_file.reset_url'),
-                            url_for(params.merge(reset_file: trans.locale)), 
-                            :class => 'btn btn-mini' %>
+                            url_for(params.merge(
+                              reset_interactive_url: true,
+                              locale_to_reset: trans.locale)),
+                            class: 'btn btn-mini' %>
               <% end %>
 
             </div>

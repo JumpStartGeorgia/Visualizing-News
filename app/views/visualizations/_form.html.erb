@@ -20,31 +20,23 @@
           model_class: model_class
         } %>
 
-	<% elsif @locale_to_reset.present? %>
+  <% elsif @visual_image_file_reset %>
 
-    <% if @visual_image_file_reset %>
-
-      <%= render partial: 'visualizations/form/reset_visual_image_file', locals: {
-            f: f
-          } %>
-
-    <% end %>
-
-    <% if @video_url_reset %>
-
-    <%= render partial: 'visualizations/form/reset_video_url', locals: {
+    <%= render partial: 'visualizations/form/reset_visual_image_file', locals: {
           f: f
         } %>
 
-    <% end %>
+  <% elsif @video_url_reset %>
 
-    <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+  <%= render partial: 'visualizations/form/reset_video_url', locals: {
+        f: f
+      } %>
 
-    <%= render partial: 'visualizations/form/reset_interactive_url', locals: {
-          f: f
-        } %>
+  <% elsif @interactive_url_reset %>
 
-    <% end %>
+  <%= render partial: 'visualizations/form/reset_interactive_url', locals: {
+        f: f
+      } %>
 
 	<% elsif !@locale_to_crop.blank? %>
 

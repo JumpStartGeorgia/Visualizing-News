@@ -77,15 +77,21 @@
               <%= image_tag trans.image.url(:thumb, false) if !trans.image_file_name.blank? %>
 
               <% if @visualization.croppable? %>
-                <%= link_to t('activerecord.attributes.image_file.reset_crop'), url_for(params.merge(:reset_crop => trans.locale)), :class => 'btn btn-mini' %>
+                <%= link_to t('activerecord.attributes.image_file.reset_crop'),
+                            url_for(params.merge(reset_crop: trans.locale)),
+                            class: 'btn btn-mini' %>
               <% end %>
 
               <% if @visualization.has_uploaded_image_file? %>
-                <%= link_to t('activerecord.attributes.image_file.reset_file'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %>
+                <%= link_to t('activerecord.attributes.image_file.reset_file'),
+                            url_for(params.merge(reset_file: trans.locale)),
+                            class: 'btn btn-mini' %>
               <% end %>
 
               <% if @visualization.type == :interactive %>
-                <%= link_to t('activerecord.attributes.image_file.reset_url'), url_for(params.merge(:reset_file => trans.locale)), :class => 'btn btn-mini' %>
+                <%= link_to t('activerecord.attributes.image_file.reset_url'),
+                            url_for(params.merge(reset_file: trans.locale)), 
+                            :class => 'btn btn-mini' %>
               <% end %>
 
             </div>

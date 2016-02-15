@@ -9,51 +9,24 @@
 
     <% if @visual_image_file_reset %>
 
-      <h3>
-        <%= t('.reset_file',
-              :language => t("app.language.#{@locale_to_reset}")) %>
-      </h3>
-
-      <%= translation.hidden_field :reload_file, :value => 'true' %>
-
-      <%= translation.fields_for :image_file do |upload| %>
-
-        <%= upload.input :file, :as => :file, :input_html => {accept:".jpg,.jpeg,.png"} %>
-        <%= upload.hidden_field :reset_crop, :value => true %>
-        <%= upload.hidden_field :image_is_cropped, :value => false %>
-
-      <% end %>
+      <%= render partial: 'visualizations/form/reset_visual_image_file', locals: {
+            translation: translation
+          } %>
 
     <% elsif @video_url_reset %>
 
-      <h3>
-        <%= t('.change_video_url',
-              language: t("app.language.#{@locale_to_reset}")) %>
-      </h3>
-
-      <div class="trans_video_url js-generate-video-embed">
-        <%= translation.input :video_url, :as => :url %>
-      </div>
-
-      <div class="js-container-receive-video-embed"></div>
-
-      <%= translation.hidden_field(
-            :video_embed,
-            class: 'js-hidden-input-receive-video-embed'
-          ) %>
+    <%= render partial: 'visualizations/form/reset_video_url', locals: {
+          translation: translation
+        } %>
 
     <% end %>
 
   <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-      <h3><%= t('.reset_url', :language => t("app.language.#{@locale_to_reset}")) %></h3>
-      <%= translation.input :interactive_url, :as => :url %>
 
-      <%= translation.hidden_field :reload_file, :value => 'true' %>
+  <%= render partial: 'visualizations/form/reset_interactive_url', locals: {
+        translation: translation
+      } %>
 
-      <%= translation.fields_for :image_file do |upload| %>
-        <%= upload.hidden_field :reset_crop, :value => true %>
-        <%= upload.hidden_field :image_is_cropped, :value => false %>
-      <% end %>
   <% end %>
 
 <% end %>

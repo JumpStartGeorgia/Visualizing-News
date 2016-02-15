@@ -127,10 +127,7 @@
                 </span>
               </li>
             <% end %>
-            <% if @visualization.reporter.present? &&
-                  (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+            <% if @visualization.reporter.present? %>
               <li>
                 <%= "#{t('.reporter')}: "%>
                 <span class="val">

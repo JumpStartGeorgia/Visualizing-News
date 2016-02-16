@@ -206,6 +206,11 @@ en:
         subject: "feradi.info Submit Visual Form"
       send_data:
         subject: "feradi.info Send Data Form"
+      print_message:
+        intro: I would like to order a beautiful, high-resolution print of the visualization "%{vis_name}".
+        purpose: "Purpose: (Please tell us how you intend to use this print)"
+        desired_size: "Desired Size (optional):"
+        other_info: "Other Information (optional):"
   helpers:
     actions: Actions
     links:

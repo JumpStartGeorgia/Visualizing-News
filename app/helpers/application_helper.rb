@@ -162,4 +162,13 @@ module ApplicationHelper
     end
     return p
   end
+
+	def print_vis_message_text(visualization_name)
+		intro = t('mailer.contact.print_message.intro', vis_name: visualization_name)
+		purpose = t('mailer.contact.print_message.purpose')
+		desired_size = t('mailer.contact.print_message.desired_size')
+		other_info = t('mailer.contact.print_message.other_info')
+
+		[intro, purpose, desired_size, other_info].join("\n\n")
+	end
 end

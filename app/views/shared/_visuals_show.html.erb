@@ -298,6 +298,7 @@
               <% end %>
             </div>
           </div>
+
           <div class="embed">
             <span><%= t('.embed')%>:</span>
               <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
@@ -332,6 +333,26 @@
 
              %></textarea>
           </div>
+
+          <% if @visualization.printable? %>
+
+            <div class='print-visualization'>
+
+              <span class='print-visualization-label'>
+                <%=t '.print.label' %>:
+              </span>
+
+              <div class='print-visualization-text'>
+                <%=t ".print.question.#{@visualization.type}", default: t('.print.question.default') %>
+                <%= link_to t('.print.contact_us'),
+                            contact_path(default_message_value: print_vis_message_text(@visualization.title)),
+                            class: 'print-visualization-text-contact fancybox' %>
+              </div>
+
+            </div>
+
+          <% end %>
+
         </div>
       </div>
 

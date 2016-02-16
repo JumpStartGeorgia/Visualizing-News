@@ -207,6 +207,11 @@ en:
         subject: "feradi.info Submit Visual Form"
       send_data:
         subject: "feradi.info Send Data Form"
+      print_message:
+        intro: I would like to order a beautiful, high-resolution print of the visualization "%{vis_name}".
+        purpose: "Purpose: (Please tell us how you intend to use this print)"
+        desired_size: "Desired Size (optional):"
+        other_info: "Other Information (optional):"
   helpers:
     actions: Actions
     links:
@@ -525,6 +530,14 @@ en:
       embed_link_title: Click to view larger image
       embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
+      print:
+        label: Print
+        question:
+          default: Want a beautiful, high-resolution print of this visualization?
+          infographic: Want a beautiful, high-resolution print of this infographic?
+          fact: Want a beautiful, high-resolution print of this fact?
+          comic: Want a beautiful, high-resolution print of this comic?
+        contact_us: Contact us!
     visuals_filter_bar:
       categories: Categories
     ideas_list:

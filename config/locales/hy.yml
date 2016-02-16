@@ -252,7 +252,8 @@ hy:
     interactive: Ինտերակտիվ
     fact: Փաստ
     comic: Ծաղրանկար
-    video: Video
+    video: վիդեո
+    gifographic: գիֆոգրաֆիկա
   multiselect:
     checkAllText: 'Նշել բոլորը'
     uncheckAllText: 'Հանել բոլոր նշումները'
@@ -268,7 +269,8 @@ hy:
         interactive: Ինտերակտիվ
         fact: Փաստ
         comic: Ծաղրանկար
-        video: Video
+        video: վիդեո
+        gifographic: գիֆոգրաֆիկա
         not_published: Չի հրապարակված
         not_promoted: 'Առաջընթաց չունի '
       view:

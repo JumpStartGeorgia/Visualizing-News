@@ -7,7 +7,7 @@ function set_src_to_data_src(tag) {
 }
 
 function is_gif_image(image) {
-	return $(image).hasClass('js-freeze-gifographic');
+	return $(image).hasClass('js-is-gifographic');
 }
 
 function freeze_gif(i) {

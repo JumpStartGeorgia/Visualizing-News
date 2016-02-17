@@ -33,17 +33,13 @@ function play_gif(image) {
 	set_src_to_data_src(image);
 }
 
-function setup_gifographic(image) {
-	freeze_gif_first_time(image);
-}
-
 function bind_freeze_to_loading_gifs($container) {
 	$container
 		.imagesLoaded()
 		.progress( function() {
 			var image = this[0];
 			if (is_gif_image(image)) {
-				setup_gifographic(image);
+				freeze_gif_first_time(image);
 			}
 		});
 }
@@ -53,7 +49,7 @@ function freeze_loaded_gifs($container) {
 		.find('img')
 		.each(function(index, image) {
 			if (image.complete && is_gif_image(image)) {
-				setup_gifographic(image);
+				freeze_gif_first_time(image);
 			}
 		});
 }

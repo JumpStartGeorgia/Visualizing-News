@@ -55,12 +55,20 @@ function setup_gifographic(image) {
 function setup_gifographics() {
 	console.log('Setting up gifographics!');
 
-  $('.js-setup-visuals')
-    .imagesLoaded()
-    .progress( function() {
-      var image = this[0];
-      if (is_gif_image(image)) {
+	$('.js-setup-visuals')
+		.imagesLoaded()
+		.progress( function() {
+			var image = this[0];
+			if (is_gif_image(image)) {
 				setup_gifographic(image);
 			}
-    });
+		});
+
+	$('.js-setup-visuals').find('img').each(function(index, image) {
+		if (image.complete) {
+			if (is_gif_image(image)) {
+				setup_gifographic(image);
+			}
+		}
+	});
 }

@@ -94,12 +94,19 @@
 
           <% else %>
             <% if @visualization.image_file_name.present? %>
-              <%= link_to(
-                    image_tag(@visualization.image.url(:medium, false),
-                              alt: @visualization.image_text),
-                    @visualization.image.url(:original, false),
-                    class: 'fancybox_visual',
-                    title: t('.embed_link_title')) %>
+              <% if @visualization.type == :gifographic %>
+                <%= image_tag(
+                      @visualization.image.url(:medium, false),
+                      alt: @visualization.image_text,
+                      class: 'js-freeze-play-gif-on-click') %>
+              <% else %>
+                <%= link_to(
+                      image_tag(@visualization.image.url(:medium, false),
+                                alt: @visualization.image_text),
+                      @visualization.image.url(:original, false),
+                      class: 'fancybox_visual',
+                      title: t('.embed_link_title')) %>
+              <% end %>
             <% end %>
           <% end %>
         </div>

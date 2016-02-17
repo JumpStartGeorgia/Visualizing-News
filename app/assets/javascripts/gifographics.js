@@ -60,3 +60,13 @@ function setup_gifographics_on_vis_page() {
 	bind_freeze_to_loading_gifs($visuals_container);
 	freeze_loaded_gifs($visuals_container);
 }
+
+function setup_gifographic_on_show_page($image) {
+	console.log('Setting up gifographic on show page!');
+
+	$image.one('load', function() {
+		freeze_gif_first_time(this);
+	}).each(function() {
+	  if(this.complete) $(this).load();
+	});
+}

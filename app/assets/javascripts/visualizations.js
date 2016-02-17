@@ -65,6 +65,9 @@ $(document).ready(function(){
     $("a.fancybox_visual").trigger('click');
   }
 
+	var $gifographic = $('.js-freeze-play-gif-on-click')
+	if ($gifographic.length > 0) setup_gifographic_on_show_page($gifographic);
+
 	// visualization form
 	if (gon.edit_visualization){
     // make sure the form is pre-loaded with the correct types and languages set

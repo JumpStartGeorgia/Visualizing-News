@@ -6,8 +6,8 @@ function set_src_to_data_src(tag) {
 	tag.src = $(tag).data().srcOriginal;
 }
 
-function is_gif_image(i) {
-	return /^(?!data:).*\.gif/i.test(i.src);
+function is_gif_image(image) {
+	return $(image).hasClass('js-freeze-gifographic');
 }
 
 function freeze_gif(i) {

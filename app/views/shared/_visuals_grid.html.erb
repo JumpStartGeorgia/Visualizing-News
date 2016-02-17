@@ -21,14 +21,14 @@
             gifographic_mod_class = ''
           end
         %>
-    		  <div class="visualization-item mod-grid js-vis-stay-visible <%= gifographic_mod_class %>">
+    		  <div class="visualization-item mod-grid js-vis-stay-visible">
     		    <div class="visual">
         		    <%
         		      type = visualization.type
         		    %>
     		       <%  if visualization.image_file_name.present? %>
       		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title, class: 'visualization-item-visual-link' do %>
-      		        <%= image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text) %>
+      		        <%= image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text, class: vis_item_image_tag_classes(visualization)) %>
                   <div class="hover_mask"></div>
         		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
       		      <% end %>

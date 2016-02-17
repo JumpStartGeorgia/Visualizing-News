@@ -7,18 +7,10 @@ function set_src_to_data_src(tag) {
 }
 
 function is_gif_image(i) {
-	var is_gif = /^(?!data:).*\.gif/i.test(i.src);
-
-	if (is_gif) {
-		console.log('Determined that image is gif:' + i.src);
-	}
-
-	return is_gif;
+	return /^(?!data:).*\.gif/i.test(i.src);
 }
 
 function freeze_gif(i) {
-	console.log('Freezing gif: ' + i.src);
-
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
 	var h = c.height = i.height;
@@ -32,30 +24,21 @@ function freeze_gif(i) {
 	}
 }
 
-function play_gif(image) {
-	console.log('Playing gif!');
+function freeze_gif_first_time(image) {
+	set_data_src_to_src(image);
+  freeze_gif(image);
+}
 
+function play_gif(image) {
 	set_src_to_data_src(image);
 }
 
 function setup_gifographic(image) {
-	console.log('Setting up gifographic:' + image.src);
-
-	set_data_src_to_src(image);
-  freeze_gif(image);
-
-	$(image).hover(
-		function() {
-			play_gif(image);
-		}, function() {
-			freeze_gif(image);
-	});
+	freeze_gif_first_time(image);
 }
 
-function setup_gifographics() {
-	console.log('Setting up gifographics!');
-
-	$('.js-setup-visuals')
+function bind_freeze_to_loading_gifs($container) {
+	$container
 		.imagesLoaded()
 		.progress( function() {
 			var image = this[0];
@@ -63,12 +46,21 @@ function setup_gifographics() {
 				setup_gifographic(image);
 			}
 		});
+}
 
-	$('.js-setup-visuals').find('img').each(function(index, image) {
-		if (image.complete) {
-			if (is_gif_image(image)) {
+function freeze_loaded_gifs($container) {
+	$container
+		.find('img')
+		.each(function(index, image) {
+			if (image.complete && is_gif_image(image)) {
 				setup_gifographic(image);
 			}
-		}
-	});
+		});
+}
+
+function setup_gifographics_on_vis_page() {
+	var $visuals_container = $('.js-setup-visuals');
+
+	bind_freeze_to_loading_gifs($visuals_container);
+	freeze_loaded_gifs($visuals_container);
 }

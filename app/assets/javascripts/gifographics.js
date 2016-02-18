@@ -6,6 +6,14 @@ function set_src_to_data_src(tag) {
 	tag.src = $(tag).data().srcOriginal;
 }
 
+function set_stop_title(tag) {
+	tag.title = $(tag).data().stopTitle;
+}
+
+function set_play_title(tag) {
+	tag.title = $(tag).data().playTitle;
+}
+
 function hide_cover_image(gif_image) {
 	$(gif_image)
 		.siblings('.js-hide-on-play-gif')
@@ -23,8 +31,11 @@ function is_gif_image(image) {
 }
 
 function freeze_gif(i) {
-	$(i).addClass('is-frozen');
-	show_cover_image(i);
+	if ($(i).hasClass('js-gif-is-playable')) {
+		$(i).addClass('is-frozen');
+		set_play_title(i);
+		show_cover_image(i);
+	}
 
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
@@ -45,8 +56,12 @@ function freeze_gif_first_time(image) {
 }
 
 function play_gif(image) {
-	$(image).removeClass('is-frozen');
-	hide_cover_image(image);
+	if ($(image).hasClass('js-gif-is-playable')) {
+		$(image).removeClass('is-frozen');
+		set_stop_title(image);
+		hide_cover_image(image);
+	}
+
 	set_src_to_data_src(image);
 }
 

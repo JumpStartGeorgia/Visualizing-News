@@ -6,12 +6,25 @@ function set_src_to_data_src(tag) {
 	tag.src = $(tag).data().srcOriginal;
 }
 
+function hide_cover_image(gif_image) {
+	$(gif_image)
+		.siblings('.js-hide-on-play-gif')
+		.addClass('is-hidden');
+}
+
+function show_cover_image(gif_image) {
+	$(gif_image)
+		.siblings('.js-show-on-freeze-gif')
+		.removeClass('is-hidden');
+}
+
 function is_gif_image(image) {
 	return $(image).hasClass('js-is-gifographic');
 }
 
 function freeze_gif(i) {
 	$(i).addClass('is-frozen');
+	show_cover_image(i);
 
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
@@ -33,6 +46,7 @@ function freeze_gif_first_time(image) {
 
 function play_gif(image) {
 	$(image).removeClass('is-frozen');
+	hide_cover_image(image);
 	set_src_to_data_src(image);
 }
 

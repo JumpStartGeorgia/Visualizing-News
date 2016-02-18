@@ -75,7 +75,7 @@
     <div id="visualization_row2" class="row-fluid">
 
       <div class="main_block">
-        <div id="visual">
+        <div id="visual" class="mod-<%= @visualization.type %>">
           <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
             <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
                 url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
@@ -99,6 +99,9 @@
                       @visualization.image.url(:medium, false),
                       alt: @visualization.image_text,
                       class: 'js-freeze-play-gif-on-click') %>
+                <%= image_tag(
+                      "#{@visualization.type}_hover.png",
+                      class: 'visual-image-cover js-hide-on-play-gif js-show-on-freeze-gif') %>
               <% else %>
                 <%= link_to(
                       image_tag(@visualization.image.url(:medium, false),

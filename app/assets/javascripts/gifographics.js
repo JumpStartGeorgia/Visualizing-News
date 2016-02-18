@@ -11,6 +11,8 @@ function is_gif_image(image) {
 }
 
 function freeze_gif(i) {
+	$(i).addClass('is-frozen');
+
 	var c = document.createElement('canvas');
 	var w = c.width = i.width;
 	var h = c.height = i.height;
@@ -30,6 +32,7 @@ function freeze_gif_first_time(image) {
 }
 
 function play_gif(image) {
+	$(image).removeClass('is-frozen');
 	set_src_to_data_src(image);
 }
 
@@ -61,11 +64,22 @@ function setup_gifographics_on_vis_page() {
 	freeze_loaded_gifs($visuals_container);
 }
 
+function bind_freeze_play_on_click_to_gif(image) {
+	$(image).click(function() {
+		if ($(this).hasClass('is-frozen')) {
+			play_gif(this);
+		} else {
+			freeze_gif(this);
+		}
+	});
+}
+
 function setup_gifographic_on_show_page($image) {
 	console.log('Setting up gifographic on show page!');
 
 	$image.one('load', function() {
 		freeze_gif_first_time(this);
+		bind_freeze_play_on_click_to_gif(this);
 	}).each(function() {
 	  if(this.complete) $(this).load();
 	});

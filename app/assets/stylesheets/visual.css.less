@@ -1,12 +1,14 @@
+@image-cover-size: 70px;
+
 #visual.mod-gifographic {
   .visual-image-cover {
     position: absolute;
     z-index: 9999;
-    width: 35px;
+    width: @image-cover-size;
     top: 50%;
     left: 50%;
-    margin-top: -17.5px;
-    margin-left: -17.5px;
+    margin-top: @image-cover-size/-2;
+    margin-left: @image-cover-size/-2;
   }
 
   .visual-image-cover.is-hidden {

@@ -529,6 +529,9 @@ ka:
       embed_link_title: დიდი გამოსახულების სანახავად დააჭირეთ
       embed_link_interactive_title: ინტერაქტიული ვიზუალიზაციის სანახავად დააჭირეთ
       comment_count: კომენტარები
+      gifographic_image_titles:
+        play: ჩართვა
+        stop: გამორთვა
       print:
         label: ბეჭდვა
         question:

@@ -99,12 +99,12 @@
                       @visualization.image.url(:medium, false),
                       alt: @visualization.image_text,
                       class: 'js-gif-is-playable',
-                      data: { stop_title: 'Click to stop',
-                              play_title: 'Click to play' }) %>
+                      data: { stop_title: t('.gifographic_image_titles.stop'),
+                              play_title: t('.gifographic_image_titles.play') }) %>
                 <%= image_tag(
                       "#{@visualization.type}_hover.png",
                       class: 'visual-image-cover js-hide-on-play-gif js-show-on-freeze-gif',
-                      title: 'Click to play') %>
+                      title: t('.gifographic_image_titles.play')) %>
               <% else %>
                 <%= link_to(
                       image_tag(@visualization.image.url(:medium, false),

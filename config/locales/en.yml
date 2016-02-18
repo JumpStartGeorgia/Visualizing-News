@@ -530,6 +530,9 @@ en:
       embed_link_title: Click to view larger image
       embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
+      gifographic_image_titles:
+        play: Click to Play
+        stop: Click to Stop
       print:
         label: Print
         question:

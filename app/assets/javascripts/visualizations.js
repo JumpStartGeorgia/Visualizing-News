@@ -65,7 +65,7 @@ $(document).ready(function(){
     $("a.fancybox_visual").trigger('click');
   }
 
-	var $gifographic = $('.js-freeze-play-gif-on-click')
+	var $gifographic = $('.js-gif-is-playable')
 	if ($gifographic.length > 0) setup_gifographic_on_show_page($gifographic);
 
 	// visualization form

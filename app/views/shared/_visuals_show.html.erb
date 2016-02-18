@@ -98,7 +98,7 @@
                 <%= image_tag(
                       @visualization.image.url(:medium, false),
                       alt: @visualization.image_text,
-                      class: 'js-freeze-play-gif-on-click') %>
+                      class: 'js-gif-is-playable') %>
                 <%= image_tag(
                       "#{@visualization.type}_hover.png",
                       class: 'visual-image-cover js-hide-on-play-gif js-show-on-freeze-gif') %>

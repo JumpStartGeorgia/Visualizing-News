@@ -30,13 +30,23 @@
       		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title, class: 'visualization-item-visual-link' do %>
       		        <%= image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text, class: vis_item_image_tag_classes(visualization)) %>
                   <div class="hover_mask"></div>
-        		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
+                  <!-- Only gifographic has svg hover image; others are png -->
+                  <% if visualization.type == :gifographic %>
+                    <%= image_tag "#{type}_hover.svg", class: 'hover_img' %>
+                  <% else %>
+                    <%= image_tag "#{type}_hover.png", class: 'hover_img' %>
+                  <% end %>
       		      <% end %>
     		      <% else %>
       		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title, class: 'visualization-item-visual-link' do %>
                   <%= image_tag('image_placeholder.png', :alt => visualization.image_text) %>
                   <div class="hover_mask"></div>
-        		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
+                  <!-- Only gifographic has svg hover image; others are png -->
+                  <% if visualization.type == :gifographic %>
+                    <%= image_tag "#{type}_hover.svg", class: 'hover_img' %>
+                  <% else %>
+                    <%= image_tag "#{type}_hover.png", class: 'hover_img' %>
+                  <% end %>
       		      <% end %>
     		      <% end %>
     		    </div>

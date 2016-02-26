@@ -104,8 +104,6 @@ function bind_freeze_play_on_click_to_gif(image) {
 }
 
 function setup_gifographic_on_show_page($image) {
-	console.log('Setting up gifographic on show page!');
-
 	$image.one('load', function() {
 		freeze_gif_first_time(this);
 		bind_freeze_play_on_click_to_gif(this);

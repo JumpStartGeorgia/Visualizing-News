@@ -26,9 +26,16 @@
     
   <% else %>
   
-    <%= link_to create_visual_path(visualization.permalink, user_in_org, params[:org]), class: 'visualization-item-visual-link' do %>
+    <%= link_to create_visual_path(
+                  visualization.permalink, 
+                  user_in_org, 
+                  params[:org]), 
+                title: visualization.title,
+                class: 'visualization-item-visual-link' do %>
     
-      <%= image_tag('image_placeholder.png', :alt => visualization.image_text) %>
+      <%= image_tag(
+            'image_placeholder.png', 
+            alt: visualization.image_text) %>
       
       <div class="hover_mask"></div>
       

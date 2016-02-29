@@ -10,7 +10,7 @@
       <% if visualization.type == :gifographic %>
       
         <%= image_tag(
-              'image_placeholder.png', 
+              'image_placeholder.svg', 
               alt: visualization.image_text, 
               class: 'js-is-gifographic',
               data: { src_original: visualization.image.url(:thumb, false) }) %>
@@ -43,7 +43,7 @@
                 class: 'visualization-item-visual-link' do %>
     
       <%= image_tag(
-            'image_placeholder.png', 
+            'image_placeholder.svg', 
             alt: visualization.image_text) %>
       
       <div class="hover_mask"></div>

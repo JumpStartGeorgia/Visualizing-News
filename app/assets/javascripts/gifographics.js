@@ -86,17 +86,19 @@ function replace_placeholder_with_gifographic($placeholder, gifographic_image) {
 	$placeholder.remove();
 }
 
+function create_gif_image_from_placeholder($placeholder) {
+	var gif = $placeholder.clone()[0];
+	gif.src = $placeholder.data('gifSrc');
+	return gif;
+}
+
 function setup_gifographics() {
 	$gifographics().each(function() {
 		var $placeholder = $(this);
-		var gifographic_image = new Image();
-		gifographic_image.src = $placeholder.data('gifSrc');
-		gifographic_image.alt = $placeholder.attr('alt');		
-		$(gifographic_image).addClass($placeholder.attr('class'));
+		var gifographic_image = create_gif_image_from_placeholder($placeholder);
 		
 		$(gifographic_image).one('load', function(){
 			setup_gifographic(gifographic_image);
-			
 			replace_placeholder_with_gifographic($placeholder, gifographic_image);
 		});
 	});

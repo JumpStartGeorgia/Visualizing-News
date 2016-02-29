@@ -76,7 +76,6 @@ function setup_gifographic(gifographic) {
 	freeze_gif(gifographic);
 	
 	if (gifographic_is_playable(gifographic)) {
-		set_data_src_to_src(gifographic);
 		bind_freeze_play_on_click_to_gif(gifographic);
 	}
 }
@@ -88,7 +87,8 @@ function replace_placeholder_with_gifographic($placeholder, gifographic_image) {
 
 function create_gif_image_from_placeholder($placeholder) {
 	var gif = $placeholder.clone()[0];
-	gif.src = $placeholder.data('gifSrc');
+	gif.src = $placeholder.data('srcOriginal');
+	
 	return gif;
 }
 

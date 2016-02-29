@@ -65,8 +65,7 @@ $(document).ready(function(){
     $("a.fancybox_visual").trigger('click');
   }
 
-	var $gifographic = $('.js-gif-is-playable')
-	if ($gifographic.length > 0) setup_gifographic_on_show_page($gifographic);
+	if ($gifographics().length > 0) setup_gifographics();
 
 	// visualization form
 	if (gon.edit_visualization){

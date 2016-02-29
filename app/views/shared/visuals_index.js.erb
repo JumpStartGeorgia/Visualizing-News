@@ -5,7 +5,7 @@
       .hide()
     );
 
-  setup_gifographics_on_vis_page();
+  if ($gifographics().length > 0) setup_gifographics();
 
   (function show_item (i, items) {
     if (items.eq(i).length)

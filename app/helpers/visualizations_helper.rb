@@ -31,14 +31,4 @@ module VisualizationsHelper
     end
     return p
   end
-
-	def vis_item_image_tag_classes(visualization)
-		image_tag_classes = []
-
-		if visualization.type == :gifographic
-			image_tag_classes.append 'js-is-gifographic'
-		end
-
-		image_tag_classes.join(' ')
-	end
 end

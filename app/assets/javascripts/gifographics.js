@@ -73,18 +73,31 @@ function bind_freeze_play_on_click_to_gif(image) {
 }
 
 function setup_gifographic(gifographic) {
-	set_data_src_to_src(gifographic);
 	freeze_gif(gifographic);
 	
 	if (gifographic_is_playable(gifographic)) {
+		set_data_src_to_src(gifographic);
 		bind_freeze_play_on_click_to_gif(gifographic);
 	}
 }
 
+function replace_placeholder_with_gifographic($placeholder, gifographic_image) {
+	$placeholder.after(gifographic_image);
+	$placeholder.remove();
+}
+
 function setup_gifographics() {
-	$gifographics().one('load', function() {
-		setup_gifographic(this);
-	}).each(function() {
-		if (this.complete) $(this).load();
+	$gifographics().each(function() {
+		var $placeholder = $(this);
+		var gifographic_image = new Image();
+		gifographic_image.src = $placeholder.data('gifSrc');
+		gifographic_image.alt = $placeholder.attr('alt');		
+		$(gifographic_image).addClass($placeholder.attr('class'));
+		
+		$(gifographic_image).one('load', function(){
+			setup_gifographic(gifographic_image);
+			
+			replace_placeholder_with_gifographic($placeholder, gifographic_image);
+		});
 	});
 }

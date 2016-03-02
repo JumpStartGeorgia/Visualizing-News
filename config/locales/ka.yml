@@ -551,14 +551,17 @@ ka:
       sign_in: გაიარეთ ავტორიზაცია
   visualizations:
     form:
-      locale_to_crop:  
+      locale_to_crop:
         preview: ნახვა
         crop_image: ესკიზის %{language} შექმნა
-      reset_file:  ჩატვირთე ახალი %{language} ინფოგრაფიკა
-      reset_url: ჩატვირთე ახალი %{language} ბმული
-      change_video_url: "%{language} ვიდეოს ბმულის შეცვლა"
-      datasources_header: მონაცემთა წყაროები
-      add_datasource: მონაცემთა წყაროს დამატება
+      reset_visual_image_file:
+        reset_file:  ჩატვირთე ახალი %{language} ინფოგრაფიკა
+      reset_interactive_url:
+        reset_url: ჩატვირთე ახალი %{language} ბმული
+      edit:
+        change_video_url: "%{language} ვიდეოს ბმულის შეცვლა"
+        datasources_header: მონაცემთა წყაროები
+        add_datasource: მონაცემთა წყაროს დამატება
     datasource_fields:
       remove_link: მონაცემთა წყაროს წაშლა
   notifications:

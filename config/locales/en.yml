@@ -552,14 +552,17 @@ en:
       sign_in: Sign In to Post
   visualizations:
     form:
-      locale_to_crop:  
+      locale_to_crop:
         preview: Preview
         crop_image: Create %{language} Thumbnail Image
-      reset_file: Load New %{language} Infographic
-      reset_url: Load New %{language} URL
-      change_video_url: Change %{language} Video URL
-      datasources_header: Data Sources
-      add_datasource: Add Data Source
+      reset_visual_image_file:
+        reset_file: Load New %{language} Infographic
+      reset_interactive_url:
+        reset_url: Load New %{language} URL
+      edit:
+        change_video_url: Change %{language} Video URL
+        datasources_header: Data Sources
+        add_datasource: Add Data Source
     datasource_fields:
       remove_link: Remove Data Source
   notifications:

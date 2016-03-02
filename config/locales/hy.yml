@@ -549,11 +549,14 @@ hy:
       locale_to_crop:
         preview: Նախնական դիտարկում
         crop_image: Ստեղծել %{language} նմուշի պատկեր
-      reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
-      reset_url: Բեռնել նոր %{language} հղում
-      change_video_url: Change %{language} Video URL
-      datasources_header: Տվյալների աղբյուր
-      add_datasource: Ավելացնել տվյալների աղբյուր
+      reset_visual_image_file:
+        reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
+      reset_interactive_url:
+        reset_url: Բեռնել նոր %{language} հղում
+      edit:
+        change_video_url: Change %{language} Video URL
+        datasources_header: Տվյալների աղբյուր
+        add_datasource: Ավելացնել տվյալների աղբյուր
     datasource_fields:
       remove_link: Հեռացնել տվյալների աղբյուր
   organizations:

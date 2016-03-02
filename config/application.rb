@@ -58,8 +58,8 @@ module BootstrapStarter
 
     # tell the assest pipeline to include the fancybox.js and font styles
     config.assets.precompile += ['fancybox/layout.js', 'fonts_en.css', 'fonts_ka.css', 'fonts_hy.css']
-    
-    
+
+
 
     # from: http://stackoverflow.com/a/24727310
     # to try and catch the following errors:
@@ -67,11 +67,11 @@ module BootstrapStarter
     # - invalid %-encoding
     require "#{Rails.root}/app/middleware/handle_invalid_percent_encoding.rb"
     config.middleware.insert 0, HandleInvalidPercentEncoding
-    config.middleware.insert 0, Rack::UTF8Sanitizer    
+    config.middleware.insert 0, Rack::UTF8Sanitizer
 
     # from: https://robots.thoughtbot.com/content-compression-with-rack-deflater
     # compress all html/json responses
     config.middleware.use Rack::Deflater
-    
+
   end
 end

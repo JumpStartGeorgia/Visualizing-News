@@ -86,11 +86,10 @@ function setup_gifographic_pre_add_to_dom(gifographic) {
 
 function setup_gifographic_post_add_to_dom(gifographic) {
 	if (gifographic_is_playable(gifographic)) {
-		if (gif_cover_image(gifographic).length > 0) {
-			bind_freeze_play_gif_on_click_element(
-				gifographic,
-				gif_cover_image(gifographic)[0]
-			);
+		var gif_cover = gif_cover_image(gifographic)[0];
+
+		if (gif_cover) {
+			bind_freeze_play_gif_on_click_element(gifographic, gif_cover);
 		}
 	}
 }

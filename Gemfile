@@ -55,6 +55,9 @@ group :assets do
 end
 
 group :development do
+  # Finds unused and missing translations
+  gem 'i18n-tasks', '~> 0.8.7'
+
 	gem "mailcatcher", "0.5.10" # small smtp server for dev, http://mailcatcher.me/
 #	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # web kit that takes html and converts to pdf
   # gem 'rb-inotify', '~> 0.8.8' # rails dev boost needs this

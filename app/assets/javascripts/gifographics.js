@@ -62,18 +62,18 @@ function play_gif(image) {
 	set_src_to_data_src(image);
 }
 
-function bind_freeze_play_on_click_to_gif(image) {
-	$(image).click(function() {
+function bind_freeze_play_gif_on_click_element(gif, clickable) {
+	$(clickable).click(function() {
 		if ($(this).hasClass('is-frozen')) {
-			play_gif(this);
+			play_gif(gif);
 		} else {
-			freeze_gif(this);
+			freeze_gif(gif);
 		}
 	});
 }
 
 function make_playable(gifographic) {
-	bind_freeze_play_on_click_to_gif(gifographic);
+	bind_freeze_play_gif_on_click_element(gifographic, gifographic);
 }
 
 function setup_gifographic(gifographic) {

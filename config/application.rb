@@ -35,6 +35,8 @@ module BootstrapStarter
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :en
 
+    config.i18n.available_locales = [:en, :ka, :hy]
+
     # rails will fallback to config.i18n.default_locale translation
     config.i18n.fallbacks = true
 

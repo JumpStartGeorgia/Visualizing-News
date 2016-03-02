@@ -97,11 +97,11 @@ function create_gif_image_from_placeholder($placeholder) {
 }
 
 function load_gifographic_from_placeholder($placeholder) {
-	var gifographic_image = create_gif_image_from_placeholder($placeholder);
+	var gifographic = create_gif_image_from_placeholder($placeholder);
 
-	$(gifographic_image).one('load', function(){
-		setup_gifographic(gifographic_image);
-		replace_placeholder_with_gifographic($placeholder, gifographic_image);
+	$(gifographic).one('load', function(){
+		setup_gifographic(gifographic);
+		replace_placeholder_with_gifographic($placeholder, gifographic);
 	});
 }
 

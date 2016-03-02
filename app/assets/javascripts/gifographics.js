@@ -14,16 +14,16 @@ function set_play_title(tag) {
 	tag.title = $(tag).data().playTitle;
 }
 
+function gif_cover_image(gif_image) {
+	return $(gif_image).siblings('.js-is-gif-cover');
+}
+
 function hide_cover_image(gif_image) {
-	$(gif_image)
-		.siblings('.js-hide-on-play-gif')
-		.addClass('is-hidden');
+	gif_cover_image(gif_image).addClass('is-hidden');
 }
 
 function show_cover_image(gif_image) {
-	$(gif_image)
-		.siblings('.js-show-on-freeze-gif')
-		.removeClass('is-hidden');
+	gif_cover_image(gif_image).removeClass('is-hidden');
 }
 
 function $gifographics() {
@@ -74,6 +74,7 @@ function bind_freeze_play_gif_on_click_element(gif, clickable) {
 
 function make_playable(gifographic) {
 	bind_freeze_play_gif_on_click_element(gifographic, gifographic);
+
 }
 
 function setup_gifographic(gifographic) {

@@ -72,11 +72,15 @@ function bind_freeze_play_on_click_to_gif(image) {
 	});
 }
 
+function make_playable(gifographic) {
+	bind_freeze_play_on_click_to_gif(gifographic);
+}
+
 function setup_gifographic(gifographic) {
 	freeze_gif(gifographic);
 
 	if (gifographic_is_playable(gifographic)) {
-		bind_freeze_play_on_click_to_gif(gifographic);
+		make_playable(gifographic);
 	}
 }
 

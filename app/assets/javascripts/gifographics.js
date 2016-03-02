@@ -64,7 +64,7 @@ function play_gif(image) {
 
 function bind_freeze_play_gif_on_click_element(gif, clickable) {
 	$(clickable).click(function() {
-		if ($(this).hasClass('is-frozen')) {
+		if ($(gif).hasClass('is-frozen')) {
 			play_gif(gif);
 		} else {
 			freeze_gif(gif);
@@ -74,7 +74,6 @@ function bind_freeze_play_gif_on_click_element(gif, clickable) {
 
 function make_playable(gifographic) {
 	bind_freeze_play_gif_on_click_element(gifographic, gifographic);
-
 }
 
 function setup_gifographic(gifographic) {

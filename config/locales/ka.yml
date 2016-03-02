@@ -551,8 +551,9 @@ ka:
       sign_in: გაიარეთ ავტორიზაცია
   visualizations:
     form:
-      preview: ნახვა
-      crop_image: ესკიზის %{language} შექმნა
+      locale_to_crop:  
+        preview: ნახვა
+        crop_image: ესკიზის %{language} შექმნა
       reset_file:  ჩატვირთე ახალი %{language} ინფოგრაფიკა
       reset_url: ჩატვირთე ახალი %{language} ბმული
       change_video_url: "%{language} ვიდეოს ბმულის შეცვლა"

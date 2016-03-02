@@ -552,8 +552,9 @@ en:
       sign_in: Sign In to Post
   visualizations:
     form:
-      preview: Preview
-      crop_image: Create %{language} Thumbnail Image
+      locale_to_crop:  
+        preview: Preview
+        crop_image: Create %{language} Thumbnail Image
       reset_file: Load New %{language} Infographic
       reset_url: Load New %{language} URL
       change_video_url: Change %{language} Video URL

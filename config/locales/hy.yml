@@ -546,8 +546,9 @@ hy:
       sign_in: Գրառում կատարելու համար՝ գրանցվեք
   visualizations:
     form:
-      preview: Նախնական դիտարկում
-      crop_image: Ստեղծել %{language} նմուշի պատկեր
+      locale_to_crop:
+        preview: Նախնական դիտարկում
+        crop_image: Ստեղծել %{language} նմուշի պատկեր
       reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
       reset_url: Բեռնել նոր %{language} հղում
       change_video_url: Change %{language} Video URL

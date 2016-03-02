@@ -15,7 +15,7 @@ ka:
       idea_progress: პროგრესი
     attributes:
       user:
-        email: ელ.ფოსტა
+        email: ელ. ფოსტა
         password: პაროლი
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი

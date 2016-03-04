@@ -62,43 +62,91 @@ function play_gif(image) {
 	set_src_to_data_src(image);
 }
 
-function bind_freeze_play_gif_on_click_element(gif, clickable) {
-	$(clickable).click(function() {
-		if ($(gif).hasClass('is-frozen')) {
-			play_gif(gif);
-		} else {
-			freeze_gif(gif);
+function create_gif(gif_image) {
+	var image = gif_image;
+
+	return {
+		cover_image: function() {
+			return gif_cover_image(image);
+		},
+
+		freeze: function() {
+			if (gifographic_is_playable(image)) {
+				$(image).addClass('is-frozen');
+				set_play_title(image);
+				show_cover_image(image);
+			}
+
+			var c = document.createElement('canvas');
+			var w = c.width = image.width;
+			var h = c.height = image.height;
+			c.getContext('2d').drawImage(image, 0, 0, w, h);
+			try {
+				image.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
+			} catch(e) { // cross-domain -- mimic original with all its tag attributes
+				for (var j = 0, a; a = image.attributes[j]; j++)
+					c.setAttribute(a.name, a.value);
+				image.parentNode.replaceChild(c, image);
+			}
+		},
+
+		make_playable_by: function(element) {
+			var that = this;
+
+			$(element).click(function() {
+				if ($(image).hasClass('is-frozen')) {
+					play_gif(image);
+				} else {
+					that.freeze();
+				}
+			});
+		},
+
+		is_playable: function() {
+			return gifographic_is_playable(image);
+		},
+
+		add_to_dom_after: function($element) {
+			$element.after(image);
+		},
+
+		make_playable: function() {
+			this.make_playable_by(image);
+		},
+
+		on_load_do: function(callback) {
+			$(image).one('load', function() {
+				callback();
+			});
 		}
-	});
+	}
 }
 
 function create_gifographic_from_placeholder($placeholder) {
-	var gif = $placeholder.clone()[0];
-	gif.src = $placeholder.data('srcOriginal');
+	var gif_image = $placeholder.clone()[0];
+	gif_image.src = $placeholder.data('srcOriginal');
 
-	function make_playable() {
-		bind_freeze_play_gif_on_click_element(gif, gif);
-	}
+	var gif = create_gif(gif_image);
 
 	function replace_placeholder() {
-		$placeholder.after(gif);
+		gif.add_to_dom_after($placeholder);
 		$placeholder.remove();
 	}
 
 	function setup_pre_add_to_dom() {
-		freeze_gif(gif);
+		gif.freeze();
 
-		if (gifographic_is_playable(gif)) {
-			make_playable();
+		if (gif.is_playable()) {
+			gif.make_playable();
 		}
 	}
 
 	function setup_post_add_to_dom() {
 		if (gifographic_is_playable(gif)) {
-			var gif_cover = gif_cover_image(gif)[0];
+			var gif_cover = gif.cover_image(gif)[0];
 
 			if (gif_cover) {
-				bind_freeze_play_gif_on_click_element(gif, gif_cover);
+				gif.make_playable_by(gif_cover);
 			}
 		}
 	}
@@ -111,9 +159,7 @@ function create_gifographic_from_placeholder($placeholder) {
 
 	return {
 		setup_on_load: function() {
-			$(gif).one('load', function() {
-				setup();
-			});
+			gif.on_load_do(setup);
 		}
 	};
 }

@@ -59,7 +59,13 @@ hide_slider = ''
             <% end %>
 					</li>
 
+          <%
+            @visual_counts_by_type = Visualization.counts_by_type
+          %>
+
           <% Visualization.types.each do |vis_type| %>
+
+            <% unless @visual_counts_by_type[vis_type] == 0 %>
 
               <li>
                 <%= link_to url_for(params.merge(type: vis_type.to_s)) do %>
@@ -67,6 +73,8 @@ hide_slider = ''
                   <div><%= t("filters.visuals.type.#{vis_type}") %></div>
                 <% end %>
               </li>
+
+            <% end %>
 
           <% end %>
 

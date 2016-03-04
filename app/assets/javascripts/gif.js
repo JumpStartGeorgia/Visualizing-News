@@ -26,12 +26,8 @@ function show_cover_image(gif_image) {
 	gif_cover_image(gif_image).removeClass('is-hidden');
 }
 
-function gifographic_is_playable(gifographic_image) {
-	return $(gifographic_image).hasClass('js-gif-is-playable');
-}
-
 function freeze_gif(i) {
-	if (gifographic_is_playable(i)) {
+	if (this.is_playable()) {
 		$(i).addClass('is-frozen');
 		set_play_title(i);
 		show_cover_image(i);
@@ -67,7 +63,7 @@ function create_gif(gif_image) {
 		},
 
 		freeze: function() {
-			if (gifographic_is_playable(image)) {
+			if (this.is_playable()) {
 				$(image).addClass('is-frozen');
 				set_play_title(image);
 				show_cover_image(image);
@@ -99,7 +95,7 @@ function create_gif(gif_image) {
 		},
 
 		is_playable: function() {
-			return gifographic_is_playable(image);
+			return $(image).hasClass('js-gif-is-playable');;
 		},
 
 		add_to_dom_after: function($element) {

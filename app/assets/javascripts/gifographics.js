@@ -18,7 +18,7 @@ function create_gifographic_from_placeholder($placeholder) {
 	}
 
 	function setup_post_add_to_dom() {
-		if (gifographic_is_playable(gif)) {
+		if (gif.is_playable()) {
 			var gif_cover = gif.cover_image(gif)[0];
 
 			if (gif_cover) {

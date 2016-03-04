@@ -60,7 +60,13 @@ hide_slider = ''
 					</li>
 
           <%
-            @visual_counts_by_type = Visualization.counts_by_type
+            show_non_published = user_signed_in? && @user_in_org && current_user.role?(User::ROLES[:org_admin]) && @param_options[:org].present?
+
+            if show_non_published
+              @visual_counts_by_type = Visualization.counts_by_type
+            else
+              @visual_counts_by_type = Visualization.counts_by_type(only_published: true)
+            end
           %>
 
           <% Visualization.types.each do |vis_type| %>
@@ -78,7 +84,7 @@ hide_slider = ''
 
           <% end %>
 
-          <% if user_signed_in? && @user_in_org && current_user.role?(User::ROLES[:org_admin]) && @param_options[:org].present? %>
+          <% if show_non_published %>
 					  <li>
 						  <%= link_to url_for(params.merge(:type => 'not_published')) do %>
                 <div><%= image_tag('filter_icons/not_published.png') %></div>

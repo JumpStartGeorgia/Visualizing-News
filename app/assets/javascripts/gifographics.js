@@ -99,21 +99,28 @@ function replace_placeholder_with_gifographic($placeholder, gifographic_image) {
 	$placeholder.remove();
 }
 
-function create_gif_image_from_placeholder($placeholder) {
+function create_gifographic_from_placeholder($placeholder) {
 	var gif = $placeholder.clone()[0];
 	gif.src = $placeholder.data('srcOriginal');
 
-	return gif;
+	function setup() {
+		setup_gifographic_pre_add_to_dom(gif);
+		replace_placeholder_with_gifographic($placeholder, gif);
+		setup_gifographic_post_add_to_dom(gif);
+	}
+
+	return {
+		setup_on_load: function() {
+			$(gif).one('load', function() {
+				setup();
+			});
+		}
+	};
 }
 
 function load_gifographic_from_placeholder($placeholder) {
-	var gifographic = create_gif_image_from_placeholder($placeholder);
-
-	$(gifographic).one('load', function(){
-		setup_gifographic_pre_add_to_dom(gifographic);
-		replace_placeholder_with_gifographic($placeholder, gifographic);
-		setup_gifographic_post_add_to_dom(gifographic);
-	});
+	var gifographic = create_gifographic_from_placeholder($placeholder);
+	gifographic.setup_on_load();
 }
 
 function setup_gifographics() {

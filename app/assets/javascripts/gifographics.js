@@ -94,18 +94,18 @@ function setup_gifographic_post_add_to_dom(gifographic) {
 	}
 }
 
-function replace_placeholder_with_gifographic($placeholder, gifographic_image) {
-	$placeholder.after(gifographic_image);
-	$placeholder.remove();
-}
-
 function create_gifographic_from_placeholder($placeholder) {
 	var gif = $placeholder.clone()[0];
 	gif.src = $placeholder.data('srcOriginal');
 
+	function replace_placeholder() {
+		$placeholder.after(gif);
+		$placeholder.remove();
+	}
+
 	function setup() {
 		setup_gifographic_pre_add_to_dom(gif);
-		replace_placeholder_with_gifographic($placeholder, gif);
+		replace_placeholder();
 		setup_gifographic_post_add_to_dom(gif);
 	}
 

@@ -58,42 +58,18 @@ hide_slider = ''
               <div><%= t('filters.visuals.type.all') %></div>
             <% end %>
 					</li>
-					<li>
-						<%= link_to url_for(params.merge(:type => 'infographic')) do %>
-              <div><%= image_tag('filter_icons/infographic.png') %></div>
-              <div><%= t('filters.visuals.type.infographic') %></div>
-            <% end %>
-					</li>
-					<li>
-						<%= link_to url_for(params.merge(:type => 'interactive')) do %>
-              <div><%= image_tag('filter_icons/interactive.png') %></div>
-              <div><%= t('filters.visuals.type.interactive') %></div>
-            <% end %>
-					</li>
-          <li>
-            <%= link_to url_for(params.merge(:type => 'video')) do %>
-              <div><%= image_tag('filter_icons/video.png')%></div>
-              <div><%= t('filters.visuals.type.video') %></div>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to url_for(params.merge(:type => 'gifographic')) do %>
-              <div><%= image_tag('filter_icons/gifographic.png') %></div>
-              <div><%= t('filters.visuals.type.gifographic') %></div>
-            <% end %>
-          </li>
-					<li>
-						<%= link_to url_for(params.merge(:type => 'fact')) do %>
-              <div><%= image_tag('filter_icons/fact.png') %></div>
-              <div><%= t('filters.visuals.type.fact') %></div>
-            <% end %>
-					</li>
-          <li>
-            <%= link_to url_for(params.merge(:type => 'comic')) do %>
-              <div><%= image_tag('filter_icons/comic.png') %></div>
-              <div><%= t('filters.visuals.type.comic') %></div>
-            <% end %>
-          </li>
+
+          <% Visualization.types.each do |vis_type| %>
+
+              <li>
+                <%= link_to url_for(params.merge(type: vis_type.to_s)) do %>
+                  <div><%= image_tag("filter_icons/#{vis_type}.png") %></div>
+                  <div><%= t("filters.visuals.type.#{vis_type}") %></div>
+                <% end %>
+              </li>
+
+          <% end %>
+
           <% if user_signed_in? && @user_in_org && current_user.role?(User::ROLES[:org_admin]) && @param_options[:org].present? %>
 					  <li>
 						  <%= link_to url_for(params.merge(:type => 'not_published')) do %>

@@ -37,6 +37,10 @@ class Visualization < ActiveRecord::Base
     gifographic: 6
   }
 
+  def self.types
+    TYPES.keys
+  end
+
   def type
     id_index = Visualization::TYPES.values.index(visualization_type_id)
     return :infographic if id_index == nil

@@ -19,7 +19,7 @@ function create_gifographic_from_placeholder($placeholder) {
 
 	function setup_post_add_to_dom() {
 		if (gif.is_playable()) {
-			var gif_cover = gif.cover_image(gif)[0];
+			var gif_cover = gif.cover_image()[0];
 
 			if (gif_cover) {
 				gif.make_playable_by(gif_cover);

@@ -14,30 +14,30 @@ function set_play_title(tag) {
 	tag.title = $(tag).data().playTitle;
 }
 
-function gif_cover_image(gif_image) {
-	return $(gif_image).siblings('.js-is-gif-cover');
-}
-
-function hide_cover_image(gif_image) {
-	gif_cover_image(gif_image).addClass('is-hidden');
-}
-
-function show_cover_image(gif_image) {
-	gif_cover_image(gif_image).removeClass('is-hidden');
-}
-
 function create_gif(gif_image) {
 	var image = gif_image;
 
+	function gif_cover_image() {
+		return $(image).siblings('.js-is-gif-cover');
+	}
+
+	function hide_cover_image() {
+		gif_cover_image().addClass('is-hidden');
+	}
+
+	function show_cover_image() {
+		gif_cover_image().removeClass('is-hidden');
+	}
+
 	return {
 		cover_image: function() {
-			return gif_cover_image(image);
+			return gif_cover_image();
 		},
 
     play: function() {
       $(image).removeClass('is-frozen');
       set_stop_title(image);
-      hide_cover_image(image);
+      hide_cover_image();
 
       set_src_to_data_src(image);
     },
@@ -46,7 +46,7 @@ function create_gif(gif_image) {
 			if (this.is_playable()) {
 				$(image).addClass('is-frozen');
 				set_play_title(image);
-				show_cover_image(image);
+				show_cover_image();
 			}
 
 			var c = document.createElement('canvas');

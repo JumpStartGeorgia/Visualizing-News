@@ -1,23 +1,23 @@
-function set_data_src_to_src(tag) {
-	$(tag).data('srcOriginal', tag.src);
-}
-
-function set_src_to_data_src(tag) {
-	tag.src = $(tag).data().srcOriginal;
-}
-
-function set_stop_title(tag) {
-	tag.title = $(tag).data().stopTitle;
-}
-
-function set_play_title(tag) {
-	tag.title = $(tag).data().playTitle;
-}
-
 function create_gif(gif_image) {
 	var image = gif_image;
 
 	var gif = {}
+
+	function set_data_src_to_src(gif_image) {
+		$(gif_image).data('srcOriginal', gif_image.src);
+	}
+
+	function set_src_to_data_src(gif_image) {
+		gif_image.src = $(gif_image).data().srcOriginal;
+	}
+
+	function set_stop_title(gif_image) {
+		gif_image.title = $(gif_image).data().stopTitle;
+	}
+
+	function set_play_title(image) {
+		image.title = $(image).data().playTitle;
+	}
 
 	gif.cover_image = function() {
 		return $(image).siblings('.js-is-gif-cover');

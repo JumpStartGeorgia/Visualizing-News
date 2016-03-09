@@ -51,14 +51,27 @@ class Visualization < ActiveRecord::Base
     Visualization::TYPES.keys[id_index]
   end
 
-  def self.counts_by_type
-    visual_counts_by_type_id = Visualization.group(:visualization_type_id).count
+  def self.counts_by_type(args = {})
+    if args[:only_published]
+      visual_counts_by_type_id = Visualization
+                                 .published
+                                 .group(:visualization_type_id)
+                                 .count
+    else
+      visual_counts_by_type_id = Visualization
+                                 .group(:visualization_type_id)
+                                 .count
+    end
+
     visual_counts_by_type = {}
 
-    visual_counts_by_type_id.keys.each do |key|
-      value = visual_counts_by_type_id[key]
-      type = Visualization.get_type_from_type_id(key)
-      visual_counts_by_type[type] = value
+    types.each do |type|
+      type_id = TYPES[type]
+      if visual_counts_by_type_id[type_id].nil?
+        visual_counts_by_type[type] = 0
+      else
+        visual_counts_by_type[type] = visual_counts_by_type_id[TYPES[type]]
+      end
     end
 
     visual_counts_by_type

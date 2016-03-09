@@ -37,10 +37,31 @@ class Visualization < ActiveRecord::Base
     gifographic: 6
   }
 
+  def self.types
+    TYPES.keys
+  end
+
+  def self.get_type_from_type_id(type_id)
+    TYPES.select { |_key, type| type == type_id }.keys[0]
+  end
+
   def type
     id_index = Visualization::TYPES.values.index(visualization_type_id)
     return :infographic if id_index == nil
     Visualization::TYPES.keys[id_index]
+  end
+
+  def self.counts_by_type
+    visual_counts_by_type_id = Visualization.group(:visualization_type_id).count
+    visual_counts_by_type = {}
+
+    visual_counts_by_type_id.keys.each do |key|
+      value = visual_counts_by_type_id[key]
+      type = Visualization.get_type_from_type_id(key)
+      visual_counts_by_type[type] = value
+    end
+
+    visual_counts_by_type
   end
 
 	has_many :visualization_categories, :dependent => :destroy

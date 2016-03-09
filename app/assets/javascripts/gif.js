@@ -29,7 +29,7 @@ function create_gif(gif_image) {
 		gif_cover_image().removeClass('is-hidden');
 	}
 
-	return {
+	var gif = {
 		cover_image: function() {
 			return gif_cover_image();
 		},
@@ -92,4 +92,6 @@ function create_gif(gif_image) {
 			});
 		}
 	}
+
+	return gif;
 }

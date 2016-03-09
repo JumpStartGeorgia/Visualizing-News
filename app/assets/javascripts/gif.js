@@ -17,22 +17,18 @@ function set_play_title(tag) {
 function create_gif(gif_image) {
 	var image = gif_image;
 
-	function gif_cover_image() {
+	var gif = {}
+
+	gif.cover_image = function() {
 		return $(image).siblings('.js-is-gif-cover');
 	}
 
 	function hide_cover_image() {
-		gif_cover_image().addClass('is-hidden');
+		gif.cover_image().addClass('is-hidden');
 	}
 
 	function show_cover_image() {
-		gif_cover_image().removeClass('is-hidden');
-	}
-
-	var gif = {}
-
-	gif.cover_image = function() {
-		return gif_cover_image();
+		gif.cover_image().removeClass('is-hidden');
 	}
 
 	gif.play = function() {

@@ -1,6 +1,4 @@
 function create_gif(gif_image) {
-	var image = gif_image;
-
 	var gif = {}
 
 	function set_data_src_to_src(gif_image) {
@@ -16,11 +14,11 @@ function create_gif(gif_image) {
 	}
 
 	function set_play_title(image) {
-		image.title = $(image).data().playTitle;
+		image.title = $(gif_image).data().playTitle;
 	}
 
 	gif.cover_image = function() {
-		return $(image).siblings('.js-is-gif-cover');
+		return $(gif_image).siblings('.js-is-gif-cover');
 	}
 
 	function hide_cover_image() {
@@ -32,30 +30,30 @@ function create_gif(gif_image) {
 	}
 
 	gif.play = function() {
-		$(image).removeClass('is-frozen');
-		set_stop_title(image);
+		$(gif_image).removeClass('is-frozen');
+		set_stop_title(gif_image);
 		hide_cover_image();
 
-		set_src_to_data_src(image);
+		set_src_to_data_src(gif_image);
 	}
 
 	gif.freeze = function() {
 		if (this.is_playable()) {
-			$(image).addClass('is-frozen');
-			set_play_title(image);
+			$(gif_image).addClass('is-frozen');
+			set_play_title(gif_image);
 			show_cover_image();
 		}
 
 		var c = document.createElement('canvas');
-		var w = c.width = image.width;
-		var h = c.height = image.height;
-		c.getContext('2d').drawImage(image, 0, 0, w, h);
+		var w = c.width = gif_image.width;
+		var h = c.height = gif_image.height;
+		c.getContext('2d').drawImage(gif_image, 0, 0, w, h);
 		try {
-			image.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
+			gif_image.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
 		} catch(e) { // cross-domain -- mimic original with all its tag attributes
-			for (var j = 0, a; a = image.attributes[j]; j++)
+			for (var j = 0, a; a = gif_image.attributes[j]; j++)
 				c.setAttribute(a.name, a.value);
-			image.parentNode.replaceChild(c, image);
+			gif_image.parentNode.replaceChild(c, gif_image);
 		}
 	}
 
@@ -63,7 +61,7 @@ function create_gif(gif_image) {
 		var that = this;
 
 		$(element).click(function() {
-			if ($(image).hasClass('is-frozen')) {
+			if ($(gif_image).hasClass('is-frozen')) {
 				that.play();
 			} else {
 				that.freeze();
@@ -72,19 +70,19 @@ function create_gif(gif_image) {
 	}
 
 	gif.is_playable = function() {
-		return $(image).hasClass('js-gif-is-playable');;
+		return $(gif_image).hasClass('js-gif-is-playable');;
 	}
 
 	gif.add_to_dom_after = function($element) {
-		$element.after(image);
+		$element.after(gif_image);
 	}
 
 	gif.make_playable = function() {
-		this.make_playable_by(image);
+		this.make_playable_by(gif_image);
 	}
 
 	gif.on_load_do = function(callback) {
-		$(image).one('load', function() {
+		$(gif_image).one('load', function() {
 			callback();
 		});
 	}

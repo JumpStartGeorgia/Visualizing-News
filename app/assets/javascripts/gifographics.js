@@ -44,7 +44,7 @@ function create_gifographic_from_placeholder($placeholder) {
 	Object.defineProperty(gifographic, 'cover_image', {
 		get: function() {
 			delete this.cover_image;
-			return this.notifier = create_cover_image(gif_image);
+			return this.cover_image = create_cover_image(gif_image);
 		}
 	})
 

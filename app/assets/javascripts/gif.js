@@ -17,31 +17,19 @@ function create_gif(gif_image) {
 		image.title = $(gif_image).data().playTitle;
 	}
 
-	gif.cover_image = function() {
-		return $(gif_image).siblings('.js-is-gif-cover');
-	}
-
-	function hide_cover_image() {
-		gif.cover_image().addClass('is-hidden');
-	}
-
-	function show_cover_image() {
-		gif.cover_image().removeClass('is-hidden');
-	}
-
-	gif.play = function() {
+	gif.play = function(callback) {
 		$(gif_image).removeClass('is-frozen');
 		set_stop_title(gif_image);
-		hide_cover_image();
+		callback();
 
 		set_src_to_data_src(gif_image);
 	}
 
-	gif.freeze = function() {
+	gif.freeze = function(callback) {
 		if (this.is_playable()) {
 			$(gif_image).addClass('is-frozen');
 			set_play_title(gif_image);
-			show_cover_image();
+			callback();
 		}
 
 		var c = document.createElement('canvas');
@@ -57,14 +45,14 @@ function create_gif(gif_image) {
 		}
 	}
 
-	gif.make_playable_by = function(element) {
+	gif.make_playable_by = function(element, on_play_callback, on_freeze_callback) {
 		var that = this;
 
 		$(element).click(function() {
 			if ($(gif_image).hasClass('is-frozen')) {
-				that.play();
+				that.play(on_play_callback);
 			} else {
-				that.freeze();
+				that.freeze(on_freeze_callback);
 			}
 		});
 	}
@@ -77,8 +65,8 @@ function create_gif(gif_image) {
 		$element.after(gif_image);
 	}
 
-	gif.make_playable = function() {
-		this.make_playable_by(gif_image);
+	gif.make_playable = function(on_play_callback, on_freeze_callback) {
+		this.make_playable_by(gif_image, on_play_callback, on_freeze_callback);
 	}
 
 	gif.on_load_do = function(callback) {

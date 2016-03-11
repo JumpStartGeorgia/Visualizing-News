@@ -28,7 +28,7 @@ function create_gifographic_from_placeholder($placeholder) {
 	}
 
 	function setup_post_add_to_dom() {
-		if (gif.is_playable() && gifographic.cover_image.img) {
+		if (gif.is_playable() && gifographic.cover_image) {
 			gif.make_playable_by(
 				gifographic.cover_image.img, on_gif_play, on_gif_freeze
 			);

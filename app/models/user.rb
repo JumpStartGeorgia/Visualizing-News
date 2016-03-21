@@ -32,11 +32,12 @@ class User < ActiveRecord::Base
   # - a role with a larger number can do everything that smaller numbers can do
   ROLES = {
 		:user => 0,
+		:analytics => 40,
 		:org_admin => 50,
 		:visual_promotion => 75,
 		:admin => 99
 	}
-	
+
   def role?(base_role)
     if base_role && ROLES.values.index(base_role)
       return base_role <= self.role

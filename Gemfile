@@ -43,6 +43,9 @@ gem 'rack-utf8_sanitizer', '~> 1.2.2' # prevent invalid encoding error
 gem "unidecoder", "~> 1.1.2" #convert utf8 to ascii for permalinks
 gem 'dotenv-rails', '~> 1.0', '>= 1.0.2'
 
+# Improves user experience with tables: searching, sorting, pagination, etc.
+gem 'jquery-dynatable-rails', '~> 0.3.2'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

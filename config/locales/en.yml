@@ -435,6 +435,12 @@ en:
     analytics:
       index:
         title: Analytics
+      visuals_table:
+        columns:
+          title: Visualization Title
+          views: Views
+          facebook_shares: Facebook Shares
+          engagement_rating: Engagement Rating
   root:
     index:
       title: Visualizations

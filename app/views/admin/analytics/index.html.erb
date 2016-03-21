@@ -1,0 +1,15 @@
+<main>
+
+  <h1>
+    <%= t '.title' %>
+  </h1>
+
+  <ul>
+    <% @visualizations.each do |visualization| %>
+      <li>
+        <%= visualization.title %>
+      </li>
+    <% end %>
+  </ul>
+
+</main>

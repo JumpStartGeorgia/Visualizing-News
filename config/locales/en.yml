@@ -422,6 +422,7 @@ en:
       users: Users
       pages: Pages
       idea_statuses: Idea Status
+      analytics: Analytics
     users:
       edit:
         title: Editing User
@@ -431,6 +432,9 @@ en:
         title: New User
       show:
         title: User Details
+    analytics:
+      index:
+        title: Analytics
   root:
     index:
       title: Visualizations

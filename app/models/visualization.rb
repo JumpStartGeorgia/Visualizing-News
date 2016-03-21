@@ -356,4 +356,12 @@ class Visualization < ActiveRecord::Base
   def printable?
     [:infographic, :fact, :comic].include? type
   end
+
+  def engagement_rating
+    if impressions_count != 0
+      (fb_likes.to_f/impressions_count.to_f).round(3)
+    else
+      'N/A'
+    end
+  end
 end

@@ -135,6 +135,5 @@ $(document).ready(function(){
     return false;
   });
 
-	var dynatable = createDynatable('.js-dynatable');
-	if (dynatable) dynatable.init();
+	createDynatable('.js-dynatable');
 });

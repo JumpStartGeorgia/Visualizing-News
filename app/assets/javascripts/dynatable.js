@@ -1,11 +1,9 @@
 function createDynatable(selector) {
-  if ($(selector).length === 0) return null;
+  if ($(selector).length === 0) return false;
 
   var dynatable = {};
 
-  dynatable.init = function() {
-    $(selector).dynatable();
-  }
+  var data = $(selector).dynatable();
 
-  return dynatable;
+  return true;
 }

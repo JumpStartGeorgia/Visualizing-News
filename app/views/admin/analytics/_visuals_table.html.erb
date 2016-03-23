@@ -1,57 +1,61 @@
-<button id='OGyhmAd6EfCGBxLpuXvIgv45WwHwXIOxotESHMYw' class='btn js-exports-table'>
-  <%= t '.export_button'%>
-</button>
+<section class='analytics-visuals-table'>
 
-<table class='table js-dynatable' data-exportable-by-id='OGyhmAd6EfCGBxLpuXvIgv45WwHwXIOxotESHMYw'>
+  <button id='OGyhmAd6EfCGBxLpuXvIgv45WwHwXIOxotESHMYw' class='btn dynatable-export'>
+    <%= t '.export_button'%>
+  </button>
 
-  <thead>
-    <tr>
+  <table class='table js-dynatable' data-exportable-by-id='OGyhmAd6EfCGBxLpuXvIgv45WwHwXIOxotESHMYw'>
 
-      <th>
-        <%= t '.columns.title' %>
-      </th>
-
-      <th>
-        <%= t '.columns.views' %>
-      </th>
-
-      <th>
-        <%= t '.columns.facebook_shares' %>
-      </th>
-
-      <th>
-        <%= t '.columns.engagement_rating' %>
-      </th>
-
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <% @visualizations.each do |visualization| %>
-
+    <thead>
       <tr>
 
         <th>
-          <%= visualization.title %>
+          <%= t '.columns.title' %>
         </th>
 
         <th>
-          <%= visualization.impressions_count %>
+          <%= t '.columns.views' %>
         </th>
 
         <th>
-          <%= visualization.fb_likes %>
+          <%= t '.columns.facebook_shares' %>
         </th>
 
         <th>
-          <%= visualization.engagement_rating %>
+          <%= t '.columns.engagement_rating' %>
         </th>
 
       </tr>
+    </thead>
 
-    <% end %>
+    <tbody>
 
-  </tbody>
+      <% @visualizations.each do |visualization| %>
 
-</table>
+        <tr>
+
+          <th>
+            <%= visualization.title %>
+          </th>
+
+          <th>
+            <%= visualization.impressions_count %>
+          </th>
+
+          <th>
+            <%= visualization.fb_likes %>
+          </th>
+
+          <th>
+            <%= visualization.engagement_rating %>
+          </th>
+
+        </tr>
+
+      <% end %>
+
+    </tbody>
+
+  </table>
+
+</section>

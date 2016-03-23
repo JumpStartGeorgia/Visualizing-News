@@ -436,6 +436,7 @@ en:
       index:
         title: Analytics
       visuals_table:
+        export_button: Export to CSV
         columns:
           title: Visualization Title
           views: Views

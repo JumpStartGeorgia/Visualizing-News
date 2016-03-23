@@ -36,7 +36,7 @@ function createDynatable(selector) {
     $table.data('dynatable').sorts.init();
     var nodes = $table.data('dynatable').records.sort();
 
-    var csvContent = "data:text/csv;charset=utf-8,";
+    var csvContent = "data:attachment/csv;charset=utf-8,";
     var headers_str = get_headers().map(surround_with_strings).join(',');
     csvContent += headers_str + "\n";
 
@@ -54,8 +54,16 @@ function createDynatable(selector) {
       csvContent += index < nodes.length ? dataString+ "\n" : dataString;
     });
 
-    var encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
+
+    var a = document.createElement('a');
+    a.href = csvContent;
+    a.target = '_blank';
+    var date_stamp = new Date().toJSON().slice(0,10);
+    a.download = 'feradi-visuals-analytics-' + date_stamp + '.csv';
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   function make_exportable() {

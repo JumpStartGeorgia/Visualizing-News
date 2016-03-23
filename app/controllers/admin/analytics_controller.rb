@@ -5,6 +5,6 @@ class Admin::AnalyticsController < ApplicationController
   end
 
   def index
-    @visualizations = Visualization.with_translations
+    @visualizations = Visualization.published.with_translations
   end
 end

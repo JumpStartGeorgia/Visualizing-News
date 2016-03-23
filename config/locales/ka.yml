@@ -421,6 +421,7 @@ ka:
       users: მომხმარებლები
       pages: გვერდები
       idea_statuses: იდეის სტატუსი
+      analytics: Analytics
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -430,6 +431,16 @@ ka:
         title: ახალი მომხმარებელი
       show:
         title: მომხმარებლის დეტალები
+    analytics:
+      index:
+        title: Analytics
+      visuals_table:
+        export_button: Export to CSV
+        columns:
+          title: Visualization Title
+          views: Views
+          facebook_shares: Facebook Shares
+          engagement_rating: Engagement Rating
   root:
     index:
       title: ვიზუალიზაციები

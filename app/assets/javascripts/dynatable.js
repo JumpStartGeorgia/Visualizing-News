@@ -43,7 +43,7 @@ function createDynatable(selector) {
     nodes.forEach(function(infoArray, index){
       infoArray = $.map(infoArray, function(el) {
         if (typeof el === 'string') {
-          el = '"' + el.trim() + '"';
+          el = surround_with_strings(el.trim());
         }
 
         return el;

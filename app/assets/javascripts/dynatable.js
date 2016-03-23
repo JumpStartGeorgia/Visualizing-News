@@ -7,7 +7,7 @@ function createDynatable(selector) {
 
   function get_headers() {
     var headers = $(selector).find('thead th').map(function() {
-      return $(this).text().replace('▼', '').trim();
+      return $(this).text().trim();
     });
 
     return $.makeArray(headers);
@@ -42,6 +42,7 @@ function createDynatable(selector) {
           return el;
         });
 
+        infoArray.shift();
         dataString = infoArray.join(",");
         csvContent += index < nodes.length ? dataString+ "\n" : dataString;
       });

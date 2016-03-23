@@ -2,17 +2,25 @@ function createDynatable(selector) {
   var $table = $(selector);
   if ($table.length === 0) return false;
 
+  var columns_sort_by_integer = [
+    'views',
+    'facebookShares',
+    'engagementRating'
+  ]
+
   function sort_by_integer(el, record) {
     return Number(el.innerHTML) || 0;
   }
 
   function init() {
+    var readers = {}
+
+    columns_sort_by_integer.forEach(function(str) {
+      readers[str] = sort_by_integer;
+    })
+
     $table.dynatable({
-      readers: {
-        'views': sort_by_integer,
-        'facebookShares': sort_by_integer,
-        'engagementRating': sort_by_integer
-      }
+      readers: readers
     });
   }
 

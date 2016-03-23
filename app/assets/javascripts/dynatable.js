@@ -1,21 +1,21 @@
 function createDynatable(selector) {
   if ($(selector).length === 0) return false;
 
-  var dynatable = {};
-
-  var data = $(selector).dynatable({
-    readers: {
-      'views': function(el, record) {
-        return Number(el.innerHTML) || 0;
-      },
-      'facebookShares': function(el, record) {
-        return Number(el.innerHTML) || 0;
-      },
-      'engagementRating': function(el, record) {
-        return Number(el.innerHTML) || 0;
+  function init() {
+    $(selector).dynatable({
+      readers: {
+        'views': function(el, record) {
+          return Number(el.innerHTML) || 0;
+        },
+        'facebookShares': function(el, record) {
+          return Number(el.innerHTML) || 0;
+        },
+        'engagementRating': function(el, record) {
+          return Number(el.innerHTML) || 0;
+        }
       }
-    }
-  });
+    });
+  }
 
   function get_headers() {
     var headers = $(selector).find('thead th').map(function() {
@@ -64,6 +64,7 @@ function createDynatable(selector) {
     });
   }
 
+  init();
   make_exportable();
 
   return true;

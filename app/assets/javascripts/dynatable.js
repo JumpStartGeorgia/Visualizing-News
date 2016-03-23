@@ -1,8 +1,9 @@
 function createDynatable(selector) {
-  if ($(selector).length === 0) return false;
+  var $table = $(selector);
+  if ($table.length === 0) return false;
 
   function init() {
-    $(selector).dynatable({
+    $table.dynatable({
       readers: {
         'views': function(el, record) {
           return Number(el.innerHTML) || 0;
@@ -18,7 +19,7 @@ function createDynatable(selector) {
   }
 
   function get_headers() {
-    var headers = $(selector).find('thead th').map(function() {
+    var headers = $table.find('thead th').map(function() {
       return $(this).text().trim();
     });
 
@@ -30,8 +31,6 @@ function createDynatable(selector) {
   }
 
   function export_table() {
-    var $table = $(selector);
-
     $table.data('dynatable').records.resetOriginal();
     $table.data('dynatable').queries.run();
     $table.data('dynatable').sorts.init();
@@ -60,12 +59,10 @@ function createDynatable(selector) {
   }
 
   function make_exportable() {
-    var export_button_id = $(selector).data('exportableById');
+    var export_button_id = $table.data('exportableById');
     var $export_button = $('#' + export_button_id);
 
-    $export_button.click(function() {
-      export_table();
-    });
+    $export_button.click(export_table);
   }
 
   init();

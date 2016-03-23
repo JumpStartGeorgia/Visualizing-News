@@ -361,7 +361,7 @@ class Visualization < ActiveRecord::Base
     if impressions_count != 0
       (fb_likes.to_f/impressions_count.to_f).round(3)
     else
-      'N/A'
+      0
     end
   end
 end

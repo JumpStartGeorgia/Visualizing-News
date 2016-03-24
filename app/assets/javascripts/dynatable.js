@@ -63,7 +63,7 @@ function createDynatable($table) {
 
     var csvContent = "data:attachment/csv;charset=utf-8,";
     var headers_str = get_headers().map(surround_with_strings).join(',');
-    csvContent += headers_str + "\n";
+    csvContent += headers_str + "%0A";
 
     nodes.forEach(function(infoArray, index){
       infoArray = $.map(infoArray, function(el) {
@@ -76,7 +76,7 @@ function createDynatable($table) {
 
       infoArray.shift();
       dataString = infoArray.join(",");
-      csvContent += index < nodes.length ? dataString+ "\n" : dataString;
+      csvContent += index < nodes.length ? dataString+ "%0A" : dataString;
     });
 
 

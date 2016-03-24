@@ -1,6 +1,17 @@
-function createDynatable(selector) {
-  var $table = $(selector);
+function createDynatable($table) {
   if ($table.length === 0) return false;
+
+  var dynatable = {}
+
+  Object.defineProperty(dynatable, 'title', {
+    get: function() {
+      delete this.title;
+      return this.title = $table
+        .siblings('.js-act-as-table-title')
+        .text()
+        .trim();
+    }
+  });
 
   var columns_sort_by_integer = [
     'views',
@@ -39,6 +50,11 @@ function createDynatable(selector) {
     return '"' + str + '"';
   }
 
+  function csv_export_file_name() {
+    var title = to_snake_case(dynatable.title);
+    return 'feradi_' + title + '_' + date_stamp() + '.csv';
+  }
+
   function export_table() {
     $table.data('dynatable').records.resetOriginal();
     $table.data('dynatable').queries.run();
@@ -67,8 +83,7 @@ function createDynatable(selector) {
     var a = document.createElement('a');
     a.href = csvContent;
     a.target = '_blank';
-    var date_stamp = new Date().toJSON().slice(0,10);
-    a.download = 'feradi-visuals-analytics-' + date_stamp + '.csv';
+    a.download = csv_export_file_name();
 
     document.body.appendChild(a);
     a.click();

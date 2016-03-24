@@ -357,11 +357,19 @@ class Visualization < ActiveRecord::Base
     [:infographic, :fact, :comic].include? type
   end
 
+  def facebook_engagement_rating
+    return 0 if impressions_count == 0
+
+    (fb_likes.to_f / impressions_count.to_f).round(3)
+  end
+
+  def feradi_engagement_rating
+    return 0 if impressions_count == 0
+
+    (overall_votes.to_f / impressions_count.to_f).round(3)
+  end
+
   def engagement_rating
-    if impressions_count != 0
-      (fb_likes.to_f/impressions_count.to_f).round(3)
-    else
-      0
-    end
+    ((facebook_engagement_rating + feradi_engagement_rating) / 2).round(3)
   end
 end

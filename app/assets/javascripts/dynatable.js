@@ -5,7 +5,10 @@ function createDynatable(selector) {
   var columns_sort_by_integer = [
     'views',
     'facebookShares',
-    'engagementRating'
+    'facebookEngagementRating',
+    'feradiLikes',
+    'feradiEngagementRating',
+    'overallEngagementRating'
   ]
 
   function sort_by_integer(el, record) {

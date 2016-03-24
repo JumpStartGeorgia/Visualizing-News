@@ -21,8 +21,20 @@
           <%= t '.columns.facebook_shares' %>
         </th>
 
-        <th data-dynatable-column='engagementRating'>
-          <%= t '.columns.engagement_rating' %>
+        <th data-dynatable-column='facebookEngagementRating'>
+          <%= t '.columns.facebook_engagement_rating' %>
+        </th>
+
+        <th data-dynatable-column='feradiLikes'>
+          <%= t '.columns.feradi_likes' %>
+        </th>
+
+        <th data-dynatable-column='feradiEngagementRating'>
+          <%= t '.columns.feradi_engagement_rating' %>
+        </th>
+
+        <th data-dynatable-column='overallEngagementRating'>
+          <%= t '.columns.overall_engagement_rating' %>
         </th>
 
       </tr>
@@ -44,6 +56,18 @@
 
           <th>
             <%= visualization.fb_likes %>
+          </th>
+
+          <th>
+            <%= visualization.facebook_engagement_rating %>
+          </th>
+
+          <th>
+            <%= visualization.overall_votes %>
+          </th>
+
+          <th>
+            <%= visualization.feradi_engagement_rating %>
           </th>
 
           <th>

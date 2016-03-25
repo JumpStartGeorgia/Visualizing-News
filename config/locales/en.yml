@@ -444,6 +444,15 @@ en:
           feradi_likes: Feradi Likes
           feradi_engagement_rating: Feradi Engagement Rating
           overall_engagement_rating: Overall Engagement Rating
+        visuals:
+          columns:
+            title: Visualization Title
+        categories:
+          columns:
+            category_name: Category Name
+        visual_types:
+          columns:
+            visual_type: Visual Type
       visuals_table:
         columns:
           title: Visualization Title

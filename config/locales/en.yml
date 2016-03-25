@@ -448,6 +448,7 @@ en:
           heading: Engagement by Visualization
           columns:
             title: Visualization Title
+            publication_date: Publication Date
         categories:
           heading: Engagement by Visualization Category
           columns:

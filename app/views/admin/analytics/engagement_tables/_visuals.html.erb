@@ -21,6 +21,10 @@
           <%= t '.columns.title' %>
         </th>
 
+        <th>
+          <%= t '.columns.publication_date' %>
+        </th>
+
         <th data-dynatable-column='views'>
           <%= t 'admin.analytics.engagement_tables.columns.views' %>
         </th>
@@ -56,6 +60,10 @@
 
           <th>
             <%= visualization.title %>
+          </th>
+
+          <th>
+            <%= visualization.published_date.strftime('%Y-%m-%d') %>
           </th>
 
           <th>

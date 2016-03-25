@@ -25,7 +25,7 @@
           <%= t 'admin.analytics.engagement_tables.columns.views' %>
         </th>
 
-        <th data-dynatable-column='facebookShares'>
+        <!-- <th data-dynatable-column='facebookShares'>
           <%= t 'admin.analytics.engagement_tables.columns.facebook_shares' %>
         </th>
 
@@ -43,44 +43,44 @@
 
         <th data-dynatable-column='overallEngagementRating'>
           <%= t 'admin.analytics.engagement_tables.columns.overall_engagement_rating' %>
-        </th>
+        </th> -->
 
       </tr>
     </thead>
 
     <tbody>
 
-      <% @visualizations.each do |visualization| %>
+      <% @categories.each do |category| %>
 
         <tr>
 
           <th>
-            <%= visualization.title %>
+            <%= category.name %>
           </th>
 
           <th>
-            <%= visualization.impressions_count %>
+            <%= category.impressions_count %>
+          </th>
+
+          <!-- <th>
+            <%#= category.fb_likes %>
           </th>
 
           <th>
-            <%= visualization.fb_likes %>
+            <%#= category.facebook_engagement_rating %>
           </th>
 
           <th>
-            <%= visualization.facebook_engagement_rating %>
+            <%#= category.overall_votes %>
           </th>
 
           <th>
-            <%= visualization.overall_votes %>
+            <%#= category.feradi_engagement_rating %>
           </th>
 
           <th>
-            <%= visualization.feradi_engagement_rating %>
-          </th>
-
-          <th>
-            <%= visualization.engagement_rating %>
-          </th>
+            <%#= category.engagement_rating %>
+          </th> -->
 
         </tr>
 

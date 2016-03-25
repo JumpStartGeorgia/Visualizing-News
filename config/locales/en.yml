@@ -435,7 +435,7 @@ en:
     analytics:
       index:
         title: Analytics
-      engagement_table:
+      engagement_tables:
         export_button: Export to CSV
         columns:
           views: Views

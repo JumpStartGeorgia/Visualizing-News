@@ -25,7 +25,7 @@
           <%= t 'admin.analytics.engagement_tables.columns.views' %>
         </th>
 
-        <!-- <th data-dynatable-column='facebookShares'>
+        <th data-dynatable-column='facebookShares'>
           <%= t 'admin.analytics.engagement_tables.columns.facebook_shares' %>
         </th>
 
@@ -33,15 +33,15 @@
           <%= t 'admin.analytics.engagement_tables.columns.facebook_engagement_rating' %>
         </th>
 
-        <th data-dynatable-column='feradiLikes'>
+        <!-- <th data-dynatable-column='feradiLikes'>
           <%= t 'admin.analytics.engagement_tables.columns.feradi_likes' %>
-        </th>
+        </th> -->
 
-        <th data-dynatable-column='feradiEngagementRating'>
+        <!-- <th data-dynatable-column='feradiEngagementRating'>
           <%= t 'admin.analytics.engagement_tables.columns.feradi_engagement_rating' %>
-        </th>
+        </th> -->
 
-        <th data-dynatable-column='overallEngagementRating'>
+        <!-- <th data-dynatable-column='overallEngagementRating'>
           <%= t 'admin.analytics.engagement_tables.columns.overall_engagement_rating' %>
         </th> -->
 
@@ -62,23 +62,23 @@
             <%= category.impressions_count %>
           </th>
 
+          <th>
+            <%= category.fb_likes %>
+          </th>
+
+          <th>
+            <%= category.facebook_engagement_rating %>
+          </th>
+
           <!-- <th>
-            <%#= category.fb_likes %>
-          </th>
-
-          <th>
-            <%#= category.facebook_engagement_rating %>
-          </th>
-
-          <th>
             <%#= category.overall_votes %>
-          </th>
+          </th> -->
 
-          <th>
+          <!-- <th>
             <%#= category.feradi_engagement_rating %>
-          </th>
+          </th> -->
 
-          <th>
+          <!-- <th>
             <%#= category.engagement_rating %>
           </th> -->
 

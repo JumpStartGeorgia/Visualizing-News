@@ -16,7 +16,7 @@ class Admin::AnalyticsController < ApplicationController
         SUM(visualizations.fb_likes) AS fb_likes, \
         SUM(visualizations.overall_votes) AS overall_votes")
                    .joins(categories: :category_translations)
-                   .where("category_translations.locale = '#{I18n.locale}'")
+                   .where('category_translations.locale = ?', I18n.locale)
                    .group('name'))
 
     @visualization_types = (

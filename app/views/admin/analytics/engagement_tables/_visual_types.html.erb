@@ -3,7 +3,7 @@
   <div class='page-header js-act-as-table-title'>
 
     <h2>
-      Engagement by Visualization
+      Engagement by Visualization Type
     </h2>
 
   </div>
@@ -22,27 +22,27 @@
         </th>
 
         <th data-dynatable-column='views'>
-          <%= t '.columns.views' %>
+          <%= t 'admin.analytics.engagement_table.columns.views' %>
         </th>
 
         <th data-dynatable-column='facebookShares'>
-          <%= t '.columns.facebook_shares' %>
+          <%= t 'admin.analytics.engagement_table.columns.facebook_shares' %>
         </th>
 
         <th data-dynatable-column='facebookEngagementRating'>
-          <%= t '.columns.facebook_engagement_rating' %>
+          <%= t 'admin.analytics.engagement_table.columns.facebook_engagement_rating' %>
         </th>
 
         <th data-dynatable-column='feradiLikes'>
-          <%= t '.columns.feradi_likes' %>
+          <%= t 'admin.analytics.engagement_table.columns.feradi_likes' %>
         </th>
 
         <th data-dynatable-column='feradiEngagementRating'>
-          <%= t '.columns.feradi_engagement_rating' %>
+          <%= t 'admin.analytics.engagement_table.columns.feradi_engagement_rating' %>
         </th>
 
         <th data-dynatable-column='overallEngagementRating'>
-          <%= t '.columns.overall_engagement_rating' %>
+          <%= t 'admin.analytics.engagement_table.columns.overall_engagement_rating' %>
         </th>
 
       </tr>
@@ -50,36 +50,36 @@
 
     <tbody>
 
-      <% @visualizations.each do |visualization| %>
+      <% @visualization_types.each do |visualization_type| %>
 
         <tr>
 
           <th>
-            <%= visualization.title %>
+            <%= t "visualization_types.#{Visualization.get_type_from_type_id(visualization_type.id)}" %>
           </th>
 
           <th>
-            <%= visualization.impressions_count %>
+            <%= visualization_type.impressions_count %>
           </th>
 
           <th>
-            <%= visualization.fb_likes %>
+            <%= visualization_type.fb_likes %>
           </th>
 
           <th>
-            <%= visualization.facebook_engagement_rating %>
+            <%= visualization_type.facebook_engagement_rating %>
           </th>
 
           <th>
-            <%= visualization.overall_votes %>
+            <%= visualization_type.overall_votes %>
           </th>
 
           <th>
-            <%= visualization.feradi_engagement_rating %>
+            <%= visualization_type.feradi_engagement_rating %>
           </th>
 
           <th>
-            <%= visualization.engagement_rating %>
+            <%= visualization_type.engagement_rating %>
           </th>
 
         </tr>

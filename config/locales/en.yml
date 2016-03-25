@@ -435,8 +435,16 @@ en:
     analytics:
       index:
         title: Analytics
-      visuals_table:
+      engagement_table:
         export_button: Export to CSV
+        columns:
+          views: Views
+          facebook_shares: Facebook Shares
+          facebook_engagement_rating: Facebook Engagement Rating
+          feradi_likes: Feradi Likes
+          feradi_engagement_rating: Feradi Engagement Rating
+          overall_engagement_rating: Overall Engagement Rating
+      visuals_table:
         columns:
           title: Visualization Title
           views: Views

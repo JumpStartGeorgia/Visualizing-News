@@ -1,0 +1,93 @@
+<section class='analytics-table'>
+
+  <div class='page-header js-act-as-table-title'>
+
+    <h2>
+      Engagement by Visualization Type
+    </h2>
+
+  </div>
+
+  <button id='OGyhmAd6EfCGBxLpuXvIgv45WwHwXIOxotESHMYw' class='btn dynatable-export'>
+    <%= t '.export_button'%>
+  </button>
+
+  <table class='table js-dynatable' data-exportable-by-id='OGyhmAd6EfCGBxLpuXvIgv45WwHwXIOxotESHMYw'>
+
+    <thead>
+      <tr>
+
+        <th>
+          <%= t '.columns.title' %>
+        </th>
+
+        <th data-dynatable-column='views'>
+          <%= t '.columns.views' %>
+        </th>
+
+        <th data-dynatable-column='facebookShares'>
+          <%= t '.columns.facebook_shares' %>
+        </th>
+
+        <!-- <th data-dynatable-column='facebookEngagementRating'>
+          <%= t '.columns.facebook_engagement_rating' %>
+        </th> -->
+
+        <th data-dynatable-column='feradiLikes'>
+          <%= t '.columns.feradi_likes' %>
+        </th>
+
+        <!-- <th data-dynatable-column='feradiEngagementRating'>
+          <%= t '.columns.feradi_engagement_rating' %>
+        </th>
+
+        <th data-dynatable-column='overallEngagementRating'>
+          <%= t '.columns.overall_engagement_rating' %>
+        </th> -->
+
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% @visualization_types.each do |visualization_type| %>
+
+        <tr>
+
+          <th>
+            <%= t "visualization_types.#{Visualization.get_type_from_type_id(visualization_type.id)}" %>
+          </th>
+
+          <th>
+            <%= visualization_type.impressions_count %>
+          </th>
+
+          <th>
+            <%= visualization_type.fb_likes %>
+          </th>
+
+          <!-- <th>
+            <%#= visualization_type.facebook_engagement_rating %>
+          </th> -->
+
+          <th>
+            <%= visualization_type.overall_votes %>
+          </th>
+
+          <!-- <th>
+            <%#= visualization_type.feradi_engagement_rating %>
+          </th>
+
+          <th>
+            <%#= visualization_type.engagement_rating %>
+          </th> -->
+
+        </tr>
+
+      <% end %>
+
+    </tbody>
+
+  </table>
+
+</section>

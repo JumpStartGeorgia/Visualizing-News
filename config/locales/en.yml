@@ -445,14 +445,17 @@ en:
           feradi_engagement_rating: Feradi Engagement Rating
           overall_engagement_rating: Overall Engagement Rating
         visuals:
+          heading: Engagement by Visualization
           columns:
             title: Visualization Title
         categories:
+          heading: Engagement by Visualization Category
           columns:
             category_name: Category Name
         visual_types:
+          heading: Engagement by Visualization Type
           columns:
-            visual_type: Visual Type
+            visual_type: Visualization Type
       visuals_table:
         columns:
           title: Visualization Title

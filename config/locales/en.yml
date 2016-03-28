@@ -458,15 +458,6 @@ en:
           heading: Engagement by Visualization Type
           columns:
             visual_type: Visualization Type
-      visuals_table:
-        columns:
-          title: Visualization Title
-          views: Views
-          facebook_shares: Facebook Shares
-          facebook_engagement_rating: Facebook Engagement Rating
-          feradi_likes: Feradi Likes
-          feradi_engagement_rating: Feradi Engagement Rating
-          overall_engagement_rating: Overall Engagement Rating
   root:
     index:
       title: Visualizations

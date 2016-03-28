@@ -2,10 +2,18 @@
 
 <main>
 
-  <%= render partial: 'admin/analytics/engagement_tables/visuals' %>
+  <%= link_to 'View Engagement by Visualization',
+              admin_analytics_path(engagement_table: 'visuals'),
+              class: 'btn' %>
 
-  <%= render partial: 'admin/analytics/engagement_tables/categories' %>
+  <%= link_to 'View Engagement by Category',
+              admin_analytics_path(engagement_table: 'categories'),
+              class: 'btn' %>
 
-  <%= render partial: 'admin/analytics/engagement_tables/visual_types' %>
+  <%= link_to 'View Engagement by Visualization Type',
+              admin_analytics_path(engagement_table: 'visual_types'),
+              class: 'btn' %>
+
+  <%= render partial: "admin/analytics/engagement_tables/#{@engagement_table}" %>
 
 </main>

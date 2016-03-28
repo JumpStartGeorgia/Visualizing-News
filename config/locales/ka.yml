@@ -385,6 +385,7 @@ ka:
       menu_about: ჩვენ შესახებ
       menu_contact: დაგვიკავშირდი
       admin: ადმინისტრატორი
+      analytics: ანალიტიკა
       user_profile: შენი გვერდი
       notifications: შეტყობინებები
       facebook: Facebook
@@ -434,13 +435,28 @@ ka:
     analytics:
       index:
         title: ანალიტიკა
-      visuals_table:
+      engagement_tables:
         export_button: ჩამოტვირთვა CSV-ის ფორმატით
         columns:
-          title: ვიზუალიზაცია
           views: ნახვა
           facebook_shares: ფეისბუქზე გაზიარება
-          engagement_rating: ჩართულობის რეიტინგი
+          facebook_engagement_rating: ფეისბუქის ჩართულობის რეიტინგი
+          feradi_likes: ფერადის ლაიკები
+          feradi_engagement_rating: ფერადის ჩართულობის რეიტინგი
+          overall_engagement_rating: ზოგადი ჩართულობის რეიტინგი
+        visuals:
+          heading: ჩართულობა ვიზუალიზაციის მიხედვით
+          columns:
+            title: ვიზუალიზაცია
+            publication_date: გამოქვეყნების თარიღი
+        categories:
+          heading: ჩართულობა კატეგორიის მიხედვით
+          columns:
+            category_name: კატეგორია
+        visual_types:
+          heading: ჩართულობა ვიზუალიზაციის სახეობის მიხედვით
+          columns:
+            visual_type: ვიზუალიზაციის სახეობა
   root:
     index:
       title: ვიზუალიზაციები

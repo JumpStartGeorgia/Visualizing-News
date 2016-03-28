@@ -2,17 +2,36 @@
 
 <main>
 
-  <%= link_to 'View Engagement by Visualization',
-              admin_analytics_path(engagement_table: 'visuals'),
-              class: 'btn' %>
+  <nav class='analytics-nav'>
 
-  <%= link_to 'View Engagement by Category',
-              admin_analytics_path(engagement_table: 'categories'),
-              class: 'btn' %>
+    <p>
+      View Engagement By:
+    </p>
 
-  <%= link_to 'View Engagement by Visualization Type',
-              admin_analytics_path(engagement_table: 'visual_types'),
-              class: 'btn' %>
+    <ul class='nav nav-pills'>
+
+      <li role="presentation" class='<%= 'active' if @engagement_table == 'visuals' %>'>
+        <%= link_to 'Visualization',
+                    admin_analytics_path(engagement_table: 'visuals'),
+                    class: 'btn' %>
+      </li>
+
+      <li role="presentation" class='<%= 'active' if @engagement_table == 'categories' %>'>
+        <%= link_to 'Category',
+                    admin_analytics_path(engagement_table: 'categories'),
+                    class: 'btn' %>
+      </li>
+
+      <li role="presentation" class='<%= 'active' if @engagement_table == 'visual_types' %>'>
+        <%= link_to 'Visualization Type',
+                    admin_analytics_path(engagement_table: 'visual_types'),
+                    class: 'btn' %>
+      </li>
+
+    </ul>
+
+  </nav>
+
 
   <%= render partial: "admin/analytics/engagement_tables/#{@engagement_table}" %>
 

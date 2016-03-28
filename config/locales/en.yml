@@ -436,6 +436,11 @@ en:
     analytics:
       index:
         title: Analytics
+        nav:
+          prompt: View Engagement By
+          visualization: Visualization
+          category: Category
+          visualization_type: Visualization Type
       engagement_tables:
         export_button: Export to CSV
         columns:

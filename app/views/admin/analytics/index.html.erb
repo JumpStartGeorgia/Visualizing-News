@@ -5,25 +5,25 @@
   <nav class='analytics-nav'>
 
     <p>
-      View Engagement By:
+      <%= t '.nav.prompt' %>:
     </p>
 
     <ul class='nav nav-pills'>
 
       <li role="presentation" class='<%= 'active' if @engagement_table == 'visuals' %>'>
-        <%= link_to 'Visualization',
+        <%= link_to t('.nav.visualization'),
                     admin_analytics_path(engagement_table: 'visuals'),
                     class: 'btn' %>
       </li>
 
       <li role="presentation" class='<%= 'active' if @engagement_table == 'categories' %>'>
-        <%= link_to 'Category',
+        <%= link_to t('.nav.category'),
                     admin_analytics_path(engagement_table: 'categories'),
                     class: 'btn' %>
       </li>
 
       <li role="presentation" class='<%= 'active' if @engagement_table == 'visual_types' %>'>
-        <%= link_to 'Visualization Type',
+        <%= link_to t('.nav.visualization_type'),
                     admin_analytics_path(engagement_table: 'visual_types'),
                     class: 'btn' %>
       </li>

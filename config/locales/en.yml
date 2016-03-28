@@ -446,7 +446,7 @@ en:
           feradi_engagement_rating: Feradi Engagement Rating
           overall_engagement_rating: Overall Engagement Rating
         visuals:
-          heading: Engagement by Visualization
+          heading: Engagement
           columns:
             title: Visualization Title
             publication_date: Publication Date

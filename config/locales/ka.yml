@@ -441,22 +441,22 @@ ka:
           views: ნახვა
           facebook_shares: ფეისბუქზე გაზიარება
           facebook_engagement_rating: ფეისბუქის ჩართულობის რეიტინგი
-          feradi_likes: ფერადის ლაიკები
+          feradi_likes: ფერადის მოწონება
           feradi_engagement_rating: ფერადის ჩართულობის რეიტინგი
           overall_engagement_rating: ზოგადი ჩართულობის რეიტინგი
         visuals:
-          heading: ჩართულობა ვიზუალიზაციის მიხედვით
+          heading: ჩართულობა
           columns:
             title: ვიზუალიზაცია
             publication_date: გამოქვეყნების თარიღი
         categories:
-          heading: ჩართულობა კატეგორიის მიხედვით
+          heading: ჩართულობა კატეგორიების მიხედვით
           columns:
             category_name: კატეგორია
         visual_types:
-          heading: ჩართულობა ვიზუალიზაციის სახეობის მიხედვით
+          heading: ჩართულობა ვიზუალიზაციის ტიპების მიხედვით
           columns:
-            visual_type: ვიზუალიზაციის სახეობა
+            visual_type: ვიზუალიზაციის ტიპი
   root:
     index:
       title: ვიზუალიზაციები

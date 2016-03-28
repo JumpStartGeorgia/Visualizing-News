@@ -12,20 +12,17 @@
 
       <li role="presentation" class='<%= 'active' if @engagement_table == 'visuals' %>'>
         <%= link_to t('.nav.visualization'),
-                    admin_analytics_path(engagement_table: 'visuals'),
-                    class: 'btn' %>
+                    admin_analytics_path(engagement_table: 'visuals') %>
       </li>
 
       <li role="presentation" class='<%= 'active' if @engagement_table == 'categories' %>'>
         <%= link_to t('.nav.category'),
-                    admin_analytics_path(engagement_table: 'categories'),
-                    class: 'btn' %>
+                    admin_analytics_path(engagement_table: 'categories') %>
       </li>
 
       <li role="presentation" class='<%= 'active' if @engagement_table == 'visual_types' %>'>
         <%= link_to t('.nav.visualization_type'),
-                    admin_analytics_path(engagement_table: 'visual_types'),
-                    class: 'btn' %>
+                    admin_analytics_path(engagement_table: 'visual_types') %>
       </li>
 
     </ul>

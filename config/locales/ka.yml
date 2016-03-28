@@ -435,6 +435,11 @@ ka:
     analytics:
       index:
         title: ანალიტიკა
+        nav:
+          prompt: ჩართულობის ნახვა
+          visualization: ვიზუალიზაცია
+          category: კატეგორია
+          visualization_type: ვიზუალიზაციის ტიპი
       engagement_tables:
         export_button: ჩამოტვირთვა CSV-ის ფორმატით
         columns:

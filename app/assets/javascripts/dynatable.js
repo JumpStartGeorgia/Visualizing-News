@@ -62,7 +62,7 @@ function createDynatable($table) {
     var nodes = $table.data('dynatable').records.sort();
 
     var csvContent = "data:attachment/csv;charset=utf-8,";
-    var headers_str = get_headers().map(surround_with_strings).join(',');
+    var headers_str = encodeURI(get_headers().map(surround_with_strings).join(','));
     csvContent += headers_str + "%0A";
 
     nodes.forEach(function(infoArray, index){
@@ -75,7 +75,7 @@ function createDynatable($table) {
       });
 
       infoArray.shift();
-      dataString = infoArray.join(",");
+      dataString = encodeURI(infoArray.join(","));
       csvContent += index < nodes.length ? dataString+ "%0A" : dataString;
     });
 

@@ -29,7 +29,13 @@
 
   </nav>
 
+  <%= render layout: "admin/analytics/engagement_table" do %>
 
-  <%= render partial: "admin/analytics/engagement_tables/#{@engagement_table}" %>
+    <%= render partial: "admin/analytics/engagement_tables/#{@engagement_table}" %>
+
+  <% end %>
+
+
+
 
 </main>

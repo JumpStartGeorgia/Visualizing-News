@@ -1,97 +1,93 @@
-<section class='analytics-table'>
+<div class='page-header js-act-as-table-title'>
 
-  <div class='page-header js-act-as-table-title'>
+  <h2>
+    <%= t '.heading' %>
+  </h2>
 
-    <h2>
-      <%= t '.heading' %>
-    </h2>
+</div>
 
-  </div>
+<button id='23ODmHWtFKkoDjZP5iPoAqEuBMu4jVHkX03iOkUiK8' class='btn dynatable-export'>
+  <%= t 'admin.analytics.engagement_tables.export_button' %>
+</button>
 
-  <button id='23ODmHWtFKkoDjZP5iPoAqEuBMu4jVHkX03iOkUiK8' class='btn dynatable-export'>
-    <%= t 'admin.analytics.engagement_tables.export_button' %>
-  </button>
+<p class='analytics-table-warning'>
+  Note: Please use Chrome or Firefox for export; Safari is currently unsupported.
+</p>
 
-  <p class='analytics-table-warning'>
-    Note: Please use Chrome or Firefox for export; Safari is currently unsupported.
-  </p>
+<table class='table table-striped js-dynatable' data-exportable-by-id='23ODmHWtFKkoDjZP5iPoAqEuBMu4jVHkX03iOkUiK8'>
 
-  <table class='table table-striped js-dynatable' data-exportable-by-id='23ODmHWtFKkoDjZP5iPoAqEuBMu4jVHkX03iOkUiK8'>
+  <thead>
+    <tr>
 
-    <thead>
+      <th>
+        <%= t '.columns.visual_type' %>
+      </th>
+
+      <th data-dynatable-column='views'>
+        <%= t 'admin.analytics.engagement_tables.columns.views' %>
+      </th>
+
+      <th data-dynatable-column='facebookShares'>
+        <%= t 'admin.analytics.engagement_tables.columns.facebook_shares' %>
+      </th>
+
+      <th data-dynatable-column='facebookEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.facebook_engagement_rating' %>
+      </th>
+
+      <th data-dynatable-column='feradiLikes'>
+        <%= t 'admin.analytics.engagement_tables.columns.feradi_likes' %>
+      </th>
+
+      <th data-dynatable-column='feradiEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.feradi_engagement_rating' %>
+      </th>
+
+      <th data-dynatable-column='overallEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.overall_engagement_rating' %>
+      </th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @table_rows.each do |visualization_type| %>
+
       <tr>
 
         <th>
-          <%= t '.columns.visual_type' %>
+          <%= t "visualization_types.#{visualization_type.type}" %>
         </th>
 
-        <th data-dynatable-column='views'>
-          <%= t 'admin.analytics.engagement_tables.columns.views' %>
+        <th>
+          <%= visualization_type.impressions_count %>
         </th>
 
-        <th data-dynatable-column='facebookShares'>
-          <%= t 'admin.analytics.engagement_tables.columns.facebook_shares' %>
+        <th>
+          <%= visualization_type.fb_likes %>
         </th>
 
-        <th data-dynatable-column='facebookEngagementRating'>
-          <%= t 'admin.analytics.engagement_tables.columns.facebook_engagement_rating' %>
+        <th>
+          <%= visualization_type.facebook_engagement_rating %>
         </th>
 
-        <th data-dynatable-column='feradiLikes'>
-          <%= t 'admin.analytics.engagement_tables.columns.feradi_likes' %>
+        <th>
+          <%= visualization_type.overall_votes %>
         </th>
 
-        <th data-dynatable-column='feradiEngagementRating'>
-          <%= t 'admin.analytics.engagement_tables.columns.feradi_engagement_rating' %>
+        <th>
+          <%= visualization_type.feradi_engagement_rating %>
         </th>
 
-        <th data-dynatable-column='overallEngagementRating'>
-          <%= t 'admin.analytics.engagement_tables.columns.overall_engagement_rating' %>
+        <th>
+          <%= visualization_type.engagement_rating %>
         </th>
 
       </tr>
-    </thead>
 
-    <tbody>
+    <% end %>
 
-      <% @table_rows.each do |visualization_type| %>
+  </tbody>
 
-        <tr>
-
-          <th>
-            <%= t "visualization_types.#{visualization_type.type}" %>
-          </th>
-
-          <th>
-            <%= visualization_type.impressions_count %>
-          </th>
-
-          <th>
-            <%= visualization_type.fb_likes %>
-          </th>
-
-          <th>
-            <%= visualization_type.facebook_engagement_rating %>
-          </th>
-
-          <th>
-            <%= visualization_type.overall_votes %>
-          </th>
-
-          <th>
-            <%= visualization_type.feradi_engagement_rating %>
-          </th>
-
-          <th>
-            <%= visualization_type.engagement_rating %>
-          </th>
-
-        </tr>
-
-      <% end %>
-
-    </tbody>
-
-  </table>
-
-</section>
+</table>

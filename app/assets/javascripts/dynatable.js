@@ -27,7 +27,7 @@ function createDynatable($table) {
   }
 
   function readers() {
-    var readers = {}
+    var readers = {};
 
     columns_sort_by_integer.forEach(function(str) {
       readers[str] = sort_by_integer;
@@ -36,9 +36,24 @@ function createDynatable($table) {
     return readers;
   }
 
+  function writers() {
+    var writers = {};
+
+    columns_sort_by_integer.forEach(function(str) {
+      writers[str] = function(record) {
+        if (record[str] === 0) return 0;
+        if (!record[str]) return 'n/a';
+        return numberWithCommas(record[str]);
+      }
+    })
+
+    return writers;
+  }
+
   function init() {
     $table.dynatable({
-      readers: readers()
+      readers: readers(),
+      writers: writers()
     });
   }
 

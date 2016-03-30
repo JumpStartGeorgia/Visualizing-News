@@ -26,15 +26,19 @@ function createDynatable($table) {
     return Number(el.innerHTML) || 0;
   }
 
-  function init() {
+  function readers() {
     var readers = {}
 
     columns_sort_by_integer.forEach(function(str) {
       readers[str] = sort_by_integer;
-    })
+    });
 
+    return readers;
+  }
+
+  function init() {
     $table.dynatable({
-      readers: readers
+      readers: readers()
     });
   }
 

@@ -13,7 +13,7 @@ function createDynatable($table) {
     }
   });
 
-  var columns_sort_by_integer = [
+  var number_columns = [
     'views',
     'facebookShares',
     'facebookEngagementRating',
@@ -29,7 +29,7 @@ function createDynatable($table) {
   function readers() {
     var readers = {};
 
-    columns_sort_by_integer.forEach(function(str) {
+    number_columns.forEach(function(str) {
       readers[str] = sort_by_integer;
     });
 
@@ -39,7 +39,7 @@ function createDynatable($table) {
   function writers() {
     var writers = {};
 
-    columns_sort_by_integer.forEach(function(str) {
+    number_columns.forEach(function(str) {
       writers[str] = function(record) {
         if (record[str] === 0) return 0;
         if (!record[str]) return 'n/a';

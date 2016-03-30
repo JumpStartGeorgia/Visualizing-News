@@ -8,21 +8,24 @@
       <%= t '.nav.prompt' %>:
     </p>
 
-    <ul class='nav nav-pills'>
+    <ul class='analytics-nav-list'>
 
-      <li role="presentation" class='<%= 'active' if @engagement_table == 'visuals' %>'>
+      <li class='analytics-nav-list-item'>
         <%= link_to t('.nav.visualization'),
-                    admin_analytics_path(engagement_table: 'visuals') %>
+                    admin_analytics_path(engagement_table: 'visuals'),
+                    class: @engagement_table == 'visuals' ? 'analytics-nav-list-item-link is-active' : 'analytics-nav-list-item-link' %>
       </li>
 
-      <li role="presentation" class='<%= 'active' if @engagement_table == 'categories' %>'>
+      <li class='analytics-nav-list-item'>
         <%= link_to t('.nav.category'),
-                    admin_analytics_path(engagement_table: 'categories') %>
+                    admin_analytics_path(engagement_table: 'categories'),
+                    class: @engagement_table == 'categories' ? 'analytics-nav-list-item-link is-active' : 'analytics-nav-list-item-link' %>
       </li>
 
-      <li role="presentation" class='<%= 'active' if @engagement_table == 'visual_types' %>'>
+      <li class='analytics-nav-list-item'>
         <%= link_to t('.nav.visualization_type'),
-                    admin_analytics_path(engagement_table: 'visual_types') %>
+                    admin_analytics_path(engagement_table: 'visual_types'),
+                    class: @engagement_table == 'visual_types' ? 'analytics-nav-list-item-link is-active' : 'analytics-nav-list-item-link' %>
       </li>
 
     </ul>

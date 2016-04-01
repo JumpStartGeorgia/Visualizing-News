@@ -1,123 +1,73 @@
-function set_data_src_to_src(tag) {
-	$(tag).data('srcOriginal', tag.src);
-}
+// Replaces a placeholder image on the dom with a gifographic, which includes
+// a gif image and a cover image
+function create_gifographic_from_placeholder($placeholder) {
+	var gif_image = $placeholder.clone()[0];
+	gif_image.src = $placeholder.data('srcOriginal');
 
-function set_src_to_data_src(tag) {
-	tag.src = $(tag).data().srcOriginal;
-}
+	var gif = create_gif(gif_image);
 
-function set_stop_title(tag) {
-	tag.title = $(tag).data().stopTitle;
-}
+	var gifographic = {}
 
-function set_play_title(tag) {
-	tag.title = $(tag).data().playTitle;
-}
-
-function gif_cover_image(gif_image) {
-	return $(gif_image).siblings('.js-is-gif-cover');
-}
-
-function hide_cover_image(gif_image) {
-	gif_cover_image(gif_image).addClass('is-hidden');
-}
-
-function show_cover_image(gif_image) {
-	gif_cover_image(gif_image).removeClass('is-hidden');
-}
-
-function $gifographics() {
-	return $('.js-is-gifographic');
-}
-
-function gifographic_is_playable(gifographic_image) {
-	return $(gifographic_image).hasClass('js-gif-is-playable');
-}
-
-function freeze_gif(i) {
-	if (gifographic_is_playable(i)) {
-		$(i).addClass('is-frozen');
-		set_play_title(i);
-		show_cover_image(i);
+	function on_gif_play() {
+		if (gifographic.cover_image) gifographic.cover_image.hide();
 	}
 
-	var c = document.createElement('canvas');
-	var w = c.width = i.width;
-	var h = c.height = i.height;
-	c.getContext('2d').drawImage(i, 0, 0, w, h);
-	try {
-		i.src = c.toDataURL("image/gif"); // if possible, retain all css aspects
-	} catch(e) { // cross-domain -- mimic original with all its tag attributes
-		for (var j = 0, a; a = i.attributes[j]; j++)
-			c.setAttribute(a.name, a.value);
-		i.parentNode.replaceChild(c, i);
+	function on_gif_freeze() {
+		if (gifographic.cover_image) gifographic.cover_image.show();
 	}
-}
 
-function play_gif(image) {
-	$(image).removeClass('is-frozen');
-	set_stop_title(image);
-	hide_cover_image(image);
-
-	set_src_to_data_src(image);
-}
-
-function bind_freeze_play_gif_on_click_element(gif, clickable) {
-	$(clickable).click(function() {
-		if ($(gif).hasClass('is-frozen')) {
-			play_gif(gif);
-		} else {
-			freeze_gif(gif);
-		}
-	});
-}
-
-function make_playable(gifographic) {
-	bind_freeze_play_gif_on_click_element(gifographic, gifographic);
-}
-
-function setup_gifographic_pre_add_to_dom(gifographic) {
-	freeze_gif(gifographic);
-
-	if (gifographic_is_playable(gifographic)) {
-		make_playable(gifographic);
+	function replace_placeholder() {
+		gif.add_to_dom_after($placeholder);
+		$placeholder.remove();
 	}
-}
 
-function setup_gifographic_post_add_to_dom(gifographic) {
-	if (gifographic_is_playable(gifographic)) {
-		var gif_cover = gif_cover_image(gifographic)[0];
+	function setup_pre_add_to_dom() {
+		gif.freeze(on_gif_freeze);
 
-		if (gif_cover) {
-			bind_freeze_play_gif_on_click_element(gifographic, gif_cover);
+		if (gif.is_playable()) {
+			gif.make_playable(on_gif_play, on_gif_freeze);
 		}
 	}
-}
 
-function replace_placeholder_with_gifographic($placeholder, gifographic_image) {
-	$placeholder.after(gifographic_image);
-	$placeholder.remove();
-}
+	function setup_post_add_to_dom() {
+		if (gif.is_playable() && gifographic.cover_image) {
+			gif.make_playable_by(
+				gifographic.cover_image.img, on_gif_play, on_gif_freeze
+			);
+		}
+	}
 
-function create_gif_image_from_placeholder($placeholder) {
-	var gif = $placeholder.clone()[0];
-	gif.src = $placeholder.data('srcOriginal');
+	function setup() {
+		setup_pre_add_to_dom();
+		replace_placeholder();
+		setup_post_add_to_dom();
+	}
 
-	return gif;
+	Object.defineProperty(gifographic, 'cover_image', {
+		get: function() {
+			delete this.cover_image;
+			return this.cover_image = create_cover_image(gif_image);
+		}
+	})
+
+	gifographic.setup_on_load = function() {
+		gif.on_load_do(setup);
+	}
+
+	return gifographic;
 }
 
 function load_gifographic_from_placeholder($placeholder) {
-	var gifographic = create_gif_image_from_placeholder($placeholder);
-
-	$(gifographic).one('load', function(){
-		setup_gifographic_pre_add_to_dom(gifographic);
-		replace_placeholder_with_gifographic($placeholder, gifographic);
-		setup_gifographic_post_add_to_dom(gifographic);
-	});
+	var gifographic = create_gifographic_from_placeholder($placeholder);
+	gifographic.setup_on_load();
 }
 
 function setup_gifographics() {
 	$gifographics().each(function() {
 		load_gifographic_from_placeholder($(this));
 	});
+}
+
+function $gifographics() {
+	return $('.js-is-gifographic');
 }

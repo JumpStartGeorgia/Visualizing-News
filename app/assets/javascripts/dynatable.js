@@ -15,6 +15,7 @@ function createDynatable($table) {
 
   var number_columns = [
     'views',
+    'numberVisualizations',
     'facebookShares',
     'facebookEngagementRating',
     'feradiLikes',

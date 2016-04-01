@@ -444,6 +444,7 @@ ka:
         export_button: ჩამოტვირთვა CSV-ის ფორმატით
         columns:
           views: ნახვა
+          number_visualizations: რაოდენობა
           facebook_shares: ფეისბუქზე გაზიარება
           facebook_engagement_rating: ფეისბუქის ჩართულობის რეიტინგი
           feradi_likes: ფერადის მოწონება

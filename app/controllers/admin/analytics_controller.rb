@@ -32,6 +32,7 @@ class Admin::AnalyticsController < ApplicationController
         Visualization.select(
           "visualizations.visualization_type_id, \
           visualizations.languages, \
+          COUNT(visualizations.id) AS number_visualizations, \
           SUM(visualizations.impressions_count) AS impressions_count, \
           SUM(visualizations.fb_likes) AS fb_likes, \
           SUM(visualizations.overall_votes) AS overall_votes")

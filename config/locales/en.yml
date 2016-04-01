@@ -445,6 +445,7 @@ en:
         export_button: Export to CSV
         columns:
           views: Views
+          number_visualizations: Amount
           facebook_shares: Facebook Shares
           facebook_engagement_rating: Facebook Engagement Rating
           feradi_likes: Feradi Likes

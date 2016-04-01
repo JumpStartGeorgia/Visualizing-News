@@ -7,6 +7,10 @@
         <%= t '.columns.visual_type' %>
       </th>
 
+      <th>
+        <%= t 'admin.analytics.engagement_tables.columns.number_visualizations' %>
+      </th>
+
       <th data-dynatable-column='views'>
         <%= t 'admin.analytics.engagement_tables.columns.views' %>
       </th>
@@ -42,6 +46,10 @@
 
         <th>
           <%= t "visualization_types.#{visualization_type.type}" %>
+        </th>
+
+        <th>
+          <%= visualization_type.number_visualizations %>
         </th>
 
         <th>

@@ -1,3 +1,5 @@
+// Replaces a placeholder image on the dom with a gifographic, which includes
+// a gif image and a cover image
 function create_gifographic_from_placeholder($placeholder) {
 	var gif_image = $placeholder.clone()[0];
 	gif_image.src = $placeholder.data('srcOriginal');

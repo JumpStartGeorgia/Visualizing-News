@@ -1,3 +1,4 @@
+// Creates an object that represents a playable/freezable gif image.
 function create_gif(gif_image) {
 	var gif = {}
 

@@ -10,7 +10,7 @@
   <% @visualization.visualization_locale = @language %>
 
   <section class='visualization-container'>
-    
+
     <div id="visualization_row1" class="row-fluid">
 
       <div class="main_block clear">
@@ -75,7 +75,7 @@
     <div id="visualization_row2" class="row-fluid">
 
       <div class="main_block">
-        <div id="visual">
+        <div id="visual" class="mod-<%= @visualization.type %>">
           <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
             <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
                 url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
@@ -93,8 +93,28 @@
             <% end %>
 
           <% else %>
-            <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
-                @visualization.image.url(:original, false), :class => 'fancybox_visual', :title => t('.embed_link_title')) if !@visualization.image_file_name.blank? %>
+            <% if @visualization.image_file_name.present? %>
+              <% if @visualization.type == :gifographic %>
+                <%= image_tag(
+                      'image_placeholder.svg',
+                      alt: @visualization.image_text,
+                      class: 'visual-image js-is-gifographic js-gif-is-playable',
+                      data: { src_original: @visualization.image.url(:medium, false),
+                              stop_title: t('.gifographic_image_titles.stop'),
+                              play_title: t('.gifographic_image_titles.play') }) %>
+                <%= image_tag(
+                      'gifographic_hover.svg',
+                      class: 'visual-image-cover js-is-cover-image',
+                      title: t('.gifographic_image_titles.play')) %>
+              <% else %>
+                <%= link_to(
+                      image_tag(@visualization.image.url(:medium, false),
+                                alt: @visualization.image_text),
+                      @visualization.image.url(:original, false),
+                      class: 'fancybox_visual',
+                      title: t('.embed_link_title')) %>
+              <% end %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -121,10 +141,7 @@
                 </span>
               </li>
             <% end %>
-            <% if @visualization.reporter.present? &&
-                  (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+            <% if @visualization.reporter.present? %>
               <li>
                 <%= "#{t('.reporter')}: "%>
                 <span class="val">
@@ -140,7 +157,7 @@
                 </span>
               </li>
             <% end %>
-            <% if @visualization.developer.present? && @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
+            <% if @visualization.developer.present? %>
               <li>
                 <%= "#{t('.developer')}: "%>
                 <span class="val">
@@ -231,10 +248,7 @@
                 </span>
               </li>
             <% end %>
-            <% if @visualization.dataset_file_name.present? &&
-                  (@visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:interactive] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:comic]) %>
+            <% if @visualization.dataset_file_name.present? %>
               <li>
                 <%= "#{t('.data_set')}: " %>
                 <%= link_to t('helpers.links.download'), @visualization.dataset.url, :class => 'download'%>
@@ -298,52 +312,61 @@
               <% end %>
             </div>
           </div>
+
           <div class="embed">
             <span><%= t('.embed')%>:</span>
-            <% if @visualization.visualization_type_id == Visualization::TYPES[:infographic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:fact] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:comic] ||
-                  @visualization.visualization_type_id == Visualization::TYPES[:video] %>
-
               <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
                 onmouseup="return false;"><%=
 
+                if @visualization.type == :interactive
                   link_to(
-                    image_tag(full_url(@visualization.image.url(:medium, false)),
-                              :alt => @visualization.title),
-                    full_url(url_for(params.merge(:from_embed => true))),
-                    :title => t('.embed_link_title'),
-                    :target => :blank
-                  ) %><br /><%=
+                    image_tag(
+                      full_url(@visualization.image.url(:medium, false)),
+                      alt: @visualization.title),
+                    full_url(url_for(params.merge(view: 'interactive',
+                                                  from_embed: true))),
+                    title: t('.embed_link_interactive_title'),
+                    target: :blank
+                  )
+                else
+                  link_to(
+                    image_tag(
+                      full_url(@visualization.image.url(:medium, false)),
+                      alt: @visualization.title),
+                    full_url(url_for(params.merge(from_embed: true))),
+                    title: t('.embed_link_title'),
+                    target: :blank
+                  )
+                end
 
-                  link_to t('app.common.app_name'), full_url(root_path(:from_embed => true)), :target => :blank
+                %><br /><%=
 
-               %></textarea>
+                link_to t('app.common.app_name'),
+                        full_url(root_path(from_embed: true)),
+                        target: :blank
 
-            <% elsif @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-
-              <textarea readonly onfocus="setTimeout(function (t){ t.select(); }, 10, this);"
-                onmouseup="return false;">
-
-                <%= link_to(
-                      image_tag(full_url(@visualization.image.url(:medium, false)),
-                                :alt => @visualization.title),
-                      full_url(url_for(params.merge(:view => 'interactive',
-                                                    :from_embed => true))),
-                      :title => t('.embed_link_interactive_title'),
-                      :target => :blank
-                    ) %>
-
-                <br />
-
-                <%= link_to t('app.common.app_name'),
-                            full_url(root_path(:from_embed => true)),
-                            :target => :blank %>
-
-              </textarea>
-
-            <% end %>
+             %></textarea>
           </div>
+
+          <% if @visualization.printable? %>
+
+            <div class='print-visualization'>
+
+              <span class='print-visualization-label'>
+                <%=t '.print.label' %>:
+              </span>
+
+              <div class='print-visualization-text'>
+                <%=t ".print.question.#{@visualization.type}", default: t('.print.question.default') %>
+                <%= link_to t('.print.contact_us'),
+                            contact_path(default_message_value: print_vis_message_text(@visualization.title)),
+                            class: 'print-visualization-text-contact fancybox' %>
+              </div>
+
+            </div>
+
+          <% end %>
+
         </div>
       </div>
 

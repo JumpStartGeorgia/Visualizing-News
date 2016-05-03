@@ -29,7 +29,6 @@ module VisualizationsHelper
         p[option[:key].to_s] = option[:value]
       end
     end
-    return p 
+    return p
   end
-
 end

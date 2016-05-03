@@ -19,7 +19,7 @@ en:
         password: Password
         password_confirmation: Password Confirmation
         role: Role
-        remember_me: Remeber Me
+        remember_me: Remember Me
         nickname: Nickname
       message:
         name: Name
@@ -143,6 +143,7 @@ en:
         submit_visual_missing_fields: "can't be blank."
         required_field: "is a required field."
         already_exists: 'already exists in the database.'
+        image_type_does_not_match_vis_type: 'type "%{extension}" is not allowed for %{vis_type} visualizations. Allowed types: %{allowed_types}'
   activemodel:
     errors:
       models:
@@ -206,6 +207,11 @@ en:
         subject: "feradi.info Submit Visual Form"
       send_data:
         subject: "feradi.info Send Data Form"
+      print_message:
+        intro: I would like to order a beautiful, high-resolution print of the visualization "%{vis_name}".
+        purpose: "Purpose: (Please tell us how you intend to use this print)"
+        desired_size: "Desired Size (optional):"
+        other_info: "Other Information (optional):"
   helpers:
     actions: Actions
     links:
@@ -248,6 +254,7 @@ en:
     fact: Fact
     comic: Comic
     video: Video
+    gifographic: Gifographic
   multiselect:
     checkAllText: 'Check all'
     uncheckAllText: 'Uncheck all'
@@ -264,6 +271,7 @@ en:
         fact: Fact
         comic: Comic
         video: Video
+        gifographic: Gifographic
         not_published: Not Published
         not_promoted: Not Promoted
       view:
@@ -378,6 +386,7 @@ en:
       menu_about: About
       menu_contact: Contact
       admin: Admin
+      analytics: Analytics
       user_profile: Your Profile
       notifications: Notifications
       facebook: Facebook
@@ -414,6 +423,7 @@ en:
       users: Users
       pages: Pages
       idea_statuses: Idea Status
+      analytics: Analytics
     users:
       edit:
         title: Editing User
@@ -423,6 +433,37 @@ en:
         title: New User
       show:
         title: User Details
+    analytics:
+      index:
+        title: Analytics
+        nav:
+          prompt: View Engagement By
+          visualization: Visualization
+          category: Category
+          visualization_type: Visualization Type
+      engagement_tables:
+        export_button: Export to CSV
+        columns:
+          views: Views
+          number_visualizations: Amount
+          facebook_shares: Facebook Shares
+          facebook_engagement_rating: Facebook Engagement Rating
+          feradi_likes: Feradi Likes
+          feradi_engagement_rating: Feradi Engagement Rating
+          overall_engagement_rating: Overall Engagement Rating
+        visuals:
+          heading: Engagement
+          columns:
+            title: Visualization Title
+            publication_date: Publication Date
+        categories:
+          heading: Engagement by Visualization Category
+          columns:
+            category_name: Category Name
+        visual_types:
+          heading: Engagement by Visualization Type
+          columns:
+            visual_type: Visualization Type
   root:
     index:
       title: Visualizations
@@ -522,6 +563,17 @@ en:
       embed_link_title: Click to view larger image
       embed_link_interactive_title: Click to view interactive visualization
       comment_count: Comments
+      gifographic_image_titles:
+        play: Click to Play
+        stop: Click to Stop
+      print:
+        label: Print
+        question:
+          default: Want a beautiful, high-resolution print of this visualization?
+          infographic: Want a beautiful, high-resolution print of this infographic?
+          fact: Want a beautiful, high-resolution print of this fact?
+          comic: Want a beautiful, high-resolution print of this comic?
+        contact_us: Contact us!
     visuals_filter_bar:
       categories: Categories
     ideas_list:
@@ -533,13 +585,17 @@ en:
       sign_in: Sign In to Post
   visualizations:
     form:
-      preview: Preview
-      crop_image: Create %{language} Thumbnail Image
-      reset_file: Load New %{language} Infographic
-      reset_url: Load New %{language} URL
-      change_video_url: Change %{language} Video URL
-      datasources_header: Data Sources
-      add_datasource: Add Data Source
+      locale_to_crop:
+        preview: Preview
+        crop_image: Create %{language} Thumbnail Image
+      reset_visual_image_file:
+        reset_file: Load New %{language} Infographic
+      reset_interactive_url:
+        reset_url: Load New %{language} URL
+      edit:
+        change_video_url: Change %{language} Video URL
+        datasources_header: Data Sources
+        add_datasource: Add Data Source
     datasource_fields:
       remove_link: Remove Data Source
   notifications:

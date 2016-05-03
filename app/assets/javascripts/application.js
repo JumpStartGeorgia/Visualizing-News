@@ -17,6 +17,8 @@
 //= require olly.min
 //= require vendor
 //= require_directory .
+//= require 'jquery.dynatable'
+
 
 $(document).ready(function(){
 	// set focus to first text box on page
@@ -133,5 +135,7 @@ $(document).ready(function(){
     return false;
   });
 
-
+	$('.js-dynatable').each(function() {
+		createDynatable($(this));
+	});
 });

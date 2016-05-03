@@ -23,7 +23,7 @@ function update_crop(coords) {
 
 // show the correct fields for the visualization type id
 function show_visualization_type_fields(type_id){
-  if (type_id == '1' || type_id == '3' || type_id == '4'){ // infographic, fact, comic
+  if (type_id == '1' || type_id == '3' || type_id == '4' || type_id == '6'){ // infographic, fact, comic, gifographic
     $('.trans_visual_file').show(300);
     $('.trans_interactive_url').hide(300);
 		$('.trans_video_url').hide(300);
@@ -36,7 +36,6 @@ function show_visualization_type_fields(type_id){
   } else if (type_id == '5'){
 		$('.trans_video_url').show(300);
 		$('.trans_visual_file').show(300);
-
 		$('.trans_interactive_url').hide(300);
 	} else {
 		$('.trans_video_url').hide(300);
@@ -66,6 +65,8 @@ $(document).ready(function(){
     $("a.fancybox_visual").trigger('click');
   }
 
+	if ($gifographics().length > 0) setup_gifographics();
+
 	// visualization form
 	if (gon.edit_visualization){
     // make sure the form is pre-loaded with the correct types and languages set
@@ -90,20 +91,8 @@ $(document).ready(function(){
 		}
 
 		// show correct fields for visualization type
-		if (gon.visualization_type){
-			if (gon.visualization_type == 1 || gon.visualization_type == 3){
-				$('.trans_visual_file').show();
-				$('.trans_video_url').hide();
-				$('.trans_interactive_url').hide();
-			} else if (gon.visualization_type == 2){
-				$('.trans_interactive_url').show();
-				$('.trans_video_url').hide();
-				$('.trans_visual_file').hide();
-			} else if (gon.visualization_type == 5) {
-				$('.trans_visual_file').show();
-				$('.trans_video_url').show();
-				$('.trans_interactive_url').hide();
-			}
+		if (gon.visualization_type) {
+			show_visualization_type_fields(gon.visualization_type);
 		}
 
 		$('.js-generate-video-embed').change(function() {

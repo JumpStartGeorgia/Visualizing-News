@@ -1,0 +1,19 @@
+<button id='vazmIx1XKGhPAdyZWiwgh3qLVEO7ZLatBDShmrReyck' class='btn dynatable-export'>
+  <%= t 'admin.analytics.engagement_tables.export_button' %>
+</button>
+
+<p class='analytics-table-warning'>
+  Note: Please use Chrome or Firefox for export; Safari is currently unsupported.
+</p>
+
+<section class='analytics-table'>
+  <div class='page-header js-act-as-table-title'>
+
+    <h2>
+      <%= t "admin.analytics.engagement_tables.#{@engagement_table}.heading" %>
+    </h2>
+
+  </div>
+
+  <%= yield %>
+</section>

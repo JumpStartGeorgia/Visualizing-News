@@ -1,0 +1,44 @@
+<%= page_title t('.title') %>
+
+<main>
+
+  <nav class='analytics-nav'>
+
+    <p>
+      <%= t '.nav.prompt' %>:
+    </p>
+
+    <ul class='analytics-nav-list'>
+
+      <li class='analytics-nav-list-item'>
+        <%= link_to t('.nav.visualization'),
+                    admin_analytics_path(engagement_table: 'visuals'),
+                    class: @engagement_table == 'visuals' ? 'analytics-nav-list-item-link is-active' : 'analytics-nav-list-item-link' %>
+      </li>
+
+      <li class='analytics-nav-list-item'>
+        <%= link_to t('.nav.category'),
+                    admin_analytics_path(engagement_table: 'categories'),
+                    class: @engagement_table == 'categories' ? 'analytics-nav-list-item-link is-active' : 'analytics-nav-list-item-link' %>
+      </li>
+
+      <li class='analytics-nav-list-item'>
+        <%= link_to t('.nav.visualization_type'),
+                    admin_analytics_path(engagement_table: 'visual_types'),
+                    class: @engagement_table == 'visual_types' ? 'analytics-nav-list-item-link is-active' : 'analytics-nav-list-item-link' %>
+      </li>
+
+    </ul>
+
+  </nav>
+
+  <%= render layout: "admin/analytics/engagement_table" do %>
+
+    <%= render partial: "admin/analytics/engagement_tables/#{@engagement_table}" %>
+
+  <% end %>
+
+
+
+
+</main>

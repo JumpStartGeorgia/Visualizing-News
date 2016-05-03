@@ -28,12 +28,53 @@ class Visualization < ActiveRecord::Base
   require 'split_votes'
   include SplitVotes
 
-  TYPES = {:infographic => 1, :interactive => 2, :fact => 3, :comic => 4, :video => 5}
+  TYPES = {
+    infographic: 1,
+    interactive: 2,
+    fact: 3,
+    comic: 4,
+    video: 5,
+    gifographic: 6
+  }
+
+  def self.types
+    TYPES.keys
+  end
+
+  def self.get_type_from_type_id(type_id)
+    TYPES.select { |_key, type| type == type_id }.keys[0]
+  end
 
   def type
     id_index = Visualization::TYPES.values.index(visualization_type_id)
     return :infographic if id_index == nil
     Visualization::TYPES.keys[id_index]
+  end
+
+  def self.counts_by_type(args = {})
+    if args[:only_published]
+      visual_counts_by_type_id = Visualization
+                                 .published
+                                 .group(:visualization_type_id)
+                                 .count
+    else
+      visual_counts_by_type_id = Visualization
+                                 .group(:visualization_type_id)
+                                 .count
+    end
+
+    visual_counts_by_type = {}
+
+    types.each do |type|
+      type_id = TYPES[type]
+      if visual_counts_by_type_id[type_id].nil?
+        visual_counts_by_type[type] = 0
+      else
+        visual_counts_by_type[type] = visual_counts_by_type_id[TYPES[type]]
+      end
+    end
+
+    visual_counts_by_type
   end
 
 	has_many :visualization_categories, :dependent => :destroy
@@ -83,10 +124,6 @@ class Visualization < ActiveRecord::Base
   end
 
 	before_validation :set_languages
-  validates :languages_internal, :organization_id, :visualization_type_id, :languages, :presence => true
-  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
-	validate :required_fields_for_type
-  validate :validate_if_published
   before_save :set_promoted_at
 
   scope :recent, order("visualizations.published_date DESC, visualization_translations.title ASC")
@@ -115,31 +152,36 @@ class Visualization < ActiveRecord::Base
     "#{self.title} - #{self.explanation} - #{self.visualization_text}"
   end
 
-	# this validation is done here and not in trans obj because
-	# when creating objs, the relationship between vis and trans do not exist
-	# and so cannot get type id
+  ############################################################
+  ##################### Validations ##########################
+
+  validates :languages_internal, :organization_id, :visualization_type_id, :languages, :presence => true
+  validates :visualization_type_id, :inclusion => {:in => TYPES.values}
+
   def required_fields_for_type
     missing_fields = []
-    self.visualization_translations.each do |trans|
-      if self.visualization_type_id == Visualization::TYPES[:infographic] ||
-          self.visualization_type_id == Visualization::TYPES[:fact] ||
-          self.visualization_type_id == Visualization::TYPES[:comic]
+
+    visualization_translations.each do |trans|
+      if [:infographic, :fact, :comic, :gifographic].include? type
         missing_fields << :visual if trans.image_file_name.blank?
-      elsif self.visualization_type_id == Visualization::TYPES[:interactive]
+      elsif type == :interactive
         missing_fields << :interactive_url if trans.interactive_url.blank?
         missing_fields << :visual if trans.image_file_name.blank?
-      elsif self.visualization_type_id == Visualization::TYPES[:video]
+      elsif type == :video
         missing_fields << :visual if trans.image_file_name.blank?
         missing_fields << :video_url if trans.video_url.blank?
         missing_fields << :video_embed if trans.video_embed.blank?
       end
     end
-    if !missing_fields.empty?
-      missing_fields.each do |field|
-        errors.add(field, I18n.t('activerecord.errors.messages.required_field'))
-      end
+
+    return if missing_fields.blank?
+
+    missing_fields.each do |field|
+      errors.add(field, I18n.t('activerecord.errors.messages.required_field'))
     end
   end
+
+  validate :required_fields_for_type
 
   # when a record is published, the following fields must be provided
   # - published date, visual file, at least one category,
@@ -161,14 +203,35 @@ class Visualization < ActiveRecord::Base
           errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
         end
       end
-=begin
-      # if there were missing fields from the translation object, add the errors
-      if !trans_errors.empty?
-        trans_errors.flatten.each do |field|
-          errors.add(field, I18n.t('activerecord.errors.messages.published_visual_missing_fields'))
-        end
-      end
-=end
+    end
+  end
+  validate :validate_if_published
+
+  def image_file_type_matches_vis_type
+    visualization_translations.each do |trans|
+      image_file_type = trans.image_file.file_content_type
+
+      next if image_file_type.blank?
+      next if allowed_image_types.include?(image_file_type)
+
+      errors.add(
+        :visual,
+        I18n.t('activerecord.errors.messages.image_type_does_not_match_vis_type',
+               extension: image_file_type,
+               vis_type: I18n.t("visualization_types.#{type}"),
+               allowed_types: allowed_image_types.join(', '))
+      )
+    end
+  end
+  validate :image_file_type_matches_vis_type
+
+  ############################################################
+
+  def allowed_image_types
+    if type == :gifographic
+      ['image/gif']
+    else
+      ['image/jpg', 'image/jpeg', 'image/png']
     end
   end
 
@@ -263,6 +326,21 @@ class Visualization < ActiveRecord::Base
 		self.visualization_translations.select{|x| x.locale == self.visualization_locale}.first.datasources
 	end
 
+  def croppable?
+    [:infographic,
+     :fact,
+     :comic,
+     :interactive,
+     :video].include? type
+  end
+
+  def has_uploaded_image_file?
+    [:infographic,
+     :fact,
+     :comic,
+     :video,
+     :gifographic].include? type
+  end
 
 	# check which visuals in trans objects need to be cropped
 	def locales_to_crop
@@ -273,5 +351,25 @@ class Visualization < ActiveRecord::Base
 		return to_crop
 	end
 
+  # Other helpful methods
 
+  def printable?
+    [:infographic, :fact, :comic].include? type
+  end
+
+  def facebook_engagement_rating
+    return 0 if impressions_count == 0
+
+    (fb_likes.to_f / impressions_count.to_f).round(3)
+  end
+
+  def feradi_engagement_rating
+    return 0 if impressions_count == 0
+
+    (overall_votes.to_f / impressions_count.to_f).round(3)
+  end
+
+  def engagement_rating
+    ((facebook_engagement_rating + feradi_engagement_rating) / 2).round(3)
+  end
 end

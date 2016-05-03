@@ -1,0 +1,22 @@
+@image-cover-size: 70px;
+
+#visual.mod-gifographic {
+  .visual-image {
+    width: 100%;
+    z-index: 10;
+  }
+
+  .visual-image-cover {
+    position: absolute;
+    z-index: 11;
+    width: @image-cover-size;
+    top: 50%;
+    left: 50%;
+    margin-top: @image-cover-size/-2;
+    margin-left: @image-cover-size/-2;
+  }
+
+  .visual-image-cover.is-hidden {
+    display: none;
+  }
+}

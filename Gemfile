@@ -41,6 +41,10 @@ gem "scoped_search", "~> 3.2.0" # search activerecord
 gem "whenever", "~> 0.9.4", require: false # easily schedule cron jobs
 gem 'rack-utf8_sanitizer', '~> 1.2.2' # prevent invalid encoding error
 gem "unidecoder", "~> 1.1.2" #convert utf8 to ascii for permalinks
+gem 'dotenv-rails', '~> 1.0', '>= 1.0.2'
+
+# Improves user experience with tables: searching, sorting, pagination, etc.
+gem 'jquery-dynatable-rails', '~> 0.3.2'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -55,6 +59,9 @@ group :assets do
 end
 
 group :development do
+  # Finds unused and missing translations
+  gem 'i18n-tasks', '~> 0.8.7'
+
 	gem "mailcatcher", "0.5.10" # small smtp server for dev, http://mailcatcher.me/
 #	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # web kit that takes html and converts to pdf
   # gem 'rb-inotify', '~> 0.8.8' # rails dev boost needs this

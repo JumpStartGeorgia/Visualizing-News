@@ -11,27 +11,23 @@
 
     <% Globalize.with_locale(@language) do %>
     	<% @visualizations.each_with_index do |visualization, index| %>
-        <% visualization.visualization_locale = @language %>
 
-    		  <div class="grid_visualization_item">
-    		    <div class="visual">
-        		    <%
-        		      type = visualization.type
-        		    %>
-    		       <%  if !visualization.image_file_name.blank? %>
-      		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title do %>
-      		        <%= image_tag(visualization.image.url(:thumb, false), :alt => visualization.image_text) %>
-                  <div class="hover_mask"></div>
-        		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
-      		      <% end %>
-    		      <% else %>
-      		      <%= link_to create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title do %>
-                  <%= image_tag('image_placeholder.png', :alt => visualization.image_text) %>
-                  <div class="hover_mask"></div>
-        		      <%= image_tag "#{type}_hover.png", :class => "hover_img" %>
-      		      <% end %>
-    		      <% end %>
-    		    </div>
+        <%
+          visualization.visualization_locale = @language
+
+          if visualization.type == :gifographic
+            gifographic_mod_class = 'mod-gifographic'
+          else
+            gifographic_mod_class = ''
+          end
+        %>
+    		  <div class="visualization-item mod-grid js-vis-stay-visible">
+    		    <%= render partial: 'shared/visual_item_image', 
+                       locals: {
+                         visualization: visualization,
+                         user_in_org: @user_in_org
+                       }
+            %>
     		    <div class="title">
     		      <h2><%= link_to visualization.title, create_visual_path(visualization.permalink, @user_in_org, params[:org]), :title => visualization.title %></h2>
     					<% if !visualization.published %>

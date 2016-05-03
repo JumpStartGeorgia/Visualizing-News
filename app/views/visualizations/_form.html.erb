@@ -20,11 +20,23 @@
           model_class: model_class
         } %>
 
-	<% elsif !@locale_to_reset.blank? %>
+  <% elsif @visual_image_file_reset %>
 
-    <%= render partial: 'visualizations/form/locale_to_reset', locals: {
+    <%= render partial: 'visualizations/form/reset_visual_image_file', locals: {
           f: f
         } %>
+
+  <% elsif @video_url_reset %>
+
+  <%= render partial: 'visualizations/form/reset_video_url', locals: {
+        f: f
+      } %>
+
+  <% elsif @interactive_url_reset %>
+
+  <%= render partial: 'visualizations/form/reset_interactive_url', locals: {
+        f: f
+      } %>
 
 	<% elsif !@locale_to_crop.blank? %>
 

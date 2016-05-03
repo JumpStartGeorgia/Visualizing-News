@@ -1,0 +1,85 @@
+<table class='table table-striped js-dynatable' data-exportable-by-id='vazmIx1XKGhPAdyZWiwgh3qLVEO7ZLatBDShmrReyck'>
+
+  <thead>
+    <tr>
+
+      <th>
+        <%= t '.columns.category_name' %>
+      </th>
+
+      <th data-dynatable-column='numberVisualizations'>
+        <%= t 'admin.analytics.engagement_tables.columns.number_visualizations' %>
+      </th>
+
+      <th data-dynatable-column='views'>
+        <%= t 'admin.analytics.engagement_tables.columns.views' %>
+      </th>
+
+      <th data-dynatable-column='facebookShares'>
+        <%= t 'admin.analytics.engagement_tables.columns.facebook_shares' %>
+      </th>
+
+      <th data-dynatable-column='facebookEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.facebook_engagement_rating' %>
+      </th>
+
+      <th data-dynatable-column='feradiLikes'>
+        <%= t 'admin.analytics.engagement_tables.columns.feradi_likes' %>
+      </th>
+
+      <th data-dynatable-column='feradiEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.feradi_engagement_rating' %>
+      </th>
+
+      <th data-dynatable-column='overallEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.overall_engagement_rating' %>
+      </th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @table_rows.each do |category| %>
+
+      <tr>
+
+        <th>
+          <%= category.name %>
+        </th>
+
+        <th>
+          <%= category.number_visualizations %>
+        </th>
+
+        <th>
+          <%= category.impressions_count %>
+        </th>
+
+        <th>
+          <%= category.fb_likes %>
+        </th>
+
+        <th>
+          <%= category.facebook_engagement_rating %>
+        </th>
+
+        <th>
+          <%= category.overall_votes %>
+        </th>
+
+        <th>
+          <%= category.feradi_engagement_rating %>
+        </th>
+
+        <th>
+          <%= category.engagement_rating %>
+        </th>
+
+      </tr>
+
+    <% end %>
+
+  </tbody>
+
+</table>

@@ -1,0 +1,85 @@
+<table class='table table-striped js-dynatable' data-exportable-by-id='vazmIx1XKGhPAdyZWiwgh3qLVEO7ZLatBDShmrReyck'>
+
+  <thead>
+    <tr>
+
+      <th>
+        <%= t '.columns.visual_type' %>
+      </th>
+
+      <th data-dynatable-column='numberVisualizations'>
+        <%= t 'admin.analytics.engagement_tables.columns.number_visualizations' %>
+      </th>
+
+      <th data-dynatable-column='views'>
+        <%= t 'admin.analytics.engagement_tables.columns.views' %>
+      </th>
+
+      <th data-dynatable-column='facebookShares'>
+        <%= t 'admin.analytics.engagement_tables.columns.facebook_shares' %>
+      </th>
+
+      <th data-dynatable-column='facebookEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.facebook_engagement_rating' %>
+      </th>
+
+      <th data-dynatable-column='feradiLikes'>
+        <%= t 'admin.analytics.engagement_tables.columns.feradi_likes' %>
+      </th>
+
+      <th data-dynatable-column='feradiEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.feradi_engagement_rating' %>
+      </th>
+
+      <th data-dynatable-column='overallEngagementRating'>
+        <%= t 'admin.analytics.engagement_tables.columns.overall_engagement_rating' %>
+      </th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @table_rows.each do |visualization_type| %>
+
+      <tr>
+
+        <th>
+          <%= t "visualization_types.#{visualization_type.type}" %>
+        </th>
+
+        <th>
+          <%= visualization_type.number_visualizations %>
+        </th>
+
+        <th>
+          <%= visualization_type.impressions_count %>
+        </th>
+
+        <th>
+          <%= visualization_type.fb_likes %>
+        </th>
+
+        <th>
+          <%= visualization_type.facebook_engagement_rating %>
+        </th>
+
+        <th>
+          <%= visualization_type.overall_votes %>
+        </th>
+
+        <th>
+          <%= visualization_type.feradi_engagement_rating %>
+        </th>
+
+        <th>
+          <%= visualization_type.engagement_rating %>
+        </th>
+
+      </tr>
+
+    <% end %>
+
+  </tbody>
+
+</table>

@@ -206,6 +206,11 @@ hy:
         subject: feradi.info Վիզուալիզացիայի ներկայացման ձև
       send_data:
         subject: feradi.info Տվյալների ուղարկման ձև
+      print_message:
+        intro: Կցանկանայի պատվիրել «%{vis_name}» ինֆոգրաֆիկայի գեղեցիկ, բարձր որակի տպագրություն
+        purpose: "Նպատակը (խնդրում ենք նշել, թե ինչ նպատակով եք օգտագործելու տպագրությունը)"
+        desired_size: "Ցանկալի չափսը (լրացնել ըստ հայեցողության)"
+        other_info: "Այլ տեղեկություններ (լրացնել ըստ հայեցողության)"
   helpers:
     actions: Գործողություններ
     links:
@@ -225,7 +230,7 @@ hy:
       sign_out: Ելք
       website: Դիտել կայքէջը
       forgot_password: Մոռացե՞լ եք գաղտնաբառը
-      password_reset: Ուղարկել ցուցումներ՝ գաղտնաբառը փոխելու համար 
+      password_reset: Ուղարկել ցուցումներ՝ գաղտնաբառը փոխելու համար
       sign_in_provider: Մուտք %{provider}-ով
       download: Բեռնել
       existing_file: Տեսնել գոյություն ունեցող փաստաթղթերը
@@ -247,7 +252,8 @@ hy:
     interactive: Ինտերակտիվ
     fact: Փաստ
     comic: Ծաղրանկար
-    video: Video
+    video: վիդեո
+    gifographic: գիֆոգրաֆիկա
   multiselect:
     checkAllText: 'Նշել բոլորը'
     uncheckAllText: 'Հանել բոլոր նշումները'
@@ -263,7 +269,8 @@ hy:
         interactive: Ինտերակտիվ
         fact: Փաստ
         comic: Ծաղրանկար
-        video: Video
+        video: վիդեո
+        gifographic: գիֆոգրաֆիկա
         not_published: Չի հրապարակված
         not_promoted: 'Առաջընթաց չունի '
       view:
@@ -297,7 +304,7 @@ hy:
     language:
       en: English
       ka: ქართული
-      hy: Հայերեն      
+      hy: Հայերեն
     language_abbreviation:
       en: EN
       ka: ქა
@@ -451,8 +458,8 @@ hy:
         Տեղադրելով այս վիզուալիզացիաները մեր կայքում՝ մենք ազատորեն կիսվում ենք Ձեզ հետ և հույս ունենք, որ Դուք էլ կկիսվեք ուրիշների հետ:
         45%-ով ավելի ինտերնետ օգտագործողներ կսեղմեն հղումը, եթե այն ինֆոգրաֆիկա է պարունակում
         Նրանցից, 30%-ը կփոխանցեն այն ուրիշներին, եթե նույնիսկ տեղեկատվությունը անիմաստ է:
-        Մարդկանց 40%-ը ավելի լավ արձագանքում է վիզուալ տեղեկատվությանը, քան տեքստին 
-        90% տեղեկատվությունը, որը հասնում է մեր ուղեղին, վիզուալ է:      
+        Մարդկանց 40%-ը ավելի լավ արձագանքում է վիզուալ տեղեկատվությանը, քան տեքստին
+        90% տեղեկատվությունը, որը հասնում է մեր ուղեղին, վիզուալ է:
     data:
       title: Ուղարկել տվյալներ
       meta_description: 'Ունե՞ք տվյալներ, որը կցանկանայիք պատկերավորել, բայց չունեք ժամանակ կամ հմտություններ: Տեղադրեք տվյալները այստեղ: Եթե հետաքրքիր են, շատ հնարավոր է, որ որևէ մեկը կօգտագործի այն,և Դուք կկարողանաք օգտագործել վիզուալիզացիան: Կիսվելով համայնքի հետ՝ Դուք դառնում եք ավելի մեծի մի մաս, որտեղ բոլորը շահում են:'
@@ -518,6 +525,16 @@ hy:
       embed_link_title: Տեսնել մեծ պատկերը
       embed_link_interactive_title: Տեսնել ինտերակտիվ վիզուալիզացիան
       comment_count: Մեկնաբանություններ
+      print:
+        label: տպագրել
+        question:
+          default: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+          # Using default for below keys because otherwise I18n falls back to
+          # English translations (instead of using default Armenian translation)
+          infographic: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+          fact: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+          comic: "Ցանկանու՞մ եք ունենալ այս ինֆոգրաֆիկան բարձր որակով տպագրված,"
+        contact_us: "դիմեք մեզ:"
     visuals_filter_bar:
       categories: Կատեգորիաներ
     ideas_list:
@@ -529,13 +546,17 @@ hy:
       sign_in: Գրառում կատարելու համար՝ գրանցվեք
   visualizations:
     form:
-      preview: Նախնական դիտարկում
-      crop_image: Ստեղծել %{language} նմուշի պատկեր
-      reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
-      reset_url: Բեռնել նոր %{language} հղում
-      change_video_url: Change %{language} Video URL
-      datasources_header: Տվյալների աղբյուր
-      add_datasource: Ավելացնել տվյալների աղբյուր
+      locale_to_crop:
+        preview: Նախնական դիտարկում
+        crop_image: Ստեղծել %{language} նմուշի պատկեր
+      reset_visual_image_file:
+        reset_file: Բեռնել նոր %{language} ինֆոգրաֆիկա
+      reset_interactive_url:
+        reset_url: Բեռնել նոր %{language} հղում
+      edit:
+        change_video_url: Change %{language} Video URL
+        datasources_header: Տվյալների աղբյուր
+        add_datasource: Ավելացնել տվյալների աղբյուր
     datasource_fields:
       remove_link: Հեռացնել տվյալների աղբյուր
   organizations:

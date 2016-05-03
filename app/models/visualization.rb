@@ -22,7 +22,7 @@ class Visualization < ActiveRecord::Base
     :video_embed
   )
 
-  scoped_search :in => :visualization_translations, :on => [:title, :explanation]
+  scoped_search :in => :visualization_translations, :on => [:title, :explanation, :visualization_text]
 
 
   require 'split_votes'

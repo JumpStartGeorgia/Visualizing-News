@@ -98,8 +98,9 @@ class User < ActiveRecord::Base
 		x = where(auth.slice(:provider, :uid)).first
 		if x.nil?
 			x = User.create(:provider => auth.provider, :uid => auth.uid,
-											:email => auth.info.email,
-											:nickname => auth.info.nickname, :avatar => auth.info.image)
+											:email => auth.info.email.present? ? auth.info.email : "<%= Devise.friendly_token[0,10] %>@fake.com",
+											:nickname => auth.info.nickname.present? ? auth.info.nickname : auth.info.name.present? ? auth.info.name : 'feradi_user',
+                      :avatar => auth.info.image)
 		end
 		return x
 	end

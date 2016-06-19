@@ -104,8 +104,15 @@
           <% else %>
             <% if @visualization.image_file_name.present? %>
               <% if @visualization.type == :gifographic %>
-                <%= image_tag(
+                <%#= image_tag(
                       'image_placeholder.svg',
+                      alt: @visualization.image_text,
+                      class: 'visual-image js-is-gifographic js-gif-is-playable',
+                      data: { src_original: @visualization.image.url(:medium, false),
+                              stop_title: t('.gifographic_image_titles.stop'),
+                              play_title: t('.gifographic_image_titles.play') }) %>
+                <%= image_tag(
+                      @visualization.image.url(:medium_thumb, false),
                       alt: @visualization.image_text,
                       class: 'visual-image js-is-gifographic js-gif-is-playable',
                       data: { src_original: @visualization.image.url(:medium, false),

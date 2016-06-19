@@ -77,9 +77,18 @@
       <div class="main_block">
         <div id="visual" class="mod-<%= @visualization.type %>">
           <% if @visualization.visualization_type_id == Visualization::TYPES[:interactive] %>
-            <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
+            <%# original way - turned off due to issues with https %>
+            <%#= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
                 url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title')) %>
-            <%= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
+            <%#= link_to(image_tag("interactive.png") , url_for(params.merge(:view => 'interactive')), :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator') %>
+
+            <%= link_to(image_tag(@visualization.image.url(:medium, false), :alt => @visualization.image_text),
+                @visualization.interactive_url, :title => t('.embed_link_interactive_title'),
+                target: :blank) %>
+            <%= link_to(image_tag("interactive.png") , @visualization.interactive_url,
+                :title => t('.embed_link_interactive_title'), :id => 'interactive_indicator',
+                target: :blank) %>
+
           <% elsif @visualization.visualization_type_id == Visualization::TYPES[:video] %>
 
             <div class='custom-container mod-responsive-video'>

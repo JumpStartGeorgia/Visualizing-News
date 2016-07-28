@@ -45,9 +45,13 @@ module ApplicationHelper
     end
   end
 
-	def current_url(no_view_param=false)
+	def current_url(options={})
+    default_options = {no_view_param: false, replace_https: false}
+    options = options.reverse_merge(default_options)
+
 		x = "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
-		if no_view_param && request.fullpath.index("?") && request.fullpath.index("view=")
+
+    if options[:no_view_param] && request.fullpath.index("?") && request.fullpath.index("view=")
 			u = URI::parse(request.fullpath)
 			p = CGI::parse(u.query)
 			p.delete("view")
@@ -62,6 +66,11 @@ module ApplicationHelper
 				x = "#{request.protocol}#{request.host_with_port}#{u.path}?#{q.join("&")}"
 			end
 		end
+
+    if options[:replace_https]
+      x.gsub!('https://', 'http://')
+    end
+
 		return x
 	end
 

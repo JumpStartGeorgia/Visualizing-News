@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'bundler'
 gem "rails", "3.2.22"
-gem "mysql2", "~> 0.3.18" # this gem works better with utf-8
+gem "mysql2", "~> 0.3.21" # this gem works better with utf-8
 
 gem "json"
 gem "jquery-rails", "3.1.2"
@@ -45,6 +45,8 @@ gem 'dotenv-rails', '~> 1.0', '>= 1.0.2'
 
 # Improves user experience with tables: searching, sorting, pagination, etc.
 gem 'jquery-dynatable-rails', '~> 0.3.2'
+
+gem 'test-unit', '~> 3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

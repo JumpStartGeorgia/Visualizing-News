@@ -200,7 +200,7 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.20)
+    mysql2 (0.3.21)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -237,6 +237,7 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
+    power_assert (0.3.1)
     pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -325,6 +326,8 @@ GEM
     term-ansicolor (1.3.2)
       tins (~> 1.0)
     terminal-table (1.5.2)
+    test-unit (3.2.1)
+      power_assert
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -401,7 +404,7 @@ DEPENDENCIES
   launchy (~> 2.4.3)
   less-rails (~> 2.6.0)
   mailcatcher (= 0.5.10)
-  mysql2 (~> 0.3.18)
+  mysql2 (~> 0.3.21)
   nested_form (~> 0.3.2)!
   omniauth
   omniauth-facebook
@@ -418,6 +421,7 @@ DEPENDENCIES
   sass-rails (= 3.2.6)
   scoped_search (~> 3.2.0)
   selenium-webdriver (= 2.27.2)
+  test-unit (~> 3.0)
   therubyracer
   twitter-bootstrap-rails (~> 2.2.8)
   uglifier (>= 1.0.3)
@@ -426,3 +430,6 @@ DEPENDENCIES
   use_tinymce (~> 0.0.15)
   useragent!
   whenever (~> 0.9.4)
+
+BUNDLED WITH
+   1.13.5

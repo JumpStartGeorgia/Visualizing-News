@@ -2,19 +2,19 @@ class VisualizationObserver < ActiveRecord::Observer
 
 	def after_save(visualization)
 		# set flag to true if the published flag is true and the record was not published before
-		visualization.send_notification = true if visualization.published && !visualization.was_published# && Rails.env.production?
-    Rails.logger.debug "====== vis send notification = #{visualization.send_notification}"
+		visualization.send_notification = visualization.published && !visualization.was_published && Rails.env.production?
+    # Rails.logger.debug "====== vis send notification = #{visualization.send_notification}"
 	end
 
 	# after visualization has been created, send notification
 	def after_commit(visualization)
-    Rails.logger.debug "===== after commit"
+    # Rails.logger.debug "===== after commit"
 		if visualization.send_notification
       users = []  
 
       # if visual is not promoted, send notification
       if !visualization.is_promoted
-    Rails.logger.debug "===== - promote email"
+    # Rails.logger.debug "===== - promote email"
 			  message = Message.new
         users = User.visual_promotion_users
 			  I18n.available_locales.each do |locale|
@@ -35,7 +35,7 @@ class VisualizationObserver < ActiveRecord::Observer
 
 			category_ids = visualization.visualization_categories.map{|x| x.category_id}
 			if category_ids && !category_ids.empty?
-    Rails.logger.debug "===== - categories"
+    # Rails.logger.debug "===== - categories"
 				message = Message.new
 				I18n.available_locales.each do |locale|
 					message.bcc = Notification.new_visual(category_ids, locale)

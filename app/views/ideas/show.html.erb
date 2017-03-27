@@ -215,16 +215,18 @@
     <div id="idea_sidebar" class="side_block">
       <div id="source">
         <ul>
-          <li id="idea_author">
-            <div class="sidebar_heading"><%= "#{t('app.common.author')}: "%></div>
-					  <div class="val">
-              <%= link_to user_ideas_path(@idea.user.permalink, remove_unwanted_params(@param_options)) do %>
-                <%= @idea.user.nickname %>
-                <br />
-          			<%= image_tag @idea.user.avatar, :id => 'user_avatar' if @idea.user.avatar %>
-              <% end %>
-					  </div>
-          </li>
+          <% if @idea.user.present? %>
+            <li id="idea_author">
+              <div class="sidebar_heading"><%= "#{t('app.common.author')}: "%></div>
+  					  <div class="val">
+                <%= link_to user_ideas_path(@idea.user.permalink, remove_unwanted_params(@param_options)) do %>
+                  <%= @idea.user.nickname %>
+                  <br />
+            			<%= image_tag @idea.user.avatar, :id => 'user_avatar' if @idea.user.avatar %>
+                <% end %>
+  					  </div>
+            </li>
+          <% end %>
           <li>
             <span class="sidebar_heading"><%= "#{t('app.common.category')}: "%></span>
             <span class="val">
